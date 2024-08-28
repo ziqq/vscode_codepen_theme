@@ -1,0 +1,45 @@
+{
+    "name": "codepen-theme",
+    "displayName": "CodePen Theme",
+    "description": "Custom theme for Visual Studio Code. Compatible with .HTML, .CSS, .JS, .JSX, .DART",
+	"icon": "assets/logo.png",
+    "version": "0.1.0",
+    "pricing": "Free",
+    "engines": {
+        "vscode": "^1.0.0"
+    },
+    "categories": [
+        "Themes"
+    ],
+    "license": "SEE LICENSE IN LICENSE",
+    "publisher": "ziqq",
+    "author": {
+		"name": "Anton Ustinoff"
+	},
+    "bugs": {
+        // "url": "https://github.com/ziqq/ZiqqVSCodeTheme/issues",
+        "email": "a.a.ustinoff@gmail.com"
+    },
+    // "repository": {
+    //     "type": "git",
+    //     "url": "https://github.com/ziqq/ZiqqVSCodeTheme"
+    // },
+    // "homepage": "https://github.com/ziqq/ZiqqVSCodeTheme",
+    "keywords": [
+		"vs code codepen",
+		"codepen",
+		"codepen.io"
+    ],
+    "contributes": {
+        "themes": [
+            {
+                "label": "CodePen Theme",
+                "uiTheme": "vs-dark",
+                "path": "./themes/codepen-theme.json"
+            }
+        ]
+    },
+    "scripts": {
+        "deploy": "vsce publish"
+    }
+}

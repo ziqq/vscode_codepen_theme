@@ -1,0 +1,14 @@
+{
+    "files.associations": {
+        "*.json": "jsonc"
+    },
+    "files.exclude": {
+        "out": true,
+        "dist": true
+    },
+    "search.exclude": {
+        "out": true,
+        "dist": true
+    },
+    "typescript.tsc.autoDetect": "off"
+}
