@@ -19,6 +19,10 @@
     "bugs": {
         "email": "a.a.ustinoff@gmail.com"
     },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/ziqq/vscode_codepen_theme"
+    },
     "keywords": [
 		"vs code codepen",
 		"codepen",
