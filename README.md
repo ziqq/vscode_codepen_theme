@@ -12,4 +12,17 @@ This extension is available for free in the [Visual Studio Code Marketplace](htt
 
 ## Screenshoots
 
-<img src="./assets/preview_html.png" width="800px">  <img src="./assets/preview_html_nunjucks.png" width="800px">  <img src="./assets/preview_scss.png" width="800px">  <img src="./assets/preview_js.png" width="800px">  <img src="./assets/preview_dart.png" width="800px">
+#### HTML
+<img src="./assets/preview_html.png" width="888">
+
+#### HTML with Nunjucks
+<img src="./assets/preview_html_nunjucks.png" width="888">
+
+#### SCSS
+<img src="./assets/preview_scss.png" width="888">
+
+#### JavaScript
+<img src="./assets/preview_js.png" width="888">
+
+#### DART
+<img src="./assets/preview_dart.png" width="888">
