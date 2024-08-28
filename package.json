@@ -1,6 +1,6 @@
 {
-    "name": "codepen-theme-by-ziqq",
-    "displayName": "Codepen Theme",
+    "name": "codepen-theme-origin",
+    "displayName": "CodePen Theme Origin",
     "description": "Custom theme for Visual Studio Code. Compatible with .HTML, .CSS, .JS, .JSX, .DART",
 	"icon": "assets/logo.png",
     "version": "0.1.0",
