@@ -3,7 +3,7 @@
     "displayName": "CodePen Theme Origin",
     "description": "Custom theme for Visual Studio Code. Compatible with .HTML, .CSS, .JS, .JSX, .DART",
 	"icon": "assets/logo.png",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "pricing": "Free",
     "engines": {
         "vscode": "^1.0.0"
@@ -16,12 +16,14 @@
     "author": {
 		"name": "Anton Ustinoff"
 	},
-    "bugs": {
-        "email": "a.a.ustinoff@gmail.com"
-    },
+    "homepage": "https://github.com/ziqq/vscode_codepen_theme",
     "repository": {
         "type": "git",
         "url": "https://github.com/ziqq/vscode_codepen_theme"
+    },
+    "bugs": {
+        "email": "a.a.ustinoff@gmail.com",
+        "url": "https://github.com/ziqq/vscode_codepen_theme/issues"
     },
     "keywords": [
 		"vs code codepen",
@@ -31,7 +33,7 @@
     "contributes": {
         "themes": [
             {
-                "label": "CodePen Theme",
+                "label": "CodePen Theme Origin",
                 "uiTheme": "vs-dark",
                 "path": "./themes/codepen-theme.json"
             }
