@@ -40,7 +40,6 @@
         ]
     },
     "scripts": {
-        // "vscode:prepublish": "npm run compile",
         "start": "code . --extensionDevelopmentPath=.",
         "deploy": "vsce publish"
     }
