@@ -1,3 +1,5 @@
+ # Anton Ustinoff <a.a.ustinoff@gmail.com>, 31 August 2024
+
 SHELL :=/bin/bash -e -o pipefail
 PWD   := $(shell pwd)
 
