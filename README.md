@@ -8,7 +8,7 @@ Custom theme for Visual Studio Code. Compatible with .HTML, .CSS, .JS, .JSX, .DA
 
 ## Installing
 
-This extension is available for free in the [Visual Studio Code Marketplace](https://marketplace.visualstudio.com/items?itemName=`ziqq`.codepen-theme)
+This extension is available for free in the [Visual Studio Code Marketplace](https://marketplace.visualstudio.com/items?itemName=ziqq.codepen-theme-original)
 
 
 ## Screenshoots
