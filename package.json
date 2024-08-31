@@ -3,7 +3,7 @@
     "displayName": "CodePen Theme Original",
     "description": "CodePen Theme Original for Visual Studio Code. Compatible with .HTML, .CSS, .JS, .JSX, .DART",
 	"icon": "assets/logo.png",
-    "version": "0.3.0",
+    "version": "0.4.0",
     "pricing": "Free",
     "engines": {
         "vscode": "^1.0.0"
