@@ -28,14 +28,18 @@ tag-add: ## Make command to add TAG. E.g: make tag-add TAG=v1.0.0
 	@if [ -z "$(TAG)" ]; then echo "TAG is not set"; exit 1; fi
 	@git tag $(TAG)
 	@git push origin $(TAG)
-	@echo "Created and pushed tag $(TAG)"
+	@echo ""
+	@echo "CREATED AND PUSHED TAG $(TAG)"
+	@echo ""
 
 .PHONY: tag-remove
 tag-remove: ## Make command to delete TAG. E.g: make tag-delete TAG=v1.0.0
 	@if [ -z "$(TAG)" ]; then echo "TAG is not set"; exit 1; fi
 	@git tag -d $(TAG)
 	@git push origin --delete $(TAG)
-	@echo "Deleted tag $(TAG) locally and remotely"
+	@echo ""
+	@echo "DELETED TAG $(TAG) LOCALLY AND REMOTELY"
+	@echo ""
 
 .PHONY: publish
 publish: build ## publish extension
