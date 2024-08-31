@@ -121,7 +121,7 @@
 		//         YELLOW: #DDCA6F // #DDCA6F
 		//   BLACK YELLOW: #A7925A // #A5925C
 		//           BLUE: #839BBC
-		//    RED || PINK: #FF5370
+		//    RED || PINK: #F07178
 		//           GREY: #666
     "tokenColors": [
 			// START CUSTOM BASE PALETTE
@@ -165,7 +165,7 @@
 							"invalid.illegal"
 					],
 					"settings": {
-							"foreground": "#FF5370"
+							"foreground": "#F07178"
 					}
 			},
 			// END CUSTOM BASE PALETTE
@@ -420,7 +420,7 @@
 					"variable.other.class.js"
 				],
 				"settings": {
-					"foreground": "#FF5370"
+					"foreground": "#F07178"
 				}
 			},
 			{
@@ -506,7 +506,7 @@
 					"markup.deleted"
 				],
 				"settings": {
-					"foreground": "#FF5370"
+					"foreground": "#F07178"
 				}
 			},
 			{
@@ -565,7 +565,7 @@
 				],
 				"settings": {
 					"fontStyle": "italic",
-					"foreground": "#FF5370"
+					"foreground": "#F07178"
 				}
 			},
 			{
@@ -601,7 +601,7 @@
 					"source.json meta.structure.dictionary.json meta.structure.dictionary.value.json meta.structure.dictionary.json meta.structure.dictionary.value.json meta.structure.dictionary.json meta.structure.dictionary.value.json meta.structure.dictionary.json support.type.property-name.json"
 				],
 				"settings": {
-					"foreground": "#FF5370"
+					"foreground": "#F07178"
 				}
 			},
 			{

@@ -2,8 +2,8 @@
     "name": "codepen-theme-original",
     "displayName": "CodePen Theme Original",
     "description": "CodePen Theme Original for Visual Studio Code. Compatible with .HTML, .CSS, .JS, .JSX, .DART",
-	"icon": "assets/logo.png",
-    "version": "0.4.0",
+    "icon": "assets/logo.png",
+    "version": "0.5.0",
     "pricing": "Free",
     "engines": {
         "vscode": "^1.0.0"
@@ -14,8 +14,8 @@
     "license": "SEE LICENSE IN LICENSE",
     "publisher": "ziqq",
     "author": {
-		"name": "Anton Ustinoff"
-	},
+        "name": "Anton Ustinoff"
+    },
     "homepage": "https://github.com/ziqq/vscode_codepen_theme",
     "repository": {
         "type": "git",
@@ -26,9 +26,9 @@
         "url": "https://github.com/ziqq/vscode_codepen_theme/issues"
     },
     "keywords": [
-		"vs code codepen",
-		"codepen",
-		"codepen.io"
+        "vs code codepen",
+        "codepen",
+        "codepen.io"
     ],
     "contributes": {
         "themes": [
@@ -40,6 +40,8 @@
         ]
     },
     "scripts": {
+        // "vscode:prepublish": "npm run compile",
+        "start": "code . --extensionDevelopmentPath=.",
         "deploy": "vsce publish"
     }
 }
