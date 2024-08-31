@@ -1,0 +1,27 @@
+:root {
+  --color-accent: green;
+  --color-primary: #1e1e1e;
+  --color-secondary: #fcfcfc;
+}
+
+#app {
+  margin: 0;
+  padding: 0;
+}
+
+.example {
+  &__wrapper {
+    margin: 0;
+  }
+
+  &__list {
+    padding: 0;
+    margin: 0;
+    border-radius: 1px solid red;
+  } // .example__list
+
+  &__item {
+    display: flex;
+    flex-direction: row;
+  } // .example__item
+} // .example
