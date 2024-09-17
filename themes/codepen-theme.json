@@ -116,59 +116,13 @@
         // DART COLORS
         "dart.closingLabels": "#666"
     },
-		// COLORS PALETTE:
-		// YELLOW      : #DDCA6F || #DDCA6F
-		// BLACK YELLOW: #A7925A || #A5925C
-		// BLUE        : #839BBC
-		// RED || PINK : #F07178
-		// GREY        : #666
+    // COLORS PALETTE:
+    // YELLOW      : #DDCA6F || #DDCA6F
+    // BLACK YELLOW: #A7925A || #A5925C
+    // BLUE        : #839BBC
+    // RED || PINK : #F07178
+    // GREY        : #666
     "tokenColors": [
-			  // START CUSTOM BASE PALETTE
-        {
-            "name": "Comment",
-            "scope": [
-                "comment",
-                "punctuation.definition.comment"
-            ],
-            "settings": {
-                "fontStyle": "italic",
-                "foreground": "#666"
-            }
-        },
-        {
-            "name": "Operator, Misc",
-            "scope": [
-                "constant.other.color",
-                "meta.tag",
-                "punctuation",
-                "punctuation.definition.tag",
-                "punctuation.separator.inheritance.php",
-                "punctuation.definition.tag.html",
-                "punctuation.definition.tag.begin.html",
-                "punctuation.definition.tag.end.html",
-                "punctuation.section.embedded",
-                "keyword",
-                "keyword.control",
-                "keyword.other.template",
-                "keyword.other.substitution",
-                "keyword.operator.ternary.dart"
-            ],
-            "settings": {
-                "fontStyle": "",
-                "foreground": "#fff"
-            }
-        },
-        {
-            "name": "Invalid",
-            "scope": [
-                "invalid",
-                "invalid.illegal"
-            ],
-            "settings": {
-                "foreground": "#F07178"
-            }
-        },
-        // END CUSTOM BASE PALETTE
         // START BASE PALETTE
         {
             "name": "CSS Curly Bracket Colors",
@@ -903,6 +857,7 @@
         {
             "name": "Source",
             "scope": [
+                "keyword.operator.comparison.dart", // e.g: == || !=
                 "keyword.operator.ternary.dart", // e.g: ?
                 "source.dart"
             ],
@@ -1300,6 +1255,52 @@
             "settings": {
                 "foreground": "#C792EA"
             }
+        },
+        // START CUSTOM BASE PALETTE
+        {
+            "name": "Comment",
+            "scope": [
+                "comment",
+                "punctuation.definition.comment"
+            ],
+            "settings": {
+                "fontStyle": "italic",
+                "foreground": "#666"
+            }
+        },
+        {
+            "name": "Operator, Misc",
+            "scope": [
+                "constant.other.color",
+                "meta.tag",
+                "punctuation",
+                "punctuation.definition.tag",
+                "punctuation.separator.inheritance.php",
+                "punctuation.definition.tag.html",
+                "punctuation.definition.tag.begin.html",
+                "punctuation.definition.tag.end.html",
+                "punctuation.section.embedded",
+                "keyword",
+                "keyword.control",
+                "keyword.other.template",
+                "keyword.other.substitution",
+                "keyword.operator.ternary.dart"
+            ],
+            "settings": {
+                "fontStyle": "",
+                "foreground": "#fff"
+            }
+        },
+        {
+            "name": "Invalid",
+            "scope": [
+                "invalid",
+                "invalid.illegal"
+            ],
+            "settings": {
+                "foreground": "#F07178"
+            }
         }
+        // END CUSTOM BASE PALETTE
     ]
 }
