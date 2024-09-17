@@ -1,3 +1,12 @@
+/*
+  COLOR PALETTE
+  YELLOW      : #DDCA6F || #DDCA6F
+  BLACK YELLOW: #A7925A || #A5925C
+  BLUE        : #839BBC
+  RED || PINK : #F07178
+  GREY        : #666
+*/
+
 :root{
   --color-yellow: #DDCA6F;
   --color-yellow-old: #DBCA81;
@@ -9,3 +18,4 @@
   --color-red-old: #F07178;
   --color-grey: #666;
 }
+
