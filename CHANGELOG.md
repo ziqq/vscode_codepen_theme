@@ -1,8 +1,11 @@
-# Change Log
+## 0.6.2
+- **FIXED**: JavaScript function color
 
-All notable changes to the "codepen-theme-original" extension will be documented in this file.
+## 0.2.0
+- **ADDED**: Dart scheme
 
-Check [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) for recommendations on how to structure this file.
+## 0.1.0
+- **ADDED**: Stable release
 
-## Unreleased
-  - Initial release
+## 0.0.1
+- **ADDED**: Initial release
