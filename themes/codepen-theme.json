@@ -203,7 +203,7 @@
                 "keyword.control.at-rule.import.css"
             ],
             "settings": {
-                "foreground": "#839BBC"
+                "foreground": "#809BBD"
             }
         },
         {
@@ -274,7 +274,7 @@
                 "meta.block variable.other"
             ],
             "settings": {
-                "foreground": "#839BBC"
+                "foreground": "#809BBD"
             }
         },
         //* CHECKED
@@ -393,7 +393,7 @@
             ],
             "settings": {
                 "fontStyle": "italic",
-                "foreground": "#839BBC"
+                "foreground": "#809BBD"
             }
         },
         {
@@ -404,7 +404,7 @@
                 "variable.function.constructor"
             ],
             "settings": {
-                "foreground": "#839BBC"
+                "foreground": "#809BBD"
             }
         },
         {
@@ -509,7 +509,7 @@
             ],
             "settings": {
                 "fontStyle": "italic",
-                "foreground": "#839BBC"
+                "foreground": "#809BBD"
             }
         },
         {
@@ -573,7 +573,7 @@
                 "source.json meta.structure.dictionary.json meta.structure.dictionary.value.json meta.structure.dictionary.json meta.structure.dictionary.value.json meta.structure.dictionary.json meta.structure.dictionary.value.json meta.structure.dictionary.json meta.structure.dictionary.value.json meta.structure.dictionary.json meta.structure.dictionary.value.json meta.structure.dictionary.json support.type.property-name.json"
             ],
             "settings": {
-                "foreground": "#839BBC"
+                "foreground": "#809BBD"
             }
         },
         {
@@ -712,7 +712,7 @@
                 "string.other.link.title.markdown"
             ],
             "settings": {
-                "foreground": "#839BBC"
+                "foreground": "#809BBD"
             }
         },
         {
@@ -1096,8 +1096,8 @@
             "scope": [
                 "constant.language",
                 "constant.escape",
-                "keyword.other.unit",
-                "keyword.other"
+                "keyword.other.unit"
+                // "keyword.other"
             ],
             "settings": {
                 "foreground": "#DDCA6F"

@@ -1,5 +1,8 @@
+## 0.6.3
+- **CHANGED**: JavaScript regexp color
+
 ## 0.6.2
-- **FIXED**: JavaScript function color
+- **CHANGED**: JavaScript function color
 
 ## 0.2.0
 - **ADDED**: Dart scheme
