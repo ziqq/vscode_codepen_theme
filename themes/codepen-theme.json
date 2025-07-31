@@ -203,7 +203,7 @@
                 "keyword.control.at-rule.import.css"
             ],
             "settings": {
-                "foreground": "#809BBD"
+                "foreground": "#839BBC"
             }
         },
         {
@@ -224,7 +224,7 @@
                 "punctuation.definition.constant.css",
                 "constant.other.color.rgb-value.hex.css",
                 "punctuation.definition.entity.css",
-                "entity.name.function.js",
+                // "entity.name.function.js",
                 "variable.other.object.js",
                 "entity.name.type.js",
                 "keyword.control.conditional.js",
@@ -274,7 +274,7 @@
                 "meta.block variable.other"
             ],
             "settings": {
-                "foreground": "#809BBD"
+                "foreground": "#839BBC"
             }
         },
         //* CHECKED
@@ -286,7 +286,7 @@
             ],
             "settings": {
                 "fontStyle": "",
-                "foreground": "#809BBD"
+                "foreground": "#839BBC"
             }
         },
         {
@@ -358,7 +358,8 @@
                 "source.less support.type.property-name",
                 "source.stylus support.type.property-name",
                 "source.postcss support.type.property-name",
-                "entity.name.function.js",
+                // "entity.name.function.js",
+                "meta.function-call.js",
                 "meta.object.member.js",
                 "support.variable.property.js"
             ],
@@ -393,7 +394,7 @@
             ],
             "settings": {
                 "fontStyle": "italic",
-                "foreground": "#809BBD"
+                "foreground": "#839BBC"
             }
         },
         {
@@ -404,7 +405,7 @@
                 "variable.function.constructor"
             ],
             "settings": {
-                "foreground": "#809BBD"
+                "foreground": "#839BBC"
             }
         },
         {
@@ -509,7 +510,7 @@
             ],
             "settings": {
                 "fontStyle": "italic",
-                "foreground": "#809BBD"
+                "foreground": "#839BBC"
             }
         },
         {
@@ -573,7 +574,7 @@
                 "source.json meta.structure.dictionary.json meta.structure.dictionary.value.json meta.structure.dictionary.json meta.structure.dictionary.value.json meta.structure.dictionary.json meta.structure.dictionary.value.json meta.structure.dictionary.json meta.structure.dictionary.value.json meta.structure.dictionary.json meta.structure.dictionary.value.json meta.structure.dictionary.json support.type.property-name.json"
             ],
             "settings": {
-                "foreground": "#809BBD"
+                "foreground": "#839BBC"
             }
         },
         {
@@ -712,7 +713,7 @@
                 "string.other.link.title.markdown"
             ],
             "settings": {
-                "foreground": "#809BBD"
+                "foreground": "#839BBC"
             }
         },
         {
@@ -810,7 +811,7 @@
             ],
             "settings": {
                 "fontStyle": "italic",
-                "foreground": "#809BBD"
+                "foreground": "#839BBC"
             }
         },
         {
@@ -958,7 +959,7 @@
             ],
             "settings": {
                 "fontStyle": "italic",
-                "foreground": "#809BBD"
+                "foreground": "#839BBC"
             }
         },
         {
@@ -1026,7 +1027,7 @@
                 "meta.var.expr"
             ],
             "settings": {
-                "foreground": "#809BBD"
+                "foreground": "#839BBC"
             }
         },
         {
@@ -1077,7 +1078,7 @@
             ],
             "settings": {
                 "fontStyle": "",
-                "foreground": "#809BBD"
+                "foreground": "#839BBC"
             }
         },
         {
@@ -1088,7 +1089,7 @@
             ],
             "settings": {
                 "fontStyle": "",
-                "foreground": "#809BBD"
+                "foreground": "#839BBC"
             }
         },
         {
@@ -1221,7 +1222,7 @@
             ],
             "settings": {
                 "fontStyle": "",
-                "foreground": "#809BBD"
+                "foreground": "#839BBC"
             }
         },
         {
