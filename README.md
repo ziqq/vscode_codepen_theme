@@ -1,9 +1,9 @@
-# CodePen Theme
+# VS Code CodePen Theme
 
 
 ## Description
 
-Custom theme for Visual Studio Code. Compatible with .HTML, .CSS, .JS, .JSX, .DART
+Custom theme for Visual Studio Code. Compatible with .HTML, .CSS, .JS, .TS, .JSX, .DART and more.
 
 
 ## Installing
