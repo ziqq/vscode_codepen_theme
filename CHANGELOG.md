@@ -1,11 +1,21 @@
-## 0.6.3
-- **CHANGED**: JavaScript regexp color
+## 0.7.0
+- **CHANGED**: Base colors to origin from `codepen.io`
+- **CHANGED**: Scheme for (JSON, JS, CSS, HTML, DART)
 
-## 0.6.2
-- **CHANGED**: JavaScript function color
+## 0.6.0 - 0.6.3
+- **CHANGED**: JavaScript scheme
+
+## 0.5.0
+- **ADDED**: Dart scheme
+
+## 0.4.0
+- **ADDED**: JSON scheme
+
+## 0.3.0
+- **ADDED**: JavaScript scheme
 
 ## 0.2.0
-- **ADDED**: Dart scheme
+- **ADDED**: HTML and CSS scheme's
 
 ## 0.1.0
 - **ADDED**: Stable release
