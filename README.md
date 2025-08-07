@@ -3,7 +3,7 @@
 
 ## Description
 
-Custom theme for Visual Studio Code. Compatible with .HTML, .CSS, .JS, .TS, .JSX, .DART and more.
+A custom theme for Visual Studio Code inspired by the codepen.io online editor theme. Compatible with .HTML, .CSS, .JS, .TS, .JSX, .DART and other formats. Made with ❤️ by ziqq.
 
 
 ## Installing
