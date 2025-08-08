@@ -208,7 +208,28 @@
                 "entity.other.attribute-name.pseudo-element.css",
                 // ENTITY END
 
+                // KEYWORD START
+                "keyword.other.template",
+                "keyword.other.substitution",
+                "keyword.operator.assignment",
+                "keyword.operator.assignment.js",
+                "keyword.operator.assignment.ts",
+                "keyword.operator.assignment.tsx",
+                "keyword.operator.assignment.compound.js",
+                "keyword.operator.closure.dart",
+                "keyword.operator.comparison.js",
+                "keyword.operator.comparison.dart",
+                "keyword.operator.logical.js",
+                "keyword.operator.logical.ts",
+                "keyword.operator.logical.tsx",
+                "keyword.operator.relational.js",
+                "keyword.operator.scss",
+                "keyword.operator.ternary.dart",
+                // KEYWORD END
+
                 // PUNCTUATION START
+                "punctuation.definition.attribute-selector.begin.bracket.square",
+                "punctuation.definition.attribute-selector.end.bracket.square",
                 "punctuation.definition.block.js",
                 "punctuation.definition.dictionary.begin.json.comments",
                 "punctuation.definition.entity",
@@ -226,6 +247,8 @@
                 "punctuation.section.function.end.bracket.round.css",
                 "punctuation.section.property-list.begin.bracket.curly.css",
                 "punctuation.section.property-list.end.bracket.curly.css",
+                "punctuation.section.property-list.begin.bracket.curly.scss",
+                "punctuation.section.property-list.end.bracket.curly.scss",
                 "punctuation.separator.comma",
                 "punctuation.separator.inheritance.php",
                 "punctuation.separator.list.comma.css",
@@ -241,25 +264,6 @@
                 "punctuation.terminator.statement.ts",
                 "punctuation.terminator.statement.tsx",
                 // PUNCTUATION END
-
-                // KEYWORD START
-                "keyword.other.template",
-                "keyword.other.substitution",
-                "keyword.operator.assignment",
-                "keyword.operator.assignment.js",
-                "keyword.operator.assignment.ts",
-                "keyword.operator.assignment.tsx",
-                "keyword.operator.assignment.compound.js",
-                "keyword.operator.ternary.dart",
-                "keyword.operator.logical.js",
-                "keyword.operator.logical.ts",
-                "keyword.operator.logical.tsx",
-                "keyword.operator.closure.dart",
-                "keyword.operator.comparison.js",
-                "keyword.operator.comparison.dart", // e.g: == || !=
-                "keyword.operator.relational.js",
-                "keyword.operator.ternary.dart", // e.g: ?
-                // KEYWORD END
 
                 // MARKUP START
                 "markup.raw.block.fenced.markdown",
@@ -284,6 +288,7 @@
                 "source.css",
                 "source.css.scss",
                 "source.dart",
+                "source.sql",
                 // SOURCE END
 
                 // STORAGE START
@@ -404,7 +409,6 @@
                 "meta.export.default.ts variable.other.object.ts",
                 "meta.property-list",
                 "meta.property-list.scss",
-                "meta.property-list.scss meta.property-list.scss",
                 "meta.property-value",
                 "meta.property-value.scss",
                 "meta.field.declaration.ts",
@@ -441,7 +445,9 @@
 
                 // STORAGE START
                 "storage.modifier",
+                "storage.modifier.sql",
                 "storage.type",
+                "storage.type.sql",
                 "storage.type.function",
                 "storage.type.primitive.dart",
                 // STORAGE END
@@ -577,6 +583,7 @@
 
                 // ENTITY START
                 "entity.name.method.js",
+                "entity.name.function.sql",
                 "entity.name.type.class.js.jsx",
                 // ENTITY END
 
@@ -585,6 +592,9 @@
                 "keyword.control.at-rule.keyframes.css",
                 "keyword.control.at-rule.import.css",
                 "keyword.control.at-rule.media.css",
+                "keyword.other.DML.sql",
+                "keyword.other.DDL.create.II.sql",
+                "keyword.other.LUW.sql",
                 // KEYWORD END
 
                 // MARKUP START
@@ -598,6 +608,7 @@
                 "meta.definition.function",
                 "meta.definition.function.js",
                 "meta.embedded.line",
+                "meta.property-list.scss variable.scss",
                 "meta.var.expr.js",
                 "meta.var.expr.ts",
                 "meta.var.expr.ts meta.definition.variable.ts",
@@ -735,6 +746,7 @@
                 "string.regexp",
                 "string.regexp.js",
                 "string.regexp.ts",
+                "string.interpolated.single.dart",
                 // STRING END
 
                 // SUPPORT START
@@ -773,6 +785,9 @@
                 "invalid.deprecated",
                 // INVALID END
 
+                "keyword.other.sql",
+                "keyword.other.create.sql",
+
                 // MARKUP START
                 "markup.changed",
                 "markup.raw.block",
@@ -785,6 +800,7 @@
                 // MARKUP END
 
                 // META START
+                "meta.create.sql",
                 "meta.embedded.expression.ts",
                 "meta.embedded.expression.tsx",
                 "meta.export.default meta.object.member",
@@ -793,6 +809,7 @@
                 "meta.object.member.js",
                 "meta.object.member",
                 "meta.object-literal.key",
+                "meta.property-list.scss entity.name.tag.css",
                 "meta.property-name",
                 "meta.property-name.scss",
                 "meta.var.expr.tsx meta.arrow.tsx",
@@ -904,5 +921,8 @@
             }
         }
         // GREY COLOR END
-    ]
+    ],
+    "editor.fontFamily": "SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace",
+    "debug.console.fontFamily": "SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace",
+    "terminal.integrated.fontFamily": "IBM Plex Mono, Codelia Ligatures, MesloLGS NF, Operator Mono-Book, Fira Code, Menlo, Monaco, 'Courier New', Ubuntu, monospace"
 }

@@ -28,3 +28,7 @@ This extension is available for free in the [Visual Studio Code Marketplace](htt
 #### DART
 
 <img src="./assets/preview_dart.png" width="888">
+
+#### SQL
+
+<img src="./assets/preview_sql.png" width="888">
