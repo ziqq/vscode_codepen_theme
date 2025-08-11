@@ -1,3 +1,6 @@
+## 0.7.1
+- **CHANGED**: Package meta info
+
 ## 0.7.0
 - **CHANGED**: Base colors to origin from `codepen.io`
 - **CHANGED**: Scheme for (`JSON`, `JS`, `CSS`, `HTML`, `DART`)
