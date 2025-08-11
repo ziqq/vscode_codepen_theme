@@ -1,5 +1,6 @@
 ## 0.7.1
 - **CHANGED**: Package meta info
+- **CHANGED**: Scheme for `Markdown`
 
 ## 0.7.0
 - **CHANGED**: Base colors to origin from `codepen.io`

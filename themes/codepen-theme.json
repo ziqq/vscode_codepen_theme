@@ -132,10 +132,11 @@
             "scope": [
                 "markup.bold",
                 "markup.bold string",
+                "markup.bold.markdown",
                 "meta.separator"
             ],
             "settings": {
-                "fontStyle": "italic"
+                "fontStyle": "bold"
             }
         },
         {
@@ -179,6 +180,7 @@
 
                 // MARKUP START
                 "markup.deleted",
+                "markup.bold.markdown",
                 // MARKUP END
 
                 // VARIABLE START
@@ -231,6 +233,7 @@
                 "punctuation.definition.attribute-selector.begin.bracket.square",
                 "punctuation.definition.attribute-selector.end.bracket.square",
                 "punctuation.definition.block.js",
+                "punctuation.definition.bold.markdown",
                 "punctuation.definition.dictionary.begin.json.comments",
                 "punctuation.definition.entity",
                 "punctuation.definition.list_item.markdown",
@@ -359,7 +362,6 @@
                 "constant.language.json.comments",
                 "constant.other.color.rgb-value.hex",
                 "constant.other.color.rgb-value.hex.css",
-                "constant.other.reference.link.markdown",
                 // CONSTANT END
 
                 // ENTITY START
@@ -367,6 +369,7 @@
                 "entity.other.attribute-name.class",
                 "entity.other.attribute-name.attribute.scss",
                 "entity.other.keyframe-offset.css",
+                "entity.name.section.markdown",
                 "entity.name.tag.css",
                 "entity.name.type.js",
                 "entity.name.typ.dart",
@@ -400,6 +403,7 @@
 
                 // MARKUP START
                 "markup.changed.git_gutter",
+                "markup.heading.markdown",
                 // MARKUP END
 
                 // META START
@@ -599,6 +603,7 @@
 
                 // MARKUP START
                 "markup.quote punctuation.definition.blockquote.markdown",
+                "markup.underline.link.markdown",
                 // MARKUP END
 
                 // META START
@@ -759,7 +764,6 @@
 
                 // MULTI-LINE START
                 "markup.heading | markup.heading entity.name",
-                "markup.heading.markdown punctuation.definition.heading.markdown",
                 "source.json meta.structure.dictionary.json meta.structure.dictionary.value.json meta.structure.dictionary.json meta.structure.dictionary.value.json meta.structure.dictionary.json meta.structure.dictionary.value.json meta.structure.dictionary.json meta.structure.dictionary.value.json meta.structure.dictionary.json meta.structure.dictionary.value.json meta.structure.dictionary.json meta.structure.dictionary.value.json meta.structure.dictionary.json meta.structure.dictionary.value.json meta.structure.dictionary.json meta.structure.dictionary.value.json meta.structure.dictionary.json support.type.property-name.json"
                 // MULTI-LINE END
             ],
@@ -775,6 +779,8 @@
             "scope": [
                 // COMMENT START
                 "comment.line.shebang.js",
+                "constant.other.reference.link.markdown",
+                "punctuation.definition.constant.markdown",
                 // COMMENT END
 
                 // ENTITY START
