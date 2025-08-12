@@ -512,7 +512,8 @@
                 // TEXT END
 
                 // VARIABLE START
-                "variable.language.dart"
+                "variable.language.dart",
+                "comment.block.documentation.dart variable.name.source.dart"
                 // VARIABLE END
             ],
             "settings": {
