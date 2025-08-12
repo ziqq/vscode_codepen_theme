@@ -259,6 +259,7 @@
                 "punctuation.separator.key-value.css",
                 "punctuation.separator.key-value.js",
                 "punctuation.separator.comma.js",
+                "punctuation.separator.key-value.mapping.yaml",
                 "punctuation.terminator.rule.css",
                 "punctuation.terminator.dart",
                 "punctuation.terminator.rule.css",
@@ -281,6 +282,7 @@
                 "meta.jsx.children.js.jsx",
                 "meta.type.annotation.ts",
                 "meta.type.annotation.tsx",
+                "meta.embedded.block.github-actions-expression",
                 // META END
 
                 // OTHER START
@@ -360,6 +362,7 @@
                 "constant.character",
                 "constant.language.null.js",
                 "constant.language.json.comments",
+                "constant.language.boolean.yaml",
                 "constant.other.color.rgb-value.hex",
                 "constant.other.color.rgb-value.hex.css",
                 // CONSTANT END
@@ -644,6 +647,7 @@
                 "variable.function.constructor",
                 "variable.language.arguments.js",
                 "variable.language.fenced.markdown",
+                "variable.other.read.github-actions-expression",
                 "variable.other.readwrite.alias.tsx",
                 "variable.other.readwrite.alias.ts",
                 "variable.other.readwrite.alias.js",
@@ -785,6 +789,7 @@
 
                 // ENTITY START
                 "entity.name.function.dart",
+                "entity.name.tag.yaml",
                 // ENTITY END
 
                 // INVALID START
@@ -831,6 +836,7 @@
                 // STRING END
 
                 // SUPPORT START
+                "support.function.github-actions-expression",
                 "support.variable.property.js",
                 "support.variable.property.tx",
                 "support.variable.property.tsx",

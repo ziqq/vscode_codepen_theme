@@ -1,3 +1,6 @@
+## 0.8.0
+- **ADDED**: `yaml` scheme
+
 ## 0.7.1
 - **CHANGED**: Package meta info
 - **CHANGED**: Scheme for `Markdown`
