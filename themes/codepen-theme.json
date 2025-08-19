@@ -293,6 +293,7 @@
                 "source.css",
                 "source.css.scss",
                 "source.dart",
+                "source.makefile",
                 "source.sql",
                 // SOURCE END
 
@@ -637,6 +638,7 @@
                 // STRING END
 
                 // SUPPORT START
+                "support.function.target.PHONY.makefile",
                 "support.other.variable",
                 // SUPPORT END
 
@@ -648,6 +650,7 @@
                 "variable.function.constructor",
                 "variable.language.arguments.js",
                 "variable.language.fenced.markdown",
+                "variable.other.makefile",
                 "variable.other.read.github-actions-expression",
                 "variable.other.readwrite.alias.tsx",
                 "variable.other.readwrite.alias.ts",
@@ -790,6 +793,7 @@
 
                 // ENTITY START
                 "entity.name.function.dart",
+                "entity.name.function.target.makefile",
                 "entity.name.tag.yaml",
                 // ENTITY END
 
