@@ -513,8 +513,7 @@
                 // TEXT END
 
                 // VARIABLE START
-                "variable.language.dart",
-                "comment.block.documentation.dart variable.name.source.dart"
+                "variable.language.dart"
                 // VARIABLE END
             ],
             "settings": {
@@ -678,6 +677,9 @@
         {
             "name": "BLUE (#809bbd) COLOR ITALIC",
             "scope": [
+                "comment.block.documentation.dart variable.name.source.dart",
+                "comment.block.documentation.dart variable.other.source.dart",
+
                 // KEYWORD START
                 "keyword.control.at-rule.import",
                 "keyword.control.at-rule.mixin",
