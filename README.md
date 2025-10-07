@@ -32,3 +32,11 @@ This extension is available for free in the [Visual Studio Code Marketplace](htt
 #### SQL
 
 <img src="./assets/preview_sql.png" width="888">
+
+#### GO
+
+<img src="./assets/preview_go.png" width="888">
+
+#### Phyton
+
+<img src="./assets/preview_phyton.png" width="888">

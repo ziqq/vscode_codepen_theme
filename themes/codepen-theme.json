@@ -202,6 +202,7 @@
                 // CONSTANT END
 
                 // ENTITY START
+                "entity.name.type.go",
                 "entity.name.tag.reference",
                 "entity.name.tag.wildcard.css",
                 "entity.name.tag.wildcard.scss",
@@ -227,9 +228,15 @@
                 "keyword.operator.relational.js",
                 "keyword.operator.scss",
                 "keyword.operator.ternary.dart",
+                "keyword.operator.optional.ts",
+                "keyword.operator.type.annotation.ts",
                 // KEYWORD END
 
                 // PUNCTUATION START
+                "punctuation.accessor.js",
+                "punctuation.accessor.jsx",
+                "punctuation.accessor.ts",
+                "punctuation.accessor.tsx",
                 "punctuation.definition.attribute-selector.begin.bracket.square",
                 "punctuation.definition.attribute-selector.end.bracket.square",
                 "punctuation.definition.block.js",
@@ -243,6 +250,14 @@
                 "punctuation.definition.tag.end.html",
                 "punctuation.definition.parameters.begin.js",
                 "punctuation.definition.parameters.end.js",
+                // "punctuation.definition.template-expression.begin.js",
+                // "punctuation.definition.template-expression.begin.ts",
+                // "punctuation.definition.template-expression.begin.jsx",
+                // "punctuation.definition.template-expression.begin.tsx",
+                // "punctuation.definition.template-expression.end.js",
+                // "punctuation.definition.template-expression.end.ts",
+                // "punctuation.definition.template-expression.end.jsx",
+                // "punctuation.definition.template-expression.end.tsx",
                 "punctuation.dot.dart",
                 "punctuation.section.class.end",
                 "punctuation.section.embedded",
@@ -278,6 +293,15 @@
                 "meta.brace.round",
                 "meta.brace.square",
                 "meta.declaration.dart",
+                "meta.embedded.expression.js",
+                "meta.embedded.expression.ts",
+                "meta.embedded.expression.jsx",
+                "meta.embedded.expression.tsx",
+                "keyword.operator.comparison.js",
+                "keyword.operator.comparison.ts",
+                "keyword.operator.comparison.jsx",
+                "keyword.operator.comparison.tsx",
+                "meta.function-call.arguments.python",
                 "meta.tag",
                 "meta.jsx.children.js.jsx",
                 "meta.type.annotation.ts",
@@ -293,12 +317,18 @@
                 "source.css",
                 "source.css.scss",
                 "source.dart",
+                "source.go",
                 "source.makefile",
                 "source.sql",
+                "source.python",
+                "source.ruby",
                 // SOURCE END
 
                 // STORAGE START
                 "storage.type.function.arrow",
+                "storage.type.boolean.go",
+                "storage.type.numeric.go",
+                "storage.type.string.go",
                 // STORAGE END
 
                 // TEXT START
@@ -322,6 +352,8 @@
         {
             "name": "WITHE (#FFFFFF) COLOR ITALIC",
             "scope": [
+                "entity.name.type.package.go",
+
                 // META START
                 "meta.import.ts punctuation.definition.block",
                 "meta.import.ts punctuation.definition.block.ts"
@@ -364,6 +396,18 @@
                 "constant.language.null.js",
                 "constant.language.json.comments",
                 "constant.language.boolean.yaml",
+                "constant.language.boolean.null.js",
+                "constant.language.boolean.null.jsx",
+                "constant.language.boolean.null.ts",
+                "constant.language.boolean.null.tsx",
+                "constant.language.boolean.true.js",
+                "constant.language.boolean.true.jsx",
+                "constant.language.boolean.true.ts",
+                "constant.language.boolean.true.tsx",
+                "constant.language.boolean.false.js",
+                "constant.language.boolean.false.jsx",
+                "constant.language.boolean.false.ts",
+                "constant.language.boolean.false.tsx",
                 "constant.other.color.rgb-value.hex",
                 "constant.other.color.rgb-value.hex.css",
                 // CONSTANT END
@@ -391,15 +435,13 @@
                 "keyword.control.dart",
                 "keyword.control.default.js.jsx",
                 "keyword.control.catch-exception.dart",
-                "keyword.control.from.js",
-                "keyword.control.from.ts",
-                "keyword.control.from.jsx",
-                "keyword.control.import.js",
-                "keyword.control.import.ts",
-                "keyword.control.import.jsx",
-                "keyword.control.return.dart",
+                "keyword.function.go",
                 "keyword.operator.expression.typeof.js",
                 "keyword.operator.expression.of.js",
+                "keyword.operator.new.js",
+                "keyword.operator.new.jsx",
+                "keyword.operator.new.ts",
+                "keyword.operator.new.tsx",
                 "variable.other.constant.object.js",
                 "keyword.other.special-method",
                 "keyword.other.unit",
@@ -412,22 +454,31 @@
 
                 // META START
                 "meta.at-rule.mixin",
+                "entity.name.type.class.python",
                 "meta.function.js",
+                "meta.function.jsx",
+                "meta.function.ts",
+                "meta.function.tsx",
                 "meta.export.default.ts meta.array.literal.ts",
-                "meta.export.default.ts variable.other.object.ts",
+                "meta.var.expr.ts",
+                "meta.var.expr.tsx",
+                // "meta.var.expr.ts entity.name.function.ts",
+                // "meta.var.expr.tsx entity.name.function.tsx",
+                // "meta.export.default.ts variable.other.object.ts",
                 "meta.property-list",
                 "meta.property-list.scss",
                 "meta.property-value",
                 "meta.property-value.scss",
                 "meta.field.declaration.ts",
                 "meta.field.declaration.tsx",
-                "meta.var.expr.ts",
-                "meta.var.expr.tsx",
                 "meta.use.php",
-                // "meta.var.expr.ts entity.name.function.ts",
-                // "meta.var.expr.tsx entity.name.function.tsx",
                 // "meta.block.tsx meta.function-call.tsx",
                 // META END
+
+                "meta.block.js variable.other.object.js",
+                "meta.block.jsx variable.other.object.jsx",
+                "meta.block.ts variable.other.object.ts",
+                "meta.block.tsx variable.other.object.tsx",
 
                 // SOURCE START
                 "source.sass keyword.control",
@@ -446,9 +497,11 @@
                 "support.orther.namespace.use.php",
                 "support.type.builtin.ts",
                 "support.type.builtin.tsx",
+                "support.type.exception.python",
                 "support.type.object.module.js",
                 "support.type.property-name.css meta.property-value.scss",
                 "support.type.sys-types",
+                "support.type.python",
                 // SUPPORT END
 
                 // STORAGE START
@@ -457,6 +510,9 @@
                 "storage.type",
                 "storage.type.sql",
                 "storage.type.function",
+                // "storage.type.string.go",
+                // "storage.type.boolean.go",
+                // "storage.type.numeric.go",
                 "storage.type.primitive.dart",
                 // STORAGE END
 
@@ -465,7 +521,15 @@
                 "variable.language",
                 "variable.language.dart",
                 "variable.language.this",
-                "variable.parameter.url"
+                "variable.parameter.url",
+                "variable.other.object.js",
+                "variable.other.object.jsx",
+                "variable.other.object.ts",
+                "variable.other.object.tsx",
+                "variable.other.constant.object.js",
+                "variable.other.constant.object.jsx",
+                "variable.other.constant.object.ts",
+                "variable.other.constant.object.tsx"
                 // VARIABLE END
             ],
             "settings": {
@@ -479,20 +543,43 @@
                 // KEYWORD START
                 "keyword.control.catch-exception.dart",
                 "keyword.control.return.dart",
-                "keyword.control.dart",
                 "keyword.control.conditional.tsx",
                 "keyword.control.conditional.ts",
                 "keyword.control.conditional.js",
+                "keyword.control.dart",
+                "keyword.control.go",
                 "keyword.control.trycatch.js",
                 "keyword.control.loop.js",
-                "keyword.control.flow.js",
-                "keyword.control.flow.ts",
-                "keyword.control.flow.tsx",
                 "keyword.control.export.js",
                 "keyword.control.export.ts",
                 "keyword.control.export.jsx",
+                "keyword.control.export.tsx",
+                "keyword.control.import.js",
+                "keyword.control.import.ts",
+                "keyword.control.import.jsx",
+                "keyword.control.import.tsx",
+                "keyword.control.import.go",
+                "keyword.control.import.python",
+                "keyword.control.flow.js",
+                "keyword.control.flow.ts",
+                "keyword.control.flow.jsx",
+                "keyword.control.flow.tsx",
+                "keyword.control.flow.python",
+                "keyword.control.from.js",
+                "keyword.control.from.ts",
+                "keyword.control.from.jsx",
+                "keyword.control.from.tsx",
+                "keyword.control.return.dart",
                 "keyword.control.operator",
+                "keyword.control.ruby",
+                "keyword.control.pseudo-method.ruby",
+                "keyword.control.start-block.ruby",
+                "keyword.package.go",
                 "keyword.other.import.dart",
+                "keyword.other.special-method.ruby",
+                "keyword.struct.go",
+                "keyword.type.go",
+                "keyword.var.go",
                 // KEYWORD END
 
                 // META START
@@ -513,7 +600,8 @@
                 // TEXT END
 
                 // VARIABLE START
-                "variable.language.dart"
+                "variable.language.dart",
+                "variable.language.special.self.python"
                 // VARIABLE END
             ],
             "settings": {
@@ -587,12 +675,15 @@
             "scope": [
                 // CONSTANT START
                 "constant.other.php",
+                "constant.other.caps.python",
                 // CONSTANT END
 
                 // ENTITY START
                 "entity.name.method.js",
                 "entity.name.function.sql",
+                "entity.name.function.ruby",
                 "entity.name.type.class.js.jsx",
+                "entity.name.type.class.js.tsx",
                 // ENTITY END
 
                 // KEYWORD START
@@ -613,21 +704,29 @@
                 // META START
                 "meta.arrow.tsx",
                 "meta.block.tsx",
+                // "meta.block.parameters.ruby",
                 "meta.class-method.js",
                 "meta.definition.function",
                 "meta.definition.function.js",
                 "meta.embedded.line",
                 "meta.property-list.scss variable.scss",
+                "meta.require.ruby",
                 "meta.var.expr.js",
                 "meta.var.expr.ts",
                 "meta.var.expr.ts meta.definition.variable.ts",
                 "meta.var.expr.tsx meta.definition.variable.tsx",
+                "meta.function.js meta.block.js meta.function.js meta.block.js meta.block.js variable.other.object.js",
+                "meta.function.jsx meta.block.jsx meta.function.jsx meta.block.jsx meta.block.jsx variable.other.object.jsx",
+                "meta.function.ts meta.block.ts meta.function.ts meta.block.ts meta.block.ts variable.other.object.ts",
+                "meta.function.tsx meta.block.tsx meta.function.tsx meta.block.tsx meta.block.tsx variable.other.object.tsx",
                 "meta.var-single-variable.expr.js",
                 // META END
 
                 // PUNCTUATION START
                 "punctuation.definition.keyword.css",
                 // PUNCTUATION END
+
+                "storage.type.class.python",
 
                 // STRING START
                 "string constant.other.placeholder",
@@ -649,6 +748,15 @@
                 "variable.function.constructor",
                 "variable.language.arguments.js",
                 "variable.language.fenced.markdown",
+                "variable.language.ruby",
+                "variable.other.assignment.go",
+                "variable.other.constant.ruby",
+                "variable.other.constant.js",
+                "variable.other.constant.jsx",
+                "variable.other.constant.ts",
+                "variable.other.constant.tsx",
+                "variable.other.block.ruby",
+                "variable.other.go",
                 "variable.other.makefile",
                 "variable.other.read.github-actions-expression",
                 "variable.other.readwrite.alias.tsx",
@@ -657,12 +765,11 @@
                 "variable.other.readwrite.tsx",
                 "variable.other.readwrite.ts",
                 "variable.other.readwrite.js",
-                "variable.other.object.tsx",
-                "variable.other.object.js",
                 "variable.parameter.js",
                 "variable.parameter.ts",
                 "variable.parameter.tsx",
                 "variable.parameter.function.language.special",
+                "variable.ruby",
                 // VARIABLE END
 
                 // MULTI-LINE START
@@ -679,6 +786,8 @@
             "scope": [
                 "comment.block.documentation.dart variable.name.source.dart",
                 "comment.block.documentation.dart variable.other.source.dart",
+
+                // "entity.name.type.package.go",
 
                 // KEYWORD START
                 "keyword.control.at-rule.import",
@@ -794,7 +903,10 @@
                 // COMMENT END
 
                 // ENTITY START
+                "entity.name.function.go",
                 "entity.name.function.dart",
+                "entity.name.function.python",
+                "entity.name.function.support.go",
                 "entity.name.function.target.makefile",
                 "entity.name.tag.yaml",
                 // ENTITY END
@@ -819,11 +931,13 @@
 
                 // META START
                 "meta.create.sql",
-                "meta.embedded.expression.ts",
-                "meta.embedded.expression.tsx",
                 "meta.export.default meta.object.member",
                 "meta.export.default.ts meta.object.member.ts",
                 "meta.function-call.js",
+                "meta.function-call.ts",
+                "meta.function-call.tsx",
+                "meta.function-call.python",
+                "meta.function-call.ruby entity.name.function.ruby",
                 "meta.object.member.js",
                 "meta.object.member",
                 "meta.object-literal.key",
@@ -844,6 +958,7 @@
 
                 // SUPPORT START
                 "support.function.github-actions-expression",
+                "support.function.magic.python",
                 "support.variable.property.js",
                 "support.variable.property.tx",
                 "support.variable.property.tsx",
@@ -854,10 +969,15 @@
                 // TEXT END
 
                 // VARIABLE START
+                "variable.other.constant.property.js",
+                "variable.other.constant.property.jsx",
+                "variable.other.constant.property.ts",
+                "variable.other.constant.property.tsx",
                 "variable.object.property.js",
                 "variable.object.property.ts",
                 "variable.object.property.tsx",
                 "variable.other.property",
+                "variable.other.property.go",
                 "variable.other.object.property",
                 "variable.other.object.property.js",
                 "variable.other.object.property.tsx",
