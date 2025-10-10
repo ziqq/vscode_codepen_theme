@@ -297,10 +297,12 @@
                 "meta.embedded.expression.ts",
                 "meta.embedded.expression.jsx",
                 "meta.embedded.expression.tsx",
+                "meta.indexed-name.python",
                 "keyword.operator.comparison.js",
                 "keyword.operator.comparison.ts",
                 "keyword.operator.comparison.jsx",
                 "keyword.operator.comparison.tsx",
+                // "meta.function-call.arguments.python",
                 "meta.function-call.arguments.python",
                 "meta.tag",
                 "meta.jsx.children.js.jsx",
@@ -574,9 +576,10 @@
                 "keyword.control.ruby",
                 "keyword.control.pseudo-method.ruby",
                 "keyword.control.start-block.ruby",
-                "keyword.package.go",
+                "keyword.operator.logical.python",
                 "keyword.other.import.dart",
                 "keyword.other.special-method.ruby",
+                "keyword.package.go",
                 "keyword.struct.go",
                 "keyword.type.go",
                 "keyword.var.go",
@@ -710,6 +713,10 @@
                 "meta.definition.function",
                 "meta.definition.function.js",
                 "meta.embedded.line",
+                "meta.fstring.python",
+                // "meta.indexed-name.python",
+                // "meta.function.parameters.python",
+                // "meta.function-call.arguments.python",
                 "meta.property-list.scss variable.scss",
                 "meta.require.ruby",
                 "meta.var.expr.js",
@@ -819,7 +826,9 @@
                 "tag.decorator.js punctuation.definition.tag.js",
                 // TAG END
 
+                // VARIABLE START
                 "variable.language.special.self.python"
+                // VARIABLE END
             ],
             "settings": {
                 "foreground": "#809bbd",

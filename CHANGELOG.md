@@ -1,5 +1,8 @@
+## 0.9.1
+- **CHANGED**: `Python` scheme
+
 ## 0.9.0
-- **ADDED**: `Phyton` scheme
+- **ADDED**: `Python` scheme
 - **ADDED**: `GO` scheme
 - **CHANGED**: `JS` scheme
 -
