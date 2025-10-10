@@ -587,6 +587,8 @@
                 "meta.import.ts",
                 "meta.export.default",
                 "meta.export.default.ts",
+                // "meta.function.decorator.python",
+                // "meta.function.decorator.python support.type.python",
                 // META END
 
                 // STORAGE START
@@ -600,8 +602,7 @@
                 // TEXT END
 
                 // VARIABLE START
-                "variable.language.dart",
-                "variable.language.special.self.python"
+                "variable.language.dart"
                 // VARIABLE END
             ],
             "settings": {
@@ -726,8 +727,6 @@
                 "punctuation.definition.keyword.css",
                 // PUNCTUATION END
 
-                "storage.type.class.python",
-
                 // STRING START
                 "string constant.other.placeholder",
                 "string.interpolated.single.dart variable.parameter.dart",
@@ -809,12 +808,18 @@
                 // STORAGE START
                 "storage.modifier.dart",
                 "storage.type.annotation.dart",
+                "meta.function.decorator.python",
+                "meta.function.decorator.python support.type.python",
+                "storage.type.class.python",
+                "storage.type.function.python",
                 // STORAGE END
 
                 // TAG START
                 "tag.decorator.js entity.name.tag.js",
-                "tag.decorator.js punctuation.definition.tag.js"
+                "tag.decorator.js punctuation.definition.tag.js",
                 // TAG END
+
+                "variable.language.special.self.python"
             ],
             "settings": {
                 "foreground": "#809bbd",
@@ -930,6 +935,7 @@
                 // MARKUP END
 
                 // META START
+                "meta.attribute.python",
                 "meta.create.sql",
                 "meta.export.default meta.object.member",
                 "meta.export.default.ts meta.object.member.ts",
