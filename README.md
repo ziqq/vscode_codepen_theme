@@ -27,7 +27,8 @@ This extension is available for free in the [Visual Studio Code Marketplace](htt
 
 #### DART
 
-<img src="./assets/preview_dart.png" width="888">
+<img src="./assets/preview_dart_I.png" width="888">
+<img src="./assets/preview_dart_II.png" width="888">
 
 #### SQL
 
@@ -37,6 +38,6 @@ This extension is available for free in the [Visual Studio Code Marketplace](htt
 
 <img src="./assets/preview_go.png" width="888">
 
-#### Phyton
+#### Python
 
 <img src="./assets/preview_phyton.png" width="888">
