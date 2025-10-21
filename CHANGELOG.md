@@ -1,3 +1,6 @@
+## 0.10.0
+- **ADDED**: `SASS` and `SCSS` scheme's
+
 ## 0.9.1
 - **CHANGED**: `Python` scheme
 

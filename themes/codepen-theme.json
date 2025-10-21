@@ -205,6 +205,7 @@
                 "entity.name.type.go",
                 "entity.name.tag.reference",
                 "entity.name.tag.wildcard.css",
+                "entity.name.tag.wildcard.sass",
                 "entity.name.tag.wildcard.scss",
                 "entity.other.attribute-name.pseudo-class",
                 "entity.other.attribute-name.pseudo-class.css",
@@ -226,7 +227,12 @@
                 "keyword.operator.logical.ts",
                 "keyword.operator.logical.tsx",
                 "keyword.operator.relational.js",
+                "keyword.operator.css",
+                "keyword.operator.sass",
                 "keyword.operator.scss",
+                "keyword.operator.comparison.css",
+                "keyword.operator.comparison.sass",
+                "keyword.operator.comparison.scss",
                 "keyword.operator.ternary.dart",
                 "keyword.operator.optional.ts",
                 "keyword.operator.type.annotation.ts",
@@ -243,6 +249,7 @@
                 "punctuation.definition.bold.markdown",
                 "punctuation.definition.dictionary.begin.json.comments",
                 "punctuation.definition.entity",
+                "punctuation.definition.entity.css",
                 "punctuation.definition.list_item.markdown",
                 "punctuation.definition.tag",
                 "punctuation.definition.tag.html",
@@ -250,6 +257,12 @@
                 "punctuation.definition.tag.end.html",
                 "punctuation.definition.parameters.begin.js",
                 "punctuation.definition.parameters.end.js",
+                "punctuation.definition.interpolation.begin.bracket.curly.css",
+                "punctuation.definition.interpolation.begin.bracket.curly.sass",
+                "punctuation.definition.interpolation.begin.bracket.curly.scss",
+                "punctuation.definition.interpolation.end.bracket.curly.css",
+                "punctuation.definition.interpolation.end.bracket.curly.sass",
+                "punctuation.definition.interpolation.end.bracket.curly.scss",
                 // "punctuation.definition.template-expression.begin.js",
                 // "punctuation.definition.template-expression.begin.ts",
                 // "punctuation.definition.template-expression.begin.jsx",
@@ -265,7 +278,9 @@
                 "punctuation.section.function.end.bracket.round.css",
                 "punctuation.section.property-list.begin.bracket.curly.css",
                 "punctuation.section.property-list.end.bracket.curly.css",
+                "punctuation.section.property-list.begin.bracket.curly.sass",
                 "punctuation.section.property-list.begin.bracket.curly.scss",
+                "punctuation.section.property-list.end.bracket.curly.sass",
                 "punctuation.section.property-list.end.bracket.curly.scss",
                 "punctuation.separator.comma",
                 "punctuation.separator.inheritance.php",
@@ -275,9 +290,9 @@
                 "punctuation.separator.key-value.js",
                 "punctuation.separator.comma.js",
                 "punctuation.separator.key-value.mapping.yaml",
-                "punctuation.terminator.rule.css",
                 "punctuation.terminator.dart",
                 "punctuation.terminator.rule.css",
+                "punctuation.terminator.rule.sass",
                 "punctuation.terminator.rule.scss",
                 "punctuation.terminator.statement.js",
                 "punctuation.terminator.statement.ts",
@@ -317,6 +332,7 @@
 
                 // SOURCE START
                 "source.css",
+                "source.css.sass",
                 "source.css.scss",
                 "source.dart",
                 "source.go",
@@ -333,11 +349,17 @@
                 "storage.type.string.go",
                 // STORAGE END
 
+                "support.constant.mathematical-symbols.css",
+                "support.constant.mathematical-symbols.sass",
+                "support.constant.mathematical-symbols.scss",
+
                 // TEXT START
                 "text.html.markdown",
                 // TEXT END
 
                 // VARIABLE START
+                "variable.language.expanded-namespace.css",
+                "variable.language.expanded-namespace.sass",
                 "variable.language.expanded-namespace.scss",
                 "variable.language.fenced.markdown",
                 // VARIABLE END
@@ -417,6 +439,9 @@
                 // ENTITY START
                 "entity.other.attribute-name",
                 "entity.other.attribute-name.class",
+                "entity.other.attribute-name.class.sass",
+                "entity.other.attribute-name.attribute.css",
+                "entity.other.attribute-name.attribute.sass",
                 "entity.other.attribute-name.attribute.scss",
                 "entity.other.keyframe-offset.css",
                 "entity.name.section.markdown",
@@ -430,7 +455,6 @@
                 "punctuation.definition.block.tsx",
                 "punctuation.definition.constant",
                 "punctuation.definition.constant.css",
-                "punctuation.definition.entity.css",
                 // PUNCTUATION END
 
                 // KEYWORD START
@@ -456,6 +480,7 @@
 
                 // META START
                 "meta.at-rule.mixin",
+                "meta.at-rule.if",
                 "entity.name.type.class.python",
                 "meta.function.js",
                 "meta.function.jsx",
@@ -468,8 +493,12 @@
                 // "meta.var.expr.tsx entity.name.function.tsx",
                 // "meta.export.default.ts variable.other.object.ts",
                 "meta.property-list",
+                "meta.property-list.css",
+                "meta.property-list.sass",
                 "meta.property-list.scss",
                 "meta.property-value",
+                "meta.property-value.css",
+                "meta.property-value.sass",
                 "meta.property-value.scss",
                 "meta.field.declaration.ts",
                 "meta.field.declaration.tsx",
@@ -483,7 +512,6 @@
                 "meta.block.tsx variable.other.object.tsx",
 
                 // SOURCE START
-                "source.sass keyword.control",
                 // SOURCE END
 
                 // SUPPORT START
@@ -501,7 +529,9 @@
                 "support.type.builtin.tsx",
                 "support.type.exception.python",
                 "support.type.object.module.js",
-                "support.type.property-name.css meta.property-value.scss",
+                "support.type.property-name.css meta.property-value.css",
+                "support.type.property-name.sass meta.property-value.sass",
+                "support.type.property-name.scss meta.property-value.scss",
                 "support.type.sys-types",
                 "support.type.python",
                 // SUPPORT END
@@ -573,6 +603,17 @@
                 "keyword.control.from.tsx",
                 "keyword.control.return.dart",
                 "keyword.control.operator",
+                "keyword.control.if.css punctuation.definition.keyword.css",
+                "keyword.control.if.sass punctuation.definition.keyword.sass",
+                "keyword.control.if.scss punctuation.definition.keyword.scss",
+                "keyword.control.if.css",
+                "keyword.control.if.sass",
+                "keyword.control.if.scss",
+                "keyword.control.return.css punctuation.definition.keyword.css",
+                "keyword.control.return.sass punctuation.definition.keyword.sass",
+                "keyword.control.return.scss punctuation.definition.keyword.scss",
+                "keyword.control.return.sass",
+                "keyword.control.return.scss",
                 "keyword.control.ruby",
                 "keyword.control.pseudo-method.ruby",
                 "keyword.control.start-block.ruby",
@@ -691,10 +732,6 @@
                 // ENTITY END
 
                 // KEYWORD START
-                "keyword.control.at-rule.font-face.css",
-                "keyword.control.at-rule.keyframes.css",
-                "keyword.control.at-rule.import.css",
-                "keyword.control.at-rule.media.css",
                 "keyword.other.DML.sql",
                 "keyword.other.DDL.create.II.sql",
                 "keyword.other.LUW.sql",
@@ -717,7 +754,15 @@
                 // "meta.indexed-name.python",
                 // "meta.function.parameters.python",
                 // "meta.function-call.arguments.python",
+                "meta.property-list.css variable.css",
+                "meta.property-list.sass variable.sass",
                 "meta.property-list.scss variable.scss",
+                "meta.property-list.css meta.at-rule.include.css",
+                "meta.property-list.sass meta.at-rule.include.sass",
+                "meta.property-list.scss meta.at-rule.include.scss",
+                "meta.property-value.css variable.css",
+                "meta.property-value.sass variable.sass",
+                "meta.property-value.scss variable.scss",
                 "meta.require.ruby",
                 "meta.var.expr.js",
                 "meta.var.expr.ts",
@@ -731,7 +776,7 @@
                 // META END
 
                 // PUNCTUATION START
-                "punctuation.definition.keyword.css",
+                // "punctuation.definition.keyword.css",
                 // PUNCTUATION END
 
                 // STRING START
@@ -751,6 +796,10 @@
                 // TEXT END
 
                 // VARIABLE START
+                "variable.css",
+                "variable.sass",
+                "variable.scss",
+                "variable.argument.css",
                 "variable.function.constructor",
                 "variable.language.arguments.js",
                 "variable.language.fenced.markdown",
@@ -797,19 +846,45 @@
 
                 // KEYWORD START
                 "keyword.control.at-rule.import",
+                "keyword.control.at-rule.import.css",
+                "keyword.control.at-rule.include.css",
+                "keyword.control.at-rule.include.sass",
+                "keyword.control.at-rule.font-face.css",
+                "keyword.control.at-rule.include.scss",
+                "keyword.control.at-rule.keyframes.css",
+                "keyword.control.at-rule.keyframes.sass",
+                "keyword.control.at-rule.keyframes.scss",
                 "keyword.control.at-rule.mixin",
                 "keyword.control.at-rule.media",
+                "keyword.control.at-rule.media.css",
+                "keyword.control.at-rule.supports.css",
                 "keyword.declaration.dart",
                 // KEYWORD END
 
                 // PUNCTUATION START
                 "punctuation.definition.keyword",
+                "punctuation.definition.keyword.css",
                 // PUNCTUATION END
 
                 // META START
+                "meta.at-rule.keyframes.css",
+                "meta.at-rule.keyframes.sass",
+                "meta.at-rule.keyframes.scss",
+                "meta.at-rule.include.css",
+                "meta.at-rule.include.sass",
+                "meta.at-rule.include.scss",
+                "meta.at-rule.function.css",
+                "meta.at-rule.function.sass",
+                "meta.at-rule.function.scss",
+                "meta.at-rule.supports.css",
+                "meta.at-rule.supports.sass",
+                "meta.at-rule.supports.scss",
+                "meta.at-rule.use.css",
+                "meta.at-rule.use.sass",
                 "meta.at-rule.use.scss",
+                "meta.definition.variable.css",
+                "meta.definition.variable.sass",
                 "meta.definition.variable.scss",
-                "meta.property-value.scss variable.scss",
                 // META END
 
                 // STORAGE START
@@ -820,6 +895,10 @@
                 "storage.type.class.python",
                 "storage.type.function.python",
                 // STORAGE END
+
+                // SOURCE START
+                "source.sass keyword.control",
+                // SOURCE END
 
                 // TAG START
                 "tag.decorator.js entity.name.tag.js",
@@ -862,6 +941,8 @@
                 // MARKUP END
 
                 // META START
+                "meta.attribute-selector.css",
+                "meta.attribute-selector.sass",
                 "meta.attribute-selector.scss",
                 "meta.embedded.expression.dart",
                 "meta.group.braces.curly constant.other.object.key.js string.unquoted.label.js",
@@ -920,6 +1001,9 @@
                 "entity.name.function.go",
                 "entity.name.function.dart",
                 "entity.name.function.python",
+                "entity.name.function.css",
+                "entity.name.function.sass",
+                "entity.name.function.scss",
                 "entity.name.function.support.go",
                 "entity.name.function.target.makefile",
                 "entity.name.tag.yaml",
@@ -956,8 +1040,12 @@
                 "meta.object.member.js",
                 "meta.object.member",
                 "meta.object-literal.key",
-                "meta.property-list.scss entity.name.tag.css",
+                "meta.property-list.css entity.name.tag.css",
+                "meta.property-list.sass entity.name.tag.sass",
+                "meta.property-list.scss entity.name.tag.scss",
                 "meta.property-name",
+                "meta.property-name.css",
+                "meta.property-name.sass",
                 "meta.property-name.scss",
                 "meta.var.expr.tsx meta.arrow.tsx",
                 "meta.var.expr.tsx meta.block.tsx",
@@ -972,8 +1060,13 @@
                 // STRING END
 
                 // SUPPORT START
+                "support.function.calc.css",
+                "support.function.misc.css",
+                "support.function.misc.sass",
+                "support.function.misc.scss",
                 "support.function.github-actions-expression",
                 "support.function.magic.python",
+                "support.type.property-name.media.css",
                 "support.variable.property.js",
                 "support.variable.property.tx",
                 "support.variable.property.tsx",

@@ -3,7 +3,7 @@
     "displayName": "CodePen Theme Original",
     "description": "A custom theme for Visual Studio Code inspired by the codepen.io online editor theme. Compatible with .HTML, .CSS, .JS, .TS, .JSX, .TSX, .DART, .GO, .PY and other formats. Made with 🖤 by ziqq.",
     "icon": "assets/logo.png",
-    "version": "0.9.1",
+    "version": "0.10.0",
     "engines": {
         "vscode": "^1.0.0"
     },
@@ -33,6 +33,72 @@
         "workspace"
     ],
     "contributes": {
+        "languages": [
+            {
+                "id": "sass",
+                "aliases": [
+                    "Sass",
+                    "sass-indented"
+                ],
+                "extensions": [
+                    ".sass",
+                    ".sass.erb"
+                ],
+                "configuration": "./sass.configuration.json"
+            },
+            {
+                "id": "sass.hover",
+                "extensions": [
+                    ".sass.hover"
+                ],
+                "configuration": "./sass.configuration.json"
+            },
+            {
+                "id": "vue",
+                "aliases": [
+                    "Vue",
+                    "vue"
+                ],
+                "extensions": [
+                    ".vue"
+                ]
+            },
+            {
+                "id": "solid",
+                "aliases": [
+                    "Solid",
+                    "solid"
+                ],
+                "extensions": [
+                    ".js",
+                    ".jsx",
+                    ".ts",
+                    ".tsx"
+                ]
+            },
+            {
+                "id": "svelte",
+                "aliases": [
+                    "Svelte",
+                    "svelte"
+                ],
+                "extensions": [
+                    ".svelte"
+                ]
+            }
+        ],
+        "grammars": [
+            {
+                "language": "sass",
+                "scopeName": "source.sass",
+                "path": "./syntaxes/sass.tmLanguage.json"
+            },
+            {
+                "language": "sass.hover",
+                "scopeName": "source.sass.hover",
+                "path": "./syntaxes/sass.hover.highlighting.json"
+            }
+        ],
         "themes": [
             {
                 "label": "CodePen Theme Original",
