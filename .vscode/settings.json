@@ -10,5 +10,12 @@
         "out": true,
         "dist": true
     },
+    "explorer.fileNesting.enabled": true,
+    "explorer.fileNesting.expand": false,
+    "explorer.fileNesting.patterns": {
+        "package.json": "package-lock.json, sass.configuration.json, scss.configuration.json",
+        ".gitignore": ".gitattributes, .gitmodules, .gitmessage, .mailmap, .git-blame*, .vscodeignore",
+        "README.md": "CHANGELOG.md, CONTRIBUTING.md, LICENSE, LICENSE.md, CODE_OF_CONDUCT.md",
+    },
     "typescript.tsc.autoDetect": "off",
 }
