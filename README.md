@@ -3,7 +3,7 @@
 
 ## Description
 
-A custom theme for Visual Studio Code inspired by the codepen.io online editor theme. Compatible with `.HTML`, `.CSS`, `.SASS`, `.SCSS` `.JS`, `.JSX`, `.TS`, `.TSX`, `.DART`, `.PHYTON`, `.GO`, `.SQL` and other formats. Made with 🖤 by ziqq.
+A custom theme for Visual Studio Code inspired by the `codepen.io` online editor theme. Compatible with `.HTML`, `.CSS`, `.SASS`, `.SCSS`, `.JS`, `.JSX`, `.TS`, `.TSX`, `.DART`, `.PHYTON`, `.GO`, `.SQL` and other formats. Made with 🖤 by ziqq.
 
 
 ## Installing
