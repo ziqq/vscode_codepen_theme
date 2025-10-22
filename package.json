@@ -3,7 +3,7 @@
     "displayName": "CodePen Theme Original",
     "description": "A custom theme for Visual Studio Code inspired by the codepen.io online editor theme. Compatible with .HTML, .CSS, .JS, .TS, .JSX, .TSX, .DART, .GO, .PY and other formats. Made with 🖤 by ziqq.",
     "icon": "assets/logo.png",
-    "version": "0.10.0",
+    "version": "0.10.1",
     "engines": {
         "vscode": "^1.0.0"
     },
@@ -35,6 +35,48 @@
     "contributes": {
         "languages": [
             {
+                "id": "dart",
+                "aliases": [
+                    "DART",
+                    "dart"
+                ],
+                "extensions": [
+                    ".dart"
+                ]
+            },
+            {
+                "id": "go",
+                "aliases": [
+                    "GO",
+                    "go"
+                ],
+                "extensions": [
+                    ".go"
+                ]
+            },
+            {
+                "id": "html",
+                "aliases": [
+                    "HTML",
+                    "html"
+                ],
+                "extensions": [
+                    ".html",
+                    ".jade",
+                    ".nunjucks"
+                ]
+            },
+            {
+                "id": "python",
+                "aliases": [
+                    "PYTHON",
+                    "python"
+                ],
+                "extensions": [
+                    ".py"
+                ]
+            },
+            {
                 "id": "sass",
                 "aliases": [
                     "Sass",
@@ -47,21 +89,16 @@
                 "configuration": "./sass.configuration.json"
             },
             {
-                "id": "sass.hover",
-                "extensions": [
-                    ".sass.hover"
-                ],
-                "configuration": "./sass.configuration.json"
-            },
-            {
-                "id": "vue",
+                "id": "scss",
                 "aliases": [
-                    "Vue",
-                    "vue"
+                    "Scss",
+                    "scss-indented"
                 ],
                 "extensions": [
-                    ".vue"
-                ]
+                    ".scss",
+                    ".scss.erb"
+                ],
+                "configuration": "./scss.configuration.json"
             },
             {
                 "id": "solid",
@@ -85,6 +122,29 @@
                 "extensions": [
                     ".svelte"
                 ]
+            },
+            {
+                "id": "sql",
+                "aliases": [
+                    "SQL",
+                    "sql",
+                    "DRIFT",
+                    "drift"
+                ],
+                "extensions": [
+                    ".sql",
+                    ".drift"
+                ]
+            },
+            {
+                "id": "vue",
+                "aliases": [
+                    "Vue",
+                    "vue"
+                ],
+                "extensions": [
+                    ".vue"
+                ]
             }
         ],
         "grammars": [
@@ -94,9 +154,9 @@
                 "path": "./syntaxes/sass.tmLanguage.json"
             },
             {
-                "language": "sass.hover",
-                "scopeName": "source.sass.hover",
-                "path": "./syntaxes/sass.hover.highlighting.json"
+                "language": "scss",
+                "scopeName": "source.scss",
+                "path": "./syntaxes/scss.tmLanguage.json"
             }
         ],
         "themes": [
