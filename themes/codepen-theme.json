@@ -335,6 +335,7 @@
                 "source.css.sass",
                 "source.css.scss",
                 "source.dart",
+                "source.groovy",
                 "source.go",
                 "source.makefile",
                 "source.sql",
@@ -540,8 +541,9 @@
                 "storage.modifier",
                 "storage.modifier.sql",
                 "storage.type",
-                "storage.type.sql",
                 "storage.type.function",
+                "storage.type.groovy",
+                "storage.type.sql",
                 // "storage.type.string.go",
                 // "storage.type.boolean.go",
                 // "storage.type.numeric.go",
@@ -610,6 +612,8 @@
                 "keyword.control.if.sass",
                 "keyword.control.if.scss",
                 "keyword.control.return.css punctuation.definition.keyword.css",
+                "keyword.control.groovy",
+                "keyword.control.new.groovy",
                 "keyword.control.return.sass punctuation.definition.keyword.sass",
                 "keyword.control.return.scss punctuation.definition.keyword.scss",
                 "keyword.control.return.sass",
@@ -638,6 +642,7 @@
                 // STORAGE START
                 "storage.type",
                 "storage.type.function",
+                "storage.type.def.groovy",
                 // STORAGE END
 
                 // TEXT START
@@ -749,6 +754,8 @@
                 "meta.class-method.js",
                 "meta.definition.function",
                 "meta.definition.function.js",
+                "meta.definition.variable.groovy",
+                "meta.definition.variable.name.groovy",
                 "meta.embedded.line",
                 "meta.fstring.python",
                 // "meta.indexed-name.python",
@@ -1037,6 +1044,7 @@
                 "meta.function-call.tsx",
                 "meta.function-call.python",
                 "meta.function-call.ruby entity.name.function.ruby",
+                "meta.method-call.groovy",
                 "meta.object.member.js",
                 "meta.object.member",
                 "meta.object-literal.key",
