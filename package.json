@@ -1,9 +1,9 @@
 {
     "name": "codepen-theme-original",
     "displayName": "CodePen Theme Original",
-    "description": "A custom theme for Visual Studio Code inspired by the codepen.io online editor theme. Compatible with .HTML, .CSS, .JS, .TS, .JSX, .TSX, .DART, .GO, .PY and other formats. Made with 🖤 by ziqq.",
+    "description": "Custom theme for Visual Studio Code inspired by the codepen.io online editor theme. Compatible with .HTML, .CSS, .JS, .TS, .JSX, .TSX, .DART, .GO, .PY and other formats. Made with 🖤 by ziqq.",
     "icon": "assets/logo.png",
-    "version": "0.10.1",
+    "version": "0.10.2",
     "engines": {
         "vscode": "^1.0.0"
     },
@@ -37,7 +37,7 @@
             {
                 "id": "dart",
                 "aliases": [
-                    "DART",
+                    "Dart",
                     "dart"
                 ],
                 "extensions": [
@@ -47,7 +47,7 @@
             {
                 "id": "go",
                 "aliases": [
-                    "GO",
+                    "Go",
                     "go"
                 ],
                 "extensions": [
@@ -57,7 +57,7 @@
             {
                 "id": "html",
                 "aliases": [
-                    "HTML",
+                    "Html",
                     "html"
                 ],
                 "extensions": [
@@ -69,7 +69,7 @@
             {
                 "id": "python",
                 "aliases": [
-                    "PYTHON",
+                    "Python",
                     "python"
                 ],
                 "extensions": [
@@ -101,19 +101,6 @@
                 "configuration": "./scss.configuration.json"
             },
             {
-                "id": "solid",
-                "aliases": [
-                    "Solid",
-                    "solid"
-                ],
-                "extensions": [
-                    ".js",
-                    ".jsx",
-                    ".ts",
-                    ".tsx"
-                ]
-            },
-            {
                 "id": "svelte",
                 "aliases": [
                     "Svelte",
@@ -126,9 +113,9 @@
             {
                 "id": "sql",
                 "aliases": [
-                    "SQL",
+                    "Sql",
                     "sql",
-                    "DRIFT",
+                    "Drift",
                     "drift"
                 ],
                 "extensions": [
@@ -150,12 +137,12 @@
         "grammars": [
             {
                 "language": "sass",
-                "scopeName": "source.sass",
+                "scopeName": "source.css.sass",
                 "path": "./syntaxes/sass.tmLanguage.json"
             },
             {
                 "language": "scss",
-                "scopeName": "source.scss",
+                "scopeName": "source.css.scss",
                 "path": "./syntaxes/scss.tmLanguage.json"
             }
         ],
@@ -168,7 +155,7 @@
         ]
     },
     "scripts": {
-        "start": "code . --extensionDevelopmentPath=.",
+        "start": "code . --extensionDevelopmentPath=. --disable-extensions",
         "deploy": "vsce publish"
     }
 }

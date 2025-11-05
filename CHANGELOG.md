@@ -1,3 +1,10 @@
+## 0.10.2
+- **ADDED**: `groovy` scheme
+- **FIXED**: `SASS` and `SCSS` scheme's
+
+## 0.10.1
+- **CHANGED**: Package meta data
+
 ## 0.10.0
 - **ADDED**: `SASS` and `SCSS` scheme's
 

@@ -4,7 +4,7 @@
     ],
     "version": "full-port-1",
     "name": "SASS (Indented)",
-    "scopeName": "source.sass",
+    "scopeName": "source.css.sass",
     "fileTypes": [
         "sass"
     ],
