@@ -1,3 +1,6 @@
+## 0.10.3
+- **CHANGED**: `yaml` scheme (comment block)
+
 ## 0.10.2
 - **ADDED**: `groovy` scheme
 - **FIXED**: `SASS` and `SCSS` scheme's

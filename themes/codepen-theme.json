@@ -1167,7 +1167,12 @@
             "name": "GREY (#717790) COLOR ITALIC",
             "scope": [
                 // COMMENT START
-                "comment"
+                "comment",
+                "comment.line.number-sign.yaml meta.embedded.block.github-actions-expression",
+                "comment.line.number-sign.yaml variable.other.read.github-actions-expression",
+                "comment.line.number-sign.yaml punctuation.separator.key-value.mapping.yaml",
+                "comment.line.number-sign.yaml entity.name.tag.yaml",
+                "comment.line.number-sign.yaml string"
                 // COMMENT END
             ],
             "settings": {

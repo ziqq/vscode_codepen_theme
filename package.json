@@ -3,7 +3,7 @@
     "displayName": "CodePen Theme Original",
     "description": "Custom theme for Visual Studio Code inspired by the codepen.io online editor theme. Compatible with .HTML, .CSS, .JS, .TS, .JSX, .TSX, .DART, .GO, .PY and other formats. Made with 🖤 by ziqq.",
     "icon": "assets/logo.png",
-    "version": "0.10.2",
+    "version": "0.10.3",
     "engines": {
         "vscode": "^1.0.0"
     },
