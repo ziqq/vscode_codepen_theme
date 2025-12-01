@@ -3,7 +3,7 @@
     "displayName": "CodePen Theme Original",
     "description": "Custom theme for Visual Studio Code inspired by the codepen.io online editor theme. Compatible with .HTML, .CSS, .JS, .TS, .JSX, .TSX, .DART, .GO, .PY and other formats. Made with 🖤 by ziqq.",
     "icon": "assets/logo.png",
-    "version": "0.10.3",
+    "version": "0.11.0",
     "engines": {
         "vscode": "^1.0.0"
     },
@@ -35,6 +35,47 @@
     "contributes": {
         "languages": [
             {
+                "id": "dotenv",
+                "aliases": [
+                    "Environment Variables",
+                    "dotenv",
+                    "env"
+                ],
+                "extensions": [
+                    ".flaskenv",
+                    ".env",
+                    ".env-sample",
+                    ".env.example",
+                    ".env.local",
+                    ".env.dev",
+                    ".env.dev.local",
+                    ".env.build",
+                    ".env.build.local",
+                    ".env.development",
+                    ".env.development.local",
+                    ".env.test",
+                    ".env.test.local",
+                    ".env.testing",
+                    ".env.qa",
+                    ".env.qa.local",
+                    ".env.uat",
+                    ".env.uat.local",
+                    ".env.stag",
+                    ".env.stag.local",
+                    ".env.stage",
+                    ".env.stage.local",
+                    ".env.staging",
+                    ".env.staging.local",
+                    ".env.live",
+                    ".env.live.local",
+                    ".env.production",
+                    ".env.production.local",
+                    ".env.prod",
+                    ".env.prod.local"
+                ],
+                "configuration": "./languages/env.configuration.json"
+            },
+            {
                 "id": "dart",
                 "aliases": [
                     "Dart",
@@ -55,6 +96,25 @@
                 ]
             },
             {
+                "id": "go.mod",
+                "filenames": [
+                    "go.mod"
+                ],
+                "aliases": [
+                    "Go Module File"
+                ],
+                "configuration": "./languages/go.mod.language-configuration.json"
+            },
+            {
+                "id": "go.sum",
+                "filenames": [
+                    "go.sum"
+                ],
+                "aliases": [
+                    "Go Checksum File"
+                ]
+            },
+            {
                 "id": "html",
                 "aliases": [
                     "Html",
@@ -64,6 +124,17 @@
                     ".html",
                     ".jade",
                     ".nunjucks"
+                ]
+            },
+            {
+                "id": "kotlin",
+                "aliases": [
+                    "Kotlin",
+                    "kotlin"
+                ],
+                "extensions": [
+                    ".kt",
+                    ".kts"
                 ]
             },
             {
@@ -77,6 +148,17 @@
                 ]
             },
             {
+                "id": "rust",
+                "aliases": [
+                    "Rust",
+                    "rust"
+                ],
+                "extensions": [
+                    ".rs"
+                ],
+                "configuration": "./languages/rust.configuration.json"
+            },
+            {
                 "id": "sass",
                 "aliases": [
                     "Sass",
@@ -86,7 +168,7 @@
                     ".sass",
                     ".sass.erb"
                 ],
-                "configuration": "./sass.configuration.json"
+                "configuration": "./languages/sass.configuration.json"
             },
             {
                 "id": "scss",
@@ -98,7 +180,7 @@
                     ".scss",
                     ".scss.erb"
                 ],
-                "configuration": "./scss.configuration.json"
+                "configuration": "./languages/scss.configuration.json"
             },
             {
                 "id": "svelte",
@@ -124,6 +206,17 @@
                 ]
             },
             {
+                "id": "toml",
+                "aliases": [
+                    "TOML",
+                    "toml"
+                ],
+                "extensions": [
+                    ".toml"
+                ],
+                "configuration": "./languages/toml.configuration.json"
+            },
+            {
                 "id": "vue",
                 "aliases": [
                     "Vue",
@@ -136,6 +229,31 @@
         ],
         "grammars": [
             {
+                "language": "dotenv",
+                "scopeName": "source.env",
+                "path": "./syntaxes/env.tmLanguage"
+            },
+            {
+                "language": "go.mod",
+                "scopeName": "go.mod",
+                "path": "./syntaxes/go.mod.tmGrammar.json"
+            },
+            {
+                "language": "go.sum",
+                "scopeName": "go.sum",
+                "path": "./syntaxes/go.sum.tmGrammar.json"
+            },
+            {
+                "language": "kotlin",
+                "scopeName": "source.kotlin",
+                "path": "./syntaxes/kotlin.tmLanguage.json"
+            },
+            {
+                "language": "rust",
+                "scopeName": "source.rust",
+                "path": "./syntaxes/rust.tmLanguage.json"
+            },
+            {
                 "language": "sass",
                 "scopeName": "source.css.sass",
                 "path": "./syntaxes/sass.tmLanguage.json"
@@ -144,6 +262,11 @@
                 "language": "scss",
                 "scopeName": "source.css.scss",
                 "path": "./syntaxes/scss.tmLanguage.json"
+            },
+            {
+                "language": "toml",
+                "scopeName": "source.toml",
+                "path": "./syntaxes/toml.tmLanguage.json"
             }
         ],
         "themes": [

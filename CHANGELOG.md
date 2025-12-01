@@ -1,8 +1,15 @@
+## 0.11.0
+- **ADDED**: `env` scheme
+- **ADDED**: `rust` scheme
+- **ADDED**: `toml` scheme
+- **ADDED**: `java` scheme
+- **ADDED**: support for `go.mod` and `go.sum` files
+
 ## 0.10.3
 - **CHANGED**: `yaml` scheme (comment block)
 
 ## 0.10.2
-- **ADDED**: `groovy` scheme
+- **ADDED**: `gradle` scheme
 - **FIXED**: `SASS` and `SCSS` scheme's
 
 ## 0.10.1

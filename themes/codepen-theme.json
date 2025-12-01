@@ -203,10 +203,13 @@
 
                 // ENTITY START
                 "entity.name.type.go",
+                "entity.name.type.rust",
                 "entity.name.tag.reference",
                 "entity.name.tag.wildcard.css",
                 "entity.name.tag.wildcard.sass",
                 "entity.name.tag.wildcard.scss",
+                "entity.name.type.swift",
+                "entity.name.type.struct.swift",
                 "entity.other.attribute-name.pseudo-class",
                 "entity.other.attribute-name.pseudo-class.css",
                 "entity.other.attribute-name.pseudo-element.css",
@@ -220,12 +223,18 @@
                 "keyword.operator.assignment.ts",
                 "keyword.operator.assignment.tsx",
                 "keyword.operator.assignment.compound.js",
+                "keyword.operator.arrow.skinny.rust",
+                "keyword.operator.borrow.and.rust",
                 "keyword.operator.closure.dart",
                 "keyword.operator.comparison.js",
                 "keyword.operator.comparison.dart",
+                "keyword.operator.comparison.java",
+                "keyword.operator.custom.postfix.swift",
                 "keyword.operator.logical.js",
                 "keyword.operator.logical.ts",
                 "keyword.operator.logical.tsx",
+                "keyword.operator.logical.java",
+                "keyword.operator.function-result.swift",
                 "keyword.operator.relational.js",
                 "keyword.operator.css",
                 "keyword.operator.sass",
@@ -233,6 +242,7 @@
                 "keyword.operator.comparison.css",
                 "keyword.operator.comparison.sass",
                 "keyword.operator.comparison.scss",
+                "keyword.operator.namespace.rust",
                 "keyword.operator.ternary.dart",
                 "keyword.operator.optional.ts",
                 "keyword.operator.type.annotation.ts",
@@ -243,6 +253,13 @@
                 "punctuation.accessor.jsx",
                 "punctuation.accessor.ts",
                 "punctuation.accessor.tsx",
+                "punctuation.bracket.angle.java",
+                "punctuation.brackets.angle.rust",
+                "punctuation.brackets.attribute.rust",
+                "punctuation.brackets.curly.rust",
+                "punctuation.brackets.round.rust",
+                "punctuation.semi.rust",
+                "punctuation.comma.rust",
                 "punctuation.definition.attribute-selector.begin.bracket.square",
                 "punctuation.definition.attribute-selector.end.bracket.square",
                 "punctuation.definition.block.js",
@@ -282,6 +299,8 @@
                 "punctuation.section.property-list.begin.bracket.curly.scss",
                 "punctuation.section.property-list.end.bracket.curly.sass",
                 "punctuation.section.property-list.end.bracket.curly.scss",
+                "punctuation.section.scope.begin.swift",
+                "punctuation.section.scope.end.swift",
                 "punctuation.separator.comma",
                 "punctuation.separator.inheritance.php",
                 "punctuation.separator.list.comma.css",
@@ -289,8 +308,12 @@
                 "punctuation.separator.key-value.css",
                 "punctuation.separator.key-value.js",
                 "punctuation.separator.comma.js",
+                "punctuation.separator.java",
+                "punctuation.separator.period.java",
+                "punctuation.separator.delimiter.java",
                 "punctuation.separator.key-value.mapping.yaml",
                 "punctuation.terminator.dart",
+                "punctuation.terminator.java",
                 "punctuation.terminator.rule.css",
                 "punctuation.terminator.rule.sass",
                 "punctuation.terminator.rule.scss",
@@ -308,19 +331,20 @@
                 "meta.brace.round",
                 "meta.brace.square",
                 "meta.declaration.dart",
+                "meta.import.ts punctuation.definition.block",
+                "meta.import.ts punctuation.definition.block.ts",
+                "meta.jsx.children.js.jsx",
                 "meta.embedded.expression.js",
                 "meta.embedded.expression.ts",
                 "meta.embedded.expression.jsx",
                 "meta.embedded.expression.tsx",
                 "meta.indexed-name.python",
-                "keyword.operator.comparison.js",
-                "keyword.operator.comparison.ts",
-                "keyword.operator.comparison.jsx",
-                "keyword.operator.comparison.tsx",
+                "meta.method.body.java",
+                "meta.method.identifier.java variable.parameter.java",
                 // "meta.function-call.arguments.python",
                 "meta.function-call.arguments.python",
                 "meta.tag",
-                "meta.jsx.children.js.jsx",
+                "meta.type-name.swift",
                 "meta.type.annotation.ts",
                 "meta.type.annotation.tsx",
                 "meta.embedded.block.github-actions-expression",
@@ -330,20 +354,30 @@
                 "other.source.dart",
                 // OTHER END
 
+                "keyword.operator.arithmetic.java",
+                "keyword.operator.comparison.js",
+                "keyword.operator.comparison.ts",
+                "keyword.operator.comparison.jsx",
+                "keyword.operator.comparison.tsx",
+
                 // SOURCE START
                 "source.css",
                 "source.css.sass",
                 "source.css.scss",
                 "source.dart",
+                "source.java",
                 "source.groovy",
                 "source.go",
                 "source.makefile",
+                "source.rust",
                 "source.sql",
                 "source.python",
                 "source.ruby",
                 // SOURCE END
 
                 // STORAGE START
+                "storage.modifier.import.java",
+                "storage.modifier.package.java",
                 "storage.type.function.arrow",
                 "storage.type.boolean.go",
                 "storage.type.numeric.go",
@@ -377,12 +411,7 @@
         {
             "name": "WITHE (#FFFFFF) COLOR ITALIC",
             "scope": [
-                "entity.name.type.package.go",
-
-                // META START
-                "meta.import.ts punctuation.definition.block",
-                "meta.import.ts punctuation.definition.block.ts"
-                // META END
+                "entity.name.type.package.go"
             ],
             "settings": {
                 "foreground": "#FFFFFF",
@@ -450,6 +479,9 @@
                 "entity.name.type.js",
                 "entity.name.typ.dart",
                 "entity.name.type.module.js",
+                "entity.name.type.primitive.rust",
+                "entity.name.type.class.java",
+                "entity.other.inherited-class.java",
                 // ENTITY END
 
                 // PUNCTUATION START
@@ -488,6 +520,12 @@
                 "meta.function.ts",
                 "meta.function.tsx",
                 "meta.export.default.ts meta.array.literal.ts",
+                "meta.catch.parameters.java storage.type.java",
+                "meta.definition.variable.java storage.type.primitive.array.java",
+                "meta.definition.variable.java storage.type.generic.java",
+                "meta.definition.variable.java storage.type.java",
+                "meta.method.identifier.java storage.type.java",
+                "meta.try.body.java storage.type.java",
                 "meta.var.expr.ts",
                 "meta.var.expr.tsx",
                 // "meta.var.expr.ts entity.name.function.ts",
@@ -524,6 +562,7 @@
                 "support.constant.property-value",
                 "support.constant.property-value.css",
                 "support.function",
+                "meta.function-call.swift meta.function-call.swift support.function.any-method.swift",
                 "support.other.namespace.php",
                 "support.orther.namespace.use.php",
                 "support.type.builtin.ts",
@@ -548,6 +587,7 @@
                 // "storage.type.boolean.go",
                 // "storage.type.numeric.go",
                 "storage.type.primitive.dart",
+                "storage.type.primitive.java",
                 // STORAGE END
 
                 // VARIABLE START
@@ -560,6 +600,7 @@
                 "variable.other.object.jsx",
                 "variable.other.object.ts",
                 "variable.other.object.tsx",
+                "variable.other.object.java",
                 "variable.other.constant.object.js",
                 "variable.other.constant.object.jsx",
                 "variable.other.constant.object.ts",
@@ -575,6 +616,8 @@
             "name": "YELLOW (#ddca7e) COLOR ITALIC",
             "scope": [
                 // KEYWORD START
+                "keyword.control.try.java",
+                "keyword.control.catch.java",
                 "keyword.control.catch-exception.dart",
                 "keyword.control.return.dart",
                 "keyword.control.conditional.tsx",
@@ -582,8 +625,11 @@
                 "keyword.control.conditional.js",
                 "keyword.control.dart",
                 "keyword.control.go",
+                "keyword.control.java",
                 "keyword.control.trycatch.js",
                 "keyword.control.loop.js",
+                "keyword.control.exception.swift",
+                "keyword.control.await.swift",
                 "keyword.control.export.js",
                 "keyword.control.export.ts",
                 "keyword.control.export.jsx",
@@ -603,7 +649,9 @@
                 "keyword.control.from.ts",
                 "keyword.control.from.jsx",
                 "keyword.control.from.tsx",
+                "keyword.control.new.java",
                 "keyword.control.return.dart",
+                "keyword.control.rust",
                 "keyword.control.operator",
                 "keyword.control.if.css punctuation.definition.keyword.css",
                 "keyword.control.if.sass punctuation.definition.keyword.sass",
@@ -621,8 +669,12 @@
                 "keyword.control.ruby",
                 "keyword.control.pseudo-method.ruby",
                 "keyword.control.start-block.ruby",
+                "keyword.control.transfer.swift",
                 "keyword.operator.logical.python",
+                "keyword.operator.instanceof.java",
                 "keyword.other.import.dart",
+                "keyword.other.fn.rust",
+                "keyword.other.rust",
                 "keyword.other.special-method.ruby",
                 "keyword.package.go",
                 "keyword.struct.go",
@@ -640,9 +692,17 @@
                 // META END
 
                 // STORAGE START
+                "storage.modifier.mut.rust",
+                "keyword.other.declaration-specifier.accessibility.swift",
+                "keyword.other.declaration-specifier.swift",
+                "storage.modifier.attribute.swift",
+                "storage.modifier.exception.swift",
+                "storage.modifier.async.swift",
+                "storage.modifier.swift",
                 "storage.type",
                 "storage.type.function",
                 "storage.type.def.groovy",
+                "storage.type.rust",
                 // STORAGE END
 
                 // TEXT START
@@ -651,7 +711,9 @@
                 // TEXT END
 
                 // VARIABLE START
-                "variable.language.dart"
+                "variable.language.dart",
+                "variable.language.this.java",
+                "variable.language.self.rust"
                 // VARIABLE END
             ],
             "settings": {
@@ -682,6 +744,8 @@
                 "constant.numeric.css",
                 "constant.numeric.decimal.js",
                 // CONSTANT END
+
+                "entity.name.type.numeric.rust",
 
                 // KEYWORD START
                 "keyword.other.unit.em.css",
@@ -726,20 +790,24 @@
                 // CONSTANT START
                 "constant.other.php",
                 "constant.other.caps.python",
+                "constant.other.caps.rust",
                 // CONSTANT END
 
                 // ENTITY START
                 "entity.name.method.js",
                 "entity.name.function.sql",
                 "entity.name.function.ruby",
+                "entity.name.namespace.rust",
                 "entity.name.type.class.js.jsx",
                 "entity.name.type.class.js.tsx",
+                "entity.name.section.toml",
                 // ENTITY END
 
                 // KEYWORD START
                 "keyword.other.DML.sql",
                 "keyword.other.DDL.create.II.sql",
                 "keyword.other.LUW.sql",
+                "keyword.other.crate.rust",
                 // KEYWORD END
 
                 // MARKUP START
@@ -749,6 +817,7 @@
 
                 // META START
                 "meta.arrow.tsx",
+                "meta.attribute.rust",
                 "meta.block.tsx",
                 // "meta.block.parameters.ruby",
                 "meta.class-method.js",
@@ -761,6 +830,7 @@
                 // "meta.indexed-name.python",
                 // "meta.function.parameters.python",
                 // "meta.function-call.arguments.python",
+                "meta.function-call.java",
                 "meta.property-list.css variable.css",
                 "meta.property-list.sass variable.sass",
                 "meta.property-list.scss variable.scss",
@@ -771,6 +841,7 @@
                 "meta.property-value.sass variable.sass",
                 "meta.property-value.scss variable.scss",
                 "meta.require.ruby",
+                "meta.use.rust",
                 "meta.var.expr.js",
                 "meta.var.expr.ts",
                 "meta.var.expr.ts meta.definition.variable.ts",
@@ -812,12 +883,13 @@
                 "variable.language.fenced.markdown",
                 "variable.language.ruby",
                 "variable.other.assignment.go",
+                "variable.other.block.ruby",
                 "variable.other.constant.ruby",
                 "variable.other.constant.js",
                 "variable.other.constant.jsx",
                 "variable.other.constant.ts",
                 "variable.other.constant.tsx",
-                "variable.other.block.ruby",
+                "variable.other.env",
                 "variable.other.go",
                 "variable.other.makefile",
                 "variable.other.read.github-actions-expression",
@@ -827,6 +899,8 @@
                 "variable.other.readwrite.tsx",
                 "variable.other.readwrite.ts",
                 "variable.other.readwrite.js",
+                "variable.other.rust",
+                "variable.other.swift",
                 "variable.parameter.js",
                 "variable.parameter.ts",
                 "variable.parameter.tsx",
@@ -866,11 +940,14 @@
                 "keyword.control.at-rule.media.css",
                 "keyword.control.at-rule.supports.css",
                 "keyword.declaration.dart",
+                "keyword.other.import.java",
+                "keyword.other.package.java",
                 // KEYWORD END
 
                 // PUNCTUATION START
-                "punctuation.definition.keyword",
+                "punctuation.definition.annotation.java",
                 "punctuation.definition.keyword.css",
+                "punctuation.definition.keyword",
                 // PUNCTUATION END
 
                 // META START
@@ -897,6 +974,7 @@
                 // STORAGE START
                 "storage.modifier.dart",
                 "storage.type.annotation.dart",
+                "storage.type.annotation.java",
                 "meta.function.decorator.python",
                 "meta.function.decorator.python support.type.python",
                 "storage.type.class.python",
@@ -906,6 +984,9 @@
                 // SOURCE START
                 "source.sass keyword.control",
                 // SOURCE END
+
+                "storage.modifier.java",
+                "storage.modifier.implements.java",
 
                 // TAG START
                 "tag.decorator.js entity.name.tag.js",
@@ -929,6 +1010,8 @@
                 // CONSTANT START
                 "constant.other.key",
                 "constant.other.symbol",
+                "constant.other.date.toml",
+                "constant.numeric.hex.toml",
                 "constant.character.escape",
                 // CONSTANT END
 
@@ -976,7 +1059,9 @@
                 // STRING END
 
                 // SUPPORT START
-                "support.type.property-name.json.comments",
+                // "support.type.property-name.json.comments",
+                "source.json meta.structure.dictionary.json support.type.property-name.json",
+                "string.json.comments",
                 // SUPPORT END
 
                 "*link*",
@@ -1007,7 +1092,10 @@
                 // ENTITY START
                 "entity.name.function.go",
                 "entity.name.function.dart",
+                "entity.name.function.java",
                 "entity.name.function.python",
+                "entity.name.function.rust",
+                "entity.name.function.macro.rust",
                 "entity.name.function.css",
                 "entity.name.function.sass",
                 "entity.name.function.scss",
@@ -1037,6 +1125,7 @@
                 // META START
                 "meta.attribute.python",
                 "meta.create.sql",
+                "meta.definition.function.body.swift storage.type.function.swift",
                 "meta.export.default meta.object.member",
                 "meta.export.default.ts meta.object.member.ts",
                 "meta.function-call.js",
@@ -1044,6 +1133,7 @@
                 "meta.function-call.tsx",
                 "meta.function-call.python",
                 "meta.function-call.ruby entity.name.function.ruby",
+                "meta.function.definition.rust",
                 "meta.method-call.groovy",
                 "meta.object.member.js",
                 "meta.object.member",
@@ -1078,6 +1168,7 @@
                 "support.variable.property.js",
                 "support.variable.property.tx",
                 "support.variable.property.tsx",
+                "support.function.any-method.swift",
                 // SUPPORT END
 
                 // TEXT START
@@ -1085,23 +1176,20 @@
                 // TEXT END
 
                 // VARIABLE START
+                "variable.object.property.js",
+                "variable.object.property.ts",
+                "variable.object.property.tsx",
                 "variable.other.constant.property.js",
                 "variable.other.constant.property.jsx",
                 "variable.other.constant.property.ts",
                 "variable.other.constant.property.tsx",
-                "variable.object.property.js",
-                "variable.object.property.ts",
-                "variable.object.property.tsx",
+                "variable.other.key.toml",
                 "variable.other.property",
                 "variable.other.property.go",
                 "variable.other.object.property",
                 "variable.other.object.property.js",
-                "variable.other.object.property.tsx",
+                "variable.other.object.property.tsx"
                 // VARIABLE END
-
-                // MULTI-LINE START
-                "source.json meta.structure.dictionary.json support.type.property-name.json"
-                // MULTI-LINE END
             ],
             "settings": {
                 "foreground": "#9a8297",

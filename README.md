@@ -3,7 +3,7 @@
 
 ## Description
 
-A custom theme for Visual Studio Code inspired by the `codepen.io` online editor theme. Compatible with `.HTML`, `.CSS`, `.SASS`, `.SCSS`, `.JS`, `.JSX`, `.TS`, `.TSX`, `.DART`, `.PHYTON`, `.GO`, `.SQL` and other formats. Made with 🖤 by ziqq.
+A custom theme for Visual Studio Code inspired by the `codepen.io` online editor theme. Compatible with `.HTML`, `.CSS`, `.SASS`, `.SCSS`, `.JS`, `.JSX`, `.TS`, `.TSX`, `.DART`, `.PYTHON`, `.GO`, `.RUST`, `.TOML`, `.SQL`, `.ENV` and other formats. Made with 🖤 by ziqq.
 
 
 ## Installing
@@ -32,8 +32,21 @@ This extension is available for free in the [Visual Studio Code Marketplace](htt
 #### GO
 <img src="./assets/preview_go.png" width="888">
 
-#### Python
-<img src="./assets/preview_phyton.png" width="888">
+#### PYTHON
+<img src="./assets/preview_python.png" width="888">
+
+#### RUST
+<img src="./assets/preview_rust_I.png" width="888">
+<img src="./assets/preview_rust_II.png" width="888">
+
+#### TOML
+<img src="./assets/preview_toml.png" width="888">
+
+#### JAVA
+<img src="./assets/preview_java.png" width="888">
 
 #### SQL
 <img src="./assets/preview_sql.png" width="888">
+
+#### ENV
+<img src="./assets/preview_env.png" width="888">
