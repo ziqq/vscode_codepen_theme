@@ -14,8 +14,8 @@
     "explorer.fileNesting.expand": false,
     "explorer.fileNesting.patterns": {
         "package.json": "package-lock.json, sass.configuration.json, scss.configuration.json, *.configuration.json",
-        ".gitignore": ".gitattributes, .gitmodules, .gitmessage, .mailmap, .git-blame*, .vscodeignore",
-        "README.md": "CHANGELOG.md, CONTRIBUTING.md, LICENSE, LICENSE.md, CODE_OF_CONDUCT.md",
+        ".gitignore": ".gitattributes, .gitmodules, .gitmessage, .mailmap, .git-blame*, .pubignore, .vscodeignore",
+        "readme*": "authors, backers.md, changelog*, citation*, code_of_conduct.md, codeowners, contributing.md, contributors, copying, credits, governance.md, history.md, license*, maintainers, readme*, security.md, sponsors.md",
     },
     "typescript.tsc.autoDetect": "off",
 }
