@@ -411,6 +411,8 @@
         {
             "name": "WITHE (#FFFFFF) COLOR ITALIC",
             "scope": [
+                "comment.block.documentation.dart variable.other.source.dart",
+
                 "entity.name.type.package.go"
             ],
             "settings": {
@@ -613,8 +615,10 @@
             }
         },
         {
-            "name": "YELLOW (#ddca7e) COLOR ITALIC",
+            "name": "YELLOW ITALIC (#ddca7e) COLOR",
             "scope": [
+                "comment.block.documentation.dart variable.name.source.dart",
+
                 // KEYWORD START
                 "keyword.control.try.java",
                 "keyword.control.catch.java",
@@ -918,11 +922,8 @@
             }
         },
         {
-            "name": "BLUE (#809bbd) COLOR ITALIC",
+            "name": "BLUE ITALIC (#809bbd) COLOR",
             "scope": [
-                "comment.block.documentation.dart variable.name.source.dart",
-                "comment.block.documentation.dart variable.other.source.dart",
-
                 // "entity.name.type.package.go",
 
                 // KEYWORD START
@@ -940,6 +941,7 @@
                 "keyword.control.at-rule.media.css",
                 "keyword.control.at-rule.supports.css",
                 "keyword.declaration.dart",
+                // "keyword.other.import.dart",
                 "keyword.other.import.java",
                 "keyword.other.package.java",
                 // KEYWORD END

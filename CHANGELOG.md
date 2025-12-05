@@ -1,3 +1,6 @@
+## 0.11.1
+- **CHANGED**: `dart` scheme (comment block)
+
 ## 0.11.0
 - **ADDED**: `env` scheme
 - **ADDED**: `rust` scheme
