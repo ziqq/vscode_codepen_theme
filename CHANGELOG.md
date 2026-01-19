@@ -1,3 +1,6 @@
+## 0.11.2
+- **CHANGED**: `js` scheme for `ts` and `tsx` files
+-
 ## 0.11.1
 - **CHANGED**: `dart` scheme (comment block)
 
