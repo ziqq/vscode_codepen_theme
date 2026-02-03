@@ -1,21 +1,33 @@
 {
-    "files.associations": {
-        "*.json": "jsonc"
-    },
-    "files.exclude": {
-        "out": true,
-        "dist": true
-    },
-    "search.exclude": {
-        "out": true,
-        "dist": true
-    },
-    "explorer.fileNesting.enabled": true,
-    "explorer.fileNesting.expand": false,
-    "explorer.fileNesting.patterns": {
-        "package.json": "package-lock.json, sass.configuration.json, scss.configuration.json, *.configuration.json",
-        ".gitignore": ".gitattributes, .gitmodules, .gitmessage, .mailmap, .git-blame*, .pubignore, .vscodeignore",
-        "readme*": "authors, backers.md, changelog*, citation*, code_of_conduct.md, codeowners, contributing.md, contributors, copying, credits, governance.md, history.md, license*, maintainers, readme*, security.md, sponsors.md",
-    },
-    "typescript.tsc.autoDetect": "off",
+  "editor.formatOnSave": true,
+  "explorer.fileNesting.enabled": true,
+  "explorer.fileNesting.expand": false,
+  "explorer.fileNesting.patterns": {
+    "package.json": "package-lock.json, sass.configuration.json, scss.configuration.json, *.configuration.json",
+    ".gitignore": ".gitattributes, .gitmodules, .gitmessage, .mailmap, .git-blame*, .pubignore, .vscodeignore",
+    "readme*": "authors, backers.md, changelog*, citation*, code_of_conduct.md, codeowners, contributing.md, contributors, copying, credits, governance.md, history.md, license*, maintainers, readme*, security.md, sponsors.md"
+  },
+  "typescript.tsc.autoDetect": "off",
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.tabSize": 2
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.tabSize": 2
+  },
+  "[markdown]": {
+    "editor.formatOnSave": false
+  },
+  "files.associations": {
+    "*.json": "jsonc"
+  },
+  "files.exclude": {
+    "out": true,
+    "dist": true
+  },
+  "search.exclude": {
+    "out": true,
+    "dist": true
+  }
 }

@@ -1,284 +1,301 @@
 {
-    "name": "codepen-theme-original",
-    "displayName": "CodePen Theme Original",
-    "description": "Custom theme for Visual Studio Code inspired by the codepen.io online editor theme. Compatible with .HTML, .CSS, .SASS, .SCSS, .JS, .JSX, .TS, .TSX, .DART, .GO, .PY, .JAVA, .RUST, .VUE and other formats. Made with 🖤 by ziqq.",
-    "icon": "assets/logo.png",
-    "version": "0.11.2",
-    "engines": {
-        "vscode": "^1.0.0"
-    },
-    "license": "Apache-2.0",
-    "publisher": "ziqq",
-    "author": {
-        "name": "Anton Ustinoff"
-    },
-    "homepage": "https://github.com/ziqq/vscode_codepen_theme",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/ziqq/vscode_codepen_theme"
-    },
-    "bugs": {
-        "email": "a.a.ustinoff@gmail.com",
-        "url": "https://github.com/ziqq/vscode_codepen_theme/issues"
-    },
-    "categories": [
-        "Themes"
-    ],
-    "keywords": [
-        "VSCode",
-        "Themes"
-    ],
-    "extensionKind": [
-        "ui",
-        "workspace"
-    ],
-    "contributes": {
-        "languages": [
-            {
-                "id": "dotenv",
-                "aliases": [
-                    "Environment Variables",
-                    "dotenv",
-                    "env"
-                ],
-                "extensions": [
-                    ".flaskenv",
-                    ".env",
-                    ".env-sample",
-                    ".env.example",
-                    ".env.local",
-                    ".env.dev",
-                    ".env.dev.local",
-                    ".env.build",
-                    ".env.build.local",
-                    ".env.development",
-                    ".env.development.local",
-                    ".env.test",
-                    ".env.test.local",
-                    ".env.testing",
-                    ".env.qa",
-                    ".env.qa.local",
-                    ".env.uat",
-                    ".env.uat.local",
-                    ".env.stag",
-                    ".env.stag.local",
-                    ".env.stage",
-                    ".env.stage.local",
-                    ".env.staging",
-                    ".env.staging.local",
-                    ".env.live",
-                    ".env.live.local",
-                    ".env.production",
-                    ".env.production.local",
-                    ".env.prod",
-                    ".env.prod.local"
-                ],
-                "configuration": "./languages/env.configuration.json"
-            },
-            {
-                "id": "dart",
-                "aliases": [
-                    "Dart",
-                    "dart"
-                ],
-                "extensions": [
-                    ".dart"
-                ]
-            },
-            {
-                "id": "go",
-                "aliases": [
-                    "Go",
-                    "go"
-                ],
-                "extensions": [
-                    ".go"
-                ]
-            },
-            {
-                "id": "go.mod",
-                "filenames": [
-                    "go.mod"
-                ],
-                "aliases": [
-                    "Go Module File"
-                ],
-                "configuration": "./languages/go.mod.language-configuration.json"
-            },
-            {
-                "id": "go.sum",
-                "filenames": [
-                    "go.sum"
-                ],
-                "aliases": [
-                    "Go Checksum File"
-                ]
-            },
-            {
-                "id": "html",
-                "aliases": [
-                    "Html",
-                    "html"
-                ],
-                "extensions": [
-                    ".html",
-                    ".jade",
-                    ".nunjucks"
-                ]
-            },
-            {
-                "id": "kotlin",
-                "aliases": [
-                    "Kotlin",
-                    "kotlin"
-                ],
-                "extensions": [
-                    ".kt",
-                    ".kts"
-                ]
-            },
-            {
-                "id": "python",
-                "aliases": [
-                    "Python",
-                    "python"
-                ],
-                "extensions": [
-                    ".py"
-                ]
-            },
-            {
-                "id": "rust",
-                "aliases": [
-                    "Rust",
-                    "rust"
-                ],
-                "extensions": [
-                    ".rs"
-                ],
-                "configuration": "./languages/rust.configuration.json"
-            },
-            {
-                "id": "sass",
-                "aliases": [
-                    "Sass",
-                    "sass-indented"
-                ],
-                "extensions": [
-                    ".sass",
-                    ".sass.erb"
-                ],
-                "configuration": "./languages/sass.configuration.json"
-            },
-            {
-                "id": "scss",
-                "aliases": [
-                    "Scss",
-                    "scss-indented"
-                ],
-                "extensions": [
-                    ".scss",
-                    ".scss.erb"
-                ],
-                "configuration": "./languages/scss.configuration.json"
-            },
-            {
-                "id": "svelte",
-                "aliases": [
-                    "Svelte",
-                    "svelte"
-                ],
-                "extensions": [
-                    ".svelte"
-                ]
-            },
-            {
-                "id": "sql",
-                "aliases": [
-                    "Sql",
-                    "sql",
-                    "Drift",
-                    "drift"
-                ],
-                "extensions": [
-                    ".sql",
-                    ".drift"
-                ]
-            },
-            {
-                "id": "toml",
-                "aliases": [
-                    "TOML",
-                    "toml"
-                ],
-                "extensions": [
-                    ".toml"
-                ],
-                "configuration": "./languages/toml.configuration.json"
-            },
-            {
-                "id": "vue",
-                "aliases": [
-                    "Vue",
-                    "vue"
-                ],
-                "extensions": [
-                    ".vue"
-                ]
-            }
+  "name": "codepen-theme-original",
+  "displayName": "CodePen Theme Original",
+  "description": "Custom theme for Visual Studio Code inspired by the codepen.io online editor theme. Compatible with .HTML, .CSS, .SASS, .SCSS, .JS, .JSX, .TS, .TSX, .DART, .GO, .PY, .JAVA, .RUST, .VUE and other formats. Made with 🖤 by ziqq.",
+  "icon": "assets/logo.png",
+  "version": "0.12.0",
+  "engines": {
+    "vscode": "^1.0.0"
+  },
+  "license": "Apache-2.0",
+  "publisher": "ziqq",
+  "author": {
+    "name": "Anton Ustinoff"
+  },
+  "homepage": "https://github.com/ziqq/vscode_codepen_theme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ziqq/vscode_codepen_theme"
+  },
+  "bugs": {
+    "email": "a.a.ustinoff@gmail.com",
+    "url": "https://github.com/ziqq/vscode_codepen_theme/issues"
+  },
+  "categories": [
+    "Themes"
+  ],
+  "keywords": [
+    "VSCode",
+    "Themes"
+  ],
+  "extensionKind": [
+    "ui",
+    "workspace"
+  ],
+  "contributes": {
+    "languages": [
+      {
+        "id": "dotenv",
+        "aliases": [
+          "Environment Variables",
+          "dotenv",
+          "env"
         ],
-        "grammars": [
-            {
-                "language": "dotenv",
-                "scopeName": "source.env",
-                "path": "./syntaxes/env.tmLanguage"
-            },
-            {
-                "language": "go.mod",
-                "scopeName": "go.mod",
-                "path": "./syntaxes/go.mod.tmGrammar.json"
-            },
-            {
-                "language": "go.sum",
-                "scopeName": "go.sum",
-                "path": "./syntaxes/go.sum.tmGrammar.json"
-            },
-            {
-                "language": "kotlin",
-                "scopeName": "source.kotlin",
-                "path": "./syntaxes/kotlin.tmLanguage.json"
-            },
-            {
-                "language": "rust",
-                "scopeName": "source.rust",
-                "path": "./syntaxes/rust.tmLanguage.json"
-            },
-            {
-                "language": "sass",
-                "scopeName": "source.css.sass",
-                "path": "./syntaxes/sass.tmLanguage.json"
-            },
-            {
-                "language": "scss",
-                "scopeName": "source.css.scss",
-                "path": "./syntaxes/scss.tmLanguage.json"
-            },
-            {
-                "language": "toml",
-                "scopeName": "source.toml",
-                "path": "./syntaxes/toml.tmLanguage.json"
-            }
+        "extensions": [
+          ".flaskenv",
+          ".env",
+          ".env-sample",
+          ".env.example",
+          ".env.local",
+          ".env.dev",
+          ".env.dev.local",
+          ".env.build",
+          ".env.build.local",
+          ".env.development",
+          ".env.development.local",
+          ".env.test",
+          ".env.test.local",
+          ".env.testing",
+          ".env.qa",
+          ".env.qa.local",
+          ".env.uat",
+          ".env.uat.local",
+          ".env.stag",
+          ".env.stag.local",
+          ".env.stage",
+          ".env.stage.local",
+          ".env.staging",
+          ".env.staging.local",
+          ".env.live",
+          ".env.live.local",
+          ".env.production",
+          ".env.production.local",
+          ".env.prod",
+          ".env.prod.local"
         ],
-        "themes": [
-            {
-                "label": "CodePen Theme Original",
-                "uiTheme": "vs-dark",
-                "path": "./themes/codepen-theme.json"
-            }
+        "configuration": "./languages/env.configuration.json"
+      },
+      {
+        "id": "c4",
+        "aliases": [
+          "C4 DSL",
+          "c4"
+        ],
+        "extensions": [
+          ".c4",
+          ".dsl"
+        ],
+        "configuration": "./languages/c4.configuration.json"
+      },
+      {
+        "id": "dart",
+        "aliases": [
+          "Dart",
+          "dart"
+        ],
+        "extensions": [
+          ".dart"
         ]
-    },
-    "scripts": {
-        "start": "code . --extensionDevelopmentPath=. --disable-extensions",
-        "deploy": "vsce publish"
-    }
+      },
+      {
+        "id": "go",
+        "aliases": [
+          "Go",
+          "go"
+        ],
+        "extensions": [
+          ".go"
+        ]
+      },
+      {
+        "id": "go.mod",
+        "filenames": [
+          "go.mod"
+        ],
+        "aliases": [
+          "Go Module File"
+        ],
+        "configuration": "./languages/go.mod.language-configuration.json"
+      },
+      {
+        "id": "go.sum",
+        "filenames": [
+          "go.sum"
+        ],
+        "aliases": [
+          "Go Checksum File"
+        ]
+      },
+      {
+        "id": "html",
+        "aliases": [
+          "Html",
+          "html"
+        ],
+        "extensions": [
+          ".html",
+          ".jade",
+          ".nunjucks"
+        ]
+      },
+      {
+        "id": "kotlin",
+        "aliases": [
+          "Kotlin",
+          "kotlin"
+        ],
+        "extensions": [
+          ".kt",
+          ".kts"
+        ]
+      },
+      {
+        "id": "python",
+        "aliases": [
+          "Python",
+          "python"
+        ],
+        "extensions": [
+          ".py"
+        ]
+      },
+      {
+        "id": "rust",
+        "aliases": [
+          "Rust",
+          "rust"
+        ],
+        "extensions": [
+          ".rs"
+        ],
+        "configuration": "./languages/rust.configuration.json"
+      },
+      {
+        "id": "sass",
+        "aliases": [
+          "Sass",
+          "sass-indented"
+        ],
+        "extensions": [
+          ".sass",
+          ".sass.erb"
+        ],
+        "configuration": "./languages/sass.configuration.json"
+      },
+      {
+        "id": "scss",
+        "aliases": [
+          "Scss",
+          "scss-indented"
+        ],
+        "extensions": [
+          ".scss",
+          ".scss.erb"
+        ],
+        "configuration": "./languages/scss.configuration.json"
+      },
+      {
+        "id": "svelte",
+        "aliases": [
+          "Svelte",
+          "svelte"
+        ],
+        "extensions": [
+          ".svelte"
+        ]
+      },
+      {
+        "id": "sql",
+        "aliases": [
+          "Sql",
+          "sql",
+          "Drift",
+          "drift"
+        ],
+        "extensions": [
+          ".sql",
+          ".drift"
+        ]
+      },
+      {
+        "id": "toml",
+        "aliases": [
+          "TOML",
+          "toml"
+        ],
+        "extensions": [
+          ".toml"
+        ],
+        "configuration": "./languages/toml.configuration.json"
+      },
+      {
+        "id": "vue",
+        "aliases": [
+          "Vue",
+          "vue"
+        ],
+        "extensions": [
+          ".vue"
+        ]
+      }
+    ],
+    "grammars": [
+      {
+        "language": "dotenv",
+        "scopeName": "source.env",
+        "path": "./syntaxes/env.tmLanguage"
+      },
+      {
+        "language": "c4",
+        "scopeName": "source.c4",
+        "path": "./syntaxes/c4.tmLanguage.json"
+      },
+      {
+        "language": "go.mod",
+        "scopeName": "go.mod",
+        "path": "./syntaxes/go.mod.tmGrammar.json"
+      },
+      {
+        "language": "go.sum",
+        "scopeName": "go.sum",
+        "path": "./syntaxes/go.sum.tmGrammar.json"
+      },
+      {
+        "language": "kotlin",
+        "scopeName": "source.kotlin",
+        "path": "./syntaxes/kotlin.tmLanguage.json"
+      },
+      {
+        "language": "rust",
+        "scopeName": "source.rust",
+        "path": "./syntaxes/rust.tmLanguage.json"
+      },
+      {
+        "language": "sass",
+        "scopeName": "source.css.sass",
+        "path": "./syntaxes/sass.tmLanguage.json"
+      },
+      {
+        "language": "scss",
+        "scopeName": "source.css.scss",
+        "path": "./syntaxes/scss.tmLanguage.json"
+      },
+      {
+        "language": "toml",
+        "scopeName": "source.toml",
+        "path": "./syntaxes/toml.tmLanguage.json"
+      }
+    ],
+    "themes": [
+      {
+        "label": "CodePen Theme Original",
+        "uiTheme": "vs-dark",
+        "path": "./themes/codepen-theme.json"
+      }
+    ]
+  },
+  "scripts": {
+    "start": "code . --extensionDevelopmentPath=. --disable-extensions",
+    "deploy": "vsce publish"
+  }
 }
