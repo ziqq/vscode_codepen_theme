@@ -1,9 +1,9 @@
 {
   "name": "codepen-theme-original",
   "displayName": "CodePen Theme Original",
-  "description": "Custom theme for Visual Studio Code inspired by the codepen.io online editor theme. Compatible with .HTML, .CSS, .SASS, .SCSS, .JS, .JSX, .TS, .TSX, .DART, .GO, .PY, .JAVA, .RUST, .VUE and other formats. Made with 🖤 by ziqq.",
+  "description": "Custom theme for Visual Studio Code inspired by the codepen.io online editor theme. Compatible with .HTML, .CSS, .SASS, .SCSS, .JS, .JSX, .TS, .TSX, .DART, .GO, .PY, .JAVA, .RUST, .VUE, Justfile and other formats. Made with 🖤 by ziqq.",
   "icon": "assets/logo.png",
-  "version": "0.12.0",
+  "version": "0.12.1",
   "engines": {
     "vscode": "^1.0.0"
   },
@@ -150,6 +150,22 @@
         ]
       },
       {
+        "id": "just",
+        "aliases": [
+          "Just",
+          "justfile"
+        ],
+        "extensions": [
+          ".just",
+          ".justfile"
+        ],
+        "filenames": [
+          "justfile",
+          "Justfile"
+        ],
+        "configuration": "./languages/just.configuration.json"
+      },
+      {
         "id": "python",
         "aliases": [
           "Python",
@@ -264,6 +280,11 @@
         "language": "kotlin",
         "scopeName": "source.kotlin",
         "path": "./syntaxes/kotlin.tmLanguage.json"
+      },
+      {
+        "language": "just",
+        "scopeName": "source.just",
+        "path": "./syntaxes/just.tmLanguage.json"
       },
       {
         "language": "rust",

@@ -3,7 +3,7 @@
 
 ## Description
 
-A custom theme for Visual Studio Code inspired by the `codepen.io` online editor theme. Compatible with `.HTML`, `.CSS`, `.SASS`, `.SCSS`, `.JS`, `.JSX`, `.TS`, `.TSX`, `.DART`, `.PYTHON`, `.GO`, `.RUST`, `.TOML`, `.SQL`, `.ENV` and other formats. Made with 🖤 by ziqq.
+A custom theme for Visual Studio Code inspired by the `codepen.io` online editor theme. Compatible with `.HTML`, `.CSS`, `.SASS`, `.SCSS`, `.JS`, `.JSX`, `.TS`, `.TSX`, `.DART`, `.PYTHON`, `.GO`, `.RUST`, `.TOML`, `.SQL`, `.ENV`, `Makefile`, `Justfile` and other formats. Made with 🖤 by ziqq.
 
 
 ## Installing
@@ -44,6 +44,9 @@ This extension is available for free in the [Visual Studio Code Marketplace](htt
 
 #### JAVA
 <img src="./assets/preview_java.png" width="888">
+
+#### JUSTFILE
+<img src="./assets/preview_justfile.png" width="888">
 
 #### SQL
 <img src="./assets/preview_sql.png" width="888">

@@ -361,6 +361,7 @@
         "source.java",
         "source.groovy",
         "source.go",
+        "source.just",
         "source.makefile",
         "source.rust",
         "source.sql",
@@ -904,6 +905,7 @@
         "variable.other.constant.tsx",
         "variable.other.env",
         "variable.other.go",
+        "variable.other.just",
         "variable.other.makefile",
         "variable.other.read.github-actions-expression",
         "variable.other.readwrite.alias.tsx",
@@ -1111,6 +1113,7 @@
         "entity.name.function.sass",
         "entity.name.function.scss",
         "entity.name.function.support.go",
+        "entity.name.function.target.just",
         "entity.name.function.target.makefile",
         "entity.name.tag.yaml",
         // ENTITY END

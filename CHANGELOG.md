@@ -1,3 +1,8 @@
+# Changelog
+
+## 0.12.1
+- **ADDED**: `justfile` language support with Makefile-style syntax highlighting
+
 ## 0.12.0
 - **ADDED**: `dsl` syntax highlighting support (CoCoNut DSL / C4 Model)
 
