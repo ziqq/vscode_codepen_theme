@@ -2,11 +2,25 @@ title = "CodePen Theme Original"
 enabled = true
 version = "1.0.0"
 revision = 1
+label = 'CodePen theme compatibility fixture'
+tags = ["theme", "providers", "screenshots"]
 
 [palette]
 background = "#1d1e22"
 accent = "#96b38a"
+keyword = "#ddca7e"
+comment = "#717790"
+
+[rendering]
+semantic_highlighting = false
+font_family = "SFMono-Regular, Consolas, monospace"
 
 [[providers]]
 language = "toml"
 extension = "tamasfe.even-better-toml"
+verified = true
+
+[[providers]]
+language = "vue"
+extension = "Vue.volar"
+verified = true

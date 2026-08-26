@@ -1,11 +1,21 @@
 set shell := ["bash", "-cu"]
 
 theme := "CodePen Theme Original"
+background := "#1d1e22"
+accent := "#96b38a"
+sample_dir := "samples"
 
-default: check
+default: check preview
 
 check:
-  @echo "Checking {{theme}}"
+  @echo "Checking {{theme}} with background {{background}}"
+  @test -d {{sample_dir}}
 
 build target="themes/codepen-theme.json":
   @echo "Generating {{target}}"
+
+preview token="keyword":
+  @echo "{{theme}} {{token}} uses {{accent}}"
+
+ci: check build
+  @echo "Running provider compatibility contract"

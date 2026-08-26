@@ -1,12 +1,26 @@
 <script lang="ts">
   let count = 0;
   const theme = 'CodePen Theme Original';
+  const tokens = ['keyword', 'string', 'comment'];
+
+  const increment = () => {
+    count += 1;
+  };
+
+  $: label = `${theme}: ${count}`;
 </script>
 
-<button class:active={count > 0} on:click={() => count += 1}>
-  {theme}: {count}
-</button>
+<section class:active={count > 0} aria-label={theme}>
+  <button on:click={increment}>{label}</button>
+  <ul>
+    {#each tokens as token, index}
+      <li data-index={index}>{token}</li>
+    {/each}
+  </ul>
+</section>
 
 <style>
-  button.active { color: #96b38a; }
+  section { background: #1d1e22; padding: 1rem; }
+  section.active button { color: #96b38a; }
+  li { color: #717790; }
 </style>
