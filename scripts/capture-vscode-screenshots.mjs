@@ -99,12 +99,21 @@ const waitForWorkbench = async (endpoint) => {
   const browser = await chromium.connectOverCDP(endpoint);
   const context = browser.contexts()[0];
   if (!context) throw new Error('VS Code debugger exposed no browser context');
+  return { browser, context };
+};
+
+const waitForExtensionWorkbench = async (context) => {
   const workbenchDeadline = Date.now() + 30_000;
   let page;
   while (Date.now() < workbenchDeadline && !page) {
     for (const candidate of context.pages()) {
       const workbench = candidate.locator('.monaco-workbench');
-      if (await workbench.count() && await workbench.isVisible()) {
+      const title = await candidate.title();
+      if (
+        title.includes('Extension Development Host') &&
+        await workbench.count() &&
+        await workbench.isVisible()
+      ) {
         page = candidate;
         break;
       }
@@ -114,9 +123,14 @@ const waitForWorkbench = async (endpoint) => {
     }
   }
   if (!page) {
-    throw new Error('VS Code debugger exposed no workbench page');
+    const titles = await Promise.all(
+      context.pages().map((candidate) => candidate.title()),
+    );
+    throw new Error(
+      `VS Code debugger exposed no Extension Development Host: ${titles}`,
+    );
   }
-  return { browser, context, page };
+  return page;
 };
 
 const inspectScreenshot = async (file) => {
@@ -266,8 +280,8 @@ let browser;
 try {
   const connected = await waitForWorkbench(`http://127.0.0.1:${port}`);
   browser = connected.browser;
-  const { page } = connected;
   await waitForFile(readyFile);
+  const page = await waitForExtensionWorkbench(connected.context);
   await page.waitForFunction(
     (expected) => getComputedStyle(document.documentElement)
       .getPropertyValue('--vscode-editor-background')
@@ -362,6 +376,12 @@ try {
     for (const [index, page] of browser.contexts()[0].pages().entries()) {
       debugPages.push({
         url: page.url(),
+        title: await page.title(),
+        editorBackground: await page.evaluate(() =>
+          getComputedStyle(document.documentElement)
+            .getPropertyValue('--vscode-editor-background')
+            .trim(),
+        ),
         tabs: await page
           .locator('.tabs-container [role="tab"]')
           .evaluateAll((elements) => elements.map((element) => ({
