@@ -1,4 +1,4 @@
-import { spawn } from 'node:child_process';
+import { execFile, spawn } from 'node:child_process';
 import {
   mkdir,
   mkdtemp,
@@ -10,12 +10,15 @@ import {
 import net from 'node:net';
 import os from 'node:os';
 import path from 'node:path';
+import { promisify } from 'node:util';
+import { resolveCliPathFromVSCodeExecutablePath } from '@vscode/test-electron';
 import { chromium } from 'playwright-core';
 import pngjs from 'pngjs';
 import { ensureRecommendedProviders } from './lib/providers.mjs';
 import { vscodeExecutable } from './lib/vscode-runtime.mjs';
 
 const { PNG } = pngjs;
+const execFileAsync = promisify(execFile);
 const compatibility = JSON.parse(
   await readFile('compatibility/scopes.json', 'utf8'),
 );
@@ -157,6 +160,22 @@ await mkdir(extensions, { recursive: true });
 await rm(output, { recursive: true, force: true });
 await mkdir(output, { recursive: true });
 
+const vsixPath = path.resolve('build/codepen-theme-original.vsix');
+const cli = resolveCliPathFromVSCodeExecutablePath(executable);
+await execFileAsync(
+  cli,
+  [
+    '--user-data-dir',
+    userData,
+    '--extensions-dir',
+    extensions,
+    '--install-extension',
+    vsixPath,
+    '--force',
+  ],
+  { maxBuffer: 10 * 1024 * 1024 },
+);
+
 await writeFile(
   path.join(userData, 'User', 'settings.json'),
   `${JSON.stringify({
@@ -196,7 +215,6 @@ const processArgs = [
   `--remote-debugging-port=${port}`,
   `--user-data-dir=${userData}`,
   `--extensions-dir=${extensions}`,
-  `--extensionDevelopmentPath=${path.resolve('.')}`,
   path.resolve('.'),
 ];
 const vscode = spawn(executable, processArgs, {
@@ -212,6 +230,26 @@ try {
   const connected = await waitForWorkbench(`http://127.0.0.1:${port}`);
   browser = connected.browser;
   const { page } = connected;
+  const modifier = process.platform === 'darwin' ? 'Meta' : 'Control';
+  await page.keyboard.press(`${modifier}+K`);
+  await page.keyboard.press(`${modifier}+T`);
+  const themeInput = page.locator('.quick-input-widget input');
+  await themeInput.waitFor({ state: 'visible', timeout: 10_000 });
+  await themeInput.fill('CodePen Theme Original');
+  const themeResult = page
+    .locator('.quick-input-list .monaco-list-row')
+    .filter({ hasText: 'CodePen Theme Original' })
+    .first();
+  await themeResult.waitFor({ state: 'visible', timeout: 20_000 });
+  await themeResult.click();
+  await page.waitForFunction(
+    (expected) => getComputedStyle(document.documentElement)
+      .getPropertyValue('--vscode-editor-background')
+      .trim()
+      .toLowerCase() === expected,
+    theme.colors['editor.background'].toLowerCase(),
+    { timeout: 20_000 },
+  );
   const results = [];
   for (const item of visualCases) {
     const source = await readFile(item.sample, 'utf8');
