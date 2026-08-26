@@ -185,6 +185,7 @@ const installedTheme = (await readdir(extensions, { withFileTypes: true }))
 if (!installedTheme) {
   throw new Error('Packaged CodePen theme was not installed for screenshots');
 }
+const installedThemePath = path.join(extensions, installedTheme.name);
 
 await writeFile(
   path.join(userData, 'User', 'settings.json'),
@@ -227,6 +228,7 @@ const processArgs = [
   userData,
   '--extensions-dir',
   extensions,
+  `--extensionDevelopmentPath=${installedThemePath}`,
   path.resolve('.'),
 ];
 const vscode = spawn(executable, processArgs, {
@@ -242,18 +244,6 @@ try {
   const connected = await waitForWorkbench(`http://127.0.0.1:${port}`);
   browser = connected.browser;
   const { page } = connected;
-  const modifier = process.platform === 'darwin' ? 'Meta' : 'Control';
-  await page.keyboard.press(`${modifier}+K`);
-  await page.keyboard.press(`${modifier}+T`);
-  const themeInput = page.locator('.quick-input-widget input');
-  await themeInput.waitFor({ state: 'visible', timeout: 10_000 });
-  await themeInput.fill('CodePen Theme Original');
-  const themeResult = page
-    .locator('.quick-input-list .monaco-list-row')
-    .filter({ hasText: 'CodePen Theme Original' })
-    .first();
-  await themeResult.waitFor({ state: 'visible', timeout: 20_000 });
-  await themeResult.click();
   await page.waitForFunction(
     (expected) => getComputedStyle(document.documentElement)
       .getPropertyValue('--vscode-editor-background')
