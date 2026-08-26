@@ -301,7 +301,7 @@ try {
   }
   await themeResult.click();
   await page.waitForFunction(
-    (expected) => getComputedStyle(document.documentElement)
+    (expected) => getComputedStyle(document.querySelector('.monaco-workbench'))
       .getPropertyValue('--vscode-editor-background')
       .trim()
       .toLowerCase() === expected,
@@ -396,7 +396,7 @@ try {
         url: page.url(),
         title: await page.title(),
         editorBackground: await page.evaluate(() =>
-          getComputedStyle(document.documentElement)
+          getComputedStyle(document.querySelector('.monaco-workbench'))
             .getPropertyValue('--vscode-editor-background')
             .trim(),
         ),
