@@ -43,7 +43,7 @@ jobs:
         run: npm run package
 
       - name: Test theme installation matrix
-        run: npm run test:vscode-versions
+        run: xvfb-run -a npm run test:vscode-versions
         env:
           CI: "true"
 
