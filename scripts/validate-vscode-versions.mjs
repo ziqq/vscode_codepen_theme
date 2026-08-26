@@ -32,6 +32,7 @@ for (const version of [...new Set(versions)]) {
     const { stdout, stderr } = await execFileAsync(
       executable,
       [
+        ...(process.platform === 'linux' ? ['--no-sandbox'] : []),
         '--user-data-dir',
         userData,
         '--extensions-dir',

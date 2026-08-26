@@ -185,6 +185,7 @@ for (const provider of providers) {
 
 const port = await freePort();
 const processArgs = [
+  ...(process.platform === 'linux' ? ['--no-sandbox'] : []),
   '--new-window',
   '--skip-welcome',
   '--disable-telemetry',
