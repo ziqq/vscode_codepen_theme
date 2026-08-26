@@ -1,5 +1,6 @@
 import { execFile, spawn } from 'node:child_process';
 import {
+  access,
   mkdir,
   mkdtemp,
   readFile,
@@ -57,6 +58,20 @@ const freePort = async () => {
     else resolve();
   }));
   return address.port;
+};
+
+const waitForFile = async (file, timeout = 30_000) => {
+  const deadline = Date.now() + timeout;
+  while (Date.now() < deadline) {
+    try {
+      await access(file);
+      return;
+    } catch (error) {
+      if (error?.code !== 'ENOENT') throw error;
+    }
+    await new Promise((resolve) => setTimeout(resolve, 100));
+  }
+  throw new Error(`Timed out waiting for ${file}`);
 };
 
 const waitForWorkbench = async (endpoint) => {
@@ -156,6 +171,8 @@ const runtimeRoot = await mkdtemp(path.join(os.tmpdir(), 'codepen-visual-'));
 const installUserData = path.join(runtimeRoot, 'install-user-data');
 const userData = path.join(runtimeRoot, 'user-data');
 const extensions = path.join(runtimeRoot, 'extensions');
+const readyFile = path.join(runtimeRoot, 'ready');
+const doneFile = path.join(runtimeRoot, 'done');
 const output = path.resolve('build/vscode-screenshots', vscodeVersion);
 await mkdir(installUserData, { recursive: true });
 await mkdir(path.join(userData, 'User'), { recursive: true });
@@ -229,10 +246,16 @@ const processArgs = [
   '--extensions-dir',
   extensions,
   `--extensionDevelopmentPath=${installedThemePath}`,
+  `--extensionTestsPath=${path.resolve('scripts/vscode-screenshot-runner.cjs')}`,
   path.resolve('.'),
 ];
 const vscode = spawn(executable, processArgs, {
-  env: { ...process.env, ELECTRON_ENABLE_LOGGING: '1' },
+  env: {
+    ...process.env,
+    CODEPEN_SCREENSHOT_READY: readyFile,
+    CODEPEN_SCREENSHOT_DONE: doneFile,
+    ELECTRON_ENABLE_LOGGING: '1',
+  },
   stdio: ['ignore', 'pipe', 'pipe'],
 });
 let vscodeLogs = '';
@@ -244,6 +267,7 @@ try {
   const connected = await waitForWorkbench(`http://127.0.0.1:${port}`);
   browser = connected.browser;
   const { page } = connected;
+  await waitForFile(readyFile);
   await page.waitForFunction(
     (expected) => getComputedStyle(document.documentElement)
       .getPropertyValue('--vscode-editor-background')
@@ -332,6 +356,7 @@ try {
   );
 } catch (error) {
   await writeFile(path.join(output, 'vscode.log'), vscodeLogs);
+  if (vscodeLogs.trim()) console.error(vscodeLogs.trim());
   if (browser) {
     const debugPages = [];
     for (const [index, page] of browser.contexts()[0].pages().entries()) {
@@ -358,6 +383,7 @@ try {
   }
   throw error;
 } finally {
+  await writeFile(doneFile, '');
   await browser?.close();
   vscode.kill('SIGTERM');
   await Promise.race([
