@@ -153,9 +153,11 @@ const providers = await ensureRecommendedProviders(
   vscodeVersion,
 );
 const runtimeRoot = await mkdtemp(path.join(os.tmpdir(), 'codepen-visual-'));
+const installUserData = path.join(runtimeRoot, 'install-user-data');
 const userData = path.join(runtimeRoot, 'user-data');
 const extensions = path.join(runtimeRoot, 'extensions');
 const output = path.resolve('build/vscode-screenshots', vscodeVersion);
+await mkdir(installUserData, { recursive: true });
 await mkdir(path.join(userData, 'User'), { recursive: true });
 await mkdir(extensions, { recursive: true });
 await rm(output, { recursive: true, force: true });
@@ -167,7 +169,7 @@ const { stdout: installOutput } = await execFileAsync(
   cli,
   [
     '--user-data-dir',
-    userData,
+    installUserData,
     '--extensions-dir',
     extensions,
     '--install-extension',
