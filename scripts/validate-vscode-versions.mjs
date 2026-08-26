@@ -9,6 +9,7 @@ import {
 import os from 'node:os';
 import path from 'node:path';
 import { promisify } from 'node:util';
+import { resolveCliPathFromVSCodeExecutablePath } from '@vscode/test-electron';
 import { vscodeExecutable } from './lib/vscode-runtime.mjs';
 
 const execFileAsync = promisify(execFile);
@@ -29,10 +30,10 @@ for (const version of [...new Set(versions)]) {
     path.join(os.tmpdir(), 'codepen-extensions-'),
   );
   try {
+    const cli = resolveCliPathFromVSCodeExecutablePath(executable);
     const { stdout, stderr } = await execFileAsync(
-      executable,
+      cli,
       [
-        ...(process.platform === 'linux' ? ['--no-sandbox'] : []),
         '--user-data-dir',
         userData,
         '--extensions-dir',
