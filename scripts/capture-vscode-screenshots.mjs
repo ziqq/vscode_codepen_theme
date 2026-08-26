@@ -3,6 +3,7 @@ import {
   mkdir,
   mkdtemp,
   readFile,
+  readdir,
   rm,
   symlink,
   writeFile,
@@ -162,7 +163,7 @@ await mkdir(output, { recursive: true });
 
 const vsixPath = path.resolve('build/codepen-theme-original.vsix');
 const cli = resolveCliPathFromVSCodeExecutablePath(executable);
-await execFileAsync(
+const { stdout: installOutput } = await execFileAsync(
   cli,
   [
     '--user-data-dir',
@@ -175,6 +176,13 @@ await execFileAsync(
   ],
   { maxBuffer: 10 * 1024 * 1024 },
 );
+if (installOutput.trim()) console.log(installOutput.trim());
+const installedTheme = (await readdir(extensions, { withFileTypes: true }))
+  .find((entry) => entry.isDirectory() &&
+    entry.name.startsWith('ziqq.codepen-theme-original-1.0.0'));
+if (!installedTheme) {
+  throw new Error('Packaged CodePen theme was not installed for screenshots');
+}
 
 await writeFile(
   path.join(userData, 'User', 'settings.json'),
@@ -213,8 +221,10 @@ const processArgs = [
   '--force-device-scale-factor=1',
   '--remote-debugging-address=127.0.0.1',
   `--remote-debugging-port=${port}`,
-  `--user-data-dir=${userData}`,
-  `--extensions-dir=${extensions}`,
+  '--user-data-dir',
+  userData,
+  '--extensions-dir',
+  extensions,
   path.resolve('.'),
 ];
 const vscode = spawn(executable, processArgs, {
