@@ -15,11 +15,6 @@
       "version": "10.0.0"
     },
     {
-      "id": "vscode.dotenv",
-      "kind": "builtin",
-      "version": "10.0.0"
-    },
-    {
       "id": "vscode.go",
       "kind": "builtin",
       "version": "10.0.0"
@@ -69,6 +64,19 @@
         {
           "vscode": ">=1.96.0",
           "version": "3.7.1"
+        }
+      ]
+    },
+    {
+      "id": "dotenv.dotenv-vscode",
+      "displayName": "Dotenv Official +Vault",
+      "kind": "recommended",
+      "version": "0.28.1",
+      "engine": "^1.65.0",
+      "compatibility": [
+        {
+          "vscode": ">=1.96.0",
+          "version": "0.28.1"
         }
       ]
     },
@@ -204,7 +212,7 @@
       "language": "dotenv",
       "languageId": "dotenv",
       "sample": "samples/dotenv/.env.example",
-      "provider": "vscode.dotenv",
+      "provider": "dotenv.dotenv-vscode",
       "rootScope": "source.dotenv",
       "requiredScopes": [
         "variable.key.dotenv",

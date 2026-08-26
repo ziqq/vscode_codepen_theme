@@ -1,6 +1,7 @@
 {
   "recommendations": [
     "systemticks.c4-dsl-extension",
+    "dotenv.dotenv-vscode",
     "golang.go",
     "JetBrains.kotlin-server",
     "nefrob.vscode-just-syntax",
