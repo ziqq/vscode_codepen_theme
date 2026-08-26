@@ -15,7 +15,13 @@ exports.run = async () => {
     throw new Error('The installed CodePen theme is not registered in VS Code');
   }
 
-  await vscode.workspace.getConfiguration('workbench').update(
+  const workbench = vscode.workspace.getConfiguration('workbench');
+  await workbench.update(
+    'colorTheme',
+    undefined,
+    vscode.ConfigurationTarget.Global,
+  );
+  await workbench.update(
     'colorTheme',
     'CodePen Theme Original',
     vscode.ConfigurationTarget.Global,

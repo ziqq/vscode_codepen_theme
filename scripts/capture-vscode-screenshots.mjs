@@ -221,7 +221,6 @@ const installedThemePath = path.join(extensions, installedTheme.name);
 await writeFile(
   path.join(userData, 'User', 'settings.json'),
   `${JSON.stringify({
-    'workbench.colorTheme': 'CodePen Theme Original',
     'workbench.startupEditor': 'none',
     'workbench.reduceMotion': 'on',
     'editor.semanticHighlighting.enabled': false,
