@@ -1,5 +1,24 @@
 # Changelog
 
+## 1.0.0
+- **BREAKING_CHANGES**: removed every bundled language definition, TextMate grammar, language configuration, and snippet
+- **CHANGED**: the extension now contributes only the CodePen color theme
+- **CHANGED**: the checked-in theme is generated from `src/colors.js` and `src/theme.js`
+- **CHANGED**: the generated theme is minified before packaging
+- **CHANGED**: syntax scopes for non-built-in formats are provided by recommended language extensions
+- **CHANGED**: provider-agnostic TextMate defaults preserve colors across grammar updates
+- **CHANGED**: minimum supported Visual Studio Code version is now `1.96.0`
+- **CHANGED**: preview screenshots use optimized local WebP assets and VSIX size is limited
+- **ADDED**: migration guidance and a curated list of language providers
+- **ADDED**: syntax samples and CI validation for generated sources and VSIX contents
+- **ADDED**: provider-version and representative TextMate scope compatibility contract
+- **ADDED**: generated visual baseline and reviewed screenshot integrity checks
+- **ADDED**: CI-only installation and real-provider tokenization checks for VS Code `1.96.0`, `1.105.1`, and `1.134.0`
+- **ADDED**: real VS Code screenshot smoke tests for representative built-in and recommended providers
+- **ADDED**: scheduled Marketplace provider-version and engine-drift monitoring
+- **ADDED**: generated README provider compatibility table with version bands
+- **ADDED**: release tag/package/changelog consistency guard
+
 ## 0.12.1
 - **ADDED**: `justfile` language support with Makefile-style syntax highlighting
 

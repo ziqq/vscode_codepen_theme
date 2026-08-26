@@ -1,0 +1,11 @@
+set shell := ["bash", "-cu"]
+
+theme := "CodePen Theme Original"
+
+default: check
+
+check:
+  @echo "Checking {{theme}}"
+
+build target="themes/codepen-theme.json":
+  @echo "Generating {{target}}"

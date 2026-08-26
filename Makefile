@@ -14,8 +14,7 @@ help:
 
 .PHONY: setup
 setup: ## setup environment
-	@npm install
-	@npm install -g @vscode/vsce
+	@npm ci
 
 .PHONY: login
 login: ## login to vsce
@@ -23,11 +22,12 @@ login: ## login to vsce
 
 .PHONY: build
 build: setup ## build extension
-	@vsce package
+	@npm run package
 
 .PHONY: tag-add
 tag-add: ## Make command to add TAG. E.g: make tag-add TAG=v1.0.0
 	@if [ -z "$(TAG)" ]; then echo "TAG is not set"; exit 1; fi
+	@npm run check:release -- "$(TAG)"
 	@echo ""
 	@echo "START ADDING TAG: $(TAG)"
 	@echo ""
@@ -50,17 +50,18 @@ tag-remove: ## Make command to delete TAG. E.g: make tag-delete TAG=v1.0.0
 	@echo ""
 
 .PHONY: publish
-publish: build ## publish extension
-	@vsce publish
-
-.PHONY: minor
-minor: build ## publish minor TAG
-	@vsce publish minor
+publish: build ## publish the validated VSIX
+	@npm run deploy
 
 .PHONY: test
 test: ## run tests
-	@npm install
+	@npm ci
 	@npm test
+
+.PHONY: visual-update
+visual-update: ## accept reviewed visual compatibility changes
+	@npm run build
+	@npm run visual:update
 
 .PHONY: diff
 diff: ## git diff

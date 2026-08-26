@@ -1,7 +1,12 @@
 {
   "recommendations": [
-      "dbaeumer.vscode-eslint",
-      "connor4312.esbuild-problem-matchers",
-      "ms-vscode.extension-test-runner"
+    "systemticks.c4-dsl-extension",
+    "golang.go",
+    "JetBrains.kotlin-server",
+    "nefrob.vscode-just-syntax",
+    "Syler.sass-indented",
+    "svelte.svelte-vscode",
+    "tamasfe.even-better-toml",
+    "Vue.volar"
   ]
 }

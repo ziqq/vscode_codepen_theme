@@ -1,0 +1,455 @@
+{
+  "schemaVersion": 1,
+  "verifiedAt": "2026-08-25",
+  "verifiedVscodeVersion": "1.134.0",
+  "minimumVscodeVersion": "1.96.0",
+  "testVscodeVersions": [
+    "1.96.0",
+    "1.105.1",
+    "1.134.0"
+  ],
+  "providers": [
+    {
+      "id": "vscode.dart",
+      "kind": "builtin",
+      "version": "10.0.0"
+    },
+    {
+      "id": "vscode.dotenv",
+      "kind": "builtin",
+      "version": "10.0.0"
+    },
+    {
+      "id": "vscode.go",
+      "kind": "builtin",
+      "version": "10.0.0"
+    },
+    {
+      "id": "vscode.html",
+      "kind": "builtin",
+      "version": "10.0.0"
+    },
+    {
+      "id": "vscode.java",
+      "kind": "builtin",
+      "version": "10.0.0"
+    },
+    {
+      "id": "vscode.typescript-basics",
+      "kind": "builtin",
+      "version": "10.0.0"
+    },
+    {
+      "id": "vscode.python",
+      "kind": "builtin",
+      "version": "10.0.0"
+    },
+    {
+      "id": "vscode.rust",
+      "kind": "builtin",
+      "version": "10.0.0"
+    },
+    {
+      "id": "vscode.scss",
+      "kind": "builtin",
+      "version": "10.0.0"
+    },
+    {
+      "id": "vscode.sql",
+      "kind": "builtin",
+      "version": "10.0.0"
+    },
+    {
+      "id": "systemticks.c4-dsl-extension",
+      "displayName": "C4 DSL Extension",
+      "kind": "recommended",
+      "version": "3.7.1",
+      "engine": "^1.80.0",
+      "compatibility": [
+        {
+          "vscode": ">=1.96.0",
+          "version": "3.7.1"
+        }
+      ]
+    },
+    {
+      "id": "golang.go",
+      "displayName": "Go",
+      "kind": "recommended",
+      "version": "0.57.2",
+      "engine": "^1.90.0",
+      "compatibility": [
+        {
+          "vscode": ">=1.96.0",
+          "version": "0.57.2"
+        }
+      ]
+    },
+    {
+      "id": "JetBrains.kotlin-server",
+      "displayName": "Kotlin by JetBrains",
+      "kind": "recommended",
+      "version": "0.0.8",
+      "engine": "^1.105.1",
+      "compatibility": [
+        {
+          "vscode": ">=1.96.0 <1.105.1",
+          "version": "0.0.1"
+        },
+        {
+          "vscode": ">=1.105.1",
+          "version": "0.0.8"
+        }
+      ]
+    },
+    {
+      "id": "nefrob.vscode-just-syntax",
+      "displayName": "vscode-just",
+      "kind": "recommended",
+      "version": "0.10.2",
+      "engine": ">=1.94.0",
+      "compatibility": [
+        {
+          "vscode": ">=1.96.0",
+          "version": "0.10.2"
+        }
+      ]
+    },
+    {
+      "id": "Syler.sass-indented",
+      "displayName": "Sass (.sass only)",
+      "kind": "recommended",
+      "version": "1.8.33",
+      "engine": "^1.92.0",
+      "compatibility": [
+        {
+          "vscode": ">=1.96.0",
+          "version": "1.8.33"
+        }
+      ]
+    },
+    {
+      "id": "svelte.svelte-vscode",
+      "displayName": "Svelte for VS Code",
+      "kind": "recommended",
+      "version": "110.3.1",
+      "engine": "^1.82.0",
+      "compatibility": [
+        {
+          "vscode": ">=1.96.0",
+          "version": "110.3.1"
+        }
+      ]
+    },
+    {
+      "id": "tamasfe.even-better-toml",
+      "displayName": "Even Better TOML",
+      "kind": "recommended",
+      "version": "0.21.2",
+      "engine": "^1.90.0",
+      "compatibility": [
+        {
+          "vscode": ">=1.96.0",
+          "version": "0.21.2"
+        }
+      ]
+    },
+    {
+      "id": "Vue.volar",
+      "displayName": "Vue (Official)",
+      "kind": "recommended",
+      "version": "3.3.11",
+      "engine": "^1.88.0",
+      "compatibility": [
+        {
+          "vscode": ">=1.96.0",
+          "version": "3.3.11"
+        }
+      ]
+    }
+  ],
+  "cases": [
+    {
+      "language": "C4 / Structurizr DSL",
+      "languageId": "c4",
+      "sample": "samples/c4/workspace.dsl",
+      "provider": "systemticks.c4-dsl-extension",
+      "rootScope": "source.c4",
+      "visual": true,
+      "requiredScopes": [
+        "keyword.control.c4",
+        "support.type.c4",
+        "string.quoted.double.c4",
+        "variable.other.property.c4"
+      ]
+    },
+    {
+      "language": "Dart",
+      "languageId": "dart",
+      "sample": "samples/dart/main.dart",
+      "provider": "vscode.dart",
+      "rootScope": "source.dart",
+      "requiredScopes": [
+        "keyword.declaration.dart",
+        "entity.name.function.dart",
+        "storage.type.primitive.dart",
+        "string.interpolated.single.dart"
+      ],
+      "screenshots": [
+        "assets/preview_dart_I.webp",
+        "assets/preview_dart_II.webp"
+      ]
+    },
+    {
+      "language": "dotenv",
+      "languageId": "dotenv",
+      "sample": "samples/dotenv/.env.example",
+      "provider": "vscode.dotenv",
+      "rootScope": "source.dotenv",
+      "requiredScopes": [
+        "variable.key.dotenv",
+        "property.value.dotenv",
+        "string.quoted.double.dotenv",
+        "comment.line.dotenv"
+      ],
+      "screenshots": [
+        "assets/preview_env.webp"
+      ]
+    },
+    {
+      "language": "Go modules",
+      "languageId": "go.mod",
+      "sample": "samples/go/go.mod",
+      "provider": "golang.go",
+      "rootScope": "go.mod",
+      "requiredScopes": [
+        "keyword.go.mod",
+        "operator.go.mod",
+        "string.unquoted.go.mod",
+        "comment.line.double-slash.go.mod"
+      ],
+      "screenshots": [
+        "assets/preview_go.webp"
+      ]
+    },
+    {
+      "language": "Go",
+      "languageId": "go",
+      "sample": "samples/go/main.go",
+      "provider": "vscode.go",
+      "rootScope": "source.go",
+      "requiredScopes": [
+        "keyword.control.import.go",
+        "entity.name.function.go",
+        "storage.type.string.go",
+        "variable.other.go"
+      ],
+      "screenshots": [
+        "assets/preview_go.webp"
+      ]
+    },
+    {
+      "language": "HTML",
+      "languageId": "html",
+      "sample": "samples/html/index.html",
+      "provider": "vscode.html",
+      "rootScope": "text.html.derivative",
+      "requiredScopes": [
+        "entity.name.tag.html",
+        "entity.other.attribute-name.html",
+        "string.quoted.double.html",
+        "punctuation.definition.tag.begin.html"
+      ],
+      "screenshots": [
+        "assets/preview_html.webp"
+      ]
+    },
+    {
+      "language": "Java",
+      "languageId": "java",
+      "sample": "samples/java/Main.java",
+      "provider": "vscode.java",
+      "rootScope": "source.java",
+      "requiredScopes": [
+        "storage.modifier.java",
+        "entity.name.function.java",
+        "entity.name.type.class.java",
+        "variable.other.object.java"
+      ],
+      "screenshots": [
+        "assets/preview_java.webp"
+      ]
+    },
+    {
+      "language": "TypeScript React",
+      "languageId": "typescriptreact",
+      "sample": "samples/javascript/index.tsx",
+      "provider": "vscode.typescript-basics",
+      "rootScope": "source.tsx",
+      "visual": true,
+      "requiredScopes": [
+        "keyword.control.export.tsx",
+        "storage.type.function.arrow.tsx",
+        "variable.other.constant.tsx",
+        "string.quoted.single.tsx"
+      ],
+      "screenshots": [
+        "assets/preview_js.webp"
+      ]
+    },
+    {
+      "language": "Just",
+      "languageId": "just",
+      "sample": "samples/just/justfile",
+      "provider": "nefrob.vscode-just-syntax",
+      "rootScope": "source.just",
+      "requiredScopes": [
+        "keyword.operator.default.just",
+        "entity.name.function.just",
+        "string.quoted.double.just",
+        "variable.other.just"
+      ],
+      "screenshots": [
+        "assets/preview_justfile.webp"
+      ]
+    },
+    {
+      "language": "Kotlin",
+      "languageId": "kotlin",
+      "sample": "samples/kotlin/Main.kt",
+      "provider": "JetBrains.kotlin-server",
+      "rootScope": "source.kotlin",
+      "visual": true,
+      "requiredScopes": [
+        "keyword.operator.kotlin",
+        "storage.type.kotlin",
+        "support.type.kotlin",
+        "string.quoted.double.kotlin"
+      ]
+    },
+    {
+      "language": "Python",
+      "languageId": "python",
+      "sample": "samples/python/main.py",
+      "provider": "vscode.python",
+      "rootScope": "source.python",
+      "requiredScopes": [
+        "keyword.control.flow.python",
+        "entity.name.function.python",
+        "storage.type.function.python",
+        "variable.language.special.self.python"
+      ],
+      "screenshots": [
+        "assets/preview_python.webp"
+      ]
+    },
+    {
+      "language": "Rust",
+      "languageId": "rust",
+      "sample": "samples/rust/main.rs",
+      "provider": "vscode.rust",
+      "rootScope": "source.rust",
+      "requiredScopes": [
+        "keyword.control.rust",
+        "entity.name.function.rust",
+        "storage.type.rust",
+        "variable.other.rust"
+      ],
+      "screenshots": [
+        "assets/preview_rust_I.webp",
+        "assets/preview_rust_II.webp"
+      ]
+    },
+    {
+      "language": "Sass",
+      "languageId": "sass",
+      "sample": "samples/sass/styles.sass",
+      "provider": "Syler.sass-indented",
+      "rootScope": "source.sass",
+      "requiredScopes": [
+        "keyword.control.unit.css.sass",
+        "entity.name.tag.css.sass.symbol",
+        "support.type.property-name.css.sass.prop.name",
+        "variable.other.name"
+      ],
+      "screenshots": [
+        "assets/preview_sass.webp"
+      ]
+    },
+    {
+      "language": "SCSS",
+      "languageId": "scss",
+      "sample": "samples/scss/styles.scss",
+      "provider": "vscode.scss",
+      "rootScope": "source.css.scss",
+      "requiredScopes": [
+        "constant.numeric.css",
+        "support.function.misc.scss",
+        "meta.property-name.scss",
+        "variable.scss"
+      ],
+      "screenshots": [
+        "assets/preview_scss.webp"
+      ]
+    },
+    {
+      "language": "SQL",
+      "languageId": "sql",
+      "sample": "samples/sql/query.sql",
+      "provider": "vscode.sql",
+      "rootScope": "source.sql",
+      "requiredScopes": [
+        "keyword.other.sql",
+        "support.function.aggregate.sql",
+        "keyword.other.DML.sql",
+        "keyword.operator.comparison.sql"
+      ],
+      "screenshots": [
+        "assets/preview_sql.webp"
+      ]
+    },
+    {
+      "language": "Svelte",
+      "languageId": "svelte",
+      "sample": "samples/svelte/Counter.svelte",
+      "provider": "svelte.svelte-vscode",
+      "rootScope": "source.svelte",
+      "requiredScopes": [
+        "keyword.control.svelte",
+        "entity.name.tag.svelte",
+        "storage.type.function.arrow.ts",
+        "variable.other.constant.ts"
+      ]
+    },
+    {
+      "language": "TOML",
+      "languageId": "toml",
+      "sample": "samples/toml/config.toml",
+      "provider": "tamasfe.even-better-toml",
+      "rootScope": "source.toml",
+      "requiredScopes": [
+        "constant.language.boolean.toml",
+        "constant.numeric.integer.toml",
+        "support.type.property-name.toml",
+        "string.quoted.single.basic.line.toml"
+      ],
+      "screenshots": [
+        "assets/preview_toml.webp"
+      ]
+    },
+    {
+      "language": "Vue",
+      "languageId": "vue",
+      "sample": "samples/vue/Counter.vue",
+      "provider": "Vue.volar",
+      "rootScope": "text.html.vue",
+      "visual": true,
+      "requiredScopes": [
+        "keyword.control.conditional.vue",
+        "entity.name.tag.html",
+        "meta.property-name.css",
+        "punctuation.definition.tag.begin.html.vue"
+      ]
+    }
+  ]
+}

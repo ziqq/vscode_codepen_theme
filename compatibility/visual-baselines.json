@@ -1,0 +1,157 @@
+{
+  "schemaVersion": 1,
+  "generatedFrom": "compatibility/scopes.json",
+  "assets": [
+    {
+      "path": "assets/preview_dart_I.webp",
+      "languages": [
+        "Dart"
+      ],
+      "width": 888,
+      "height": 1751,
+      "bytes": 96216,
+      "sha256": "7f72e0e9fd19a0776c1d12cf3e391e081d666f41feb6c9455bd9a4d59392b7f9"
+    },
+    {
+      "path": "assets/preview_dart_II.webp",
+      "languages": [
+        "Dart"
+      ],
+      "width": 888,
+      "height": 4147,
+      "bytes": 214254,
+      "sha256": "a1326995d9223b46b7e6946dbb9d9e0345e6c80506820a256fcbdbab34aafbc1"
+    },
+    {
+      "path": "assets/preview_env.webp",
+      "languages": [
+        "dotenv"
+      ],
+      "width": 888,
+      "height": 478,
+      "bytes": 24664,
+      "sha256": "b97f747d8618a20f7a73b26e29aa1ebbf7c589f712571c3a9f5b40804494bc18"
+    },
+    {
+      "path": "assets/preview_go.webp",
+      "languages": [
+        "Go modules",
+        "Go"
+      ],
+      "width": 888,
+      "height": 2349,
+      "bytes": 118866,
+      "sha256": "9543586f80eadacd9d7d3b33915449a19172f63d8b4c3c459a2be0f6819c3d78"
+    },
+    {
+      "path": "assets/preview_html.webp",
+      "languages": [
+        "HTML"
+      ],
+      "width": 888,
+      "height": 725,
+      "bytes": 37454,
+      "sha256": "d512aab3faa23d1b1548e7fc501f7a7da1560ede5ac9d0797c391b5d922bbd26"
+    },
+    {
+      "path": "assets/preview_java.webp",
+      "languages": [
+        "Java"
+      ],
+      "width": 888,
+      "height": 2529,
+      "bytes": 148646,
+      "sha256": "bf6cfefd1c7eec20389fa2a9d6d0190bbf14f3c9e6b8f497e4e171108c4b5033"
+    },
+    {
+      "path": "assets/preview_js.webp",
+      "languages": [
+        "TypeScript React"
+      ],
+      "width": 888,
+      "height": 1643,
+      "bytes": 85034,
+      "sha256": "9200312ced6bf08382901c3b6dc5fc137b23f6e00317f671e09b915370d4ddb8"
+    },
+    {
+      "path": "assets/preview_justfile.webp",
+      "languages": [
+        "Just"
+      ],
+      "width": 888,
+      "height": 1385,
+      "bytes": 66756,
+      "sha256": "e555314e0ce39b89ae2b634cac0756731087069fd49f7e0bc9e478bba0ec25cd"
+    },
+    {
+      "path": "assets/preview_python.webp",
+      "languages": [
+        "Python"
+      ],
+      "width": 888,
+      "height": 4495,
+      "bytes": 285174,
+      "sha256": "ed2cdc470e29adabf251b7426f952ce199fac7445ddeb0a67272b0f8c08830fd"
+    },
+    {
+      "path": "assets/preview_rust_I.webp",
+      "languages": [
+        "Rust"
+      ],
+      "width": 888,
+      "height": 388,
+      "bytes": 29842,
+      "sha256": "397f0a3099337a8389bb55112698cffa51fff6e72b23e8fa28ec19de91f09d69"
+    },
+    {
+      "path": "assets/preview_rust_II.webp",
+      "languages": [
+        "Rust"
+      ],
+      "width": 888,
+      "height": 1646,
+      "bytes": 110286,
+      "sha256": "e5cb4fafc0c32541435978b4fff125874fa06fc53b54461f4a337c44ad61c911"
+    },
+    {
+      "path": "assets/preview_sass.webp",
+      "languages": [
+        "Sass"
+      ],
+      "width": 888,
+      "height": 3054,
+      "bytes": 142714,
+      "sha256": "b20272e3110daceb460db9804f5d17931761b9efdc700f4cf465416df0227400"
+    },
+    {
+      "path": "assets/preview_scss.webp",
+      "languages": [
+        "SCSS"
+      ],
+      "width": 888,
+      "height": 4037,
+      "bytes": 173116,
+      "sha256": "9d0f4b962b1148248de10bb14f3ce4d28293c0e41b15a7eea6f021cc19ef980f"
+    },
+    {
+      "path": "assets/preview_sql.webp",
+      "languages": [
+        "SQL"
+      ],
+      "width": 888,
+      "height": 709,
+      "bytes": 38464,
+      "sha256": "e7fb8924e3aedb61717a49e4ab3f899e54a45447dc895f5aa8361eb130338ca0"
+    },
+    {
+      "path": "assets/preview_toml.webp",
+      "languages": [
+        "TOML"
+      ],
+      "width": 888,
+      "height": 2321,
+      "bytes": 85588,
+      "sha256": "e5fd012e0fa14838b4e0a32247cda2463097655325ff31175ed95baedfcb94ca"
+    }
+  ]
+}

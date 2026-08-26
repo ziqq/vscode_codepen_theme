@@ -1,0 +1,12 @@
+title = "CodePen Theme Original"
+enabled = true
+version = "1.0.0"
+revision = 1
+
+[palette]
+background = "#1d1e22"
+accent = "#96b38a"
+
+[[providers]]
+language = "toml"
+extension = "tamasfe.even-better-toml"

@@ -1,71 +1,72 @@
-name: Checkout VS Code Extension
+name: Verify VS Code Extension
 
 on:
   workflow_dispatch:
   pull_request:
     branches:
-      - "main"
-      - "master"
-      - "dev"
-      - "develop"
-      - "feature/**"
-      - "bugfix/**"
-      - "hotfix/**"
-      - "support/**"
+      - main
+      - master
+      - dev
+      - develop
     paths:
-      - .github/workflows/*.yml
-      - "README.md"
+      - ".github/workflows/**"
+      - ".gitattributes"
+      - ".gitignore"
+      - ".vscode/**"
+      - "assets/**"
+      - "compatibility/**"
+      - "samples/**"
+      - "scripts/**"
+      - "src/**"
+      - "themes/**"
+      - ".vscodeignore"
       - "CHANGELOG.md"
-      - "**.json"
-      - "**.ts"
-      - "**.js"
-      - "**.mjs"
+      - "Makefile"
+      - "README.md"
+      - "package.json"
+      - "package-lock.json"
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
 
 jobs:
-  checkout:
-    name: "Checkout VS Code Extension"
-    strategy:
-      fail-fast: false
-      matrix:
-        os:
-          - ubuntu-latest
-          #- macos-latest
-          #- windows-latest
-    runs-on: ${{ matrix.os }}
-    defaults:
-      run:
-        working-directory: ./
+  verify:
+    name: Verify and package
+    runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
       - name: Checkout
-        id: checkout
         uses: actions/checkout@v4
-        #with:
-        #  sparse-checkout: |
-        #    .github
-        #    src/
-        #    *.json
-        #    *.js
-        #    *.mjs
-        #    README.md
-        #    CHANGELOG.md
 
       - name: Install Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 18.x
+          node-version: 20.x
+          cache: npm
 
-      - name: Install Dependencies
-        run: npm install
+      - name: Install dependencies
+        run: npm ci
 
-      - name: Run Tests
-        run: xvfb-run -a npm test
-        if: runner.os == 'Linux'
+      - name: Check JavaScript syntax
+        run: npm run lint
 
-      - name: Run Tests
+      - name: Validate source and generated theme
         run: npm test
-        if: runner.os != 'Linux'
 
-      - name: Lint Code
-        run: |
-          npm run lint
+      - name: Build and validate VSIX
+        run: npm run package
+
+      - name: Audit dependencies
+        run: npm audit --audit-level=high
+
+      - name: Upload VSIX
+        uses: actions/upload-artifact@v4
+        with:
+          name: codepen-theme-original-${{ github.event.pull_request.head.sha || github.sha }}
+          path: build/codepen-theme-original.vsix
+          if-no-files-found: error
+          retention-days: 7

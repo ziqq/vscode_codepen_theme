@@ -1,11 +1,11 @@
 {
   "name": "codepen-theme-original",
   "displayName": "CodePen Theme Original",
-  "description": "Custom theme for Visual Studio Code inspired by the codepen.io online editor theme. Compatible with .HTML, .CSS, .SASS, .SCSS, .JS, .JSX, .TS, .TSX, .DART, .GO, .PY, .JAVA, .RUST, .VUE, Justfile and other formats. Made with 🖤 by ziqq.",
+  "description": "A CodePen-inspired dark color theme for Visual Studio Code. Language grammars are provided by VS Code and recommended language extensions.",
   "icon": "assets/logo.png",
-  "version": "0.12.1",
+  "version": "1.0.0",
   "engines": {
-    "vscode": "^1.0.0"
+    "vscode": "^1.96.0"
   },
   "license": "Apache-2.0",
   "publisher": "ziqq",
@@ -26,287 +26,11 @@
   ],
   "keywords": [
     "VSCode",
-    "Themes"
-  ],
-  "extensionKind": [
-    "ui",
-    "workspace"
+    "CodePen",
+    "dark theme",
+    "color theme"
   ],
   "contributes": {
-    "languages": [
-      {
-        "id": "dotenv",
-        "aliases": [
-          "Environment Variables",
-          "dotenv",
-          "env"
-        ],
-        "extensions": [
-          ".flaskenv",
-          ".env",
-          ".env-sample",
-          ".env.example",
-          ".env.local",
-          ".env.dev",
-          ".env.dev.local",
-          ".env.build",
-          ".env.build.local",
-          ".env.development",
-          ".env.development.local",
-          ".env.test",
-          ".env.test.local",
-          ".env.testing",
-          ".env.qa",
-          ".env.qa.local",
-          ".env.uat",
-          ".env.uat.local",
-          ".env.stag",
-          ".env.stag.local",
-          ".env.stage",
-          ".env.stage.local",
-          ".env.staging",
-          ".env.staging.local",
-          ".env.live",
-          ".env.live.local",
-          ".env.production",
-          ".env.production.local",
-          ".env.prod",
-          ".env.prod.local"
-        ],
-        "configuration": "./languages/env.configuration.json"
-      },
-      {
-        "id": "c4",
-        "aliases": [
-          "C4 DSL",
-          "c4"
-        ],
-        "extensions": [
-          ".c4",
-          ".dsl"
-        ],
-        "configuration": "./languages/c4.configuration.json"
-      },
-      {
-        "id": "dart",
-        "aliases": [
-          "Dart",
-          "dart"
-        ],
-        "extensions": [
-          ".dart"
-        ]
-      },
-      {
-        "id": "go",
-        "aliases": [
-          "Go",
-          "go"
-        ],
-        "extensions": [
-          ".go"
-        ]
-      },
-      {
-        "id": "go.mod",
-        "filenames": [
-          "go.mod"
-        ],
-        "aliases": [
-          "Go Module File"
-        ],
-        "configuration": "./languages/go.mod.language-configuration.json"
-      },
-      {
-        "id": "go.sum",
-        "filenames": [
-          "go.sum"
-        ],
-        "aliases": [
-          "Go Checksum File"
-        ]
-      },
-      {
-        "id": "html",
-        "aliases": [
-          "Html",
-          "html"
-        ],
-        "extensions": [
-          ".html",
-          ".jade",
-          ".nunjucks"
-        ]
-      },
-      {
-        "id": "kotlin",
-        "aliases": [
-          "Kotlin",
-          "kotlin"
-        ],
-        "extensions": [
-          ".kt",
-          ".kts"
-        ]
-      },
-      {
-        "id": "just",
-        "aliases": [
-          "Just",
-          "justfile"
-        ],
-        "extensions": [
-          ".just",
-          ".justfile"
-        ],
-        "filenames": [
-          "justfile",
-          "Justfile"
-        ],
-        "configuration": "./languages/just.configuration.json"
-      },
-      {
-        "id": "python",
-        "aliases": [
-          "Python",
-          "python"
-        ],
-        "extensions": [
-          ".py"
-        ]
-      },
-      {
-        "id": "rust",
-        "aliases": [
-          "Rust",
-          "rust"
-        ],
-        "extensions": [
-          ".rs"
-        ],
-        "configuration": "./languages/rust.configuration.json"
-      },
-      {
-        "id": "sass",
-        "aliases": [
-          "Sass",
-          "sass-indented"
-        ],
-        "extensions": [
-          ".sass",
-          ".sass.erb"
-        ],
-        "configuration": "./languages/sass.configuration.json"
-      },
-      {
-        "id": "scss",
-        "aliases": [
-          "Scss",
-          "scss-indented"
-        ],
-        "extensions": [
-          ".scss",
-          ".scss.erb"
-        ],
-        "configuration": "./languages/scss.configuration.json"
-      },
-      {
-        "id": "svelte",
-        "aliases": [
-          "Svelte",
-          "svelte"
-        ],
-        "extensions": [
-          ".svelte"
-        ]
-      },
-      {
-        "id": "sql",
-        "aliases": [
-          "Sql",
-          "sql",
-          "Drift",
-          "drift"
-        ],
-        "extensions": [
-          ".sql",
-          ".drift"
-        ]
-      },
-      {
-        "id": "toml",
-        "aliases": [
-          "TOML",
-          "toml"
-        ],
-        "extensions": [
-          ".toml"
-        ],
-        "configuration": "./languages/toml.configuration.json"
-      },
-      {
-        "id": "vue",
-        "aliases": [
-          "Vue",
-          "vue"
-        ],
-        "extensions": [
-          ".vue"
-        ]
-      }
-    ],
-    "grammars": [
-      {
-        "language": "dotenv",
-        "scopeName": "source.env",
-        "path": "./syntaxes/env.tmLanguage"
-      },
-      {
-        "language": "c4",
-        "scopeName": "source.c4",
-        "path": "./syntaxes/c4.tmLanguage.json"
-      },
-      {
-        "language": "go.mod",
-        "scopeName": "go.mod",
-        "path": "./syntaxes/go.mod.tmGrammar.json"
-      },
-      {
-        "language": "go.sum",
-        "scopeName": "go.sum",
-        "path": "./syntaxes/go.sum.tmGrammar.json"
-      },
-      {
-        "language": "kotlin",
-        "scopeName": "source.kotlin",
-        "path": "./syntaxes/kotlin.tmLanguage.json"
-      },
-      {
-        "language": "just",
-        "scopeName": "source.just",
-        "path": "./syntaxes/just.tmLanguage.json"
-      },
-      {
-        "language": "rust",
-        "scopeName": "source.rust",
-        "path": "./syntaxes/rust.tmLanguage.json"
-      },
-      {
-        "language": "sass",
-        "scopeName": "source.css.sass",
-        "path": "./syntaxes/sass.tmLanguage.json"
-      },
-      {
-        "language": "scss",
-        "scopeName": "source.css.scss",
-        "path": "./syntaxes/scss.tmLanguage.json"
-      },
-      {
-        "language": "toml",
-        "scopeName": "source.toml",
-        "path": "./syntaxes/toml.tmLanguage.json"
-      }
-    ],
     "themes": [
       {
         "label": "CodePen Theme Original",
@@ -315,8 +39,35 @@
       }
     ]
   },
+  "devDependencies": {
+    "@vscode/test-electron": "^2.5.2",
+    "@vscode/vsce": "3.7.1",
+    "playwright-core": "^1.62.1",
+    "pngjs": "^7.0.0",
+    "vscode-oniguruma": "^2.0.1",
+    "vscode-textmate": "^9.3.2"
+  },
   "scripts": {
-    "start": "code . --extensionDevelopmentPath=. --disable-extensions",
-    "deploy": "vsce publish"
+    "start": "node --watch src/index.js",
+    "build": "node src/index.js",
+    "check:theme": "node scripts/validate-theme.mjs",
+    "check:compatibility": "node scripts/validate-compatibility.mjs",
+    "check:docs": "node scripts/generate-readme.mjs --check",
+    "check:visual": "node scripts/render-visual-baseline.mjs --check",
+    "check:release": "node scripts/validate-release.mjs",
+    "check": "npm run check:theme && npm run check:compatibility && npm run check:docs && npm run check:visual && npm run check:release",
+    "test": "npm run check",
+    "lint": "node --check src/colors.js && node --check src/theme.js && node --check src/index.js && node --check scripts/lib/compatibility.mjs && node --check scripts/lib/providers.mjs && node --check scripts/lib/vscode-runtime.mjs && node --check scripts/capture-vscode-screenshots.mjs && node --check scripts/check-provider-drift.mjs && node --check scripts/validate-theme.mjs && node --check scripts/validate-compatibility.mjs && node --check scripts/generate-readme.mjs && node --check scripts/render-visual-baseline.mjs && node --check scripts/tokenize-providers.mjs && node --check scripts/validate-provider-matrix.mjs && node --check scripts/validate-vscode-versions.mjs && node --check scripts/validate-release.mjs && node --check scripts/validate-vsix.mjs",
+    "docs:update": "node scripts/generate-readme.mjs --write",
+    "check:provider-drift": "node scripts/check-provider-drift.mjs",
+    "test:vscode-versions": "node scripts/validate-vscode-versions.mjs",
+    "test:providers": "node scripts/tokenize-providers.mjs",
+    "test:provider-matrix": "node scripts/validate-provider-matrix.mjs",
+    "test:screenshots": "node scripts/capture-vscode-screenshots.mjs",
+    "visual:update": "node scripts/render-visual-baseline.mjs --write",
+    "check:package": "node scripts/validate-vsix.mjs ./build/codepen-theme-original.vsix",
+    "package": "vsce package --out ./build/codepen-theme-original.vsix && npm run check:package",
+    "vscode:prepublish": "npm run build && npm run check",
+    "deploy": "npm run check:release && npm run check:package && vsce publish --packagePath ./build/codepen-theme-original.vsix"
   }
 }

@@ -1,0 +1,75 @@
+name: Provider Compatibility
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 5 * * 1"
+
+concurrency:
+  group: provider-compatibility
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  compatibility:
+    name: VS Code and provider integration
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20.x
+          cache: npm
+
+      - name: Restore VS Code and provider caches
+        uses: actions/cache@v4
+        with:
+          path: |
+            .vscode-test
+            .cache/codepen-theme/providers
+          key: ${{ runner.os }}-provider-compatibility-${{ hashFiles('compatibility/scopes.json', 'package-lock.json') }}
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build and validate VSIX
+        run: npm run package
+
+      - name: Test theme installation matrix
+        run: npm run test:vscode-versions
+        env:
+          CI: "true"
+
+      - name: Test provider tokenization matrix
+        run: npm run test:provider-matrix
+        env:
+          CI: "true"
+
+      - name: Capture real VS Code screenshots
+        run: xvfb-run -a npm run test:screenshots
+        env:
+          CI: "true"
+
+      - name: Check Marketplace provider drift
+        run: npm run check:provider-drift
+        env:
+          CI: "true"
+
+      - name: Upload compatibility evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: provider-compatibility-${{ github.run_id }}
+          path: |
+            build/provider-drift.json
+            build/provider-tokenization-*.json
+            build/vscode-version-compatibility.json
+            build/vscode-screenshots/**
+          if-no-files-found: warn
+          retention-days: 14

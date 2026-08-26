@@ -3,10 +3,14 @@ name: Deploy VS Code Extension
 on:
   push:
     tags:
-      - "v[0-9]+.[0-9]+.[0-9]+*"
-  #release:
-  #  types:
-  #    - created
+      - "v*.*.*"
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
+
+permissions:
+  contents: read
 
 jobs:
   deploy:
@@ -26,12 +30,23 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20.x
+          cache: npm
 
       - name: Install Dependencies
         id: install
-        run: |
-          npm install
-          npm install -g @vscode/vsce
+        run: npm ci
+
+      - name: Check JavaScript Syntax
+        run: npm run lint
+
+      - name: Validate Source
+        run: npm test
+
+      - name: Validate Release Tag
+        run: npm run check:release -- "${GITHUB_REF_NAME}"
+
+      - name: Validate Package
+        run: npm run package
 
       - name: Publish
         id: publish
