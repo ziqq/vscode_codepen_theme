@@ -15,17 +15,6 @@ exports.run = async () => {
     throw new Error('The installed CodePen theme is not registered in VS Code');
   }
 
-  const workbench = vscode.workspace.getConfiguration('workbench');
-  await workbench.update(
-    'colorTheme',
-    undefined,
-    vscode.ConfigurationTarget.Global,
-  );
-  await workbench.update(
-    'colorTheme',
-    'CodePen Theme Original',
-    vscode.ConfigurationTarget.Global,
-  );
   await writeFile(readyFile, '');
 
   const deadline = Date.now() + 120_000;

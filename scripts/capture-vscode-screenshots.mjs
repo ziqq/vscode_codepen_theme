@@ -281,6 +281,25 @@ try {
   browser = connected.browser;
   await waitForFile(readyFile);
   const page = await waitForExtensionWorkbench(connected.context);
+  const modifier = process.platform === 'darwin' ? 'Meta' : 'Control';
+  await page.keyboard.press(`${modifier}+K`);
+  await page.waitForTimeout(100);
+  await page.keyboard.press(`${modifier}+T`);
+  const themeInput = page.locator('.quick-input-widget input');
+  await themeInput.waitFor({ state: 'visible', timeout: 10_000 });
+  await themeInput.fill('CodePen Theme Original');
+  const themeRows = page.locator('.quick-input-list .monaco-list-row');
+  const themeResult = themeRows
+    .filter({ hasText: 'CodePen Theme Original' })
+    .first();
+  try {
+    await themeResult.waitFor({ state: 'visible', timeout: 20_000 });
+  } catch (error) {
+    if (error?.name !== 'TimeoutError') throw error;
+    const options = await themeRows.allTextContents();
+    throw new Error(`CodePen theme is absent from the picker: ${options}`);
+  }
+  await themeResult.click();
   await page.waitForFunction(
     (expected) => getComputedStyle(document.documentElement)
       .getPropertyValue('--vscode-editor-background')
