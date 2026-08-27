@@ -55,7 +55,7 @@
       "version": "10.0.0"
     },
     {
-      "id": "vscode.markdown",
+      "id": "vscode.markdown-basics",
       "kind": "builtin",
       "version": "10.0.0"
     },
@@ -415,10 +415,10 @@
       "provider": "vscode.json",
       "rootScope": "source.json.comments",
       "requiredScopes": [
-        "support.type.property-name.json",
-        "string.quoted.double.json",
-        "constant.language.json",
-        "comment.line.double-slash.json"
+        "support.type.property-name.json.comments",
+        "string.quoted.double.json.comments",
+        "constant.language.json.comments",
+        "comment.line.double-slash.json.comments"
       ]
     },
     {
@@ -472,7 +472,7 @@
       "language": "Markdown",
       "languageId": "markdown",
       "sample": "samples/markdown/compatibility.md",
-      "provider": "vscode.markdown",
+      "provider": "vscode.markdown-basics",
       "rootScope": "text.html.markdown",
       "requiredScopes": [
         "markup.heading.markdown",

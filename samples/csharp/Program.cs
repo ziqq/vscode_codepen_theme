@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
+// C# fixture for provider-owned TextMate scopes.
 internal sealed record Theme(string Name, string Accent, string Background)
 {
     public string Label => $"{Name}: {Accent}";

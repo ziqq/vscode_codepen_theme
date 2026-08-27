@@ -24,6 +24,11 @@
   content: attr(data-kind) ': ';
 }
 
+.preview button {
+  color: var(--accent);
+  background: transparent;
+}
+
 @media (width >= 48rem) {
   .preview {
     grid-template-columns: repeat(2, minmax(0, 1fr));

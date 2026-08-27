@@ -2,6 +2,7 @@
 #include <string>
 #include <vector>
 
+// C++ fixture for provider-owned TextMate scopes.
 struct Theme {
   std::string name;
   std::string accent;

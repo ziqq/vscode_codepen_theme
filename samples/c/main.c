@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 
+// C fixture for provider-owned TextMate scopes.
 typedef struct {
   const char *name;
   const char *accent;
