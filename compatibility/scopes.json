@@ -239,7 +239,7 @@
       "provider": "vscode.cpp",
       "rootScope": "source.c",
       "requiredScopes": [
-        "storage.type.c",
+        "storage.type.built-in.c",
         "entity.name.function.c",
         "string.quoted.double.c",
         "comment.line.double-slash.c"
@@ -252,8 +252,8 @@
       "provider": "vscode.cpp",
       "rootScope": "source.cpp",
       "requiredScopes": [
-        "storage.type.cpp",
-        "entity.name.function.cpp",
+        "storage.type.struct.cpp",
+        "entity.name.function.definition.cpp",
         "string.quoted.double.cpp",
         "comment.line.double-slash.cpp"
       ]
@@ -265,7 +265,7 @@
       "provider": "vscode.csharp",
       "rootScope": "source.cs",
       "requiredScopes": [
-        "storage.type.cs",
+        "storage.type.class.cs",
         "entity.name.function.cs",
         "string.quoted.double.cs",
         "comment.line.double-slash.cs"
@@ -418,7 +418,7 @@
         "support.type.property-name.json.comments",
         "string.quoted.double.json.comments",
         "constant.language.json.comments",
-        "comment.line.double-slash.json.comments"
+        "comment.line.double-slash.js"
       ]
     },
     {
@@ -477,7 +477,7 @@
       "requiredScopes": [
         "markup.heading.markdown",
         "markup.bold.markdown",
-        "markup.raw.block.fenced.markdown",
+        "markup.underline.link.markdown",
         "string.other.link.title.markdown"
       ]
     },
@@ -488,7 +488,7 @@
       "provider": "vscode.php",
       "rootScope": "source.php",
       "requiredScopes": [
-        "keyword.control.php",
+        "keyword.control.foreach.php",
         "entity.name.function.php",
         "variable.other.php",
         "string.quoted.single.php"
@@ -609,8 +609,8 @@
       "rootScope": "source.shell",
       "requiredScopes": [
         "comment.line.number-sign.shell",
-        "keyword.control.shell",
-        "variable.other.readwrite.shell",
+        "keyword.control.if.shell",
+        "variable.other.normal.shell",
         "string.quoted.double.shell"
       ]
     },
@@ -621,10 +621,10 @@
       "provider": "vscode.swift",
       "rootScope": "source.swift",
       "requiredScopes": [
-        "keyword.control.swift",
+        "keyword.control.loop.swift",
         "entity.name.function.swift",
-        "storage.type.swift",
-        "string.quoted.double.swift"
+        "storage.type.struct.swift",
+        "string.quoted.double.single-line.swift"
       ]
     },
     {
