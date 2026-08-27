@@ -10,6 +10,21 @@
   ],
   "providers": [
     {
+      "id": "vscode.cpp",
+      "kind": "builtin",
+      "version": "10.0.0"
+    },
+    {
+      "id": "vscode.csharp",
+      "kind": "builtin",
+      "version": "10.0.0"
+    },
+    {
+      "id": "vscode.css",
+      "kind": "builtin",
+      "version": "10.0.0"
+    },
+    {
       "id": "vscode.dart",
       "kind": "builtin",
       "version": "10.0.0"
@@ -25,7 +40,27 @@
       "version": "10.0.0"
     },
     {
+      "id": "vscode.javascript",
+      "kind": "builtin",
+      "version": "10.0.0"
+    },
+    {
       "id": "vscode.java",
+      "kind": "builtin",
+      "version": "10.0.0"
+    },
+    {
+      "id": "vscode.json",
+      "kind": "builtin",
+      "version": "10.0.0"
+    },
+    {
+      "id": "vscode.markdown",
+      "kind": "builtin",
+      "version": "10.0.0"
+    },
+    {
+      "id": "vscode.php",
       "kind": "builtin",
       "version": "10.0.0"
     },
@@ -40,6 +75,11 @@
       "version": "10.0.0"
     },
     {
+      "id": "vscode.ruby",
+      "kind": "builtin",
+      "version": "10.0.0"
+    },
+    {
       "id": "vscode.rust",
       "kind": "builtin",
       "version": "10.0.0"
@@ -50,7 +90,22 @@
       "version": "10.0.0"
     },
     {
+      "id": "vscode.shellscript",
+      "kind": "builtin",
+      "version": "10.0.0"
+    },
+    {
       "id": "vscode.sql",
+      "kind": "builtin",
+      "version": "10.0.0"
+    },
+    {
+      "id": "vscode.swift",
+      "kind": "builtin",
+      "version": "10.0.0"
+    },
+    {
+      "id": "vscode.yaml",
       "kind": "builtin",
       "version": "10.0.0"
     },
@@ -178,6 +233,45 @@
   ],
   "cases": [
     {
+      "language": "C",
+      "languageId": "c",
+      "sample": "samples/c/main.c",
+      "provider": "vscode.cpp",
+      "rootScope": "source.c",
+      "requiredScopes": [
+        "storage.type.c",
+        "entity.name.function.c",
+        "string.quoted.double.c",
+        "comment.line.double-slash.c"
+      ]
+    },
+    {
+      "language": "C++",
+      "languageId": "cpp",
+      "sample": "samples/cpp/main.cpp",
+      "provider": "vscode.cpp",
+      "rootScope": "source.cpp",
+      "requiredScopes": [
+        "storage.type.cpp",
+        "entity.name.function.cpp",
+        "string.quoted.double.cpp",
+        "comment.line.double-slash.cpp"
+      ]
+    },
+    {
+      "language": "C#",
+      "languageId": "csharp",
+      "sample": "samples/csharp/Program.cs",
+      "provider": "vscode.csharp",
+      "rootScope": "source.cs",
+      "requiredScopes": [
+        "storage.type.cs",
+        "entity.name.function.cs",
+        "string.quoted.double.cs",
+        "comment.line.double-slash.cs"
+      ]
+    },
+    {
       "language": "C4 / Structurizr DSL",
       "languageId": "c4",
       "sample": "samples/c4/workspace.dsl",
@@ -189,6 +283,19 @@
         "support.type.c4",
         "string.quoted.double.c4",
         "variable.other.property.c4"
+      ]
+    },
+    {
+      "language": "CSS",
+      "languageId": "css",
+      "sample": "samples/css/styles.css",
+      "provider": "vscode.css",
+      "rootScope": "source.css",
+      "requiredScopes": [
+        "entity.name.tag.css",
+        "support.type.property-name.css",
+        "constant.numeric.css",
+        "variable.css"
       ]
     },
     {
@@ -289,6 +396,32 @@
       ]
     },
     {
+      "language": "JavaScript",
+      "languageId": "javascript",
+      "sample": "samples/javascript/main.js",
+      "provider": "vscode.javascript",
+      "rootScope": "source.js",
+      "requiredScopes": [
+        "keyword.control.import.js",
+        "entity.name.function.js",
+        "variable.other.constant.js",
+        "string.quoted.single.js"
+      ]
+    },
+    {
+      "language": "JSONC",
+      "languageId": "jsonc",
+      "sample": "samples/json/theme.jsonc",
+      "provider": "vscode.json",
+      "rootScope": "source.json.comments",
+      "requiredScopes": [
+        "support.type.property-name.json",
+        "string.quoted.double.json",
+        "constant.language.json",
+        "comment.line.double-slash.json"
+      ]
+    },
+    {
       "language": "TypeScript React",
       "languageId": "typescriptreact",
       "sample": "samples/javascript/index.tsx",
@@ -336,6 +469,32 @@
       ]
     },
     {
+      "language": "Markdown",
+      "languageId": "markdown",
+      "sample": "samples/markdown/compatibility.md",
+      "provider": "vscode.markdown",
+      "rootScope": "text.html.markdown",
+      "requiredScopes": [
+        "markup.heading.markdown",
+        "markup.bold.markdown",
+        "markup.raw.block.fenced.markdown",
+        "string.other.link.title.markdown"
+      ]
+    },
+    {
+      "language": "PHP",
+      "languageId": "php",
+      "sample": "samples/php/index.php",
+      "provider": "vscode.php",
+      "rootScope": "source.php",
+      "requiredScopes": [
+        "keyword.control.php",
+        "entity.name.function.php",
+        "variable.other.php",
+        "string.quoted.single.php"
+      ]
+    },
+    {
       "language": "Python",
       "languageId": "python",
       "sample": "samples/python/main.py",
@@ -366,6 +525,19 @@
       "screenshots": [
         "assets/preview_rust_I.webp",
         "assets/preview_rust_II.webp"
+      ]
+    },
+    {
+      "language": "Ruby",
+      "languageId": "ruby",
+      "sample": "samples/ruby/main.rb",
+      "provider": "vscode.ruby",
+      "rootScope": "source.ruby",
+      "requiredScopes": [
+        "keyword.control.ruby",
+        "entity.name.function.ruby",
+        "variable.other.constant.ruby",
+        "string.quoted.double.ruby"
       ]
     },
     {
@@ -430,6 +602,32 @@
       ]
     },
     {
+      "language": "Shell Script",
+      "languageId": "shellscript",
+      "sample": "samples/shell/theme-preview.sh",
+      "provider": "vscode.shellscript",
+      "rootScope": "source.shell",
+      "requiredScopes": [
+        "comment.line.number-sign.shell",
+        "keyword.control.shell",
+        "variable.other.readwrite.shell",
+        "string.quoted.double.shell"
+      ]
+    },
+    {
+      "language": "Swift",
+      "languageId": "swift",
+      "sample": "samples/swift/main.swift",
+      "provider": "vscode.swift",
+      "rootScope": "source.swift",
+      "requiredScopes": [
+        "keyword.control.swift",
+        "entity.name.function.swift",
+        "storage.type.swift",
+        "string.quoted.double.swift"
+      ]
+    },
+    {
       "language": "TOML",
       "languageId": "toml",
       "sample": "samples/toml/config.toml",
@@ -457,6 +655,19 @@
         "entity.name.tag.html",
         "meta.property-name.css",
         "punctuation.definition.tag.begin.html.vue"
+      ]
+    },
+    {
+      "language": "YAML",
+      "languageId": "yaml",
+      "sample": "samples/yaml/provider-compatibility.yaml",
+      "provider": "vscode.yaml",
+      "rootScope": "source.yaml",
+      "requiredScopes": [
+        "entity.name.tag.yaml",
+        "string.unquoted.plain.out.yaml",
+        "constant.language.boolean.yaml",
+        "comment.line.number-sign.yaml"
       ]
     }
   ]

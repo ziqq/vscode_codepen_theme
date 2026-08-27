@@ -1,0 +1,31 @@
+:root {
+  --background: #1d1e22;
+  --surface: #2e2f39;
+  --accent: #96b38a;
+  --keyword: #ddca7e;
+}
+
+.preview {
+  display: grid;
+  gap: 0.75rem;
+  max-width: 48rem;
+  padding: 1rem;
+  color: var(--accent);
+  background: var(--background);
+  border: 1px solid var(--surface);
+}
+
+.preview__token[data-kind='keyword'] {
+  color: var(--keyword);
+  font-weight: 700;
+}
+
+.preview__token::before {
+  content: attr(data-kind) ': ';
+}
+
+@media (width >= 48rem) {
+  .preview {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

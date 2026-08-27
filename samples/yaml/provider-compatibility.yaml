@@ -1,0 +1,21 @@
+# Provider-owned YAML grammar fixture.
+name: CodePen Theme compatibility
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 9 * * 1'
+
+env:
+  THEME_NAME: CodePen Theme Original
+  THEME_BACKGROUND: '#1d1e22'
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check compatibility contract
+        run: npm run check:compatibility
+      - name: Render fixture summary
+        if: ${{ success() }}
+        run: echo "${THEME_NAME} is ready"

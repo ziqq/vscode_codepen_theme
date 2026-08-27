@@ -1,0 +1,15 @@
+{
+  // JSONC fixture for the built-in VS Code grammar.
+  "name": "CodePen Theme Original",
+  "version": "1.0.0",
+  "enabled": true,
+  "palette": {
+    "background": "#1d1e22",
+    "accent": "#96b38a",
+    "tokens": ["keyword", "string", "comment"]
+  },
+  "rendering": {
+    "semanticHighlighting": false,
+    "previewLimit": 3
+  }
+}
