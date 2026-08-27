@@ -28,7 +28,6 @@ $tokens: (
 
   &__token {
     @include token('comment');
-
     &[data-kind='string'] { @include token('string'); }
   }
 }
