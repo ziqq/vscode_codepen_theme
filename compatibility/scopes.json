@@ -537,7 +537,7 @@
         "keyword.control.ruby",
         "entity.name.function.ruby",
         "variable.other.constant.ruby",
-        "string.quoted.double.ruby"
+        "string.quoted.single.ruby"
       ]
     },
     {
@@ -666,7 +666,7 @@
       "requiredScopes": [
         "entity.name.tag.yaml",
         "string.unquoted.plain.out.yaml",
-        "constant.language.boolean.yaml",
+        "string.quoted.single.yaml",
         "comment.line.number-sign.yaml"
       ]
     }
