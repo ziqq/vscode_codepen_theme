@@ -1,12 +1,12 @@
 const fs = require('node:fs');
 const path = require('node:path');
-const getTheme = require('./theme');
+const resolveTheme = require('./theme');
 
 const outputPath = path.resolve(__dirname, '../themes/codepen-theme.json');
 const buildDirectory = path.resolve(__dirname, '../build');
 
 function generateTheme() {
-  const theme = getTheme({ name: 'CodePen Theme Original' });
+  const theme = resolveTheme({ name: 'CodePen Theme Original' });
   return `${JSON.stringify(theme)}\n`;
 }
 
