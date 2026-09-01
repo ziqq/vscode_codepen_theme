@@ -62,6 +62,11 @@ jobs:
         env:
           CI: "true"
 
+      - name: Capture semantic JS and TS screenshots
+        run: xvfb-run -a npm run test:screenshots:semantic
+        env:
+          CI: "true"
+
       - name: Upload compatibility evidence
         if: always()
         uses: actions/upload-artifact@v4
@@ -70,6 +75,9 @@ jobs:
           path: |
             build/provider-drift.json
             build/provider-tokenization-*.json
+            build/semantic-provider-*.json
+            build/codepen-reference-*.json
+            build/refinement*.json
             build/vscode-version-compatibility.json
             build/vscode-screenshots/**
           if-no-files-found: warn

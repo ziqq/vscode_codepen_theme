@@ -8,9 +8,22 @@
       "runtimeExecutable": "${execPath}",
       "args": [
         "--extensionDevelopmentPath=${workspaceFolder}",
-        "${workspaceFolder}/samples"
+        "--extensionDevelopmentPath=${workspaceFolder}/.cache/codepen-theme/preview/providers/systemticks.c4-dsl-extension",
+        "--extensionDevelopmentPath=${workspaceFolder}/.cache/codepen-theme/preview/providers/dotenv.dotenv-vscode",
+        "--extensionDevelopmentPath=${workspaceFolder}/.cache/codepen-theme/preview/providers/golang.go",
+        "--extensionDevelopmentPath=${workspaceFolder}/.cache/codepen-theme/preview/providers/jetbrains.kotlin-server",
+        "--extensionDevelopmentPath=${workspaceFolder}/.cache/codepen-theme/preview/providers/nefrob.vscode-just-syntax",
+        "--extensionDevelopmentPath=${workspaceFolder}/.cache/codepen-theme/preview/providers/syler.sass-indented",
+        "--extensionDevelopmentPath=${workspaceFolder}/.cache/codepen-theme/preview/providers/svelte.svelte-vscode",
+        "--extensionDevelopmentPath=${workspaceFolder}/.cache/codepen-theme/preview/providers/tamasfe.even-better-toml",
+        "--extensionDevelopmentPath=${workspaceFolder}/.cache/codepen-theme/preview/providers/vue.volar",
+        "--extensionDevelopmentPath=${workspaceFolder}/.cache/codepen-theme/preview/providers/dart-code.dart-code",
+        "--profile-temp",
+        "--skip-welcome",
+        "--skip-release-notes",
+        "${workspaceFolder}/.cache/codepen-theme/preview/samples.code-workspace"
       ],
-      "preLaunchTask": "npm: build"
+      "preLaunchTask": "preview: launch"
     },
     {
       "name": "Run Samples Without Build",
@@ -19,8 +32,22 @@
       "runtimeExecutable": "${execPath}",
       "args": [
         "--extensionDevelopmentPath=${workspaceFolder}",
-        "${workspaceFolder}/samples"
-      ]
+        "--extensionDevelopmentPath=${workspaceFolder}/.cache/codepen-theme/preview/providers/systemticks.c4-dsl-extension",
+        "--extensionDevelopmentPath=${workspaceFolder}/.cache/codepen-theme/preview/providers/dotenv.dotenv-vscode",
+        "--extensionDevelopmentPath=${workspaceFolder}/.cache/codepen-theme/preview/providers/golang.go",
+        "--extensionDevelopmentPath=${workspaceFolder}/.cache/codepen-theme/preview/providers/jetbrains.kotlin-server",
+        "--extensionDevelopmentPath=${workspaceFolder}/.cache/codepen-theme/preview/providers/nefrob.vscode-just-syntax",
+        "--extensionDevelopmentPath=${workspaceFolder}/.cache/codepen-theme/preview/providers/syler.sass-indented",
+        "--extensionDevelopmentPath=${workspaceFolder}/.cache/codepen-theme/preview/providers/svelte.svelte-vscode",
+        "--extensionDevelopmentPath=${workspaceFolder}/.cache/codepen-theme/preview/providers/tamasfe.even-better-toml",
+        "--extensionDevelopmentPath=${workspaceFolder}/.cache/codepen-theme/preview/providers/vue.volar",
+        "--extensionDevelopmentPath=${workspaceFolder}/.cache/codepen-theme/preview/providers/dart-code.dart-code",
+        "--profile-temp",
+        "--skip-welcome",
+        "--skip-release-notes",
+        "${workspaceFolder}/.cache/codepen-theme/preview/samples.code-workspace"
+      ],
+      "preLaunchTask": "preview: prepare"
     }
   ]
 }

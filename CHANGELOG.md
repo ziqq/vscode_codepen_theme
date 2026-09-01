@@ -1,5 +1,25 @@
 # Changelog
 
+## Unreleased
+- **ADDED**: `CodePen Theme Original Upright`, preserving the Original palette while disabling theme-owned italics and retaining bold and underline
+- **ADDED**: classic 13 px Monaco/Courier typography defaults for the editor, Debug Console, integrated terminal, and the `[Log]`-scoped Output editor
+- **FIXED**: Dart named-argument values retain their binding color instead of inheriting the argument-label color
+- **FIXED**: inline code and square-bracket references remain visible inside documentation comments across refinement providers
+- **CHANGED**: centralized theme variant metadata across generation, runtime gating, packaging, and validation; removed invalid font-setting keys from generated color-theme JSON
+- **ADDED**: complete TypeScript and JavaScript React samples with real-provider scope, color, and contextual-refinement assertions; all refinement language IDs now have full samples
+- **ADDED**: optional, theme-scoped syntax refinement using bundled parsers, with a debounced worker, stale-result protection, and automatic removal when switching themes
+- **FIXED**: exact 1,885/1,885 classic Twilight foreground parity for the recorded JS/TS/JSX corpus, including old-parser contexts for `import type`, labelled/function/mapped types, assertion signatures, `satisfies`, and JSX expressions
+- **FIXED**: runtime/type references and local bindings in JS/TS; Dart documentation, enums and callback types; Java bare fields/parameters; method/field roles across typed languages; Just aliases and Make separators
+- **FIXED**: Swift/SCSS container color leakage, C format strings, Ruby/PHP/Kotlin interpolation, dotenv values, Sass hex values and Svelte directives
+- **ADDED**: independent contextual, incomplete-edit, lifecycle and actual-editor regression checks; parser license and packaged-asset integrity checks
+- **FIXED**: Java modifiers, array types, fields and record components; Dart annotation colors; Just/Make targets and automatic Make variables
+- **FIXED**: member, type, unit and interpolation colors in C/C++, C#, Go, PHP, Python, Rust, Swift, Sass/CSS and TOML
+- **ADDED**: full-source color assertions for all 33 samples, Makefile provider coverage, and multi-position Dart plus Java/Just/Make editor checks
+- **CHANGED**: apply measured classic Twilight JS/TS roles across languages: neutral type references, blue bindings, purple members, and gray operators; preserve existing TextMate decorations
+- **CHANGED**: keep bracket-pair rainbow colors from overriding syntax foregrounds and sort palette keys alphabetically
+- **ADDED**: semantic highlighting with JS/TS local/declaration distinctions and Dart member/constructor roles; keep Dart keyword typography separate from color rules
+- **ADDED**: 30 recorded live CodePen variants, exact-span reference audits with explicit known differences, color checks for 30 language fixtures, and real JS/TS and optional Dart semantic verification
+
 ## 1.0.0
 - **BREAKING_CHANGES**: removed every bundled language definition, TextMate grammar, language configuration, and snippet
 - **CHANGED**: the extension now contributes only the CodePen color theme

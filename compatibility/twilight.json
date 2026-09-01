@@ -1,0 +1,1115 @@
+{
+  "schemaVersion": 1,
+  "reference": "Classic CodePen JS/TS roles measured in codepen-reference.json. Other languages adapt these roles where provider scopes allow; TextMate cannot reconstruct missing semantic context.",
+  "decorationSha256": "072094852d5542e0a398eae6917e18b5ee315993af8d87e645927bb3a201a6e9",
+  "cases": [
+    {
+      "language": "C",
+      "source": "// note\nint run(int count) { return count + 2; }",
+      "expect": [
+        { "line": 2, "text": "int", "foreground": "#ffffff" },
+        { "line": 2, "text": "count", "foreground": "#809bbd" },
+        { "line": 2, "text": "return", "foreground": "#ddca7e" },
+        {
+          "line": 1,
+          "text": "//",
+          "foreground": "#717790"
+        },
+        {
+          "line": 2,
+          "text": "run",
+          "foreground": "#809bbd"
+        },
+        {
+          "line": 2,
+          "text": "+",
+          "foreground": "#cccccc"
+        },
+        {
+          "line": 2,
+          "text": "2",
+          "foreground": "#d0782a"
+        }
+      ]
+    },
+    {
+      "language": "C++",
+      "source": "// note\nint run(int count) { return count + 2; }",
+      "expect": [
+        { "line": 2, "text": "int", "foreground": "#ffffff" },
+        { "line": 2, "text": "count", "foreground": "#809bbd" },
+        { "line": 2, "text": "return", "foreground": "#ddca7e" },
+        {
+          "line": 1,
+          "text": "//",
+          "foreground": "#717790"
+        },
+        {
+          "line": 2,
+          "text": "run",
+          "foreground": "#809bbd"
+        },
+        {
+          "line": 2,
+          "text": "2",
+          "foreground": "#d0782a"
+        }
+      ]
+    },
+    {
+      "language": "C#",
+      "source": "// note\nclass Counter { int Run(int count) { return count + 2; } }",
+      "expect": [
+        { "line": 2, "text": "int", "foreground": "#ffffff" },
+        { "line": 2, "text": "count", "foreground": "#809bbd" },
+        { "line": 2, "text": "return", "foreground": "#ddca7e" },
+        {
+          "line": 1,
+          "text": "//",
+          "foreground": "#717790"
+        },
+        {
+          "line": 2,
+          "text": "Counter",
+          "foreground": "#809bbd"
+        },
+        {
+          "line": 2,
+          "text": "Run",
+          "foreground": "#9a8297"
+        },
+        {
+          "line": 2,
+          "text": "2",
+          "foreground": "#d0782a"
+        }
+      ]
+    },
+    {
+      "language": "C4 / Structurizr DSL",
+      "source": "// note\nworkspace \"Demo\" {\n  model {\n    reader = person \"Reader\"\n  }\n}",
+      "expect": [
+        {
+          "line": 1,
+          "text": "//",
+          "foreground": "#717790"
+        },
+        {
+          "line": 2,
+          "text": "workspace",
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 2,
+          "text": "Demo",
+          "foreground": "#96b38a"
+        }
+      ]
+    },
+    {
+      "language": "CSS",
+      "source": ".dropdown { width: 16px; color: #232323; }\n/* note */",
+      "expect": [
+        {
+          "line": 1,
+          "text": ".dropdown",
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 1,
+          "text": "width",
+          "foreground": "#9a8297"
+        },
+        {
+          "line": 1,
+          "text": "16px",
+          "foreground": "#d0782a"
+        },
+        {
+          "line": 1,
+          "text": "#232323",
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 2,
+          "text": "/*",
+          "foreground": "#717790"
+        }
+      ]
+    },
+    {
+      "language": "Dart",
+      "expect": [
+        {
+          "line": 1,
+          "text": "import",
+          "foreground": "#ddca7e",
+          "fontStyle": 1
+        },
+        {
+          "line": 1,
+          "text": "'dart:math'",
+          "foreground": "#96b38a"
+        },
+        {
+          "line": 3,
+          "text": "ThemeMode",
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 3,
+          "text": "dark",
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 8,
+          "text": "Comparable",
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 12,
+          "text": "fixed",
+          "foreground": "#9a8297"
+        },
+        {
+          "line": 12,
+          "text": "alias",
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 12,
+          "text": "0",
+          "foreground": "#d0782a"
+        },
+        {
+          "line": 25,
+          "text": "const",
+          "foreground": "#ddca7e",
+          "fontStyle": 1
+        },
+        {
+          "line": 25,
+          "text": "PriceType",
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 28,
+          "text": "fromAlias",
+          "foreground": "#9a8297"
+        },
+        {
+          "line": 29,
+          "text": "String",
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 29,
+          "text": "alias",
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 31,
+          "text": "trim",
+          "foreground": "#9a8297"
+        },
+        {
+          "line": 31,
+          "text": "toLowerCase",
+          "foreground": "#9a8297"
+        },
+        {
+          "line": 128,
+          "text": "name",
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 140,
+          "text": "contrastScore",
+          "foreground": "#9a8297"
+        },
+        {
+          "line": 143,
+          "text": "describeTheme",
+          "foreground": "#9a8297"
+        },
+        {
+          "line": 143,
+          "text": "state",
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 144,
+          "text": "return",
+          "foreground": "#ddca7e",
+          "fontStyle": 1
+        },
+        {
+          "line": 151,
+          "text": "palette",
+          "foreground": "#ffffff"
+        }
+      ],
+      "sourceFile": "samples/dart/main.dart",
+      "reference": "JS/TS role adaptation. Dart's TextMate grammar leaves plain names unclassified and does not distinguish methods from top-level functions; real semantic assertions are in dart-semantic.json."
+    },
+    {
+      "language": "dotenv",
+      "source": "# note\nPORT=3000\nNAME=\"demo\"",
+      "expect": [
+        {
+          "line": 1,
+          "text": "#",
+          "foreground": "#717790"
+        },
+        {
+          "line": 2,
+          "text": "PORT",
+          "foreground": "#809bbd"
+        },
+        {
+          "line": 3,
+          "text": "demo",
+          "foreground": "#96b38a"
+        }
+      ]
+    },
+    {
+      "language": "Go modules",
+      "source": "// note\nmodule example.com/demo\ngo 1.22",
+      "expect": [
+        {
+          "line": 1,
+          "text": "//",
+          "foreground": "#717790"
+        },
+        {
+          "line": 2,
+          "text": "module",
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 3,
+          "text": "go",
+          "foreground": "#ddca7e"
+        }
+      ]
+    },
+    {
+      "language": "Go",
+      "source": "package main\n// note\nfunc run(count int) int { return count + 2 }",
+      "expect": [
+        { "line": 3, "text": "int", "foreground": "#ffffff" },
+        { "line": 3, "text": "count", "foreground": "#809bbd" },
+        { "line": 3, "text": "return", "foreground": "#ddca7e" },
+        {
+          "line": 2,
+          "text": "//",
+          "foreground": "#717790"
+        },
+        {
+          "line": 3,
+          "text": "run",
+          "foreground": "#809bbd"
+        },
+        {
+          "line": 3,
+          "text": "2",
+          "foreground": "#d0782a"
+        }
+      ]
+    },
+    {
+      "language": "HTML",
+      "source": "<header class=\"header\">About</header>",
+      "expect": [
+        {
+          "line": 1,
+          "text": "<header",
+          "foreground": "#a7925a"
+        },
+        {
+          "line": 1,
+          "text": ">",
+          "foreground": "#a7925a"
+        },
+        {
+          "line": 1,
+          "text": "</header>",
+          "foreground": "#a7925a"
+        },
+        {
+          "line": 1,
+          "text": "class",
+          "foreground": "#ddca7e",
+          "fontStyle": 1
+        },
+        {
+          "line": 1,
+          "text": "\"header\"",
+          "foreground": "#96b38a"
+        }
+      ]
+    },
+    {
+      "language": "Java",
+      "source": "// note\nclass Counter { int run(int count) { return count + 2; } }",
+      "expect": [
+        { "line": 2, "text": "int", "foreground": "#ffffff" },
+        { "line": 2, "text": "count", "foreground": "#809bbd" },
+        { "line": 2, "text": "return", "foreground": "#ddca7e" },
+        {
+          "line": 1,
+          "text": "//",
+          "foreground": "#717790"
+        },
+        {
+          "line": 2,
+          "text": "Counter",
+          "foreground": "#809bbd"
+        },
+        {
+          "line": 2,
+          "text": "run",
+          "foreground": "#9a8297"
+        },
+        {
+          "line": 2,
+          "text": "2",
+          "foreground": "#d0782a"
+        }
+      ]
+    },
+    {
+      "language": "JavaScript",
+      "source": "const nav = document.querySelector('#navigation');\nfunction handleEnter() {\n  const coords = { width: 200 };\n  this.classList.add('active');\n  setTimeout(() => coords.width, 200);\n  if (coords) return `${coords.width}px`;\n}\n// note\nclass Counter { increment() { const next = 2; return next; } }",
+      "expect": [
+        { "line": 9, "text": "const", "foreground": "#ddca7e", "fontStyle": 1 },
+        { "line": 9, "text": "increment", "foreground": "#9a8297" },
+        {
+          "line": 1,
+          "text": "const",
+          "foreground": "#ddca7e",
+          "fontStyle": 1
+        },
+        {
+          "line": 1,
+          "text": "nav",
+          "foreground": "#809bbd"
+        },
+        {
+          "line": 1,
+          "text": "=",
+          "foreground": "#cccccc"
+        },
+        {
+          "line": 1,
+          "text": "querySelector",
+          "foreground": "#9a8297"
+        },
+        {
+          "line": 2,
+          "text": "function",
+          "foreground": "#ddca7e",
+          "fontStyle": 1
+        },
+        {
+          "line": 2,
+          "text": "handleEnter",
+          "foreground": "#809bbd"
+        },
+        {
+          "line": 3,
+          "text": "width",
+          "foreground": "#9a8297"
+        },
+        {
+          "line": 3,
+          "text": "200",
+          "foreground": "#d0782a"
+        },
+        {
+          "line": 4,
+          "text": "classList",
+          "foreground": "#9a8297"
+        },
+        {
+          "line": 5,
+          "text": "=>",
+          "foreground": "#cccccc"
+        },
+        {
+          "line": 6,
+          "text": "if",
+          "foreground": "#ddca7e",
+          "fontStyle": 1
+        },
+        {
+          "line": 8,
+          "text": "//",
+          "foreground": "#717790"
+        },
+        {
+          "line": 8,
+          "text": "note",
+          "foreground": "#717790",
+          "fontStyle": 1
+        }
+      ]
+    },
+    {
+      "language": "JavaScript React",
+      "source": "// JSX roles\nconst Preview = ({ label }) => <button data-label={label}>{'Open'}</button>;",
+      "expect": [
+        {
+          "line": 1,
+          "text": "// JSX roles",
+          "foreground": "#717790"
+        },
+        {
+          "line": 2,
+          "text": "const",
+          "foreground": "#ddca7e",
+          "fontStyle": 1
+        },
+        {
+          "line": 2,
+          "text": "button",
+          "foreground": "#a7925a"
+        },
+        {
+          "line": 2,
+          "text": "data-label",
+          "foreground": "#ddca7e",
+          "fontStyle": 1
+        },
+        {
+          "line": 2,
+          "text": "Open",
+          "foreground": "#96b38a"
+        }
+      ]
+    },
+    {
+      "language": "JSONC",
+      "source": "// note\n{ \"label\": \"demo\", \"count\": 2 }",
+      "expect": [
+        {
+          "line": 1,
+          "text": "//",
+          "foreground": "#717790"
+        },
+        {
+          "line": 2,
+          "text": "label",
+          "foreground": "#9a8297"
+        },
+        {
+          "line": 2,
+          "text": "demo",
+          "foreground": "#96b38a"
+        },
+        {
+          "line": 2,
+          "text": "2",
+          "foreground": "#d0782a"
+        }
+      ]
+    },
+    {
+      "language": "TypeScript",
+      "source": "type Token = 'keyword' | 'string';\nconst selected: Token = 'keyword';",
+      "expect": [
+        {
+          "line": 1,
+          "text": "type",
+          "foreground": "#ddca7e",
+          "fontStyle": 1
+        },
+        {
+          "line": 1,
+          "text": "Token",
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 1,
+          "text": "keyword",
+          "foreground": "#96b38a"
+        },
+        {
+          "line": 2,
+          "text": "selected",
+          "foreground": "#809bbd"
+        }
+      ]
+    },
+    {
+      "language": "TypeScript React",
+      "expect": [
+        {
+          "line": 1,
+          "text": "import",
+          "foreground": "#ddca7e",
+          "fontStyle": 1
+        },
+        {
+          "line": 1,
+          "text": "type",
+          "foreground": "#809bbd"
+        },
+        {
+          "line": 1,
+          "text": "CSSProperties",
+          "foreground": "#809bbd"
+        },
+        {
+          "line": 1,
+          "text": "{",
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 1,
+          "text": "'react'",
+          "foreground": "#96b38a"
+        },
+        {
+          "line": 3,
+          "text": "type",
+          "foreground": "#ddca7e",
+          "fontStyle": 1
+        },
+        {
+          "line": 3,
+          "text": "TokenName",
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 3,
+          "text": "=",
+          "foreground": "#cccccc"
+        },
+        {
+          "line": 3,
+          "text": "|",
+          "foreground": "#cccccc"
+        },
+        {
+          "line": 5,
+          "text": "Theme",
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 5,
+          "text": "Readonly",
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 5,
+          "text": "<",
+          "foreground": "#cccccc"
+        },
+        {
+          "line": 5,
+          "text": "{",
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 6,
+          "text": "name",
+          "foreground": "#9a8297"
+        },
+        {
+          "line": 6,
+          "text": ":",
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 6,
+          "text": "string",
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 7,
+          "text": "accent",
+          "foreground": "#9a8297"
+        },
+        {
+          "line": 7,
+          "text": "string",
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 7,
+          "text": "${",
+          "foreground": "#96b38a"
+        },
+        {
+          "line": 7,
+          "text": "}",
+          "foreground": "#96b38a"
+        },
+        {
+          "line": 9,
+          "text": "Record",
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 9,
+          "text": "TokenName",
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 9,
+          "text": "string",
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 12,
+          "text": "const",
+          "foreground": "#ddca7e",
+          "fontStyle": 1
+        },
+        {
+          "line": 12,
+          "text": "theme",
+          "foreground": "#809bbd"
+        },
+        {
+          "line": 12,
+          "text": "Theme",
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 13,
+          "text": "name",
+          "foreground": "#9a8297"
+        },
+        {
+          "line": 23,
+          "text": "CSSProperties",
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 28,
+          "text": "tokenLabel",
+          "foreground": "#809bbd"
+        },
+        {
+          "line": 28,
+          "text": "TokenName",
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 28,
+          "text": "=>",
+          "foreground": "#cccccc"
+        },
+        {
+          "line": 31,
+          "text": "<section",
+          "foreground": "#a7925a"
+        },
+        {
+          "line": 31,
+          "text": "aria-label",
+          "foreground": "#ddca7e",
+          "fontStyle": 1
+        },
+        {
+          "line": 32,
+          "text": "</strong>",
+          "foreground": "#a7925a"
+        }
+      ],
+      "sourceFile": "samples/javascript/index.tsx",
+      "reference": "Classic CodePen TypeScript editor, computed cm-type = #ffffff on 2026-08-31. JSX uses HTML roles; CodePen's TS-only parser misclassifies closing JSX tags as regexes."
+    },
+    {
+      "language": "Just",
+      "source": "# note\nname := \"demo\"\nrun:\n    echo {{name}}",
+      "expect": [
+        {
+          "line": 1,
+          "text": "#",
+          "foreground": "#717790"
+        },
+        {
+          "line": 2,
+          "text": "name",
+          "foreground": "#809bbd"
+        },
+        {
+          "line": 2,
+          "text": "demo",
+          "foreground": "#96b38a"
+        },
+        {
+          "line": 3,
+          "text": "run",
+          "foreground": "#9a8297"
+        }
+      ]
+    },
+    {
+      "language": "Kotlin",
+      "source": "// note\nfun run(count: Int): Int { return count + 2 }",
+      "expect": [
+        {
+          "line": 1,
+          "text": "//",
+          "foreground": "#717790"
+        },
+        {
+          "line": 2,
+          "text": "fun",
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 2,
+          "text": "2",
+          "foreground": "#d0782a"
+        }
+      ]
+    },
+    {
+      "language": "Makefile",
+      "source": "# note\nNAME := demo\nrun:\n\t@echo $(NAME)",
+      "expect": [
+        { "line": 1, "text": "# note", "foreground": "#717790" },
+        { "line": 2, "text": "NAME", "foreground": "#809bbd" },
+        { "line": 3, "text": "run", "foreground": "#9a8297" }
+      ]
+    },
+    {
+      "language": "Markdown",
+      "source": "# Demo\n\nA **strong** word and `code`.",
+      "expect": [
+        {
+          "line": 1,
+          "text": "Demo",
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 3,
+          "text": "strong",
+          "foreground": "#f07178",
+          "fontStyle": 2
+        },
+        {
+          "line": 3,
+          "text": "code",
+          "foreground": "#ffffff"
+        }
+      ]
+    },
+    {
+      "language": "PHP",
+      "source": "<?php\n// note\nfunction run($count) { return $count + 2; }",
+      "expect": [
+        {
+          "line": 2,
+          "text": "//",
+          "foreground": "#717790"
+        },
+        {
+          "line": 3,
+          "text": "run",
+          "foreground": "#809bbd"
+        },
+        {
+          "line": 3,
+          "text": "2",
+          "foreground": "#d0782a"
+        }
+      ]
+    },
+    {
+      "language": "Python",
+      "source": "# note\ndef run(count):\n    return count + 2",
+      "expect": [
+        {
+          "line": 1,
+          "text": "#",
+          "foreground": "#717790"
+        },
+        {
+          "line": 2,
+          "text": "run",
+          "foreground": "#809bbd"
+        },
+        {
+          "line": 3,
+          "text": "2",
+          "foreground": "#d0782a"
+        }
+      ]
+    },
+    {
+      "language": "Rust",
+      "source": "// note\nfn run(count: i32) -> i32 { count + 2 }",
+      "expect": [
+        {
+          "line": 1,
+          "text": "//",
+          "foreground": "#717790"
+        },
+        {
+          "line": 2,
+          "text": "run",
+          "foreground": "#809bbd"
+        },
+        {
+          "line": 2,
+          "text": "2",
+          "occurrence": 3,
+          "foreground": "#d0782a"
+        }
+      ]
+    },
+    {
+      "language": "Ruby",
+      "source": "# note\ndef run(count)\n  count + 2\nend",
+      "expect": [
+        {
+          "line": 1,
+          "text": "#",
+          "foreground": "#717790"
+        },
+        {
+          "line": 2,
+          "text": "run",
+          "foreground": "#9a8297"
+        },
+        {
+          "line": 3,
+          "text": "2",
+          "foreground": "#d0782a"
+        }
+      ]
+    },
+    {
+      "language": "Sass",
+      "source": "// note\n.demo\n  width: 16px",
+      "expect": [
+        {
+          "line": 1,
+          "text": "//",
+          "foreground": "#717790"
+        },
+        {
+          "line": 2,
+          "text": "demo",
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 3,
+          "text": "width",
+          "foreground": "#9a8297"
+        },
+        {
+          "line": 3,
+          "text": "16",
+          "foreground": "#d0782a"
+        }
+      ]
+    },
+    {
+      "language": "SCSS",
+      "source": "@mixin size($x) { width: $x; }\n.dropdown { font-size: 16px; }\n// note",
+      "expect": [
+        {
+          "line": 1,
+          "text": "@mixin",
+          "foreground": "#809bbd",
+          "fontStyle": 1
+        },
+        {
+          "line": 1,
+          "text": "size",
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 1,
+          "text": "$x",
+          "foreground": "#809bbd"
+        },
+        {
+          "line": 1,
+          "text": "width",
+          "foreground": "#9a8297"
+        },
+        {
+          "line": 2,
+          "text": ".dropdown",
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 2,
+          "text": "16px",
+          "foreground": "#d0782a"
+        },
+        {
+          "line": 3,
+          "text": "//",
+          "foreground": "#717790"
+        }
+      ]
+    },
+    {
+      "language": "SQL",
+      "source": "-- note\nSELECT name FROM users WHERE count = 2;",
+      "expect": [
+        {
+          "line": 1,
+          "text": "--",
+          "foreground": "#717790"
+        },
+        {
+          "line": 2,
+          "text": "SELECT",
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 2,
+          "text": "2",
+          "foreground": "#d0782a"
+        }
+      ]
+    },
+    {
+      "language": "Svelte",
+      "source": "<script>let count = 2;</script>\n<p class=\"demo\">{count}</p>",
+      "expect": [
+        {
+          "line": 1,
+          "text": "2",
+          "foreground": "#d0782a"
+        },
+        {
+          "line": 2,
+          "text": "class",
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 2,
+          "text": "demo",
+          "foreground": "#96b38a"
+        }
+      ]
+    },
+    {
+      "language": "Shell Script",
+      "source": "# note\nrun() { echo \"demo\"; return 2; }",
+      "expect": [
+        {
+          "line": 1,
+          "text": "#",
+          "foreground": "#717790"
+        },
+        {
+          "line": 2,
+          "text": "run",
+          "foreground": "#809bbd"
+        },
+        {
+          "line": 2,
+          "text": "demo",
+          "foreground": "#96b38a"
+        }
+      ]
+    },
+    {
+      "language": "Swift",
+      "source": "// note\nfunc run(_ count: Int) -> Int { return count + 2 }",
+      "expect": [
+        {
+          "line": 1,
+          "text": "//",
+          "foreground": "#717790"
+        },
+        {
+          "line": 2,
+          "text": "run",
+          "foreground": "#809bbd"
+        },
+        {
+          "line": 2,
+          "text": "2",
+          "foreground": "#d0782a"
+        }
+      ]
+    },
+    {
+      "language": "TOML",
+      "source": "# note\nname = \"demo\"\ncount = 2",
+      "expect": [
+        {
+          "line": 1,
+          "text": "#",
+          "foreground": "#717790"
+        },
+        {
+          "line": 2,
+          "text": "name",
+          "foreground": "#9a8297"
+        },
+        {
+          "line": 2,
+          "text": "demo",
+          "foreground": "#96b38a"
+        },
+        {
+          "line": 3,
+          "text": "2",
+          "foreground": "#d0782a"
+        }
+      ]
+    },
+    {
+      "language": "Vue",
+      "source": "<template><div class=\"demo\">{{ 2 }}</div></template>\n<script setup>const label = \"demo\";</script>",
+      "expect": [
+        {
+          "line": 1,
+          "text": "class",
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 1,
+          "text": "demo",
+          "foreground": "#96b38a"
+        },
+        {
+          "line": 2,
+          "text": "demo",
+          "foreground": "#96b38a"
+        }
+      ]
+    },
+    {
+      "language": "YAML",
+      "source": "# note\nname: \"demo\"\ncount: 2",
+      "expect": [
+        {
+          "line": 1,
+          "text": "#",
+          "foreground": "#717790"
+        },
+        {
+          "line": 2,
+          "text": "name",
+          "foreground": "#9a8297"
+        },
+        {
+          "line": 2,
+          "text": "demo",
+          "foreground": "#96b38a"
+        },
+        {
+          "line": 3,
+          "text": "2",
+          "foreground": "#d0782a"
+        }
+      ]
+    }
+  ]
+}

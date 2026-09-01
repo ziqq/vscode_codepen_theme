@@ -1,0 +1,330 @@
+{
+  "cases": [
+    {
+      "language": "javascript",
+      "source": "const nav = document.querySelector('#navigation');\nfunction handleEnter() {\n  const coords = { width: 200 };\n  nav.getBoundingClientRect();\n  setTimeout(() => `${coords.width}px`, 200);\n}\nhandleEnter();",
+      "expect": [
+        {
+          "line": 1,
+          "text": "nav",
+          "type": "variable",
+          "modifiers": [
+            "declaration",
+            "readonly"
+          ],
+          "foreground": "#809bbd"
+        },
+        {
+          "line": 1,
+          "text": "document",
+          "type": "variable",
+          "modifiers": [
+            "defaultLibrary"
+          ],
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 1,
+          "text": "querySelector",
+          "type": "method",
+          "modifiers": [
+            "defaultLibrary"
+          ],
+          "foreground": "#9a8297"
+        },
+        {
+          "line": 2,
+          "text": "handleEnter",
+          "type": "function",
+          "modifiers": [
+            "declaration"
+          ],
+          "foreground": "#809bbd"
+        },
+        {
+          "line": 3,
+          "text": "coords",
+          "type": "variable",
+          "modifiers": [
+            "declaration",
+            "local",
+            "readonly"
+          ],
+          "foreground": "#809bbd"
+        },
+        {
+          "line": 3,
+          "text": "width",
+          "type": "property",
+          "modifiers": [
+            "declaration"
+          ],
+          "foreground": "#9a8297"
+        },
+        {
+          "line": 4,
+          "text": "nav",
+          "type": "variable",
+          "modifiers": [
+            "readonly"
+          ],
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 5,
+          "text": "setTimeout",
+          "type": "function",
+          "modifiers": [
+            "defaultLibrary"
+          ],
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 5,
+          "text": "coords",
+          "type": "variable",
+          "modifiers": [
+            "local",
+            "readonly"
+          ],
+          "foreground": "#809bbd"
+        },
+        {
+          "line": 5,
+          "text": "width",
+          "type": "property",
+          "modifiers": [],
+          "foreground": "#9a8297"
+        },
+        {
+          "line": 7,
+          "text": "handleEnter",
+          "type": "function",
+          "modifiers": [],
+          "foreground": "#ddca7e"
+        }
+      ]
+    },
+    {
+      "language": "typescript",
+      "source": "class Counter {\n  value = 2;\n  increment(step: number): number {\n    const next = this.value + step;\n    return next;\n  }\n}\nconst counter = new Counter();\ncounter.increment(2);",
+      "expect": [
+        {
+          "line": 1,
+          "text": "Counter",
+          "type": "class",
+          "modifiers": [
+            "declaration"
+          ],
+          "foreground": "#809bbd"
+        },
+        {
+          "line": 2,
+          "text": "value",
+          "type": "property",
+          "modifiers": [
+            "declaration"
+          ],
+          "foreground": "#9a8297"
+        },
+        {
+          "line": 3,
+          "text": "increment",
+          "type": "method",
+          "modifiers": [
+            "declaration"
+          ],
+          "foreground": "#9a8297"
+        },
+        {
+          "line": 3,
+          "text": "step",
+          "type": "parameter",
+          "modifiers": [
+            "declaration"
+          ],
+          "foreground": "#809bbd"
+        },
+        {
+          "line": 4,
+          "text": "next",
+          "type": "variable",
+          "modifiers": [
+            "declaration",
+            "local",
+            "readonly"
+          ],
+          "foreground": "#809bbd"
+        },
+        {
+          "line": 5,
+          "text": "next",
+          "type": "variable",
+          "modifiers": [
+            "local",
+            "readonly"
+          ],
+          "foreground": "#809bbd"
+        },
+        {
+          "line": 8,
+          "text": "Counter",
+          "type": "class",
+          "modifiers": [],
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 9,
+          "text": "counter",
+          "type": "variable",
+          "modifiers": [
+            "readonly"
+          ],
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 9,
+          "text": "increment",
+          "type": "method",
+          "modifiers": [],
+          "foreground": "#9a8297"
+        }
+      ]
+    },
+    {
+      "language": "typescriptreact",
+      "sourceFile": "samples/javascript/index.tsx",
+      "requireValidProgram": true,
+      "reference": "Measured CodePen TS roles before JSX. The provider leaves import bindings to TextMate and classifies resolved type references separately.",
+      "dependencies": {
+        "semantic-react.d.ts": "declare module 'react' { export interface CSSProperties { color?: string; backgroundColor?: string } }\ndeclare namespace JSX { interface IntrinsicElements { section: { style?: import('react').CSSProperties }; strong: {}; ul: {}; li: { key?: string } } }"
+      },
+      "expect": [
+        {
+          "line": 1,
+          "text": "CSSProperties",
+          "absent": true
+        },
+        {
+          "line": 3,
+          "text": "TokenName",
+          "type": "type",
+          "modifiers": [
+            "declaration"
+          ],
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 5,
+          "text": "Theme",
+          "type": "type",
+          "modifiers": [
+            "declaration"
+          ],
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 5,
+          "text": "Readonly",
+          "type": "type",
+          "modifiers": [
+            "defaultLibrary"
+          ],
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 6,
+          "text": "name",
+          "type": "property",
+          "modifiers": [
+            "declaration"
+          ],
+          "foreground": "#9a8297"
+        },
+        {
+          "line": 9,
+          "text": "Record",
+          "type": "type",
+          "modifiers": [
+            "defaultLibrary"
+          ],
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 9,
+          "text": "TokenName",
+          "type": "type",
+          "modifiers": [],
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 12,
+          "text": "theme",
+          "type": "variable",
+          "modifiers": [
+            "declaration",
+            "readonly"
+          ],
+          "foreground": "#809bbd"
+        },
+        {
+          "line": 12,
+          "text": "Theme",
+          "type": "type",
+          "modifiers": [],
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 23,
+          "text": "CSSProperties",
+          "type": "interface",
+          "modifiers": [],
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 24,
+          "text": "theme",
+          "type": "variable",
+          "modifiers": [
+            "readonly"
+          ],
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 24,
+          "text": "accent",
+          "type": "property",
+          "modifiers": [],
+          "foreground": "#9a8297"
+        },
+        {
+          "line": 28,
+          "text": "tokenLabel",
+          "type": "function",
+          "modifiers": [
+            "declaration",
+            "readonly"
+          ],
+          "foreground": "#809bbd"
+        },
+        {
+          "line": 28,
+          "text": "TokenName",
+          "type": "type",
+          "modifiers": [],
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 30,
+          "text": "Preview",
+          "type": "function",
+          "modifiers": [
+            "declaration",
+            "readonly"
+          ],
+          "foreground": "#809bbd"
+        }
+      ]
+    }
+  ]
+}

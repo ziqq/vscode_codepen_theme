@@ -2,13 +2,25 @@ import { execFile } from 'node:child_process';
 import { access } from 'node:fs/promises';
 import path from 'node:path';
 import { promisify } from 'node:util';
-import { downloadAndUnzipVSCode } from '@vscode/test-electron';
+import {
+  downloadAndUnzipVSCode,
+  resolveCliPathFromVSCodeExecutablePath,
+} from '@vscode/test-electron';
 
 const execFileAsync = promisify(execFile);
 
 export async function vscodeExecutable(version) {
   if (process.env.CODEPEN_VSCODE_EXECUTABLE) {
-    return path.resolve(process.env.CODEPEN_VSCODE_EXECUTABLE);
+    const executable = path.resolve(process.env.CODEPEN_VSCODE_EXECUTABLE);
+    const cli = resolveCliPathFromVSCodeExecutablePath(executable);
+    const { stdout } = await execFileAsync(cli, ['--version']);
+    const actualVersion = stdout.trim().split(/\s+/)[0];
+    if (actualVersion !== version) {
+      throw new Error(
+        `Requested VS Code ${version}, but ${executable} is ${actualVersion}`,
+      );
+    }
+    return executable;
   }
   if (
     process.env.CI !== 'true' &&

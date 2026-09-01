@@ -13,7 +13,7 @@ comment = "#717790"
 
 [rendering]
 semantic_highlighting = false
-font_family = "SFMono-Regular, Consolas, monospace"
+font_family = "Monaco, Courier New, Courier, monospace"
 
 [[providers]]
 language = "toml"

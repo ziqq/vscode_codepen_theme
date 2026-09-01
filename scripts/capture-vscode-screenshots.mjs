@@ -6,7 +6,6 @@ import {
   readFile,
   readdir,
   rm,
-  symlink,
   writeFile,
 } from 'node:fs/promises';
 import net from 'node:net';
@@ -25,8 +24,15 @@ const compatibility = JSON.parse(
   await readFile('compatibility/scopes.json', 'utf8'),
 );
 const theme = JSON.parse(await readFile('themes/codepen-theme.json', 'utf8'));
-const vscodeVersion = process.argv[2] ?? compatibility.verifiedVscodeVersion;
-const visualCases = compatibility.cases.filter((item) => item.visual === true);
+const semantic = process.argv.includes('--semantic');
+if (process.env.CODEPEN_DART_SDK && !process.env.CODEPEN_DART_EXTENSION) {
+  throw new Error('Dart semantic screenshots require CODEPEN_DART_EXTENSION as well as CODEPEN_DART_SDK; the built-in Dart extension is grammar-only.');
+}
+const mode = semantic ? 'semantic' : 'textmate';
+const vscodeVersion = process.argv.slice(2).find((arg) => arg !== '--semantic') ?? compatibility.verifiedVscodeVersion;
+const visualCases = compatibility.cases.filter((item) => semantic
+  ? ['JavaScript', 'TypeScript React', ...(process.env.CODEPEN_DART_SDK ? ['Dart'] : [])].includes(item.language)
+  : item.visual === true);
 
 if (visualCases.length === 0) {
   throw new Error('No visual compatibility cases are configured');
@@ -187,7 +193,7 @@ const userData = path.join(runtimeRoot, 'user-data');
 const extensions = path.join(runtimeRoot, 'extensions');
 const readyFile = path.join(runtimeRoot, 'ready');
 const doneFile = path.join(runtimeRoot, 'done');
-const output = path.resolve('build/vscode-screenshots', vscodeVersion);
+const output = path.resolve('build/vscode-screenshots', vscodeVersion, mode);
 await mkdir(installUserData, { recursive: true });
 await mkdir(path.join(userData, 'User'), { recursive: true });
 await mkdir(extensions, { recursive: true });
@@ -223,25 +229,27 @@ await writeFile(
   `${JSON.stringify({
     'workbench.startupEditor': 'none',
     'workbench.reduceMotion': 'on',
-    'editor.semanticHighlighting.enabled': false,
+    'editor.semanticHighlighting.enabled': semantic,
+    'codepen.syntaxRefinement.enabled': false,
     'editor.fontFamily': 'monospace',
     'editor.fontSize': 16,
     'editor.lineHeight': 24,
     'editor.minimap.enabled': false,
     'editor.stickyScroll.enabled': false,
     'editor.renderWhitespace': 'none',
+    'editor.bracketPairColorization.enabled': true,
+    ...(process.env.CODEPEN_DART_SDK ? { 'dart.sdkPath': process.env.CODEPEN_DART_SDK, 'dart.enableSdkFormatter': false, 'dart.checkForSdkUpdates': false, 'dart.allowAnalytics': false } : {}),
     'security.workspace.trust.enabled': false,
     'telemetry.telemetryLevel': 'off',
   }, null, 2)}\n`,
 );
 
-for (const provider of providers) {
-  const target = path.join(
-    extensions,
-    `${provider.provider.id}-${provider.version}`.toLowerCase(),
-  );
-  await symlink(provider.extensionRoot, target, 'dir');
-}
+// Multiple development paths are supported by @vscode/test-electron. Load
+// extracted provider caches explicitly; symlinks are absent from the profile
+// index, and older caches need not retain their original VSIX archives.
+const providerDevelopmentPaths = providers.filter((entry) =>
+  visualCases.some((item) => item.provider.toLowerCase() === entry.provider.id.toLowerCase()),
+).map((entry) => `--extensionDevelopmentPath=${entry.extensionRoot}`);
 
 const port = await freePort();
 const processArgs = [
@@ -259,6 +267,8 @@ const processArgs = [
   '--extensions-dir',
   extensions,
   `--extensionDevelopmentPath=${installedThemePath}`,
+  ...providerDevelopmentPaths,
+  ...(process.env.CODEPEN_DART_EXTENSION ? [`--extensionDevelopmentPath=${path.resolve(process.env.CODEPEN_DART_EXTENSION)}`] : []),
   `--extensionTestsPath=${path.resolve('scripts/vscode-screenshot-runner.cjs')}`,
   path.resolve('.'),
 ];
@@ -267,6 +277,12 @@ const vscode = spawn(executable, processArgs, {
     ...process.env,
     CODEPEN_SCREENSHOT_READY: readyFile,
     CODEPEN_SCREENSHOT_DONE: doneFile,
+    CODEPEN_SCREENSHOT_SEMANTIC: semantic ? '1' : '0',
+    CODEPEN_SCREENSHOT_SAMPLES: JSON.stringify(visualCases.map((item) => path.resolve(item.sample))),
+    CODEPEN_SCREENSHOT_EXPECTATIONS: JSON.stringify(visualCases.map((item) => ({
+      file: path.resolve(item.sample), languageId: item.languageId, provider: item.provider,
+    }))),
+    CODEPEN_SEMANTIC_REPORT: path.join(output, 'semantic-tokens.json'),
     ELECTRON_ENABLE_LOGGING: '1',
   },
   stdio: ['ignore', 'pipe', 'pipe'],
@@ -279,7 +295,7 @@ let browser;
 try {
   const connected = await waitForWorkbench(`http://127.0.0.1:${port}`);
   browser = connected.browser;
-  await waitForFile(readyFile);
+  await waitForFile(readyFile, 60_000);
   const page = await waitForExtensionWorkbench(connected.context);
   const modifier = process.platform === 'darwin' ? 'Meta' : 'Control';
   await page.keyboard.press(`${modifier}+K`);
@@ -364,6 +380,66 @@ try {
     await page.waitForTimeout(2_000);
     await focusSample();
     await waitForSample();
+    const readRenderedLines = async () => page.locator('.part.editor .view-line').evaluateAll((elements) =>
+      elements.map((element) => {
+        const walker = document.createTreeWalker(element, NodeFilter.SHOW_TEXT);
+        const spans = [];
+        while (walker.nextNode()) {
+          const node = walker.currentNode;
+          const style = getComputedStyle(node.parentElement);
+          spans.push({ text: node.textContent.replaceAll('\u00a0', ' '), color: style.color, fontStyle: style.fontStyle });
+        }
+        return { text: spans.map((span) => span.text).join(''), spans };
+      }),
+    );
+    const editorFixture = JSON.parse(await readFile('compatibility/editor-colors.json', 'utf8'))[item.languageId] ?? {};
+    const expectations = editorFixture[mode] ?? [];
+    const renderedLines = await readRenderedLines();
+    const revealLine = async (line) => {
+      await page.keyboard.press('Control+G');
+      const input = page.locator('.quick-input-widget input');
+      await input.waitFor({ state: 'visible', timeout: 10_000 });
+      await input.fill(`:${line}`);
+      await input.press('Enter');
+      await page.waitForTimeout(500);
+    };
+    for (const line of (editorFixture.scrollLines ?? []).filter((line) => line !== 1)) {
+      await revealLine(line);
+      renderedLines.push(...await readRenderedLines());
+      const clip = await page.locator('.part.editor').boundingBox();
+      await page.screenshot({ path: path.join(output, `${item.languageId}-line-${line}.png`), clip });
+    }
+    if (editorFixture.scrollLines) await revealLine(1);
+    for (const expected of expectations) {
+      const sourceLine = source.split(/\r?\n/)[expected.line - 1].trim();
+      const rendered = renderedLines.find((line) => line.text.trim() === sourceLine);
+      if (!rendered) throw new Error(`${item.sample}:${expected.line}: reference line is not visible`);
+      const start = rendered.text.indexOf(expected.text);
+      if (start < 0) throw new Error(`Missing visible token ${expected.text}`);
+      const end = start + expected.text.length;
+      let offset = 0;
+      for (const span of rendered.spans) {
+        const overlaps = offset < end && offset + span.text.length > start;
+        offset += span.text.length;
+        if (!overlaps) continue;
+        if (span.color !== `rgb(${rgb(expected.foreground).join(', ')})` ||
+            (expected.fontStyle && span.fontStyle !== expected.fontStyle)) {
+          throw new Error(`${item.sample}:${expected.line} ${expected.text}: rendered ${JSON.stringify(span)}, expected ${JSON.stringify(expected)}`);
+        }
+      }
+    }
+    const textColors = await page.locator('.part.editor .view-line span').evaluateAll((elements) =>
+      [...new Set(elements.filter((element) =>
+        element.textContent?.trim() && !element.querySelector('span') &&
+        element.getBoundingClientRect().width > 0,
+      ).map((element) => getComputedStyle(element).color))],
+    );
+    const textPaletteMatches = tokenPalette.filter(({ color, rgb }) =>
+      color.toLowerCase() !== '#ffffff' && textColors.includes(`rgb(${rgb.join(', ')})`),
+    );
+    if (textPaletteMatches.length < 2) {
+      throw new Error(`${item.sample}: syntax-colored text was not rendered (color decorators do not count)`);
+    }
     const file = path.join(
       output,
       `${item.languageId.replaceAll(/[^a-z0-9.-]/gi, '-')}.png`,
@@ -377,6 +453,9 @@ try {
       language: item.language,
       sample: item.sample,
       provider: item.provider,
+      renderedAssertions: expectations.length,
+      renderedLines,
+      textPaletteMatches: textPaletteMatches.map((entry) => entry.color),
       screenshot: path.relative('.', file),
       ...(await inspectScreenshot(file)),
     });
@@ -384,12 +463,12 @@ try {
   }
   await writeFile(
     path.join(output, 'report.json'),
-    `${JSON.stringify({ vscodeVersion, results }, null, 2)}\n`,
+    `${JSON.stringify({ vscodeVersion, mode, results }, null, 2)}\n`,
   );
 } catch (error) {
   await writeFile(path.join(output, 'vscode.log'), vscodeLogs);
   if (vscodeLogs.trim()) console.error(vscodeLogs.trim());
-  if (browser) {
+  if (browser?.contexts()[0]) {
     const debugPages = [];
     for (const [index, page] of browser.contexts()[0].pages().entries()) {
       debugPages.push({

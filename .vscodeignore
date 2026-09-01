@@ -25,6 +25,7 @@ test/**
 **/tsconfig.json
 **/.eslintrc.json
 **/*.map
+**/*.log
 **/*.ts
 **/.vscode-test.*
 bin/**

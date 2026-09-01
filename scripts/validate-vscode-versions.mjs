@@ -58,8 +58,9 @@ for (const version of [...new Set(versions)]) {
         'utf8',
       ),
     );
-    if (Object.keys(manifest.contributes ?? {}).join(',') !== 'themes') {
-      throw new Error(`VS Code ${version} installed a non-theme-only manifest`);
+    if (Object.keys(manifest.contributes ?? {}).sort().join(',') !== 'configuration,configurationDefaults,themes' ||
+        manifest.main !== './runtime/extension.js') {
+      throw new Error(`VS Code ${version} installed an unexpected theme/refinement manifest`);
     }
     report.push({
       vscode: version,

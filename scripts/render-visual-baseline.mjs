@@ -86,7 +86,7 @@ function renderSvg() {
 
   return [
     `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}">`,
-    '<style>text{font:14px SFMono-Regular,Consolas,Liberation Mono,monospace}.title{font-size:24px;font-weight:700}.language{font-size:17px;font-weight:700}</style>',
+    '<style>text{font:14px Monaco,\'Courier New\',Courier,monospace}.title{font-size:24px;font-weight:700}.language{font-size:17px;font-weight:700}</style>',
     `<rect width="100%" height="100%" fill="${background}"/>`,
     `<text class="title" x="32" y="42" fill="${foreground}">CodePen Theme compatibility baseline</text>`,
     `<text x="32" y="70" fill="${muted}">VS Code ${escapeXml(compatibility.verifiedVscodeVersion)} · verified ${escapeXml(compatibility.verifiedAt)} · ${compatibility.cases.length} syntax fixtures</text>`,

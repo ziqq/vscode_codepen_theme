@@ -9,7 +9,21 @@
         "isDefault": true
       },
       "isBackground": true,
-      "problemMatcher": [],
+      "problemMatcher": {
+        "owner": "codepen-theme",
+        "pattern": {
+          "regexp": "^(.+):(\\d+):(\\d+): (.+)$",
+          "file": 1,
+          "line": 2,
+          "column": 3,
+          "message": 4
+        },
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": "^CODEPEN_THEME_BUILD_START$",
+          "endsPattern": "^CODEPEN_THEME_BUILD_READY .+$"
+        }
+      },
       "label": "npm: start",
       "detail": "Regenerate the CodePen theme when source files change"
     },
@@ -20,6 +34,32 @@
       "problemMatcher": [],
       "label": "npm: build",
       "detail": "Generate themes/codepen-theme.json from src"
+    },
+    {
+      "label": "preview: prepare",
+      "type": "process",
+      "command": "node",
+      "args": [
+        "scripts/prepare-preview.mjs",
+        "--vscode-executable",
+        "${execPath}"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": [],
+      "detail": "Create the isolated preview profile and provider links"
+    },
+    {
+      "label": "preview: launch",
+      "dependsOrder": "sequence",
+      "dependsOn": [
+        "npm: build",
+        "preview: prepare",
+        "npm: start"
+      ],
+      "problemMatcher": [],
+      "detail": "Build, prepare the isolated profile, and start the theme watcher"
     },
     {
       "type": "npm",

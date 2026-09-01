@@ -21,4 +21,28 @@ for (const version of compatibility.testVscodeVersions) {
       `Provider tokenization failed for VS Code ${version} with exit code ${exitCode}`,
     );
   }
+  const semanticExitCode = await new Promise((resolve, reject) => {
+    const child = spawn(
+      process.execPath,
+      ['scripts/test-semantic-provider.mjs', version],
+      { stdio: 'inherit', env: process.env },
+    );
+    child.once('error', reject);
+    child.once('exit', (code) => resolve(code));
+  });
+  if (semanticExitCode !== 0) {
+    throw new Error(`Semantic provider failed for VS Code ${version}`);
+  }
+  const referenceExitCode = await new Promise((resolve, reject) => {
+    const child = spawn(
+      process.execPath,
+      ['scripts/audit-codepen-reference.mjs', version],
+      { stdio: 'inherit', env: process.env },
+    );
+    child.once('error', reject);
+    child.once('exit', (code) => resolve(code));
+  });
+  if (referenceExitCode !== 0) {
+    throw new Error(`CodePen reference audit failed for VS Code ${version}`);
+  }
 }

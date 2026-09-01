@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "verifiedAt": "2026-08-25",
+  "verifiedAt": "2026-09-01",
   "verifiedVscodeVersion": "1.134.0",
   "minimumVscodeVersion": "1.96.0",
   "testVscodeVersions": [
@@ -56,6 +56,11 @@
     },
     {
       "id": "vscode.markdown-basics",
+      "kind": "builtin",
+      "version": "10.0.0"
+    },
+    {
+      "id": "vscode.make",
       "kind": "builtin",
       "version": "10.0.0"
     },
@@ -300,6 +305,7 @@
     },
     {
       "language": "Dart",
+      "visual": true,
       "languageId": "dart",
       "sample": "samples/dart/main.dart",
       "provider": "vscode.dart",
@@ -381,6 +387,7 @@
     },
     {
       "language": "Java",
+      "visual": true,
       "languageId": "java",
       "sample": "samples/java/Main.java",
       "provider": "vscode.java",
@@ -409,6 +416,19 @@
       ]
     },
     {
+      "language": "JavaScript React",
+      "languageId": "javascriptreact",
+      "sample": "samples/javascript/Component.jsx",
+      "provider": "vscode.javascript",
+      "rootScope": "source.js.jsx",
+      "requiredScopes": [
+        "entity.name.tag.js.jsx",
+        "entity.other.attribute-name.js.jsx",
+        "storage.type.function.js.jsx",
+        "variable.other.constant.js.jsx"
+      ]
+    },
+    {
       "language": "JSONC",
       "languageId": "jsonc",
       "sample": "samples/json/theme.jsonc",
@@ -419,6 +439,19 @@
         "string.quoted.double.json.comments",
         "constant.language.json.comments",
         "comment.line.double-slash.js"
+      ]
+    },
+    {
+      "language": "TypeScript",
+      "languageId": "typescript",
+      "sample": "samples/typescript/main.ts",
+      "provider": "vscode.typescript-basics",
+      "rootScope": "source.ts",
+      "requiredScopes": [
+        "keyword.control.import.ts",
+        "entity.name.type.alias.ts",
+        "storage.type.function.arrow.ts",
+        "variable.other.constant.ts"
       ]
     },
     {
@@ -440,6 +473,7 @@
     },
     {
       "language": "Just",
+      "visual": true,
       "languageId": "just",
       "sample": "samples/just/justfile",
       "provider": "nefrob.vscode-just-syntax",
@@ -466,6 +500,20 @@
         "storage.type.kotlin",
         "support.type.kotlin",
         "string.quoted.double.kotlin"
+      ]
+    },
+    {
+      "language": "Makefile",
+      "visual": true,
+      "languageId": "makefile",
+      "sample": "samples/make/Makefile",
+      "provider": "vscode.make",
+      "rootScope": "source.makefile",
+      "requiredScopes": [
+        "entity.name.function.target.makefile",
+        "variable.other.makefile",
+        "comment.line.number-sign.makefile",
+        "keyword.control.ifeq.makefile"
       ]
     },
     {

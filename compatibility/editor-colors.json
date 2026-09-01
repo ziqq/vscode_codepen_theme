@@ -1,0 +1,459 @@
+{
+  "typescriptreact": {
+    "textmate": [
+      {
+        "line": 1,
+        "text": "import",
+        "foreground": "#ddca7e",
+        "fontStyle": "italic"
+      },
+      {
+        "line": 1,
+        "text": "type",
+        "foreground": "#809bbd"
+      },
+      {
+        "line": 1,
+        "text": "CSSProperties",
+        "foreground": "#809bbd"
+      },
+      {
+        "line": 1,
+        "text": "{",
+        "foreground": "#ffffff"
+      },
+      {
+        "line": 3,
+        "text": "TokenName",
+        "foreground": "#ffffff"
+      },
+      {
+        "line": 5,
+        "text": "Readonly",
+        "foreground": "#ffffff"
+      },
+      {
+        "line": 5,
+        "text": "<",
+        "foreground": "#cccccc"
+      },
+      {
+        "line": 6,
+        "text": "string",
+        "foreground": "#ffffff"
+      },
+      {
+        "line": 7,
+        "text": "${",
+        "foreground": "#96b38a"
+      },
+      {
+        "line": 7,
+        "text": "string",
+        "foreground": "#ffffff"
+      },
+      {
+        "line": 9,
+        "text": "Record",
+        "foreground": "#ffffff"
+      },
+      {
+        "line": 12,
+        "text": "const",
+        "foreground": "#ddca7e",
+        "fontStyle": "italic"
+      },
+      {
+        "line": 12,
+        "text": "theme",
+        "foreground": "#809bbd"
+      },
+      {
+        "line": 12,
+        "text": "Theme",
+        "foreground": "#ffffff"
+      }
+    ],
+    "semantic": [
+      {
+        "line": 1,
+        "text": "import",
+        "foreground": "#ddca7e",
+        "fontStyle": "italic"
+      },
+      {
+        "line": 1,
+        "text": "type",
+        "foreground": "#809bbd"
+      },
+      {
+        "line": 1,
+        "text": "{",
+        "foreground": "#ffffff"
+      },
+      {
+        "line": 3,
+        "text": "TokenName",
+        "foreground": "#ffffff"
+      },
+      {
+        "line": 5,
+        "text": "Readonly",
+        "foreground": "#ffffff"
+      },
+      {
+        "line": 5,
+        "text": "<",
+        "foreground": "#cccccc"
+      },
+      {
+        "line": 6,
+        "text": "string",
+        "foreground": "#ffffff"
+      },
+      {
+        "line": 7,
+        "text": "${",
+        "foreground": "#96b38a"
+      },
+      {
+        "line": 7,
+        "text": "string",
+        "foreground": "#ffffff"
+      },
+      {
+        "line": 9,
+        "text": "Record",
+        "foreground": "#ffffff"
+      },
+      {
+        "line": 12,
+        "text": "const",
+        "foreground": "#ddca7e",
+        "fontStyle": "italic"
+      },
+      {
+        "line": 12,
+        "text": "theme",
+        "foreground": "#809bbd"
+      },
+      {
+        "line": 12,
+        "text": "Theme",
+        "foreground": "#ffffff"
+      }
+    ]
+  },
+  "dart": {
+    "semantic": [
+      {
+        "line": 3,
+        "text": "ThemeMode",
+        "foreground": "#ffffff"
+      },
+      {
+        "line": 3,
+        "text": "dark",
+        "foreground": "#9a8297"
+      },
+      {
+        "line": 8,
+        "text": "Comparable",
+        "foreground": "#ffffff"
+      },
+      {
+        "line": 12,
+        "text": "alias",
+        "foreground": "#809bbd"
+      },
+      {
+        "line": 12,
+        "text": "0",
+        "foreground": "#d0782a"
+      },
+      {
+        "line": 1,
+        "text": "import",
+        "foreground": "#ddca7e",
+        "fontStyle": "italic"
+      },
+      {
+        "line": 3,
+        "text": "enum",
+        "foreground": "#ddca7e",
+        "fontStyle": "italic"
+      },
+      {
+        "line": 25,
+        "text": "const",
+        "foreground": "#ddca7e",
+        "fontStyle": "italic"
+      },
+      {
+        "line": 70,
+        "text": "alias",
+        "foreground": "#9a8297"
+      },
+      {
+        "line": 76,
+        "text": "isFixed",
+        "foreground": "#9a8297"
+      },
+      {
+        "line": 85,
+        "text": "map",
+        "foreground": "#9a8297"
+      },
+      {
+        "line": 86,
+        "text": "fixed",
+        "foreground": "#809bbd"
+      },
+      {
+        "line": 96,
+        "text": "maybeMap",
+        "foreground": "#9a8297"
+      },
+      {
+        "line": 101,
+        "text": "map",
+        "foreground": "#9a8297"
+      },
+      {
+        "line": 114,
+        "text": "@override",
+        "foreground": "#ddca7e"
+      },
+      {
+        "line": 121,
+        "text": "ThemeState",
+        "foreground": "#809bbd"
+      },
+      {
+        "line": 128,
+        "text": "name",
+        "foreground": "#9a8297"
+      },
+      {
+        "line": 140,
+        "text": "contrastScore",
+        "foreground": "#9a8297"
+      },
+      {
+        "line": 145,
+        "text": "name",
+        "foreground": "#809bbd"
+      },
+      {
+        "line": 154,
+        "text": "state",
+        "foreground": "#809bbd"
+      }
+    ],
+    "scrollLines": [
+      1,
+      40,
+      70,
+      96,
+      124,
+      150
+    ],
+    "textmate": [
+      {
+        "line": 1,
+        "text": "import",
+        "foreground": "#ddca7e",
+        "fontStyle": "italic"
+      },
+      {
+        "line": 25,
+        "text": "const",
+        "foreground": "#ddca7e",
+        "fontStyle": "italic"
+      },
+      {
+        "line": 28,
+        "text": "fromAlias",
+        "foreground": "#9a8297"
+      },
+      {
+        "line": 70,
+        "text": "String",
+        "foreground": "#ffffff"
+      },
+      {
+        "line": 85,
+        "text": "map",
+        "foreground": "#9a8297"
+      },
+      {
+        "line": 96,
+        "text": "maybeMap",
+        "foreground": "#9a8297"
+      },
+      {
+        "line": 114,
+        "text": "@override",
+        "foreground": "#ddca7e"
+      },
+      {
+        "line": 121,
+        "text": "sealed",
+        "foreground": "#ddca7e",
+        "fontStyle": "italic"
+      },
+      {
+        "line": 140,
+        "text": "contrastScore",
+        "foreground": "#9a8297"
+      }
+    ]
+  },
+  "java": {
+    "textmate": [
+      {
+        "line": 3,
+        "text": "public",
+        "foreground": "#ddca7e",
+        "fontStyle": "italic"
+      },
+      {
+        "line": 3,
+        "text": "final",
+        "foreground": "#ddca7e",
+        "fontStyle": "italic"
+      },
+      {
+        "line": 3,
+        "text": "class",
+        "foreground": "#ddca7e",
+        "fontStyle": "italic"
+      },
+      {
+        "line": 3,
+        "text": "Main",
+        "foreground": "#809bbd"
+      },
+      {
+        "line": 4,
+        "text": "THEME_NAME",
+        "foreground": "#9a8297"
+      },
+      {
+        "line": 9,
+        "text": "record",
+        "foreground": "#ddca7e"
+      },
+      {
+        "line": 9,
+        "text": "name",
+        "foreground": "#9a8297"
+      },
+      {
+        "line": 15,
+        "text": "<",
+        "foreground": "#cccccc"
+      },
+      {
+        "line": 15,
+        "text": "defaultTokens",
+        "foreground": "#9a8297"
+      },
+      {
+        "line": 22,
+        "text": "String",
+        "foreground": "#ffffff"
+      },
+      {
+        "line": 22,
+        "text": "args",
+        "foreground": "#809bbd"
+      },
+      {
+        "line": 27,
+        "text": "message",
+        "foreground": "#809bbd"
+      }
+    ]
+  },
+  "just": {
+    "textmate": [
+      { "line": 11, "text": "theme", "foreground": "#809bbd" },
+      { "line": 11, "text": "{{", "foreground": "#96b38a" },
+      {
+        "line": 3,
+        "text": "theme",
+        "foreground": "#809bbd"
+      },
+      {
+        "line": 8,
+        "text": "default",
+        "foreground": "#9a8297"
+      },
+      {
+        "line": 8,
+        "text": "check",
+        "foreground": "#9a8297"
+      },
+      {
+        "line": 14,
+        "text": "build",
+        "foreground": "#9a8297"
+      },
+      {
+        "line": 14,
+        "text": "target",
+        "foreground": "#809bbd"
+      },
+      {
+        "line": 20,
+        "text": "ci",
+        "foreground": "#9a8297"
+      }
+    ]
+  },
+  "makefile": {
+    "textmate": [
+      {
+        "line": 2,
+        "text": "THEME",
+        "foreground": "#809bbd"
+      },
+      {
+        "line": 7,
+        "text": ".PHONY",
+        "foreground": "#9a8297"
+      },
+      {
+        "line": 8,
+        "text": "all",
+        "foreground": "#9a8297"
+      },
+      {
+        "line": 8,
+        "text": "check",
+        "foreground": "#9a8297"
+      },
+      {
+        "line": 13,
+        "text": "OUTPUT",
+        "foreground": "#809bbd"
+      },
+      {
+        "line": 17,
+        "text": "$@",
+        "foreground": "#809bbd"
+      },
+      {
+        "line": 17,
+        "text": "$<",
+        "foreground": "#809bbd"
+      },
+      {
+        "line": 19,
+        "text": "%.json",
+        "foreground": "#9a8297"
+      }
+    ]
+  }
+}

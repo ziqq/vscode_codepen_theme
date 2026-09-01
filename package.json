@@ -9,6 +9,12 @@
   },
   "license": "Apache-2.0",
   "publisher": "ziqq",
+  "main": "./runtime/extension.js",
+  "activationEvents": ["onStartupFinished"],
+  "capabilities": {
+    "untrustedWorkspaces": { "supported": true },
+    "virtualWorkspaces": { "supported": true }
+  },
   "author": {
     "name": "Anton Ustinoff"
   },
@@ -31,11 +37,39 @@
     "color theme"
   ],
   "contributes": {
+    "configuration": {
+      "title": "CodePen Theme",
+      "properties": {
+        "codepen.syntaxRefinement.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Refine ambiguous syntax colors while a CodePen Theme Original variant is active. Does not replace language grammars or language servers.",
+          "scope": "resource"
+        }
+      }
+    },
+    "configurationDefaults": {
+      "debug.console.fontFamily": "Monaco, 'Courier New', Courier, monospace",
+      "debug.console.fontSize": 13,
+      "editor.fontFamily": "Monaco, 'Courier New', Courier, monospace",
+      "editor.fontSize": 13,
+      "terminal.integrated.fontFamily": "Monaco, 'Courier New', Courier, monospace",
+      "terminal.integrated.fontSize": 13,
+      "[Log]": {
+        "editor.fontFamily": "Monaco, 'Courier New', Courier, monospace",
+        "editor.fontSize": 13
+      }
+    },
     "themes": [
       {
         "label": "CodePen Theme Original",
         "uiTheme": "vs-dark",
         "path": "./themes/codepen-theme.json"
+      },
+      {
+        "label": "CodePen Theme Original Upright",
+        "uiTheme": "vs-dark",
+        "path": "./themes/codepen-theme-upright.json"
       }
     ]
   },
@@ -44,26 +78,36 @@
     "@vscode/vsce": "3.7.1",
     "playwright-core": "^1.62.1",
     "pngjs": "^7.0.0",
+    "tree-sitter-wasm": "1.1.6",
+    "typescript": "6.0.3",
     "vscode-oniguruma": "^2.0.1",
-    "vscode-textmate": "^9.3.2"
+    "vscode-textmate": "^9.3.2",
+    "web-tree-sitter": "0.27.0"
   },
   "scripts": {
-    "start": "node --watch src/index.js",
+    "start": "node --watch --watch-preserve-output src/index.js",
     "build": "node src/index.js",
     "check:theme": "node scripts/validate-theme.mjs",
+    "check:colors": "node scripts/validate-token-colors.mjs",
     "check:compatibility": "node scripts/validate-compatibility.mjs",
     "check:docs": "node scripts/generate-readme.mjs --check",
     "check:visual": "node scripts/render-visual-baseline.mjs --check",
     "check:release": "node scripts/validate-release.mjs",
-    "check": "npm run check:theme && npm run check:compatibility && npm run check:docs && npm run check:visual && npm run check:release",
+    "check": "npm run check:theme && npm run lint:refinement && npm run check:colors && npm run test:refinement && npm run check:compatibility && npm run check:docs && npm run check:visual && npm run check:release",
+    "lint:refinement": "node scripts/lint-refinement.mjs",
     "test": "npm run check",
-    "lint": "node --check src/colors.js && node --check src/theme.js && node --check src/index.js && node --check scripts/lib/compatibility.mjs && node --check scripts/lib/providers.mjs && node --check scripts/lib/vscode-runtime.mjs && node --check scripts/capture-vscode-screenshots.mjs && node --check scripts/vscode-screenshot-runner.cjs && node --check scripts/check-provider-drift.mjs && node --check scripts/validate-theme.mjs && node --check scripts/validate-compatibility.mjs && node --check scripts/generate-readme.mjs && node --check scripts/render-visual-baseline.mjs && node --check scripts/tokenize-providers.mjs && node --check scripts/validate-provider-matrix.mjs && node --check scripts/validate-vscode-versions.mjs && node --check scripts/validate-release.mjs && node --check scripts/validate-vsix.mjs",
+    "lint": "node --check scripts/audit-codepen-reference.mjs && node --check scripts/lib/token-colors.mjs && node --check scripts/validate-token-colors.mjs && node --check scripts/test-semantic-provider.mjs && node --check src/colors.js && node --check src/theme-variants.js && node --check src/theme.js && node --check src/index.js && node --check scripts/prepare-preview.mjs && node --check scripts/lib/compatibility.mjs && node --check scripts/lib/providers.mjs && node --check scripts/lib/vscode-runtime.mjs && node --check scripts/capture-vscode-screenshots.mjs && node --check scripts/vscode-screenshot-runner.cjs && node --check scripts/check-provider-drift.mjs && node --check scripts/validate-theme.mjs && node --check scripts/validate-compatibility.mjs && node --check scripts/generate-readme.mjs && node --check scripts/render-visual-baseline.mjs && node --check scripts/tokenize-providers.mjs && node --check scripts/validate-provider-matrix.mjs && node --check scripts/validate-vscode-versions.mjs && node --check scripts/validate-release.mjs && node --check scripts/validate-vsix.mjs",
     "docs:update": "node scripts/generate-readme.mjs --write",
     "check:provider-drift": "node scripts/check-provider-drift.mjs",
     "test:vscode-versions": "node scripts/validate-vscode-versions.mjs",
     "test:providers": "node scripts/tokenize-providers.mjs",
+    "test:semantic": "node scripts/test-semantic-provider.mjs",
+    "test:refinement": "node scripts/test-refinement.mjs && node --test scripts/test-refinement-lifecycle.cjs && node scripts/audit-refinement-reference.mjs",
+    "test:refinement:editor": "node scripts/capture-refinement.mjs",
+    "test:reference": "node scripts/audit-codepen-reference.mjs",
     "test:provider-matrix": "node scripts/validate-provider-matrix.mjs",
     "test:screenshots": "node scripts/capture-vscode-screenshots.mjs",
+    "test:screenshots:semantic": "node scripts/capture-vscode-screenshots.mjs --semantic",
     "visual:update": "node scripts/render-visual-baseline.mjs --write",
     "check:package": "node scripts/validate-vsix.mjs ./build/codepen-theme-original.vsix",
     "package": "vsce package --out ./build/codepen-theme-original.vsix && npm run check:package",

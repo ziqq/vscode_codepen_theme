@@ -1,0 +1,159 @@
+{
+  "reference": "Dart SDK 3.11.5 analysis-server classifications; color roles are adapted from measured classic CodePen JS/TS. Enum declaration lacks a declaration modifier and therefore uses the neutral type color.",
+  "expect": [
+    { "line": 70, "text": "alias", "type": "variable", "modifiers": ["declaration", "instance"], "foreground": "#9a8297" },
+    { "line": 76, "text": "isFixed", "type": "property", "modifiers": ["declaration", "instance"], "foreground": "#9a8297" },
+    { "line": 85, "text": "map", "type": "method", "modifiers": ["declaration", "instance"], "foreground": "#9a8297" },
+    { "line": 86, "text": "fixed", "type": "parameter", "modifiers": ["declaration"], "foreground": "#809bbd" },
+    { "line": 86, "text": "Function", "type": "keyword", "modifiers": [], "foreground": "#ddca7e", "limitation": "Dart emits the same keyword token as const; a theme cannot distinguish the function type here." },
+    { "line": 96, "text": "maybeMap", "type": "method", "modifiers": ["declaration", "instance"], "foreground": "#9a8297" },
+    { "line": 101, "text": "map", "type": "method", "modifiers": ["instance"], "foreground": "#9a8297" },
+    { "line": 108, "text": "maybeMapOrNull", "type": "method", "modifiers": ["declaration", "instance"], "foreground": "#9a8297" },
+    { "line": 114, "text": "override", "type": "property", "modifiers": ["annotation"], "foreground": "#ddca7e" },
+    { "line": 115, "text": "compareTo", "type": "method", "modifiers": ["declaration", "instance"], "foreground": "#9a8297" },
+    { "line": 145, "text": "name", "type": "variable", "modifiers": ["declaration"], "foreground": "#809bbd" },
+    { "line": 154, "text": "state", "type": "variable", "modifiers": [], "foreground": "#809bbd" },
+    {
+      "line": 3,
+      "text": "ThemeMode",
+      "type": "enum",
+      "modifiers": [],
+      "foreground": "#ffffff"
+    },
+    {
+      "line": 3,
+      "text": "dark",
+      "type": "enumMember",
+      "modifiers": [],
+      "foreground": "#9a8297"
+    },
+    {
+      "line": 8,
+      "text": "Comparable",
+      "type": "class",
+      "modifiers": [],
+      "foreground": "#ffffff"
+    },
+    {
+      "line": 12,
+      "text": "alias",
+      "type": "parameter",
+      "modifiers": [
+        "label"
+      ],
+      "foreground": "#809bbd"
+    },
+    {
+      "line": 28,
+      "text": "fromAlias",
+      "type": "method",
+      "modifiers": [
+        "declaration",
+        "static"
+      ],
+      "foreground": "#9a8297"
+    },
+    {
+      "line": 29,
+      "text": "alias",
+      "type": "parameter",
+      "modifiers": [
+        "declaration"
+      ],
+      "foreground": "#809bbd"
+    },
+    {
+      "line": 31,
+      "text": "trim",
+      "type": "method",
+      "modifiers": [
+        "instance"
+      ],
+      "foreground": "#9a8297"
+    },
+    {
+      "line": 121,
+      "text": "ThemeState",
+      "type": "class",
+      "modifiers": [
+        "declaration"
+      ],
+      "foreground": "#809bbd"
+    },
+    {
+      "line": 122,
+      "text": "ThemeState",
+      "type": "class",
+      "modifiers": [
+        "constructor",
+        "declaration"
+      ],
+      "foreground": "#809bbd"
+    },
+    {
+      "line": 128,
+      "text": "name",
+      "type": "variable",
+      "modifiers": [
+        "declaration",
+        "instance"
+      ],
+      "foreground": "#9a8297"
+    },
+    {
+      "line": 131,
+      "text": "label",
+      "type": "property",
+      "modifiers": [
+        "declaration",
+        "instance"
+      ],
+      "foreground": "#9a8297"
+    },
+    {
+      "line": 140,
+      "text": "contrastScore",
+      "type": "method",
+      "modifiers": [
+        "declaration",
+        "instance"
+      ],
+      "foreground": "#9a8297"
+    },
+    {
+      "line": 140,
+      "text": "max",
+      "type": "function",
+      "modifiers": [],
+      "foreground": "#ddca7e"
+    },
+    {
+      "line": 143,
+      "text": "describeTheme",
+      "type": "function",
+      "modifiers": [
+        "declaration",
+        "static"
+      ],
+      "foreground": "#809bbd"
+    },
+    {
+      "line": 151,
+      "text": "ThemePalette",
+      "type": "class",
+      "modifiers": [
+        "constructor"
+      ],
+      "foreground": "#ddca7e"
+    },
+    {
+      "line": 154,
+      "text": "message",
+      "type": "variable",
+      "modifiers": [
+        "declaration"
+      ],
+      "foreground": "#809bbd"
+    }
+  ]
+}
