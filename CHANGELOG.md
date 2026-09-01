@@ -38,7 +38,7 @@
 - **ADDED**: CI-only installation and real-provider tokenization checks for VS Code `1.96.0`, `1.105.1`, and `1.134.0`
 - **ADDED**: real VS Code screenshot smoke tests for representative built-in and recommended providers
 - **ADDED**: scheduled Marketplace provider-version and engine-drift monitoring
-- **ADDED**: generated README provider compatibility table with version bands
+- **ADDED**: generated language-support provider compatibility table with version bands
 - **ADDED**: release tag/package/changelog consistency guard
 
 ## 0.12.1

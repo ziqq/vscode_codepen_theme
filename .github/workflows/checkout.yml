@@ -23,6 +23,7 @@ on:
       - "CHANGELOG.md"
       - "docs/**"
       - "Makefile"
+      - "MIGRATION.md"
       - "README.md"
       - "package.json"
       - "package-lock.json"

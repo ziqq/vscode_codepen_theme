@@ -15,12 +15,21 @@ const files = execFileSync('unzip', ['-Z1', vsixPath], { encoding: 'utf8' })
   .trim()
   .split('\n');
 
+const documentationPaths = [
+  'MIGRATION.md',
+  'docs/configuration.md',
+  'docs/development.md',
+  'docs/highlighting.md',
+  'docs/language-support.md',
+  'docs/screenshots.md',
+];
+
 const requiredFiles = [
   'extension/package.json',
+  'extension/readme.md',
   'extension/assets/logo.png',
-  'extension/docs/development.md',
-  'extension/docs/screenshots.md',
-  'extension/docs/user-guide.md',
+  ...documentationPaths.map((documentationPath) =>
+    `extension/${documentationPath}`),
   ...themeVariants.map((variant) => `extension/themes/${variant.file}`),
   'extension/runtime/extension.js',
   'extension/runtime/worker.js',
@@ -33,11 +42,7 @@ for (const requiredFile of requiredFiles) {
   }
 }
 
-for (const documentationPath of [
-  'docs/development.md',
-  'docs/screenshots.md',
-  'docs/user-guide.md',
-]) {
+for (const documentationPath of documentationPaths) {
   const packaged = execFileSync(
     'unzip',
     ['-p', vsixPath, `extension/${documentationPath}`],
@@ -47,6 +52,26 @@ for (const documentationPath of [
   if (packaged !== source) {
     throw new Error(`VSIX contains stale ${documentationPath}`);
   }
+}
+
+const packagedReadme = execFileSync(
+  'unzip',
+  ['-p', vsixPath, 'extension/readme.md'],
+  { encoding: 'utf8' },
+);
+for (const documentationPath of documentationPaths) {
+  const expectedLink =
+    `https://github.com/ziqq/vscode_codepen_theme/blob/master/${documentationPath}`;
+  if (!packagedReadme.includes(expectedLink)) {
+    throw new Error(
+      `Packaged README does not link ${documentationPath} through master`,
+    );
+  }
+}
+const expectedPreview =
+  'https://github.com/ziqq/vscode_codepen_theme/raw/master/assets/preview_js.webp';
+if (!packagedReadme.includes(expectedPreview)) {
+  throw new Error('Packaged README preview does not resolve through master');
 }
 
 const forbiddenPrefixes = [

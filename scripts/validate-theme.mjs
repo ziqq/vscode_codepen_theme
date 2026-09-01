@@ -15,7 +15,7 @@ const recommendations = JSON.parse(
 const compatibility = JSON.parse(
   await readFile('compatibility/scopes.json', 'utf8'),
 );
-const userGuide = await readFile('docs/user-guide.md', 'utf8');
+const languageSupport = await readFile('docs/language-support.md', 'utf8');
 
 const expectedContributionPoints = [
   'configuration',
@@ -254,9 +254,9 @@ for (const directory of ['languages', 'syntaxes', 'snippets']) {
 }
 
 for (const extensionId of expectedRecommendations) {
-  if (!userGuide.toLowerCase().includes(extensionId.toLowerCase())) {
+  if (!languageSupport.toLowerCase().includes(extensionId.toLowerCase())) {
     throw new Error(
-      `User guide does not document recommended extension ${extensionId}`,
+      `Language support does not document recommended extension ${extensionId}`,
     );
   }
 }
