@@ -318,10 +318,10 @@
         "text": "supports",
         "foreground": "#809bbd"
       },
-      {
-        "line": 43,
-        "text": "container",
-        "foreground": "#ddca7e"
+        {
+          "line": 43,
+          "text": "container",
+          "foreground": "#809bbd"
       },
       {
         "line": 51,
@@ -1886,10 +1886,10 @@
         "text": "each",
         "foreground": "#ddca7e"
       },
-      {
-        "line": 46,
-        "text": "supports",
-        "foreground": "#ddca7e"
+        {
+          "line": 46,
+          "text": "supports",
+          "foreground": "#809bbd"
       }
     ]
   },
@@ -2222,10 +2222,10 @@
           "text": "providers",
           "foreground": "#9a8297"
       },
-      {
-        "line": 29,
-        "text": "2026-09-01",
-        "foreground": "#ffffff"
+        {
+          "line": 29,
+          "text": "2026-09-01",
+          "foreground": "#96b38a"
       },
       {
         "line": 33,
@@ -2699,7 +2699,12 @@
         },
         {
           "line": 2,
-          "text": "NODE_VERSION=22",
+          "text": "NODE_VERSION",
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 2,
+          "text": "22",
           "foreground": "#ffffff"
         },
         {
@@ -2714,7 +2719,7 @@
         },
         {
           "line": 3,
-          "text": "node:${NODE_VERSION}-alpine",
+          "text": "NODE_VERSION",
           "foreground": "#ffffff"
         },
         {
@@ -2759,7 +2764,17 @@
         },
         {
           "line": 18,
-          "text": "{prefix}: {theme.Name} ({theme.Accent})",
+          "text": "prefix",
+          "foreground": "#809bbd"
+        },
+        {
+          "line": 18,
+          "text": "Name",
+          "foreground": "#96b38a"
+        },
+        {
+          "line": 18,
+          "text": "Accent",
           "foreground": "#96b38a"
         },
         {
@@ -2849,7 +2864,14 @@
         },
         {
           "line": 2,
-          "text": "theme.id",
+          "text": "theme",
+          "occurrence": 3,
+          "foreground": "#809bbd"
+        },
+        {
+          "line": 2,
+          "text": "id",
+          "occurrence": 2,
           "foreground": "#809bbd"
         },
         {
@@ -2879,7 +2901,7 @@
         },
         {
           "line": 2,
-          "text": "ThemeSettings :",
+          "text": "ThemeSettings",
           "foreground": "#ffffff"
         },
         {
@@ -3183,12 +3205,12 @@
         {
           "line": 2,
           "text": "1d1e22",
-          "foreground": "#ffffff"
+          "foreground": "#ddca7e"
         },
         {
           "line": 4,
           "text": "px",
-          "foreground": "#ddca7e"
+          "foreground": "#d0782a"
         },
         {
           "line": 6,
@@ -3723,7 +3745,7 @@
         },
         {
           "line": 5,
-          "text": "_MainTex (",
+          "text": "_MainTex",
           "foreground": "#ffffff"
         },
         {
@@ -3803,7 +3825,12 @@
       "expect": [
         {
           "line": 1,
-          "text": "Imports System.Collections.Generic",
+          "text": "Imports",
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 1,
+          "text": "System.Collections.Generic",
           "foreground": "#ffffff"
         },
         {

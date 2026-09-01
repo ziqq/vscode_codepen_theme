@@ -42,7 +42,7 @@ const «blue|text» = «green|"class False { field }"»;`],
   void «purple|run»() { «white|Theme» «blue|theme» = new «yellow|Theme»(); «blue|theme».«purple|label»("x"); }
 }`],
   ['dart', `«gray|/// Links »«white|[»«purple|name»«white|]»«gray| and code »«white|\`name\`»«gray| remain comments.»
-enum «blue|Mode» { «blue|dark», «blue|light» }
+enum «blue|Mode» { «purple|dark», «purple|light» }
 class «blue|Theme» {
   final «white|String» «purple|name»;
   Theme(this.«purple|name»);
@@ -167,4 +167,118 @@ impl Theme { fn «purple|label»(&self) {} }
 fn «blue|main»() { «yellow|label»(); }`],
   ['cpp', `struct «blue|Theme» { std::string «purple|name»; std::string label(std::string prefix); };
 std::string Theme::«purple|label»(std::string «blue|prefix») { return «blue|prefix» + «purple|name»; }`],
+  ['java', `class «blue|Theme» {
+  void «purple|run»() {
+    «white|String» «blue|message» = «white|String».«purple|format»("%s", "x");
+    for («white|Theme» «blue|item» : items) use(«blue|item».«purple|name»);
+  }
+}`],
+  ['kotlin', `class «blue|Theme»
+fun «white|Theme».«purple|label»(«blue|prefix»: «white|String») = «blue|prefix»
+fun «blue|main»() { label(«purple|prefix» = value) }`],
+  ['cuda-cpp', `struct «blue|Theme» { «white|float» «purple|accent»; };
+__global__ void «blue|render»(«white|Theme» *«blue|theme») { «blue|theme»->«purple|accent» = «orange|1.0f»; }`],
+  ['groovy', `class «blue|Theme» {
+  «white|String» «purple|name»
+  «white|String» «purple|label»(«white|String» «blue|prefix») { «green|"\${»«blue|prefix»«green|}: \${»«purple|name»«green|}"» }
+}
+new «yellow|Theme»().«purple|label»('x')`],
+  ['julia', `module «blue|ThemeKit»
+struct «blue|Theme»
+  «purple|name»::«white|String»
+end
+function «blue|label»(«blue|theme»::«white|Theme»; «blue|prefix»="x")
+  «green|"$(»«blue|prefix»«green|) $(»«blue|theme»«white|.»«purple|name»«green|)"»
+end
+end`],
+  ['lua', `local «blue|Theme» = {}
+function «yellow|Theme».«purple|new»(«blue|name»)
+  return «yellow|setmetatable»({ «purple|name» = «blue|name» }, «yellow|Theme»)
+end
+local «blue|theme» = «yellow|Theme».«purple|new»("x")
+print(«yellow|theme».«purple|name»)`],
+  ['objective-c', `@interface «blue|Theme» : NSObject
+@property NSString *«purple|name»;
+- (NSString *)«purple|label»:(NSString *)«blue|prefix»;
+@end`],
+  ['objective-cpp', `@implementation «blue|Theme»
+- (NSString *)«purple|label»:(NSString *)«blue|prefix» { return self.«purple|name»; }
+@end`],
+  ['r', `«blue|theme» <- list(«purple|name» = "x")
+«blue|label» <- function(«blue|value») paste(«blue|value»$«purple|name»)
+«yellow|label»(«yellow|theme»)`],
+  ['ini', `[«purple|theme»]
+«purple|name»«operator|=»«green|CodePen»
+«purple|enabled»«operator|=»«yellow|true»
+«purple|count»«operator|=»«orange|2»
+«purple|source»«operator|=»«green|\${»«blue|HOME»«green|}/theme`],
+  ['properties', `«purple|theme.name»«operator|=»«green|CodePen»
+«purple|theme.count»«operator|=»«orange|2»
+«purple|theme.source»«operator|=»«green|\${»«blue|base»«green|}/theme`],
+  ['dockerfile', `ARG «blue|VERSION»=«orange|22»
+FROM node:\${«blue|VERSION»} AS «blue|build»
+LABEL «purple|theme»="CodePen"
+COPY --from=«blue|build» /src /app`],
+  ['bibtex', `@article{«blue|twilight2026»,
+  «purple|author» = {CodePen},
+  «purple|title» = {Twilight}
+}`],
+  ['latex', `\\newcommand{«blue|\\theme»}[2]{«blue|#1» + «blue|#2»}
+«yellow|\\begin»{green} «yellow|\\theme»{x}{«orange|2»} «yellow|\\end»{green}`],
+  ['tex', `\\def«blue|\\theme»#1{«yellow|\\textbf»{«blue|#1»}}`],
+  ['wat', `(module
+  (type «blue|$signature» (func))
+  (func «blue|$render» (type «white|$signature») (param «blue|$value» i32)
+    call «yellow|$helper»)
+  (export "render" (func «yellow|$render»)))`],
+  ['fsharp', `type «blue|Theme» = { «purple|Name»: «white|string» }
+type «blue|Mode» = | «purple|Original» | «purple|Ligatures»
+let «blue|label» «blue|prefix» «blue|theme» = «green|$"{»«blue|prefix»«green|}: {»«blue|theme»«white|.»«purple|Name»«green|}"»`],
+  ['hlsl', `cbuffer «blue|ThemeSettings» : register(b0) { float4 «purple|Accent»; };
+struct «blue|Input» { float3 «purple|position» : «purple|POSITION»; };
+float4 «blue|render»(«white|Input» «blue|input») : «purple|SV_Target» { return «blue|input».«purple|position».x + «orange|1.0»; }`],
+  ['shaderlab', `Shader "Theme" { Properties { «purple|_Accent» ("Accent", Color) = (1,1,1,1) }
+SubShader { Pass { CGPROGRAM
+float4 «blue|render»(float4 «blue|position» : «purple|POSITION») : «purple|SV_Target» { return «blue|position»; }
+ENDCG } } }`],
+  ['powershell', `class «blue|Theme» {
+  [string] «purple|$Name»
+  [string] «purple|Label»([string] «blue|$prefix») { return «green|"\${»«blue|prefix»«green|}: $(»«yellow|$this»«white|.»«purple|Name»«green|)"» }
+}
+function «blue|Show-Theme»([Theme] «blue|$theme») { «blue|$theme».«purple|Label»('x') }`],
+  ['perl', `package «blue|Theme»;
+sub «purple|label» { my «blue|$self» = shift; return «green|"»«blue|$self»«green|->{»«purple|name»«green|}"»; }
+package «blue|main»;
+my «blue|$theme» = «yellow|Theme»->«purple|new»(«purple|name» => 'x');`],
+  ['raku', `enum «blue|Mode» <«purple|original» «purple|ligatures»>;
+class «blue|Theme» { has Str «purple|$.name»; method «purple|label»(Str «blue|$prefix») { «green|"»«blue|$prefix»«green|: »«purple|$!name»«green|"» } }
+my «blue|$theme» = Theme.«purple|new»(«purple|name» => 'x');`],
+  ['vb', `Public Class «blue|Theme»
+  Public Property «purple|Name» As «white|String»
+  Public Function «purple|Label»(«blue|prefix» As «white|String») As «white|String»
+    Return «green|$"{»«blue|prefix»«green|}: {»«purple|Name»«green|}"»
+  End Function
+End Class`],
+  ['handlebars', `<article>{{«yellow|theme».«purple|name»}}</article>
+{{#each theme.tokens as |«blue|token» «blue|index»|}}{{«blue|token».«purple|name»}}{{/each}}
+{{helper «purple|name»=«yellow|theme».«purple|name»}}`],
+  ['jade', `- const «blue|theme» = { «purple|name»: 'x' }
+mixin «blue|token»(«blue|name»)
+  code= «blue|name»
+main.card(data-name=«yellow|theme».«purple|name»)
+  +«yellow|token»(«yellow|theme».«purple|name»)`],
+  ['bat', `:«purple|render»
+call :«purple|label»
+:«purple|label»`],
+  ['coffeescript', `class «blue|Theme»
+  constructor: («purple|@name») ->
+  «purple|label»: («blue|prefix») -> «green|"#{»«blue|prefix»«green|}: #{»«purple|@name»«green|}"»
+«blue|theme» = new Theme 'x'
+theme.«purple|label»()`],
+  ['clojure', `(defrecord «blue|Theme» [«purple|name»])
+(defprotocol «blue|Renderable» («purple|render» [value prefix]))
+(defn «blue|label» [«blue|theme»] (str «blue|theme»))
+(«yellow|label» default-theme)`],
+  ['razor', `<«brown|PageTitle»>@«purple|State».«purple|Title»</«brown|PageTitle»>
+@code { private «white|ThemeState» «purple|State» { get; } = new «yellow|ThemeState»(); }`],
 ];

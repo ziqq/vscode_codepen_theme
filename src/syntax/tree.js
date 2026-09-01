@@ -1,11 +1,15 @@
 const path = require('node:path');
 const { Spans } = require('./spans');
 const { addComment } = require('./comments');
+const { refineDialect } = require('./dialects');
 
 const grammars = Object.freeze({
   c: 'c', cpp: 'cpp', csharp: 'c_sharp', dart: 'dart', go: 'go', java: 'java',
-  just: 'just', kotlin: 'kotlin', makefile: 'make', php: 'php', python: 'python',
-  ruby: 'ruby', rust: 'rust', sql: 'sql', swift: 'swift', shellscript: 'bash',
+  'cuda-cpp': 'cuda', groovy: 'groovy', julia: 'julia', just: 'just',
+  kotlin: 'kotlin', lua: 'lua', makefile: 'make', 'objective-c': 'objc',
+  'objective-cpp': 'objc', perl: 'perl', php: 'php', powershell: 'powershell',
+  python: 'python', r: 'r', razor: 'razor', ruby: 'ruby', rust: 'rust', sql: 'sql',
+  swift: 'swift', shellscript: 'bash',
   html: 'html', svelte: 'svelte', vue: 'vue', markdown: 'markdown',
 });
 let initialization;
@@ -40,8 +44,12 @@ const isIdentifier = (node) => identifiers.has(node.type) && !node.namedChildren
 async function refineTree(source, language) {
   return withTree(source, language, async (root) => {
     const base = classify(root, source, language);
-    if (language !== 'makefile') return base;
     const spans = new Spans(source.length);
+    for (const span of base) spans.add(span.start, span.end, span.role, 20, span.fontStyle);
+    for (const span of refineDialect(root, source, language)) {
+      spans.add(span.start, span.end, span.role, 40, span.fontStyle);
+    }
+    if (language !== 'makefile') return spans.finish();
     const stack = [root];
     while (stack.length) {
       const node = stack.pop();
@@ -51,7 +59,6 @@ async function refineTree(source, language) {
         }
       } else stack.push(...node.namedChildren);
     }
-    for (const span of base) spans.add(span.start, span.end, span.role, 30, span.fontStyle);
     return spans.finish();
   });
 }
@@ -88,6 +95,10 @@ function classify(root, source, language) {
   const bindings = new Map();
   const declarations = new Set();
   const region = (node) => ({ start: node.startIndex, end: node.endIndex, node });
+  const fieldContains = (owner, name, node) => {
+    const value = field(owner, name);
+    return value && (value.id === node.id || contains(region(value), node));
+  };
   for (const node of nodes) {
     if ((classKinds.has(node.type) || node.type === 'impl_item') && node.id !== root.id) classes.push(region(node));
     if (blockKinds.has(node.type)) blocks.push(region(node));
@@ -108,7 +119,7 @@ function classify(root, source, language) {
   const set = (node, role) => { if (node) roles.set(node.id, role); };
   function declare(node, kind, scope) {
     if (!node) return;
-    const role = kind === 'member' ? 'purple' : kind === 'alias' ? 'white' : 'blue';
+    const role = kind === 'member' || kind === 'enum' ? 'purple' : kind === 'alias' ? 'white' : 'blue';
     set(node, role);
     declarations.add(node.id);
     const owner = scope ?? smallest(blocks, node) ?? functionOf(node) ?? region(root);
@@ -124,7 +135,8 @@ function classify(root, source, language) {
   };
   const memberContext = (node) => {
     const owner = nearestOwner(node);
-    return owner && classKinds.has(owner.node.type);
+    return owner && classKinds.has(owner.node.type) ||
+      language === 'razor' && ['property_declaration', 'field_declaration'].includes(node.type);
   };
   const propertyNode = (node) => node.type === 'field_identifier' ||
     (node.parent.type === 'field_access' && isField(node, 'field')) ||
@@ -148,9 +160,9 @@ function classify(root, source, language) {
       declare(name, 'type', smallest(blocks, node) ?? region(root));
     }
     if (functionKinds.has(node.type)) {
-      let name = field(node, 'name') ?? firstIdentifier(node);
+      let name = field(node, 'name') ?? field(node, 'function') ?? firstIdentifier(node);
       if (/lambda|closure|anonymous|function_literal/.test(node.type)) name = undefined;
-      if (language === 'cpp' || language === 'c') {
+      if (language === 'cpp' || language === 'c' || language === 'cuda-cpp') {
         let declarator = field(node, 'declarator');
         while (declarator && !isIdentifier(declarator)) declarator = field(declarator, 'declarator') ?? field(declarator, 'name');
         name = declarator ?? name;
@@ -160,13 +172,17 @@ function classify(root, source, language) {
       const outerFn = functions.filter((item) => item.node.id !== node.id && contains(item, node))
         .sort((a, b) => (a.end - a.start) - (b.end - b.start))[0];
       const qualified = name && ancestor(name, (item) => item.type === 'qualified_identifier');
-      const member = language === 'ruby' || language === 'just' || node.type === 'method_declaration' || qualified ||
+      const kotlinReceiver = language === 'kotlin' && node.type === 'function_declaration' && name &&
+        /\.\s*$/.test(source.slice(node.startIndex, name.startIndex));
+      const member = language === 'ruby' || language === 'just' || language === 'razor' ||
+        node.type === 'method_declaration' || qualified || kotlinReceiver ||
         node.type === 'constructor_declaration' || (cls && (!outerFn || outerFn.start < cls.start)) ||
         (language === 'rust' && ancestor(node, (item) => item.type === 'impl_item' || item.type === 'trait_item'));
       declare(name, member ? 'member' : 'function', member && cls ? cls :
         member && !['ruby', 'just'].includes(language) ? region(node) : outerFn ?? region(root));
     }
-    if (node.type === 'enum_constant' || node.type === 'enum_variant') {
+    if (node.type === 'enum_constant' || node.type === 'enum_variant' ||
+        node.type === 'enum_entry' || node.type === 'enumerator') {
       declare(field(node, 'name') ?? firstIdentifier(node), 'enum', classOf(node));
     }
     if (!isIdentifier(node)) continue;
@@ -179,12 +195,21 @@ function classify(root, source, language) {
           firstIdentifier(param)?.id === node.id || parent.type === 'variable_name')) {
       const promoted = param.type === 'property_promotion_parameter' || param.type === 'constructor_param' ||
         (language === 'kotlin' && param.type === 'class_parameter' && param.children.some((item) => item.type === 'binding_pattern_kind')) ||
-        (['csharp', 'java'].includes(language) && param.parent?.parent?.type === 'record_declaration');
+        (['csharp', 'java', 'razor'].includes(language) && param.parent?.parent?.type === 'record_declaration');
       const signature = ancestor(node, (item) => item.type === 'function_declarator');
       declare(node, promoted ? 'member' : 'variable', promoted ? classOf(node) :
         functionOf(node) ?? (signature ? region(signature) : region(param)));
     }
     if (['parameters', 'method_parameters', 'lambda_parameters', 'closure_parameters', 'inferred_parameters'].includes(parent.type)) declare(node, 'variable', functionOf(node));
+    if (['enhanced_for_statement', 'for_in_statement', 'for_range_loop'].includes(parent.type) &&
+        (isField(node, 'name') || isField(node, 'left') || isField(node, 'pattern'))) {
+      declare(node, 'variable', region(parent));
+    }
+    if (['type_pattern', 'record_pattern_component'].includes(parent.type) &&
+        parent.namedChildren.at(-1)?.id === node.id) {
+      const patternScope = ancestor(node, (item) => item.type === 'switch_rule' || item.type.includes('case'));
+      declare(node, 'variable', patternScope ? region(patternScope) : undefined);
+    }
     if (language === 'dart' && parent.type === 'variable_pattern') {
       // Pattern variables belong to their switch/if case, including references
       // inside interpolated strings in the case body.
@@ -195,7 +220,8 @@ function classify(root, source, language) {
     const declaration = ancestor(node, (item) => ['variable_declarator', 'initialized_identifier',
       'initialized_variable_definition', 'variable_declaration', 'property_declaration', 'let_declaration',
       'var_spec', 'const_spec', 'init_declarator', 'declaration', 'field_declaration'].includes(item.type));
-    if (declaration && (isField(node, 'name') || isField(node, 'pattern') || isField(node, 'declarator') ||
+    if (declaration && (fieldContains(declaration, 'name', node) || fieldContains(declaration, 'pattern', node) ||
+        fieldContains(declaration, 'declarator', node) ||
         parent.type === 'initialized_identifier' || (parent.type === 'pattern' && isField(node, 'bound_identifier')) ||
         (parent.type === 'variable_declaration' && firstIdentifier(parent)?.id === node.id))) {
       declare(node, memberContext(declaration) ? 'member' : 'variable', memberContext(declaration) ? classOf(node) : undefined);
@@ -227,7 +253,12 @@ function classify(root, source, language) {
       'field_pattern'].includes(parent.type) &&
         (isField(node, 'name') || isField(node, 'field') || firstIdentifier(parent)?.id === node.id)) return 'purple';
     if (language === 'go' && parent.type === 'literal_element' && isField(parent, 'key')) return 'purple';
+    if (language === 'java' && parent.type === 'record_pattern' && firstIdentifier(parent)?.id === node.id) return 'white';
+    if (language === 'kotlin' && parent.type === 'value_argument' &&
+        parent.namedChildren[0]?.id === node.id && parent.children.some((item) => item.text === '=')) return 'purple';
     if (language === 'java' && parent.type === 'method_invocation' && isField(node, 'name')) return 'purple';
+    if (language === 'java' && parent.type === 'method_invocation' &&
+        isField(node, 'object') && /^[A-Z]/.test(node.text)) return 'white';
     if (language === 'ruby' && parent.type === 'call' && isField(node, 'method')) return node.text === 'new' ? 'yellow' : 'purple';
     if (language === 'php' && parent.type === 'variable_name') return node.text === 'this' ? 'yellow' : 'blue';
     if (language === 'php' && parent.type === 'function_call_expression' && isField(node, 'function')) return 'yellow';
@@ -237,7 +268,7 @@ function classify(root, source, language) {
         !ancestor(node, (item) => typeKinds.test(item.type))) return 'yellow';
     if (node.type === 'type_identifier' || node.type === 'namespace_identifier' ||
         ancestor(node, (item) => typeKinds.test(item.type))) return 'white';
-    if (language === 'csharp' && ['type', 'returns'].some((name) => isField(node, name))) return 'white';
+    if (['csharp', 'razor'].includes(language) && ['type', 'returns'].some((name) => isField(node, name))) return 'white';
     const associatedClass = outOfLineClass(node);
     const associatedMember = (entry) => entry.kind === 'member' && associatedClass &&
       entry.start === associatedClass.start && entry.end === associatedClass.end;

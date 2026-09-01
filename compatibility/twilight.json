@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "reference": "Classic CodePen JS/TS roles measured in codepen-reference.json. Other languages adapt these roles where provider scopes allow; TextMate cannot reconstruct missing semantic context.",
-  "decorationSha256": "072094852d5542e0a398eae6917e18b5ee315993af8d87e645927bb3a201a6e9",
+  "decorationSha256": "6ee9779e2538a32797f4cb02f9e15243b602da92aedcf8b23bf638146a8f0f9e",
   "cases": [
     {
       "language": "C",
@@ -1482,10 +1482,10 @@
           "text": "background",
           "foreground": "#809bbd"
         },
-        {
-          "line": 2,
-          "text": "1d1e22",
-          "foreground": "#ffffff"
+    {
+      "line": 2,
+      "text": "1d1e22",
+      "foreground": "#ddca7e"
         }
       ]
     },

@@ -3,6 +3,8 @@ const { refineTypeScript } = require('./typescript');
 const { Spans } = require('./spans');
 const { refineEmbedded } = require('./embedded');
 const { refineSimple } = require('./simple');
+const { refineFormat, formatLanguages } = require('./formats');
+const { refineLegacy, legacyLanguages } = require('./legacy');
 const { addComment } = require('./comments');
 
 const scriptLanguages = ['javascript', 'javascriptreact', 'typescript', 'typescriptreact'];
@@ -14,6 +16,8 @@ const supportedLanguages = [
   'scss',
   'css',
   'c4',
+  ...formatLanguages,
+  ...legacyLanguages,
 ];
 const maximumDocumentLength = 250_000;
 
@@ -52,6 +56,8 @@ async function refine(source, language) {
   if (typeof source !== 'string' || source.length > maximumDocumentLength) return [];
   if (scriptLanguages.includes(language)) return refineTypeScript(source, language);
   if (language === 'dotenv') return refineDotenv(source);
+  if (formatLanguages.includes(language)) return refineFormat(source, language);
+  if (legacyLanguages.includes(language)) return refineLegacy(source, language);
   if (['sass', 'scss', 'css', 'c4'].includes(language)) return refineSimple(source, language);
   if (['html', 'vue', 'svelte', 'markdown'].includes(language)) return refineEmbedded(source, language, refine);
   return refineTree(source, language);

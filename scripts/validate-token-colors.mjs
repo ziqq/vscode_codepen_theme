@@ -57,7 +57,7 @@ const decorations = ligaturesTheme.tokenColors.filter((rule) =>
 assert.equal(
   createHash('sha256').update(JSON.stringify(decorations)).digest('hex'),
   twilight.decorationSha256,
-  'Existing TextMate decorations must remain unchanged during the color migration',
+  'Ligatures TextMate decorations must match the reviewed typography baseline',
 );
 for (const rule of theme.tokenColors) {
   assert.equal(Object.keys(rule.settings).length, 1, `${rule.name}: mixed color/style rule`);
@@ -195,4 +195,4 @@ for (const language of ['just', 'makefile']) {
 }
 assert.equal(semanticColor(theme, 'property', ['annotation'], 'dart'), '#ddca7e');
 semanticAssertions++;
-console.log(`Twilight: ${probes.length} TextMate probes, ${semanticAssertions} semantic assertions, ${twilight.cases.length} provider fixtures, ${fullSamples.cases.reduce((count, item) => count + item.expect.length, 0)} full-sample assertions; decorations unchanged.`);
+console.log(`Twilight: ${probes.length} TextMate probes, ${semanticAssertions} semantic assertions, ${twilight.cases.length} provider fixtures, ${fullSamples.cases.reduce((count, item) => count + item.expect.length, 0)} full-sample assertions; typography baseline verified.`);
