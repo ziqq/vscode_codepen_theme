@@ -29,3 +29,22 @@ int main(void) {
   print_theme(&theme);
   return 0;
 }
+
+typedef enum {
+  TOKEN_KEYWORD = 1 << 0,
+  TOKEN_STRING = 1 << 1,
+  TOKEN_COMMENT = 1 << 2,
+} TokenMask;
+
+static const char *token_name(TokenMask token) {
+  switch (token) {
+    case TOKEN_KEYWORD:
+      return "keyword";
+    case TOKEN_STRING:
+      return "string";
+    case TOKEN_COMMENT:
+      return "comment";
+    default:
+      return "unknown";
+  }
+}

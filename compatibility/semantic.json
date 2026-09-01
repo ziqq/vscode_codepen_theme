@@ -197,7 +197,7 @@
       "requireValidProgram": true,
       "reference": "Measured CodePen TS roles before JSX. The provider leaves import bindings to TextMate and classifies resolved type references separately.",
       "dependencies": {
-        "semantic-react.d.ts": "declare module 'react' { export interface CSSProperties { color?: string; backgroundColor?: string } }\ndeclare namespace JSX { interface IntrinsicElements { section: { style?: import('react').CSSProperties }; strong: {}; ul: {}; li: { key?: string } } }"
+      "semantic-react.d.ts": "declare module 'react' { export interface CSSProperties { color?: string; backgroundColor?: string } export type ReactNode = unknown }\ndeclare namespace JSX { interface Element {} interface ElementChildrenAttribute { children: {} } interface IntrinsicElements { section: { style?: import('react').CSSProperties; hidden?: boolean; children?: unknown }; span: { children?: unknown }; strong: { role?: string; children?: unknown }; mark: { 'data-token'?: string; children?: unknown }; ul: { children?: unknown }; li: { key?: string; children?: unknown } } }"
       },
       "expect": [
         {

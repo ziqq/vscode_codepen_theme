@@ -8,8 +8,8 @@ if (!['--check', '--write'].includes(mode)) {
 const compatibility = JSON.parse(
   await readFile('compatibility/scopes.json', 'utf8'),
 );
-const readmePath = 'README.md';
-const readme = await readFile(readmePath, 'utf8');
+const guidePath = 'docs/user-guide.md';
+const guide = await readFile(guidePath, 'utf8');
 const startMarker = '<!-- provider-table:start -->';
 const endMarker = '<!-- provider-table:end -->';
 
@@ -41,21 +41,21 @@ const generated = [
   endMarker,
 ].join('\n');
 
-const start = readme.indexOf(startMarker);
-const end = readme.indexOf(endMarker);
+const start = guide.indexOf(startMarker);
+const end = guide.indexOf(endMarker);
 if (start === -1 || end === -1 || end < start) {
-  throw new Error('README provider table markers are missing or invalid');
+  throw new Error('User-guide provider table markers are missing or invalid');
 }
 
-const expected = `${readme.slice(0, start)}${generated}${readme.slice(
+const expected = `${guide.slice(0, start)}${generated}${guide.slice(
   end + endMarker.length,
 )}`;
 
 if (mode === '--write') {
-  await writeFile(readmePath, expected);
-  console.log('Updated generated README provider table.');
-} else if (readme !== expected) {
-  throw new Error('README provider table is stale; run npm run docs:update');
+  await writeFile(guidePath, expected);
+  console.log('Updated generated user-guide provider table.');
+} else if (guide !== expected) {
+  throw new Error('User-guide provider table is stale; run npm run docs:update');
 } else {
-  console.log('README provider table is current.');
+  console.log('User-guide provider table is current.');
 }

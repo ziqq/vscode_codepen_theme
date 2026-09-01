@@ -24,3 +24,22 @@ BACKGROUND := \#1d1e22
 else
 BACKGROUND := \#ffffff
 endif
+
+empty :=
+space := $(empty) $(empty)
+TOKEN_NAMES := keyword string comment
+
+define preview_banner
+$(THEME) [$1] uses $(ACCENT)
+endef
+
+.PHONY: render matrix
+render: TOKEN := keyword
+render: | build
+	@printf '%s\n' "$(call preview_banner,$(TOKEN))"
+
+build:
+	@mkdir -p $@
+
+matrix:
+	@$(foreach token,$(TOKEN_NAMES),printf '%s\n' '$(token)';)

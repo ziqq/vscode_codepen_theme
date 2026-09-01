@@ -17,8 +17,8 @@ The measured JS/TS role policy remains:
   that member role; their variables are blue.
 - Green strings and interpolation delimiters; orange numeric literals; gray
   operators and type brackets; ordinary punctuation white.
-- Existing TextMate typography is preserved in Original. Upright suppresses
-  only theme-owned italics while preserving bold and underline. Narrow Dart corrections restore
+- Original suppresses theme-owned italics while preserving bold and underline.
+  Ligatures retains the italic layer. Narrow Dart corrections restore
   gray italic documentation and regular white `Function`/`void` types after the
   Dart provider has classified them as ordinary symbols or keywords.
 
@@ -63,10 +63,10 @@ the large development parser package and its editor queries are excluded.
 ## Verification layers
 
 1. `check:colors` preserves the decoration hash and checks palette/semantic selectors.
-2. `test:providers` checks 33 complete real-grammar samples plus independent edge
-   fixtures. The three-version matrix covers 1.96.0, 1.105.1 and 1.134.0; 1.135.0
-   is also checked locally. It also checks the runtime overlay against every
-   full-sample and edge expectation. The six intended full-sample corrections
+2. `test:providers` checks 68 complete real-grammar samples plus independent edge
+   fixtures. The version matrix covers 1.96.0, 1.105.1, 1.134.0 and 1.135.0.
+   It also checks the runtime overlay against every
+   full-sample and edge expectation. The seven intended full-sample corrections
    are explicit in `refinement-full.json`; contextual checks have no version-specific
    fallback exemptions. Native provider fallback assertions are not contextual matches.
 3. `test:refinement` checks independently marked source roles, UTF-16/CRLF offsets,
@@ -94,13 +94,14 @@ npm run test:refinement:editor -- 1.135.0
 
 Verified locally on 2026-09-01:
 
-- 559 marked role assertions in 47 independently authored fixtures, plus 188
+- 565 marked role assertions in 48 independently authored fixtures, plus 192
   incomplete-edit cases and lifecycle tests.
-- 33 full samples on each of VS Code 1.96.0, 1.105.1 and 1.134.0: 194 short,
-  363 full, 94 edge, and 457 contextual-overlay assertions per version; no failures.
-- 159 actual-editor scenarios on VS Code 1.135.0: 47 contextual fixtures and
+- All 68 full samples pass on VS Code 1.96.0, 1.105.1, 1.134.0 and 1.135.0
+  with 299 short, 725 full, 94 edge, and 819
+  contextual-overlay assertions; no failures.
+- 161 actual-editor scenarios on VS Code 1.135.0: 48 contextual fixtures and
   30 reference fixtures in both semantic modes, plus five lifecycle scenarios
-  including the Upright typography path;
+  including the Ligatures typography path;
   no color differences or typography failures. Real TS and Dart tokens
   were required for their semantic runs. Other servers are not certified.
 - The 5.88 MiB VSIX passed asset/hash/license checks and installation in all three

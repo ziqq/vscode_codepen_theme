@@ -1,4 +1,4 @@
-import type { CSSProperties } from 'react';
+import type { CSSProperties, ReactNode } from 'react';
 
 type TokenName = 'keyword' | 'string' | 'comment';
 
@@ -37,3 +37,29 @@ export const Preview = () => (
     </ul>
   </section>
 );
+
+type PreviewState =
+  | { status: 'loading' }
+  | { status: 'ready'; selected: TokenName }
+  | { status: 'failed'; error: Error };
+
+const Status = ({ state }: { readonly state: PreviewState }) => {
+  switch (state.status) {
+    case 'loading':
+      return <span>Loading {theme.name}&hellip;</span>;
+    case 'ready':
+      return <mark data-token={state.selected}>{tokenLabel(state.selected)}</mark>;
+    case 'failed':
+      return <strong role="alert">{state.error.message}</strong>;
+  }
+};
+
+export const ReadyPreview = () => (
+  <PreviewProvider value={theme}>
+    <Status state={{ status: 'ready', selected: 'keyword' }} />
+  </PreviewProvider>
+);
+
+function PreviewProvider({ children }: { readonly children?: ReactNode; readonly value: Theme }) {
+  return <section hidden>{children}</section>;
+}

@@ -1,12 +1,14 @@
 # Changelog
 
 ## Unreleased
-- **ADDED**: `CodePen Theme Original Upright`, preserving the Original palette while disabling theme-owned italics and retaining bold and underline
-- **ADDED**: classic 13 px Monaco/Courier typography defaults for the editor, Debug Console, integrated terminal, and the `[Log]`-scoped Output editor
+- **ADDED**: `CodePen Theme Original Ligatures`, preserving the Original palette while retaining theme-owned italics; `CodePen Theme Original` remains non-italic
+- **ADDED**: legacy Operator Mono Lig/Operator Mono typography with Monaco/Courier fallbacks for the editor, integrated terminal, Debug Console, and `[Log]`-scoped Output editor; editor ligatures are enabled
 - **FIXED**: Dart named-argument values retain their binding color instead of inheriting the argument-label color
+- **FIXED**: Dart switch-pattern bindings remain blue when referenced inside string interpolation
 - **FIXED**: inline code and square-bracket references remain visible inside documentation comments across refinement providers
-- **CHANGED**: centralized theme variant metadata across generation, runtime gating, packaging, and validation; removed invalid font-setting keys from generated color-theme JSON
+- **CHANGED**: centralized theme variant metadata across generation, runtime gating, packaging, and validation; `package.json` is now the single typography-default source; removed invalid font-setting keys from generated color-theme JSON
 - **ADDED**: complete TypeScript and JavaScript React samples with real-provider scope, color, and contextual-refinement assertions; all refinement language IDs now have full samples
+- **ADDED**: 35 complete fixtures for the remaining user-facing VS Code built-in grammars, bringing the provider contract to 68 samples and rejecting undeclared sample sources
 - **ADDED**: optional, theme-scoped syntax refinement using bundled parsers, with a debounced worker, stale-result protection, and automatic removal when switching themes
 - **FIXED**: exact 1,885/1,885 classic Twilight foreground parity for the recorded JS/TS/JSX corpus, including old-parser contexts for `import type`, labelled/function/mapped types, assertion signatures, `satisfies`, and JSX expressions
 - **FIXED**: runtime/type references and local bindings in JS/TS; Dart documentation, enums and callback types; Java bare fields/parameters; method/field roles across typed languages; Just aliases and Make separators
@@ -14,7 +16,7 @@
 - **ADDED**: independent contextual, incomplete-edit, lifecycle and actual-editor regression checks; parser license and packaged-asset integrity checks
 - **FIXED**: Java modifiers, array types, fields and record components; Dart annotation colors; Just/Make targets and automatic Make variables
 - **FIXED**: member, type, unit and interpolation colors in C/C++, C#, Go, PHP, Python, Rust, Swift, Sass/CSS and TOML
-- **ADDED**: full-source color assertions for all 33 samples, Makefile provider coverage, and multi-position Dart plus Java/Just/Make editor checks
+- **ADDED**: full-source color assertions for the original 33 refinement-oriented samples, Makefile provider coverage, and multi-position Dart plus Java/Just/Make editor checks
 - **CHANGED**: apply measured classic Twilight JS/TS roles across languages: neutral type references, blue bindings, purple members, and gray operators; preserve existing TextMate decorations
 - **CHANGED**: keep bracket-pair rainbow colors from overriding syntax foregrounds and sort palette keys alphabetically
 - **ADDED**: semantic highlighting with JS/TS local/declaration distinctions and Dart member/constructor roles; keep Dart keyword typography separate from color rules

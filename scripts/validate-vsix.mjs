@@ -4,7 +4,7 @@ import { createRequire } from 'node:module';
 import { createHash } from 'node:crypto';
 const require = createRequire(import.meta.url);
 const { runtimeFiles } = require('../src/build-runtime.js');
-const { themeVariants, typographyDefaults } = require('../src/theme-variants.js');
+const { themeVariants } = require('../src/theme-variants.js');
 
 const vsixPath = process.argv[2];
 if (!vsixPath) {
@@ -18,6 +18,9 @@ const files = execFileSync('unzip', ['-Z1', vsixPath], { encoding: 'utf8' })
 const requiredFiles = [
   'extension/package.json',
   'extension/assets/logo.png',
+  'extension/docs/development.md',
+  'extension/docs/screenshots.md',
+  'extension/docs/user-guide.md',
   ...themeVariants.map((variant) => `extension/themes/${variant.file}`),
   'extension/runtime/extension.js',
   'extension/runtime/worker.js',
@@ -27,6 +30,22 @@ const requiredFiles = [
 for (const requiredFile of requiredFiles) {
   if (!files.includes(requiredFile)) {
     throw new Error(`VSIX is missing ${requiredFile}`);
+  }
+}
+
+for (const documentationPath of [
+  'docs/development.md',
+  'docs/screenshots.md',
+  'docs/user-guide.md',
+]) {
+  const packaged = execFileSync(
+    'unzip',
+    ['-p', vsixPath, `extension/${documentationPath}`],
+    { encoding: 'utf8' },
+  );
+  const source = await readFile(documentationPath, 'utf8');
+  if (packaged !== source) {
+    throw new Error(`VSIX contains stale ${documentationPath}`);
   }
 }
 
@@ -84,7 +103,7 @@ if (
   throw new Error('VSIX has unexpected contribution points');
 }
 if (JSON.stringify(manifest.contributes.configurationDefaults) !==
-    JSON.stringify(typographyDefaults)) {
+    JSON.stringify(sourceManifest.contributes.configurationDefaults)) {
   throw new Error('VSIX has stale classic CodePen typography defaults');
 }
 if (manifest.main !== './runtime/extension.js') throw new Error('VSIX runtime entry point is missing');

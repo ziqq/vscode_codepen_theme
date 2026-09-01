@@ -1,17 +1,6 @@
 {
-  "workbench.colorTheme": "CodePen Theme Original",
-  "editor.semanticHighlighting.enabled": "configuredByTheme",
   "editor.minimap.enabled": false,
-  "editor.fontFamily": "Monaco, 'Courier New', Courier, monospace",
-  "editor.fontSize": 13,
-  "editor.lineHeight": 20,
-  "debug.console.fontFamily": "Monaco, 'Courier New', Courier, monospace",
-  "debug.console.fontSize": 13,
-  "terminal.integrated.fontFamily": "Monaco, 'Courier New', Courier, monospace",
-  "terminal.integrated.fontSize": 13,
-  "[Log]": {
-    "editor.fontFamily": "Monaco, 'Courier New', Courier, monospace",
-    "editor.fontSize": 13
-  },
+  "editor.semanticHighlighting.enabled": "configuredByTheme",
+  "workbench.colorTheme": "CodePen Theme Original",
   "workbench.startupEditor": "none"
 }

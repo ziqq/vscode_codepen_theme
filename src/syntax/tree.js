@@ -14,9 +14,9 @@ const identifiers = new Set(['identifier', 'type_identifier', 'field_identifier'
   'simple_identifier', 'name', 'constant', 'namespace_identifier', 'package_identifier',
   'identifier_dollar_escaped', 'interpolated_identifier']);
 const classKinds = new Set(['class_declaration', 'class_definition', 'class_specifier',
-  'struct_specifier', 'struct_item', 'enum_item', 'enum_declaration', 'interface_declaration',
-  'record_declaration', 'trait_item', 'extension_declaration', 'extension_type_declaration',
-  'type_spec', 'class', 'module']);
+  'struct_specifier', 'struct_item', 'enum_specifier', 'enum_item', 'enum_declaration',
+  'interface_declaration', 'protocol_declaration', 'record_declaration', 'trait_item',
+  'extension_declaration', 'extension_type_declaration', 'type_spec', 'class', 'module']);
 const functionKinds = new Set(['function_declaration', 'function_definition', 'function_item',
   'method_declaration', 'constructor_declaration', 'method', 'singleton_method', 'lambda_expression',
   'lambda_literal', 'lambda', 'closure_expression', 'anonymous_function', 'function_literal', 'recipe',
@@ -185,6 +185,13 @@ function classify(root, source, language) {
         functionOf(node) ?? (signature ? region(signature) : region(param)));
     }
     if (['parameters', 'method_parameters', 'lambda_parameters', 'closure_parameters', 'inferred_parameters'].includes(parent.type)) declare(node, 'variable', functionOf(node));
+    if (language === 'dart' && parent.type === 'variable_pattern') {
+      // Pattern variables belong to their switch/if case, including references
+      // inside interpolated strings in the case body.
+      const patternScope = ancestor(node, (item) =>
+        item.type.includes('case'));
+      declare(node, 'variable', patternScope ? region(patternScope) : undefined);
+    }
     const declaration = ancestor(node, (item) => ['variable_declarator', 'initialized_identifier',
       'initialized_variable_definition', 'variable_declaration', 'property_declaration', 'let_declaration',
       'var_spec', 'const_spec', 'init_declarator', 'declaration', 'field_declaration'].includes(item.type));
@@ -210,7 +217,10 @@ function classify(root, source, language) {
   function useRole(node) {
     if (roles.has(node.id)) return roles.get(node.id);
     const parent = node.parent;
-    if (language === 'sql') return ancestor(node, (item) => item.type === 'field') ? 'purple' : 'blue';
+    if (language === 'sql') {
+      if (ancestor(node, (item) => item.type === 'invocation')) return 'yellow';
+      return ancestor(node, (item) => item.type === 'field') ? 'purple' : 'blue';
+    }
     if (language === 'rust' && parent.type === 'macro_invocation' && isField(node, 'macro')) return 'purple';
     if (propertyNode(node)) return 'purple';
     if (['keyword_argument', 'label', 'value_argument_label', 'field_initializer',
@@ -272,6 +282,9 @@ function classify(root, source, language) {
       if (node.type === 'automatic_variable') spans.add(node.startIndex, node.endIndex, 'blue', 40);
       if (node.type === 'word' && ['targets', 'prerequisites'].includes(node.parent.type)) spans.add(node.startIndex, node.endIndex, 'purple', 30);
       if (node.type === 'word' && (isField(node, 'name') || node.parent.type === 'variable_reference')) spans.add(node.startIndex, node.endIndex, 'blue', 40);
+      if (!node.isNamed && node.parent?.type === 'function_call' && /^[a-z][\w-]*$/.test(text)) {
+        spans.add(node.startIndex, node.endIndex, 'yellow', 40);
+      }
     }
     if (language === 'dart' && node.type === 'annotation') spans.add(node.startIndex, node.endIndex, 'yellow', 40);
     if (language === 'rust' && node.parent?.type === 'macro_invocation' && (isField(node, 'macro') || text === '!')) {

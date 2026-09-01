@@ -1,0 +1,24 @@
+{{!-- Blocks, helpers, paths, data variables, partials, and escaped values. --}}
+<article class="theme-card" data-theme-id="{{theme.id}}">
+  <header>
+    <h1>{{uppercase theme.name}}</h1>
+    <span style="color: {{theme.accent}}">{{@root.product}}</span>
+  </header>
+
+  {{#if theme.tokens.length}}
+    <ul>
+      {{#each theme.tokens as |token index|}}
+        <li data-index="{{index}}">
+          <code>{{token.name}}</code>: {{token.color}}
+        </li>
+      {{else}}
+        <li>No visible tokens</li>
+      {{/each}}
+    </ul>
+  {{else}}
+    <p>{{defaultMessage}}</p>
+  {{/if}}
+
+  {{> theme-footer name=theme.name}}
+  <pre>{{{theme.rawCss}}}</pre>
+</article>

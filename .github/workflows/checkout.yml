@@ -21,6 +21,7 @@ on:
       - "themes/**"
       - ".vscodeignore"
       - "CHANGELOG.md"
+      - "docs/**"
       - "Makefile"
       - "README.md"
       - "package.json"

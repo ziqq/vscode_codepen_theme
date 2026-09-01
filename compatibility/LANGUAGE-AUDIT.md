@@ -14,11 +14,12 @@ font style, and full scope stack for each source span.
 
 ## Coverage
 
-- 33 complete language/format samples, including dedicated TypeScript and
-  JavaScript React fixtures instead of inferring both from TSX.
-- 363 reviewed full-sample assertions in [full-samples.json](full-samples.json),
-  in addition to 194 short regression assertions.
-- All pass on VS Code 1.96.0, 1.105.1, and 1.134.0. Version-specific missing
+- 68 complete language/format samples, including dedicated related and embedded
+  formats instead of inferring them from a neighboring grammar.
+- 725 reviewed full-sample assertions in [full-samples.json](full-samples.json),
+  in addition to 299 short regression assertions.
+- All 68 cases pass on VS Code 1.96.0, 1.105.1, 1.134.0, and 1.135.0.
+  Version-specific missing
   grammar context is explicit in `providerFallbacks`, with the intended role
   retained alongside the actual fallback; it is not silently treated as parity.
 - The 30-case live CodePen JS/TS/JSX reference audit remains unchanged:
@@ -29,8 +30,12 @@ font style, and full scope stack for each source span.
   and Vue. Dart is reviewed at the beginning, middle, and end, not only imports.
 
 These counts are regression coverage, not proof that every construct in every
-language server is covered. Java was checked with its built-in TextMate grammar;
-Java language-server semantic tokens were not verified.
+language server is covered. The detailed table below focuses on the 33 cases
+with contextual-refinement or earlier provider-boundary findings. The additional
+35 built-in cases are pinned by their provider, root scope, representative scopes,
+and exact source-span expectations in the machine-readable contracts. Java was
+checked with its built-in TextMate grammar; Java language-server semantic tokens
+were not verified.
 
 ## Reviewed language results
 

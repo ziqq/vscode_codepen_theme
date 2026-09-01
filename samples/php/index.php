@@ -30,3 +30,25 @@ foreach (tokens($theme) as $name => $color) {
     echo "$name: $color\n";
 }
 echo $theme->label() . PHP_EOL;
+
+enum TokenRole: string
+{
+    case Keyword = 'keyword';
+    case String = 'string';
+    case Comment = 'comment';
+}
+
+function colorFor(TokenRole $role, Theme $theme): string
+{
+    return match ($role) {
+        TokenRole::Keyword => '#ddca7e',
+        TokenRole::String => $theme->accent,
+        TokenRole::Comment => '#717790',
+    };
+}
+
+$labels = array_map(
+    static fn (TokenRole $role): string => "{$role->value}: " . colorFor($role, $theme),
+    TokenRole::cases(),
+);
+echo implode(PHP_EOL, $labels) . PHP_EOL;

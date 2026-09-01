@@ -10,6 +10,12 @@
   },
   "rendering": {
     "semanticHighlighting": false,
-    "previewLimit": 3
-  }
+    "previewLimit": 3,
+    "fontStack": ["Operator Mono Lig", "Operator Mono", "monospace"]
+  },
+  "diagnostics": [
+    { "severity": "warning", "enabled": true },
+    { "severity": "error", "enabled": false }
+  ],
+  "metadata": null
 }

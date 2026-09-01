@@ -28,3 +28,22 @@ public final class Main {
     System.out.println(message);
   }
 }
+
+sealed interface TokenRole permits KeywordRole, LiteralRole {
+  String color();
+}
+
+record KeywordRole(String color) implements TokenRole {}
+
+record LiteralRole(String name, String color) implements TokenRole {}
+
+final class TokenFormatter {
+  private TokenFormatter() {}
+
+  static String describe(TokenRole role) {
+    return switch (role) {
+      case KeywordRole keyword -> "keyword=" + keyword.color();
+      case LiteralRole(String name, String color) -> name + "=" + color;
+    };
+  }
+}

@@ -24,3 +24,17 @@
   section.active button { color: #96b38a; }
   li { color: #717790; }
 </style>
+
+{#if count > 2}
+  <aside data-state="busy">
+    {@html `<strong>${theme}</strong>`}
+  </aside>
+{:else if count === 0}
+  <small>Choose a token to start.</small>
+{:else}
+  <small>{count} token{count === 1 ? '' : 's'} selected.</small>
+{/if}
+
+<svelte:head>
+  <meta name="theme-color" content="#1d1e22" />
+</svelte:head>

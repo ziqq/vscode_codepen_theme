@@ -6,7 +6,7 @@ import path from 'node:path';
 const require = createRequire(import.meta.url);
 const { generatedThemes } = require('../src/index.js');
 const { runtimeFiles } = require('../src/build-runtime.js');
-const { themeVariants, typographyDefaults } = require('../src/theme-variants.js');
+const { themeVariants } = require('../src/theme-variants.js');
 
 const manifest = JSON.parse(await readFile('package.json', 'utf8'));
 const recommendations = JSON.parse(
@@ -15,7 +15,7 @@ const recommendations = JSON.parse(
 const compatibility = JSON.parse(
   await readFile('compatibility/scopes.json', 'utf8'),
 );
-const readme = await readFile('README.md', 'utf8');
+const userGuide = await readFile('docs/user-guide.md', 'utf8');
 
 const expectedContributionPoints = [
   'configuration',
@@ -27,6 +27,21 @@ const expectedRecommendations = compatibility.providers
   .filter((provider) => provider.kind === 'recommended')
   .map((provider) => provider.id);
 const expectedSamples = compatibility.cases.map((item) => item.sample);
+
+const sampleEntries = await readdir('samples', {
+  recursive: true,
+  withFileTypes: true,
+});
+const actualSamples = sampleEntries
+  .filter((entry) => entry.isFile())
+  .map((entry) => path.relative(
+    process.cwd(),
+    path.join(entry.parentPath ?? entry.path, entry.name),
+  ).split(path.sep).join('/'))
+  .filter((samplePath) =>
+    samplePath !== 'samples/README.md' &&
+    !samplePath.startsWith('samples/.vscode/'))
+  .sort();
 
 if (
   JSON.stringify(actualContributionPoints) !==
@@ -49,9 +64,70 @@ if (Object.keys(configuration).join(',') !== 'codepen.syntaxRefinement.enabled' 
     configuration['codepen.syntaxRefinement.enabled'].default !== true) {
   throw new Error('Only the opt-out syntax refinement setting is allowed');
 }
-if (JSON.stringify(manifest.contributes.configurationDefaults) !==
-    JSON.stringify(typographyDefaults)) {
-  throw new Error('Classic CodePen typography defaults are missing or stale');
+const typographyDefaults = manifest.contributes.configurationDefaults;
+const expectedTypographyKeys = [
+  '[Log]',
+  'debug.console.fontFamily',
+  'debug.console.fontSize',
+  'editor.fontFamily',
+  'editor.fontLigatures',
+  'editor.fontSize',
+  'terminal.integrated.fontFamily',
+  'terminal.integrated.fontSize',
+];
+if (!typographyDefaults ||
+    JSON.stringify(Object.keys(typographyDefaults).sort()) !==
+      JSON.stringify(expectedTypographyKeys)) {
+  throw new Error('package.json must be the complete typography-default source');
+}
+const logDefaults = typographyDefaults['[Log]'];
+if (!logDefaults ||
+    JSON.stringify(Object.keys(logDefaults).sort()) !==
+      JSON.stringify([
+        'editor.fontFamily',
+        'editor.fontLigatures',
+        'editor.fontSize',
+      ])) {
+  throw new Error('Output typography must use only the [Log] language override');
+}
+const fontFamily = typographyDefaults['editor.fontFamily'];
+const fontFamilySettings = [
+  typographyDefaults['debug.console.fontFamily'],
+  typographyDefaults['terminal.integrated.fontFamily'],
+  logDefaults['editor.fontFamily'],
+];
+if (typeof fontFamily !== 'string' ||
+    fontFamilySettings.some((value) => value !== fontFamily)) {
+  throw new Error('Every contributed surface must share one font-family stack');
+}
+let previousFontIndex = -1;
+for (const family of [
+  'Operator Mono Lig',
+  'Operator Mono',
+  'Monaco',
+  'Courier New',
+  'Courier',
+  'monospace',
+]) {
+  const index = fontFamily.indexOf(family, previousFontIndex + 1);
+  if (index === -1) {
+    throw new Error(`Classic CodePen font fallback is missing or reordered: ${family}`);
+  }
+  previousFontIndex = index;
+}
+if (typographyDefaults['editor.fontLigatures'] !== true ||
+    logDefaults['editor.fontLigatures'] !== true) {
+  throw new Error('Editor and Log-language ligatures must default to enabled');
+}
+for (const [setting, value] of [
+  ['debug.console.fontSize', typographyDefaults['debug.console.fontSize']],
+  ['editor.fontSize', typographyDefaults['editor.fontSize']],
+  ['terminal.integrated.fontSize', typographyDefaults['terminal.integrated.fontSize']],
+  ['[Log].editor.fontSize', logDefaults['editor.fontSize']],
+]) {
+  if (!Number.isFinite(value) || value <= 0) {
+    throw new Error(`${setting} must be a positive number`);
+  }
 }
 const expectedRuntime = runtimeFiles();
 const actualRuntime = (await readdir('runtime', { recursive: true, withFileTypes: true }))
@@ -126,7 +202,7 @@ for (const [absolutePath, expectedSource] of generatedThemes()) {
 }
 
 const original = parsedThemes.get('CodePen Theme Original');
-const upright = parsedThemes.get('CodePen Theme Original Upright');
+const ligatures = parsedThemes.get('CodePen Theme Original Ligatures');
 const foregroundRules = (theme) => theme.tokenColors.filter(
   (rule) => rule.settings.foreground !== undefined,
 );
@@ -136,16 +212,22 @@ const semanticForegrounds = (theme) => Object.fromEntries(
     typeof value === 'string' ? value : value.foreground,
   ]),
 );
-if (JSON.stringify(original.colors) !== JSON.stringify(upright.colors) ||
-    JSON.stringify(foregroundRules(original)) !== JSON.stringify(foregroundRules(upright)) ||
-    JSON.stringify(semanticForegrounds(original)) !== JSON.stringify(semanticForegrounds(upright))) {
-  throw new Error('Upright variant must preserve every Original foreground color');
+if (JSON.stringify(original.colors) !== JSON.stringify(ligatures.colors) ||
+    JSON.stringify(foregroundRules(original)) !== JSON.stringify(foregroundRules(ligatures)) ||
+    JSON.stringify(semanticForegrounds(original)) !== JSON.stringify(semanticForegrounds(ligatures))) {
+  throw new Error('Ligatures variant must preserve every Original foreground color');
 }
-if (upright.tokenColors.some((rule) =>
+if (original.tokenColors.some((rule) =>
   rule.settings.fontStyle?.split(/\s+/).includes('italic')) ||
-  Object.values(upright.semanticTokenColors).some((value) =>
+  Object.values(original.semanticTokenColors).some((value) =>
     typeof value === 'object' && value.italic === true)) {
-  throw new Error('Upright variant must not contribute italic typography');
+  throw new Error('Original must not contribute italic typography');
+}
+if (!ligatures.tokenColors.some((rule) =>
+  rule.settings.fontStyle?.split(/\s+/).includes('italic')) ||
+  !Object.values(ligatures.semanticTokenColors).some((value) =>
+    typeof value === 'object' && value.italic === true)) {
+  throw new Error('Ligatures must retain TextMate and semantic italics');
 }
 
 const generatedThemeFiles = await readdir('themes');
@@ -172,15 +254,30 @@ for (const directory of ['languages', 'syntaxes', 'snippets']) {
 }
 
 for (const extensionId of expectedRecommendations) {
-  if (!readme.toLowerCase().includes(extensionId.toLowerCase())) {
+  if (!userGuide.toLowerCase().includes(extensionId.toLowerCase())) {
     throw new Error(
-      `README does not document recommended extension ${extensionId}`,
+      `User guide does not document recommended extension ${extensionId}`,
     );
   }
 }
 
 for (const samplePath of expectedSamples) {
   await access(samplePath, constants.R_OK);
+}
+
+if (new Set(expectedSamples).size !== expectedSamples.length) {
+  throw new Error('Every compatibility case must reference a unique sample');
+}
+
+const declaredSamples = [...expectedSamples].sort();
+if (JSON.stringify(actualSamples) !== JSON.stringify(declaredSamples)) {
+  const undeclared = actualSamples.filter((item) => !declaredSamples.includes(item));
+  const missing = declaredSamples.filter((item) => !actualSamples.includes(item));
+  throw new Error([
+    'Every sample source must be declared exactly once in compatibility/scopes.json.',
+    undeclared.length > 0 ? `Undeclared: ${undeclared.join(', ')}` : '',
+    missing.length > 0 ? `Missing: ${missing.join(', ')}` : '',
+  ].filter(Boolean).join(' '));
 }
 
 console.log(

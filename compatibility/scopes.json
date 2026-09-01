@@ -1,12 +1,13 @@
 {
   "schemaVersion": 1,
   "verifiedAt": "2026-09-01",
-  "verifiedVscodeVersion": "1.134.0",
+  "verifiedVscodeVersion": "1.135.0",
   "minimumVscodeVersion": "1.96.0",
   "testVscodeVersions": [
     "1.96.0",
     "1.105.1",
-    "1.134.0"
+    "1.134.0",
+    "1.135.0"
   ],
   "providers": [
     {
@@ -111,6 +112,131 @@
     },
     {
       "id": "vscode.yaml",
+      "kind": "builtin",
+      "version": "10.0.0"
+    },
+    {
+      "id": "vscode.bat",
+      "kind": "builtin",
+      "version": "10.0.0"
+    },
+    {
+      "id": "vscode.clojure",
+      "kind": "builtin",
+      "version": "10.0.0"
+    },
+    {
+      "id": "vscode.coffeescript",
+      "kind": "builtin",
+      "version": "10.0.0"
+    },
+    {
+      "id": "vscode.diff",
+      "kind": "builtin",
+      "version": "10.0.0"
+    },
+    {
+      "id": "vscode.docker",
+      "kind": "builtin",
+      "version": "10.0.0"
+    },
+    {
+      "id": "vscode.fsharp",
+      "kind": "builtin",
+      "version": "10.0.0"
+    },
+    {
+      "id": "vscode.groovy",
+      "kind": "builtin",
+      "version": "10.0.0"
+    },
+    {
+      "id": "vscode.handlebars",
+      "kind": "builtin",
+      "version": "10.0.0"
+    },
+    {
+      "id": "vscode.hlsl",
+      "kind": "builtin",
+      "version": "10.0.0"
+    },
+    {
+      "id": "vscode.ini",
+      "kind": "builtin",
+      "version": "10.0.0"
+    },
+    {
+      "id": "vscode.julia",
+      "kind": "builtin",
+      "version": "10.0.0"
+    },
+    {
+      "id": "vscode.latex",
+      "kind": "builtin",
+      "version": "10.0.0"
+    },
+    {
+      "id": "vscode.less",
+      "kind": "builtin",
+      "version": "10.0.0"
+    },
+    {
+      "id": "vscode.lua",
+      "kind": "builtin",
+      "version": "10.0.0"
+    },
+    {
+      "id": "vscode.ms-vscode.js-debug",
+      "kind": "builtin",
+      "version": "1.117.0"
+    },
+    {
+      "id": "vscode.objective-c",
+      "kind": "builtin",
+      "version": "10.0.0"
+    },
+    {
+      "id": "vscode.perl",
+      "kind": "builtin",
+      "version": "10.0.0"
+    },
+    {
+      "id": "vscode.powershell",
+      "kind": "builtin",
+      "version": "10.0.0"
+    },
+    {
+      "id": "vscode.pug",
+      "kind": "builtin",
+      "version": "10.0.0"
+    },
+    {
+      "id": "vscode.r",
+      "kind": "builtin",
+      "version": "10.0.0"
+    },
+    {
+      "id": "vscode.razor",
+      "kind": "builtin",
+      "version": "10.0.0"
+    },
+    {
+      "id": "vscode.restructuredtext",
+      "kind": "builtin",
+      "version": "10.0.0"
+    },
+    {
+      "id": "vscode.shaderlab",
+      "kind": "builtin",
+      "version": "10.0.0"
+    },
+    {
+      "id": "vscode.vb",
+      "kind": "builtin",
+      "version": "10.0.0"
+    },
+    {
+      "id": "vscode.xml",
       "kind": "builtin",
       "version": "10.0.0"
     },
@@ -716,6 +842,461 @@
         "string.unquoted.plain.out.yaml",
         "string.quoted.single.yaml",
         "comment.line.number-sign.yaml"
+      ]
+    },
+    {
+      "language": "Batch",
+      "languageId": "bat",
+      "sample": "samples/batch/theme-preview.bat",
+      "provider": "vscode.bat",
+      "rootScope": "source.batchfile",
+      "requiredScopes": [
+        "comment.line.rem.batchfile",
+        "keyword.control.repeat.batchfile",
+        "keyword.control.conditional.batchfile",
+        "keyword.command.batchfile"
+      ]
+    },
+    {
+      "language": "BibTeX",
+      "languageId": "bibtex",
+      "sample": "samples/latex/references.bib",
+      "provider": "vscode.latex",
+      "rootScope": "text.bibtex",
+      "requiredScopes": [
+        "keyword.other.entry-type.bibtex",
+        "entity.name.type.entry-key.bibtex",
+        "support.function.key.bibtex",
+        "punctuation.definition.string.begin.bibtex"
+      ]
+    },
+    {
+      "language": "Clojure",
+      "languageId": "clojure",
+      "sample": "samples/clojure/core.clj",
+      "provider": "vscode.clojure",
+      "rootScope": "source.clojure",
+      "requiredScopes": [
+        "comment.line.semicolon.clojure",
+        "keyword.control.clojure",
+        "string.quoted.double.clojure",
+        "entity.name.function.clojure"
+      ]
+    },
+    {
+      "language": "CoffeeScript",
+      "languageId": "coffeescript",
+      "sample": "samples/coffeescript/theme.coffee",
+      "provider": "vscode.coffeescript",
+      "rootScope": "source.coffee",
+      "requiredScopes": [
+        "comment.line.number-sign.coffee",
+        "storage.type.class.coffee",
+        "storage.type.function.coffee",
+        "string.quoted.single.coffee"
+      ]
+    },
+    {
+      "language": "CUDA C++",
+      "languageId": "cuda-cpp",
+      "sample": "samples/cuda/main.cu",
+      "provider": "vscode.cpp",
+      "rootScope": "source.cuda-cpp",
+      "requiredScopes": [
+        "comment.line.double-slash.cuda-cpp",
+        "storage.type.struct.cuda-cpp",
+        "storage.modifier.__device__.cuda-cpp",
+        "keyword.control.return.cuda-cpp"
+      ]
+    },
+    {
+      "language": "Diff",
+      "languageId": "diff",
+      "sample": "samples/diff/theme.patch",
+      "provider": "vscode.diff",
+      "rootScope": "source.diff",
+      "requiredScopes": [
+        "punctuation.definition.from-file.diff",
+        "punctuation.definition.to-file.diff",
+        "punctuation.definition.range.diff",
+        "markup.inserted.diff"
+      ]
+    },
+    {
+      "language": "Docker Compose",
+      "languageId": "dockercompose",
+      "sample": "samples/docker/compose.yaml",
+      "provider": "vscode.yaml",
+      "rootScope": "source.yaml",
+      "requiredScopes": [
+        "entity.name.tag.yaml",
+        "string.quoted.double.yaml",
+        "constant.language.boolean.yaml",
+        "punctuation.definition.block.sequence.item.yaml"
+      ]
+    },
+    {
+      "language": "Dockerfile",
+      "languageId": "dockerfile",
+      "sample": "samples/docker/Dockerfile",
+      "provider": "vscode.docker",
+      "rootScope": "source.dockerfile",
+      "requiredScopes": [
+        "comment.line.number-sign.dockerfile",
+        "punctuation.definition.comment.dockerfile",
+        "keyword.other.special-method.dockerfile",
+        "string.quoted.double.dockerfile"
+      ]
+    },
+    {
+      "language": "F#",
+      "languageId": "fsharp",
+      "sample": "samples/fsharp/Program.fs",
+      "provider": "vscode.fsharp",
+      "rootScope": "source.fsharp",
+      "requiredScopes": [
+        "comment.line.double-slash.fsharp",
+        "keyword.fsharp",
+        "string.quoted.double.fsharp",
+        "entity.name.type.fsharp"
+      ]
+    },
+    {
+      "language": "Groovy",
+      "languageId": "groovy",
+      "sample": "samples/groovy/theme.groovy",
+      "provider": "vscode.groovy",
+      "rootScope": "source.groovy",
+      "requiredScopes": [
+        "comment.line.double-slash.groovy",
+        "storage.type.annotation.groovy",
+        "storage.type.def.groovy",
+        "keyword.control.new.groovy"
+      ]
+    },
+    {
+      "language": "Handlebars",
+      "languageId": "handlebars",
+      "sample": "samples/handlebars/card.hbs",
+      "provider": "vscode.handlebars",
+      "rootScope": "text.html.handlebars",
+      "requiredScopes": [
+        "comment.block.handlebars",
+        "keyword.control",
+        "string.quoted.double.handlebars",
+        "variable.parameter.handlebars"
+      ]
+    },
+    {
+      "language": "HLSL",
+      "languageId": "hlsl",
+      "sample": "samples/hlsl/theme.hlsl",
+      "provider": "vscode.hlsl",
+      "rootScope": "source.hlsl",
+      "requiredScopes": [
+        "comment.line.double-slash.hlsl",
+        "storage.type.structured.hlsl",
+        "storage.type.basic.hlsl",
+        "support.function.hlsl"
+      ]
+    },
+    {
+      "language": "INI",
+      "languageId": "ini",
+      "sample": "samples/ini/theme.ini",
+      "provider": "vscode.ini",
+      "rootScope": "source.ini",
+      "requiredScopes": [
+        "comment.line.semicolon.ini",
+        "keyword.other.definition.ini",
+        "string.quoted.double.ini",
+        "punctuation.definition.entity.ini"
+      ]
+    },
+    {
+      "language": "JSON",
+      "languageId": "json",
+      "sample": "samples/json/theme.json",
+      "provider": "vscode.json",
+      "rootScope": "source.json",
+      "requiredScopes": [
+        "support.type.property-name.json",
+        "string.quoted.double.json",
+        "constant.numeric.json",
+        "punctuation.definition.dictionary.begin.json"
+      ]
+    },
+    {
+      "language": "JSON Lines",
+      "languageId": "jsonl",
+      "sample": "samples/json/events.jsonl",
+      "provider": "vscode.json",
+      "rootScope": "source.json.lines",
+      "requiredScopes": [
+        "support.type.property-name.json.lines",
+        "string.quoted.double.json.lines",
+        "constant.numeric.json.lines",
+        "punctuation.definition.dictionary.begin.json.lines"
+      ]
+    },
+    {
+      "language": "Julia",
+      "languageId": "julia",
+      "sample": "samples/julia/theme.jl",
+      "provider": "vscode.julia",
+      "rootScope": "source.julia",
+      "requiredScopes": [
+        "comment.line.number-sign.julia",
+        "keyword.control.export.julia",
+        "keyword.other.julia",
+        "keyword.storage.modifier.julia"
+      ]
+    },
+    {
+      "language": "LaTeX",
+      "languageId": "latex",
+      "sample": "samples/latex/document.tex",
+      "provider": "vscode.latex",
+      "rootScope": "text.tex.latex",
+      "requiredScopes": [
+        "comment.line.percentage.tex",
+        "keyword.control.preamble.latex",
+        "storage.type.function.latex",
+        "keyword.other.item.latex"
+      ]
+    },
+    {
+      "language": "Less",
+      "languageId": "less",
+      "sample": "samples/less/styles.less",
+      "provider": "vscode.less",
+      "rootScope": "source.css.less",
+      "requiredScopes": [
+        "comment.line.double-slash.less",
+        "keyword.control.conditional.less",
+        "variable.other.readwrite.less",
+        "constant.numeric.less"
+      ]
+    },
+    {
+      "language": "Lua",
+      "languageId": "lua",
+      "sample": "samples/lua/theme.lua",
+      "provider": "vscode.lua",
+      "rootScope": "source.lua",
+      "requiredScopes": [
+        "comment.line.double-dash.lua",
+        "keyword.control.lua",
+        "string.quoted.double.lua",
+        "entity.name.function.lua"
+      ]
+    },
+    {
+      "language": "Objective-C",
+      "languageId": "objective-c",
+      "sample": "samples/objective-c/main.m",
+      "provider": "vscode.objective-c",
+      "rootScope": "source.objc",
+      "requiredScopes": [
+        "comment.line.double-slash.objc",
+        "keyword.control.directive.import.objc",
+        "storage.type.built-in.primitive.objc",
+        "keyword.other.property.objc"
+      ]
+    },
+    {
+      "language": "Objective-C++",
+      "languageId": "objective-cpp",
+      "sample": "samples/objective-cpp/main.mm",
+      "provider": "vscode.objective-c",
+      "rootScope": "source.objcpp",
+      "requiredScopes": [
+        "comment.line.double-slash.objcpp",
+        "keyword.control.directive.include.objcpp",
+        "storage.type.built-in.primitive.objcpp",
+        "storage.type.struct.objcpp"
+      ]
+    },
+    {
+      "language": "Perl",
+      "languageId": "perl",
+      "sample": "samples/perl/theme.pl",
+      "provider": "vscode.perl",
+      "rootScope": "source.perl",
+      "requiredScopes": [
+        "comment.line.number-sign.perl",
+        "storage.type.sub.perl",
+        "storage.modifier.perl",
+        "string.quoted.other.q-paren.perl"
+      ]
+    },
+    {
+      "language": "PowerShell",
+      "languageId": "powershell",
+      "sample": "samples/powershell/theme.ps1",
+      "provider": "vscode.powershell",
+      "rootScope": "source.powershell",
+      "requiredScopes": [
+        "comment.line.powershell",
+        "storage.type.powershell",
+        "keyword.control.powershell",
+        "keyword.other.hashtable.begin.powershell"
+      ]
+    },
+    {
+      "language": "Properties",
+      "languageId": "properties",
+      "sample": "samples/properties/theme.properties",
+      "provider": "vscode.ini",
+      "rootScope": "source.ini",
+      "requiredScopes": [
+        "comment.line.number-sign.ini",
+        "punctuation.definition.comment.ini",
+        "keyword.other.definition.ini",
+        "punctuation.separator.key-value.ini"
+      ]
+    },
+    {
+      "language": "Pug",
+      "languageId": "jade",
+      "sample": "samples/pug/index.pug",
+      "provider": "vscode.pug",
+      "rootScope": "text.pug",
+      "requiredScopes": [
+        "comment.unbuffered.block.pug",
+        "storage.type.function.pug",
+        "string.quoted.single.js",
+        "entity.name.tag.pug"
+      ]
+    },
+    {
+      "language": "R",
+      "languageId": "r",
+      "sample": "samples/r/theme.R",
+      "provider": "vscode.r",
+      "rootScope": "source.r",
+      "requiredScopes": [
+        "comment.line.number-sign.r",
+        "keyword.control.r",
+        "storage.type.r",
+        "string.quoted.double.r"
+      ]
+    },
+    {
+      "language": "Raku",
+      "languageId": "raku",
+      "sample": "samples/raku/theme.raku",
+      "provider": "vscode.perl",
+      "rootScope": "source.perl.6",
+      "requiredScopes": [
+        "comment.line.number-sign.perl",
+        "storage.type.class.perl.6",
+        "storage.type.declare.routine.perl",
+        "keyword.control.flowcontrol.perl"
+      ]
+    },
+    {
+      "language": "Razor",
+      "languageId": "razor",
+      "sample": "samples/razor/Theme.razor",
+      "provider": "vscode.razor",
+      "rootScope": "text.html.cshtml",
+      "requiredScopes": [
+        "keyword.control.razor.directive.page",
+        "keyword.control.razor.directive.code",
+        "keyword.control.conditional.if.cs",
+        "storage.type.accessor.get.cs"
+      ]
+    },
+    {
+      "language": "reStructuredText",
+      "languageId": "restructuredtext",
+      "sample": "samples/restructuredtext/theme.rst",
+      "provider": "vscode.restructuredtext",
+      "rootScope": "source.rst",
+      "requiredScopes": [
+        "keyword.control",
+        "string.interpolated",
+        "entity.name.tag.anchor",
+        "markup.heading"
+      ]
+    },
+    {
+      "language": "ShaderLab",
+      "languageId": "shaderlab",
+      "sample": "samples/shaderlab/Theme.shader",
+      "provider": "vscode.shaderlab",
+      "rootScope": "source.shaderlab",
+      "requiredScopes": [
+        "storage.type.structure.shaderlab",
+        "keyword.preprocessor.hlsl",
+        "string.quoted.double.shaderlab",
+        "constant.numeric.shaderlab"
+      ]
+    },
+    {
+      "language": "TeX",
+      "languageId": "tex",
+      "sample": "samples/latex/package.sty",
+      "provider": "vscode.latex",
+      "rootScope": "text.tex",
+      "requiredScopes": [
+        "comment.line.percentage.tex",
+        "support.class.general.latex3.tex",
+        "support.function.general.tex",
+        "punctuation.definition.brackets.tex"
+      ]
+    },
+    {
+      "language": "Visual Basic",
+      "languageId": "vb",
+      "sample": "samples/visual-basic/Theme.vb",
+      "provider": "vscode.vb",
+      "rootScope": "source.asp.vb.net",
+      "requiredScopes": [
+        "comment.line.apostrophe.asp",
+        "storage.modifier.asp",
+        "storage.type.asp",
+        "string.quoted.double.asp"
+      ]
+    },
+    {
+      "language": "WAT",
+      "languageId": "wat",
+      "sample": "samples/wat/theme.wat",
+      "provider": "vscode.ms-vscode.js-debug",
+      "rootScope": "text.wat",
+      "requiredScopes": [
+        "comment.line.double-semicolon",
+        "keyword",
+        "string.quoted",
+        "constant.numeric"
+      ]
+    },
+    {
+      "language": "XML",
+      "languageId": "xml",
+      "sample": "samples/xml/theme.xml",
+      "provider": "vscode.xml",
+      "rootScope": "text.xml",
+      "requiredScopes": [
+        "comment.block.xml",
+        "string.quoted.double.xml",
+        "entity.name.tag.localname.xml",
+        "entity.other.attribute-name.localname.xml"
+      ]
+    },
+    {
+      "language": "XSL",
+      "languageId": "xsl",
+      "sample": "samples/xml/transform.xsl",
+      "provider": "vscode.xml",
+      "rootScope": "text.xml.xsl",
+      "requiredScopes": [
+        "string.quoted.double.xml",
+        "entity.name.tag.namespace.xml",
+        "entity.name.tag.localname.xml",
+        "entity.other.attribute-name.localname.xml"
       ]
     }
   ]

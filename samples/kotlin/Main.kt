@@ -27,3 +27,15 @@ fun main() {
 
     println(theme.label(ThemeMode.DARK))
 }
+
+sealed interface TokenRole {
+    val color: String
+
+    data class Keyword(override val color: String = "#ddca7e") : TokenRole
+    data class Literal(val name: String, override val color: String) : TokenRole
+}
+
+fun TokenRole.describe(): String = when (this) {
+    is TokenRole.Keyword -> "keyword=$color"
+    is TokenRole.Literal -> "$name=$color"
+}

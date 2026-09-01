@@ -25,3 +25,21 @@ internal static class Program
         Console.WriteLine(theme.Label);
     }
 }
+
+internal enum TokenRole
+{
+    Keyword,
+    String,
+    Comment,
+}
+
+internal static class TokenRoleExtensions
+{
+    public static string Color(this TokenRole role) => role switch
+    {
+        TokenRole.Keyword => "#ddca7e",
+        TokenRole.String => "#96b38a",
+        TokenRole.Comment => "#717790",
+        _ => throw new ArgumentOutOfRangeException(nameof(role)),
+    };
+}

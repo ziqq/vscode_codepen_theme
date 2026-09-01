@@ -8,8 +8,15 @@ import assert from 'node:assert/strict';
 import { vscodeExecutable } from './lib/vscode-runtime.mjs';
 const require = createRequire(import.meta.url);
 const { chromium } = require('playwright-core');
-const { typographyDefaults } = require('../src/theme-variants');
 const root = process.cwd();
+const manifest = JSON.parse(
+  await fs.readFile(path.join(root, 'package.json'), 'utf8'),
+);
+const typographyDefaults = manifest.contributes?.configurationDefaults;
+assert.ok(
+  typographyDefaults,
+  'package.json must contribute typography defaults for the editor harness',
+);
 const requestedVersion = process.argv[2] ?? '1.135.0';
 const executable = await vscodeExecutable(requestedVersion);
 const output = await fs.mkdtemp(path.join(os.tmpdir(), 'codepen-refinement-'));
@@ -31,6 +38,13 @@ for (const reference of references) {
   cases.push({ id: reference.id, language: { javascript: 'javascript', typescript: 'typescript', jsx: 'javascriptreact' }[reference.mode],
     source: reference.source, reference: true, lines: reference.lines });
 }
+const evidenceCaseIds = new Set([
+  cases.find((item) => item.language === 'typescript')?.id,
+  cases.find((item) => item.language === 'dart' && item.source.includes('switch (state)'))?.id,
+  cases.find((item) => item.language === 'java')?.id,
+  cases.find((item) => item.language === 'just')?.id,
+  cases.find((item) => item.language === 'makefile')?.id,
+]);
 const extensions = { javascript: 'js', javascriptreact: 'jsx', typescript: 'ts', typescriptreact: 'tsx', dart: 'dart',
   java: 'java', go: 'go', python: 'py', cpp: 'cpp', c: 'c', csharp: 'cs', kotlin: 'kt', swift: 'swift', ruby: 'rb',
   php: 'php', just: 'just', makefile: 'mk', sql: 'sql', dotenv: 'env', shellscript: 'sh', html: 'html',
@@ -45,7 +59,7 @@ for (const item of cases) {
 }
 const plan = cases.flatMap((item) => [ { ...item, semantic: false }, { ...item, semantic: true } ]);
 plan.push(...[
-  { disabled: true }, { otherTheme: true }, { upright: true }, { edit: true }, {},
+  { disabled: true }, { otherTheme: true }, { ligatures: true }, { edit: true }, {},
 ].map((mode, index) => ({ ...cases[0], id: `lifecycle-${index}`, semantic: true, ...mode })));
 await fs.writeFile(path.join(output, 'plan.json'), JSON.stringify({
   root,
@@ -62,7 +76,9 @@ const settings = {
   'editor.bracketPairColorization.enabled': true, 'workbench.startupEditor': 'none',
   'workbench.reduceMotion': 'on', 'extensions.autoUpdate': false, 'extensions.autoCheckUpdates': false,
   'extensions.ignoreRecommendations': true, 'telemetry.telemetryLevel': 'off',
+  'dotenv.enableAutocloaking': false,
   'go.showWelcome': false, 'go.toolsManagement.checkForUpdates': 'off',
+  'vue.welcome.show': false,
   ...(process.env.CODEPEN_DART_SDK ? { 'dart.sdkPath': process.env.CODEPEN_DART_SDK } : {}),
   'dart.allowAnalytics': false, 'dart.checkForSdkUpdates': false,
 };
@@ -116,10 +132,11 @@ try {
     const style = getComputedStyle(line);
     return { fontFamily: style.fontFamily, fontSize: style.fontSize };
   });
-  assert.match(outputTypography.fontFamily, /Monaco/,
-    `Output must render the [Log] system stack: ${outputTypography.fontFamily}`);
-  assert.equal(outputTypography.fontSize, '13px',
-    'Output must render the [Log] 13px font size');
+  assert.match(outputTypography.fontFamily, /Operator Mono(?: Lig)?|Monaco/,
+    `Output must render the contributed font stack: ${outputTypography.fontFamily}`);
+  assert.equal(outputTypography.fontSize,
+    `${typographyDefaults['[Log]']['editor.fontSize']}px`,
+    'Output must render the contributed [Log] font size');
   await fs.writeFile(path.join(output, 'output-ack'), '');
   for (let index = 0; index < plan.length; index++) {
     let ready;
@@ -141,9 +158,11 @@ try {
         const style = getComputedStyle(line);
         return { fontFamily: style.fontFamily, fontSize: style.fontSize };
       });
-      assert.match(typography.fontFamily, /Monaco/,
-        `Editor must render the contributed classic system stack: ${typography.fontFamily}`);
-      assert.equal(typography.fontSize, '13px', 'Editor must render the contributed 13px font size');
+      assert.match(typography.fontFamily, /Operator Mono(?: Lig)?|Monaco/,
+        `Editor must render the contributed font stack: ${typography.fontFamily}`);
+      assert.equal(typography.fontSize,
+        `${typographyDefaults['editor.fontSize']}px`,
+        'Editor must render the contributed font size');
     }
     const rendered = await page.locator('.part.editor .view-line').evaluateAll((elements) => {
       const probe = document.createElement('span');
@@ -196,14 +215,17 @@ try {
     if (!ready.disabled && !ready.otherTheme) {
       const styleChecks = [];
       if (ready.language === 'dart' && ready.source.includes('Function')) styleChecks.push({ text: 'Function', style: 'normal' });
-      if (ready.language === 'dart' && ready.source.startsWith('///')) styleChecks.push({ text: ready.source.split('\n')[0], style: 'italic' });
-      if (ready.id === 'typescript-0') styleChecks.push({ text: 'const', style: 'italic' });
+      if (ready.language === 'dart' && ready.source.startsWith('///')) styleChecks.push({ text: ready.source.split('\n')[0], style: ready.ligatures ? 'italic' : 'normal' });
+      if (ready.id === 'typescript-0') styleChecks.push({ text: 'const', style: ready.ligatures ? 'italic' : 'normal' });
       for (const check of styleChecks) {
         const start = ready.source.indexOf(check.text);
         if (fontStyles.slice(start, start + check.text.length).some((style) => style !== check.style)) result.errors.push({ typography: check });
       }
-      if (ready.upright && fontStyles.some((style) => style === 'italic')) {
-        result.errors.push({ typography: 'Upright rendered theme-owned italics' });
+      if (!ready.ligatures && fontStyles.some((style) => style === 'italic')) {
+        result.errors.push({ typography: 'Original rendered theme-owned italics' });
+      }
+      if (ready.ligatures && !fontStyles.some((style) => style === 'italic')) {
+        result.errors.push({ typography: 'Ligatures did not render theme-owned italics' });
       }
     }
     if (!ready.disabled && !ready.otherTheme) for (const expected of ready.expectations ?? []) {
@@ -230,7 +252,7 @@ try {
         offset++;
       }
     }
-    if (['typescript-0', 'dart-5', 'java-4', 'just-16', 'makefile-17'].includes(ready.id) && ready.semantic) {
+    if (evidenceCaseIds.has(ready.id) && ready.semantic) {
       await page.screenshot({ path: path.join(output, `${ready.id}.png`), clip: await page.locator('.part.editor').boundingBox() });
     }
     results.push(result);

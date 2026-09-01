@@ -28,8 +28,8 @@ function activate(context) {
     supportedLanguages.includes(document.languageId) && document.getText().length <= maximumDocumentLength;
 
   function decoration(span) {
-    // Contextual colors are shared by both variants; only theme-owned italics
-    // are suppressed when the Upright variant is active.
+    // Contextual colors are shared by both variants. Original suppresses
+    // theme-owned italics, while Ligatures retains them.
     const fontStyle = activeVariant()?.italics ? span.fontStyle : undefined;
     const key = `${span.role}:${fontStyle ?? ''}`;
     if (!decorations.has(key)) decorations.set(key, vscode.window.createTextEditorDecorationType({

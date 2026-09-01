@@ -64,11 +64,21 @@
           "line": 30,
           "text": "0",
           "foreground": "#d0782a"
-        }
-      ]
-    },
-    {
-      "language": "C++",
+      },
+      {
+        "line": 33,
+        "text": "typedef",
+        "foreground": "#ddca7e"
+      },
+      {
+        "line": 39,
+        "text": "token_name",
+        "foreground": "#809bbd"
+      }
+    ]
+  },
+  {
+    "language": "C++",
       "expect": [
         {
           "line": 6,
@@ -127,11 +137,21 @@
           "line": 25,
           "text": "return",
           "foreground": "#ddca7e"
-        }
-      ]
-    },
-    {
-      "language": "C#",
+      },
+      {
+        "line": 28,
+        "text": "TokenRole",
+        "foreground": "#809bbd"
+      },
+      {
+        "line": 31,
+        "text": "select_tokens",
+        "foreground": "#809bbd"
+      }
+    ]
+  },
+  {
+    "language": "C#",
       "expect": [
         {
           "line": 6,
@@ -192,11 +212,21 @@
           "line": 25,
           "text": "Label",
           "foreground": "#9a8297"
-        }
-      ]
-    },
-    {
-      "language": "C4 / Structurizr DSL",
+      },
+      {
+        "line": 29,
+        "text": "TokenRole",
+        "foreground": "#809bbd"
+      },
+      {
+        "line": 38,
+        "text": "Color",
+        "foreground": "#9a8297"
+      }
+    ]
+  },
+  {
+    "language": "C4 / Structurizr DSL",
       "expect": [
         {
           "line": 1,
@@ -282,11 +312,26 @@
           "line": 34,
           "text": "1fr",
           "foreground": "#d0782a"
-        }
-      ]
-    },
-    {
-      "language": "Dart",
+      },
+      {
+        "line": 38,
+        "text": "supports",
+        "foreground": "#809bbd"
+      },
+      {
+        "line": 43,
+        "text": "container",
+        "foreground": "#ddca7e"
+      },
+      {
+        "line": 51,
+        "text": "token-pulse",
+        "foreground": "#809bbd"
+      }
+    ]
+  },
+  {
+    "language": "Dart",
       "expect": [
         {
           "line": 1,
@@ -377,6 +422,16 @@
           "line": 145,
           "text": "final",
           "foreground": "#ddca7e"
+        },
+        {
+          "line": 145,
+          "text": "palette",
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 146,
+          "text": "palette",
+          "foreground": "#809bbd"
         },
         {
           "line": 150,
@@ -542,11 +597,21 @@
           "line": 42,
           "text": "Label",
           "foreground": "#9a8297"
-        }
-      ]
-    },
-    {
-      "language": "HTML",
+      },
+      {
+        "line": 45,
+        "text": "labeler",
+        "foreground": "#ffffff"
+      },
+      {
+        "line": 49,
+        "text": "labels",
+        "foreground": "#809bbd"
+      }
+    ]
+  },
+  {
+    "language": "HTML",
       "expect": [
         {
           "line": 2,
@@ -597,11 +662,26 @@
           "line": 27,
           "text": "textContent",
           "foreground": "#9a8297"
-        }
-      ]
-    },
-    {
-      "language": "Java",
+      },
+      {
+        "line": 30,
+        "text": "details",
+        "foreground": "#a7925a"
+      },
+      {
+        "line": 36,
+        "text": "meter",
+        "foreground": "#a7925a"
+      },
+      {
+        "line": 39,
+        "text": "template",
+        "foreground": "#a7925a"
+      }
+    ]
+  },
+  {
+    "language": "Java",
       "expect": [
         {
           "line": 1,
@@ -737,11 +817,21 @@
           "line": 27,
           "text": "message",
           "foreground": "#809bbd"
-        }
-      ]
-    },
-    {
-      "language": "JavaScript",
+      },
+      {
+        "line": 32,
+        "text": "TokenRole",
+        "foreground": "#809bbd"
+      },
+      {
+        "line": 43,
+        "text": "describe",
+        "foreground": "#9a8297"
+      }
+    ]
+  },
+  {
+    "language": "JavaScript",
       "expect": [
         {
           "line": 1,
@@ -807,11 +897,21 @@
           "line": 32,
           "text": "new",
           "foreground": "#ddca7e"
-        }
-      ]
-    },
-    {
-      "language": "JavaScript React",
+      },
+      {
+        "line": 35,
+        "text": "streamTokenLabels",
+        "foreground": "#809bbd"
+      },
+      {
+        "line": 37,
+        "text": "throwIfAborted",
+        "foreground": "#9a8297"
+      }
+    ]
+  },
+  {
+    "language": "JavaScript React",
       "expect": [
         {
           "line": 1,
@@ -862,11 +962,21 @@
           "line": 32,
           "text": "No tokens",
           "foreground": "#ffffff"
-        }
-      ]
-    },
-    {
-      "language": "JSONC",
+      },
+      {
+        "line": 37,
+        "text": "TokenBadge",
+        "foreground": "#809bbd"
+      },
+      {
+        "line": 47,
+        "text": "code",
+        "foreground": "#a7925a"
+      }
+    ]
+  },
+  {
+    "language": "JSONC",
       "expect": [
         {
           "line": 2,
@@ -907,11 +1017,21 @@
           "line": 13,
           "text": "3",
           "foreground": "#d0782a"
-        }
-      ]
-    },
-    {
-      "language": "TypeScript",
+      },
+      {
+        "line": 16,
+        "text": "diagnostics",
+        "foreground": "#9a8297"
+      },
+      {
+        "line": 20,
+        "text": "null",
+        "foreground": "#ddca7e"
+      }
+    ]
+  },
+  {
+    "language": "TypeScript",
       "expect": [
         {
           "line": 1,
@@ -967,11 +1087,21 @@
           "line": 51,
           "text": "unknown",
           "foreground": "#96b38a"
-        }
-      ]
-    },
-    {
-      "language": "TypeScript React",
+      },
+      {
+        "line": 55,
+        "text": "TokenEntry",
+        "foreground": "#ffffff"
+      },
+      {
+        "line": 67,
+        "text": "render",
+        "foreground": "#9a8297"
+      }
+    ]
+  },
+  {
+    "language": "TypeScript React",
       "expect": [
         {
           "line": 1,
@@ -1022,11 +1152,21 @@
           "line": 31,
           "text": "section",
           "foreground": "#a7925a"
-        }
-      ]
-    },
-    {
-      "language": "Just",
+      },
+      {
+        "line": 41,
+        "text": "PreviewState",
+        "foreground": "#ffffff"
+      },
+      {
+        "line": 51,
+        "text": "mark",
+        "foreground": "#a7925a"
+      }
+    ]
+  },
+  {
+    "language": "Just",
       "expect": [
         { "line": 11, "text": "theme", "foreground": "#809bbd" },
         { "line": 11, "text": "{{", "foreground": "#96b38a" },
@@ -1090,11 +1230,26 @@
           "line": 20,
           "text": "ci",
           "foreground": "#9a8297"
-        }
-      ]
-    },
-    {
-      "language": "Kotlin",
+      },
+      {
+        "line": 28,
+        "text": "group",
+        "foreground": "#ddca7e"
+      },
+      {
+        "line": 29,
+        "text": "lint",
+        "foreground": "#9a8297"
+      },
+      {
+        "line": 36,
+        "text": "release",
+        "foreground": "#9a8297"
+      }
+    ]
+  },
+  {
+    "language": "Kotlin",
       "expect": [
         {
           "line": 1,
@@ -1140,11 +1295,21 @@
           "line": 18,
           "text": "val",
           "foreground": "#ddca7e"
-        }
-      ]
-    },
-    {
-      "language": "Makefile",
+      },
+      {
+        "line": 38,
+        "text": "when",
+        "foreground": "#ddca7e"
+      },
+      {
+        "line": 39,
+        "text": "keyword=",
+        "foreground": "#96b38a"
+      }
+    ]
+  },
+  {
+    "language": "Makefile",
       "expect": [
         {
           "line": 1,
@@ -1230,11 +1395,26 @@
           "line": 26,
           "text": "endif",
           "foreground": "#ddca7e"
-        }
-      ]
-    },
-    {
-      "language": "Markdown",
+      },
+      {
+        "line": 32,
+        "text": "define",
+        "foreground": "#ddca7e"
+      },
+      {
+        "line": 37,
+        "text": "render",
+        "foreground": "#9a8297"
+      },
+      {
+        "line": 39,
+        "text": "call",
+        "foreground": "#ddca7e"
+      }
+    ]
+  },
+  {
+    "language": "Markdown",
       "expect": [
         {
           "line": 1,
@@ -1270,11 +1450,26 @@
           "line": 16,
           "text": "log",
           "foreground": "#9a8297"
-        }
-      ]
-    },
-    {
-      "language": "PHP",
+      },
+      {
+        "line": 22,
+        "text": "Review checklist",
+        "foreground": "#ddca7e"
+      },
+      {
+        "line": 25,
+        "text": "bold text",
+        "foreground": "#f07178"
+      },
+      {
+        "line": 41,
+        "text": "^provider",
+        "foreground": "#809bbd"
+      }
+    ]
+  },
+  {
+    "language": "PHP",
       "expect": [
         {
           "line": 5,
@@ -1339,76 +1534,101 @@
           "line": 32,
           "text": "label",
           "foreground": "#9a8297"
-        }
-      ]
-    },
-    {
-      "language": "Python",
+      },
+      {
+        "line": 34,
+        "text": "TokenRole",
+        "foreground": "#809bbd"
+      },
+      {
+        "line": 41,
+        "text": "colorFor",
+        "foreground": "#809bbd"
+      },
+      {
+        "line": 43,
+        "text": "match",
+        "foreground": "#ddca7e"
+      }
+    ]
+  },
+  {
+    "language": "Python",
       "expect": [
         {
-          "line": 5,
+          "line": 6,
           "text": "class",
           "foreground": "#ddca7e"
         },
         {
-          "line": 5,
+          "line": 6,
           "text": "ThemeMode",
           "foreground": "#809bbd"
         },
         {
-          "line": 10,
+          "line": 11,
           "text": "dataclass",
           "foreground": "#ddca7e"
         },
         {
-          "line": 12,
+          "line": 13,
           "text": "str",
           "foreground": "#ffffff"
         },
         {
-          "line": 16,
+          "line": 17,
           "text": "def",
           "foreground": "#ddca7e"
         },
         {
-          "line": 16,
+          "line": 17,
           "text": "mode",
           "foreground": "#809bbd"
         },
         {
-          "line": 17,
+          "line": 18,
           "text": "f",
           "foreground": "#96b38a"
         },
         {
-          "line": 17,
+          "line": 18,
           "text": "{",
           "foreground": "#96b38a"
         },
         {
-          "line": 17,
+          "line": 18,
           "text": "name",
           "foreground": "#9a8297"
         },
         {
-          "line": 20,
+          "line": 21,
           "text": "palette",
           "foreground": "#809bbd"
         },
         {
-          "line": 20,
+          "line": 21,
           "text": "dict",
           "foreground": "#ffffff"
         },
         {
-          "line": 23,
+          "line": 24,
           "text": "accent",
           "foreground": "#9a8297"
-        }
-      ]
-    },
-    {
-      "language": "Rust",
+      },
+      {
+          "line": 43,
+          "text": "SupportsLabel",
+        "foreground": "#809bbd"
+      },
+      {
+          "line": 48,
+          "text": "match",
+        "foreground": "#ddca7e"
+      }
+    ]
+  },
+  {
+    "language": "Rust",
       "expect": [
         {
           "line": 1,
@@ -1469,11 +1689,26 @@
           "line": 32,
           "text": "'#'",
           "foreground": "#96b38a"
-        }
-      ]
-    },
-    {
-      "language": "Ruby",
+      },
+      {
+        "line": 41,
+        "text": "TokenRole",
+        "foreground": "#809bbd"
+      },
+      {
+        "line": 47,
+        "text": "CssColor",
+        "foreground": "#809bbd"
+      },
+      {
+        "line": 64,
+        "text": "every_role_has_a_css_color",
+        "foreground": "#809bbd"
+      }
+    ]
+  },
+  {
+    "language": "Ruby",
       "expect": [
         {
           "line": 1,
@@ -1520,11 +1755,21 @@
           "providerFallbacks": {
             "1.96.0": { "foreground": "#ffffff", "reason": "The old Ruby grammar emits source.ruby without a method scope." }
           }
-        }
-      ]
-    },
-    {
-      "language": "Sass",
+      },
+      {
+        "line": 23,
+        "text": "Token",
+        "foreground": "#809bbd"
+      },
+      {
+        "line": 25,
+        "text": "describe_token",
+        "foreground": "#9a8297"
+      }
+    ]
+  },
+  {
+    "language": "Sass",
       "expect": [
         {
           "line": 1,
@@ -1565,11 +1810,26 @@
           "line": 21,
           "text": "700",
           "foreground": "#d0782a"
-        }
-      ]
-    },
-    {
-      "language": "SCSS",
+      },
+      {
+        "line": 29,
+        "text": "token-color",
+        "foreground": "#809bbd"
+      },
+      {
+        "line": 32,
+        "text": "each",
+        "foreground": "#ddca7e"
+      },
+      {
+        "line": 36,
+        "text": "for",
+        "foreground": "#ddca7e"
+      }
+    ]
+  },
+  {
+    "language": "SCSS",
       "expect": [
         {
           "line": 1,
@@ -1615,11 +1875,26 @@
           "line": 27,
           "text": "include",
           "foreground": "#809bbd"
-        }
-      ]
-    },
-    {
-      "language": "SQL",
+      },
+      {
+        "line": 35,
+        "text": "token-color",
+        "foreground": "#ddca7e"
+      },
+      {
+        "line": 39,
+        "text": "each",
+        "foreground": "#ddca7e"
+      },
+      {
+        "line": 46,
+        "text": "supports",
+        "foreground": "#ddca7e"
+      }
+    ]
+  },
+  {
+    "language": "SQL",
       "expect": [
         {
           "line": 1,
@@ -1666,11 +1941,26 @@
           "line": 29,
           "text": "DESC",
           "foreground": "#ddca7e"
-        }
-      ]
-    },
-    {
-      "language": "Svelte",
+      },
+      {
+        "line": 31,
+        "text": "INSERT",
+        "foreground": "#ddca7e"
+      },
+      {
+        "line": 33,
+        "text": "UPDATE",
+        "foreground": "#ddca7e"
+      },
+      {
+        "line": 41,
+        "text": "ROW_NUMBER",
+        "foreground": "#ddca7e"
+      }
+    ]
+  },
+  {
+    "language": "Svelte",
       "expect": [
         {
           "line": 1,
@@ -1721,11 +2011,26 @@
           "line": 23,
           "text": "1rem",
           "foreground": "#d0782a"
-        }
-      ]
-    },
-    {
-      "language": "Shell Script",
+      },
+      {
+        "line": 28,
+        "text": "if",
+        "foreground": "#ddca7e"
+      },
+      {
+        "line": 30,
+        "text": "html",
+        "foreground": "#ddca7e"
+      },
+      {
+        "line": 38,
+        "text": "head",
+        "foreground": "#a7925a"
+      }
+    ]
+  },
+  {
+    "language": "Shell Script",
       "expect": [
         {
           "line": 1,
@@ -1771,11 +2076,26 @@
           "line": 24,
           "text": "then",
           "foreground": "#ddca7e"
-        }
-      ]
-    },
-    {
-      "language": "Swift",
+      },
+      {
+        "line": 28,
+        "text": "describe_mode",
+        "foreground": "#809bbd"
+      },
+      {
+        "line": 29,
+        "text": "case",
+        "foreground": "#ddca7e"
+      },
+      {
+        "line": 40,
+        "text": "while",
+        "foreground": "#ddca7e"
+      }
+    ]
+  },
+  {
+    "language": "Swift",
       "expect": [
         {
           "line": 3,
@@ -1841,11 +2161,26 @@
           "line": 30,
           "text": "label",
           "foreground": "#9a8297"
-        }
-      ]
-    },
-    {
-      "language": "TOML",
+      },
+      {
+        "line": 32,
+        "text": "TokenRepresentable",
+        "foreground": "#809bbd"
+      },
+      {
+        "line": 44,
+        "text": "cssVariables",
+        "foreground": "#9a8297"
+      },
+      {
+        "line": 49,
+        "text": "ThemeStore",
+        "foreground": "#809bbd"
+      }
+    ]
+  },
+  {
+    "language": "TOML",
       "expect": [
         {
           "line": 1,
@@ -1886,11 +2221,26 @@
           "line": 18,
           "text": "providers",
           "foreground": "#9a8297"
-        }
-      ]
-    },
-    {
-      "language": "Vue",
+      },
+      {
+        "line": 29,
+        "text": "2026-09-01",
+        "foreground": "#ffffff"
+      },
+      {
+        "line": 33,
+        "text": "screenshots",
+        "foreground": "#9a8297"
+      },
+      {
+        "line": 35,
+        "text": "1280",
+        "foreground": "#d0782a"
+      }
+    ]
+  },
+  {
+    "language": "Vue",
       "expect": [
         {
           "line": 1,
@@ -1941,11 +2291,26 @@
           "line": 26,
           "text": "1rem",
           "foreground": "#d0782a"
-        }
-      ]
-    },
-    {
-      "language": "YAML",
+      },
+      {
+        "line": 31,
+        "text": "i18n",
+        "foreground": "#a7925a"
+      },
+      {
+        "line": 34,
+        "text": "title",
+        "foreground": "#9a8297"
+      },
+      {
+        "line": 34,
+        "text": "CodePen Theme Original",
+        "foreground": "#96b38a"
+      }
+    ]
+  },
+  {
+    "language": "YAML",
       "expect": [
         {
           "line": 1,
@@ -1986,6 +2351,1630 @@
           "line": 21,
           "text": "run",
           "foreground": "#9a8297"
+      },
+      {
+        "line": 23,
+        "text": "preview_defaults",
+        "foreground": "#809bbd"
+      },
+      {
+        "line": 32,
+        "text": "notes",
+        "foreground": "#9a8297"
+      },
+      {
+        "line": 37,
+        "text": "preview_defaults",
+        "foreground": "#809bbd"
+      }
+    ]
+  },
+  {
+    "language": "Batch",
+      "expect": [
+        {
+          "line": 1,
+          "text": "echo",
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 2,
+          "text": "setlocal EnableExtensions EnableDelayedExpansion",
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 4,
+          "text": "Exercise variables, labels, calls, loops, conditionals, and numbers.",
+          "foreground": "#717790"
+        },
+        {
+          "line": 5,
+          "text": "THEME_NAME",
+          "foreground": "#809bbd"
+        },
+        {
+          "line": 5,
+          "text": "CodePen Theme Original",
+          "foreground": "#96b38a"
+        },
+        {
+          "line": 7,
+          "text": "3",
+          "foreground": "#d0782a"
+        },
+        {
+          "line": 9,
+          "text": "(",
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 1,
+          "text": "off",
+          "foreground": "#ddca7e"
+        }
+      ]
+    },
+    {
+      "language": "BibTeX",
+      "expect": [
+        {
+          "line": 1,
+          "text": "article",
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 1,
+          "text": "twilight2026",
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 2,
+          "text": "author",
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 2,
+          "text": "Theme Maintainers and CodePen Contributors",
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 1,
+          "text": "{",
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 2,
+          "text": "=",
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 3,
+          "text": "title",
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 3,
+          "text": "=",
+          "foreground": "#ffffff"
+        }
+      ]
+    },
+    {
+      "language": "Clojure",
+      "expect": [
+        {
+          "line": 1,
+          "text": "ns",
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 1,
+          "text": "codepen.theme",
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 4,
+          "text": "; Records, protocols, destructuring, threading, and metadata.",
+          "foreground": "#717790"
+        },
+        {
+          "line": 8,
+          "text": "render",
+          "foreground": "#809bbd"
+        },
+        {
+          "line": 13,
+          "text": "):",
+          "foreground": "#96b38a"
+        },
+        {
+          "line": 25,
+          "text": "#{",
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 1,
+          "text": "(",
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 2,
+          "text": "(",
+          "foreground": "#ffffff"
+        }
+      ]
+    },
+    {
+      "language": "CoffeeScript",
+      "expect": [
+        {
+          "line": 1,
+          "text": "Classes, interpolation, comprehensions, defaults, and existential access.",
+          "foreground": "#717790"
+        },
+        {
+          "line": 2,
+          "text": "class",
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 2,
+          "text": "Theme",
+          "foreground": "#809bbd"
+        },
+        {
+          "line": 3,
+          "text": "@name",
+          "foreground": "#809bbd"
+        },
+        {
+          "line": 3,
+          "text": "#96b38a",
+          "foreground": "#96b38a"
+        },
+        {
+          "line": 7,
+          "text": "#{",
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 7,
+          "text": "prefix",
+          "foreground": "#96b38a"
+        },
+        {
+          "line": 10,
+          "text": "toUpperCase",
+          "foreground": "#ddca7e"
+        }
+      ]
+    },
+    {
+      "language": "CUDA C++",
+      "expect": [
+        {
+          "line": 1,
+          "text": "include",
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 1,
+          "text": "cstdio",
+          "foreground": "#96b38a"
+        },
+        {
+          "line": 4,
+          "text": "//",
+          "foreground": "#717790"
+        },
+        {
+          "line": 5,
+          "text": "Pixel",
+          "foreground": "#809bbd"
+        },
+        {
+          "line": 6,
+          "text": "red",
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 11,
+          "text": "value",
+          "foreground": "#809bbd"
+        },
+        {
+          "line": 23,
+          "text": "nullptr",
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 25,
+          "text": "Pixel",
+          "foreground": "#ffffff"
+        }
+      ]
+    },
+    {
+      "language": "Diff",
+      "expect": [
+        {
+          "line": 1,
+          "text": "diff --git a/theme.json b/theme.json",
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 3,
+          "text": "---",
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 7,
+          "text": "\"name\": \"CodePen Theme\",",
+          "foreground": "#f07178"
+        },
+        {
+          "line": 2,
+          "text": "index 317b2a1..af03ad1 100644",
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 3,
+          "text": "a/theme.json",
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 4,
+          "text": "+++",
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 4,
+          "text": "b/theme.json",
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 5,
+          "text": "@@",
+          "foreground": "#ffffff"
+        }
+      ]
+    },
+    {
+      "language": "Docker Compose",
+      "expect": [
+        {
+          "line": 1,
+          "text": "name",
+          "foreground": "#9a8297"
+        },
+        {
+          "line": 1,
+          "text": "codepen-theme-preview",
+          "foreground": "#96b38a"
+        },
+        {
+          "line": 20,
+          "text": "true",
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 1,
+          "text": ":",
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 3,
+          "text": "services",
+          "foreground": "#9a8297"
+        },
+        {
+          "line": 3,
+          "text": ":",
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 4,
+          "text": "preview",
+          "foreground": "#9a8297"
+        },
+        {
+          "line": 4,
+          "text": ":",
+          "foreground": "#ffffff"
+        }
+      ]
+    },
+    {
+      "language": "Dockerfile",
+      "expect": [
+        {
+          "line": 1,
+          "text": "Multi-stage image with arguments, variables, flags, and a health check.",
+          "foreground": "#717790"
+        },
+        {
+          "line": 2,
+          "text": "ARG",
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 2,
+          "text": "NODE_VERSION=22",
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 11,
+          "text": "CodePen Theme Original",
+          "foreground": "#96b38a"
+        },
+        {
+          "line": 3,
+          "text": "FROM",
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 3,
+          "text": "node:${NODE_VERSION}-alpine",
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 3,
+          "text": "AS",
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 3,
+          "text": "dependencies",
+          "foreground": "#ffffff"
+        }
+      ]
+    },
+    {
+      "language": "F#",
+      "expect": [
+        {
+          "line": 1,
+          "text": "namespace",
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 1,
+          "text": "CodePen.Theme",
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 5,
+          "text": "// Records, discriminated unions, options, pipelines, and pattern matching.",
+          "foreground": "#717790"
+        },
+        {
+          "line": 7,
+          "text": "Keyword",
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 8,
+          "text": "name",
+          "foreground": "#809bbd"
+        },
+        {
+          "line": 18,
+          "text": "{prefix}: {theme.Name} ({theme.Accent})",
+          "foreground": "#96b38a"
+        },
+        {
+          "line": 3,
+          "text": "open",
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 3,
+          "text": "System",
+          "foreground": "#ffffff"
+        }
+      ]
+    },
+    {
+      "language": "Groovy",
+      "expect": [
+        {
+          "line": 1,
+          "text": "import",
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 3,
+          "text": "//",
+          "foreground": "#717790"
+        },
+        {
+          "line": 5,
+          "text": "Theme",
+          "foreground": "#809bbd"
+        },
+        {
+          "line": 6,
+          "text": "name",
+          "foreground": "#809bbd"
+        },
+        {
+          "line": 8,
+          "text": "tokens",
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 10,
+          "text": "theme",
+          "foreground": "#96b38a"
+        },
+        {
+          "line": 11,
+          "text": "${",
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 26,
+          "text": "println",
+          "foreground": "#ddca7e"
+        }
+      ]
+    },
+    {
+      "language": "Handlebars",
+      "expect": [
+        {
+          "line": 1,
+          "text": "{{!--",
+          "foreground": "#717790"
+        },
+        {
+          "line": 2,
+          "text": "article",
+          "foreground": "#a7925a"
+        },
+        {
+          "line": 2,
+          "text": "class",
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 2,
+          "text": "theme-card",
+          "foreground": "#96b38a"
+        },
+        {
+          "line": 2,
+          "text": "{{",
+          "foreground": "#d0782a"
+        },
+        {
+          "line": 2,
+          "text": "theme.id",
+          "foreground": "#809bbd"
+        },
+        {
+          "line": 4,
+          "text": "</",
+          "foreground": "#a7925a"
+        },
+        {
+          "line": 8,
+          "text": "if",
+          "foreground": "#ddca7e"
+        }
+      ]
+    },
+    {
+      "language": "HLSL",
+      "expect": [
+        {
+          "line": 1,
+          "text": "//",
+          "foreground": "#717790"
+        },
+        {
+          "line": 2,
+          "text": "cbuffer",
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 2,
+          "text": "ThemeSettings :",
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 2,
+          "text": "register",
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 14,
+          "text": "POSITION",
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 27,
+          "text": "1.0",
+          "foreground": "#d0782a"
+        },
+        {
+          "line": 1,
+          "text": "Constant buffers, semantics, structs, resources, and vector operations.",
+          "foreground": "#717790"
+        },
+        {
+          "line": 2,
+          "text": "(b0)",
+          "foreground": "#ffffff"
+        }
+      ]
+    },
+    {
+      "language": "INI",
+      "expect": [
+        {
+          "line": 1,
+          "text": "Sections, dotted keys, quoted values, numbers, booleans, and substitutions.",
+          "foreground": "#717790"
+        },
+        {
+          "line": 2,
+          "text": "theme",
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 3,
+          "text": "name",
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 3,
+          "text": "CodePen Theme Original",
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 15,
+          "text": "code --extensionDevelopmentPath=.",
+          "foreground": "#96b38a"
+        },
+        {
+          "line": 2,
+          "text": "[",
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 2,
+          "text": "]",
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 3,
+          "text": "=",
+          "foreground": "#ffffff"
+        }
+      ]
+    },
+    {
+      "language": "JSON",
+      "expect": [
+        {
+          "line": 2,
+          "text": "name",
+          "foreground": "#9a8297"
+        },
+        {
+          "line": 2,
+          "text": "CodePen Theme Original",
+          "foreground": "#96b38a"
+        },
+        {
+          "line": 3,
+          "text": "true",
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 1,
+          "text": "{",
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 2,
+          "text": ":",
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 2,
+          "text": ",",
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 3,
+          "text": "dark",
+          "foreground": "#9a8297"
+        },
+        {
+          "line": 3,
+          "text": ":",
+          "foreground": "#ffffff"
+        }
+      ]
+    },
+    {
+      "language": "JSON Lines",
+      "expect": [
+        {
+          "line": 1,
+          "text": "event",
+          "foreground": "#9a8297"
+        },
+        {
+          "line": 1,
+          "text": "theme_loaded",
+          "foreground": "#96b38a"
+        },
+        {
+          "line": 1,
+          "text": "true",
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 1,
+          "text": "{",
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 1,
+          "text": ":",
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 1,
+          "text": ",",
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 1,
+          "text": "theme",
+          "occurrence": 2,
+          "foreground": "#9a8297"
+        },
+        {
+          "line": 1,
+          "text": ":",
+          "occurrence": 2,
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 7,
+          "text": "typescriptreact",
+          "foreground": "#96b38a"
+        },
+        {
+          "line": 7,
+          "text": "15",
+          "foreground": "#d0782a"
+        },
+        {
+          "line": 9,
+          "text": "colors",
+          "foreground": "#9a8297"
+        },
+        {
+          "line": 10,
+          "text": "false",
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 11,
+          "text": "parse",
+          "foreground": "#96b38a"
+        },
+        {
+          "line": 12,
+          "text": "null",
+          "foreground": "#ddca7e"
+        }
+      ]
+    },
+    {
+      "language": "Julia",
+      "expect": [
+        {
+          "line": 1,
+          "text": "module",
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 1,
+          "text": "CodePenTheme",
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 5,
+          "text": "Structs, typed fields, keyword arguments, comprehensions, and macros.",
+          "foreground": "#717790"
+        },
+        {
+          "line": 6,
+          "text": "AbstractString",
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 12,
+          "text": "label",
+          "foreground": "#809bbd"
+        },
+        {
+          "line": 12,
+          "text": "theme",
+          "occurrence": 2,
+          "foreground": "#96b38a"
+        },
+        {
+          "line": 13,
+          "text": "prefix",
+          "foreground": "#96b38a"
+        },
+        {
+          "line": 19,
+          "text": ":comment",
+          "foreground": "#96b38a"
+        }
+      ]
+    },
+    {
+      "language": "LaTeX",
+      "expect": [
+        {
+          "line": 1,
+          "text": "documentclass",
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 1,
+          "text": "11pt",
+          "foreground": "#809bbd"
+        },
+        {
+          "line": 1,
+          "text": "article",
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 5,
+          "text": "Commands, environments, math, references, and optional arguments.",
+          "foreground": "#717790"
+        },
+        {
+          "line": 6,
+          "text": "{codepenaccent}{HTML}{96B38A}",
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 8,
+          "text": "#2",
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 17,
+          "text": "mathrm",
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 27,
+          "text": "Palette",
+          "foreground": "#ffffff"
+        }
+      ]
+    },
+    {
+      "language": "Less",
+      "expect": [
+        {
+          "line": 1,
+          "text": "//",
+          "foreground": "#717790"
+        },
+        {
+          "line": 2,
+          "text": "background",
+          "foreground": "#809bbd"
+        },
+        {
+          "line": 2,
+          "text": "1d1e22",
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 4,
+          "text": "px",
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 6,
+          "text": "contrast-text",
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 6,
+          "text": "lightness",
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 2,
+          "text": ":",
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 15,
+          "text": "t",
+          "occurrence": 2,
+          "foreground": "#96b38a"
+        }
+      ]
+    },
+    {
+      "language": "Lua",
+      "expect": [
+        {
+          "line": 1,
+          "text": "--",
+          "foreground": "#717790"
+        },
+        {
+          "line": 2,
+          "text": "local",
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 2,
+          "text": "Theme",
+          "foreground": "#809bbd"
+        },
+        {
+          "line": 2,
+          "text": "{}",
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 5,
+          "text": "Theme",
+          "foreground": "#809bbd"
+        },
+        {
+          "line": 6,
+          "text": "setmetatable",
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 7,
+          "text": "CodePen Theme Original",
+          "foreground": "#96b38a"
+        },
+        {
+          "line": 18,
+          "text": "...",
+          "foreground": "#ddca7e"
+        }
+      ]
+    },
+    {
+      "language": "Objective-C",
+      "expect": [
+        {
+          "line": 1,
+          "text": "import",
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 1,
+          "text": "Foundation/Foundation.h",
+          "foreground": "#96b38a"
+        },
+        {
+          "line": 3,
+          "text": "//",
+          "foreground": "#717790"
+        },
+        {
+          "line": 4,
+          "text": "NS_ENUM",
+          "foreground": "#809bbd"
+        },
+        {
+          "line": 4,
+          "text": "NSUInteger",
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 4,
+          "text": "ThemeMode",
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 12,
+          "text": "name",
+          "foreground": "#809bbd"
+        },
+        {
+          "line": 26,
+          "text": "%@",
+          "foreground": "#96b38a"
+        }
+      ]
+    },
+    {
+      "language": "Objective-C++",
+      "expect": [
+        {
+          "line": 1,
+          "text": "import",
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 1,
+          "text": "Foundation/Foundation.h",
+          "foreground": "#96b38a"
+        },
+        {
+          "line": 7,
+          "text": "//",
+          "foreground": "#717790"
+        },
+        {
+          "line": 8,
+          "text": "Token",
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 9,
+          "text": "std",
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 9,
+          "text": "::",
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 14,
+          "text": "NSString",
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 14,
+          "text": "name",
+          "foreground": "#809bbd"
+        }
+      ]
+    },
+    {
+      "language": "Perl",
+      "expect": [
+        {
+          "line": 1,
+          "text": "use",
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 1,
+          "text": "strict;",
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 3,
+          "text": "say",
+          "foreground": "#96b38a"
+        },
+        {
+          "line": 5,
+          "text": "Packages, hashes, references, regexes, interpolation, and substitutions.",
+          "foreground": "#717790"
+        },
+        {
+          "line": 6,
+          "text": "Theme",
+          "foreground": "#809bbd"
+        },
+        {
+          "line": 9,
+          "text": "class",
+          "foreground": "#809bbd"
+        },
+        {
+          "line": 10,
+          "text": "bless",
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 11,
+          "text": "name",
+          "foreground": "#96b38a"
+        }
+      ]
+    },
+    {
+      "language": "PowerShell",
+      "expect": [
+        {
+          "line": 1,
+          "text": "Set-StrictMode",
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 1,
+          "text": "Version Latest",
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 2,
+          "text": "ErrorActionPreference",
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 2,
+          "text": "Stop",
+          "foreground": "#96b38a"
+        },
+        {
+          "line": 4,
+          "text": "Classes, attributes, typed parameters, splatting, interpolation, and pipelines.",
+          "foreground": "#717790"
+        },
+        {
+          "line": 5,
+          "text": "class",
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 5,
+          "text": "Theme",
+          "foreground": "#809bbd"
+        },
+        {
+          "line": 5,
+          "text": "{",
+          "foreground": "#ffffff"
+        }
+      ]
+    },
+    {
+      "language": "Properties",
+      "expect": [
+        {
+          "line": 1,
+          "text": "Keys, escaped separators, continuations, substitutions, and Unicode escapes.",
+          "foreground": "#717790"
+        },
+        {
+          "line": 2,
+          "text": "theme.name",
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 2,
+          "text": "CodePen Theme Original",
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 2,
+          "text": "=",
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 3,
+          "text": "theme.accent",
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 3,
+          "text": "=",
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 3,
+          "text": "96b38a",
+          "foreground": "#717790"
+        },
+        {
+          "line": 4,
+          "text": "theme.background",
+          "foreground": "#ddca7e"
+        }
+      ]
+    },
+    {
+      "language": "Pug",
+      "expect": [
+        {
+          "line": 1,
+          "text": "const",
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 1,
+          "text": "theme",
+          "foreground": "#809bbd"
+        },
+        {
+          "line": 1,
+          "text": "name",
+          "foreground": "#9a8297"
+        },
+        {
+          "line": 1,
+          "text": "CodePen Theme Original",
+          "foreground": "#96b38a"
+        },
+        {
+          "line": 4,
+          "text": "//-",
+          "foreground": "#717790"
+        },
+        {
+          "line": 5,
+          "text": "token",
+          "foreground": "#809bbd"
+        },
+        {
+          "line": 6,
+          "text": "${",
+          "foreground": "#96b38a"
+        },
+        {
+          "line": 1,
+          "text": "{",
+          "foreground": "#ffffff"
+        }
+      ]
+    },
+    {
+      "language": "R",
+      "expect": [
+        {
+          "line": 1,
+          "text": "Functions, named lists, data frames, formulas, pipes, and vectorization.",
+          "foreground": "#717790"
+        },
+        {
+          "line": 2,
+          "text": "theme",
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 2,
+          "text": "<-",
+          "foreground": "#cccccc"
+        },
+        {
+          "line": 3,
+          "text": "name",
+          "foreground": "#809bbd"
+        },
+        {
+          "line": 3,
+          "text": "CodePen Theme Original",
+          "foreground": "#96b38a"
+        },
+        {
+          "line": 8,
+          "text": "label_theme",
+          "foreground": "#809bbd"
+        },
+        {
+          "line": 9,
+          "text": "stopifnot",
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 13,
+          "text": "FALSE",
+          "foreground": "#ddca7e"
+        }
+      ]
+    },
+    {
+      "language": "Raku",
+      "expect": [
+        {
+          "line": 1,
+          "text": "use",
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 1,
+          "text": "v6.d;",
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 3,
+          "text": "Classes, attributes, signatures, named arguments, junctions, and matching.",
+          "foreground": "#717790"
+        },
+        {
+          "line": 4,
+          "text": "ThemeMode",
+          "foreground": "#809bbd"
+        },
+        {
+          "line": 7,
+          "text": "Str",
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 8,
+          "text": "#96b38a",
+          "foreground": "#96b38a"
+        },
+        {
+          "line": 11,
+          "text": "$prefix",
+          "foreground": "#809bbd"
+        },
+        {
+          "line": 4,
+          "text": "enum",
+          "foreground": "#ddca7e"
+        }
+      ]
+    },
+    {
+      "language": "Razor",
+      "expect": [
+        {
+          "line": 1,
+          "text": "page",
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 1,
+          "text": "/theme/{Mode?}",
+          "foreground": "#96b38a"
+        },
+        {
+          "line": 2,
+          "text": "System",
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 4,
+          "text": "State",
+          "foreground": "#809bbd"
+        },
+        {
+          "line": 4,
+          "text": "</",
+          "foreground": "#a7925a"
+        },
+        {
+          "line": 6,
+          "text": "class",
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 50,
+          "text": "false",
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 2,
+          "text": "using",
+          "foreground": "#ddca7e"
+        }
+      ]
+    },
+    {
+      "language": "reStructuredText",
+      "expect": [
+        {
+          "line": 1,
+          "text": "CodePen Theme Original",
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 2,
+          "text": "======================",
+          "foreground": "#96b38a"
+        },
+        {
+          "line": 5,
+          "text": "``e",
+          "foreground": "#96b38a"
+        },
+        {
+          "line": 6,
+          "text": "`V",
+          "foreground": "#a7925a"
+        },
+        {
+          "line": 13,
+          "text": ".. list-table::",
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 13,
+          "text": "Token roles",
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 14,
+          "text": "1",
+          "foreground": "#d0782a"
+        },
+        {
+          "line": 4,
+          "text": "The classic Twilight palette keeps bindings blue, members purple, strings",
+          "foreground": "#ffffff"
+        }
+      ]
+    },
+    {
+      "language": "ShaderLab",
+      "expect": [
+        {
+          "line": 1,
+          "text": "Shader",
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 1,
+          "text": "CodePen/TwilightPreview",
+          "foreground": "#96b38a"
+        },
+        {
+          "line": 5,
+          "text": "_MainTex (",
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 5,
+          "text": "2D",
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 5,
+          "text": ") =",
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 6,
+          "text": "0.588",
+          "foreground": "#d0782a"
+        },
+        {
+          "line": 3,
+          "text": "Properties",
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 5,
+          "text": "Texture",
+          "foreground": "#96b38a"
+        }
+      ]
+    },
+    {
+      "language": "TeX",
+      "expect": [
+        {
+          "line": 1,
+          "text": "NeedsTeXFormat",
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 1,
+          "text": "{LaTeX2e}",
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 4,
+          "text": "Plain TeX and package-level definitions exercise the text.tex grammar.",
+          "foreground": "#717790"
+        },
+        {
+          "line": 1,
+          "text": "\\",
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 2,
+          "text": "\\",
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 2,
+          "text": "ProvidesPackage",
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 2,
+          "text": "{codepentheme}",
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 2,
+          "text": "[",
+          "foreground": "#ffffff"
+        }
+      ]
+    },
+    {
+      "language": "Visual Basic",
+      "expect": [
+        {
+          "line": 1,
+          "text": "Imports System.Collections.Generic",
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 4,
+          "text": "Classes, properties, generics, interpolation, LINQ, and XML documentation.",
+          "foreground": "#717790"
+        },
+        {
+          "line": 6,
+          "text": "Public",
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 7,
+          "text": "String",
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 9,
+          "text": "Of",
+          "foreground": "#809bbd"
+        },
+        {
+          "line": 14,
+          "text": "ToArray",
+          "foreground": "#809bbd"
+        },
+        {
+          "line": 17,
+          "text": "theme",
+          "foreground": "#96b38a"
+        },
+        {
+          "line": 9,
+          "text": "(",
+          "foreground": "#ffffff"
+        }
+      ]
+    },
+    {
+      "language": "WAT",
+      "expect": [
+        {
+          "line": 1,
+          "text": "module",
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 2,
+          "text": ";; Imports, types, named parameters, locals, memory, data, and control flow.",
+          "foreground": "#717790"
+        },
+        {
+          "line": 3,
+          "text": "$contrast_type",
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 4,
+          "text": "env",
+          "foreground": "#96b38a"
+        },
+        {
+          "line": 1,
+          "text": "(",
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 6,
+          "text": "1",
+          "foreground": "#d0782a"
+        },
+        {
+          "line": 3,
+          "text": "(",
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 3,
+          "text": "type",
+          "foreground": "#ddca7e"
+        }
+      ]
+    },
+    {
+      "language": "XML",
+      "expect": [
+        {
+          "line": 1,
+          "text": "<?",
+          "foreground": "#a7925a"
+        },
+        {
+          "line": 1,
+          "text": "xml",
+          "foreground": "#a7925a"
+        },
+        {
+          "line": 1,
+          "text": "version",
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 1,
+          "text": "1.0",
+          "foreground": "#96b38a"
+        },
+        {
+          "line": 2,
+          "text": "<!--",
+          "foreground": "#717790"
+        },
+        {
+          "line": 10,
+          "text": "amp",
+          "foreground": "#d0782a"
+        },
+        {
+          "line": 1,
+          "text": "encoding",
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 1,
+          "text": "UTF-8",
+          "foreground": "#96b38a"
+        }
+      ]
+    },
+    {
+      "language": "XSL",
+      "expect": [
+        {
+          "line": 1,
+          "text": "<?",
+          "foreground": "#a7925a"
+        },
+        {
+          "line": 1,
+          "text": "xml",
+          "foreground": "#a7925a"
+        },
+        {
+          "line": 1,
+          "text": "version",
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 1,
+          "text": "1.0",
+          "foreground": "#96b38a"
+        },
+        {
+          "line": 1,
+          "text": "encoding",
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 1,
+          "text": "UTF-8",
+          "foreground": "#96b38a"
+        },
+        {
+          "line": 1,
+          "text": "?>",
+          "foreground": "#a7925a"
+        },
+        {
+          "line": 2,
+          "text": "<",
+          "foreground": "#a7925a"
         }
       ]
     }

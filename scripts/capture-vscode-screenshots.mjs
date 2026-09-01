@@ -231,6 +231,7 @@ await writeFile(
     'workbench.reduceMotion': 'on',
     'editor.semanticHighlighting.enabled': semantic,
     'codepen.syntaxRefinement.enabled': false,
+    'dotenv.enableAutocloaking': false,
     'editor.fontFamily': 'monospace',
     'editor.fontSize': 16,
     'editor.lineHeight': 24,
@@ -241,6 +242,7 @@ await writeFile(
     ...(process.env.CODEPEN_DART_SDK ? { 'dart.sdkPath': process.env.CODEPEN_DART_SDK, 'dart.enableSdkFormatter': false, 'dart.checkForSdkUpdates': false, 'dart.allowAnalytics': false } : {}),
     'security.workspace.trust.enabled': false,
     'telemetry.telemetryLevel': 'off',
+    'vue.welcome.show': false,
   }, null, 2)}\n`,
 );
 

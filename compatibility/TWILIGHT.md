@@ -122,8 +122,8 @@ The main boundaries are:
    The real-service checks cover JS/TS and the optional local Dart-Code run;
    the other language fixtures exercise real grammars, not their language servers.
 
-The [full-sample follow-up](LANGUAGE-AUDIT.md) extends coverage to 33 language
-fixtures with 194 short and 363 full-sample assertions, plus 35 real TypeScript
+The [full-sample follow-up](LANGUAGE-AUDIT.md) extends coverage to 68 language
+fixtures with 299 short and 725 full-sample assertions, plus 35 real TypeScript
 service assertions per matrix version. Offline checks exercise 20 TextMate
 selector probes, 287 semantic selector assertions, and the unchanged-decoration
 guard. The local Dart editor run checks 28 real semantic tokens plus visible

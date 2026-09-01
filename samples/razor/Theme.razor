@@ -1,0 +1,53 @@
+@page "/theme/{Mode?}"
+@using System.Collections.Immutable
+
+<PageTitle>@State.Name</PageTitle>
+
+<article class="theme-card" data-mode="@Mode">
+    <h1 style="color: @State.Accent">@State.Name</h1>
+
+    @if (State.Tokens.Length > 0)
+    {
+        <ul>
+            @foreach (var token in State.Tokens)
+            {
+                <li class="token token--@token.Role">
+                    <code>@token.Role</code>: @token.Color
+                </li>
+            }
+        </ul>
+    }
+    else
+    {
+        <p>No visible tokens.</p>
+    }
+
+    <button @onclick="ToggleMode">Toggle mode</button>
+</article>
+
+@code {
+    [Parameter]
+    public string? Mode { get; set; }
+
+    private ThemeState State { get; set; } = ThemeState.Original;
+
+    private void ToggleMode() => State = State with
+    {
+        Ligatures = !State.Ligatures,
+    };
+
+    private sealed record Token(string Role, string Color);
+
+    private sealed record ThemeState(
+        string Name,
+        string Accent,
+        bool Ligatures,
+        ImmutableArray<Token> Tokens)
+    {
+        public static ThemeState Original { get; } = new(
+            "CodePen Theme Original",
+            "#96b38a",
+            false,
+            [new("keyword", "#ddca7e"), new("string", "#96b38a")]);
+    }
+}

@@ -51,3 +51,26 @@ const tokenLabel = <Token extends TokenName>(token: Token, index = 0) =>
   `${index}: ${isTokenName(token) ? theme.tokens[token] : 'unknown'}`;
 
 export { ThemeRegistry, style, theme, tokenLabel };
+
+type TokenEntry<Name extends TokenName = TokenName> = readonly [
+  name: Name,
+  color: Theme['tokens'][Name],
+];
+
+abstract class ThemeRenderer<TTheme extends Theme> {
+  constructor(protected readonly value: TTheme) {}
+
+  abstract render(): Iterable<TokenEntry>;
+}
+
+class TextThemeRenderer extends ThemeRenderer<typeof theme> {
+  override *render(): Generator<TokenEntry> {
+    for (const [name, color] of Object.entries(this.value.tokens)) {
+      if (isTokenName(name)) yield [name, color];
+    }
+  }
+}
+
+const renderer = new TextThemeRenderer(theme);
+const labels = [...renderer.render()].map(([name, color]) => `${name}=${color}`);
+void labels;

@@ -24,3 +24,18 @@ verified = true
 language = "vue"
 extension = "Vue.volar"
 verified = true
+
+[metadata]
+updated_at = 2026-09-01T12:30:00+04:00
+authors = [{ name = "CodePen", role = "reference" }]
+coordinates = { line = 12, column = 8 }
+
+[[screenshots]]
+language = "typescript"
+dimensions = [1280, 720]
+tags = ["semantic", "textmate"]
+
+[[screenshots]]
+language = "dart"
+dimensions = [1280, 720]
+tags = ["refinement", "comments"]

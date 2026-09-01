@@ -31,3 +31,23 @@ export const renderPreview = (theme) => {
 
 const preview = new ThemePreview('CodePen Theme Original');
 console.log(renderPreview(preview));
+
+export async function* streamTokenLabels(theme, { signal } = {}) {
+  for (const token of theme.visibleTokens()) {
+    signal?.throwIfAborted();
+    await Promise.resolve();
+    yield `${token.name}=${token.color}`;
+  }
+}
+
+const overrides = new Map([['accent', '#96b38a']]);
+const resolvedAccent = overrides.get('accent') ?? palette.accent;
+const summary = {
+  ...palette,
+  accent: resolvedAccent,
+  tokenCount: preview.visibleTokens().length,
+};
+
+for await (const label of streamTokenLabels(preview)) {
+  console.debug(label, summary.tokenCount);
+}

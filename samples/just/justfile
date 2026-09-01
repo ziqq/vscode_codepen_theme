@@ -8,14 +8,30 @@ sample_dir := "samples"
 default: check preview
 
 check:
-  @echo "Checking {{theme}} with background {{background}}"
-  @test -d {{sample_dir}}
+    @echo "Checking {{ theme }} with background {{ background }}"
+    @test -d {{ sample_dir }}
 
 build target="themes/codepen-theme.json":
-  @echo "Generating {{target}}"
+    @echo "Generating {{ target }}"
 
 preview token="keyword":
-  @echo "{{theme}} {{token}} uses {{accent}}"
+    @echo "{{ theme }} {{ token }} uses {{ accent }}"
 
 ci: check build
-  @echo "Running provider compatibility contract"
+    @echo "Running provider compatibility contract"
+
+mode := env_var_or_default("CODEPEN_MODE", "dark")
+theme_file := sample_dir / "json/theme.jsonc"
+
+alias test := check
+
+[group('quality')]
+lint file=theme_file:
+    @printf 'Linting %s in %s mode\n' "{{ file }}" "{{ mode }}"
+
+[private]
+announce message:
+    @printf '%s\n' "{{ message }}"
+
+release version="next": (announce "Preparing {{theme}} {{version}}") check build
+    @printf '%s %s\n' "{{ theme }}" "{{ version }}"

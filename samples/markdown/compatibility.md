@@ -18,3 +18,24 @@ console.log(`Previewing ${theme}`);
 
 Read the [compatibility contract](../../compatibility/scopes.json) before
 changing a provider baseline.
+
+## Review checklist
+
+- [x] Built-in and recommended grammars have representative fixtures.
+- [x] Inline `code`, **bold text**, and _emphasis_ keep distinct roles.
+- [ ] Refresh visual screenshots only after reviewing intentional color changes.
+
+| Role | Expected color | Example |
+| --- | ---: | --- |
+| Keyword | `#ddca7e` | `const`, `class`, `if` |
+| String | `#96b38a` | `"CodePen Theme"` |
+| Comment | `#717790` | `// provider-owned scope` |
+
+<details>
+<summary>Why providers matter</summary>
+
+A color theme maps emitted scopes; it does not parse source files itself.
+
+</details>
+
+[^provider]: The compatibility runner resolves the grammar declared in the provider manifest.

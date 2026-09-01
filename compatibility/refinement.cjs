@@ -56,6 +56,10 @@ void «blue|main»() {
   final «blue|fixed» = 1;
   invoke(«purple|fixed»: «blue|fixed»);
 }`],
+  ['dart', `class ThemeReady { final ThemePalette palette; }
+String describeTheme(ThemeReady state) => switch (state) {
+  ThemeReady(:final «blue|palette») => «green|'value: \${»«blue|palette»«white|.»«purple|background»«green|}'»
+};`],
   ['typescript', `«gray|/** Uses »«white|[Theme]»«gray| and »«white|\`value\`»«gray|. */»
 const «blue|value» = 1;`],
   ['java', `«gray|/** Uses »«white|[Theme]»«gray| and »«white|\`value\`»«gray|. */»

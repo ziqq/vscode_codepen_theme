@@ -31,3 +31,18 @@ $tokens: (
     &[data-kind='string'] { @include token('string'); }
   }
 }
+
+@function token-color($name, $fallback: $accent) {
+  @return if(map-has-key($tokens, $name), map-get($tokens, $name), $fallback);
+}
+
+@each $name, $color in $tokens {
+  .token--#{$name} {
+    --token-color: #{$color};
+    color: token-color($name);
+  }
+}
+
+@supports selector(:has(*)) {
+  .preview:has(.token--keyword) { outline-color: $accent; }
+}

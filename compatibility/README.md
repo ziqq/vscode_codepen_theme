@@ -47,7 +47,7 @@ when its optional SDK/extension paths are supplied. A built-in Dart grammar is
 not a Dart semantic provider, and the ordinary CI matrix does not certify one.
 
 The [full-language follow-up](LANGUAGE-AUDIT.md) records corrections and remaining
-grammar limitations for all 33 samples. `full-samples.json` tests complete files;
+grammar limitations for all 68 samples. `full-samples.json` tests complete files;
 provider reports include every rendered span, not just a list of observed scopes.
 Known missing categories in older grammars are version-specific and reported
 separately from exact role matches. Makefile is now a first-class matrix case.

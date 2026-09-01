@@ -1,0 +1,22 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{codepentheme}[2026/09/01 Twilight preview helpers]
+
+% Plain TeX and package-level definitions exercise the text.tex grammar.
+\newif\ifcodepenitalics
+\codepenitalicsfalse
+
+\def\codepenbackground{1D1E22}
+\def\codepenaccent{96B38A}
+
+\newcommand\CodePenThemeName{CodePen Theme Original}
+\newcommand\CodePenToken[2]{%
+  \begingroup
+  \edef\CodePenRole{#1}%
+  \texttt{\CodePenRole: #2}%
+  \endgroup
+}
+
+\DeclareOption{ligatures}{\codepenitalicstrue}
+\ProcessOptions\relax
+
+\endinput

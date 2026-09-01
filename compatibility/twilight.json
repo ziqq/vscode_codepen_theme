@@ -1110,6 +1110,741 @@
           "foreground": "#d0782a"
         }
       ]
+    },
+    {
+      "language": "Batch",
+      "sourceFile": "samples/batch/theme-preview.bat",
+      "expect": [
+        {
+          "line": 1,
+          "text": "echo",
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 2,
+          "text": "setlocal EnableExtensions EnableDelayedExpansion",
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 4,
+          "text": "Exercise variables, labels, calls, loops, conditionals, and numbers.",
+          "foreground": "#717790"
+        }
+      ]
+    },
+    {
+      "language": "BibTeX",
+      "sourceFile": "samples/latex/references.bib",
+      "expect": [
+        {
+          "line": 1,
+          "text": "article",
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 1,
+          "text": "twilight2026",
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 2,
+          "text": "author",
+          "foreground": "#ddca7e"
+        }
+      ]
+    },
+    {
+      "language": "Clojure",
+      "sourceFile": "samples/clojure/core.clj",
+      "expect": [
+        {
+          "line": 1,
+          "text": "ns",
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 1,
+          "text": "codepen.theme",
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 4,
+          "text": "; Records, protocols, destructuring, threading, and metadata.",
+          "foreground": "#717790"
+        }
+      ]
+    },
+    {
+      "language": "CoffeeScript",
+      "sourceFile": "samples/coffeescript/theme.coffee",
+      "expect": [
+        {
+          "line": 1,
+          "text": "Classes, interpolation, comprehensions, defaults, and existential access.",
+          "foreground": "#717790"
+        },
+        {
+          "line": 2,
+          "text": "class",
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 2,
+          "text": "Theme",
+          "foreground": "#809bbd"
+        }
+      ]
+    },
+    {
+      "language": "CUDA C++",
+      "sourceFile": "samples/cuda/main.cu",
+      "expect": [
+        {
+          "line": 1,
+          "text": "include",
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 1,
+          "text": "cstdio",
+          "foreground": "#96b38a"
+        },
+        {
+          "line": 4,
+          "text": "//",
+          "foreground": "#717790"
+        }
+      ]
+    },
+    {
+      "language": "Diff",
+      "sourceFile": "samples/diff/theme.patch",
+      "expect": [
+        {
+          "line": 1,
+          "text": "diff --git a/theme.json b/theme.json",
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 3,
+          "text": "---",
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 7,
+          "text": "\"name\": \"CodePen Theme\",",
+          "foreground": "#f07178"
+        }
+      ]
+    },
+    {
+      "language": "Docker Compose",
+      "sourceFile": "samples/docker/compose.yaml",
+      "expect": [
+        {
+          "line": 1,
+          "text": "name",
+          "foreground": "#9a8297"
+        },
+        {
+          "line": 1,
+          "text": "codepen-theme-preview",
+          "foreground": "#96b38a"
+        },
+        {
+          "line": 20,
+          "text": "true",
+          "foreground": "#ddca7e"
+        }
+      ]
+    },
+    {
+      "language": "Dockerfile",
+      "sourceFile": "samples/docker/Dockerfile",
+      "expect": [
+        {
+          "line": 1,
+          "text": "Multi-stage image with arguments, variables, flags, and a health check.",
+          "foreground": "#717790"
+        },
+        {
+          "line": 2,
+          "text": "ARG",
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 2,
+          "text": "NODE_VERSION=22",
+          "foreground": "#ffffff"
+        }
+      ]
+    },
+    {
+      "language": "F#",
+      "sourceFile": "samples/fsharp/Program.fs",
+      "expect": [
+        {
+          "line": 1,
+          "text": "namespace",
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 1,
+          "text": "CodePen.Theme",
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 5,
+          "text": "// Records, discriminated unions, options, pipelines, and pattern matching.",
+          "foreground": "#717790"
+        }
+      ]
+    },
+    {
+      "language": "Groovy",
+      "sourceFile": "samples/groovy/theme.groovy",
+      "expect": [
+        {
+          "line": 1,
+          "text": "import",
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 3,
+          "text": "//",
+          "foreground": "#717790"
+        },
+        {
+          "line": 5,
+          "text": "Theme",
+          "foreground": "#809bbd"
+        }
+      ]
+    },
+    {
+      "language": "Handlebars",
+      "sourceFile": "samples/handlebars/card.hbs",
+      "expect": [
+        {
+          "line": 1,
+          "text": "{{!--",
+          "foreground": "#717790"
+        },
+        {
+          "line": 2,
+          "text": "article",
+          "foreground": "#a7925a"
+        },
+        {
+          "line": 2,
+          "text": "class",
+          "foreground": "#ddca7e"
+        }
+      ]
+    },
+    {
+      "language": "HLSL",
+      "sourceFile": "samples/hlsl/theme.hlsl",
+      "expect": [
+        {
+          "line": 1,
+          "text": "//",
+          "foreground": "#717790"
+        },
+        {
+          "line": 2,
+          "text": "cbuffer",
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 2,
+          "text": "ThemeSettings :",
+          "foreground": "#ffffff"
+        }
+      ]
+    },
+    {
+      "language": "INI",
+      "sourceFile": "samples/ini/theme.ini",
+      "expect": [
+        {
+          "line": 1,
+          "text": "Sections, dotted keys, quoted values, numbers, booleans, and substitutions.",
+          "foreground": "#717790"
+        },
+        {
+          "line": 2,
+          "text": "theme",
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 3,
+          "text": "name",
+          "foreground": "#ddca7e"
+        }
+      ]
+    },
+    {
+      "language": "JSON",
+      "sourceFile": "samples/json/theme.json",
+      "expect": [
+        {
+          "line": 2,
+          "text": "name",
+          "foreground": "#9a8297"
+        },
+        {
+          "line": 2,
+          "text": "CodePen Theme Original",
+          "foreground": "#96b38a"
+        },
+        {
+          "line": 3,
+          "text": "true",
+          "foreground": "#ddca7e"
+        }
+      ]
+    },
+    {
+      "language": "JSON Lines",
+      "sourceFile": "samples/json/events.jsonl",
+      "expect": [
+        {
+          "line": 1,
+          "text": "event",
+          "foreground": "#9a8297"
+        },
+        {
+          "line": 1,
+          "text": "theme_loaded",
+          "foreground": "#96b38a"
+        },
+        {
+          "line": 1,
+          "text": "true",
+          "foreground": "#ddca7e"
+        }
+      ]
+    },
+    {
+      "language": "Julia",
+      "sourceFile": "samples/julia/theme.jl",
+      "expect": [
+        {
+          "line": 1,
+          "text": "module",
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 1,
+          "text": "CodePenTheme",
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 5,
+          "text": "Structs, typed fields, keyword arguments, comprehensions, and macros.",
+          "foreground": "#717790"
+        }
+      ]
+    },
+    {
+      "language": "LaTeX",
+      "sourceFile": "samples/latex/document.tex",
+      "expect": [
+        {
+          "line": 1,
+          "text": "documentclass",
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 1,
+          "text": "11pt",
+          "foreground": "#809bbd"
+        },
+        {
+          "line": 1,
+          "text": "article",
+          "foreground": "#ffffff"
+        }
+      ]
+    },
+    {
+      "language": "Less",
+      "sourceFile": "samples/less/styles.less",
+      "expect": [
+        {
+          "line": 1,
+          "text": "//",
+          "foreground": "#717790"
+        },
+        {
+          "line": 2,
+          "text": "background",
+          "foreground": "#809bbd"
+        },
+        {
+          "line": 2,
+          "text": "1d1e22",
+          "foreground": "#ffffff"
+        }
+      ]
+    },
+    {
+      "language": "Lua",
+      "sourceFile": "samples/lua/theme.lua",
+      "expect": [
+        {
+          "line": 1,
+          "text": "--",
+          "foreground": "#717790"
+        },
+        {
+          "line": 2,
+          "text": "local",
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 2,
+          "text": "Theme",
+          "foreground": "#809bbd"
+        }
+      ]
+    },
+    {
+      "language": "Objective-C",
+      "sourceFile": "samples/objective-c/main.m",
+      "expect": [
+        {
+          "line": 1,
+          "text": "import",
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 1,
+          "text": "Foundation/Foundation.h",
+          "foreground": "#96b38a"
+        },
+        {
+          "line": 3,
+          "text": "//",
+          "foreground": "#717790"
+        }
+      ]
+    },
+    {
+      "language": "Objective-C++",
+      "sourceFile": "samples/objective-cpp/main.mm",
+      "expect": [
+        {
+          "line": 1,
+          "text": "import",
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 1,
+          "text": "Foundation/Foundation.h",
+          "foreground": "#96b38a"
+        },
+        {
+          "line": 7,
+          "text": "//",
+          "foreground": "#717790"
+        }
+      ]
+    },
+    {
+      "language": "Perl",
+      "sourceFile": "samples/perl/theme.pl",
+      "expect": [
+        {
+          "line": 1,
+          "text": "use",
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 1,
+          "text": "strict;",
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 3,
+          "text": "say",
+          "foreground": "#96b38a"
+        }
+      ]
+    },
+    {
+      "language": "PowerShell",
+      "sourceFile": "samples/powershell/theme.ps1",
+      "expect": [
+        {
+          "line": 1,
+          "text": "Set-StrictMode",
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 1,
+          "text": "Version Latest",
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 2,
+          "text": "ErrorActionPreference",
+          "foreground": "#ddca7e"
+        }
+      ]
+    },
+    {
+      "language": "Properties",
+      "sourceFile": "samples/properties/theme.properties",
+      "expect": [
+        {
+          "line": 1,
+          "text": "Keys, escaped separators, continuations, substitutions, and Unicode escapes.",
+          "foreground": "#717790"
+        },
+        {
+          "line": 2,
+          "text": "theme.name",
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 2,
+          "text": "CodePen Theme Original",
+          "foreground": "#ffffff"
+        }
+      ]
+    },
+    {
+      "language": "Pug",
+      "sourceFile": "samples/pug/index.pug",
+      "expect": [
+        {
+          "line": 1,
+          "text": "const",
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 1,
+          "text": "theme",
+          "foreground": "#809bbd"
+        },
+        {
+          "line": 1,
+          "text": "name",
+          "foreground": "#9a8297"
+        }
+      ]
+    },
+    {
+      "language": "R",
+      "sourceFile": "samples/r/theme.R",
+      "expect": [
+        {
+          "line": 1,
+          "text": "Functions, named lists, data frames, formulas, pipes, and vectorization.",
+          "foreground": "#717790"
+        },
+        {
+          "line": 2,
+          "text": "theme",
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 2,
+          "text": "<-",
+          "foreground": "#cccccc"
+        }
+      ]
+    },
+    {
+      "language": "Raku",
+      "sourceFile": "samples/raku/theme.raku",
+      "expect": [
+        {
+          "line": 1,
+          "text": "use",
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 1,
+          "text": "v6.d;",
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 3,
+          "text": "Classes, attributes, signatures, named arguments, junctions, and matching.",
+          "foreground": "#717790"
+        }
+      ]
+    },
+    {
+      "language": "Razor",
+      "sourceFile": "samples/razor/Theme.razor",
+      "expect": [
+        {
+          "line": 1,
+          "text": "page",
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 1,
+          "text": "/theme/{Mode?}",
+          "foreground": "#96b38a"
+        },
+        {
+          "line": 2,
+          "text": "System",
+          "foreground": "#ffffff"
+        }
+      ]
+    },
+    {
+      "language": "reStructuredText",
+      "sourceFile": "samples/restructuredtext/theme.rst",
+      "expect": [
+        {
+          "line": 1,
+          "text": "CodePen Theme Original",
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 2,
+          "text": "======================",
+          "foreground": "#96b38a"
+        },
+        {
+          "line": 5,
+          "text": "``e",
+          "foreground": "#96b38a"
+        }
+      ]
+    },
+    {
+      "language": "ShaderLab",
+      "sourceFile": "samples/shaderlab/Theme.shader",
+      "expect": [
+        {
+          "line": 1,
+          "text": "Shader",
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 1,
+          "text": "CodePen/TwilightPreview",
+          "foreground": "#96b38a"
+        },
+        {
+          "line": 5,
+          "text": "_MainTex (",
+          "foreground": "#ffffff"
+        }
+      ]
+    },
+    {
+      "language": "TeX",
+      "sourceFile": "samples/latex/package.sty",
+      "expect": [
+        {
+          "line": 1,
+          "text": "NeedsTeXFormat",
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 1,
+          "text": "{LaTeX2e}",
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 4,
+          "text": "Plain TeX and package-level definitions exercise the text.tex grammar.",
+          "foreground": "#717790"
+        }
+      ]
+    },
+    {
+      "language": "Visual Basic",
+      "sourceFile": "samples/visual-basic/Theme.vb",
+      "expect": [
+        {
+          "line": 1,
+          "text": "Imports System.Collections.Generic",
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 4,
+          "text": "Classes, properties, generics, interpolation, LINQ, and XML documentation.",
+          "foreground": "#717790"
+        },
+        {
+          "line": 6,
+          "text": "Public",
+          "foreground": "#ddca7e"
+        }
+      ]
+    },
+    {
+      "language": "WAT",
+      "sourceFile": "samples/wat/theme.wat",
+      "expect": [
+        {
+          "line": 1,
+          "text": "module",
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 2,
+          "text": ";; Imports, types, named parameters, locals, memory, data, and control flow.",
+          "foreground": "#717790"
+        },
+        {
+          "line": 3,
+          "text": "$contrast_type",
+          "foreground": "#ffffff"
+        }
+      ]
+    },
+    {
+      "language": "XML",
+      "sourceFile": "samples/xml/theme.xml",
+      "expect": [
+        {
+          "line": 1,
+          "text": "<?",
+          "foreground": "#a7925a"
+        },
+        {
+          "line": 1,
+          "text": "xml",
+          "foreground": "#a7925a"
+        },
+        {
+          "line": 1,
+          "text": "version",
+          "foreground": "#ddca7e"
+        }
+      ]
+    },
+    {
+      "language": "XSL",
+      "sourceFile": "samples/xml/transform.xsl",
+      "expect": [
+        {
+          "line": 1,
+          "text": "<?",
+          "foreground": "#a7925a"
+        },
+        {
+          "line": 1,
+          "text": "xml",
+          "foreground": "#a7925a"
+        },
+        {
+          "line": 1,
+          "text": "version",
+          "foreground": "#ddca7e"
+        }
+      ]
     }
   ]
 }

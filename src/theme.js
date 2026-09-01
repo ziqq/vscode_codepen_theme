@@ -384,6 +384,7 @@ const tokenColors = [
     'keyword.control.return.sass punctuation.definition.keyword.sass',
     'keyword.control.return.scss',
     'keyword.control.return.scss punctuation.definition.keyword.scss',
+    'source.sass keyword.control.at-rule.css.sass',
     'keyword.control.ruby',
     'keyword.control.rust',
     'keyword.control.start-block.ruby',
@@ -964,7 +965,11 @@ const tokenColors = [
     'entity.name.type.class.java',
     'entity.name.type.record.java',
     'entity.name.type.class.python',
+    'entity.name.type.actor.swift',
+    'entity.name.type.anchor.yaml',
+    'entity.name.type.protocol.swift',
     'entity.name.type.struct.rust',
+    'entity.name.type.trait.rust',
     'meta.definition.type.struct.swift entity.name.type.struct.swift',
     'meta.parameter-clause.swift variable.parameter.function.swift',
     'meta.parameter-clause.swift entity.name.function.swift',
@@ -2044,7 +2049,7 @@ function resolveTheme({ name, italics = true }) {
       // DART COLORS
       'dart.closingLabels': color.gray,
     },
-    // The Upright variant removes only the dedicated italic layer. Regular,
+    // Original omits the dedicated italic layer; Ligatures retains it. Regular,
     // bold, underline, and every foreground rule remain byte-for-byte equal.
     tokenColors: italics
       ? tokenColors

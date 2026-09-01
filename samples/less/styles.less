@@ -1,0 +1,29 @@
+// Variables, guarded mixins, nesting, interpolation, and color functions.
+@background: #1d1e22;
+@accent: #96b38a;
+@spacing: 8px;
+
+.contrast-text(@color) when (lightness(@color) >= 50%) {
+  color: #111;
+}
+
+.contrast-text(@color) when (lightness(@color) < 50%) {
+  color: #fff;
+}
+
+.theme-card {
+  @selector: token;
+  display: grid;
+  gap: @spacing * 2;
+  padding: calc(@spacing + 1rem);
+  background: fade(@background, 95%);
+  border: 1px solid mix(@accent, white, 40%);
+  .contrast-text(@background);
+
+  &__title {
+    color: @accent;
+    &:hover { text-decoration: underline; }
+  }
+
+  &--@{selector} { box-shadow: 0 0 0 2px @accent; }
+}

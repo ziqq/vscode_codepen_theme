@@ -19,3 +19,19 @@ tokens(theme).each do |name, color|
   puts "#{name}: #{color}" if color.start_with?('#')
 end
 puts theme.label
+
+Token = Data.define(:name, :color)
+
+def describe_token(token)
+  case token
+  in Token(name: 'keyword', color:)
+    "keyword uses #{color}"
+  in Token(name:, color:) if color.start_with?('#')
+    "#{name} uses #{color}"
+  else
+    'unknown token'
+  end
+end
+
+token_objects = tokens(theme).map { |name, color| Token.new(name.to_s, color) }
+puts token_objects.filter_map { |token| describe_token(token) }

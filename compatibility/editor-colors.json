@@ -4,8 +4,7 @@
       {
         "line": 1,
         "text": "import",
-        "foreground": "#ddca7e",
-        "fontStyle": "italic"
+        "foreground": "#ddca7e"
       },
       {
         "line": 1,
@@ -60,8 +59,7 @@
       {
         "line": 12,
         "text": "const",
-        "foreground": "#ddca7e",
-        "fontStyle": "italic"
+        "foreground": "#ddca7e"
       },
       {
         "line": 12,
@@ -78,8 +76,7 @@
       {
         "line": 1,
         "text": "import",
-        "foreground": "#ddca7e",
-        "fontStyle": "italic"
+        "foreground": "#ddca7e"
       },
       {
         "line": 1,
@@ -129,8 +126,7 @@
       {
         "line": 12,
         "text": "const",
-        "foreground": "#ddca7e",
-        "fontStyle": "italic"
+        "foreground": "#ddca7e"
       },
       {
         "line": 12,
@@ -174,20 +170,17 @@
       {
         "line": 1,
         "text": "import",
-        "foreground": "#ddca7e",
-        "fontStyle": "italic"
+        "foreground": "#ddca7e"
       },
       {
         "line": 3,
         "text": "enum",
-        "foreground": "#ddca7e",
-        "fontStyle": "italic"
+        "foreground": "#ddca7e"
       },
       {
         "line": 25,
         "text": "const",
-        "foreground": "#ddca7e",
-        "fontStyle": "italic"
+        "foreground": "#ddca7e"
       },
       {
         "line": 70,
@@ -262,14 +255,12 @@
       {
         "line": 1,
         "text": "import",
-        "foreground": "#ddca7e",
-        "fontStyle": "italic"
+        "foreground": "#ddca7e"
       },
       {
         "line": 25,
         "text": "const",
-        "foreground": "#ddca7e",
-        "fontStyle": "italic"
+        "foreground": "#ddca7e"
       },
       {
         "line": 28,
@@ -299,8 +290,7 @@
       {
         "line": 121,
         "text": "sealed",
-        "foreground": "#ddca7e",
-        "fontStyle": "italic"
+        "foreground": "#ddca7e"
       },
       {
         "line": 140,
@@ -314,20 +304,17 @@
       {
         "line": 3,
         "text": "public",
-        "foreground": "#ddca7e",
-        "fontStyle": "italic"
+        "foreground": "#ddca7e"
       },
       {
         "line": 3,
         "text": "final",
-        "foreground": "#ddca7e",
-        "fontStyle": "italic"
+        "foreground": "#ddca7e"
       },
       {
         "line": 3,
         "text": "class",
-        "foreground": "#ddca7e",
-        "fontStyle": "italic"
+        "foreground": "#ddca7e"
       },
       {
         "line": 3,

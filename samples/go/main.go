@@ -41,3 +41,15 @@ func main() {
 	}
 	fmt.Println(theme.Label())
 }
+
+type labeler interface {
+	Label() string
+}
+
+func labels[T labeler](values ...T) []string {
+	result := make([]string, 0, len(values))
+	for _, value := range values {
+		result = append(result, value.Label())
+	}
+	return result
+}

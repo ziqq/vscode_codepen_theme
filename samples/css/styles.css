@@ -34,3 +34,21 @@
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
+
+@supports (container-type: inline-size) {
+  .preview-shell {
+    container: theme-preview / inline-size;
+  }
+
+  @container theme-preview (width > 30rem) {
+    .preview__token {
+      display: grid;
+      grid-template-columns: subgrid;
+    }
+  }
+}
+
+@keyframes token-pulse {
+  from { opacity: 0.65; }
+  to { opacity: 1; }
+}

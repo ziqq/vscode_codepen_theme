@@ -19,3 +19,22 @@ jobs:
       - name: Render fixture summary
         if: ${{ success() }}
         run: echo "${THEME_NAME} is ready"
+
+defaults: &preview_defaults
+  shell: bash
+  timeout-minutes: 10
+
+matrix:
+  include:
+    - { language: typescript, provider: vscode.typescript-basics }
+    - { language: dart, provider: Dart-Code.dart-code }
+
+notes: |-
+  Providers own tokenization.
+  The theme owns foreground colors and typography.
+
+preview:
+  <<: *preview_defaults
+  palette:
+    background: '#1d1e22'
+    accent: '#96b38a'

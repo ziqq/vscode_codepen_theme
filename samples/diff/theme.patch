@@ -1,0 +1,18 @@
+diff --git a/theme.json b/theme.json
+index 317b2a1..af03ad1 100644
+--- a/theme.json
++++ b/theme.json
+@@ -1,7 +1,10 @@
+ {
+-  "name": "CodePen Theme",
+-  "italic": true,
++  "name": "CodePen Theme Original",
++  "italic": false,
+   "colors": {
+-    "accent": "#8f9d6a"
++    "accent": "#96b38a",
++    "keyword": "#ddca7e",
++    "comment": "#717790"
+   }
+ }
+\ No newline at end of file

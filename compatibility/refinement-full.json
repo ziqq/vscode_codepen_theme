@@ -3,8 +3,10 @@
   "corrections": [
     { "language": "C#", "line": 6, "text": "Name", "foreground": "#9a8297", "reason": "A positional record component is a property." },
     { "language": "Dart", "line": 134, "text": "ThemePalette", "foreground": "#809bbd", "reason": "Constructor declaration binding, not an ordinary type reference." },
+    { "language": "Dart", "line": 145, "text": "palette", "foreground": "#809bbd", "reason": "A switch-pattern binding is a local variable." },
     { "language": "Dart", "line": 154, "text": "message", "foreground": "#809bbd", "reason": "A local variable declaration left unclassified by the native grammar." },
     { "language": "Go", "line": 14, "text": "Label", "foreground": "#9a8297", "reason": "Receiver method declaration, not a free function." },
+    { "language": "Go", "line": 45, "text": "labeler", "foreground": "#809bbd", "reason": "Interface declaration binding, not an ordinary type reference." },
     { "language": "JavaScript React", "line": 24, "text": "onSelect", "foreground": "#ddca7e", "reason": "Classic CodePen treats identifiers inside JSX expression islands as JavaScript atoms." },
     { "language": "SQL", "line": 8, "text": "TRUE", "foreground": "#ddca7e", "reason": "Boolean literal, not unclassified source text." }
   ]

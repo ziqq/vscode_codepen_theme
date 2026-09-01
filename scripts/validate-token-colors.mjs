@@ -7,8 +7,8 @@ import vscodeOniguruma from 'vscode-oniguruma';
 import { semanticColor, textmateTheme, tokenStyle } from './lib/token-colors.mjs';
 
 const theme = JSON.parse(await readFile('themes/codepen-theme.json', 'utf8'));
-const uprightTheme = JSON.parse(
-  await readFile('themes/codepen-theme-upright.json', 'utf8'),
+const ligaturesTheme = JSON.parse(
+  await readFile('themes/codepen-theme-ligatures.json', 'utf8'),
 );
 const twilight = JSON.parse(await readFile('compatibility/twilight.json', 'utf8'));
 const compatibility = JSON.parse(await readFile('compatibility/scopes.json', 'utf8'));
@@ -22,14 +22,14 @@ assert.equal(twilight.schemaVersion, 1);
 assert.equal(theme.colors['editor.background'], '#1d1e22');
 assert.equal(theme.colors['editorLineNumber.foreground'], '#34363e');
 assert.equal(theme.semanticHighlighting, true);
-assert.deepEqual(uprightTheme.colors, theme.colors);
+assert.deepEqual(ligaturesTheme.colors, theme.colors);
 assert.deepEqual(
-  uprightTheme.tokenColors.filter((rule) => rule.settings.foreground),
+  ligaturesTheme.tokenColors.filter((rule) => rule.settings.foreground),
   theme.tokenColors.filter((rule) => rule.settings.foreground),
-  'Upright must preserve all TextMate foreground rules',
+  'Ligatures must preserve all TextMate foreground rules',
 );
 assert.deepEqual(
-  Object.fromEntries(Object.entries(uprightTheme.semanticTokenColors).map(
+  Object.fromEntries(Object.entries(ligaturesTheme.semanticTokenColors).map(
     ([selector, value]) => [
       selector,
       typeof value === 'string' ? value : value.foreground,
@@ -41,14 +41,19 @@ assert.deepEqual(
       typeof value === 'string' ? value : value.foreground,
     ],
   )),
-  'Upright must preserve all semantic foregrounds',
+  'Ligatures must preserve all semantic foregrounds',
 );
-assert.ok(!uprightTheme.tokenColors.some((rule) =>
+assert.ok(!theme.tokenColors.some((rule) =>
   rule.settings.fontStyle?.split(/\s+/).includes('italic')));
-assert.ok(!Object.values(uprightTheme.semanticTokenColors).some((value) =>
+assert.ok(!Object.values(theme.semanticTokenColors).some((value) =>
+  typeof value === 'object' && value.italic === true));
+assert.ok(ligaturesTheme.tokenColors.some((rule) =>
+  rule.settings.fontStyle?.split(/\s+/).includes('italic')));
+assert.ok(Object.values(ligaturesTheme.semanticTokenColors).some((value) =>
   typeof value === 'object' && value.italic === true));
 
-const decorations = theme.tokenColors.filter((rule) => rule.settings.fontStyle !== undefined);
+const decorations = ligaturesTheme.tokenColors.filter((rule) =>
+  rule.settings.fontStyle !== undefined);
 assert.equal(
   createHash('sha256').update(JSON.stringify(decorations)).digest('hex'),
   twilight.decorationSha256,
@@ -60,8 +65,10 @@ for (const rule of theme.tokenColors) {
 for (const value of Object.values(theme.semanticTokenColors)) {
   assert.match(typeof value === 'string' ? value : value.foreground, /^#[0-9a-f]{6}$/i);
 }
-assert.equal(theme.semanticTokenColors['keyword:dart'].italic, true);
+assert.equal(theme.semanticTokenColors['keyword:dart'], '#ddca7e');
 assert.equal(theme.semanticTokenColors['keyword.void:dart'].italic, false);
+assert.equal(ligaturesTheme.semanticTokenColors['keyword:dart'].italic, true);
+assert.equal(ligaturesTheme.semanticTokenColors['keyword.void:dart'].italic, false);
 assert.deepEqual(
   twilight.cases.map((item) => item.language).sort(),
   compatibility.cases.map((item) => item.language).sort(),
@@ -120,7 +127,7 @@ const probes = [
 const wasm = await readFile('node_modules/vscode-oniguruma/release/onig.wasm');
 await vscodeOniguruma.loadWASM(wasm.buffer.slice(wasm.byteOffset, wasm.byteOffset + wasm.byteLength));
 const registry = new vscodeTextmate.Registry({
-  theme: textmateTheme(theme),
+  theme: textmateTheme(ligaturesTheme),
   onigLib: Promise.resolve(vscodeOniguruma),
   loadGrammar: async () => ({
     scopeName: 'source.twilight-test',

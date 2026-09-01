@@ -9,7 +9,9 @@ if (!['--check', '--write'].includes(mode)) {
 const compatibility = JSON.parse(
   await readFile('compatibility/scopes.json', 'utf8'),
 );
-const theme = JSON.parse(await readFile('themes/codepen-theme.json', 'utf8'));
+const theme = JSON.parse(
+  await readFile('themes/codepen-theme-ligatures.json', 'utf8'),
+);
 const providers = new Map(
   compatibility.providers.map((provider) => [
     provider.id.toLowerCase(),
@@ -90,7 +92,7 @@ function renderSvg() {
     `<rect width="100%" height="100%" fill="${background}"/>`,
     `<text class="title" x="32" y="42" fill="${foreground}">CodePen Theme compatibility baseline</text>`,
     `<text x="32" y="70" fill="${muted}">VS Code ${escapeXml(compatibility.verifiedVscodeVersion)} · verified ${escapeXml(compatibility.verifiedAt)} · ${compatibility.cases.length} syntax fixtures</text>`,
-    `<text x="32" y="94" fill="${muted}">Generated from themes/codepen-theme.json and compatibility/scopes.json</text>`,
+    `<text x="32" y="94" fill="${muted}">Generated from themes/codepen-theme-ligatures.json and compatibility/scopes.json</text>`,
     rows.join(''),
     '</svg>',
     '',

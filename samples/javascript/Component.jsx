@@ -33,3 +33,18 @@ export function ThemePreview({ name = 'CodePen Theme Original', onSelect }) {
     </section>
   );
 }
+
+export function TokenBadge({ token, color, compact = false, ...attributes }) {
+  const label = compact ? token : `${token}: ${color ?? 'inherit'}`;
+
+  return (
+    <span
+      {...attributes}
+      className={`token-badge ${compact ? 'token-badge--compact' : ''}`}
+      data-token={token}
+      style={{ color }}
+    >
+      {color ? <code>{label}</code> : <del>{label}</del>}
+    </span>
+  );
+}

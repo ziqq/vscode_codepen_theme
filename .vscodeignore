@@ -30,7 +30,6 @@ test/**
 **/.vscode-test.*
 bin/**
 build/**
-docs/**
 tools/**
 typings/**
 third_party/**

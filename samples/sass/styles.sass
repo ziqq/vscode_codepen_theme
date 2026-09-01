@@ -25,3 +25,14 @@ $muted: #717790
 
     &[data-kind='keyword']
       color: #ddca7e
+
+@function token-color($name)
+  @return map-get(('keyword': #ddca7e, 'string': $accent, 'comment': $muted), $name)
+
+@each $name in keyword, string, comment
+  .token--#{$name}
+    color: token-color($name)
+
+@for $index from 1 through 3
+  .preview__token:nth-child(#{$index})
+    transition-delay: $index * 40ms
