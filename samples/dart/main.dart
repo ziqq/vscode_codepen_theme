@@ -3,7 +3,7 @@ import 'dart:math' as math;
 enum ThemeMode { dark, highContrast }
 
 /// {@template price_type}
-/// PriceType enumeration
+/// [PriceType] enumeration
 /// {@endtemplate}
 enum PriceType implements Comparable<PriceType> {
   /// Fixed price type
