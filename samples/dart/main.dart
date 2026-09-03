@@ -154,3 +154,8 @@ void main() {
   final message = describeTheme(state, ThemeMode.dark);
   print('$message; contrast score: ${palette.contrastScore()}');
 }
+
+Future<int> resolveLimit(Future<int> value) async {
+  final limit = await value;
+  return limit;
+}

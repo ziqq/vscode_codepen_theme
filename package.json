@@ -10,10 +10,16 @@
   "license": "Apache-2.0",
   "publisher": "ziqq",
   "main": "./runtime/extension.js",
-  "activationEvents": ["onStartupFinished"],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
   "capabilities": {
-    "untrustedWorkspaces": { "supported": true },
-    "virtualWorkspaces": { "supported": true }
+    "untrustedWorkspaces": {
+      "supported": true
+    },
+    "virtualWorkspaces": {
+      "supported": true
+    }
   },
   "author": {
     "name": "Anton Ustinoff"

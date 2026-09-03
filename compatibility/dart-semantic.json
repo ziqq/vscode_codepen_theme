@@ -4,21 +4,21 @@
     { "line": 70, "text": "alias", "type": "variable", "modifiers": ["declaration", "instance"], "foreground": "#9a8297" },
     { "line": 76, "text": "isFixed", "type": "property", "modifiers": ["declaration", "instance"], "foreground": "#9a8297" },
     { "line": 85, "text": "map", "type": "method", "modifiers": ["declaration", "instance"], "foreground": "#9a8297" },
-    { "line": 86, "text": "fixed", "type": "parameter", "modifiers": ["declaration"], "foreground": "#809bbd" },
-    { "line": 86, "text": "Function", "type": "keyword", "modifiers": [], "foreground": "#ddca7e", "limitation": "Dart emits the same keyword token as const; a theme cannot distinguish the function type here." },
+    { "line": 86, "text": "fixed", "type": "parameter", "modifiers": ["declaration"], "foreground": "#ffffff" },
+    { "line": 86, "text": "Function", "type": "keyword", "modifiers": [], "foreground": "#809bbd", "limitation": "Dart emits the same keyword token as const; the contextual refinement layer restores the yellow type role." },
     { "line": 96, "text": "maybeMap", "type": "method", "modifiers": ["declaration", "instance"], "foreground": "#9a8297" },
     { "line": 101, "text": "map", "type": "method", "modifiers": ["instance"], "foreground": "#9a8297" },
     { "line": 108, "text": "maybeMapOrNull", "type": "method", "modifiers": ["declaration", "instance"], "foreground": "#9a8297" },
-    { "line": 114, "text": "override", "type": "property", "modifiers": ["annotation"], "foreground": "#ddca7e" },
+    { "line": 114, "text": "override", "type": "property", "modifiers": ["annotation"], "foreground": "#809bbd" },
     { "line": 115, "text": "compareTo", "type": "method", "modifiers": ["declaration", "instance"], "foreground": "#9a8297" },
-    { "line": 145, "text": "name", "type": "variable", "modifiers": ["declaration"], "foreground": "#809bbd" },
-    { "line": 154, "text": "state", "type": "variable", "modifiers": [], "foreground": "#809bbd" },
+    { "line": 145, "text": "name", "type": "variable", "modifiers": ["declaration"], "foreground": "#ffffff" },
+    { "line": 154, "text": "state", "type": "variable", "modifiers": [], "foreground": "#ffffff" },
     {
       "line": 3,
       "text": "ThemeMode",
       "type": "enum",
       "modifiers": [],
-      "foreground": "#ffffff"
+      "foreground": "#ddca7e"
     },
     {
       "line": 3,
@@ -32,7 +32,7 @@
       "text": "Comparable",
       "type": "class",
       "modifiers": [],
-      "foreground": "#ffffff"
+      "foreground": "#ddca7e"
     },
     {
       "line": 12,
@@ -41,7 +41,7 @@
       "modifiers": [
         "label"
       ],
-      "foreground": "#809bbd"
+      "foreground": "#ffffff"
     },
     {
       "line": 28,
@@ -60,7 +60,7 @@
       "modifiers": [
         "declaration"
       ],
-      "foreground": "#809bbd"
+      "foreground": "#ffffff"
     },
     {
       "line": 31,
@@ -78,7 +78,7 @@
       "modifiers": [
         "declaration"
       ],
-      "foreground": "#809bbd"
+      "foreground": "#ddca7e"
     },
     {
       "line": 122,
@@ -88,7 +88,7 @@
         "constructor",
         "declaration"
       ],
-      "foreground": "#809bbd"
+      "foreground": "#ddca7e"
     },
     {
       "line": 128,
@@ -125,7 +125,7 @@
       "text": "max",
       "type": "function",
       "modifiers": [],
-      "foreground": "#ddca7e"
+      "foreground": "#9a8297"
     },
     {
       "line": 143,
@@ -135,7 +135,7 @@
         "declaration",
         "static"
       ],
-      "foreground": "#809bbd"
+      "foreground": "#9a8297"
     },
     {
       "line": 151,
@@ -153,7 +153,7 @@
       "modifiers": [
         "declaration"
       ],
-      "foreground": "#809bbd"
+      "foreground": "#ffffff"
     }
   ]
 }

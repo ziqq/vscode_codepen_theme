@@ -8,6 +8,8 @@ const reference = JSON.parse(await readFile('compatibility/codepen-reference.jso
 const reviewed = JSON.parse(await readFile('compatibility/refinement-differences.json', 'utf8')).differences;
 const results = [];
 const usedReviewed = new Set();
+const unexpected = [];
+const changed = [];
 let total = 0, exact = 0;
 for (const fixture of reference.cases) {
   const spans = await refine(fixture.source, { javascript: 'javascript', typescript: 'typescript', jsx: 'javascriptreact' }[fixture.mode]);
@@ -24,10 +26,14 @@ for (const fixture of reference.cases) {
         if (actual.length === 1 && actual[0] === expected) exact++;
         else {
           const accepted = reviewed.find((item) => item.case === fixture.id && item.line === line + 1 && item.start === start && item.text === text);
-          assert.ok(accepted, `${fixture.id}:${line + 1}:${start} ${text}: unreviewed difference ${actual}`);
-          assert.deepEqual(actual, [accepted.actual], `${fixture.id}:${line + 1} ${text}: different role than reviewed`);
-          usedReviewed.add(accepted);
-          differences.push({ line: line + 1, start, text, expected, actual, reason: accepted.reason });
+          const detail = { case: fixture.id, line: line + 1, start, text, expected, actual };
+          if (!accepted) unexpected.push(detail);
+          else if (JSON.stringify(actual) !== JSON.stringify([accepted.actual])) {
+            changed.push({ ...detail, reviewedActual: accepted.actual });
+          } else {
+            usedReviewed.add(accepted);
+            differences.push({ line: line + 1, start, text, expected, actual, reason: accepted.reason });
+          }
         }
       }
       start += text.length;
@@ -36,6 +42,8 @@ for (const fixture of reference.cases) {
   }
   results.push({ id: fixture.id, differences });
 }
-assert.equal(usedReviewed.size, reviewed.length, 'Stale reviewed contextual-reference differences must be removed');
+const stale = reviewed.filter((item) => !usedReviewed.has(item));
+assert.equal(unexpected.length + changed.length + stale.length, 0,
+  `Contextual-reference review drift:\n${JSON.stringify({ unexpected, changed, stale }, null, 2)}`);
 await writeFile('build/refinement-reference.json', `${JSON.stringify({ total, exact, differences: total - exact, results }, null, 2)}\n`);
 console.log(`Contextual reference: ${exact}/${total} exact spans; ${total - exact} differences.`);

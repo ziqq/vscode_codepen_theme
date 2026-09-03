@@ -2,9 +2,9 @@
   "typescriptreact": {
     "textmate": [
       {
-        "line": 1,
-        "text": "import",
-        "foreground": "#ddca7e"
+      "line": 1,
+      "text": "import",
+      "foreground": "#809bbd"
       },
       {
         "line": 1,
@@ -24,12 +24,12 @@
       {
         "line": 3,
         "text": "TokenName",
-        "foreground": "#ffffff"
+        "foreground": "#ddca7e"
       },
       {
         "line": 5,
         "text": "Readonly",
-        "foreground": "#ffffff"
+        "foreground": "#ddca7e"
       },
       {
         "line": 5,
@@ -38,8 +38,13 @@
       },
       {
         "line": 6,
+        "text": "name",
+        "foreground": "#9a8297"
+      },
+      {
+        "line": 6,
         "text": "string",
-        "foreground": "#ffffff"
+        "foreground": "#ddca7e"
       },
       {
         "line": 7,
@@ -49,17 +54,17 @@
       {
         "line": 7,
         "text": "string",
-        "foreground": "#ffffff"
+        "foreground": "#ddca7e"
       },
       {
         "line": 9,
         "text": "Record",
-        "foreground": "#ffffff"
+        "foreground": "#ddca7e"
       },
       {
         "line": 12,
         "text": "const",
-        "foreground": "#ddca7e"
+        "foreground": "#809bbd"
       },
       {
         "line": 12,
@@ -69,14 +74,19 @@
       {
         "line": 12,
         "text": "Theme",
-        "foreground": "#ffffff"
+        "foreground": "#ddca7e"
+      },
+      {
+        "line": 13,
+        "text": "name",
+        "foreground": "#9a8297"
       }
     ],
     "semantic": [
       {
         "line": 1,
         "text": "import",
-        "foreground": "#ddca7e"
+        "foreground": "#809bbd"
       },
       {
         "line": 1,
@@ -91,12 +101,12 @@
       {
         "line": 3,
         "text": "TokenName",
-        "foreground": "#ffffff"
+        "foreground": "#ddca7e"
       },
       {
         "line": 5,
         "text": "Readonly",
-        "foreground": "#ffffff"
+        "foreground": "#ddca7e"
       },
       {
         "line": 5,
@@ -105,8 +115,13 @@
       },
       {
         "line": 6,
+        "text": "name",
+        "foreground": "#9a8297"
+      },
+      {
+        "line": 6,
         "text": "string",
-        "foreground": "#ffffff"
+        "foreground": "#ddca7e"
       },
       {
         "line": 7,
@@ -116,51 +131,66 @@
       {
         "line": 7,
         "text": "string",
-        "foreground": "#ffffff"
+        "foreground": "#ddca7e"
       },
       {
         "line": 9,
         "text": "Record",
-        "foreground": "#ffffff"
-      },
-      {
-        "line": 12,
-        "text": "const",
         "foreground": "#ddca7e"
       },
       {
         "line": 12,
-        "text": "theme",
+        "text": "const",
         "foreground": "#809bbd"
       },
       {
         "line": 12,
-        "text": "Theme",
+        "text": "theme",
         "foreground": "#ffffff"
+      },
+      {
+        "line": 12,
+        "text": "Theme",
+        "foreground": "#ddca7e"
+      },
+      {
+        "line": 13,
+        "text": "name",
+        "foreground": "#9a8297"
+      },
+      {
+        "line": 28,
+        "text": "tokenLabel",
+        "foreground": "#9a8297"
+      },
+      {
+        "line": 30,
+        "text": "Preview",
+        "foreground": "#9a8297"
       }
     ]
   },
   "dart": {
     "semantic": [
       {
-        "line": 3,
-        "text": "ThemeMode",
-        "foreground": "#ffffff"
+      "line": 3,
+      "text": "ThemeMode",
+      "foreground": "#ddca7e"
       },
       {
-        "line": 3,
-        "text": "dark",
-        "foreground": "#9a8297"
+      "line": 3,
+      "text": "dark",
+      "foreground": "#9a8297"
       },
       {
-        "line": 8,
-        "text": "Comparable",
-        "foreground": "#ffffff"
+      "line": 8,
+      "text": "Comparable",
+      "foreground": "#ddca7e"
       },
       {
-        "line": 12,
-        "text": "alias",
-        "foreground": "#809bbd"
+      "line": 12,
+      "text": "alias",
+      "foreground": "#ffffff"
       },
       {
         "line": 12,
@@ -170,27 +200,42 @@
       {
         "line": 1,
         "text": "import",
-        "foreground": "#ddca7e"
+        "foreground": "#809bbd"
       },
       {
-        "line": 3,
-        "text": "enum",
-        "foreground": "#ddca7e"
+        "line": 1,
+        "text": "as",
+        "foreground": "#ffffff"
       },
       {
-        "line": 25,
-        "text": "const",
-        "foreground": "#ddca7e"
+      "line": 3,
+      "text": "enum",
+      "foreground": "#809bbd"
       },
       {
-        "line": 70,
-        "text": "alias",
-        "foreground": "#9a8297"
+      "line": 25,
+      "text": "const",
+      "foreground": "#809bbd"
       },
       {
-        "line": 76,
-        "text": "isFixed",
-        "foreground": "#9a8297"
+      "line": 70,
+      "text": "alias",
+      "foreground": "#9a8297"
+      },
+      {
+      "line": 73,
+      "text": "value",
+      "foreground": "#9a8297"
+      },
+      {
+      "line": 76,
+      "text": "isFixed",
+      "foreground": "#9a8297"
+      },
+      {
+        "line": 66,
+        "text": "null",
+        "foreground": "#d0782a"
       },
       {
         "line": 85,
@@ -198,9 +243,9 @@
         "foreground": "#9a8297"
       },
       {
-        "line": 86,
-        "text": "fixed",
-        "foreground": "#809bbd"
+      "line": 86,
+      "text": "fixed",
+      "foreground": "#9a8297"
       },
       {
         "line": 96,
@@ -213,19 +258,19 @@
         "foreground": "#9a8297"
       },
       {
-        "line": 114,
-        "text": "@override",
-        "foreground": "#ddca7e"
+      "line": 114,
+      "text": "@override",
+      "foreground": "#809bbd"
       },
       {
-        "line": 121,
-        "text": "ThemeState",
-        "foreground": "#809bbd"
+      "line": 121,
+      "text": "ThemeState",
+      "foreground": "#ddca7e"
       },
       {
-        "line": 128,
-        "text": "name",
-        "foreground": "#9a8297"
+      "line": 128,
+      "text": "name",
+      "foreground": "#9a8297"
       },
       {
         "line": 140,
@@ -233,14 +278,19 @@
         "foreground": "#9a8297"
       },
       {
-        "line": 145,
-        "text": "name",
-        "foreground": "#809bbd"
+      "line": 145,
+      "text": "name",
+      "foreground": "#ffffff"
       },
       {
-        "line": 154,
-        "text": "state",
-        "foreground": "#809bbd"
+      "line": 154,
+      "text": "state",
+      "foreground": "#ffffff"
+      },
+      {
+        "line": 155,
+        "text": "print",
+        "foreground": "#9a8297"
       }
     ],
     "scrollLines": [
@@ -270,7 +320,7 @@
       {
         "line": 70,
         "text": "String",
-        "foreground": "#ffffff"
+        "foreground": "#ddca7e"
       },
       {
         "line": 85,
@@ -285,7 +335,7 @@
       {
         "line": 114,
         "text": "@override",
-        "foreground": "#ddca7e"
+        "foreground": "#809bbd"
       },
       {
         "line": 121,
@@ -295,6 +345,55 @@
       {
         "line": 140,
         "text": "contrastScore",
+        "foreground": "#9a8297"
+      }
+    ]
+  },
+  "javascript": {
+    "scrollLines": [
+      1,
+      25,
+      35
+    ],
+    "semantic": [
+      {
+        "line": 10,
+        "text": "ThemePreview",
+        "foreground": "#ddca7e"
+      },
+      {
+        "line": 12,
+        "text": "name",
+        "foreground": "#9a8297"
+      },
+      {
+        "line": 13,
+        "text": "tokens",
+        "foreground": "#9a8297"
+      },
+      {
+        "line": 16,
+        "text": "label",
+        "foreground": "#9a8297"
+      },
+      {
+        "line": 27,
+        "text": "renderPreview",
+        "foreground": "#9a8297"
+      },
+      {
+        "line": 28,
+        "text": "lines",
+        "foreground": "#ffffff"
+      },
+      {
+        "line": 28,
+        "text": "visibleTokens",
+        "foreground": "#9a8297"
+      },
+      {
+        "line": 35,
+        "text": "streamTokenLabels",
         "foreground": "#9a8297"
       }
     ]
@@ -319,7 +418,7 @@
       {
         "line": 3,
         "text": "Main",
-        "foreground": "#809bbd"
+        "foreground": "#ddca7e"
       },
       {
         "line": 4,
@@ -349,7 +448,7 @@
       {
         "line": 22,
         "text": "String",
-        "foreground": "#ffffff"
+        "foreground": "#ddca7e"
       },
       {
         "line": 22,
@@ -359,7 +458,7 @@
       {
         "line": 27,
         "text": "message",
-        "foreground": "#809bbd"
+        "foreground": "#ffffff"
       }
     ]
   },

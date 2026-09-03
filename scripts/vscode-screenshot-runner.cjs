@@ -14,6 +14,9 @@ exports.run = async () => {
   if (!theme) {
     throw new Error('The installed CodePen theme is not registered in VS Code');
   }
+  // Activate explicitly so semantic screenshots exercise the packaged
+  // refinement layer instead of depending on onStartupFinished timing.
+  await theme.activate();
 
   for (const expected of JSON.parse(process.env.CODEPEN_SCREENSHOT_EXPECTATIONS)) {
     if (!expected.provider.startsWith('vscode.') && !vscode.extensions.getExtension(expected.provider)) {
@@ -33,6 +36,7 @@ exports.run = async () => {
       await dart.activate();
     }
     const results = [];
+    const dartErrors = [];
     for (const file of JSON.parse(process.env.CODEPEN_SCREENSHOT_SAMPLES)) {
       const document = await vscode.workspace.openTextDocument(file);
       const range = new vscode.Range(document.positionAt(0), document.positionAt(document.getText().length));
@@ -59,23 +63,37 @@ exports.run = async () => {
           type: legend.tokenTypes[type], modifiers: legend.tokenModifiers.filter((_, bit) => modifiers & (1 << bit)) });
       }
       if (document.languageId === 'dart') {
-        const assert = require('node:assert/strict');
         const { readFile } = require('node:fs/promises');
         const { semanticColor } = await import('./lib/token-colors.mjs');
         const expectations = JSON.parse(await readFile(`${__dirname}/../compatibility/dart-semantic.json`, 'utf8'));
         const colors = JSON.parse(await readFile(`${theme.extensionPath}/themes/codepen-theme.json`, 'utf8'));
         for (const expected of expectations.expect) {
           const token = decoded.find((item) => item.line === expected.line && item.text === expected.text);
-          assert.ok(token, `Missing Dart semantic token ${expected.line}:${expected.text}`);
-          assert.equal(token.type, expected.type, `${expected.text}: semantic type`);
-          assert.deepEqual([...token.modifiers].sort(), [...expected.modifiers].sort(), `${expected.text}: modifiers`);
-          assert.equal(semanticColor(colors, token.type, token.modifiers, 'dart'), expected.foreground, `${expected.text}: foreground`);
+          if (!token) {
+            dartErrors.push(`Missing Dart semantic token ${expected.line}:${expected.text}`);
+            continue;
+          }
+          if (token.type !== expected.type) {
+            dartErrors.push(`${expected.line}:${expected.text}: semantic type ${token.type}, expected ${expected.type}`);
+          }
+          const actualModifiers = [...token.modifiers].sort();
+          const expectedModifiers = [...expected.modifiers].sort();
+          if (JSON.stringify(actualModifiers) !== JSON.stringify(expectedModifiers)) {
+            dartErrors.push(`${expected.line}:${expected.text}: modifiers ${JSON.stringify(actualModifiers)}, expected ${JSON.stringify(expectedModifiers)}`);
+          }
+          const foreground = semanticColor(colors, token.type, token.modifiers, 'dart');
+          if (foreground !== expected.foreground) {
+            dartErrors.push(`${expected.line}:${expected.text}: foreground ${foreground}, expected ${expected.foreground}`);
+          }
         }
       }
       results.push({ file, language: document.languageId, tokens: tokens.data.length / 5,
         types: legend.tokenTypes, modifiers: legend.tokenModifiers, decoded });
     }
-    await writeFile(process.env.CODEPEN_SEMANTIC_REPORT, `${JSON.stringify(results, null, 2)}\n`);
+    await writeFile(
+      process.env.CODEPEN_SEMANTIC_REPORT,
+      `${JSON.stringify({ results, dartErrors }, null, 2)}\n`,
+    );
   }
 
   await writeFile(readyFile, '');

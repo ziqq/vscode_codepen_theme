@@ -21,6 +21,7 @@ const grammars = {
 };
 const results = [];
 const unexpected = [];
+const usedRoleDifferences = new Set();
 for (const fixture of reference.cases) {
   const [extension, grammarFile, scope] = grammars[fixture.mode];
   const grammarPath = path.join(extensions, extension, 'syntaxes', grammarFile);
@@ -62,9 +63,19 @@ for (const fixture of reference.cases) {
   }
   registry.dispose();
   for (const mismatch of mismatches) {
-    const accepted = reviewed.differences.find((item) => item.case === fixture.id &&
+    const exactDifference = reviewed.differences.find((item) => item.case === fixture.id &&
       item.line === mismatch.line && item.start === mismatch.start && item.text === mismatch.text &&
       item.expected === mismatch.expected && JSON.stringify(item.actual) === JSON.stringify(mismatch.actual));
+    const roleDifference = reviewed.roleDifferences?.find((item, index) => {
+      const accepted = item.modes.includes(fixture.mode) &&
+        item.cmScope === mismatch.cmScope &&
+        item.expected === mismatch.expected &&
+        JSON.stringify(item.actual) === JSON.stringify(mismatch.actual) &&
+        (!item.texts || item.texts.includes(mismatch.text));
+      if (accepted) usedRoleDifferences.add(index);
+      return accepted;
+    });
+    const accepted = exactDifference ?? roleDifference;
     if (!accepted) unexpected.push({ case: fixture.id, ...mismatch });
     else mismatch.reason = accepted.reason;
   }
@@ -77,3 +88,8 @@ await writeFile(`build/codepen-reference-${version}.json`, `${JSON.stringify({
   results,
 }, null, 2)}\n`);
 assert.equal(unexpected.length, 0, `Unreviewed CodePen differences:\n${JSON.stringify(unexpected, null, 2)}`);
+assert.equal(
+  usedRoleDifferences.size,
+  reviewed.roleDifferences?.length ?? 0,
+  'Stale CodePen role-difference policies must be removed',
+);

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "description": "Reviewed role assertions on the complete samples, not isolated snippets. Missing grammar context is documented separately; no generated expectation snapshots.",
+  "description": "Reviewed role assertions on complete samples, verified against native providers and contextual refinement.",
   "cases": [
     {
       "language": "C",
@@ -23,22 +23,22 @@
         {
           "line": 6,
           "text": "char",
-          "foreground": "#ffffff"
+          "foreground": "#ddca7e"
         },
         {
           "line": 11,
           "text": "print_theme",
-          "foreground": "#809bbd"
+          "foreground": "#9a8297"
         },
         {
           "line": 11,
           "text": "theme",
-          "foreground": "#809bbd"
+          "foreground": "#9a8297"
         },
         {
           "line": 15,
           "text": "int",
-          "foreground": "#ffffff"
+          "foreground": "#ddca7e"
         },
         {
           "line": 21,
@@ -48,7 +48,7 @@
         {
           "line": 23,
           "text": "size_t",
-          "foreground": "#ffffff"
+          "foreground": "#ddca7e"
         },
         {
           "line": 23,
@@ -64,39 +64,55 @@
           "line": 30,
           "text": "0",
           "foreground": "#d0782a"
-      },
-      {
-        "line": 33,
-        "text": "typedef",
-        "foreground": "#ddca7e"
-      },
-      {
-        "line": 39,
-        "text": "token_name",
-        "foreground": "#809bbd"
-      }
-    ]
-  },
-  {
-    "language": "C++",
+        },
+        {
+          "line": 33,
+          "text": "typedef",
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 39,
+          "text": "token_name",
+          "foreground": "#9a8297"
+        }
+      ]
+    },
+    {
+      "language": "C++",
       "expect": [
         {
           "line": 6,
           "text": "Theme",
-          "foreground": "#809bbd"
+          "foreground": "#ddca7e"
         },
         {
           "line": 7,
           "text": "string",
-          "foreground": "#ffffff"
+          "foreground": "#ddca7e",
+          "providerFallbacks": {
+            "1.96.0": {
+              "foreground": "#ffffff",
+              "reason": "The older C++ grammar leaves std::string unclassified."
+            },
+            "1.105.1": {
+              "foreground": "#ffffff",
+              "reason": "The older C++ grammar leaves std::string unclassified."
+            }
+          }
         },
         {
           "line": 7,
           "text": "name",
           "foreground": "#9a8297",
           "providerFallbacks": {
-            "1.96.0": { "foreground": "#ffffff", "reason": "The older C++ grammar leaves string name in one unclassified struct-body span." },
-            "1.105.1": { "foreground": "#ffffff", "reason": "The older C++ grammar leaves string name in one unclassified struct-body span." }
+            "1.96.0": {
+              "foreground": "#ffffff",
+              "reason": "The older C++ grammar leaves string name in one unclassified struct-body span."
+            },
+            "1.105.1": {
+              "foreground": "#ffffff",
+              "reason": "The older C++ grammar leaves string name in one unclassified struct-body span."
+            }
           }
         },
         {
@@ -107,20 +123,26 @@
         {
           "line": 11,
           "text": "const",
-          "foreground": "#ddca7e"
+          "foreground": "#809bbd"
         },
         {
           "line": 16,
           "text": "main",
-          "foreground": "#809bbd"
+          "foreground": "#9a8297"
         },
         {
           "line": 17,
           "text": "theme",
-          "foreground": "#809bbd",
+          "foreground": "#ffffff",
           "providerFallbacks": {
-            "1.96.0": { "foreground": "#ffffff", "reason": "The older C++ grammar leaves the type and local binding in one unclassified body span." },
-            "1.105.1": { "foreground": "#ffffff", "reason": "The older C++ grammar leaves the type and local binding in one unclassified body span." }
+            "1.96.0": {
+              "foreground": "#ffffff",
+              "reason": "The older C++ grammar leaves the type and local binding in one unclassified body span."
+            },
+            "1.105.1": {
+              "foreground": "#ffffff",
+              "reason": "The older C++ grammar leaves the type and local binding in one unclassified body span."
+            }
           }
         },
         {
@@ -136,22 +158,22 @@
         {
           "line": 25,
           "text": "return",
+          "foreground": "#809bbd"
+        },
+        {
+          "line": 28,
+          "text": "TokenRole",
           "foreground": "#ddca7e"
-      },
-      {
-        "line": 28,
-        "text": "TokenRole",
-        "foreground": "#809bbd"
-      },
-      {
-        "line": 31,
-        "text": "select_tokens",
-        "foreground": "#809bbd"
-      }
-    ]
-  },
-  {
-    "language": "C#",
+        },
+        {
+          "line": 31,
+          "text": "select_tokens",
+          "foreground": "#9a8297"
+        }
+      ]
+    },
+    {
+      "language": "C#",
       "expect": [
         {
           "line": 6,
@@ -161,12 +183,12 @@
         {
           "line": 6,
           "text": "Theme",
-          "foreground": "#809bbd"
+          "foreground": "#ddca7e"
         },
         {
           "line": 6,
           "text": "string",
-          "foreground": "#ffffff"
+          "foreground": "#ddca7e"
         },
         {
           "line": 6,
@@ -212,21 +234,21 @@
           "line": 25,
           "text": "Label",
           "foreground": "#9a8297"
-      },
-      {
-        "line": 29,
-        "text": "TokenRole",
-        "foreground": "#809bbd"
-      },
-      {
-        "line": 38,
-        "text": "Color",
-        "foreground": "#9a8297"
-      }
-    ]
-  },
-  {
-    "language": "C4 / Structurizr DSL",
+        },
+        {
+          "line": 29,
+          "text": "TokenRole",
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 38,
+          "text": "Color",
+          "foreground": "#9a8297"
+        }
+      ]
+    },
+    {
+      "language": "C4 / Structurizr DSL",
       "expect": [
         {
           "line": 1,
@@ -312,26 +334,26 @@
           "line": 34,
           "text": "1fr",
           "foreground": "#d0782a"
-      },
-      {
-        "line": 38,
-        "text": "supports",
-        "foreground": "#809bbd"
-      },
+        },
+        {
+          "line": 38,
+          "text": "supports",
+          "foreground": "#809bbd"
+        },
         {
           "line": 43,
           "text": "container",
           "foreground": "#809bbd"
-      },
-      {
-        "line": 51,
-        "text": "token-pulse",
-        "foreground": "#809bbd"
-      }
-    ]
-  },
-  {
-    "language": "Dart",
+        },
+        {
+          "line": 51,
+          "text": "token-pulse",
+          "foreground": "#809bbd"
+        }
+      ]
+    },
+    {
+      "language": "Dart",
       "expect": [
         {
           "line": 1,
@@ -339,9 +361,19 @@
           "foreground": "#ddca7e"
         },
         {
+          "line": 1,
+          "text": "as",
+          "foreground": "#ddca7e"
+        },
+        {
           "line": 3,
           "text": "enum",
           "foreground": "#ddca7e"
+        },
+        {
+          "line": 3,
+          "text": "dark",
+          "foreground": "#ffffff"
         },
         {
           "line": 8,
@@ -361,7 +393,7 @@
         {
           "line": 29,
           "text": "String",
-          "foreground": "#ffffff"
+          "foreground": "#ddca7e"
         },
         {
           "line": 70,
@@ -371,6 +403,16 @@
         {
           "line": 76,
           "text": "bool",
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 76,
+          "text": "get",
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 76,
+          "text": "isFixed",
           "foreground": "#ffffff"
         },
         {
@@ -381,17 +423,17 @@
         {
           "line": 85,
           "text": "T",
-          "foreground": "#ffffff"
+          "foreground": "#ddca7e"
         },
         {
           "line": 86,
           "text": "Function",
-          "foreground": "#ffffff"
+          "foreground": "#ddca7e"
         },
         {
           "line": 114,
           "text": "@override",
-          "foreground": "#ddca7e"
+          "foreground": "#809bbd"
         },
         {
           "line": 115,
@@ -411,7 +453,7 @@
         {
           "line": 134,
           "text": "ThemePalette",
-          "foreground": "#ffffff"
+          "foreground": "#ddca7e"
         },
         {
           "line": 140,
@@ -436,12 +478,52 @@
         {
           "line": 150,
           "text": "void",
-          "foreground": "#ffffff"
+          "foreground": "#ddca7e"
         },
         {
           "line": 154,
           "text": "message",
           "foreground": "#ffffff"
+        },
+        {
+          "line": 155,
+          "text": "print",
+          "foreground": "#9a8297"
+        },
+        {
+          "line": 158,
+          "text": "Future",
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 158,
+          "text": "resolveLimit",
+          "foreground": "#9a8297"
+        },
+        {
+          "line": 158,
+          "text": "async",
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 159,
+          "text": "final",
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 159,
+          "text": "limit",
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 159,
+          "text": "await",
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 160,
+          "text": "return",
+          "foreground": "#ddca7e"
         }
       ]
     },
@@ -536,7 +618,7 @@
         {
           "line": 8,
           "text": "type",
-          "foreground": "#ddca7e"
+          "foreground": "#809bbd"
         },
         {
           "line": 9,
@@ -551,7 +633,7 @@
         {
           "line": 14,
           "text": "t",
-          "foreground": "#809bbd"
+          "foreground": "#ffffff"
         },
         {
           "line": 14,
@@ -597,21 +679,21 @@
           "line": 42,
           "text": "Label",
           "foreground": "#9a8297"
-      },
-      {
-        "line": 45,
-        "text": "labeler",
-        "foreground": "#ffffff"
-      },
-      {
-        "line": 49,
-        "text": "labels",
-        "foreground": "#809bbd"
-      }
-    ]
-  },
-  {
-    "language": "HTML",
+        },
+        {
+          "line": 45,
+          "text": "labeler",
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 49,
+          "text": "labels",
+          "foreground": "#809bbd"
+        }
+      ]
+    },
+    {
+      "language": "HTML",
       "expect": [
         {
           "line": 2,
@@ -651,7 +733,7 @@
         {
           "line": 25,
           "text": "const",
-          "foreground": "#ddca7e"
+          "foreground": "#809bbd"
         },
         {
           "line": 25,
@@ -662,26 +744,26 @@
           "line": 27,
           "text": "textContent",
           "foreground": "#9a8297"
-      },
-      {
-        "line": 30,
-        "text": "details",
-        "foreground": "#a7925a"
-      },
-      {
-        "line": 36,
-        "text": "meter",
-        "foreground": "#a7925a"
-      },
-      {
-        "line": 39,
-        "text": "template",
-        "foreground": "#a7925a"
-      }
-    ]
-  },
-  {
-    "language": "Java",
+        },
+        {
+          "line": 30,
+          "text": "details",
+          "foreground": "#a7925a"
+        },
+        {
+          "line": 36,
+          "text": "meter",
+          "foreground": "#a7925a"
+        },
+        {
+          "line": 39,
+          "text": "template",
+          "foreground": "#a7925a"
+        }
+      ]
+    },
+    {
+      "language": "Java",
       "expect": [
         {
           "line": 1,
@@ -706,7 +788,7 @@
         {
           "line": 3,
           "text": "Main",
-          "foreground": "#809bbd"
+          "foreground": "#ddca7e"
         },
         {
           "line": 4,
@@ -721,7 +803,7 @@
         {
           "line": 4,
           "text": "String",
-          "foreground": "#ffffff"
+          "foreground": "#ddca7e"
         },
         {
           "line": 4,
@@ -741,7 +823,7 @@
         {
           "line": 9,
           "text": "Token",
-          "foreground": "#809bbd"
+          "foreground": "#ddca7e"
         },
         {
           "line": 9,
@@ -761,7 +843,7 @@
         {
           "line": 15,
           "text": "List",
-          "foreground": "#ffffff"
+          "foreground": "#ddca7e"
         },
         {
           "line": 15,
@@ -771,7 +853,7 @@
         {
           "line": 15,
           "text": "Token",
-          "foreground": "#ffffff"
+          "foreground": "#ddca7e"
         },
         {
           "line": 15,
@@ -786,12 +868,12 @@
         {
           "line": 22,
           "text": "void",
-          "foreground": "#ffffff"
+          "foreground": "#ddca7e"
         },
         {
           "line": 22,
           "text": "String",
-          "foreground": "#ffffff"
+          "foreground": "#ddca7e"
         },
         {
           "line": 22,
@@ -816,32 +898,32 @@
         {
           "line": 27,
           "text": "message",
-          "foreground": "#809bbd"
-      },
-      {
-        "line": 32,
-        "text": "TokenRole",
-        "foreground": "#809bbd"
-      },
-      {
-        "line": 43,
-        "text": "describe",
-        "foreground": "#9a8297"
-      }
-    ]
-  },
-  {
-    "language": "JavaScript",
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 32,
+          "text": "TokenRole",
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 43,
+          "text": "describe",
+          "foreground": "#9a8297"
+        }
+      ]
+    },
+    {
+      "language": "JavaScript",
       "expect": [
         {
           "line": 1,
           "text": "import",
-          "foreground": "#ddca7e"
+          "foreground": "#809bbd"
         },
         {
           "line": 3,
           "text": "const",
-          "foreground": "#ddca7e"
+          "foreground": "#809bbd"
         },
         {
           "line": 3,
@@ -856,6 +938,16 @@
         {
           "line": 10,
           "text": "ThemePreview",
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 10,
+          "text": "export",
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 10,
+          "text": "class",
           "foreground": "#809bbd"
         },
         {
@@ -897,26 +989,36 @@
           "line": 32,
           "text": "new",
           "foreground": "#ddca7e"
-      },
-      {
-        "line": 35,
-        "text": "streamTokenLabels",
-        "foreground": "#809bbd"
-      },
-      {
-        "line": 37,
-        "text": "throwIfAborted",
-        "foreground": "#9a8297"
-      }
-    ]
-  },
-  {
-    "language": "JavaScript React",
+        },
+        {
+          "line": 35,
+          "text": "streamTokenLabels",
+          "foreground": "#809bbd"
+        },
+        {
+          "line": 35,
+          "text": "async",
+          "foreground": "#809bbd"
+        },
+        {
+          "line": 37,
+          "text": "throwIfAborted",
+          "foreground": "#9a8297"
+        },
+        {
+          "line": 38,
+          "text": "await",
+          "foreground": "#ddca7e"
+        }
+      ]
+    },
+    {
+      "language": "JavaScript React",
       "expect": [
         {
           "line": 1,
           "text": "import",
-          "foreground": "#ddca7e"
+          "foreground": "#809bbd"
         },
         {
           "line": 1,
@@ -962,21 +1064,21 @@
           "line": 32,
           "text": "No tokens",
           "foreground": "#ffffff"
-      },
-      {
-        "line": 37,
-        "text": "TokenBadge",
-        "foreground": "#809bbd"
-      },
-      {
-        "line": 47,
-        "text": "code",
-        "foreground": "#a7925a"
-      }
-    ]
-  },
-  {
-    "language": "JSONC",
+        },
+        {
+          "line": 37,
+          "text": "TokenBadge",
+          "foreground": "#809bbd"
+        },
+        {
+          "line": 47,
+          "text": "code",
+          "foreground": "#a7925a"
+        }
+      ]
+    },
+    {
+      "language": "JSONC",
       "expect": [
         {
           "line": 2,
@@ -986,7 +1088,7 @@
         {
           "line": 3,
           "text": "name",
-          "foreground": "#9a8297"
+          "foreground": "#96b38a"
         },
         {
           "line": 3,
@@ -1001,7 +1103,7 @@
         {
           "line": 7,
           "text": "background",
-          "foreground": "#9a8297"
+          "foreground": "#96b38a"
         },
         {
           "line": 9,
@@ -1017,41 +1119,41 @@
           "line": 13,
           "text": "3",
           "foreground": "#d0782a"
-      },
-      {
-        "line": 16,
-        "text": "diagnostics",
-        "foreground": "#9a8297"
-      },
-      {
-        "line": 20,
-        "text": "null",
-        "foreground": "#ddca7e"
-      }
-    ]
-  },
-  {
-    "language": "TypeScript",
+        },
+        {
+          "line": 16,
+          "text": "diagnostics",
+          "foreground": "#96b38a"
+        },
+        {
+          "line": 20,
+          "text": "null",
+          "foreground": "#ddca7e"
+        }
+      ]
+    },
+    {
+      "language": "TypeScript",
       "expect": [
         {
           "line": 1,
           "text": "import",
-          "foreground": "#ddca7e"
+          "foreground": "#809bbd"
         },
         {
           "line": 3,
           "text": "TokenName",
-          "foreground": "#ffffff"
+          "foreground": "#ddca7e"
         },
         {
           "line": 5,
           "text": "CustomProperties",
-          "foreground": "#ffffff"
+          "foreground": "#ddca7e"
         },
         {
           "line": 9,
           "text": "Theme",
-          "foreground": "#809bbd"
+          "foreground": "#ddca7e"
         },
         {
           "line": 14,
@@ -1076,7 +1178,7 @@
         {
           "line": 33,
           "text": "ThemeRegistry",
-          "foreground": "#809bbd"
+          "foreground": "#ddca7e"
         },
         {
           "line": 50,
@@ -1087,36 +1189,36 @@
           "line": 51,
           "text": "unknown",
           "foreground": "#96b38a"
-      },
-      {
-        "line": 55,
-        "text": "TokenEntry",
-        "foreground": "#ffffff"
-      },
-      {
-        "line": 67,
-        "text": "render",
-        "foreground": "#9a8297"
-      }
-    ]
-  },
-  {
-    "language": "TypeScript React",
+        },
+        {
+          "line": 55,
+          "text": "TokenEntry",
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 67,
+          "text": "render",
+          "foreground": "#9a8297"
+        }
+      ]
+    },
+    {
+      "language": "TypeScript React",
       "expect": [
         {
           "line": 1,
           "text": "import",
-          "foreground": "#ddca7e"
+          "foreground": "#809bbd"
         },
         {
           "line": 3,
           "text": "TokenName",
-          "foreground": "#ffffff"
+          "foreground": "#ddca7e"
         },
         {
           "line": 5,
           "text": "Readonly",
-          "foreground": "#ffffff"
+          "foreground": "#ddca7e"
         },
         {
           "line": 5,
@@ -1131,7 +1233,7 @@
         {
           "line": 6,
           "text": "string",
-          "foreground": "#ffffff"
+          "foreground": "#ddca7e"
         },
         {
           "line": 12,
@@ -1141,7 +1243,7 @@
         {
           "line": 23,
           "text": "CSSProperties",
-          "foreground": "#ffffff"
+          "foreground": "#ddca7e"
         },
         {
           "line": 28,
@@ -1152,25 +1254,37 @@
           "line": 31,
           "text": "section",
           "foreground": "#a7925a"
-      },
-      {
-        "line": 41,
-        "text": "PreviewState",
-        "foreground": "#ffffff"
-      },
-      {
-        "line": 51,
-        "text": "mark",
-        "foreground": "#a7925a"
-      }
-    ]
-  },
-  {
-    "language": "Just",
+        },
+        {
+          "line": 41,
+          "text": "PreviewState",
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 51,
+          "text": "mark",
+          "foreground": "#a7925a"
+        }
+      ]
+    },
+    {
+      "language": "Just",
       "expect": [
-        { "line": 11, "text": "theme", "foreground": "#809bbd" },
-        { "line": 11, "text": "{{", "foreground": "#96b38a" },
-        { "line": 15, "text": "target", "foreground": "#809bbd" },
+        {
+          "line": 11,
+          "text": "theme",
+          "foreground": "#809bbd"
+        },
+        {
+          "line": 11,
+          "text": "{{",
+          "foreground": "#96b38a"
+        },
+        {
+          "line": 15,
+          "text": "target",
+          "foreground": "#809bbd"
+        },
         {
           "line": 1,
           "text": "set",
@@ -1230,31 +1344,31 @@
           "line": 20,
           "text": "ci",
           "foreground": "#9a8297"
-      },
-      {
-        "line": 28,
-        "text": "group",
-        "foreground": "#ddca7e"
-      },
-      {
-        "line": 29,
-        "text": "lint",
-        "foreground": "#9a8297"
-      },
-      {
-        "line": 36,
-        "text": "release",
-        "foreground": "#9a8297"
-      }
-    ]
-  },
-  {
-    "language": "Kotlin",
+        },
+        {
+          "line": 28,
+          "text": "group",
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 29,
+          "text": "lint",
+          "foreground": "#9a8297"
+        },
+        {
+          "line": 36,
+          "text": "release",
+          "foreground": "#9a8297"
+        }
+      ]
+    },
+    {
+      "language": "Kotlin",
       "expect": [
         {
           "line": 1,
           "text": "enum",
-          "foreground": "#ddca7e"
+          "foreground": "#809bbd"
         },
         {
           "line": 1,
@@ -1264,7 +1378,7 @@
         {
           "line": 3,
           "text": "data",
-          "foreground": "#ddca7e"
+          "foreground": "#809bbd"
         },
         {
           "line": 4,
@@ -1274,7 +1388,7 @@
         {
           "line": 4,
           "text": "String",
-          "foreground": "#ffffff"
+          "foreground": "#ddca7e"
         },
         {
           "line": 9,
@@ -1284,7 +1398,7 @@
         {
           "line": 11,
           "text": "Map",
-          "foreground": "#ffffff"
+          "foreground": "#ddca7e"
         },
         {
           "line": 12,
@@ -1295,21 +1409,21 @@
           "line": 18,
           "text": "val",
           "foreground": "#ddca7e"
-      },
-      {
-        "line": 38,
-        "text": "when",
-        "foreground": "#ddca7e"
-      },
-      {
-        "line": 39,
-        "text": "keyword=",
-        "foreground": "#96b38a"
-      }
-    ]
-  },
-  {
-    "language": "Makefile",
+        },
+        {
+          "line": 38,
+          "text": "when",
+          "foreground": "#809bbd"
+        },
+        {
+          "line": 39,
+          "text": "keyword=",
+          "foreground": "#96b38a"
+        }
+      ]
+    },
+    {
+      "language": "Makefile",
       "expect": [
         {
           "line": 1,
@@ -1395,26 +1509,26 @@
           "line": 26,
           "text": "endif",
           "foreground": "#ddca7e"
-      },
-      {
-        "line": 32,
-        "text": "define",
-        "foreground": "#ddca7e"
-      },
-      {
-        "line": 37,
-        "text": "render",
-        "foreground": "#9a8297"
-      },
-      {
-        "line": 39,
-        "text": "call",
-        "foreground": "#ddca7e"
-      }
-    ]
-  },
-  {
-    "language": "Markdown",
+        },
+        {
+          "line": 32,
+          "text": "define",
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 37,
+          "text": "render",
+          "foreground": "#9a8297"
+        },
+        {
+          "line": 39,
+          "text": "call",
+          "foreground": "#ddca7e"
+        }
+      ]
+    },
+    {
+      "language": "Markdown",
       "expect": [
         {
           "line": 1,
@@ -1450,51 +1564,51 @@
           "line": 16,
           "text": "log",
           "foreground": "#9a8297"
-      },
-      {
-        "line": 22,
-        "text": "Review checklist",
-        "foreground": "#ddca7e"
-      },
-      {
-        "line": 25,
-        "text": "bold text",
-        "foreground": "#f07178"
-      },
-      {
-        "line": 41,
-        "text": "^provider",
-        "foreground": "#809bbd"
-      }
-    ]
-  },
-  {
-    "language": "PHP",
+        },
+        {
+          "line": 22,
+          "text": "Review checklist",
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 25,
+          "text": "bold text",
+          "foreground": "#f07178"
+        },
+        {
+          "line": 41,
+          "text": "^provider",
+          "foreground": "#809bbd"
+        }
+      ]
+    },
+    {
+      "language": "PHP",
       "expect": [
         {
           "line": 5,
           "text": "final",
-          "foreground": "#ddca7e"
+          "foreground": "#809bbd"
         },
         {
           "line": 5,
           "text": "Theme",
-          "foreground": "#809bbd"
+          "foreground": "#ddca7e"
         },
         {
           "line": 7,
           "text": "public",
-          "foreground": "#ddca7e"
+          "foreground": "#809bbd"
         },
         {
           "line": 8,
           "text": "readonly",
-          "foreground": "#ddca7e"
+          "foreground": "#809bbd"
         },
         {
           "line": 8,
           "text": "string",
-          "foreground": "#ffffff"
+          "foreground": "#ddca7e"
         },
         {
           "line": 8,
@@ -1509,12 +1623,12 @@
         {
           "line": 19,
           "text": "tokens",
-          "foreground": "#809bbd"
+          "foreground": "#9a8297"
         },
         {
           "line": 19,
           "text": "array",
-          "foreground": "#ffffff"
+          "foreground": "#ddca7e"
         },
         {
           "line": 23,
@@ -1526,34 +1640,40 @@
           "text": "as",
           "foreground": "#ddca7e",
           "providerFallbacks": {
-            "1.96.0": { "foreground": "#cccccc", "reason": "Old PHP grammar classifies as with the same logical-operator scope as symbolic operators." },
-            "1.105.1": { "foreground": "#cccccc", "reason": "Old PHP grammar classifies as with the same logical-operator scope as symbolic operators." }
+            "1.96.0": {
+              "foreground": "#cccccc",
+              "reason": "Old PHP grammar classifies as with the same logical-operator scope as symbolic operators."
+            },
+            "1.105.1": {
+              "foreground": "#cccccc",
+              "reason": "Old PHP grammar classifies as with the same logical-operator scope as symbolic operators."
+            }
           }
         },
         {
           "line": 32,
           "text": "label",
           "foreground": "#9a8297"
-      },
-      {
-        "line": 34,
-        "text": "TokenRole",
-        "foreground": "#809bbd"
-      },
-      {
-        "line": 41,
-        "text": "colorFor",
-        "foreground": "#809bbd"
-      },
-      {
-        "line": 43,
-        "text": "match",
-        "foreground": "#ddca7e"
-      }
-    ]
-  },
-  {
-    "language": "Python",
+        },
+        {
+          "line": 34,
+          "text": "TokenRole",
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 41,
+          "text": "colorFor",
+          "foreground": "#9a8297"
+        },
+        {
+          "line": 43,
+          "text": "match",
+          "foreground": "#809bbd"
+        }
+      ]
+    },
+    {
+      "language": "Python",
       "expect": [
         {
           "line": 6,
@@ -1563,17 +1683,17 @@
         {
           "line": 6,
           "text": "ThemeMode",
-          "foreground": "#809bbd"
+          "foreground": "#ddca7e"
         },
         {
           "line": 11,
           "text": "dataclass",
-          "foreground": "#ddca7e"
+          "foreground": "#809bbd"
         },
         {
           "line": 13,
           "text": "str",
-          "foreground": "#ffffff"
+          "foreground": "#ddca7e"
         },
         {
           "line": 17,
@@ -1583,7 +1703,7 @@
         {
           "line": 17,
           "text": "mode",
-          "foreground": "#809bbd"
+          "foreground": "#ffffff"
         },
         {
           "line": 18,
@@ -1614,21 +1734,21 @@
           "line": 24,
           "text": "accent",
           "foreground": "#9a8297"
-      },
-      {
+        },
+        {
           "line": 43,
           "text": "SupportsLabel",
-        "foreground": "#809bbd"
-      },
-      {
+          "foreground": "#ddca7e"
+        },
+        {
           "line": 48,
           "text": "match",
-        "foreground": "#ddca7e"
-      }
-    ]
-  },
-  {
-    "language": "Rust",
+          "foreground": "#ddca7e"
+        }
+      ]
+    },
+    {
+      "language": "Rust",
       "expect": [
         {
           "line": 1,
@@ -1638,12 +1758,12 @@
         {
           "line": 4,
           "text": "Theme",
-          "foreground": "#809bbd"
+          "foreground": "#ddca7e"
         },
         {
           "line": 5,
           "text": "str",
-          "foreground": "#ffffff"
+          "foreground": "#ddca7e"
         },
         {
           "line": 11,
@@ -1653,7 +1773,7 @@
         {
           "line": 11,
           "text": "String",
-          "foreground": "#ffffff"
+          "foreground": "#ddca7e"
         },
         {
           "line": 12,
@@ -1689,26 +1809,26 @@
           "line": 32,
           "text": "'#'",
           "foreground": "#96b38a"
-      },
-      {
-        "line": 41,
-        "text": "TokenRole",
-        "foreground": "#809bbd"
-      },
-      {
-        "line": 47,
-        "text": "CssColor",
-        "foreground": "#809bbd"
-      },
-      {
-        "line": 64,
-        "text": "every_role_has_a_css_color",
-        "foreground": "#809bbd"
-      }
-    ]
-  },
-  {
-    "language": "Ruby",
+        },
+        {
+          "line": 41,
+          "text": "TokenRole",
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 47,
+          "text": "CssColor",
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 64,
+          "text": "every_role_has_a_css_color",
+          "foreground": "#809bbd"
+        }
+      ]
+    },
+    {
+      "language": "Ruby",
       "expect": [
         {
           "line": 1,
@@ -1720,13 +1840,16 @@
           "text": "define",
           "foreground": "#9a8297",
           "providerFallbacks": {
-            "1.96.0": { "foreground": "#ffffff", "reason": "The old Ruby grammar emits source.ruby without a method scope." }
+            "1.96.0": {
+              "foreground": "#ffffff",
+              "reason": "The old Ruby grammar emits source.ruby without a method scope."
+            }
           }
         },
         {
           "line": 4,
           "text": "def",
-          "foreground": "#ddca7e"
+          "foreground": "#809bbd"
         },
         {
           "line": 4,
@@ -1736,7 +1859,7 @@
         {
           "line": 9,
           "text": "theme",
-          "foreground": "#809bbd"
+          "foreground": "#ffffff"
         },
         {
           "line": 11,
@@ -1753,23 +1876,26 @@
           "text": "each",
           "foreground": "#9a8297",
           "providerFallbacks": {
-            "1.96.0": { "foreground": "#ffffff", "reason": "The old Ruby grammar emits source.ruby without a method scope." }
+            "1.96.0": {
+              "foreground": "#ffffff",
+              "reason": "The old Ruby grammar emits source.ruby without a method scope."
+            }
           }
-      },
-      {
-        "line": 23,
-        "text": "Token",
-        "foreground": "#809bbd"
-      },
-      {
-        "line": 25,
-        "text": "describe_token",
-        "foreground": "#9a8297"
-      }
-    ]
-  },
-  {
-    "language": "Sass",
+        },
+        {
+          "line": 23,
+          "text": "Token",
+          "foreground": "#809bbd"
+        },
+        {
+          "line": 25,
+          "text": "describe_token",
+          "foreground": "#9a8297"
+        }
+      ]
+    },
+    {
+      "language": "Sass",
       "expect": [
         {
           "line": 1,
@@ -1810,26 +1936,26 @@
           "line": 21,
           "text": "700",
           "foreground": "#d0782a"
-      },
-      {
-        "line": 29,
-        "text": "token-color",
-        "foreground": "#809bbd"
-      },
-      {
-        "line": 32,
-        "text": "each",
-        "foreground": "#ddca7e"
-      },
-      {
-        "line": 36,
-        "text": "for",
-        "foreground": "#ddca7e"
-      }
-    ]
-  },
-  {
-    "language": "SCSS",
+        },
+        {
+          "line": 29,
+          "text": "token-color",
+          "foreground": "#809bbd"
+        },
+        {
+          "line": 32,
+          "text": "each",
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 36,
+          "text": "for",
+          "foreground": "#ddca7e"
+        }
+      ]
+    },
+    {
+      "language": "SCSS",
       "expect": [
         {
           "line": 1,
@@ -1875,26 +2001,26 @@
           "line": 27,
           "text": "include",
           "foreground": "#809bbd"
-      },
-      {
-        "line": 35,
-        "text": "token-color",
-        "foreground": "#ddca7e"
-      },
-      {
-        "line": 39,
-        "text": "each",
-        "foreground": "#ddca7e"
-      },
+        },
+        {
+          "line": 35,
+          "text": "token-color",
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 39,
+          "text": "each",
+          "foreground": "#ddca7e"
+        },
         {
           "line": 46,
           "text": "supports",
           "foreground": "#809bbd"
-      }
-    ]
-  },
-  {
-    "language": "SQL",
+        }
+      ]
+    },
+    {
+      "language": "SQL",
       "expect": [
         {
           "line": 1,
@@ -1941,26 +2067,26 @@
           "line": 29,
           "text": "DESC",
           "foreground": "#ddca7e"
-      },
-      {
-        "line": 31,
-        "text": "INSERT",
-        "foreground": "#ddca7e"
-      },
-      {
-        "line": 33,
-        "text": "UPDATE",
-        "foreground": "#ddca7e"
-      },
-      {
-        "line": 41,
-        "text": "ROW_NUMBER",
-        "foreground": "#ddca7e"
-      }
-    ]
-  },
-  {
-    "language": "Svelte",
+        },
+        {
+          "line": 31,
+          "text": "INSERT",
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 33,
+          "text": "UPDATE",
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 41,
+          "text": "ROW_NUMBER",
+          "foreground": "#ddca7e"
+        }
+      ]
+    },
+    {
+      "language": "Svelte",
       "expect": [
         {
           "line": 1,
@@ -1970,7 +2096,7 @@
         {
           "line": 2,
           "text": "let",
-          "foreground": "#ddca7e"
+          "foreground": "#809bbd"
         },
         {
           "line": 2,
@@ -2011,26 +2137,26 @@
           "line": 23,
           "text": "1rem",
           "foreground": "#d0782a"
-      },
-      {
-        "line": 28,
-        "text": "if",
-        "foreground": "#ddca7e"
-      },
-      {
-        "line": 30,
-        "text": "html",
-        "foreground": "#ddca7e"
-      },
-      {
-        "line": 38,
-        "text": "head",
-        "foreground": "#a7925a"
-      }
-    ]
-  },
-  {
-    "language": "Shell Script",
+        },
+        {
+          "line": 28,
+          "text": "if",
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 30,
+          "text": "html",
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 38,
+          "text": "head",
+          "foreground": "#a7925a"
+        }
+      ]
+    },
+    {
+      "language": "Shell Script",
       "expect": [
         {
           "line": 1,
@@ -2076,41 +2202,41 @@
           "line": 24,
           "text": "then",
           "foreground": "#ddca7e"
-      },
-      {
-        "line": 28,
-        "text": "describe_mode",
-        "foreground": "#809bbd"
-      },
-      {
-        "line": 29,
-        "text": "case",
-        "foreground": "#ddca7e"
-      },
-      {
-        "line": 40,
-        "text": "while",
-        "foreground": "#ddca7e"
-      }
-    ]
-  },
-  {
-    "language": "Swift",
+        },
+        {
+          "line": 28,
+          "text": "describe_mode",
+          "foreground": "#809bbd"
+        },
+        {
+          "line": 29,
+          "text": "case",
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 40,
+          "text": "while",
+          "foreground": "#ddca7e"
+        }
+      ]
+    },
+    {
+      "language": "Swift",
       "expect": [
         {
           "line": 3,
           "text": "enum",
-          "foreground": "#ddca7e"
+          "foreground": "#809bbd"
         },
         {
           "line": 3,
           "text": "ThemeMode",
-          "foreground": "#809bbd"
+          "foreground": "#ddca7e"
         },
         {
           "line": 8,
           "text": "Theme",
-          "foreground": "#809bbd"
+          "foreground": "#ddca7e"
         },
         {
           "line": 9,
@@ -2120,7 +2246,7 @@
         {
           "line": 9,
           "text": "String",
-          "foreground": "#ffffff"
+          "foreground": "#ddca7e"
         },
         {
           "line": 13,
@@ -2135,7 +2261,7 @@
         {
           "line": 13,
           "text": "ThemeMode",
-          "foreground": "#ffffff"
+          "foreground": "#ddca7e"
         },
         {
           "line": 13,
@@ -2150,37 +2276,37 @@
         {
           "line": 18,
           "text": "tokens",
-          "foreground": "#809bbd"
+          "foreground": "#9a8297"
         },
         {
           "line": 18,
           "text": "Theme",
-          "foreground": "#ffffff"
+          "foreground": "#ddca7e"
         },
         {
           "line": 30,
           "text": "label",
           "foreground": "#9a8297"
-      },
-      {
-        "line": 32,
-        "text": "TokenRepresentable",
-        "foreground": "#809bbd"
-      },
-      {
-        "line": 44,
-        "text": "cssVariables",
-        "foreground": "#9a8297"
-      },
-      {
-        "line": 49,
-        "text": "ThemeStore",
-        "foreground": "#809bbd"
-      }
-    ]
-  },
-  {
-    "language": "TOML",
+        },
+        {
+          "line": 32,
+          "text": "TokenRepresentable",
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 44,
+          "text": "cssVariables",
+          "foreground": "#9a8297"
+        },
+        {
+          "line": 49,
+          "text": "ThemeStore",
+          "foreground": "#ddca7e"
+        }
+      ]
+    },
+    {
+      "language": "TOML",
       "expect": [
         {
           "line": 1,
@@ -2221,26 +2347,26 @@
           "line": 18,
           "text": "providers",
           "foreground": "#9a8297"
-      },
+        },
         {
           "line": 29,
           "text": "2026-09-01",
           "foreground": "#96b38a"
-      },
-      {
-        "line": 33,
-        "text": "screenshots",
-        "foreground": "#9a8297"
-      },
-      {
-        "line": 35,
-        "text": "1280",
-        "foreground": "#d0782a"
-      }
-    ]
-  },
-  {
-    "language": "Vue",
+        },
+        {
+          "line": 33,
+          "text": "screenshots",
+          "foreground": "#9a8297"
+        },
+        {
+          "line": 35,
+          "text": "1280",
+          "foreground": "#d0782a"
+        }
+      ]
+    },
+    {
+      "language": "Vue",
       "expect": [
         {
           "line": 1,
@@ -2250,7 +2376,7 @@
         {
           "line": 2,
           "text": "import",
-          "foreground": "#ddca7e"
+          "foreground": "#809bbd"
         },
         {
           "line": 4,
@@ -2260,7 +2386,7 @@
         {
           "line": 9,
           "text": "function",
-          "foreground": "#ddca7e"
+          "foreground": "#809bbd"
         },
         {
           "line": 9,
@@ -2270,7 +2396,7 @@
         {
           "line": 9,
           "text": "void",
-          "foreground": "#ffffff"
+          "foreground": "#ddca7e"
         },
         {
           "line": 10,
@@ -2291,26 +2417,26 @@
           "line": 26,
           "text": "1rem",
           "foreground": "#d0782a"
-      },
-      {
-        "line": 31,
-        "text": "i18n",
-        "foreground": "#a7925a"
-      },
-      {
-        "line": 34,
-        "text": "title",
-        "foreground": "#9a8297"
-      },
-      {
-        "line": 34,
-        "text": "CodePen Theme Original",
-        "foreground": "#96b38a"
-      }
-    ]
-  },
-  {
-    "language": "YAML",
+        },
+        {
+          "line": 31,
+          "text": "i18n",
+          "foreground": "#a7925a"
+        },
+        {
+          "line": 34,
+          "text": "title",
+          "foreground": "#96b38a"
+        },
+        {
+          "line": 34,
+          "text": "CodePen Theme Original",
+          "foreground": "#96b38a"
+        }
+      ]
+    },
+    {
+      "language": "YAML",
       "expect": [
         {
           "line": 1,
@@ -2351,26 +2477,26 @@
           "line": 21,
           "text": "run",
           "foreground": "#9a8297"
-      },
-      {
-        "line": 23,
-        "text": "preview_defaults",
-        "foreground": "#809bbd"
-      },
-      {
-        "line": 32,
-        "text": "notes",
-        "foreground": "#9a8297"
-      },
-      {
-        "line": 37,
-        "text": "preview_defaults",
-        "foreground": "#809bbd"
-      }
-    ]
-  },
-  {
-    "language": "Batch",
+        },
+        {
+          "line": 23,
+          "text": "preview_defaults",
+          "foreground": "#809bbd"
+        },
+        {
+          "line": 32,
+          "text": "notes",
+          "foreground": "#9a8297"
+        },
+        {
+          "line": 37,
+          "text": "preview_defaults",
+          "foreground": "#809bbd"
+        }
+      ]
+    },
+    {
+      "language": "Batch",
       "expect": [
         {
           "line": 1,
@@ -2465,7 +2591,7 @@
         {
           "line": 1,
           "text": "ns",
-          "foreground": "#ddca7e"
+          "foreground": "#809bbd"
         },
         {
           "line": 1,
@@ -2480,7 +2606,7 @@
         {
           "line": 8,
           "text": "render",
-          "foreground": "#809bbd"
+          "foreground": "#9a8297"
         },
         {
           "line": 13,
@@ -2515,17 +2641,17 @@
         {
           "line": 2,
           "text": "class",
-          "foreground": "#ddca7e"
+          "foreground": "#809bbd"
         },
         {
           "line": 2,
           "text": "Theme",
-          "foreground": "#809bbd"
+          "foreground": "#ddca7e"
         },
         {
           "line": 3,
           "text": "@name",
-          "foreground": "#809bbd"
+          "foreground": "#ffffff"
         },
         {
           "line": 3,
@@ -2545,7 +2671,7 @@
         {
           "line": 10,
           "text": "toUpperCase",
-          "foreground": "#ddca7e"
+          "foreground": "#9a8297"
         }
       ]
     },
@@ -2570,7 +2696,7 @@
         {
           "line": 5,
           "text": "Pixel",
-          "foreground": "#809bbd"
+          "foreground": "#ddca7e"
         },
         {
           "line": 6,
@@ -2760,12 +2886,12 @@
         {
           "line": 8,
           "text": "name",
-          "foreground": "#809bbd"
+          "foreground": "#ffffff"
         },
         {
           "line": 18,
           "text": "prefix",
-          "foreground": "#809bbd"
+          "foreground": "#ffffff"
         },
         {
           "line": 18,
@@ -2795,7 +2921,7 @@
         {
           "line": 1,
           "text": "import",
-          "foreground": "#ddca7e"
+          "foreground": "#809bbd"
         },
         {
           "line": 3,
@@ -2805,7 +2931,7 @@
         {
           "line": 5,
           "text": "Theme",
-          "foreground": "#809bbd"
+          "foreground": "#ddca7e"
         },
         {
           "line": 6,
@@ -2830,7 +2956,7 @@
         {
           "line": 26,
           "text": "println",
-          "foreground": "#ddca7e"
+          "foreground": "#9a8297"
         }
       ]
     },
@@ -2907,7 +3033,7 @@
         {
           "line": 2,
           "text": "register",
-          "foreground": "#ddca7e"
+          "foreground": "#9a8297"
         },
         {
           "line": 14,
@@ -2982,7 +3108,7 @@
         {
           "line": 2,
           "text": "name",
-          "foreground": "#9a8297"
+          "foreground": "#96b38a"
         },
         {
           "line": 2,
@@ -3012,7 +3138,7 @@
         {
           "line": 3,
           "text": "dark",
-          "foreground": "#9a8297"
+          "foreground": "#96b38a"
         },
         {
           "line": 3,
@@ -3027,7 +3153,7 @@
         {
           "line": 1,
           "text": "event",
-          "foreground": "#9a8297"
+          "foreground": "#96b38a"
         },
         {
           "line": 1,
@@ -3058,7 +3184,7 @@
           "line": 1,
           "text": "theme",
           "occurrence": 2,
-          "foreground": "#9a8297"
+          "foreground": "#96b38a"
         },
         {
           "line": 1,
@@ -3079,7 +3205,7 @@
         {
           "line": 9,
           "text": "colors",
-          "foreground": "#9a8297"
+          "foreground": "#96b38a"
         },
         {
           "line": 10,
@@ -3104,7 +3230,7 @@
         {
           "line": 1,
           "text": "module",
-          "foreground": "#ddca7e"
+          "foreground": "#809bbd"
         },
         {
           "line": 1,
@@ -3119,12 +3245,12 @@
         {
           "line": 6,
           "text": "AbstractString",
-          "foreground": "#ffffff"
+          "foreground": "#ddca7e"
         },
         {
           "line": 12,
           "text": "label",
-          "foreground": "#809bbd"
+          "foreground": "#9a8297"
         },
         {
           "line": 12,
@@ -3251,7 +3377,7 @@
         {
           "line": 2,
           "text": "Theme",
-          "foreground": "#809bbd"
+          "foreground": "#ffffff"
         },
         {
           "line": 2,
@@ -3261,12 +3387,12 @@
         {
           "line": 5,
           "text": "Theme",
-          "foreground": "#809bbd"
+          "foreground": "#9a8297"
         },
         {
           "line": 6,
           "text": "setmetatable",
-          "foreground": "#ddca7e"
+          "foreground": "#9a8297"
         },
         {
           "line": 7,
@@ -3286,7 +3412,7 @@
         {
           "line": 1,
           "text": "import",
-          "foreground": "#ddca7e"
+          "foreground": "#809bbd"
         },
         {
           "line": 1,
@@ -3301,12 +3427,12 @@
         {
           "line": 4,
           "text": "NS_ENUM",
-          "foreground": "#809bbd"
+          "foreground": "#9a8297"
         },
         {
           "line": 4,
           "text": "NSUInteger",
-          "foreground": "#ffffff"
+          "foreground": "#ddca7e"
         },
         {
           "line": 4,
@@ -3316,7 +3442,7 @@
         {
           "line": 12,
           "text": "name",
-          "foreground": "#809bbd"
+          "foreground": "#ffffff"
         },
         {
           "line": 26,
@@ -3331,7 +3457,7 @@
         {
           "line": 1,
           "text": "import",
-          "foreground": "#ddca7e"
+          "foreground": "#809bbd"
         },
         {
           "line": 1,
@@ -3346,7 +3472,7 @@
         {
           "line": 8,
           "text": "Token",
-          "foreground": "#ffffff"
+          "foreground": "#ddca7e"
         },
         {
           "line": 9,
@@ -3361,12 +3487,12 @@
         {
           "line": 14,
           "text": "NSString",
-          "foreground": "#ffffff"
+          "foreground": "#ddca7e"
         },
         {
           "line": 14,
           "text": "name",
-          "foreground": "#809bbd"
+          "foreground": "#ffffff"
         }
       ]
     },
@@ -3376,7 +3502,7 @@
         {
           "line": 1,
           "text": "use",
-          "foreground": "#ddca7e"
+          "foreground": "#809bbd"
         },
         {
           "line": 1,
@@ -3396,17 +3522,17 @@
         {
           "line": 6,
           "text": "Theme",
-          "foreground": "#809bbd"
+          "foreground": "#ddca7e"
         },
         {
           "line": 9,
           "text": "class",
-          "foreground": "#809bbd"
+          "foreground": "#ffffff"
         },
         {
           "line": 10,
           "text": "bless",
-          "foreground": "#ddca7e"
+          "foreground": "#9a8297"
         },
         {
           "line": 11,
@@ -3421,7 +3547,7 @@
         {
           "line": 1,
           "text": "Set-StrictMode",
-          "foreground": "#ddca7e"
+          "foreground": "#9a8297"
         },
         {
           "line": 1,
@@ -3451,7 +3577,7 @@
         {
           "line": 5,
           "text": "Theme",
-          "foreground": "#809bbd"
+          "foreground": "#9a8297"
         },
         {
           "line": 5,
@@ -3511,7 +3637,7 @@
         {
           "line": 1,
           "text": "const",
-          "foreground": "#ddca7e"
+          "foreground": "#809bbd"
         },
         {
           "line": 1,
@@ -3571,7 +3697,13 @@
         {
           "line": 3,
           "text": "name",
-          "foreground": "#809bbd"
+          "foreground": "#9a8297",
+          "providerFallbacks": {
+            "1.96.0": {
+              "foreground": "#ffffff",
+              "reason": "The older R grammar leaves a named list key unclassified."
+            }
+          }
         },
         {
           "line": 3,
@@ -3581,12 +3713,12 @@
         {
           "line": 8,
           "text": "label_theme",
-          "foreground": "#809bbd"
+          "foreground": "#9a8297"
         },
         {
           "line": 9,
           "text": "stopifnot",
-          "foreground": "#ddca7e"
+          "foreground": "#9a8297"
         },
         {
           "line": 13,
@@ -3601,7 +3733,7 @@
         {
           "line": 1,
           "text": "use",
-          "foreground": "#ddca7e"
+          "foreground": "#809bbd"
         },
         {
           "line": 1,
@@ -3616,12 +3748,12 @@
         {
           "line": 4,
           "text": "ThemeMode",
-          "foreground": "#809bbd"
+          "foreground": "#ddca7e"
         },
         {
           "line": 7,
           "text": "Str",
-          "foreground": "#ffffff"
+          "foreground": "#ddca7e"
         },
         {
           "line": 8,
@@ -3631,12 +3763,12 @@
         {
           "line": 11,
           "text": "$prefix",
-          "foreground": "#809bbd"
+          "foreground": "#ffffff"
         },
         {
           "line": 4,
           "text": "enum",
-          "foreground": "#ddca7e"
+          "foreground": "#809bbd"
         }
       ]
     },
@@ -3661,7 +3793,7 @@
         {
           "line": 4,
           "text": "State",
-          "foreground": "#809bbd"
+          "foreground": "#ffffff"
         },
         {
           "line": 4,

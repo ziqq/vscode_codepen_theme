@@ -7,11 +7,31 @@
       "language": "Swift",
       "source": "func palette() -> [String: String] {\n  [\n    \"name\": \"demo\",\n    \"accent\": \"green\",\n  ]\n}",
       "expect": [
-        { "line": 1, "text": "palette", "foreground": "#809bbd" },
-        { "line": 2, "text": "[", "foreground": "#ffffff" },
-        { "line": 3, "text": ",", "foreground": "#ffffff" },
-        { "line": 4, "text": ",", "foreground": "#ffffff" },
-        { "line": 5, "text": "]", "foreground": "#ffffff" }
+        {
+          "line": 1,
+          "text": "palette",
+          "foreground": "#9a8297"
+        },
+        {
+          "line": 2,
+          "text": "[",
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 3,
+          "text": ",",
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 4,
+          "text": ",",
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 5,
+          "text": "]",
+          "foreground": "#ffffff"
+        }
       ]
     },
     {
@@ -19,11 +39,31 @@
       "language": "SCSS",
       "source": "$tokens: (\n  'keyword': #ddca7e,\n  'string': #96b38a,\n);",
       "expect": [
-        { "line": 1, "text": "$tokens", "foreground": "#809bbd" },
-        { "line": 2, "text": ":", "foreground": "#ffffff" },
-        { "line": 3, "text": ":", "foreground": "#ffffff" },
-        { "line": 2, "text": "#ddca7e", "foreground": "#ddca7e" },
-        { "line": 3, "text": "'string'", "foreground": "#96b38a" }
+        {
+          "line": 1,
+          "text": "$tokens",
+          "foreground": "#809bbd"
+        },
+        {
+          "line": 2,
+          "text": ":",
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 3,
+          "text": ":",
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 2,
+          "text": "#ddca7e",
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 3,
+          "text": "'string'",
+          "foreground": "#96b38a"
+        }
       ]
     },
     {
@@ -31,10 +71,26 @@
       "language": "C",
       "source": "void print_name(const char *name) { printf(\"name: %s / %02d / %%\", name, 2); }",
       "expect": [
-        { "line": 1, "text": "print_name", "foreground": "#809bbd" },
-        { "line": 1, "text": "%s", "foreground": "#96b38a" },
-        { "line": 1, "text": "%02d", "foreground": "#96b38a" },
-        { "line": 1, "text": "%%", "foreground": "#96b38a" }
+        {
+          "line": 1,
+          "text": "print_name",
+          "foreground": "#9a8297"
+        },
+        {
+          "line": 1,
+          "text": "%s",
+          "foreground": "#96b38a"
+        },
+        {
+          "line": 1,
+          "text": "%02d",
+          "foreground": "#96b38a"
+        },
+        {
+          "line": 1,
+          "text": "%%",
+          "foreground": "#96b38a"
+        }
       ]
     },
     {
@@ -42,10 +98,36 @@
       "language": "C++",
       "source": "void render() {\n  const std::vector<std::string> names;\n  bool smaller = 1 < 2;\n}",
       "expect": [
-        { "line": 2, "text": "<", "foreground": "#cccccc" },
-        { "line": 2, "text": ">", "foreground": "#cccccc" },
-        { "line": 2, "text": "string", "foreground": "#ffffff" },
-        { "line": 3, "text": "<", "foreground": "#cccccc" }
+        {
+          "line": 2,
+          "text": "<",
+          "foreground": "#cccccc"
+        },
+        {
+          "line": 2,
+          "text": ">",
+          "foreground": "#cccccc"
+        },
+        {
+          "line": 2,
+          "text": "string",
+          "foreground": "#ddca7e",
+          "providerFallbacks": {
+            "1.96.0": {
+              "foreground": "#ffffff",
+              "reason": "The older C++ grammar leaves std::string unclassified."
+            },
+            "1.105.1": {
+              "foreground": "#ffffff",
+              "reason": "The older C++ grammar leaves std::string unclassified."
+            }
+          }
+        },
+        {
+          "line": 3,
+          "text": "<",
+          "foreground": "#cccccc"
+        }
       ]
     },
     {
@@ -53,12 +135,36 @@
       "language": "Just",
       "source": "name := \"demo\"\nbuild target=\"release\":\n  @echo \"{{name}}\"\nalias b := build\nall: (build \"debug\")",
       "expect": [
-        { "line": 1, "text": "name", "foreground": "#809bbd" },
-        { "line": 2, "text": "build", "foreground": "#9a8297" },
-        { "line": 2, "text": "target", "foreground": "#809bbd" },
-        { "line": 3, "text": "name", "foreground": "#809bbd" },
-        { "line": 4, "text": "b", "foreground": "#9a8297" },
-        { "line": 5, "text": "build", "foreground": "#9a8297" }
+        {
+          "line": 1,
+          "text": "name",
+          "foreground": "#809bbd"
+        },
+        {
+          "line": 2,
+          "text": "build",
+          "foreground": "#9a8297"
+        },
+        {
+          "line": 2,
+          "text": "target",
+          "foreground": "#809bbd"
+        },
+        {
+          "line": 3,
+          "text": "name",
+          "foreground": "#809bbd"
+        },
+        {
+          "line": 4,
+          "text": "b",
+          "foreground": "#9a8297"
+        },
+        {
+          "line": 5,
+          "text": "build",
+          "foreground": "#9a8297"
+        }
       ]
     },
     {
@@ -66,13 +172,42 @@
       "language": "Ruby",
       "source": "def label(name)\n  \"hello #{name.upcase}, #{1 + 2}\"\nend",
       "expect": [
-        { "line": 1, "text": "label", "foreground": "#9a8297" },
-        { "line": 1, "text": "name", "foreground": "#809bbd" },
-        { "line": 2, "text": "#{", "foreground": "#96b38a" },
-        { "line": 2, "text": "#{", "occurrence": 2, "foreground": "#96b38a" },
-        { "line": 2, "text": "}", "foreground": "#96b38a" },
-        { "line": 2, "text": "+", "foreground": "#cccccc" },
-        { "line": 2, "text": "1", "foreground": "#d0782a" }
+        {
+          "line": 1,
+          "text": "label",
+          "foreground": "#9a8297"
+        },
+        {
+          "line": 1,
+          "text": "name",
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 2,
+          "text": "#{",
+          "foreground": "#96b38a"
+        },
+        {
+          "line": 2,
+          "text": "#{",
+          "occurrence": 2,
+          "foreground": "#96b38a"
+        },
+        {
+          "line": 2,
+          "text": "}",
+          "foreground": "#96b38a"
+        },
+        {
+          "line": 2,
+          "text": "+",
+          "foreground": "#cccccc"
+        },
+        {
+          "line": 2,
+          "text": "1",
+          "foreground": "#d0782a"
+        }
       ]
     },
     {
@@ -80,10 +215,27 @@
       "language": "Rust",
       "source": "fn label(name: &str) {\n  println!(\"{name}: {} / {:02} / {{literal}}\", name, 2);\n}",
       "expect": [
-        { "line": 2, "text": "{", "foreground": "#96b38a" },
-        { "line": 2, "text": "}", "foreground": "#96b38a" },
-        { "line": 2, "text": "{}", "foreground": "#96b38a" },
-        { "line": 2, "text": "2", "occurrence": 2, "foreground": "#d0782a" }
+        {
+          "line": 2,
+          "text": "{",
+          "foreground": "#96b38a"
+        },
+        {
+          "line": 2,
+          "text": "}",
+          "foreground": "#96b38a"
+        },
+        {
+          "line": 2,
+          "text": "{}",
+          "foreground": "#96b38a"
+        },
+        {
+          "line": 2,
+          "text": "2",
+          "occurrence": 2,
+          "foreground": "#d0782a"
+        }
       ]
     },
     {
@@ -91,11 +243,31 @@
       "language": "PHP",
       "source": "<?php\n$name = 'demo';\necho \"{$name}: {$theme->name}\";\n$next = $name;",
       "expect": [
-        { "line": 3, "text": "{", "foreground": "#96b38a" },
-        { "line": 3, "text": "}", "foreground": "#96b38a" },
-        { "line": 3, "text": "$", "foreground": "#96b38a" },
-        { "line": 3, "text": "name", "foreground": "#809bbd" },
-        { "line": 4, "text": "$", "foreground": "#ffffff" }
+        {
+          "line": 3,
+          "text": "{",
+          "foreground": "#96b38a"
+        },
+        {
+          "line": 3,
+          "text": "}",
+          "foreground": "#96b38a"
+        },
+        {
+          "line": 3,
+          "text": "$",
+          "foreground": "#96b38a"
+        },
+        {
+          "line": 3,
+          "text": "name",
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 4,
+          "text": "$",
+          "foreground": "#ffffff"
+        }
       ]
     },
     {
@@ -103,11 +275,32 @@
       "language": "Shell Script",
       "source": "name=demo\necho \"${name}: $name\"\necho ${name}",
       "expect": [
-        { "line": 2, "text": "${", "foreground": "#96b38a" },
-        { "line": 2, "text": "}", "foreground": "#96b38a" },
-        { "line": 2, "text": "$", "occurrence": 2, "foreground": "#96b38a" },
-        { "line": 2, "text": "name", "foreground": "#809bbd" },
-        { "line": 3, "text": "name", "foreground": "#809bbd" }
+        {
+          "line": 2,
+          "text": "${",
+          "foreground": "#96b38a"
+        },
+        {
+          "line": 2,
+          "text": "}",
+          "foreground": "#96b38a"
+        },
+        {
+          "line": 2,
+          "text": "$",
+          "occurrence": 2,
+          "foreground": "#96b38a"
+        },
+        {
+          "line": 2,
+          "text": "name",
+          "foreground": "#809bbd"
+        },
+        {
+          "line": 3,
+          "text": "name",
+          "foreground": "#809bbd"
+        }
       ]
     },
     {
@@ -115,11 +308,31 @@
       "language": "Sass",
       "source": "$accent: #96b38a\n.preview\n  color: #fff\n  width: 12px\n  opacity: 0.5",
       "expect": [
-        { "line": 1, "text": "$accent", "foreground": "#809bbd" },
-        { "line": 1, "text": "#96b38a", "foreground": "#ddca7e" },
-        { "line": 3, "text": "#fff", "foreground": "#ddca7e" },
-        { "line": 4, "text": "12px", "foreground": "#d0782a" },
-        { "line": 5, "text": "0.5", "foreground": "#d0782a" }
+        {
+          "line": 1,
+          "text": "$accent",
+          "foreground": "#809bbd"
+        },
+        {
+          "line": 1,
+          "text": "#96b38a",
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 3,
+          "text": "#fff",
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 4,
+          "text": "12px",
+          "foreground": "#d0782a"
+        },
+        {
+          "line": 5,
+          "text": "0.5",
+          "foreground": "#d0782a"
+        }
       ]
     },
     {
@@ -127,12 +340,38 @@
       "language": "Svelte",
       "source": "<button on:click={handle} class:active={ready} bind:value={value}>go</button>",
       "expect": [
-        { "line": 1, "text": "on", "occurrence": 2, "foreground": "#ddca7e" },
-        { "line": 1, "text": ":", "foreground": "#ffffff" },
-        { "line": 1, "text": "click", "foreground": "#ddca7e" },
-        { "line": 1, "text": ":", "occurrence": 2, "foreground": "#ffffff" },
-        { "line": 1, "text": "active", "foreground": "#ddca7e" },
-        { "line": 1, "text": "button", "foreground": "#a7925a" }
+        {
+          "line": 1,
+          "text": "on",
+          "occurrence": 2,
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 1,
+          "text": ":",
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 1,
+          "text": "click",
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 1,
+          "text": ":",
+          "occurrence": 2,
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 1,
+          "text": "active",
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 1,
+          "text": "button",
+          "foreground": "#a7925a"
+        }
       ]
     },
     {
@@ -140,12 +379,36 @@
       "language": "dotenv",
       "source": "MODE=dark\nPORT=3000\nENABLED=true\nQUOTED=\"dark\"\n# A comment",
       "expect": [
-        { "line": 1, "text": "MODE", "foreground": "#809bbd" },
-        { "line": 1, "text": "dark", "foreground": "#96b38a" },
-        { "line": 2, "text": "3000", "foreground": "#96b38a" },
-        { "line": 3, "text": "true", "foreground": "#96b38a" },
-        { "line": 4, "text": "dark", "foreground": "#96b38a" },
-        { "line": 5, "text": "A comment", "foreground": "#717790" }
+        {
+          "line": 1,
+          "text": "MODE",
+          "foreground": "#809bbd"
+        },
+        {
+          "line": 1,
+          "text": "dark",
+          "foreground": "#96b38a"
+        },
+        {
+          "line": 2,
+          "text": "3000",
+          "foreground": "#96b38a"
+        },
+        {
+          "line": 3,
+          "text": "true",
+          "foreground": "#96b38a"
+        },
+        {
+          "line": 4,
+          "text": "dark",
+          "foreground": "#96b38a"
+        },
+        {
+          "line": 5,
+          "text": "A comment",
+          "foreground": "#717790"
+        }
       ]
     },
     {
@@ -153,8 +416,17 @@
       "language": "dotenv",
       "source": "LABEL=\"${MODE} ${COUNT}\"",
       "expect": [
-        { "line": 1, "text": "${", "foreground": "#96b38a" },
-        { "line": 1, "text": "}", "occurrence": 2, "foreground": "#96b38a" }
+        {
+          "line": 1,
+          "text": "${",
+          "foreground": "#96b38a"
+        },
+        {
+          "line": 1,
+          "text": "}",
+          "occurrence": 2,
+          "foreground": "#96b38a"
+        }
       ]
     },
     {
@@ -162,9 +434,24 @@
       "language": "Dart",
       "source": "/// Read [name] and `value`.\nclass Theme {}",
       "expect": [
-        { "line": 1, "text": "Read", "foreground": "#717790", "fontStyle": 1 },
-        { "line": 1, "text": "name", "foreground": "#9a8297", "fontStyle": 1 },
-        { "line": 1, "text": "`value`", "foreground": "#ffffff", "fontStyle": 1 }
+        {
+          "line": 1,
+          "text": "Read",
+          "foreground": "#717790",
+          "fontStyle": 1
+        },
+        {
+          "line": 1,
+          "text": "name",
+          "foreground": "#ffffff",
+          "fontStyle": 1
+        },
+        {
+          "line": 1,
+          "text": "`value`",
+          "foreground": "#ffffff",
+          "fontStyle": 1
+        }
       ]
     },
     {
@@ -172,15 +459,51 @@
       "language": "YAML",
       "source": "name: 'demo'\ncount: 42\nratio: 0.5\nenabled: true\ndisabled: false\nempty: null\nquoted: 'true'\n# comment",
       "expect": [
-        { "line": 1, "text": "name", "foreground": "#9a8297" },
-        { "line": 1, "text": "demo", "foreground": "#96b38a" },
-        { "line": 2, "text": "42", "foreground": "#d0782a" },
-        { "line": 3, "text": "0.5", "foreground": "#d0782a" },
-        { "line": 4, "text": "true", "foreground": "#ddca7e" },
-        { "line": 5, "text": "false", "foreground": "#ddca7e" },
-        { "line": 6, "text": "null", "foreground": "#ddca7e" },
-        { "line": 7, "text": "true", "foreground": "#96b38a" },
-        { "line": 8, "text": "comment", "foreground": "#717790" }
+        {
+          "line": 1,
+          "text": "name",
+          "foreground": "#9a8297"
+        },
+        {
+          "line": 1,
+          "text": "demo",
+          "foreground": "#96b38a"
+        },
+        {
+          "line": 2,
+          "text": "42",
+          "foreground": "#d0782a"
+        },
+        {
+          "line": 3,
+          "text": "0.5",
+          "foreground": "#d0782a"
+        },
+        {
+          "line": 4,
+          "text": "true",
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 5,
+          "text": "false",
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 6,
+          "text": "null",
+          "foreground": "#d0782a"
+        },
+        {
+          "line": 7,
+          "text": "true",
+          "foreground": "#96b38a"
+        },
+        {
+          "line": 8,
+          "text": "comment",
+          "foreground": "#717790"
+        }
       ]
     },
     {
@@ -188,13 +511,41 @@
       "language": "TOML",
       "source": "[theme]\nname = 'demo'\ncount = 42\nratio = 0.5\nenabled = true\nquoted = 'true'",
       "expect": [
-        { "line": 1, "text": "theme", "foreground": "#9a8297" },
-        { "line": 2, "text": "name", "foreground": "#9a8297" },
-        { "line": 2, "text": "demo", "foreground": "#96b38a" },
-        { "line": 3, "text": "42", "foreground": "#d0782a" },
-        { "line": 4, "text": "0.5", "foreground": "#d0782a" },
-        { "line": 5, "text": "true", "foreground": "#ddca7e" },
-        { "line": 6, "text": "true", "foreground": "#96b38a" }
+        {
+          "line": 1,
+          "text": "theme",
+          "foreground": "#9a8297"
+        },
+        {
+          "line": 2,
+          "text": "name",
+          "foreground": "#9a8297"
+        },
+        {
+          "line": 2,
+          "text": "demo",
+          "foreground": "#96b38a"
+        },
+        {
+          "line": 3,
+          "text": "42",
+          "foreground": "#d0782a"
+        },
+        {
+          "line": 4,
+          "text": "0.5",
+          "foreground": "#d0782a"
+        },
+        {
+          "line": 5,
+          "text": "true",
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 6,
+          "text": "true",
+          "foreground": "#96b38a"
+        }
       ]
     },
     {
@@ -202,11 +553,32 @@
       "language": "JSONC",
       "source": "{\n  \"name\": \"demo\",\n  \"count\": 42,\n  \"enabled\": true,\n  \"empty\": null\n}",
       "expect": [
-        { "line": 2, "text": "name", "foreground": "#9a8297" },
-        { "line": 2, "text": "demo", "foreground": "#96b38a" },
-        { "line": 3, "text": "42", "foreground": "#d0782a" },
-        { "line": 4, "text": "true", "foreground": "#ddca7e" },
-        { "line": 5, "text": "null", "foreground": "#ddca7e" }
+        {
+          "line": 2,
+          "text": "name",
+          "foreground": "#96b38a"
+        },
+        {
+          "line": 2,
+          "text": "demo",
+          "foreground": "#96b38a"
+        },
+        {
+          "line": 3,
+          "text": "42",
+          "foreground": "#d0782a"
+        },
+        {
+          "line": 4,
+          "text": "true",
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 5,
+          "text": "null",
+          "foreground": "#ddca7e",
+          "refinedForeground": "#d0782a"
+        }
       ]
     },
     {
@@ -214,12 +586,36 @@
       "language": "CSS",
       "source": ".preview { color: #fff; width: 12px; opacity: 0.5; content: 'true'; }",
       "expect": [
-        { "line": 1, "text": "color", "foreground": "#9a8297" },
-        { "line": 1, "text": ":", "foreground": "#ffffff" },
-        { "line": 1, "text": "#fff", "foreground": "#ddca7e" },
-        { "line": 1, "text": "12px", "foreground": "#d0782a" },
-        { "line": 1, "text": "0.5", "foreground": "#d0782a" },
-        { "line": 1, "text": "true", "foreground": "#96b38a" }
+        {
+          "line": 1,
+          "text": "color",
+          "foreground": "#9a8297"
+        },
+        {
+          "line": 1,
+          "text": ":",
+          "foreground": "#ffffff"
+        },
+        {
+          "line": 1,
+          "text": "#fff",
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 1,
+          "text": "12px",
+          "foreground": "#d0782a"
+        },
+        {
+          "line": 1,
+          "text": "0.5",
+          "foreground": "#d0782a"
+        },
+        {
+          "line": 1,
+          "text": "true",
+          "foreground": "#96b38a"
+        }
       ]
     }
   ]

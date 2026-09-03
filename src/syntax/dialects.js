@@ -1,4 +1,5 @@
 const { Spans } = require('./spans');
+const { codeRoles } = require('./roles');
 
 // Tree-sitter provides the common syntax tree in tree.js. This module keeps
 // grammar-specific constructs isolated so the shared declaration model stays
@@ -24,6 +25,8 @@ const ancestor = (node, predicate) => {
   }
 };
 const identifier = (node) => node?.type === 'identifier';
+const calledAfter = (source, node) => node &&
+  /^\s*(?:<[^;{}()]*>)?\s*\(/.test(source.slice(node.endIndex, node.endIndex + 160));
 
 function add(spans, node, role, priority = 60) {
   if (node) spans.add(node.startIndex, node.endIndex, role, priority);
@@ -35,39 +38,40 @@ function directIdentifiers(node) {
 
 function groovy(spans, nodes, source) {
   for (const node of nodes) {
-    if (node.type === 'class_definition') add(spans, field(node, 'name'), 'blue');
-    if (node.type === 'annotation') add(spans, node.namedChildren.find(identifier), 'yellow');
+    if (node.type === 'class_definition') add(spans, field(node, 'name'), codeRoles.type);
+    if (node.type === 'annotation') add(spans, node.namedChildren.find(identifier), codeRoles.annotation);
     if (node.type === 'function_definition') {
-      add(spans, field(node, 'function'), 'purple');
-      add(spans, field(node, 'type'), 'white');
+      add(spans, field(node, 'function'), codeRoles.method);
+      add(spans, field(node, 'type'), codeRoles.type);
     }
     if (node.type === 'parameter') {
-      add(spans, field(node, 'name'), 'blue');
+      add(spans, field(node, 'name'), codeRoles.binding);
       const type = field(node, 'type');
-      if (type) add(spans, type, 'white');
+      if (type) add(spans, type, codeRoles.type);
     }
     if (node.type === 'declaration') {
       const member = ancestor(node, (item) => item.type === 'class_definition') &&
         !ancestor(node, (item) => item.type === 'function_definition');
-      add(spans, field(node, 'name'), member ? 'purple' : 'blue');
-      add(spans, field(node, 'type'), 'white');
+      add(spans, field(node, 'name'), member ? codeRoles.property : codeRoles.binding);
+      add(spans, field(node, 'type'), codeRoles.type);
     }
     if (node.type === 'type_with_generics') {
-      for (const name of node.descendantsOfType('identifier')) add(spans, name, 'white');
+      for (const name of node.descendantsOfType('identifier')) add(spans, name, codeRoles.type);
     }
     if (node.type === 'dotted_identifier') {
       const names = directIdentifiers(node);
-      for (const name of names.slice(1)) add(spans, name, 'purple');
+      for (const name of names.slice(1)) {
+        add(spans, name, calledAfter(source, name) ? codeRoles.method : codeRoles.property);
+      }
     }
     if (node.type === 'function_call') {
       const fn = field(node, 'function');
       if (identifier(fn)) {
-        const prefix = source.slice(Math.max(0, fn.startIndex - 3), fn.startIndex);
-        add(spans, fn, /(?:\.|\?\.)\s*$/.test(prefix) ? 'purple' : 'yellow');
+        add(spans, fn, codeRoles.method);
       }
-      else if (fn?.type === 'dotted_identifier') add(spans, directIdentifiers(fn).at(-1), 'purple');
+      else if (fn?.type === 'dotted_identifier') add(spans, directIdentifiers(fn).at(-1), codeRoles.method);
     }
-    if (identifier(node) && node.text === 'it') add(spans, node, 'blue');
+    if (identifier(node) && node.text === 'it') add(spans, node, codeRoles.binding);
     if (identifier(node) && /\bnew\s*$/.test(source.slice(Math.max(0, node.startIndex - 8), node.startIndex))) {
       add(spans, node, 'yellow', 70);
     }
@@ -76,10 +80,11 @@ function groovy(spans, nodes, source) {
 
 function cuda(spans, nodes, source) {
   for (const node of nodes) {
-    if (identifier(node) && ancestor(node, (item) => item.type === 'sizeof_expression')) add(spans, node, 'white', 70);
+    if (identifier(node) && ancestor(node, (item) => item.type === 'sizeof_expression')) add(spans, node, codeRoles.type, 70);
     if (node.type === 'qualified_identifier') {
-      add(spans, field(node, 'scope'), 'yellow', 65);
-      add(spans, field(node, 'name'), 'purple', 70);
+      add(spans, field(node, 'scope'), codeRoles.type, 65);
+      const name = field(node, 'name');
+      add(spans, name, calledAfter(source, name) ? codeRoles.method : codeRoles.type, 70);
     }
   }
   for (const match of source.matchAll(/^\s*#/gm)) {
@@ -88,11 +93,11 @@ function cuda(spans, nodes, source) {
   }
   for (const match of source.matchAll(/\b(?:__global__|__device__|__host__)\s+[A-Za-z_]\w*(?:\s*[*&]\s*)?\s+([A-Za-z_]\w*)\s*\(/g)) {
     const at = match.index + match[0].lastIndexOf(match[1]);
-    spans.add(at, at + match[1].length, 'blue', 75);
+    spans.add(at, at + match[1].length, codeRoles.functionDeclaration, 75);
   }
 }
 
-function julia(spans, nodes) {
+function julia(spans, nodes, source) {
   const functions = nodes.filter((node) => node.type === 'function_definition');
   const functionOf = (node) => functions.find((candidate) =>
     candidate.startIndex <= node.startIndex && candidate.endIndex >= node.endIndex);
@@ -103,26 +108,26 @@ function julia(spans, nodes) {
   for (const node of nodes) {
     if (node.type === 'module_definition') {
       const name = field(node, 'name');
-      if (name) { add(spans, name, 'blue'); globals.add(name.text); declarationIds.add(name.id); }
+      if (name) { add(spans, name, codeRoles.functionDeclaration); globals.add(name.text); declarationIds.add(name.id); }
     }
     if (node.type === 'struct_definition') {
       const name = node.namedChildren[0]?.descendantsOfType('identifier')[0];
-      if (name) { add(spans, name, 'blue'); globals.add(name.text); declarationIds.add(name.id); }
+      if (name) { add(spans, name, codeRoles.type); globals.add(name.text); declarationIds.add(name.id); }
       for (const typed of node.descendantsOfType('typed_expression')) {
         const names = typed.namedChildren.filter(identifier);
-        if (names[0]) { add(spans, names[0], 'purple'); declarationIds.add(names[0].id); }
-        if (names[1]) add(spans, names[1], 'white');
+        if (names[0]) { add(spans, names[0], codeRoles.property); declarationIds.add(names[0].id); }
+        if (names[1]) add(spans, names[1], codeRoles.type);
       }
     }
     if (node.type === 'function_definition') {
       const signature = node.namedChildren[0];
       const call = signature?.type === 'typed_expression' ? signature.namedChildren[0] : signature?.namedChildren[0];
       const name = call?.type === 'call_expression' ? call.namedChildren[0] : undefined;
-      if (identifier(name)) { add(spans, name, 'blue'); globals.add(name.text); declarationIds.add(name.id); }
+      if (identifier(name)) { add(spans, name, codeRoles.functionDeclaration); globals.add(name.text); declarationIds.add(name.id); }
       for (const typed of call?.descendantsOfType('typed_expression') ?? []) {
         const names = typed.namedChildren.filter(identifier);
-        if (names[0]) { add(spans, names[0], 'blue'); localNames.get(node.id).add(names[0].text); declarationIds.add(names[0].id); }
-        if (names[1]) add(spans, names[1], 'white');
+        if (names[0]) { add(spans, names[0], codeRoles.binding); localNames.get(node.id).add(names[0].text); declarationIds.add(names[0].id); }
+        if (names[1]) add(spans, names[1], codeRoles.type);
       }
     }
     if (node.type === 'assignment') {
@@ -131,19 +136,19 @@ function julia(spans, nodes) {
       if (identifier(left)) {
         if (fn) localNames.get(fn.id).add(left.text);
         else globals.add(left.text);
-        add(spans, left, 'blue'); declarationIds.add(left.id);
+        add(spans, left, codeRoles.binding); declarationIds.add(left.id);
       } else if (left?.type === 'call_expression' && !fn) {
         const name = left.namedChildren[0];
-        if (identifier(name)) { add(spans, name, 'blue'); globals.add(name.text); declarationIds.add(name.id); }
+        if (identifier(name)) { add(spans, name, codeRoles.functionDeclaration); globals.add(name.text); declarationIds.add(name.id); }
         for (const parameter of left.namedChildren.slice(1).flatMap((item) => item.descendantsOfType('identifier'))) {
-          add(spans, parameter, 'blue');
+          add(spans, parameter, codeRoles.binding);
         }
       }
     }
     if (node.type === 'for_binding') {
       const name = node.namedChildren.find(identifier);
       const fn = functionOf(node);
-      if (name && fn) { localNames.get(fn.id).add(name.text); add(spans, name, 'blue'); declarationIds.add(name.id); }
+      if (name && fn) { localNames.get(fn.id).add(name.text); add(spans, name, codeRoles.binding); declarationIds.add(name.id); }
     }
   }
 
@@ -151,21 +156,21 @@ function julia(spans, nodes) {
     if (!identifier(node) || declarationIds.has(node.id)) continue;
     const parent = node.parent;
     if (parent.type === 'field_expression' && parent.namedChildren.at(-1)?.id === node.id) {
-      add(spans, node, 'purple'); continue;
+      add(spans, node, calledAfter(source, node) ? codeRoles.method : codeRoles.property); continue;
     }
     if (ancestor(node, (item) => item.type === 'typed_expression') &&
         parent.type !== 'call_expression') {
       const typed = ancestor(node, (item) => item.type === 'typed_expression');
-      if (typed?.namedChildren.at(-1)?.id === node.id) { add(spans, node, 'white'); continue; }
+      if (typed?.namedChildren.at(-1)?.id === node.id) { add(spans, node, codeRoles.type); continue; }
     }
     if (parent.type === 'macro_identifier') { add(spans, node, 'purple'); continue; }
     if (parent.type === 'quote_expression') { add(spans, node, 'green'); continue; }
     if (parent.type === 'call_expression' && parent.namedChildren[0]?.id === node.id) {
-      add(spans, node, 'yellow'); continue;
+      add(spans, node, codeRoles.method); continue;
     }
     const fn = functionOf(node);
-    if (fn && localNames.get(fn.id)?.has(node.text)) add(spans, node, 'blue');
-    else if (globals.has(node.text)) add(spans, node, 'yellow');
+    if (fn && localNames.get(fn.id)?.has(node.text)) add(spans, node, codeRoles.binding);
+    else if (globals.has(node.text)) add(spans, node, codeRoles.binding);
   }
   for (const node of nodes) {
     if (node.type === 'quote_expression') add(spans, node, 'green', 70);
@@ -176,7 +181,7 @@ function julia(spans, nodes) {
   }
 }
 
-function lua(spans, nodes) {
+function lua(spans, nodes, source) {
   const functions = nodes.filter((node) => node.type === 'function_declaration');
   const functionOf = (node) => functions.filter((candidate) =>
     candidate.startIndex <= node.startIndex && candidate.endIndex >= node.endIndex)
@@ -192,7 +197,7 @@ function lua(spans, nodes) {
         : node.namedChildren[0]?.descendantsOfType('identifier') ?? []) {
         const fn = functionOf(node);
         if (fn) locals.get(fn.id).add(name.text); else globals.add(name.text);
-        add(spans, name, 'blue'); declarations.add(name.id);
+        add(spans, name, codeRoles.binding); declarations.add(name.id);
       }
     }
     if (node.type === 'parameters' || node.type === 'variable_list' &&
@@ -200,13 +205,13 @@ function lua(spans, nodes) {
       const fn = functionOf(node);
       for (const name of directIdentifiers(node)) {
         if (fn) locals.get(fn.id).add(name.text);
-        add(spans, name, 'blue'); declarations.add(name.id);
+        add(spans, name, codeRoles.binding); declarations.add(name.id);
       }
     }
     if (node.type === 'function_declaration') {
       const name = field(node, 'name');
-      if (name?.type === 'dot_index_expression') add(spans, field(name, 'field'), 'purple');
-      if (name?.type === 'method_index_expression') add(spans, field(name, 'method'), 'purple');
+      if (name?.type === 'dot_index_expression') add(spans, field(name, 'field'), codeRoles.method);
+      if (name?.type === 'method_index_expression') add(spans, field(name, 'method'), codeRoles.method);
     }
   }
 
@@ -216,32 +221,32 @@ function lua(spans, nodes) {
     if ((parent.type === 'dot_index_expression' && field(parent, 'field')?.id === node.id) ||
         (parent.type === 'method_index_expression' && field(parent, 'method')?.id === node.id) ||
         (parent.type === 'field' && field(parent, 'name')?.id === node.id)) {
-      add(spans, node, 'purple'); continue;
+      add(spans, node, calledAfter(source, node) ? codeRoles.method : codeRoles.property); continue;
     }
-    if (node.text === 'self') { add(spans, node, 'yellow'); continue; }
+    if (node.text === 'self') { add(spans, node, codeRoles.keyword); continue; }
     if (parent.type === 'function_call' && field(parent, 'name')?.id === node.id) {
-      add(spans, node, 'yellow'); continue;
+      add(spans, node, codeRoles.method); continue;
     }
     const fn = functionOf(node);
-    if (fn && locals.get(fn.id)?.has(node.text)) add(spans, node, 'blue');
-    else if (globals.has(node.text)) add(spans, node, 'yellow');
+    if (fn && locals.get(fn.id)?.has(node.text)) add(spans, node, codeRoles.binding);
+    else if (globals.has(node.text)) add(spans, node, codeRoles.binding);
   }
 }
 
 function objectiveC(spans, nodes, source) {
   for (const node of nodes) {
     if (['class_interface', 'class_implementation'].includes(node.type)) {
-      add(spans, directIdentifiers(node)[0], 'blue');
+      add(spans, directIdentifiers(node)[0], codeRoles.type);
     }
     if (node.type === 'property_declaration') {
-      add(spans, node.descendantsOfType('identifier').at(-1), 'purple');
-      for (const type of node.descendantsOfType('type_identifier')) add(spans, type, 'white');
+      add(spans, node.descendantsOfType('identifier').at(-1), codeRoles.property);
+      for (const type of node.descendantsOfType('type_identifier')) add(spans, type, codeRoles.type);
     }
     if (['method_declaration', 'method_definition'].includes(node.type)) {
       for (const name of directIdentifiers(node)) add(spans, name, 'purple');
       for (const parameter of node.descendantsOfType('method_parameter')) {
-        add(spans, parameter.descendantsOfType('identifier').at(-1), 'blue');
-        for (const type of parameter.descendantsOfType('type_identifier')) add(spans, type, 'white');
+        add(spans, parameter.descendantsOfType('identifier').at(-1), codeRoles.binding);
+        for (const type of parameter.descendantsOfType('type_identifier')) add(spans, type, codeRoles.type);
       }
     }
     if (node.type === 'message_expression') {
@@ -253,22 +258,30 @@ function objectiveC(spans, nodes, source) {
         spans.add(node.startIndex + match.index, node.startIndex + match.index + match[1].length, 'purple', 65);
       }
     }
-    if (node.type === 'type_identifier') add(spans, node, 'white', 50);
-    if (identifier(node) && /^_[A-Za-z]/.test(node.text)) add(spans, node, 'purple');
+    if (node.type === 'type_identifier') add(spans, node, codeRoles.type, 50);
+    if (identifier(node) && /^_[A-Za-z]/.test(node.text)) add(spans, node, codeRoles.property);
   }
   for (const match of source.matchAll(/^\s*#/gm)) {
     const at = match.index + match[0].lastIndexOf('#');
-    spans.add(at, at + 1, 'yellow', 70);
+    spans.add(at, at + 1, codeRoles.keyword, 70);
+  }
+  if (source.includes('::')) {
+    for (const match of source.matchAll(/\b([a-z_]\w*)::([A-Za-z_]\w*)/g)) {
+      spans.add(match.index, match.index + match[1].length, 'white', 75);
+      const typeAt = match.index + match[0].lastIndexOf(match[2]);
+      spans.add(typeAt, typeAt + match[2].length, codeRoles.type, 75);
+    }
   }
   for (const match of source.matchAll(/\bNS_ENUM\s*\([^,]+,\s*([A-Za-z_]\w*)\s*\)/g)) {
     spans.add(match.index, match.index + 'NS_ENUM'.length, 'yellow', 75);
     const typeAt = match.index + match[0].lastIndexOf(match[1]);
-    spans.add(typeAt, typeAt + match[1].length, 'blue', 75);
+    spans.add(typeAt, typeAt + match[1].length, codeRoles.type, 75);
     const bodyStart = source.indexOf('{', match.index + match[0].length);
     const bodyEnd = bodyStart >= 0 ? source.indexOf('}', bodyStart) : -1;
     if (bodyStart >= 0 && bodyEnd >= 0) {
       for (const item of source.slice(bodyStart + 1, bodyEnd).matchAll(/\b[A-Za-z_]\w*\b/g)) {
-        spans.add(bodyStart + 1 + item.index, bodyStart + 1 + item.index + item[0].length, 'purple', 70);
+        spans.add(bodyStart + 1 + item.index, bodyStart + 1 + item.index + item[0].length,
+          codeRoles.enumMember, 70);
       }
     }
   }
@@ -287,13 +300,13 @@ function rLanguage(spans, nodes) {
       if (!identifier(left)) continue;
       const fn = functionOf(node);
       if (fn) locals.get(fn.id).add(left.text); else globals.add(left.text);
-      add(spans, left, 'blue'); declarations.add(left.id);
+      add(spans, left, codeRoles.binding); declarations.add(left.id);
     }
     if (node.type === 'parameters') {
       const fn = functionOf(node);
       for (const parameter of node.descendantsOfType('parameter')) {
         const name = field(parameter, 'name');
-        if (name && fn) { locals.get(fn.id).add(name.text); add(spans, name, 'blue'); declarations.add(name.id); }
+        if (name && fn) { locals.get(fn.id).add(name.text); add(spans, name, codeRoles.binding); declarations.add(name.id); }
       }
     }
   }
@@ -301,17 +314,17 @@ function rLanguage(spans, nodes) {
     if (!identifier(node) || declarations.has(node.id)) continue;
     const parent = node.parent;
     if (parent.type === 'extract_operator' && parent.namedChildren.at(-1)?.id === node.id) {
-      add(spans, node, 'purple'); continue;
+      add(spans, node, codeRoles.property); continue;
     }
     if (parent.type === 'argument' && field(parent, 'name')?.id === node.id) {
-      add(spans, node, 'purple'); continue;
+      add(spans, node, codeRoles.namedArgument); continue;
     }
     if (parent.type === 'call' && field(parent, 'function')?.id === node.id) {
-      add(spans, node, 'yellow'); continue;
+      add(spans, node, codeRoles.method); continue;
     }
     const fn = functionOf(node);
-    if (fn && locals.get(fn.id)?.has(node.text)) add(spans, node, 'blue');
-    else if (globals.has(node.text)) add(spans, node, 'yellow');
+    if (fn && locals.get(fn.id)?.has(node.text)) add(spans, node, codeRoles.binding);
+    else if (globals.has(node.text)) add(spans, node, codeRoles.binding);
   }
 }
 
@@ -334,8 +347,8 @@ function refineDialect(root, source, language) {
   const nodes = collect(root);
   if (language === 'cuda-cpp') cuda(spans, nodes, source);
   else if (language === 'groovy') groovy(spans, nodes, source);
-  else if (language === 'julia') julia(spans, nodes);
-  else if (language === 'lua') lua(spans, nodes);
+  else if (language === 'julia') julia(spans, nodes, source);
+  else if (language === 'lua') lua(spans, nodes, source);
   else if (['objective-c', 'objective-cpp'].includes(language)) objectiveC(spans, nodes, source);
   else if (language === 'r') rLanguage(spans, nodes);
   else if (language === 'razor') razor(spans, source);

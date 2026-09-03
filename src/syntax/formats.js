@@ -59,7 +59,9 @@ function refineConfig(source, language) {
     if (value.start < value.end) {
       spans.add(offset + value.start, offset + value.end, 'green', 30);
       const scalar = line.slice(value.start, value.end);
-      if (/^(?:true|false|yes|no|on|off|null)$/i.test(scalar)) {
+      if (/^null$/i.test(scalar)) {
+        spans.add(offset + value.start, offset + value.end, 'orange', 45);
+      } else if (/^(?:true|false|yes|no|on|off)$/i.test(scalar)) {
         spans.add(offset + value.start, offset + value.end, 'yellow', 45);
       } else if (/^[+-]?(?:\d+(?:\.\d+)?|\.\d+)$/.test(scalar)) {
         spans.add(offset + value.start, offset + value.end, 'orange', 45);
@@ -74,6 +76,20 @@ function refineConfig(source, language) {
     }
     continuation = language === 'properties' && /(?<!\\)(?:\\\\)*\\\s*$/.test(line);
   });
+  return spans.finish();
+}
+
+/** JSON providers use one TextMate scope for booleans and null. A tiny
+ * string/comment-aware pass keeps booleans yellow while making null orange. */
+function refineJson(source) {
+  const spans = new Spans(source.length);
+  const masked = source.replace(
+    /"(?:\\.|[^"\\])*(?:"|$)|\/\/[^\n]*|\/\*[\s\S]*?(?:\*\/|$)/g,
+    (text) => text.replace(/[^\n]/g, ' '),
+  );
+  for (const match of masked.matchAll(/\bnull\b/g)) {
+    spans.add(match.index, match.index + match[0].length, 'orange', 60);
+  }
   return spans.finish();
 }
 
@@ -225,6 +241,7 @@ function refineWat(source) {
 }
 
 function refineFormat(source, language) {
+  if (language === 'json' || language === 'jsonc' || language === 'jsonl') return refineJson(source);
   if (language === 'ini' || language === 'properties') return refineConfig(source, language);
   if (language === 'dockerfile') return refineDockerfile(source);
   if (language === 'bibtex') return refineBibtex(source);
@@ -233,6 +250,9 @@ function refineFormat(source, language) {
   return [];
 }
 
-const formatLanguages = ['ini', 'properties', 'dockerfile', 'bibtex', 'latex', 'tex', 'wat'];
+const formatLanguages = [
+  'json', 'jsonc', 'jsonl',
+  'ini', 'properties', 'dockerfile', 'bibtex', 'latex', 'tex', 'wat',
+];
 
 module.exports = { refineFormat, formatLanguages };

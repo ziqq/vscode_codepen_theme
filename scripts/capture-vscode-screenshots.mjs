@@ -230,7 +230,10 @@ await writeFile(
     'workbench.startupEditor': 'none',
     'workbench.reduceMotion': 'on',
     'editor.semanticHighlighting.enabled': semantic,
-    'codepen.syntaxRefinement.enabled': false,
+    // TextMate captures isolate the provider/theme contract. Semantic captures
+    // verify the user-visible composition: TextMate + semantic tokens + the
+    // contextual refinement layer that resolves otherwise identical scopes.
+    'codepen.syntaxRefinement.enabled': semantic,
     'dotenv.enableAutocloaking': false,
     'editor.fontFamily': 'monospace',
     'editor.fontSize': 16,
@@ -298,7 +301,22 @@ try {
   const connected = await waitForWorkbench(`http://127.0.0.1:${port}`);
   browser = connected.browser;
   await waitForFile(readyFile, 60_000);
+  if (semantic && process.env.CODEPEN_DART_SDK) {
+    const semanticReport = JSON.parse(
+      await readFile(path.join(output, 'semantic-tokens.json'), 'utf8'),
+    );
+    if (semanticReport.dartErrors.length > 0) {
+      throw new Error(
+        `Dart semantic mismatches:\n${semanticReport.dartErrors.join('\n')}`,
+      );
+    }
+  }
   const page = await waitForExtensionWorkbench(connected.context);
+  // Provider diagnostics are unrelated to theme rendering and may otherwise
+  // cover the editor in captured baselines (for example, an expired LSP build).
+  await page.addStyleTag({
+    content: '.notifications-toasts { display: none !important; }',
+  });
   const modifier = process.platform === 'darwin' ? 'Meta' : 'Control';
   await page.keyboard.press(`${modifier}+K`);
   await page.waitForTimeout(100);

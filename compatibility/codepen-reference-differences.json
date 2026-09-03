@@ -1,5 +1,96 @@
 {
-  "description": "Reviewed differences between measured CodePen and TextMate, not matches. Exact spans prevent silently accepting new regressions. Semantic results are checked separately.",
+  "description": "Reviewed differences between measured CodePen and TextMate, not matches. Exact spans cover parser limitations; role policies cover the intentional programming-language hierarchy and still require an exact mode, CodeMirror role, and color transition. Semantic results are checked separately.",
+  "roleDifferences": [
+    {
+      "modes": ["javascript"],
+      "cmScope": "cm-keyword",
+      "expected": "#ddca7e",
+      "actual": ["#809bbd"],
+      "reason": "Programming-language declaration and control keywords are blue; stylesheet-family syntax retains the classic CodePen mapping."
+    },
+    {
+      "modes": ["typescript"],
+      "cmScope": "cm-keyword",
+      "expected": "#ddca7e",
+      "actual": ["#809bbd"],
+      "reason": "Programming-language declaration and control keywords are blue; stylesheet-family syntax retains the classic CodePen mapping."
+    },
+    {
+      "modes": ["jsx"],
+      "cmScope": "cm-keyword",
+      "expected": "#ddca7e",
+      "actual": ["#809bbd"],
+      "reason": "Programming-language declaration and control keywords are blue; stylesheet-family syntax retains the classic CodePen mapping."
+    },
+    {
+      "modes": ["javascript"],
+      "cmScope": "cm-keyword",
+      "expected": "#ddca7e",
+      "actual": ["#809bbd", "#ddca7e"],
+      "texts": ["function*"],
+      "reason": "The function declaration keyword is blue while the generator marker retains its classic operator color."
+    },
+    {
+      "modes": ["typescript"],
+      "cmScope": "cm-keyword",
+      "expected": "#ddca7e",
+      "actual": ["#809bbd", "#ddca7e"],
+      "texts": ["function*"],
+      "reason": "The function declaration keyword is blue while the generator marker retains its classic operator color."
+    },
+    {
+      "modes": ["typescript"],
+      "cmScope": "cm-type",
+      "expected": "#ffffff",
+      "actual": ["#ddca7e"],
+      "reason": "Programming-language type declarations and references are yellow."
+    },
+    {
+      "modes": ["javascript"],
+      "cmScope": "cm-def",
+      "expected": "#809bbd",
+      "actual": ["#ddca7e"],
+      "reason": "Programming-language class declarations are yellow type symbols."
+    },
+    {
+      "modes": ["typescript"],
+      "cmScope": "cm-def",
+      "expected": "#809bbd",
+      "actual": ["#ddca7e"],
+      "reason": "Programming-language class, interface, and enum declarations are yellow type symbols."
+    },
+    {
+      "modes": ["typescript"],
+      "cmScope": "cm-variable",
+      "expected": "#ddca7e",
+      "actual": ["#ffffff"],
+      "reason": "Bindings and value references are white."
+    },
+    {
+      "modes": ["typescript"],
+      "cmScope": "cm-variable",
+      "expected": "#ddca7e",
+      "actual": ["#809bbd"],
+      "texts": ["satisfies", "trace"],
+      "reason": "A contextual type keyword and a decorator name are blue even where classic CodeMirror reports a variable role."
+    },
+    {
+      "modes": ["typescript"],
+      "cmScope": "cm-variable",
+      "expected": "#ddca7e",
+      "actual": ["#809bbd"],
+      "texts": ["from"],
+      "reason": "Import syntax is blue throughout the adapted programming-language hierarchy, including from where classic CodeMirror reports a variable role."
+    },
+    {
+      "modes": ["typescript"],
+      "cmScope": "cm-operator",
+      "expected": "#cccccc",
+      "actual": ["#809bbd"],
+      "texts": ["@"],
+      "reason": "Decorator punctuation is blue together with the annotation role."
+    }
+  ],
   "differences": [
     {
       "case": "javascript-bindings",
@@ -737,6 +828,28 @@
         "#809bbd"
       ],
       "reason": "Classic CodePen misclassifies this modern TypeScript/JSX construct; preserve the provider's keyword, type, or parameter role instead of copying the parser error."
+    },
+    {
+      "case": "javascript-literals",
+      "line": 7,
+      "start": 28,
+      "text": "null",
+      "expected": "#ddca7e",
+      "actual": [
+        "#d0782a"
+      ],
+      "reason": "The adapted literal hierarchy separates null from booleans and assigns it CodePen orange."
+    },
+    {
+      "case": "literals-and-interpolation",
+      "line": 7,
+      "start": 28,
+      "text": "null",
+      "expected": "#ddca7e",
+      "actual": [
+        "#d0782a"
+      ],
+      "reason": "The adapted literal hierarchy separates null from booleans and assigns it CodePen orange."
     }
   ]
 }

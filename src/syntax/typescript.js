@@ -1,5 +1,6 @@
 const { Spans } = require('./spans');
 const { addComment } = require('./comments');
+const { codeRoles } = require('./roles');
 
 let compiler;
 function refineTypeScript(source, language) {
@@ -30,9 +31,24 @@ function refineTypeScript(source, language) {
       if (predicate(current)) return current;
     }
   };
-  const isMember = (node) => ts.isPropertyDeclaration(node) || ts.isPropertySignature(node) ||
-    ts.isPropertyAssignment(node) || ts.isMethodDeclaration(node) || ts.isMethodSignature(node) ||
-    ts.isGetAccessor(node) || ts.isSetAccessor(node);
+  const isMethod = (node) => ts.isMethodDeclaration(node) || ts.isMethodSignature(node);
+  const isAccessor = (node) => ts.isGetAccessor(node) || ts.isSetAccessor(node);
+  const isProperty = (node) => ts.isPropertyDeclaration(node) || ts.isPropertySignature(node) ||
+    ts.isPropertyAssignment(node) || ts.isShorthandPropertyAssignment(node);
+  const isCallableProperty = (node) =>
+    (ts.isPropertyDeclaration(node) || ts.isPropertyAssignment(node)) &&
+    Boolean(node.initializer &&
+      (ts.isArrowFunction(node.initializer) || ts.isFunctionExpression(node.initializer)));
+  const isCallableBinding = (node) => ts.isVariableDeclaration(node) &&
+    Boolean(node.initializer &&
+      (ts.isArrowFunction(node.initializer) || ts.isFunctionExpression(node.initializer)));
+  const isParameterProperty = (node) => ts.isParameter(node) &&
+    node.modifiers?.some((modifier) => [S.PublicKeyword, S.PrivateKeyword,
+      S.ProtectedKeyword, S.ReadonlyKeyword].includes(modifier.kind));
+  const isBindingDeclaration = (node) => ts.isVariableDeclaration(node) ||
+    ts.isParameter(node) || ts.isBindingElement(node) || ts.isImportClause(node) ||
+    ts.isImportSpecifier(node) || ts.isNamespaceImport(node) ||
+    ts.isImportEqualsDeclaration(node);
   const isLocal = (node) => Boolean(ancestor(node, (parent) => ts.isFunctionLike(parent) ||
     ts.isBlock(parent) || ts.isForStatement(parent) || ts.isForOfStatement(parent) ||
     ts.isForInStatement(parent) || ts.isCatchClause(parent)));
@@ -40,7 +56,6 @@ function refineTypeScript(source, language) {
     (ts.isJsxOpeningElement(parent) || ts.isJsxClosingElement(parent) || ts.isJsxSelfClosingElement(parent)) &&
     parent.tagName.pos <= node.pos && parent.tagName.end >= node.end));
   const inside = (node, parent) => Boolean(parent && parent.pos <= node.pos && parent.end >= node.end);
-  const jsxExpression = (node) => ancestor(node, (parent) => ts.isJsxExpression(parent));
   const typeOnlyImport = (node) => ancestor(node, (parent) =>
     ts.isImportClause(parent) && parent.isTypeOnly);
   const satisfiesType = (node) => {
@@ -52,53 +67,79 @@ function refineTypeScript(source, language) {
     return predicate?.assertsModifier && inside(node, predicate.type);
   };
   const namedTupleMember = (node) => ancestor(node, (parent) => ts.isNamedTupleMember(parent));
+  const decoratorHead = (node) => {
+    const decorator = ancestor(node, (parent) => ts.isDecorator(parent));
+    if (!decorator) return false;
+    const expression = ts.isCallExpression(decorator.expression)
+      ? decorator.expression.expression
+      : decorator.expression;
+    return inside(node, expression);
+  };
 
   function identifierRole(node) {
     const parent = node.parent;
+    if (decoratorHead(node)) return codeRoles.annotation;
     if (inJsxTag(node)) return 'brown';
     if (ts.isJsxAttribute(parent) || ts.isJsxNamespacedName(parent)) return 'yellow';
     if ((ts.isJsxOpeningElement(parent) || ts.isJsxClosingElement(parent) ||
         ts.isJsxSelfClosingElement(parent)) && parent.tagName === node) return 'brown';
-    if (ts.isPropertyAccessExpression(parent) && parent.name === node) return 'purple';
-    if (ts.isQualifiedName(parent) && parent.right === node) return 'white';
-    // Preserve the lexical-state transitions of CodePen's classic JavaScript
-    // mode. JSX expression islands and these newer TypeScript constructs are
-    // intentionally classified by their original parser context.
-    if (jsxExpression(node)) return 'yellow';
-    if (typeOnlyImport(node)) return 'yellow';
-    if (satisfiesType(node) || assertionPredicateType(node)) return 'yellow';
-    const tupleMember = namedTupleMember(node);
-    if (tupleMember) {
-      const tuple = tupleMember.parent;
-      return tupleMember.name === node && tuple.elements[0] === tupleMember ? 'white' : 'yellow';
+    if (ts.isPropertyAccessExpression(parent) && parent.name === node) {
+      const called = ts.isCallExpression(parent.parent) && parent.parent.expression === parent;
+      const declarations = checker.getSymbolAtLocation(node)?.declarations ?? [];
+      if (declarations.some((declaration) => ts.isEnumMember(declaration))) return codeRoles.enumMember;
+      if (declarations.some(isAccessor)) return codeRoles.property;
+      return called || declarations.some((declaration) => isMethod(declaration) || isCallableProperty(declaration))
+        ? codeRoles.method
+        : codeRoles.property;
     }
-    if (ts.isTypeParameterDeclaration(parent) && ts.isMappedTypeNode(parent.parent)) return 'yellow';
-    if (ts.isParameter(parent) &&
-        (ts.isFunctionTypeNode(parent.parent) || ts.isConstructorTypeNode(parent.parent))) return 'yellow';
-    if ((isMember(parent) && parent.name === node) ||
-        ts.isShorthandPropertyAssignment(parent) ||
-        (ts.isBindingElement(parent) && parent.propertyName === node)) return 'purple';
-    if (ts.isEnumMember(parent) && parent.name === node) return 'blue';
-    if (ts.isTypeAliasDeclaration(parent) && parent.name === node) return 'white';
+    if (ts.isQualifiedName(parent) && parent.right === node) return codeRoles.type;
+    if ((isMethod(parent) || isCallableProperty(parent)) && parent.name === node) return codeRoles.method;
+    if (isAccessor(parent) && parent.name === node) return codeRoles.property;
+    if ((isProperty(parent) && parent.name === node) ||
+        (isParameterProperty(parent) && parent.name === node) ||
+        (ts.isBindingElement(parent) && parent.propertyName === node)) return codeRoles.property;
+    if (ts.isEnumMember(parent) && parent.name === node) return codeRoles.enumMember;
+    if (ts.isTypeAliasDeclaration(parent) && parent.name === node) return codeRoles.type;
     if (parent.name === node && (ts.isClassLike(parent) || ts.isInterfaceDeclaration(parent) ||
-        ts.isEnumDeclaration(parent))) return 'blue';
+        ts.isEnumDeclaration(parent))) return codeRoles.type;
+    if (typeOnlyImport(node)) return codeRoles.type;
+    if (satisfiesType(node) || assertionPredicateType(node)) return codeRoles.type;
+    const tupleMember = namedTupleMember(node);
+    if (tupleMember && tupleMember.name === node) return codeRoles.namedArgument;
+    if (ts.isTypeParameterDeclaration(parent) && ts.isMappedTypeNode(parent.parent)) return codeRoles.type;
+    if (ts.isParameter(parent) &&
+        (ts.isFunctionTypeNode(parent.parent) || ts.isConstructorTypeNode(parent.parent))) return codeRoles.binding;
     if (ts.isModuleDeclaration(parent) && parent.name === node) return 'yellow';
     if (node.text === 'const' && ts.isTypeReferenceNode(parent) &&
         ts.isAsExpression(parent.parent)) return 'yellow';
+    if (parent.name === node &&
+        (ts.isFunctionDeclaration(parent) || ts.isFunctionExpression(parent))) {
+      return codeRoles.functionDeclaration;
+    }
+    if (parent.name === node && isCallableBinding(parent)) {
+      return codeRoles.functionDeclaration;
+    }
     if (parent.name === node && (ts.isVariableDeclaration(parent) || ts.isParameter(parent) ||
-        ts.isBindingElement(parent) || ts.isFunctionDeclaration(parent) || ts.isFunctionExpression(parent) ||
+        ts.isBindingElement(parent) ||
         ts.isImportClause(parent) || ts.isImportSpecifier(parent) || ts.isNamespaceImport(parent) ||
-        ts.isImportEqualsDeclaration(parent))) return 'blue';
-    if (ts.isImportSpecifier(parent)) return 'blue';
+        ts.isImportEqualsDeclaration(parent))) return codeRoles.binding;
+    if (ts.isImportSpecifier(parent)) return codeRoles.binding;
+    if (ts.isCallExpression(parent) && parent.expression === node) return codeRoles.method;
     const typeContext = ancestor(node, (item) => ts.isTypeNode(item));
     if (ts.isTypeParameterDeclaration(parent) || typeContext &&
         !ts.isTypeQueryNode(typeContext) &&
         !(ts.isTypePredicateNode(typeContext) && typeContext.parameterName === node) &&
-        !(js && ts.isExpressionWithTypeArguments(typeContext))) return 'white';
+        !(js && ts.isExpressionWithTypeArguments(typeContext))) return codeRoles.type;
     const symbol = checker.getSymbolAtLocation(node);
     const declarations = symbol?.declarations ?? [];
-    if (declarations.some(isMember)) return 'purple';
-    if (declarations.some((item) => ts.isParameter(item) || isLocal(item))) return 'blue';
+    if (declarations.some((declaration) => isMethod(declaration) || isCallableProperty(declaration))) {
+      return codeRoles.method;
+    }
+    if (declarations.some(isCallableBinding)) return codeRoles.functionDeclaration;
+    if (declarations.some((declaration) => isProperty(declaration) || isParameterProperty(declaration) || isAccessor(declaration))) {
+      return codeRoles.property;
+    }
+    if (declarations.some((item) => isBindingDeclaration(item) || isLocal(item))) return codeRoles.binding;
     return 'yellow';
   }
 
@@ -139,26 +180,29 @@ function refineTypeScript(source, language) {
     if (node.kind === S.EndOfFileToken || start === node.end) return;
     const parent = node.parent;
     let role = 'white';
-    if (node.kind >= S.FirstKeyword && node.kind <= S.LastKeyword) role = 'yellow';
+    if (node.kind >= S.FirstKeyword && node.kind <= S.LastKeyword) role = codeRoles.keyword;
     if (node.kind >= S.FirstTypeNode && node.kind <= S.LastTypeNode ||
         [S.StringKeyword, S.NumberKeyword, S.BooleanKeyword, S.AnyKeyword, S.UnknownKeyword,
-          S.NeverKeyword, S.ObjectKeyword, S.SymbolKeyword, S.BigIntKeyword, S.VoidKeyword].includes(node.kind)) role = 'white';
-    if (node.kind === S.TypeKeyword && ts.isImportClause(parent) && parent.isTypeOnly) role = 'blue';
-    if (node.kind === S.ReadonlyKeyword && ts.isPropertySignature(parent)) role = 'purple';
-    if ((satisfiesType(node) || namedTupleMember(node)) &&
-        node.kind >= S.FirstKeyword && node.kind <= S.LastKeyword) role = 'yellow';
-    if (node.kind === S.AssertsKeyword && ts.isTypePredicateNode(parent) && parent.assertsModifier) role = 'white';
+          S.NeverKeyword, S.ObjectKeyword, S.SymbolKeyword, S.BigIntKeyword, S.VoidKeyword].includes(node.kind)) role = codeRoles.type;
+    if (node.kind === S.VoidKeyword) role = codeRoles.keyword;
+    if ([S.TrueKeyword, S.FalseKeyword].includes(node.kind)) role = 'yellow';
+    if (node.kind === S.NullKeyword) role = 'orange';
+    if (node.kind === S.AsKeyword) role = codeRoles.binding;
+    if (node.kind === S.TypeKeyword && ts.isImportClause(parent) && parent.isTypeOnly) role = codeRoles.keyword;
     if (node.kind >= S.FirstPunctuation && node.kind <= S.LastPunctuation &&
         ![S.OpenBraceToken, S.CloseBraceToken, S.OpenParenToken, S.CloseParenToken,
           S.OpenBracketToken, S.CloseBracketToken, S.DotToken, S.SemicolonToken, S.CommaToken,
           S.ColonToken].includes(node.kind)) role = 'operator';
     if (node.kind === S.DotDotDotToken) role = 'purple';
     if (node.kind === S.QuestionDotToken) role = 'white';
+    if (node.kind === S.AtToken && ts.isDecorator(parent)) role = codeRoles.annotation;
     if (inJsxTag(node)) role = 'brown';
-    if (node.kind === S.ConstructorKeyword ||
-        [S.GetKeyword, S.SetKeyword].includes(node.kind) &&
-        (ts.isMethodDeclaration(parent) || ts.isObjectLiteralExpression(parent.parent))) role = 'purple';
-    if (node.kind === S.AsteriskToken && (ts.isFunctionLike(parent) || ts.isNamespaceImport(parent) || ts.isExportDeclaration(parent))) role = 'yellow';
+    if (node.kind === S.ConstructorKeyword && ts.isConstructorDeclaration(parent)) {
+      role = codeRoles.method;
+    }
+    if (node.kind === S.AsteriskToken && ts.isFunctionLike(parent)) role = codeRoles.keyword;
+    if (node.kind === S.AsteriskToken &&
+        (ts.isNamespaceImport(parent) || ts.isExportDeclaration(parent))) role = 'yellow';
     if (ts.isJsxAttribute(parent) && node.kind === S.EqualsToken) role = 'white';
     if ((ts.isJsxOpeningElement(parent) || ts.isJsxClosingElement(parent) ||
         ts.isJsxSelfClosingElement(parent) || ts.isJsxOpeningFragment(parent) ||

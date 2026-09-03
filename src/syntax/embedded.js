@@ -12,18 +12,44 @@ async function refineEmbedded(source, language, refine) {
       const node = stack.pop(); nodes.push(node); stack.push(...node.namedChildren);
     }
     const script = nodes.filter((node) => node.type === 'raw_text' && node.parent.type === 'script_element');
-    // SFC template expressions share script declarations but do not execute code.
-    const declarations = script.map((node) => node.text).join('\n');
+    const style = nodes.filter((node) => node.type === 'raw_text' && node.parent.type === 'style_element');
     function scriptMode(node) {
       const tag = node.parent.namedChildren.find((child) => child.type === 'start_tag')?.text ?? '';
-      if (/\btype\s*=\s*["'](?:application\/(?:ld\+)?json|text\/plain)["']/.test(tag)) return undefined;
-      return /\blang\s*=\s*["']tsx?["']/.test(tag) ? 'typescript' : 'javascript';
+      if (/\btype\s*=\s*["']application\/(?:ld\+)?json["']/.test(tag)) return 'json';
+      if (/\btype\s*=\s*["']text\/plain["']/.test(tag)) return undefined;
+      const mode = /\blang\s*=\s*["'](jsx|tsx?|javascript|typescript)["']/.exec(tag)?.[1];
+      return { jsx: 'javascriptreact', ts: 'typescript', tsx: 'typescriptreact',
+        javascript: 'javascript', typescript: 'typescript' }[mode] ?? 'javascript';
     }
-    for (const node of script) {
-      const mode = scriptMode(node);
+    const scriptRegions = script.map((node) => ({ node, mode: scriptMode(node) }));
+    // SFC template expressions share script declarations but do not execute code.
+    const declarations = scriptRegions
+      .filter(({ mode }) => mode?.includes('script'))
+      .map(({ node }) => node.text)
+      .join('\n');
+    for (const { node, mode } of scriptRegions) {
       if (!mode) continue;
-      for (const span of refineTypeScript(node.text, mode)) {
+      const refined = mode === 'json' ? await refine(node.text, mode) : refineTypeScript(node.text, mode);
+      for (const span of refined) {
         spans.add(node.startIndex + span.start, node.startIndex + span.end, span.role, 20);
+      }
+    }
+    for (const node of style) {
+      const tag = node.parent.namedChildren.find((child) => child.type === 'start_tag')?.text ?? '';
+      const mode = /\blang\s*=\s*["'](sass|scss)["']/.exec(tag)?.[1] ?? 'css';
+      for (const span of await refine(node.text, mode)) {
+        spans.add(node.startIndex + span.start, node.startIndex + span.end,
+          span.role, 20, span.fontStyle);
+      }
+    }
+    const embeddedJson = nodes.filter((node) => node.type === 'text' && node.parent.type === 'element' &&
+      /^<i18n\b[^>]*\blang\s*=\s*["']json["']/i.test(
+        node.parent.namedChildren.find((child) => child.type === 'start_tag')?.text ?? '',
+      ));
+    for (const node of embeddedJson) {
+      for (const span of await refine(node.text, 'json')) {
+        spans.add(node.startIndex + span.start, node.startIndex + span.end,
+          span.role, 20, span.fontStyle);
       }
     }
     const ancestor = (node, predicate) => {

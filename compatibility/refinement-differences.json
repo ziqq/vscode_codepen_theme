@@ -1,4 +1,5669 @@
 {
-  "description": "No exceptions. Every recorded nonblank classic CodePen span must match the contextual refinement exactly.",
-  "differences": []
+  "description": "Reviewed deviations from the measured classic CodePen JS/TS palette introduced by the adapted GitHub-style role hierarchy.",
+  "differences": [
+    {
+      "case": "javascript-bindings",
+      "line": 1,
+      "start": 0,
+      "text": "const",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "javascript-bindings",
+      "line": 1,
+      "start": 6,
+      "text": "globalValue",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "javascript-bindings",
+      "line": 2,
+      "start": 0,
+      "text": "let",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "javascript-bindings",
+      "line": 2,
+      "start": 4,
+      "text": "mutable",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "javascript-bindings",
+      "line": 3,
+      "start": 0,
+      "text": "var",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "javascript-bindings",
+      "line": 3,
+      "start": 4,
+      "text": "legacy",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "javascript-bindings",
+      "line": 4,
+      "start": 0,
+      "text": "function",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "javascript-bindings",
+      "line": 4,
+      "start": 9,
+      "text": "outer",
+      "actual": "#9a8297",
+      "reason": "The adapted hierarchy assigns functions, methods, callback parameters, and enum members to CodePen purple."
+    },
+    {
+      "case": "javascript-bindings",
+      "line": 4,
+      "start": 15,
+      "text": "parameter",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "javascript-bindings",
+      "line": 5,
+      "start": 2,
+      "text": "const",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "javascript-bindings",
+      "line": 5,
+      "start": 8,
+      "text": "local",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "javascript-bindings",
+      "line": 5,
+      "start": 16,
+      "text": "parameter",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "javascript-bindings",
+      "line": 6,
+      "start": 2,
+      "text": "if",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "javascript-bindings",
+      "line": 6,
+      "start": 6,
+      "text": "local",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "javascript-bindings",
+      "line": 6,
+      "start": 15,
+      "text": "let",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "javascript-bindings",
+      "line": 6,
+      "start": 19,
+      "text": "nested",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "javascript-bindings",
+      "line": 6,
+      "start": 28,
+      "text": "local",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "javascript-bindings",
+      "line": 6,
+      "start": 45,
+      "text": "nested",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "javascript-bindings",
+      "line": 7,
+      "start": 2,
+      "text": "return",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "javascript-bindings",
+      "line": 7,
+      "start": 15,
+      "text": "local",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "javascript-members",
+      "line": 1,
+      "start": 0,
+      "text": "class",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "javascript-members",
+      "line": 1,
+      "start": 6,
+      "text": "Base",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "javascript-members",
+      "line": 2,
+      "start": 0,
+      "text": "class",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "javascript-members",
+      "line": 2,
+      "start": 6,
+      "text": "Derived",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "javascript-members",
+      "line": 2,
+      "start": 14,
+      "text": "extends",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "javascript-members",
+      "line": 3,
+      "start": 2,
+      "text": "get",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "javascript-members",
+      "line": 3,
+      "start": 16,
+      "text": "return",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "javascript-members",
+      "line": 3,
+      "start": 23,
+      "text": "this",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "javascript-members",
+      "line": 4,
+      "start": 2,
+      "text": "set",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "javascript-members",
+      "line": 4,
+      "start": 12,
+      "text": "next",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "javascript-members",
+      "line": 4,
+      "start": 20,
+      "text": "this",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "javascript-members",
+      "line": 4,
+      "start": 33,
+      "text": "next",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "javascript-members",
+      "line": 5,
+      "start": 9,
+      "text": "step",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "javascript-members",
+      "line": 5,
+      "start": 17,
+      "text": "return",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "javascript-members",
+      "line": 5,
+      "start": 24,
+      "text": "this",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "javascript-members",
+      "line": 5,
+      "start": 37,
+      "text": "step",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "javascript-members",
+      "line": 7,
+      "start": 0,
+      "text": "const",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "javascript-members",
+      "line": 7,
+      "start": 6,
+      "text": "instance",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "javascript-members",
+      "line": 7,
+      "start": 17,
+      "text": "new",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "javascript-literals",
+      "line": 1,
+      "start": 0,
+      "text": "const",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "javascript-literals",
+      "line": 1,
+      "start": 6,
+      "text": "name",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "javascript-literals",
+      "line": 2,
+      "start": 0,
+      "text": "const",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "javascript-literals",
+      "line": 2,
+      "start": 6,
+      "text": "single",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "javascript-literals",
+      "line": 3,
+      "start": 0,
+      "text": "const",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "javascript-literals",
+      "line": 3,
+      "start": 6,
+      "text": "double",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "javascript-literals",
+      "line": 4,
+      "start": 0,
+      "text": "const",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "javascript-literals",
+      "line": 4,
+      "start": 6,
+      "text": "template",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "javascript-literals",
+      "line": 5,
+      "start": 0,
+      "text": "const",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "javascript-literals",
+      "line": 5,
+      "start": 6,
+      "text": "regexp",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "javascript-literals",
+      "line": 6,
+      "start": 0,
+      "text": "const",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "javascript-literals",
+      "line": 6,
+      "start": 6,
+      "text": "values",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "javascript-literals",
+      "line": 7,
+      "start": 0,
+      "text": "const",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "javascript-literals",
+      "line": 7,
+      "start": 6,
+      "text": "flags",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "javascript-destructuring",
+      "line": 1,
+      "start": 0,
+      "text": "const",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "javascript-destructuring",
+      "line": 1,
+      "start": 6,
+      "text": "data",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "javascript-destructuring",
+      "line": 2,
+      "start": 0,
+      "text": "const",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "javascript-destructuring",
+      "line": 2,
+      "start": 8,
+      "text": "name",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "javascript-destructuring",
+      "line": 2,
+      "start": 21,
+      "text": "total",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "javascript-destructuring",
+      "line": 2,
+      "start": 31,
+      "text": "rest",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "javascript-destructuring",
+      "line": 3,
+      "start": 0,
+      "text": "const",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "javascript-destructuring",
+      "line": 3,
+      "start": 7,
+      "text": "first",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "javascript-destructuring",
+      "line": 3,
+      "start": 17,
+      "text": "tail",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "javascript-destructuring",
+      "line": 4,
+      "start": 0,
+      "text": "function",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "javascript-destructuring",
+      "line": 4,
+      "start": 9,
+      "text": "use",
+      "actual": "#9a8297",
+      "reason": "The adapted hierarchy assigns functions, methods, callback parameters, and enum members to CodePen purple."
+    },
+    {
+      "case": "javascript-destructuring",
+      "line": 4,
+      "start": 21,
+      "text": "label",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "javascript-destructuring",
+      "line": 4,
+      "start": 33,
+      "text": "values",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "javascript-destructuring",
+      "line": 4,
+      "start": 43,
+      "text": "return",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "javascript-destructuring",
+      "line": 4,
+      "start": 50,
+      "text": "label",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "javascript-destructuring",
+      "line": 4,
+      "start": 58,
+      "text": "values",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "javascript-destructuring",
+      "line": 5,
+      "start": 0,
+      "text": "const",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "javascript-destructuring",
+      "line": 5,
+      "start": 6,
+      "text": "object",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "javascript-destructuring",
+      "line": 5,
+      "start": 30,
+      "text": "value",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "javascript-destructuring",
+      "line": 5,
+      "start": 39,
+      "text": "return",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "javascript-destructuring",
+      "line": 5,
+      "start": 46,
+      "text": "value",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "javascript-builtins",
+      "line": 1,
+      "start": 0,
+      "text": "const",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "javascript-builtins",
+      "line": 1,
+      "start": 6,
+      "text": "date",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "javascript-builtins",
+      "line": 1,
+      "start": 13,
+      "text": "new",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "javascript-builtins",
+      "line": 2,
+      "start": 0,
+      "text": "const",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "javascript-builtins",
+      "line": 2,
+      "start": 6,
+      "text": "map",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "javascript-builtins",
+      "line": 2,
+      "start": 12,
+      "text": "new",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "javascript-builtins",
+      "line": 3,
+      "start": 0,
+      "text": "const",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "javascript-builtins",
+      "line": 3,
+      "start": 6,
+      "text": "value",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "javascript-builtins",
+      "line": 4,
+      "start": 0,
+      "text": "const",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "javascript-builtins",
+      "line": 4,
+      "start": 6,
+      "text": "json",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "javascript-builtins",
+      "line": 5,
+      "start": 0,
+      "text": "const",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "javascript-builtins",
+      "line": 5,
+      "start": 6,
+      "text": "matches",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "javascript-builtins",
+      "line": 6,
+      "start": 28,
+      "text": "result",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "javascript-builtins",
+      "line": 6,
+      "start": 50,
+      "text": "result",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "javascript-async-docs",
+      "line": 2,
+      "start": 0,
+      "text": "async",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "javascript-async-docs",
+      "line": 2,
+      "start": 6,
+      "text": "function",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "javascript-async-docs",
+      "line": 2,
+      "start": 15,
+      "text": "read",
+      "actual": "#9a8297",
+      "reason": "The adapted hierarchy assigns functions, methods, callback parameters, and enum members to CodePen purple."
+    },
+    {
+      "case": "javascript-async-docs",
+      "line": 2,
+      "start": 20,
+      "text": "value",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "javascript-async-docs",
+      "line": 2,
+      "start": 29,
+      "text": "return",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "javascript-async-docs",
+      "line": 2,
+      "start": 36,
+      "text": "await",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "javascript-async-docs",
+      "line": 2,
+      "start": 58,
+      "text": "value",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "javascript-async-docs",
+      "line": 3,
+      "start": 0,
+      "text": "function*",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "javascript-async-docs",
+      "line": 3,
+      "start": 10,
+      "text": "items",
+      "actual": "#9a8297",
+      "reason": "The adapted hierarchy assigns functions, methods, callback parameters, and enum members to CodePen purple."
+    },
+    {
+      "case": "javascript-async-docs",
+      "line": 3,
+      "start": 20,
+      "text": "yield",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "javascript-async-docs",
+      "line": 4,
+      "start": 0,
+      "text": "const",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "javascript-async-docs",
+      "line": 4,
+      "start": 6,
+      "text": "arrow",
+      "actual": "#9a8297",
+      "reason": "The adapted hierarchy assigns functions, methods, callable references, and callable invocations to CodePen purple."
+    },
+    {
+      "case": "javascript-async-docs",
+      "line": 4,
+      "start": 15,
+      "text": "value",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "javascript-async-docs",
+      "line": 4,
+      "start": 29,
+      "text": "value",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "type-and-class-contexts",
+      "line": 1,
+      "start": 0,
+      "text": "type",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "type-and-class-contexts",
+      "line": 1,
+      "start": 5,
+      "text": "Alias",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "type-and-class-contexts",
+      "line": 1,
+      "start": 13,
+      "text": "string",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "type-and-class-contexts",
+      "line": 1,
+      "start": 22,
+      "text": "number",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "type-and-class-contexts",
+      "line": 2,
+      "start": 0,
+      "text": "interface",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "type-and-class-contexts",
+      "line": 2,
+      "start": 10,
+      "text": "Shape",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "type-and-class-contexts",
+      "line": 2,
+      "start": 24,
+      "text": "string",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "type-and-class-contexts",
+      "line": 2,
+      "start": 36,
+      "text": "value",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "type-and-class-contexts",
+      "line": 2,
+      "start": 43,
+      "text": "number",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "type-and-class-contexts",
+      "line": 2,
+      "start": 52,
+      "text": "number",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "type-and-class-contexts",
+      "line": 3,
+      "start": 0,
+      "text": "class",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "type-and-class-contexts",
+      "line": 3,
+      "start": 6,
+      "text": "Counter",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "type-and-class-contexts",
+      "line": 5,
+      "start": 14,
+      "text": "public",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "type-and-class-contexts",
+      "line": 5,
+      "start": 21,
+      "text": "name",
+      "actual": "#9a8297",
+      "reason": "The adapted hierarchy assigns properties and field access to CodePen purple."
+    },
+    {
+      "case": "type-and-class-contexts",
+      "line": 5,
+      "start": 27,
+      "text": "string",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "type-and-class-contexts",
+      "line": 6,
+      "start": 12,
+      "text": "step",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "type-and-class-contexts",
+      "line": 6,
+      "start": 18,
+      "text": "number",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "type-and-class-contexts",
+      "line": 6,
+      "start": 27,
+      "text": "number",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "type-and-class-contexts",
+      "line": 6,
+      "start": 36,
+      "text": "return",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "type-and-class-contexts",
+      "line": 6,
+      "start": 43,
+      "text": "this",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "type-and-class-contexts",
+      "line": 6,
+      "start": 56,
+      "text": "step",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "type-and-class-contexts",
+      "line": 8,
+      "start": 0,
+      "text": "const",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "type-and-class-contexts",
+      "line": 8,
+      "start": 6,
+      "text": "counter",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "type-and-class-contexts",
+      "line": 8,
+      "start": 15,
+      "text": "Counter",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "type-and-class-contexts",
+      "line": 8,
+      "start": 25,
+      "text": "new",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "bindings-and-blocks",
+      "line": 1,
+      "start": 0,
+      "text": "const",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "bindings-and-blocks",
+      "line": 1,
+      "start": 6,
+      "text": "globalValue",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "bindings-and-blocks",
+      "line": 2,
+      "start": 0,
+      "text": "let",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "bindings-and-blocks",
+      "line": 2,
+      "start": 4,
+      "text": "mutable",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "bindings-and-blocks",
+      "line": 3,
+      "start": 0,
+      "text": "var",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "bindings-and-blocks",
+      "line": 3,
+      "start": 4,
+      "text": "legacy",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "bindings-and-blocks",
+      "line": 4,
+      "start": 0,
+      "text": "function",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "bindings-and-blocks",
+      "line": 4,
+      "start": 9,
+      "text": "outer",
+      "actual": "#9a8297",
+      "reason": "The adapted hierarchy assigns functions, methods, callback parameters, and enum members to CodePen purple."
+    },
+    {
+      "case": "bindings-and-blocks",
+      "line": 4,
+      "start": 15,
+      "text": "parameter",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "bindings-and-blocks",
+      "line": 5,
+      "start": 2,
+      "text": "const",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "bindings-and-blocks",
+      "line": 5,
+      "start": 8,
+      "text": "local",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "bindings-and-blocks",
+      "line": 5,
+      "start": 16,
+      "text": "parameter",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "bindings-and-blocks",
+      "line": 6,
+      "start": 2,
+      "text": "if",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "bindings-and-blocks",
+      "line": 6,
+      "start": 6,
+      "text": "local",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "bindings-and-blocks",
+      "line": 6,
+      "start": 15,
+      "text": "let",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "bindings-and-blocks",
+      "line": 6,
+      "start": 19,
+      "text": "nested",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "bindings-and-blocks",
+      "line": 6,
+      "start": 28,
+      "text": "local",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "bindings-and-blocks",
+      "line": 6,
+      "start": 45,
+      "text": "nested",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "bindings-and-blocks",
+      "line": 7,
+      "start": 2,
+      "text": "return",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "bindings-and-blocks",
+      "line": 7,
+      "start": 15,
+      "text": "local",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "functions-and-methods",
+      "line": 1,
+      "start": 0,
+      "text": "function",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "functions-and-methods",
+      "line": 1,
+      "start": 9,
+      "text": "declared",
+      "actual": "#9a8297",
+      "reason": "The adapted hierarchy assigns functions, methods, callback parameters, and enum members to CodePen purple."
+    },
+    {
+      "case": "functions-and-methods",
+      "line": 1,
+      "start": 18,
+      "text": "value",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "functions-and-methods",
+      "line": 1,
+      "start": 25,
+      "text": "number",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "functions-and-methods",
+      "line": 1,
+      "start": 34,
+      "text": "number",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "functions-and-methods",
+      "line": 1,
+      "start": 43,
+      "text": "return",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "functions-and-methods",
+      "line": 1,
+      "start": 50,
+      "text": "value",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "functions-and-methods",
+      "line": 2,
+      "start": 0,
+      "text": "const",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "functions-and-methods",
+      "line": 2,
+      "start": 6,
+      "text": "arrow",
+      "actual": "#9a8297",
+      "reason": "The adapted hierarchy assigns functions, methods, callable references, and callable invocations to CodePen purple."
+    },
+    {
+      "case": "functions-and-methods",
+      "line": 2,
+      "start": 15,
+      "text": "value",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "functions-and-methods",
+      "line": 2,
+      "start": 22,
+      "text": "number",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "functions-and-methods",
+      "line": 2,
+      "start": 33,
+      "text": "value",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "functions-and-methods",
+      "line": 3,
+      "start": 0,
+      "text": "const",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "functions-and-methods",
+      "line": 3,
+      "start": 6,
+      "text": "named",
+      "actual": "#9a8297",
+      "reason": "The adapted hierarchy assigns functions, methods, callable references, and callable invocations to CodePen purple."
+    },
+    {
+      "case": "functions-and-methods",
+      "line": 3,
+      "start": 14,
+      "text": "function",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "functions-and-methods",
+      "line": 3,
+      "start": 23,
+      "text": "inner",
+      "actual": "#9a8297",
+      "reason": "The adapted hierarchy assigns functions, methods, callback parameters, and enum members to CodePen purple."
+    },
+    {
+      "case": "functions-and-methods",
+      "line": 3,
+      "start": 29,
+      "text": "value",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "functions-and-methods",
+      "line": 3,
+      "start": 36,
+      "text": "number",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "functions-and-methods",
+      "line": 3,
+      "start": 46,
+      "text": "return",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "functions-and-methods",
+      "line": 3,
+      "start": 59,
+      "text": "value",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "functions-and-methods",
+      "line": 4,
+      "start": 0,
+      "text": "const",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "functions-and-methods",
+      "line": 4,
+      "start": 6,
+      "text": "object",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "functions-and-methods",
+      "line": 4,
+      "start": 24,
+      "text": "value",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "functions-and-methods",
+      "line": 4,
+      "start": 31,
+      "text": "number",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "functions-and-methods",
+      "line": 4,
+      "start": 41,
+      "text": "return",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "functions-and-methods",
+      "line": 4,
+      "start": 48,
+      "text": "value",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "functions-and-methods",
+      "line": 4,
+      "start": 66,
+      "text": "x",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "functions-and-methods",
+      "line": 4,
+      "start": 69,
+      "text": "number",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "functions-and-methods",
+      "line": 4,
+      "start": 80,
+      "text": "x",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "functions-and-methods",
+      "line": 7,
+      "start": 0,
+      "text": "async",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "functions-and-methods",
+      "line": 7,
+      "start": 6,
+      "text": "function",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "functions-and-methods",
+      "line": 7,
+      "start": 15,
+      "text": "task",
+      "actual": "#9a8297",
+      "reason": "The adapted hierarchy assigns functions, methods, callback parameters, and enum members to CodePen purple."
+    },
+    {
+      "case": "functions-and-methods",
+      "line": 7,
+      "start": 20,
+      "text": "value",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "functions-and-methods",
+      "line": 7,
+      "start": 27,
+      "text": "Promise",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "functions-and-methods",
+      "line": 7,
+      "start": 35,
+      "text": "number",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "functions-and-methods",
+      "line": 7,
+      "start": 46,
+      "text": "return",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "functions-and-methods",
+      "line": 7,
+      "start": 53,
+      "text": "await",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "functions-and-methods",
+      "line": 7,
+      "start": 59,
+      "text": "value",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "functions-and-methods",
+      "line": 8,
+      "start": 0,
+      "text": "function*",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "functions-and-methods",
+      "line": 8,
+      "start": 10,
+      "text": "sequence",
+      "actual": "#9a8297",
+      "reason": "The adapted hierarchy assigns functions, methods, callback parameters, and enum members to CodePen purple."
+    },
+    {
+      "case": "functions-and-methods",
+      "line": 8,
+      "start": 23,
+      "text": "yield",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "types-and-generics",
+      "line": 1,
+      "start": 0,
+      "text": "type",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "types-and-generics",
+      "line": 1,
+      "start": 5,
+      "text": "Name",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "types-and-generics",
+      "line": 1,
+      "start": 12,
+      "text": "string",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "types-and-generics",
+      "line": 2,
+      "start": 0,
+      "text": "type",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "types-and-generics",
+      "line": 2,
+      "start": 5,
+      "text": "Shape",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "types-and-generics",
+      "line": 2,
+      "start": 11,
+      "text": "T",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "types-and-generics",
+      "line": 2,
+      "start": 18,
+      "text": "readonly",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "types-and-generics",
+      "line": 2,
+      "start": 35,
+      "text": "T",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "types-and-generics",
+      "line": 2,
+      "start": 45,
+      "text": "Array",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "types-and-generics",
+      "line": 2,
+      "start": 51,
+      "text": "T",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "types-and-generics",
+      "line": 3,
+      "start": 0,
+      "text": "interface",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "types-and-generics",
+      "line": 3,
+      "start": 10,
+      "text": "Box",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "types-and-generics",
+      "line": 3,
+      "start": 14,
+      "text": "T",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "types-and-generics",
+      "line": 3,
+      "start": 16,
+      "text": "extends",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "types-and-generics",
+      "line": 3,
+      "start": 24,
+      "text": "object",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "types-and-generics",
+      "line": 3,
+      "start": 41,
+      "text": "T",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "types-and-generics",
+      "line": 4,
+      "start": 0,
+      "text": "type",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "types-and-generics",
+      "line": 4,
+      "start": 5,
+      "text": "Choice",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "types-and-generics",
+      "line": 4,
+      "start": 14,
+      "text": "Name",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "types-and-generics",
+      "line": 4,
+      "start": 21,
+      "text": "number",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "types-and-generics",
+      "line": 5,
+      "start": 0,
+      "text": "type",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "types-and-generics",
+      "line": 5,
+      "start": 5,
+      "text": "Joined",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "types-and-generics",
+      "line": 5,
+      "start": 14,
+      "text": "Box",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "types-and-generics",
+      "line": 5,
+      "start": 18,
+      "text": "object",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "types-and-generics",
+      "line": 5,
+      "start": 36,
+      "text": "Name",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "types-and-generics",
+      "line": 6,
+      "start": 0,
+      "text": "function",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "types-and-generics",
+      "line": 6,
+      "start": 9,
+      "text": "identity",
+      "actual": "#9a8297",
+      "reason": "The adapted hierarchy assigns functions, methods, callback parameters, and enum members to CodePen purple."
+    },
+    {
+      "case": "types-and-generics",
+      "line": 6,
+      "start": 18,
+      "text": "T",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "types-and-generics",
+      "line": 6,
+      "start": 21,
+      "text": "value",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "types-and-generics",
+      "line": 6,
+      "start": 28,
+      "text": "T",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "types-and-generics",
+      "line": 6,
+      "start": 32,
+      "text": "T",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "types-and-generics",
+      "line": 6,
+      "start": 36,
+      "text": "return",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "types-and-generics",
+      "line": 6,
+      "start": 43,
+      "text": "value",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "types-and-generics",
+      "line": 7,
+      "start": 0,
+      "text": "const",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "types-and-generics",
+      "line": 7,
+      "start": 6,
+      "text": "answer",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "types-and-generics",
+      "line": 7,
+      "start": 24,
+      "text": "number",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "types-and-generics",
+      "line": 8,
+      "start": 0,
+      "text": "type",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "types-and-generics",
+      "line": 8,
+      "start": 5,
+      "text": "Handler",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "types-and-generics",
+      "line": 8,
+      "start": 16,
+      "text": "value",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "types-and-generics",
+      "line": 8,
+      "start": 23,
+      "text": "number",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "types-and-generics",
+      "line": 8,
+      "start": 34,
+      "text": "void",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "types-and-generics",
+      "line": 9,
+      "start": 0,
+      "text": "let",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "types-and-generics",
+      "line": 9,
+      "start": 4,
+      "text": "tuple",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "types-and-generics",
+      "line": 9,
+      "start": 12,
+      "text": "Name",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "types-and-generics",
+      "line": 9,
+      "start": 18,
+      "text": "number",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "enums-and-namespaces",
+      "line": 1,
+      "start": 0,
+      "text": "enum",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "enums-and-namespaces",
+      "line": 1,
+      "start": 5,
+      "text": "Mode",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "enums-and-namespaces",
+      "line": 1,
+      "start": 12,
+      "text": "Dark",
+      "actual": "#9a8297",
+      "reason": "The adapted hierarchy assigns enum members to CodePen purple."
+    },
+    {
+      "case": "enums-and-namespaces",
+      "line": 1,
+      "start": 18,
+      "text": "Light",
+      "actual": "#9a8297",
+      "reason": "The adapted hierarchy assigns enum members to CodePen purple."
+    },
+    {
+      "case": "enums-and-namespaces",
+      "line": 2,
+      "start": 0,
+      "text": "const",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "enums-and-namespaces",
+      "line": 2,
+      "start": 6,
+      "text": "enum",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "enums-and-namespaces",
+      "line": 2,
+      "start": 11,
+      "text": "Flag",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "enums-and-namespaces",
+      "line": 2,
+      "start": 18,
+      "text": "Ready",
+      "actual": "#9a8297",
+      "reason": "The adapted hierarchy assigns enum members to CodePen purple."
+    },
+    {
+      "case": "enums-and-namespaces",
+      "line": 3,
+      "start": 0,
+      "text": "namespace",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "enums-and-namespaces",
+      "line": 3,
+      "start": 18,
+      "text": "export",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "enums-and-namespaces",
+      "line": 3,
+      "start": 25,
+      "text": "const",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "enums-and-namespaces",
+      "line": 3,
+      "start": 31,
+      "text": "accent",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "enums-and-namespaces",
+      "line": 4,
+      "start": 0,
+      "text": "let",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "enums-and-namespaces",
+      "line": 4,
+      "start": 4,
+      "text": "mode",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "enums-and-namespaces",
+      "line": 4,
+      "start": 10,
+      "text": "Mode",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "enums-and-namespaces",
+      "line": 5,
+      "start": 0,
+      "text": "const",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "enums-and-namespaces",
+      "line": 5,
+      "start": 6,
+      "text": "flag",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "enums-and-namespaces",
+      "line": 6,
+      "start": 0,
+      "text": "const",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "enums-and-namespaces",
+      "line": 6,
+      "start": 6,
+      "text": "color",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "enums-and-namespaces",
+      "line": 7,
+      "start": 0,
+      "text": "interface",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "enums-and-namespaces",
+      "line": 7,
+      "start": 10,
+      "text": "Palette",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "enums-and-namespaces",
+      "line": 7,
+      "start": 27,
+      "text": "string",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "enums-and-namespaces",
+      "line": 8,
+      "start": 0,
+      "text": "type",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "enums-and-namespaces",
+      "line": 8,
+      "start": 5,
+      "text": "ThemeName",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "enums-and-namespaces",
+      "line": 8,
+      "start": 17,
+      "text": "keyof",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "enums-and-namespaces",
+      "line": 8,
+      "start": 23,
+      "text": "Palette",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "imports-and-exports",
+      "line": 1,
+      "start": 0,
+      "text": "import",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "imports-and-exports",
+      "line": 1,
+      "start": 9,
+      "text": "value",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "imports-and-exports",
+      "line": 1,
+      "start": 16,
+      "text": "value",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "imports-and-exports",
+      "line": 1,
+      "start": 22,
+      "text": "as",
+      "actual": "#ffffff",
+      "reason": "Alias and assertion connectors stay neutral like the value or binding around them."
+    },
+    {
+      "case": "imports-and-exports",
+      "line": 1,
+      "start": 25,
+      "text": "alias",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "imports-and-exports",
+      "line": 1,
+      "start": 33,
+      "text": "from",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "imports-and-exports",
+      "line": 2,
+      "start": 0,
+      "text": "import",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "imports-and-exports",
+      "line": 2,
+      "start": 7,
+      "text": "DefaultValue",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "imports-and-exports",
+      "line": 2,
+      "start": 20,
+      "text": "from",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "imports-and-exports",
+      "line": 3,
+      "start": 0,
+      "text": "import",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "imports-and-exports",
+      "line": 3,
+      "start": 9,
+      "text": "as",
+      "actual": "#ffffff",
+      "reason": "Alias and assertion connectors stay neutral like the value or binding around them."
+    },
+    {
+      "case": "imports-and-exports",
+      "line": 3,
+      "start": 12,
+      "text": "library",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "imports-and-exports",
+      "line": 3,
+      "start": 20,
+      "text": "from",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "imports-and-exports",
+      "line": 4,
+      "start": 0,
+      "text": "import",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "imports-and-exports",
+      "line": 4,
+      "start": 30,
+      "text": "from",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "imports-and-exports",
+      "line": 5,
+      "start": 0,
+      "text": "export",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "imports-and-exports",
+      "line": 5,
+      "start": 7,
+      "text": "type",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "imports-and-exports",
+      "line": 5,
+      "start": 12,
+      "text": "Style",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "imports-and-exports",
+      "line": 5,
+      "start": 20,
+      "text": "CSSProperties",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "imports-and-exports",
+      "line": 6,
+      "start": 0,
+      "text": "export",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "imports-and-exports",
+      "line": 7,
+      "start": 0,
+      "text": "export",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "imports-and-exports",
+      "line": 7,
+      "start": 7,
+      "text": "default",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "imports-and-exports",
+      "line": 7,
+      "start": 15,
+      "text": "function",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "imports-and-exports",
+      "line": 7,
+      "start": 24,
+      "text": "main",
+      "actual": "#9a8297",
+      "reason": "The adapted hierarchy assigns functions, methods, callback parameters, and enum members to CodePen purple."
+    },
+    {
+      "case": "imports-and-exports",
+      "line": 7,
+      "start": 33,
+      "text": "return",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "class-members-and-inheritance",
+      "line": 1,
+      "start": 0,
+      "text": "class",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "class-members-and-inheritance",
+      "line": 1,
+      "start": 6,
+      "text": "Base",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "class-members-and-inheritance",
+      "line": 1,
+      "start": 13,
+      "text": "protected",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "class-members-and-inheritance",
+      "line": 2,
+      "start": 0,
+      "text": "class",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "class-members-and-inheritance",
+      "line": 2,
+      "start": 6,
+      "text": "Derived",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "class-members-and-inheritance",
+      "line": 2,
+      "start": 14,
+      "text": "extends",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "class-members-and-inheritance",
+      "line": 2,
+      "start": 22,
+      "text": "Base",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "class-members-and-inheritance",
+      "line": 3,
+      "start": 2,
+      "text": "static",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "class-members-and-inheritance",
+      "line": 3,
+      "start": 9,
+      "text": "readonly",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "class-members-and-inheritance",
+      "line": 4,
+      "start": 2,
+      "text": "private",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "class-members-and-inheritance",
+      "line": 4,
+      "start": 17,
+      "text": "number",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "class-members-and-inheritance",
+      "line": 5,
+      "start": 2,
+      "text": "get",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "class-members-and-inheritance",
+      "line": 5,
+      "start": 15,
+      "text": "string",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "class-members-and-inheritance",
+      "line": 5,
+      "start": 24,
+      "text": "return",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "class-members-and-inheritance",
+      "line": 5,
+      "start": 31,
+      "text": "this",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "class-members-and-inheritance",
+      "line": 6,
+      "start": 2,
+      "text": "set",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "class-members-and-inheritance",
+      "line": 6,
+      "start": 12,
+      "text": "value",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "class-members-and-inheritance",
+      "line": 6,
+      "start": 19,
+      "text": "string",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "class-members-and-inheritance",
+      "line": 6,
+      "start": 29,
+      "text": "this",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "class-members-and-inheritance",
+      "line": 6,
+      "start": 49,
+      "text": "value",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "class-members-and-inheritance",
+      "line": 7,
+      "start": 6,
+      "text": "step",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "class-members-and-inheritance",
+      "line": 7,
+      "start": 12,
+      "text": "number",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "class-members-and-inheritance",
+      "line": 7,
+      "start": 22,
+      "text": "return",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "class-members-and-inheritance",
+      "line": 7,
+      "start": 29,
+      "text": "super",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "class-members-and-inheritance",
+      "line": 7,
+      "start": 43,
+      "text": "step",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "class-members-and-inheritance",
+      "line": 9,
+      "start": 0,
+      "text": "const",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "class-members-and-inheritance",
+      "line": 9,
+      "start": 6,
+      "text": "instance",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "class-members-and-inheritance",
+      "line": 9,
+      "start": 16,
+      "text": "Derived",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "class-members-and-inheritance",
+      "line": 9,
+      "start": 26,
+      "text": "new",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "destructuring-and-rest",
+      "line": 1,
+      "start": 0,
+      "text": "const",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "destructuring-and-rest",
+      "line": 1,
+      "start": 6,
+      "text": "data",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "destructuring-and-rest",
+      "line": 2,
+      "start": 0,
+      "text": "const",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "destructuring-and-rest",
+      "line": 2,
+      "start": 8,
+      "text": "name",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "destructuring-and-rest",
+      "line": 2,
+      "start": 21,
+      "text": "total",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "destructuring-and-rest",
+      "line": 2,
+      "start": 31,
+      "text": "rest",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "destructuring-and-rest",
+      "line": 3,
+      "start": 0,
+      "text": "const",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "destructuring-and-rest",
+      "line": 3,
+      "start": 7,
+      "text": "first",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "destructuring-and-rest",
+      "line": 3,
+      "start": 14,
+      "text": "second",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "destructuring-and-rest",
+      "line": 3,
+      "start": 29,
+      "text": "tail",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "destructuring-and-rest",
+      "line": 4,
+      "start": 0,
+      "text": "function",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "destructuring-and-rest",
+      "line": 4,
+      "start": 9,
+      "text": "use",
+      "actual": "#9a8297",
+      "reason": "The adapted hierarchy assigns functions, methods, callback parameters, and enum members to CodePen purple."
+    },
+    {
+      "case": "destructuring-and-rest",
+      "line": 4,
+      "start": 21,
+      "text": "label",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "destructuring-and-rest",
+      "line": 4,
+      "start": 38,
+      "text": "string",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "destructuring-and-rest",
+      "line": 4,
+      "start": 51,
+      "text": "values",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "destructuring-and-rest",
+      "line": 4,
+      "start": 59,
+      "text": "number",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "destructuring-and-rest",
+      "line": 5,
+      "start": 2,
+      "text": "const",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "destructuring-and-rest",
+      "line": 5,
+      "start": 10,
+      "text": "length",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "destructuring-and-rest",
+      "line": 5,
+      "start": 21,
+      "text": "values",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "destructuring-and-rest",
+      "line": 6,
+      "start": 2,
+      "text": "return",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "destructuring-and-rest",
+      "line": 6,
+      "start": 9,
+      "text": "label",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "destructuring-and-rest",
+      "line": 6,
+      "start": 17,
+      "text": "length",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "destructuring-and-rest",
+      "line": 8,
+      "start": 0,
+      "text": "const",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "destructuring-and-rest",
+      "line": 8,
+      "start": 6,
+      "text": "clone",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "literals-and-interpolation",
+      "line": 1,
+      "start": 0,
+      "text": "const",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "literals-and-interpolation",
+      "line": 1,
+      "start": 6,
+      "text": "name",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "literals-and-interpolation",
+      "line": 2,
+      "start": 0,
+      "text": "const",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "literals-and-interpolation",
+      "line": 2,
+      "start": 6,
+      "text": "single",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "literals-and-interpolation",
+      "line": 3,
+      "start": 0,
+      "text": "const",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "literals-and-interpolation",
+      "line": 3,
+      "start": 6,
+      "text": "double",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "literals-and-interpolation",
+      "line": 4,
+      "start": 0,
+      "text": "const",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "literals-and-interpolation",
+      "line": 4,
+      "start": 6,
+      "text": "template",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "literals-and-interpolation",
+      "line": 5,
+      "start": 0,
+      "text": "const",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "literals-and-interpolation",
+      "line": 5,
+      "start": 6,
+      "text": "regexp",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "literals-and-interpolation",
+      "line": 6,
+      "start": 0,
+      "text": "const",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "literals-and-interpolation",
+      "line": 6,
+      "start": 6,
+      "text": "values",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "literals-and-interpolation",
+      "line": 7,
+      "start": 0,
+      "text": "const",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "literals-and-interpolation",
+      "line": 7,
+      "start": 6,
+      "text": "flags",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "operators-and-control",
+      "line": 1,
+      "start": 0,
+      "text": "function",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "operators-and-control",
+      "line": 1,
+      "start": 9,
+      "text": "choose",
+      "actual": "#9a8297",
+      "reason": "The adapted hierarchy assigns functions, methods, callback parameters, and enum members to CodePen purple."
+    },
+    {
+      "case": "operators-and-control",
+      "line": 1,
+      "start": 16,
+      "text": "value",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "operators-and-control",
+      "line": 1,
+      "start": 23,
+      "text": "unknown",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "operators-and-control",
+      "line": 1,
+      "start": 32,
+      "text": "fallback",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "operators-and-control",
+      "line": 1,
+      "start": 42,
+      "text": "string",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "operators-and-control",
+      "line": 2,
+      "start": 2,
+      "text": "if",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "operators-and-control",
+      "line": 2,
+      "start": 6,
+      "text": "typeof",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "operators-and-control",
+      "line": 2,
+      "start": 13,
+      "text": "value",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "operators-and-control",
+      "line": 2,
+      "start": 35,
+      "text": "value",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "operators-and-control",
+      "line": 2,
+      "start": 53,
+      "text": "return",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "operators-and-control",
+      "line": 2,
+      "start": 60,
+      "text": "value",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "operators-and-control",
+      "line": 3,
+      "start": 2,
+      "text": "const",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "operators-and-control",
+      "line": 3,
+      "start": 8,
+      "text": "result",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "operators-and-control",
+      "line": 3,
+      "start": 17,
+      "text": "value",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "operators-and-control",
+      "line": 3,
+      "start": 26,
+      "text": "fallback",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "operators-and-control",
+      "line": 4,
+      "start": 2,
+      "text": "return",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "operators-and-control",
+      "line": 4,
+      "start": 9,
+      "text": "result",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "operators-and-control",
+      "line": 4,
+      "start": 16,
+      "text": "instanceof",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "operators-and-control",
+      "line": 4,
+      "start": 36,
+      "text": "result",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "operators-and-control",
+      "line": 4,
+      "start": 45,
+      "text": "fallback",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "operators-and-control",
+      "line": 6,
+      "start": 0,
+      "text": "for",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "operators-and-control",
+      "line": 6,
+      "start": 5,
+      "text": "const",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "operators-and-control",
+      "line": 6,
+      "start": 11,
+      "text": "entry",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "operators-and-control",
+      "line": 6,
+      "start": 17,
+      "text": "of",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "operators-and-control",
+      "line": 6,
+      "start": 41,
+      "text": "entry",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "operators-and-control",
+      "line": 7,
+      "start": 0,
+      "text": "try",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "operators-and-control",
+      "line": 7,
+      "start": 6,
+      "text": "throw",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "operators-and-control",
+      "line": 7,
+      "start": 12,
+      "text": "new",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "operators-and-control",
+      "line": 7,
+      "start": 33,
+      "text": "catch",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "operators-and-control",
+      "line": 7,
+      "start": 40,
+      "text": "error",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "operators-and-control",
+      "line": 7,
+      "start": 61,
+      "text": "error",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "operators-and-control",
+      "line": 8,
+      "start": 0,
+      "text": "const",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "operators-and-control",
+      "line": 8,
+      "start": 6,
+      "text": "object",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "operators-and-control",
+      "line": 9,
+      "start": 0,
+      "text": "const",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "operators-and-control",
+      "line": 9,
+      "start": 6,
+      "text": "found",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "mapped-and-conditional-types",
+      "line": 1,
+      "start": 0,
+      "text": "type",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "mapped-and-conditional-types",
+      "line": 1,
+      "start": 5,
+      "text": "Picked",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "mapped-and-conditional-types",
+      "line": 1,
+      "start": 12,
+      "text": "T",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "mapped-and-conditional-types",
+      "line": 1,
+      "start": 22,
+      "text": "in",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "mapped-and-conditional-types",
+      "line": 1,
+      "start": 25,
+      "text": "keyof",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "mapped-and-conditional-types",
+      "line": 1,
+      "start": 31,
+      "text": "T",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "mapped-and-conditional-types",
+      "line": 1,
+      "start": 36,
+      "text": "T",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "mapped-and-conditional-types",
+      "line": 1,
+      "start": 38,
+      "text": "K",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "mapped-and-conditional-types",
+      "line": 2,
+      "start": 0,
+      "text": "type",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "mapped-and-conditional-types",
+      "line": 2,
+      "start": 5,
+      "text": "Unwrap",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "mapped-and-conditional-types",
+      "line": 2,
+      "start": 12,
+      "text": "T",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "mapped-and-conditional-types",
+      "line": 2,
+      "start": 17,
+      "text": "T",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "mapped-and-conditional-types",
+      "line": 2,
+      "start": 19,
+      "text": "extends",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "mapped-and-conditional-types",
+      "line": 2,
+      "start": 27,
+      "text": "Promise",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "mapped-and-conditional-types",
+      "line": 2,
+      "start": 35,
+      "text": "infer",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "mapped-and-conditional-types",
+      "line": 2,
+      "start": 41,
+      "text": "U",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "mapped-and-conditional-types",
+      "line": 2,
+      "start": 46,
+      "text": "U",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "mapped-and-conditional-types",
+      "line": 2,
+      "start": 50,
+      "text": "T",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "mapped-and-conditional-types",
+      "line": 3,
+      "start": 0,
+      "text": "type",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "mapped-and-conditional-types",
+      "line": 3,
+      "start": 5,
+      "text": "Hex",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "mapped-and-conditional-types",
+      "line": 3,
+      "start": 15,
+      "text": "string",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "mapped-and-conditional-types",
+      "line": 4,
+      "start": 0,
+      "text": "type",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "mapped-and-conditional-types",
+      "line": 4,
+      "start": 5,
+      "text": "ReadonlyName",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "mapped-and-conditional-types",
+      "line": 4,
+      "start": 20,
+      "text": "Readonly",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "mapped-and-conditional-types",
+      "line": 4,
+      "start": 37,
+      "text": "string",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "mapped-and-conditional-types",
+      "line": 5,
+      "start": 0,
+      "text": "const",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "mapped-and-conditional-types",
+      "line": 5,
+      "start": 6,
+      "text": "palette",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "mapped-and-conditional-types",
+      "line": 5,
+      "start": 33,
+      "text": "as",
+      "actual": "#ffffff",
+      "reason": "Alias and assertion connectors stay neutral like the value or binding around them."
+    },
+    {
+      "case": "mapped-and-conditional-types",
+      "line": 6,
+      "start": 0,
+      "text": "const",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "mapped-and-conditional-types",
+      "line": 6,
+      "start": 6,
+      "text": "validated",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "mapped-and-conditional-types",
+      "line": 6,
+      "start": 31,
+      "text": "satisfies",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "mapped-and-conditional-types",
+      "line": 6,
+      "start": 43,
+      "text": "count",
+      "actual": "#9a8297",
+      "reason": "The adapted hierarchy assigns property access to CodePen purple."
+    },
+    {
+      "case": "mapped-and-conditional-types",
+      "line": 7,
+      "start": 0,
+      "text": "let",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "mapped-and-conditional-types",
+      "line": 7,
+      "start": 4,
+      "text": "unknownValue",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "mapped-and-conditional-types",
+      "line": 7,
+      "start": 18,
+      "text": "unknown",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "mapped-and-conditional-types",
+      "line": 8,
+      "start": 0,
+      "text": "let",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "mapped-and-conditional-types",
+      "line": 8,
+      "start": 4,
+      "text": "impossible",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "mapped-and-conditional-types",
+      "line": 8,
+      "start": 16,
+      "text": "never",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "labels-switch-and-async",
+      "line": 1,
+      "start": 0,
+      "text": "async",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "labels-switch-and-async",
+      "line": 1,
+      "start": 6,
+      "text": "function",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "labels-switch-and-async",
+      "line": 1,
+      "start": 15,
+      "text": "run",
+      "actual": "#9a8297",
+      "reason": "The adapted hierarchy assigns functions, methods, callback parameters, and enum members to CodePen purple."
+    },
+    {
+      "case": "labels-switch-and-async",
+      "line": 1,
+      "start": 19,
+      "text": "task",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "labels-switch-and-async",
+      "line": 1,
+      "start": 31,
+      "text": "Promise",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "labels-switch-and-async",
+      "line": 1,
+      "start": 39,
+      "text": "number",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "labels-switch-and-async",
+      "line": 2,
+      "start": 2,
+      "text": "const",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "labels-switch-and-async",
+      "line": 2,
+      "start": 8,
+      "text": "value",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "labels-switch-and-async",
+      "line": 2,
+      "start": 16,
+      "text": "await",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "labels-switch-and-async",
+      "line": 2,
+      "start": 22,
+      "text": "task",
+      "actual": "#9a8297",
+      "reason": "The adapted hierarchy assigns functions, methods, callable references, and callable invocations to CodePen purple."
+    },
+    {
+      "case": "labels-switch-and-async",
+      "line": 3,
+      "start": 2,
+      "text": "switch",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "labels-switch-and-async",
+      "line": 3,
+      "start": 10,
+      "text": "value",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "labels-switch-and-async",
+      "line": 4,
+      "start": 4,
+      "text": "case",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "labels-switch-and-async",
+      "line": 4,
+      "start": 12,
+      "text": "return",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "labels-switch-and-async",
+      "line": 5,
+      "start": 4,
+      "text": "default",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "labels-switch-and-async",
+      "line": 5,
+      "start": 13,
+      "text": "return",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "labels-switch-and-async",
+      "line": 8,
+      "start": 0,
+      "text": "function",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "labels-switch-and-async",
+      "line": 8,
+      "start": 9,
+      "text": "loops",
+      "actual": "#9a8297",
+      "reason": "The adapted hierarchy assigns functions, methods, callback parameters, and enum members to CodePen purple."
+    },
+    {
+      "case": "labels-switch-and-async",
+      "line": 8,
+      "start": 26,
+      "text": "for",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "labels-switch-and-async",
+      "line": 8,
+      "start": 31,
+      "text": "let",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "labels-switch-and-async",
+      "line": 8,
+      "start": 35,
+      "text": "i",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "labels-switch-and-async",
+      "line": 8,
+      "start": 42,
+      "text": "i",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "labels-switch-and-async",
+      "line": 8,
+      "start": 49,
+      "text": "i",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "labels-switch-and-async",
+      "line": 8,
+      "start": 56,
+      "text": "break",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "decorators-and-access",
+      "line": 1,
+      "start": 0,
+      "text": "function",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "decorators-and-access",
+      "line": 1,
+      "start": 9,
+      "text": "trace",
+      "actual": "#9a8297",
+      "reason": "The adapted hierarchy assigns functions, methods, callback parameters, and enum members to CodePen purple."
+    },
+    {
+      "case": "decorators-and-access",
+      "line": 1,
+      "start": 15,
+      "text": "value",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "decorators-and-access",
+      "line": 1,
+      "start": 22,
+      "text": "unknown",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "decorators-and-access",
+      "line": 1,
+      "start": 33,
+      "text": "return",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "decorators-and-access",
+      "line": 1,
+      "start": 40,
+      "text": "value",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "decorators-and-access",
+      "line": 2,
+      "start": 0,
+      "text": "@",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "decorators-and-access",
+      "line": 2,
+      "start": 1,
+      "text": "trace",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "decorators-and-access",
+      "line": 3,
+      "start": 0,
+      "text": "class",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "decorators-and-access",
+      "line": 3,
+      "start": 6,
+      "text": "Service",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "decorators-and-access",
+      "line": 5,
+      "start": 2,
+      "text": "static",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "decorators-and-access",
+      "line": 5,
+      "start": 20,
+      "text": "return",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "decorators-and-access",
+      "line": 5,
+      "start": 27,
+      "text": "new",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "decorators-and-access",
+      "line": 6,
+      "start": 11,
+      "text": "return",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "decorators-and-access",
+      "line": 6,
+      "start": 18,
+      "text": "this",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "decorators-and-access",
+      "line": 8,
+      "start": 0,
+      "text": "const",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "decorators-and-access",
+      "line": 8,
+      "start": 6,
+      "text": "service",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "overloads-and-function-types",
+      "line": 1,
+      "start": 0,
+      "text": "function",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "overloads-and-function-types",
+      "line": 1,
+      "start": 9,
+      "text": "format",
+      "actual": "#9a8297",
+      "reason": "The adapted hierarchy assigns functions, methods, callback parameters, and enum members to CodePen purple."
+    },
+    {
+      "case": "overloads-and-function-types",
+      "line": 1,
+      "start": 16,
+      "text": "value",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "overloads-and-function-types",
+      "line": 1,
+      "start": 23,
+      "text": "number",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "overloads-and-function-types",
+      "line": 1,
+      "start": 32,
+      "text": "string",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "overloads-and-function-types",
+      "line": 2,
+      "start": 0,
+      "text": "function",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "overloads-and-function-types",
+      "line": 2,
+      "start": 9,
+      "text": "format",
+      "actual": "#9a8297",
+      "reason": "The adapted hierarchy assigns functions, methods, callback parameters, and enum members to CodePen purple."
+    },
+    {
+      "case": "overloads-and-function-types",
+      "line": 2,
+      "start": 16,
+      "text": "value",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "overloads-and-function-types",
+      "line": 2,
+      "start": 23,
+      "text": "string",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "overloads-and-function-types",
+      "line": 2,
+      "start": 32,
+      "text": "string",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "overloads-and-function-types",
+      "line": 3,
+      "start": 0,
+      "text": "function",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "overloads-and-function-types",
+      "line": 3,
+      "start": 9,
+      "text": "format",
+      "actual": "#9a8297",
+      "reason": "The adapted hierarchy assigns functions, methods, callback parameters, and enum members to CodePen purple."
+    },
+    {
+      "case": "overloads-and-function-types",
+      "line": 3,
+      "start": 16,
+      "text": "value",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "overloads-and-function-types",
+      "line": 3,
+      "start": 23,
+      "text": "number",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "overloads-and-function-types",
+      "line": 3,
+      "start": 32,
+      "text": "string",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "overloads-and-function-types",
+      "line": 3,
+      "start": 41,
+      "text": "string",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "overloads-and-function-types",
+      "line": 3,
+      "start": 50,
+      "text": "return",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "overloads-and-function-types",
+      "line": 3,
+      "start": 64,
+      "text": "value",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "overloads-and-function-types",
+      "line": 4,
+      "start": 0,
+      "text": "type",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "overloads-and-function-types",
+      "line": 4,
+      "start": 5,
+      "text": "Callback",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "overloads-and-function-types",
+      "line": 4,
+      "start": 17,
+      "text": "value",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "overloads-and-function-types",
+      "line": 4,
+      "start": 24,
+      "text": "number",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "overloads-and-function-types",
+      "line": 4,
+      "start": 35,
+      "text": "string",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "overloads-and-function-types",
+      "line": 5,
+      "start": 0,
+      "text": "interface",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "overloads-and-function-types",
+      "line": 5,
+      "start": 10,
+      "text": "Callable",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "overloads-and-function-types",
+      "line": 5,
+      "start": 22,
+      "text": "value",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "overloads-and-function-types",
+      "line": 5,
+      "start": 29,
+      "text": "number",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "overloads-and-function-types",
+      "line": 5,
+      "start": 38,
+      "text": "string",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "overloads-and-function-types",
+      "line": 6,
+      "start": 0,
+      "text": "const",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "overloads-and-function-types",
+      "line": 6,
+      "start": 6,
+      "text": "callback",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "overloads-and-function-types",
+      "line": 6,
+      "start": 16,
+      "text": "Callback",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "tuples-arrays-and-index-types",
+      "line": 1,
+      "start": 0,
+      "text": "type",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "tuples-arrays-and-index-types",
+      "line": 1,
+      "start": 5,
+      "text": "Pair",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "tuples-arrays-and-index-types",
+      "line": 1,
+      "start": 27,
+      "text": "count",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "tuples-arrays-and-index-types",
+      "line": 2,
+      "start": 0,
+      "text": "type",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "tuples-arrays-and-index-types",
+      "line": 2,
+      "start": 5,
+      "text": "Names",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "tuples-arrays-and-index-types",
+      "line": 2,
+      "start": 13,
+      "text": "readonly",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "tuples-arrays-and-index-types",
+      "line": 2,
+      "start": 22,
+      "text": "string",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "tuples-arrays-and-index-types",
+      "line": 3,
+      "start": 0,
+      "text": "type",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "tuples-arrays-and-index-types",
+      "line": 3,
+      "start": 5,
+      "text": "Entry",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "tuples-arrays-and-index-types",
+      "line": 3,
+      "start": 21,
+      "text": "string",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "tuples-arrays-and-index-types",
+      "line": 3,
+      "start": 36,
+      "text": "number",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "tuples-arrays-and-index-types",
+      "line": 4,
+      "start": 0,
+      "text": "type",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "tuples-arrays-and-index-types",
+      "line": 4,
+      "start": 5,
+      "text": "Name",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "tuples-arrays-and-index-types",
+      "line": 4,
+      "start": 12,
+      "text": "Entry",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "tuples-arrays-and-index-types",
+      "line": 5,
+      "start": 0,
+      "text": "type",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "tuples-arrays-and-index-types",
+      "line": 5,
+      "start": 5,
+      "text": "Keys",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "tuples-arrays-and-index-types",
+      "line": 5,
+      "start": 12,
+      "text": "keyof",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "tuples-arrays-and-index-types",
+      "line": 5,
+      "start": 18,
+      "text": "Entry",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "tuples-arrays-and-index-types",
+      "line": 6,
+      "start": 0,
+      "text": "let",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "tuples-arrays-and-index-types",
+      "line": 6,
+      "start": 4,
+      "text": "values",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "tuples-arrays-and-index-types",
+      "line": 6,
+      "start": 12,
+      "text": "Array",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "tuples-arrays-and-index-types",
+      "line": 6,
+      "start": 18,
+      "text": "Entry",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "tuples-arrays-and-index-types",
+      "line": 7,
+      "start": 0,
+      "text": "const",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "tuples-arrays-and-index-types",
+      "line": 7,
+      "start": 6,
+      "text": "pair",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "tuples-arrays-and-index-types",
+      "line": 7,
+      "start": 12,
+      "text": "Pair",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "assertions-and-type-queries",
+      "line": 1,
+      "start": 0,
+      "text": "const",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "assertions-and-type-queries",
+      "line": 1,
+      "start": 6,
+      "text": "data",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "assertions-and-type-queries",
+      "line": 2,
+      "start": 0,
+      "text": "type",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "assertions-and-type-queries",
+      "line": 2,
+      "start": 5,
+      "text": "Data",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "assertions-and-type-queries",
+      "line": 2,
+      "start": 12,
+      "text": "typeof",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "assertions-and-type-queries",
+      "line": 3,
+      "start": 0,
+      "text": "const",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "assertions-and-type-queries",
+      "line": 3,
+      "start": 6,
+      "text": "key",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "assertions-and-type-queries",
+      "line": 3,
+      "start": 19,
+      "text": "as",
+      "actual": "#ffffff",
+      "reason": "Alias and assertion connectors stay neutral like the value or binding around them."
+    },
+    {
+      "case": "assertions-and-type-queries",
+      "line": 3,
+      "start": 22,
+      "text": "keyof",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "assertions-and-type-queries",
+      "line": 3,
+      "start": 28,
+      "text": "Data",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "assertions-and-type-queries",
+      "line": 4,
+      "start": 0,
+      "text": "let",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "assertions-and-type-queries",
+      "line": 4,
+      "start": 4,
+      "text": "maybe",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "assertions-and-type-queries",
+      "line": 4,
+      "start": 11,
+      "text": "Data",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "assertions-and-type-queries",
+      "line": 4,
+      "start": 18,
+      "text": "undefined",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "assertions-and-type-queries",
+      "line": 5,
+      "start": 0,
+      "text": "const",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "assertions-and-type-queries",
+      "line": 5,
+      "start": 6,
+      "text": "name",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "assertions-and-type-queries",
+      "line": 6,
+      "start": 0,
+      "text": "function",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "assertions-and-type-queries",
+      "line": 6,
+      "start": 9,
+      "text": "isData",
+      "actual": "#9a8297",
+      "reason": "The adapted hierarchy assigns functions, methods, callback parameters, and enum members to CodePen purple."
+    },
+    {
+      "case": "assertions-and-type-queries",
+      "line": 6,
+      "start": 16,
+      "text": "value",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "assertions-and-type-queries",
+      "line": 6,
+      "start": 23,
+      "text": "unknown",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "assertions-and-type-queries",
+      "line": 6,
+      "start": 33,
+      "text": "value",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "assertions-and-type-queries",
+      "line": 6,
+      "start": 39,
+      "text": "is",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "assertions-and-type-queries",
+      "line": 6,
+      "start": 42,
+      "text": "Data",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "assertions-and-type-queries",
+      "line": 6,
+      "start": 49,
+      "text": "return",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "assertions-and-type-queries",
+      "line": 6,
+      "start": 58,
+      "text": "value",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "assertions-and-type-queries",
+      "line": 7,
+      "start": 0,
+      "text": "function",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "assertions-and-type-queries",
+      "line": 7,
+      "start": 9,
+      "text": "assertData",
+      "actual": "#9a8297",
+      "reason": "The adapted hierarchy assigns functions, methods, callback parameters, and enum members to CodePen purple."
+    },
+    {
+      "case": "assertions-and-type-queries",
+      "line": 7,
+      "start": 20,
+      "text": "value",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "assertions-and-type-queries",
+      "line": 7,
+      "start": 27,
+      "text": "unknown",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "assertions-and-type-queries",
+      "line": 7,
+      "start": 37,
+      "text": "asserts",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "assertions-and-type-queries",
+      "line": 7,
+      "start": 45,
+      "text": "value",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "assertions-and-type-queries",
+      "line": 7,
+      "start": 51,
+      "text": "is",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "abstract-classes-and-implements",
+      "line": 1,
+      "start": 0,
+      "text": "interface",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "abstract-classes-and-implements",
+      "line": 1,
+      "start": 10,
+      "text": "Named",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "abstract-classes-and-implements",
+      "line": 1,
+      "start": 24,
+      "text": "string",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "abstract-classes-and-implements",
+      "line": 2,
+      "start": 0,
+      "text": "abstract",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "abstract-classes-and-implements",
+      "line": 2,
+      "start": 9,
+      "text": "class",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "abstract-classes-and-implements",
+      "line": 2,
+      "start": 15,
+      "text": "Base",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "abstract-classes-and-implements",
+      "line": 2,
+      "start": 20,
+      "text": "implements",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "abstract-classes-and-implements",
+      "line": 2,
+      "start": 31,
+      "text": "Named",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "abstract-classes-and-implements",
+      "line": 3,
+      "start": 2,
+      "text": "abstract",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "abstract-classes-and-implements",
+      "line": 3,
+      "start": 17,
+      "text": "string",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "abstract-classes-and-implements",
+      "line": 4,
+      "start": 2,
+      "text": "abstract",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "abstract-classes-and-implements",
+      "line": 4,
+      "start": 18,
+      "text": "void",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "abstract-classes-and-implements",
+      "line": 6,
+      "start": 0,
+      "text": "class",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "abstract-classes-and-implements",
+      "line": 6,
+      "start": 6,
+      "text": "Concrete",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "abstract-classes-and-implements",
+      "line": 6,
+      "start": 15,
+      "text": "extends",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "abstract-classes-and-implements",
+      "line": 6,
+      "start": 23,
+      "text": "Base",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "abstract-classes-and-implements",
+      "line": 8,
+      "start": 9,
+      "text": "void",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "computed-properties-and-symbols",
+      "line": 1,
+      "start": 0,
+      "text": "const",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "computed-properties-and-symbols",
+      "line": 1,
+      "start": 6,
+      "text": "key",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "computed-properties-and-symbols",
+      "line": 2,
+      "start": 0,
+      "text": "const",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "computed-properties-and-symbols",
+      "line": 2,
+      "start": 6,
+      "text": "object",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "computed-properties-and-symbols",
+      "line": 2,
+      "start": 58,
+      "text": "return",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "computed-properties-and-symbols",
+      "line": 3,
+      "start": 0,
+      "text": "const",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "computed-properties-and-symbols",
+      "line": 3,
+      "start": 6,
+      "text": "value",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "computed-properties-and-symbols",
+      "line": 4,
+      "start": 0,
+      "text": "const",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "computed-properties-and-symbols",
+      "line": 4,
+      "start": 6,
+      "text": "name",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "computed-properties-and-symbols",
+      "line": 5,
+      "start": 25,
+      "text": "key",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "computed-properties-and-symbols",
+      "line": 5,
+      "start": 33,
+      "text": "key",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "nested-generics-and-utilities",
+      "line": 1,
+      "start": 0,
+      "text": "type",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "nested-generics-and-utilities",
+      "line": 1,
+      "start": 5,
+      "text": "Nested",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "nested-generics-and-utilities",
+      "line": 1,
+      "start": 14,
+      "text": "Map",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "nested-generics-and-utilities",
+      "line": 1,
+      "start": 18,
+      "text": "string",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "nested-generics-and-utilities",
+      "line": 1,
+      "start": 26,
+      "text": "Array",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "nested-generics-and-utilities",
+      "line": 1,
+      "start": 32,
+      "text": "Promise",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "nested-generics-and-utilities",
+      "line": 1,
+      "start": 40,
+      "text": "number",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "nested-generics-and-utilities",
+      "line": 2,
+      "start": 0,
+      "text": "type",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "nested-generics-and-utilities",
+      "line": 2,
+      "start": 5,
+      "text": "Optional",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "nested-generics-and-utilities",
+      "line": 2,
+      "start": 16,
+      "text": "Partial",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "nested-generics-and-utilities",
+      "line": 2,
+      "start": 32,
+      "text": "string",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "nested-generics-and-utilities",
+      "line": 2,
+      "start": 47,
+      "text": "number",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "nested-generics-and-utilities",
+      "line": 3,
+      "start": 0,
+      "text": "type",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "nested-generics-and-utilities",
+      "line": 3,
+      "start": 5,
+      "text": "Mandatory",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "nested-generics-and-utilities",
+      "line": 3,
+      "start": 17,
+      "text": "Required",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "nested-generics-and-utilities",
+      "line": 3,
+      "start": 26,
+      "text": "Optional",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "nested-generics-and-utilities",
+      "line": 4,
+      "start": 0,
+      "text": "type",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "nested-generics-and-utilities",
+      "line": 4,
+      "start": 5,
+      "text": "Selected",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "nested-generics-and-utilities",
+      "line": 4,
+      "start": 16,
+      "text": "Pick",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "nested-generics-and-utilities",
+      "line": 4,
+      "start": 21,
+      "text": "Mandatory",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "nested-generics-and-utilities",
+      "line": 5,
+      "start": 0,
+      "text": "type",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "nested-generics-and-utilities",
+      "line": 5,
+      "start": 5,
+      "text": "Omitted",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "nested-generics-and-utilities",
+      "line": 5,
+      "start": 15,
+      "text": "Omit",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "nested-generics-and-utilities",
+      "line": 5,
+      "start": 20,
+      "text": "Mandatory",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "nested-generics-and-utilities",
+      "line": 6,
+      "start": 0,
+      "text": "type",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "nested-generics-and-utilities",
+      "line": 6,
+      "start": 5,
+      "text": "Result",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "nested-generics-and-utilities",
+      "line": 6,
+      "start": 14,
+      "text": "ReturnType",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "nested-generics-and-utilities",
+      "line": 6,
+      "start": 31,
+      "text": "string",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "nested-generics-and-utilities",
+      "line": 7,
+      "start": 0,
+      "text": "type",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "nested-generics-and-utilities",
+      "line": 7,
+      "start": 5,
+      "text": "Args",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "nested-generics-and-utilities",
+      "line": 7,
+      "start": 12,
+      "text": "Parameters",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "nested-generics-and-utilities",
+      "line": 7,
+      "start": 24,
+      "text": "name",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "nested-generics-and-utilities",
+      "line": 7,
+      "start": 30,
+      "text": "string",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "nested-generics-and-utilities",
+      "line": 7,
+      "start": 41,
+      "text": "void",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "documentation-and-escapes",
+      "line": 5,
+      "start": 0,
+      "text": "function",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "documentation-and-escapes",
+      "line": 5,
+      "start": 9,
+      "text": "documented",
+      "actual": "#9a8297",
+      "reason": "The adapted hierarchy assigns functions, methods, callback parameters, and enum members to CodePen purple."
+    },
+    {
+      "case": "documentation-and-escapes",
+      "line": 5,
+      "start": 20,
+      "text": "value",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "documentation-and-escapes",
+      "line": 5,
+      "start": 27,
+      "text": "string",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "documentation-and-escapes",
+      "line": 5,
+      "start": 36,
+      "text": "string",
+      "actual": "#ddca7e",
+      "reason": "The adapted hierarchy assigns types and type declarations to CodePen yellow."
+    },
+    {
+      "case": "documentation-and-escapes",
+      "line": 5,
+      "start": 45,
+      "text": "return",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "documentation-and-escapes",
+      "line": 5,
+      "start": 52,
+      "text": "value",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "documentation-and-escapes",
+      "line": 6,
+      "start": 0,
+      "text": "const",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "documentation-and-escapes",
+      "line": 6,
+      "start": 6,
+      "text": "escaped",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "documentation-and-escapes",
+      "line": 7,
+      "start": 0,
+      "text": "const",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "documentation-and-escapes",
+      "line": 7,
+      "start": 6,
+      "text": "regex",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "jsx-tags-and-expressions",
+      "line": 1,
+      "start": 0,
+      "text": "const",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "jsx-tags-and-expressions",
+      "line": 1,
+      "start": 6,
+      "text": "theme",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "jsx-tags-and-expressions",
+      "line": 2,
+      "start": 0,
+      "text": "const",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "jsx-tags-and-expressions",
+      "line": 2,
+      "start": 6,
+      "text": "style",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "jsx-tags-and-expressions",
+      "line": 3,
+      "start": 0,
+      "text": "const",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "jsx-tags-and-expressions",
+      "line": 3,
+      "start": 6,
+      "text": "element",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "jsx-components-and-fragments",
+      "line": 1,
+      "start": 0,
+      "text": "const",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "jsx-components-and-fragments",
+      "line": 1,
+      "start": 6,
+      "text": "Widget",
+      "actual": "#9a8297",
+      "reason": "The adapted hierarchy assigns functions, methods, callable references, and callable invocations to CodePen purple."
+    },
+    {
+      "case": "jsx-components-and-fragments",
+      "line": 1,
+      "start": 18,
+      "text": "title",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "jsx-components-and-fragments",
+      "line": 1,
+      "start": 37,
+      "text": "title",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "jsx-components-and-fragments",
+      "line": 2,
+      "start": 0,
+      "text": "const",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "jsx-components-and-fragments",
+      "line": 2,
+      "start": 6,
+      "text": "view",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "jsx-events-and-spread",
+      "line": 1,
+      "start": 0,
+      "text": "const",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "jsx-events-and-spread",
+      "line": 1,
+      "start": 6,
+      "text": "props",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "jsx-events-and-spread",
+      "line": 2,
+      "start": 0,
+      "text": "const",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "jsx-events-and-spread",
+      "line": 2,
+      "start": 6,
+      "text": "click",
+      "actual": "#9a8297",
+      "reason": "The adapted hierarchy assigns functions, methods, callable references, and callable invocations to CodePen purple."
+    },
+    {
+      "case": "jsx-events-and-spread",
+      "line": 2,
+      "start": 14,
+      "text": "event",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "jsx-events-and-spread",
+      "line": 2,
+      "start": 23,
+      "text": "event",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "jsx-events-and-spread",
+      "line": 3,
+      "start": 0,
+      "text": "const",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "jsx-events-and-spread",
+      "line": 3,
+      "start": 6,
+      "text": "node",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "jsx-nested-maps",
+      "line": 1,
+      "start": 0,
+      "text": "const",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "jsx-nested-maps",
+      "line": 1,
+      "start": 6,
+      "text": "items",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "jsx-nested-maps",
+      "line": 2,
+      "start": 0,
+      "text": "const",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "jsx-nested-maps",
+      "line": 2,
+      "start": 6,
+      "text": "List",
+      "actual": "#9a8297",
+      "reason": "The adapted hierarchy assigns functions, methods, callable references, and callable invocations to CodePen purple."
+    },
+    {
+      "case": "jsx-nested-maps",
+      "line": 3,
+      "start": 14,
+      "text": "item",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "jsx-nested-maps",
+      "line": 3,
+      "start": 20,
+      "text": "index",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "jsx-nested-maps",
+      "line": 3,
+      "start": 39,
+      "text": "index",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "jsx-nested-maps",
+      "line": 3,
+      "start": 47,
+      "text": "item",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "jsx-nested-maps",
+      "line": 5,
+      "start": 0,
+      "text": "const",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, function declarations, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "jsx-nested-maps",
+      "line": 5,
+      "start": 6,
+      "text": "page",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, and named arguments to neutral white."
+    },
+    {
+      "case": "javascript-bindings",
+      "line": 2,
+      "start": 14,
+      "text": "globalValue",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, enum values, and named arguments to neutral white."
+    },
+    {
+      "case": "javascript-bindings",
+      "line": 3,
+      "start": 13,
+      "text": "mutable",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, enum values, and named arguments to neutral white."
+    },
+    {
+      "case": "javascript-bindings",
+      "line": 4,
+      "start": 27,
+      "text": "globalValue",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, enum values, and named arguments to neutral white."
+    },
+    {
+      "case": "javascript-bindings",
+      "line": 5,
+      "start": 28,
+      "text": "globalValue",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, enum values, and named arguments to neutral white."
+    },
+    {
+      "case": "javascript-bindings",
+      "line": 6,
+      "start": 35,
+      "text": "mutable",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, enum values, and named arguments to neutral white."
+    },
+    {
+      "case": "javascript-bindings",
+      "line": 9,
+      "start": 0,
+      "text": "outer",
+      "actual": "#9a8297",
+      "reason": "The adapted hierarchy assigns functions, methods, callable references, and callable invocations to CodePen purple."
+    },
+    {
+      "case": "javascript-members",
+      "line": 8,
+      "start": 0,
+      "text": "instance",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, enum values, and named arguments to neutral white."
+    },
+    {
+      "case": "javascript-literals",
+      "line": 4,
+      "start": 26,
+      "text": "name",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, enum values, and named arguments to neutral white."
+    },
+    {
+      "case": "javascript-destructuring",
+      "line": 2,
+      "start": 40,
+      "text": "data",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, enum values, and named arguments to neutral white."
+    },
+    {
+      "case": "javascript-destructuring",
+      "line": 6,
+      "start": 0,
+      "text": "object",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, enum values, and named arguments to neutral white."
+    },
+    {
+      "case": "javascript-destructuring",
+      "line": 6,
+      "start": 14,
+      "text": "total",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, enum values, and named arguments to neutral white."
+    },
+    {
+      "case": "javascript-builtins",
+      "line": 6,
+      "start": 16,
+      "text": "value",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, enum values, and named arguments to neutral white."
+    },
+    {
+      "case": "type-and-class-contexts",
+      "line": 9,
+      "start": 0,
+      "text": "counter",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, enum values, and named arguments to neutral white."
+    },
+    {
+      "case": "bindings-and-blocks",
+      "line": 2,
+      "start": 14,
+      "text": "globalValue",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, enum values, and named arguments to neutral white."
+    },
+    {
+      "case": "bindings-and-blocks",
+      "line": 3,
+      "start": 13,
+      "text": "mutable",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, enum values, and named arguments to neutral white."
+    },
+    {
+      "case": "bindings-and-blocks",
+      "line": 4,
+      "start": 27,
+      "text": "globalValue",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, enum values, and named arguments to neutral white."
+    },
+    {
+      "case": "bindings-and-blocks",
+      "line": 5,
+      "start": 28,
+      "text": "globalValue",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, enum values, and named arguments to neutral white."
+    },
+    {
+      "case": "bindings-and-blocks",
+      "line": 6,
+      "start": 35,
+      "text": "mutable",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, enum values, and named arguments to neutral white."
+    },
+    {
+      "case": "bindings-and-blocks",
+      "line": 9,
+      "start": 0,
+      "text": "outer",
+      "actual": "#9a8297",
+      "reason": "The adapted hierarchy assigns functions, methods, callable references, and callable invocations to CodePen purple."
+    },
+    {
+      "case": "functions-and-methods",
+      "line": 3,
+      "start": 53,
+      "text": "inner",
+      "actual": "#9a8297",
+      "reason": "The adapted hierarchy assigns functions, methods, callable references, and callable invocations to CodePen purple."
+    },
+    {
+      "case": "functions-and-methods",
+      "line": 5,
+      "start": 0,
+      "text": "object",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, enum values, and named arguments to neutral white."
+    },
+    {
+      "case": "functions-and-methods",
+      "line": 6,
+      "start": 0,
+      "text": "arrow",
+      "actual": "#9a8297",
+      "reason": "The adapted hierarchy assigns functions, methods, callable references, and callable invocations to CodePen purple."
+    },
+    {
+      "case": "types-and-generics",
+      "line": 7,
+      "start": 15,
+      "text": "identity",
+      "actual": "#9a8297",
+      "reason": "The adapted hierarchy assigns functions, methods, callable references, and callable invocations to CodePen purple."
+    },
+    {
+      "case": "imports-and-exports",
+      "line": 7,
+      "start": 40,
+      "text": "library",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, enum values, and named arguments to neutral white."
+    },
+    {
+      "case": "class-members-and-inheritance",
+      "line": 6,
+      "start": 42,
+      "text": "Number",
+      "actual": "#9a8297",
+      "reason": "The adapted hierarchy assigns functions, methods, callable references, and callable invocations to CodePen purple."
+    },
+    {
+      "case": "destructuring-and-rest",
+      "line": 2,
+      "start": 40,
+      "text": "data",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, enum values, and named arguments to neutral white."
+    },
+    {
+      "case": "destructuring-and-rest",
+      "line": 8,
+      "start": 19,
+      "text": "data",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, enum values, and named arguments to neutral white."
+    },
+    {
+      "case": "destructuring-and-rest",
+      "line": 8,
+      "start": 32,
+      "text": "total",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, enum values, and named arguments to neutral white."
+    },
+    {
+      "case": "literals-and-interpolation",
+      "line": 4,
+      "start": 26,
+      "text": "name",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, enum values, and named arguments to neutral white."
+    },
+    {
+      "case": "operators-and-control",
+      "line": 9,
+      "start": 14,
+      "text": "object",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, enum values, and named arguments to neutral white."
+    },
+    {
+      "case": "overloads-and-function-types",
+      "line": 3,
+      "start": 57,
+      "text": "String",
+      "actual": "#9a8297",
+      "reason": "The adapted hierarchy assigns functions, methods, callable references, and callable invocations to CodePen purple."
+    },
+    {
+      "case": "assertions-and-type-queries",
+      "line": 2,
+      "start": 19,
+      "text": "data",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, enum values, and named arguments to neutral white."
+    },
+    {
+      "case": "assertions-and-type-queries",
+      "line": 5,
+      "start": 13,
+      "text": "maybe",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, enum values, and named arguments to neutral white."
+    },
+    {
+      "case": "computed-properties-and-symbols",
+      "line": 1,
+      "start": 12,
+      "text": "Symbol",
+      "actual": "#9a8297",
+      "reason": "The adapted hierarchy assigns functions, methods, callable references, and callable invocations to CodePen purple."
+    },
+    {
+      "case": "computed-properties-and-symbols",
+      "line": 2,
+      "start": 18,
+      "text": "key",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, enum values, and named arguments to neutral white."
+    },
+    {
+      "case": "computed-properties-and-symbols",
+      "line": 2,
+      "start": 45,
+      "text": "get",
+      "actual": "#809bbd",
+      "reason": "The adapted hierarchy assigns programming keywords, annotations, and decorators to CodePen blue."
+    },
+    {
+      "case": "computed-properties-and-symbols",
+      "line": 3,
+      "start": 14,
+      "text": "object",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, enum values, and named arguments to neutral white."
+    },
+    {
+      "case": "computed-properties-and-symbols",
+      "line": 3,
+      "start": 21,
+      "text": "key",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, enum values, and named arguments to neutral white."
+    },
+    {
+      "case": "computed-properties-and-symbols",
+      "line": 4,
+      "start": 13,
+      "text": "object",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, enum values, and named arguments to neutral white."
+    },
+    {
+      "case": "computed-properties-and-symbols",
+      "line": 5,
+      "start": 12,
+      "text": "object",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, enum values, and named arguments to neutral white."
+    },
+    {
+      "case": "jsx-tags-and-expressions",
+      "line": 2,
+      "start": 23,
+      "text": "theme",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, enum values, and named arguments to neutral white."
+    },
+    {
+      "case": "jsx-tags-and-expressions",
+      "line": 3,
+      "start": 37,
+      "text": "theme",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, enum values, and named arguments to neutral white."
+    },
+    {
+      "case": "jsx-tags-and-expressions",
+      "line": 3,
+      "start": 56,
+      "text": "style",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, enum values, and named arguments to neutral white."
+    },
+    {
+      "case": "jsx-tags-and-expressions",
+      "line": 4,
+      "start": 23,
+      "text": "theme",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, enum values, and named arguments to neutral white."
+    },
+    {
+      "case": "jsx-tags-and-expressions",
+      "line": 4,
+      "start": 37,
+      "text": "theme",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, enum values, and named arguments to neutral white."
+    },
+    {
+      "case": "jsx-events-and-spread",
+      "line": 3,
+      "start": 25,
+      "text": "props",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, enum values, and named arguments to neutral white."
+    },
+    {
+      "case": "jsx-events-and-spread",
+      "line": 3,
+      "start": 41,
+      "text": "click",
+      "actual": "#9a8297",
+      "reason": "The adapted hierarchy assigns functions, methods, callable references, and callable invocations to CodePen purple."
+    },
+    {
+      "case": "jsx-nested-maps",
+      "line": 3,
+      "start": 3,
+      "text": "items",
+      "actual": "#ffffff",
+      "reason": "The adapted hierarchy assigns variables, parameters, fields, properties, object keys, enum values, and named arguments to neutral white."
+    },
+    {
+      "case": "javascript-literals",
+      "line": 7,
+      "start": 28,
+      "text": "null",
+      "actual": "#d0782a",
+      "reason": "The adapted literal hierarchy assigns null to CodePen orange."
+    },
+    {
+      "case": "types-and-generics",
+      "line": 4,
+      "start": 30,
+      "text": "null",
+      "actual": "#d0782a",
+      "reason": "The adapted literal hierarchy assigns null to CodePen orange."
+    },
+    {
+      "case": "literals-and-interpolation",
+      "line": 7,
+      "start": 28,
+      "text": "null",
+      "actual": "#d0782a",
+      "reason": "The adapted literal hierarchy assigns null to CodePen orange."
+    }
+  ]
 }

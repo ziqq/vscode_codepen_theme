@@ -1,69 +1,1181 @@
 {
-  "description": "Intentional role corrections to the native full-sample baseline when contextual refinement is enabled. Other assertions retain their intended colors without provider fallback exemptions.",
+  "description": "Reviewed full-sample corrections applied by the contextual syntax layer after TextMate tokenization.",
   "corrections": [
-    { "language": "C#", "line": 6, "text": "Name", "foreground": "#9a8297", "reason": "A positional record component is a property." },
-    { "language": "Dart", "line": 134, "text": "ThemePalette", "foreground": "#809bbd", "reason": "Constructor declaration binding, not an ordinary type reference." },
-    { "language": "Dart", "line": 145, "text": "palette", "foreground": "#809bbd", "reason": "A switch-pattern binding is a local variable." },
-    { "language": "Dart", "line": 154, "text": "message", "foreground": "#809bbd", "reason": "A local variable declaration left unclassified by the native grammar." },
-    { "language": "Go", "line": 14, "text": "Label", "foreground": "#9a8297", "reason": "Receiver method declaration, not a free function." },
-    { "language": "Go", "line": 45, "text": "labeler", "foreground": "#809bbd", "reason": "Interface declaration binding, not an ordinary type reference." },
-    { "language": "JavaScript React", "line": 24, "text": "onSelect", "foreground": "#ddca7e", "reason": "Classic CodePen treats identifiers inside JSX expression islands as JavaScript atoms." },
-    { "language": "SQL", "line": 8, "text": "TRUE", "foreground": "#ddca7e", "reason": "Boolean literal, not unclassified source text." },
-    { "language": "BibTeX", "line": 1, "text": "twilight2026", "foreground": "#809bbd", "reason": "A citation key is a declaration binding." },
-    { "language": "BibTeX", "line": 2, "text": "author", "foreground": "#9a8297", "reason": "A bibliography field name is a property." },
-    { "language": "BibTeX", "line": 3, "text": "title", "foreground": "#9a8297", "reason": "A bibliography field name is a property." },
-    { "language": "Clojure", "line": 1, "text": "codepen.theme", "foreground": "#809bbd", "reason": "The namespace form declares a global binding." },
-    { "language": "Clojure", "line": 8, "text": "render", "foreground": "#9a8297", "reason": "A protocol operation is a member declaration." },
-    { "language": "CoffeeScript", "line": 3, "text": "@name", "foreground": "#9a8297", "reason": "An at-prefixed instance field is a property." },
-    { "language": "CoffeeScript", "line": 7, "text": "#{", "foreground": "#96b38a", "reason": "String interpolation delimiters retain the string role." },
-    { "language": "CoffeeScript", "line": 7, "text": "prefix", "foreground": "#809bbd", "reason": "An interpolated parameter retains its binding role." },
-    { "language": "CoffeeScript", "line": 10, "text": "toUpperCase", "foreground": "#9a8297", "reason": "A receiver method is a member." },
-    { "language": "CUDA C++", "line": 6, "text": "red", "foreground": "#9a8297", "reason": "A struct field is a property." },
-    { "language": "Dockerfile", "line": 2, "text": "NODE_VERSION", "foreground": "#809bbd", "reason": "ARG declares a build variable." },
-    { "language": "Dockerfile", "line": 2, "text": "22", "foreground": "#d0782a", "reason": "A numeric ARG default is a number." },
-    { "language": "Dockerfile", "line": 3, "text": "NODE_VERSION", "foreground": "#809bbd", "reason": "A Docker variable reference keeps the binding role." },
-    { "language": "Dockerfile", "line": 3, "text": "dependencies", "foreground": "#809bbd", "reason": "A stage alias is a declaration binding." },
-    { "language": "F#", "line": 7, "text": "Keyword", "foreground": "#9a8297", "reason": "A discriminated-union case is a member." },
-    { "language": "F#", "line": 18, "text": "prefix", "foreground": "#809bbd", "reason": "An interpolated local retains its binding role." },
-    { "language": "F#", "line": 18, "text": "Name", "foreground": "#9a8297", "reason": "An interpolated record field is a member." },
-    { "language": "F#", "line": 18, "text": "Accent", "foreground": "#9a8297", "reason": "An interpolated record field is a member." },
-    { "language": "Groovy", "line": 6, "text": "name", "foreground": "#9a8297", "reason": "A class field is a property." },
-    { "language": "Groovy", "line": 8, "text": "tokens", "foreground": "#9a8297", "reason": "A class field is a property." },
-    { "language": "Groovy", "line": 11, "text": "${", "foreground": "#96b38a", "reason": "String interpolation delimiters retain the string role." },
-    { "language": "Handlebars", "line": 2, "text": "{{", "foreground": "#ffffff", "reason": "Handlebars expression delimiters are neutral punctuation." },
-    { "language": "Handlebars", "line": 2, "text": "theme", "foreground": "#ddca7e", "reason": "A root context value is a global reference." },
-    { "language": "Handlebars", "line": 2, "text": "id", "foreground": "#9a8297", "reason": "A path segment is a member." },
-    { "language": "HLSL", "line": 2, "text": "ThemeSettings", "foreground": "#809bbd", "reason": "A constant-buffer name is a declaration binding." },
-    { "language": "HLSL", "line": 14, "text": "POSITION", "foreground": "#9a8297", "reason": "A shader semantic is member metadata." },
-    { "language": "INI", "line": 2, "text": "theme", "foreground": "#9a8297", "reason": "A section name is a property path." },
-    { "language": "INI", "line": 3, "text": "name", "foreground": "#9a8297", "reason": "A configuration key is a property." },
-    { "language": "INI", "line": 3, "text": "CodePen Theme Original", "foreground": "#96b38a", "reason": "An INI scalar value uses the string role." },
-    { "language": "INI", "line": 3, "text": "=", "foreground": "#cccccc", "reason": "An assignment separator is an operator." },
-    { "language": "Julia", "line": 1, "text": "CodePenTheme", "foreground": "#809bbd", "reason": "A module name is a declaration binding." },
-    { "language": "Julia", "line": 13, "text": "prefix", "foreground": "#809bbd", "reason": "An interpolated parameter retains its binding role." },
-    { "language": "LaTeX", "line": 1, "text": "article", "foreground": "#96b38a", "reason": "A document-class argument is a scalar value." },
-    { "language": "LaTeX", "line": 8, "text": "#2", "foreground": "#809bbd", "reason": "A macro parameter is a binding." },
-    { "language": "LaTeX", "line": 17, "text": "mathrm", "foreground": "#ddca7e", "reason": "A TeX command is callable syntax." },
-    { "language": "Lua", "line": 5, "text": "Theme", "foreground": "#ddca7e", "reason": "A global table reference uses the global role." },
-    { "language": "Objective-C", "line": 4, "text": "NS_ENUM", "foreground": "#ddca7e", "reason": "NS_ENUM is a declaration macro." },
-    { "language": "Objective-C", "line": 4, "text": "ThemeMode", "foreground": "#809bbd", "reason": "NS_ENUM declares an enum binding." },
-    { "language": "Perl", "line": 11, "text": "name", "foreground": "#9a8297", "reason": "A hash key is a member." },
-    { "language": "Properties", "line": 2, "text": "theme.name", "foreground": "#9a8297", "reason": "A properties key is a property path." },
-    { "language": "Properties", "line": 2, "text": "CodePen Theme Original", "foreground": "#96b38a", "reason": "A properties scalar uses the string role." },
-    { "language": "Properties", "line": 2, "text": "=", "foreground": "#cccccc", "reason": "An assignment separator is an operator." },
-    { "language": "Properties", "line": 3, "text": "theme.accent", "foreground": "#9a8297", "reason": "A properties key is a property path." },
-    { "language": "Properties", "line": 3, "text": "=", "foreground": "#cccccc", "reason": "An assignment separator is an operator." },
-    { "language": "Properties", "line": 3, "text": "96b38a", "foreground": "#96b38a", "reason": "A hash-prefixed scalar is data, not a comment." },
-    { "language": "Properties", "line": 4, "text": "theme.background", "foreground": "#9a8297", "reason": "A properties key is a property path." },
-    { "language": "R", "line": 2, "text": "theme", "foreground": "#809bbd", "reason": "An assignment declares a binding." },
-    { "language": "R", "line": 3, "text": "name", "foreground": "#9a8297", "reason": "A named argument is a property." },
-    { "language": "Razor", "line": 4, "text": "State", "foreground": "#9a8297", "reason": "A Razor component property is a member." },
-    { "language": "ShaderLab", "line": 5, "text": "_MainTex", "foreground": "#9a8297", "reason": "A ShaderLab property name is a member." },
-    { "language": "TeX", "line": 1, "text": "\\", "foreground": "#ddca7e", "reason": "The command introducer is part of callable TeX syntax." },
-    { "language": "TeX", "line": 2, "text": "\\", "foreground": "#ddca7e", "reason": "The command introducer is part of callable TeX syntax." },
-    { "language": "Visual Basic", "line": 1, "text": "Imports", "foreground": "#ddca7e", "reason": "Imports is a keyword." },
-    { "language": "Visual Basic", "line": 9, "text": "Of", "foreground": "#ddca7e", "reason": "Of is a generic-type keyword." },
-    { "language": "Visual Basic", "line": 14, "text": "ToArray", "foreground": "#9a8297", "reason": "A receiver method is a member." },
-    { "language": "WAT", "line": 3, "text": "$contrast_type", "foreground": "#809bbd", "reason": "A top-level WAT type form declares a binding." }
+    {
+      "language": "C",
+      "line": 6,
+      "text": "const",
+      "foreground": "#809bbd",
+      "reason": "A programming keyword, modifier, annotation, or decorator uses CodePen blue."
+    },
+    {
+      "language": "C",
+      "line": 23,
+      "text": "sizeof",
+      "foreground": "#809bbd",
+      "reason": "A programming keyword, modifier, annotation, or decorator uses CodePen blue."
+    },
+    {
+      "language": "C",
+      "line": 30,
+      "text": "return",
+      "foreground": "#809bbd",
+      "reason": "A programming keyword, modifier, annotation, or decorator uses CodePen blue."
+    },
+    {
+      "language": "C",
+      "line": 33,
+      "text": "typedef",
+      "foreground": "#809bbd",
+      "reason": "A programming keyword, modifier, annotation, or decorator uses CodePen blue."
+    },
+    {
+      "language": "C#",
+      "line": 6,
+      "text": "record",
+      "foreground": "#809bbd",
+      "reason": "A programming keyword, modifier, annotation, or decorator uses CodePen blue."
+    },
+    {
+      "language": "C#",
+      "line": 6,
+      "text": "Name",
+      "foreground": "#9a8297",
+      "reason": "A positional record component is a property and uses CodePen purple."
+    },
+    {
+      "language": "C#",
+      "line": 19,
+      "text": "var",
+      "foreground": "#809bbd",
+      "reason": "A programming keyword, modifier, annotation, or decorator uses CodePen blue."
+    },
+    {
+      "language": "C#",
+      "line": 19,
+      "text": "theme",
+      "foreground": "#ffffff",
+      "reason": "A variable, parameter, field, property, object key, enum value, or named argument uses neutral white."
+    },
+    {
+      "language": "C#",
+      "line": 19,
+      "text": "new",
+      "foreground": "#809bbd",
+      "reason": "A programming keyword, modifier, annotation, or decorator uses CodePen blue."
+    },
+    {
+      "language": "Dart",
+      "line": 1,
+      "text": "import",
+      "foreground": "#809bbd",
+      "reason": "A programming keyword, modifier, annotation, or decorator uses CodePen blue."
+    },
+    {
+      "language": "Dart",
+      "line": 1,
+      "text": "as",
+      "foreground": "#ffffff",
+      "reason": "An alias connector is neutral like the binding it introduces."
+    },
+    {
+      "language": "Dart",
+      "line": 3,
+      "text": "enum",
+      "foreground": "#809bbd",
+      "reason": "A programming keyword, modifier, annotation, or decorator uses CodePen blue."
+    },
+    {
+      "language": "Dart",
+      "line": 3,
+      "text": "dark",
+      "foreground": "#9a8297",
+      "reason": "An enum member uses CodePen purple."
+    },
+    {
+      "language": "Dart",
+      "line": 8,
+      "text": "implements",
+      "foreground": "#809bbd",
+      "reason": "A programming keyword, modifier, annotation, or decorator uses CodePen blue."
+    },
+    {
+      "language": "Dart",
+      "line": 25,
+      "text": "required",
+      "foreground": "#809bbd",
+      "reason": "A programming keyword, modifier, annotation, or decorator uses CodePen blue."
+    },
+    {
+      "language": "Dart",
+      "line": 70,
+      "text": "final",
+      "foreground": "#809bbd",
+      "reason": "A programming keyword, modifier, annotation, or decorator uses CodePen blue."
+    },
+    {
+      "language": "Dart",
+      "line": 76,
+      "text": "get",
+      "foreground": "#809bbd",
+      "reason": "A programming keyword, modifier, annotation, or decorator uses CodePen blue."
+    },
+    {
+      "language": "Dart",
+      "line": 76,
+      "text": "isFixed",
+      "foreground": "#9a8297",
+      "reason": "A getter declaration uses CodePen purple."
+    },
+    {
+      "language": "Dart",
+      "line": 121,
+      "text": "sealed",
+      "foreground": "#809bbd",
+      "reason": "A programming keyword, modifier, annotation, or decorator uses CodePen blue."
+    },
+    {
+      "language": "Dart",
+      "line": 125,
+      "text": "extends",
+      "foreground": "#809bbd",
+      "reason": "A programming keyword, modifier, annotation, or decorator uses CodePen blue."
+    },
+    {
+      "language": "Dart",
+      "line": 145,
+      "text": "final",
+      "foreground": "#809bbd",
+      "reason": "A programming keyword, modifier, annotation, or decorator uses CodePen blue."
+    },
+    {
+      "language": "Dart",
+      "line": 146,
+      "text": "palette",
+      "foreground": "#ffffff",
+      "reason": "A variable, parameter, field, property, object key, enum value, or named argument uses neutral white."
+    },
+    {
+      "language": "Dart",
+      "line": 150,
+      "text": "void",
+      "foreground": "#809bbd",
+      "reason": "A programming keyword, modifier, annotation, or decorator uses CodePen blue."
+    },
+    {
+      "language": "Dart",
+      "line": 158,
+      "text": "async",
+      "foreground": "#809bbd",
+      "reason": "A programming keyword, modifier, annotation, or decorator uses CodePen blue."
+    },
+    {
+      "language": "Dart",
+      "line": 159,
+      "text": "final",
+      "foreground": "#809bbd",
+      "reason": "A programming keyword, modifier, annotation, or decorator uses CodePen blue."
+    },
+    {
+      "language": "Dart",
+      "line": 159,
+      "text": "await",
+      "foreground": "#809bbd",
+      "reason": "A programming keyword, modifier, annotation, or decorator uses CodePen blue."
+    },
+    {
+      "language": "Dart",
+      "line": 160,
+      "text": "return",
+      "foreground": "#809bbd",
+      "reason": "A programming keyword, modifier, annotation, or decorator uses CodePen blue."
+    },
+    {
+      "language": "Go",
+      "line": 9,
+      "text": "string",
+      "foreground": "#ddca7e",
+      "reason": "A programming type or type declaration uses CodePen yellow."
+    },
+    {
+      "language": "Go",
+      "line": 14,
+      "text": "Label",
+      "foreground": "#9a8297",
+      "reason": "A callable symbol, callable invocation, or shader/member semantic uses CodePen purple."
+    },
+    {
+      "language": "Go",
+      "line": 18,
+      "text": "supportedTokens",
+      "foreground": "#9a8297",
+      "reason": "A callable symbol, callable invocation, or shader/member semantic uses CodePen purple."
+    },
+    {
+      "language": "Go",
+      "line": 19,
+      "text": "make",
+      "foreground": "#9a8297",
+      "reason": "A callable symbol, callable invocation, or shader/member semantic uses CodePen purple."
+    },
+    {
+      "language": "Go",
+      "line": 19,
+      "text": "len",
+      "foreground": "#9a8297",
+      "reason": "A callable symbol, callable invocation, or shader/member semantic uses CodePen purple."
+    },
+    {
+      "language": "Go",
+      "line": 22,
+      "text": "append",
+      "foreground": "#9a8297",
+      "reason": "A callable symbol, callable invocation, or shader/member semantic uses CodePen purple."
+    },
+    {
+      "language": "Go",
+      "line": 49,
+      "text": "labels",
+      "foreground": "#9a8297",
+      "reason": "A callable symbol, callable invocation, or shader/member semantic uses CodePen purple."
+    },
+    {
+      "language": "Java",
+      "line": 1,
+      "text": "import",
+      "foreground": "#809bbd",
+      "reason": "A programming keyword, modifier, annotation, or decorator uses CodePen blue."
+    },
+    {
+      "language": "Java",
+      "line": 3,
+      "text": "public",
+      "foreground": "#809bbd",
+      "reason": "A programming keyword, modifier, annotation, or decorator uses CodePen blue."
+    },
+    {
+      "language": "Java",
+      "line": 3,
+      "text": "final",
+      "foreground": "#809bbd",
+      "reason": "A programming keyword, modifier, annotation, or decorator uses CodePen blue."
+    },
+    {
+      "language": "Java",
+      "line": 3,
+      "text": "class",
+      "foreground": "#809bbd",
+      "reason": "A programming keyword, modifier, annotation, or decorator uses CodePen blue."
+    },
+    {
+      "language": "Java",
+      "line": 4,
+      "text": "private",
+      "foreground": "#809bbd",
+      "reason": "A programming keyword, modifier, annotation, or decorator uses CodePen blue."
+    },
+    {
+      "language": "Java",
+      "line": 4,
+      "text": "static",
+      "foreground": "#809bbd",
+      "reason": "A programming keyword, modifier, annotation, or decorator uses CodePen blue."
+    },
+    {
+      "language": "Java",
+      "line": 9,
+      "text": "record",
+      "foreground": "#809bbd",
+      "reason": "A programming keyword, modifier, annotation, or decorator uses CodePen blue."
+    },
+    {
+      "language": "Java",
+      "line": 9,
+      "text": "name",
+      "foreground": "#9a8297",
+      "reason": "A record component is a property and uses CodePen purple."
+    },
+    {
+      "language": "Java",
+      "line": 9,
+      "text": "color",
+      "foreground": "#9a8297",
+      "reason": "A record component is a property and uses CodePen purple."
+    },
+    {
+      "language": "Java",
+      "line": 17,
+      "text": "new",
+      "foreground": "#809bbd",
+      "reason": "A programming keyword, modifier, annotation, or decorator uses CodePen blue."
+    },
+    {
+      "language": "Java",
+      "line": 22,
+      "text": "void",
+      "foreground": "#809bbd",
+      "reason": "A programming keyword, modifier, annotation, or decorator uses CodePen blue."
+    },
+    {
+      "language": "Java",
+      "line": 22,
+      "text": "args",
+      "foreground": "#ffffff",
+      "reason": "A variable, parameter, field, property, object key, enum value, or named argument uses neutral white."
+    },
+    {
+      "language": "JavaScript",
+      "line": 1,
+      "text": "import",
+      "foreground": "#809bbd",
+      "reason": "A programming keyword, modifier, annotation, or decorator uses CodePen blue."
+    },
+    {
+      "language": "JavaScript",
+      "line": 3,
+      "text": "palette",
+      "foreground": "#ffffff",
+      "reason": "A variable, parameter, field, property, object key, enum value, or named argument uses neutral white."
+    },
+    {
+      "language": "JavaScript",
+      "line": 10,
+      "text": "export",
+      "foreground": "#809bbd",
+      "reason": "A programming keyword, modifier, annotation, or decorator uses CodePen blue."
+    },
+    {
+      "language": "JavaScript",
+      "line": 11,
+      "text": "name",
+      "foreground": "#ffffff",
+      "reason": "A variable, parameter, field, property, object key, enum value, or named argument uses neutral white."
+    },
+    {
+      "language": "JavaScript",
+      "line": 17,
+      "text": "return",
+      "foreground": "#809bbd",
+      "reason": "A programming keyword, modifier, annotation, or decorator uses CodePen blue."
+    },
+    {
+      "language": "JavaScript",
+      "line": 27,
+      "text": "renderPreview",
+      "foreground": "#9a8297",
+      "reason": "A callable symbol, callable invocation, or shader/member semantic uses CodePen purple."
+    },
+    {
+      "language": "JavaScript",
+      "line": 32,
+      "text": "new",
+      "foreground": "#809bbd",
+      "reason": "A programming keyword, modifier, annotation, or decorator uses CodePen blue."
+    },
+    {
+      "language": "JavaScript",
+      "line": 35,
+      "text": "streamTokenLabels",
+      "foreground": "#9a8297",
+      "reason": "A callable symbol, callable invocation, or shader/member semantic uses CodePen purple."
+    },
+    {
+      "language": "JavaScript",
+      "line": 38,
+      "text": "await",
+      "foreground": "#809bbd",
+      "reason": "A programming keyword, modifier, annotation, or decorator uses CodePen blue."
+    },
+    {
+      "language": "JavaScript React",
+      "line": 1,
+      "text": "import",
+      "foreground": "#809bbd",
+      "reason": "A programming keyword, modifier, annotation, or decorator uses CodePen blue."
+    },
+    {
+      "language": "JavaScript React",
+      "line": 3,
+      "text": "tokens",
+      "foreground": "#ffffff",
+      "reason": "A variable, parameter, field, property, object key, enum value, or named argument uses neutral white."
+    },
+    {
+      "language": "JavaScript React",
+      "line": 9,
+      "text": "ThemePreview",
+      "foreground": "#9a8297",
+      "reason": "A callable symbol, callable invocation, or shader/member semantic uses CodePen purple."
+    },
+    {
+      "language": "JavaScript React",
+      "line": 37,
+      "text": "TokenBadge",
+      "foreground": "#9a8297",
+      "reason": "A callable symbol, callable invocation, or shader/member semantic uses CodePen purple."
+    },
+    {
+      "language": "TypeScript",
+      "line": 1,
+      "text": "import",
+      "foreground": "#809bbd",
+      "reason": "A programming keyword, modifier, annotation, or decorator uses CodePen blue."
+    },
+    {
+      "language": "TypeScript",
+      "line": 14,
+      "text": "theme",
+      "foreground": "#ffffff",
+      "reason": "A variable, parameter, field, property, object key, enum value, or named argument uses neutral white."
+    },
+    {
+      "language": "TypeScript",
+      "line": 23,
+      "text": "isTokenName",
+      "foreground": "#9a8297",
+      "reason": "A callable symbol, callable invocation, or shader/member semantic uses CodePen purple."
+    },
+    {
+      "language": "TypeScript",
+      "line": 28,
+      "text": "typeof",
+      "foreground": "#809bbd",
+      "reason": "A programming keyword, modifier, annotation, or decorator uses CodePen blue."
+    },
+    {
+      "language": "TypeScript",
+      "line": 50,
+      "text": "tokenLabel",
+      "foreground": "#9a8297",
+      "reason": "A callable symbol, callable invocation, or shader/member semantic uses CodePen purple."
+    },
+    {
+      "language": "TypeScript React",
+      "line": 1,
+      "text": "import",
+      "foreground": "#809bbd",
+      "reason": "A programming keyword, modifier, annotation, or decorator uses CodePen blue."
+    },
+    {
+      "language": "TypeScript React",
+      "line": 12,
+      "text": "theme",
+      "foreground": "#ffffff",
+      "reason": "A variable, parameter, field, property, object key, enum value, or named argument uses neutral white."
+    },
+    {
+      "language": "TypeScript React",
+      "line": 28,
+      "text": "tokenLabel",
+      "foreground": "#9a8297",
+      "reason": "A callable symbol, callable invocation, or shader/member semantic uses CodePen purple."
+    },
+    {
+      "language": "Kotlin",
+      "line": 1,
+      "text": "class",
+      "foreground": "#809bbd",
+      "reason": "A programming keyword, modifier, annotation, or decorator uses CodePen blue."
+    },
+    {
+      "language": "Kotlin",
+      "line": 4,
+      "text": "val",
+      "foreground": "#809bbd",
+      "reason": "A programming keyword, modifier, annotation, or decorator uses CodePen blue."
+    },
+    {
+      "language": "Kotlin",
+      "line": 9,
+      "text": "fun",
+      "foreground": "#809bbd",
+      "reason": "A programming keyword, modifier, annotation, or decorator uses CodePen blue."
+    },
+    {
+      "language": "Kotlin",
+      "line": 18,
+      "text": "val",
+      "foreground": "#809bbd",
+      "reason": "A programming keyword, modifier, annotation, or decorator uses CodePen blue."
+    },
+    {
+      "language": "Markdown",
+      "line": 15,
+      "text": "const",
+      "foreground": "#809bbd",
+      "reason": "A programming keyword, modifier, annotation, or decorator uses CodePen blue."
+    },
+    {
+      "language": "Markdown",
+      "line": 15,
+      "text": "theme",
+      "foreground": "#ffffff",
+      "reason": "A variable, parameter, field, property, object key, enum value, or named argument uses neutral white."
+    },
+    {
+      "language": "PHP",
+      "line": 29,
+      "text": "as",
+      "foreground": "#ffffff",
+      "reason": "An alias connector is neutral like the binding it introduces."
+    },
+    {
+      "language": "Python",
+      "line": 6,
+      "text": "class",
+      "foreground": "#809bbd",
+      "reason": "A programming keyword, modifier, annotation, or decorator uses CodePen blue."
+    },
+    {
+      "language": "Python",
+      "line": 17,
+      "text": "def",
+      "foreground": "#809bbd",
+      "reason": "A programming keyword, modifier, annotation, or decorator uses CodePen blue."
+    },
+    {
+      "language": "Python",
+      "line": 18,
+      "text": "name",
+      "foreground": "#9a8297",
+      "reason": "An instance field uses CodePen purple."
+    },
+    {
+      "language": "Python",
+      "line": 21,
+      "text": "palette",
+      "foreground": "#9a8297",
+      "reason": "A callable symbol, callable invocation, or shader/member semantic uses CodePen purple."
+    },
+    {
+      "language": "Python",
+      "line": 21,
+      "text": "dict",
+      "foreground": "#ddca7e",
+      "reason": "A programming type or type declaration uses CodePen yellow."
+    },
+    {
+      "language": "Python",
+      "line": 24,
+      "text": "accent",
+      "foreground": "#9a8297",
+      "reason": "An instance field uses CodePen purple."
+    },
+    {
+      "language": "Python",
+      "line": 48,
+      "text": "match",
+      "foreground": "#809bbd",
+      "reason": "A programming keyword, modifier, annotation, or decorator uses CodePen blue."
+    },
+    {
+      "language": "Rust",
+      "line": 1,
+      "text": "use",
+      "foreground": "#809bbd",
+      "reason": "A programming keyword, modifier, annotation, or decorator uses CodePen blue."
+    },
+    {
+      "language": "Rust",
+      "line": 11,
+      "text": "fn",
+      "foreground": "#809bbd",
+      "reason": "A programming keyword, modifier, annotation, or decorator uses CodePen blue."
+    },
+    {
+      "language": "Rust",
+      "line": 24,
+      "text": "main",
+      "foreground": "#9a8297",
+      "reason": "A callable symbol, callable invocation, or shader/member semantic uses CodePen purple."
+    },
+    {
+      "language": "Rust",
+      "line": 25,
+      "text": "let",
+      "foreground": "#809bbd",
+      "reason": "A programming keyword, modifier, annotation, or decorator uses CodePen blue."
+    },
+    {
+      "language": "Rust",
+      "line": 64,
+      "text": "every_role_has_a_css_color",
+      "foreground": "#9a8297",
+      "reason": "A callable symbol, callable invocation, or shader/member semantic uses CodePen purple."
+    },
+    {
+      "language": "Ruby",
+      "line": 23,
+      "text": "Token",
+      "foreground": "#ffffff",
+      "reason": "A variable, parameter, field, property, object key, enum value, or named argument uses neutral white."
+    },
+    {
+      "language": "SQL",
+      "line": 8,
+      "text": "TRUE",
+      "foreground": "#ddca7e",
+      "reason": "A programming type or type declaration uses CodePen yellow."
+    },
+    {
+      "language": "Svelte",
+      "line": 2,
+      "text": "count",
+      "foreground": "#ffffff",
+      "reason": "A variable, parameter, field, property, object key, enum value, or named argument uses neutral white."
+    },
+    {
+      "language": "Svelte",
+      "line": 6,
+      "text": "increment",
+      "foreground": "#9a8297",
+      "reason": "A callable symbol, callable invocation, or shader/member semantic uses CodePen purple."
+    },
+    {
+      "language": "Shell Script",
+      "line": 20,
+      "text": "for",
+      "foreground": "#809bbd",
+      "reason": "A programming keyword, modifier, annotation, or decorator uses CodePen blue."
+    },
+    {
+      "language": "Shell Script",
+      "line": 24,
+      "text": "then",
+      "foreground": "#809bbd",
+      "reason": "A programming keyword, modifier, annotation, or decorator uses CodePen blue."
+    },
+    {
+      "language": "Shell Script",
+      "line": 29,
+      "text": "case",
+      "foreground": "#809bbd",
+      "reason": "A programming keyword, modifier, annotation, or decorator uses CodePen blue."
+    },
+    {
+      "language": "Shell Script",
+      "line": 40,
+      "text": "while",
+      "foreground": "#809bbd",
+      "reason": "A programming keyword, modifier, annotation, or decorator uses CodePen blue."
+    },
+    {
+      "language": "Swift",
+      "line": 9,
+      "text": "let",
+      "foreground": "#809bbd",
+      "reason": "A programming keyword, modifier, annotation, or decorator uses CodePen blue."
+    },
+    {
+      "language": "Swift",
+      "line": 13,
+      "text": "mode",
+      "foreground": "#ffffff",
+      "reason": "A variable, parameter, field, property, object key, enum value, or named argument uses neutral white."
+    },
+    {
+      "language": "Vue",
+      "line": 2,
+      "text": "import",
+      "foreground": "#809bbd",
+      "reason": "A programming keyword, modifier, annotation, or decorator uses CodePen blue."
+    },
+    {
+      "language": "Vue",
+      "line": 4,
+      "text": "count",
+      "foreground": "#ffffff",
+      "reason": "A variable, parameter, field, property, object key, enum value, or named argument uses neutral white."
+    },
+    {
+      "language": "Vue",
+      "line": 9,
+      "text": "increment",
+      "foreground": "#9a8297",
+      "reason": "A callable symbol, callable invocation, or shader/member semantic uses CodePen purple."
+    },
+    {
+      "language": "Vue",
+      "line": 9,
+      "text": "void",
+      "foreground": "#809bbd",
+      "reason": "A programming keyword, modifier, annotation, or decorator uses CodePen blue."
+    },
+    {
+      "language": "BibTeX",
+      "line": 1,
+      "text": "twilight2026",
+      "foreground": "#809bbd",
+      "reason": "A programming keyword, modifier, annotation, or decorator uses CodePen blue."
+    },
+    {
+      "language": "BibTeX",
+      "line": 2,
+      "text": "author",
+      "foreground": "#9a8297",
+      "reason": "A callable symbol, callable invocation, or shader/member semantic uses CodePen purple."
+    },
+    {
+      "language": "BibTeX",
+      "line": 3,
+      "text": "title",
+      "foreground": "#9a8297",
+      "reason": "A callable symbol, callable invocation, or shader/member semantic uses CodePen purple."
+    },
+    {
+      "language": "CoffeeScript",
+      "line": 7,
+      "text": "#{",
+      "foreground": "#96b38a",
+      "reason": "A string or quoted data key uses CodePen green."
+    },
+    {
+      "language": "CoffeeScript",
+      "line": 7,
+      "text": "prefix",
+      "foreground": "#ffffff",
+      "reason": "A variable, parameter, field, property, object key, enum value, or named argument uses neutral white."
+    },
+    {
+      "language": "CUDA C++",
+      "line": 11,
+      "text": "value",
+      "foreground": "#ffffff",
+      "reason": "A variable, parameter, field, property, object key, enum value, or named argument uses neutral white."
+    },
+    {
+      "language": "CUDA C++",
+      "line": 25,
+      "text": "Pixel",
+      "foreground": "#ddca7e",
+      "reason": "A programming type or type declaration uses CodePen yellow."
+    },
+    {
+      "language": "Dockerfile",
+      "line": 2,
+      "text": "NODE_VERSION",
+      "foreground": "#809bbd",
+      "reason": "A programming keyword, modifier, annotation, or decorator uses CodePen blue."
+    },
+    {
+      "language": "Dockerfile",
+      "line": 2,
+      "text": "22",
+      "foreground": "#d0782a",
+      "reason": "A numeric literal uses CodePen orange."
+    },
+    {
+      "language": "Dockerfile",
+      "line": 3,
+      "text": "NODE_VERSION",
+      "foreground": "#809bbd",
+      "reason": "A programming keyword, modifier, annotation, or decorator uses CodePen blue."
+    },
+    {
+      "language": "Dockerfile",
+      "line": 3,
+      "text": "dependencies",
+      "foreground": "#809bbd",
+      "reason": "A programming keyword, modifier, annotation, or decorator uses CodePen blue."
+    },
+    {
+      "language": "F#",
+      "line": 1,
+      "text": "namespace",
+      "foreground": "#809bbd",
+      "reason": "A programming keyword, modifier, annotation, or decorator uses CodePen blue."
+    },
+    {
+      "language": "F#",
+      "line": 18,
+      "text": "Name",
+      "foreground": "#9a8297",
+      "reason": "A record field uses CodePen purple."
+    },
+    {
+      "language": "F#",
+      "line": 18,
+      "text": "Accent",
+      "foreground": "#9a8297",
+      "reason": "A record field uses CodePen purple."
+    },
+    {
+      "language": "F#",
+      "line": 3,
+      "text": "open",
+      "foreground": "#809bbd",
+      "reason": "A programming keyword, modifier, annotation, or decorator uses CodePen blue."
+    },
+    {
+      "language": "Groovy",
+      "line": 6,
+      "text": "name",
+      "foreground": "#9a8297",
+      "reason": "A class field uses CodePen purple."
+    },
+    {
+      "language": "Groovy",
+      "line": 11,
+      "text": "${",
+      "foreground": "#96b38a",
+      "reason": "A string or quoted data key uses CodePen green."
+    },
+    {
+      "language": "Handlebars",
+      "line": 2,
+      "text": "{{",
+      "foreground": "#ffffff",
+      "reason": "A variable, parameter, field, property, object key, enum value, or named argument uses neutral white."
+    },
+    {
+      "language": "Handlebars",
+      "line": 2,
+      "text": "theme",
+      "foreground": "#ddca7e",
+      "reason": "A programming type or type declaration uses CodePen yellow."
+    },
+    {
+      "language": "Handlebars",
+      "line": 2,
+      "text": "id",
+      "foreground": "#9a8297",
+      "reason": "A callable symbol, callable invocation, or shader/member semantic uses CodePen purple."
+    },
+    {
+      "language": "HLSL",
+      "line": 2,
+      "text": "cbuffer",
+      "foreground": "#809bbd",
+      "reason": "A programming keyword, modifier, annotation, or decorator uses CodePen blue."
+    },
+    {
+      "language": "HLSL",
+      "line": 2,
+      "text": "ThemeSettings",
+      "foreground": "#ddca7e",
+      "reason": "A programming type or type declaration uses CodePen yellow."
+    },
+    {
+      "language": "HLSL",
+      "line": 2,
+      "text": "register",
+      "foreground": "#809bbd",
+      "reason": "A programming keyword, modifier, annotation, or decorator uses CodePen blue."
+    },
+    {
+      "language": "HLSL",
+      "line": 14,
+      "text": "POSITION",
+      "foreground": "#9a8297",
+      "reason": "A callable symbol, callable invocation, or shader/member semantic uses CodePen purple."
+    },
+    {
+      "language": "INI",
+      "line": 2,
+      "text": "theme",
+      "foreground": "#9a8297",
+      "reason": "A callable symbol, callable invocation, or shader/member semantic uses CodePen purple."
+    },
+    {
+      "language": "INI",
+      "line": 3,
+      "text": "name",
+      "foreground": "#9a8297",
+      "reason": "A callable symbol, callable invocation, or shader/member semantic uses CodePen purple."
+    },
+    {
+      "language": "INI",
+      "line": 3,
+      "text": "CodePen Theme Original",
+      "foreground": "#96b38a",
+      "reason": "A string or quoted data key uses CodePen green."
+    },
+    {
+      "language": "INI",
+      "line": 3,
+      "text": "=",
+      "foreground": "#cccccc",
+      "reason": "The contextual layer preserves this CodePen palette role."
+    },
+    {
+      "language": "Julia",
+      "line": 1,
+      "text": "CodePenTheme",
+      "foreground": "#9a8297",
+      "reason": "A callable symbol, callable invocation, or shader/member semantic uses CodePen purple."
+    },
+    {
+      "language": "Julia",
+      "line": 13,
+      "text": "prefix",
+      "foreground": "#ffffff",
+      "reason": "A variable, parameter, field, property, object key, enum value, or named argument uses neutral white."
+    },
+    {
+      "language": "LaTeX",
+      "line": 1,
+      "text": "article",
+      "foreground": "#96b38a",
+      "reason": "A string or quoted data key uses CodePen green."
+    },
+    {
+      "language": "LaTeX",
+      "line": 8,
+      "text": "#2",
+      "foreground": "#809bbd",
+      "reason": "A programming keyword, modifier, annotation, or decorator uses CodePen blue."
+    },
+    {
+      "language": "LaTeX",
+      "line": 17,
+      "text": "mathrm",
+      "foreground": "#ddca7e",
+      "reason": "A programming type or type declaration uses CodePen yellow."
+    },
+    {
+      "language": "Lua",
+      "line": 5,
+      "text": "Theme",
+      "foreground": "#ffffff",
+      "reason": "A variable, parameter, field, property, object key, enum value, or named argument uses neutral white."
+    },
+    {
+      "language": "Objective-C",
+      "line": 4,
+      "text": "NS_ENUM",
+      "foreground": "#ddca7e",
+      "reason": "A programming type or type declaration uses CodePen yellow."
+    },
+    {
+      "language": "Objective-C",
+      "line": 4,
+      "text": "ThemeMode",
+      "foreground": "#ddca7e",
+      "reason": "A programming type or type declaration uses CodePen yellow."
+    },
+    {
+      "language": "Perl",
+      "line": 11,
+      "text": "name",
+      "foreground": "#ffffff",
+      "reason": "A variable, parameter, field, property, object key, enum value, or named argument uses neutral white."
+    },
+    {
+      "language": "PowerShell",
+      "line": 5,
+      "text": "class",
+      "foreground": "#809bbd",
+      "reason": "A programming keyword, modifier, annotation, or decorator uses CodePen blue."
+    },
+    {
+      "language": "PowerShell",
+      "line": 5,
+      "text": "Theme",
+      "foreground": "#ddca7e",
+      "reason": "A programming type or type declaration uses CodePen yellow."
+    },
+    {
+      "language": "Properties",
+      "line": 2,
+      "text": "theme.name",
+      "foreground": "#9a8297",
+      "reason": "A callable symbol, callable invocation, or shader/member semantic uses CodePen purple."
+    },
+    {
+      "language": "Properties",
+      "line": 2,
+      "text": "CodePen Theme Original",
+      "foreground": "#96b38a",
+      "reason": "A string or quoted data key uses CodePen green."
+    },
+    {
+      "language": "Properties",
+      "line": 2,
+      "text": "=",
+      "foreground": "#cccccc",
+      "reason": "The contextual layer preserves this CodePen palette role."
+    },
+    {
+      "language": "Properties",
+      "line": 3,
+      "text": "theme.accent",
+      "foreground": "#9a8297",
+      "reason": "A callable symbol, callable invocation, or shader/member semantic uses CodePen purple."
+    },
+    {
+      "language": "Properties",
+      "line": 3,
+      "text": "=",
+      "foreground": "#cccccc",
+      "reason": "The contextual layer preserves this CodePen palette role."
+    },
+    {
+      "language": "Properties",
+      "line": 3,
+      "text": "96b38a",
+      "foreground": "#96b38a",
+      "reason": "A string or quoted data key uses CodePen green."
+    },
+    {
+      "language": "Properties",
+      "line": 4,
+      "text": "theme.background",
+      "foreground": "#9a8297",
+      "reason": "A callable symbol, callable invocation, or shader/member semantic uses CodePen purple."
+    },
+    {
+      "language": "Pug",
+      "line": 1,
+      "text": "theme",
+      "foreground": "#ffffff",
+      "reason": "A variable, parameter, field, property, object key, enum value, or named argument uses neutral white."
+    },
+    {
+      "language": "Pug",
+      "line": 5,
+      "text": "token",
+      "foreground": "#9a8297",
+      "reason": "A callable symbol, callable invocation, or shader/member semantic uses CodePen purple."
+    },
+    {
+      "language": "R",
+      "line": 3,
+      "text": "name",
+      "foreground": "#ffffff",
+      "reason": "A named argument remains neutral white."
+    },
+    {
+      "language": "R",
+      "line": 8,
+      "text": "label_theme",
+      "foreground": "#ffffff",
+      "reason": "A variable, parameter, field, property, object key, enum value, or named argument uses neutral white."
+    },
+    {
+      "language": "Razor",
+      "line": 2,
+      "text": "using",
+      "foreground": "#809bbd",
+      "reason": "A programming keyword, modifier, annotation, or decorator uses CodePen blue."
+    },
+    {
+      "language": "ShaderLab",
+      "line": 1,
+      "text": "Shader",
+      "foreground": "#809bbd",
+      "reason": "A programming keyword, modifier, annotation, or decorator uses CodePen blue."
+    },
+    {
+      "language": "ShaderLab",
+      "line": 5,
+      "text": "_MainTex",
+      "foreground": "#9a8297",
+      "reason": "A callable symbol, callable invocation, or shader/member semantic uses CodePen purple."
+    },
+    {
+      "language": "ShaderLab",
+      "line": 3,
+      "text": "Properties",
+      "foreground": "#809bbd",
+      "reason": "A programming keyword, modifier, annotation, or decorator uses CodePen blue."
+    },
+    {
+      "language": "TeX",
+      "line": 1,
+      "text": "\\",
+      "foreground": "#ddca7e",
+      "reason": "A programming type or type declaration uses CodePen yellow."
+    },
+    {
+      "language": "TeX",
+      "line": 2,
+      "text": "\\",
+      "foreground": "#ddca7e",
+      "reason": "A programming type or type declaration uses CodePen yellow."
+    },
+    {
+      "language": "Visual Basic",
+      "line": 1,
+      "text": "Imports",
+      "foreground": "#809bbd",
+      "reason": "A programming keyword, modifier, annotation, or decorator uses CodePen blue."
+    },
+    {
+      "language": "Visual Basic",
+      "line": 6,
+      "text": "Public",
+      "foreground": "#809bbd",
+      "reason": "A programming keyword, modifier, annotation, or decorator uses CodePen blue."
+    },
+    {
+      "language": "Visual Basic",
+      "line": 7,
+      "text": "String",
+      "foreground": "#ddca7e",
+      "reason": "A programming type or type declaration uses CodePen yellow."
+    },
+    {
+      "language": "Visual Basic",
+      "line": 14,
+      "text": "ToArray",
+      "foreground": "#9a8297",
+      "reason": "A callable symbol, callable invocation, or shader/member semantic uses CodePen purple."
+    },
+    {
+      "language": "WAT",
+      "line": 3,
+      "text": "$contrast_type",
+      "foreground": "#809bbd",
+      "reason": "A programming keyword, modifier, annotation, or decorator uses CodePen blue."
+    },
+    {
+      "language": "CoffeeScript",
+      "line": 3,
+      "text": "@name",
+      "foreground": "#9a8297",
+      "reason": "An at-prefixed instance field uses CodePen purple."
+    },
+    {
+      "language": "CUDA C++",
+      "line": 6,
+      "text": "red",
+      "foreground": "#9a8297",
+      "reason": "A struct field uses CodePen purple."
+    },
+    {
+      "language": "F#",
+      "line": 7,
+      "text": "Keyword",
+      "foreground": "#9a8297",
+      "reason": "A discriminated-union case uses CodePen purple."
+    },
+    {
+      "language": "Groovy",
+      "line": 8,
+      "text": "tokens",
+      "foreground": "#9a8297",
+      "reason": "A class field uses CodePen purple."
+    },
+    {
+      "language": "Razor",
+      "line": 4,
+      "text": "State",
+      "foreground": "#9a8297",
+      "reason": "A component property uses CodePen purple."
+    },
+    {
+      "language": "JSONC",
+      "line": 20,
+      "text": "null",
+      "foreground": "#d0782a",
+      "reason": "The contextual literal layer separates null from provider boolean scopes and uses CodePen orange."
+    },
+    {
+      "language": "JSON Lines",
+      "line": 12,
+      "text": "null",
+      "foreground": "#d0782a",
+      "reason": "The contextual literal layer separates null from provider boolean scopes and uses CodePen orange."
+    }
   ]
 }
