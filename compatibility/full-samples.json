@@ -103,7 +103,7 @@
         {
           "line": 7,
           "text": "name",
-          "foreground": "#9a8297",
+          "foreground": "#ffffff",
           "providerFallbacks": {
             "1.96.0": {
               "foreground": "#ffffff",
@@ -158,7 +158,7 @@
         {
           "line": 25,
           "text": "return",
-          "foreground": "#809bbd"
+          "foreground": "#ddca7e"
         },
         {
           "line": 28,
@@ -198,7 +198,7 @@
         {
           "line": 8,
           "text": "Label",
-          "foreground": "#9a8297"
+          "foreground": "#ffffff"
         },
         {
           "line": 8,
@@ -233,7 +233,7 @@
         {
           "line": 25,
           "text": "Label",
-          "foreground": "#9a8297"
+          "foreground": "#ffffff"
         },
         {
           "line": 29,
@@ -358,17 +358,17 @@
         {
           "line": 1,
           "text": "import",
-          "foreground": "#ddca7e"
+          "foreground": "#809bbd"
         },
         {
           "line": 1,
           "text": "as",
-          "foreground": "#ddca7e"
+          "foreground": "#809bbd"
         },
         {
           "line": 3,
           "text": "enum",
-          "foreground": "#ddca7e"
+          "foreground": "#809bbd"
         },
         {
           "line": 3,
@@ -378,12 +378,12 @@
         {
           "line": 8,
           "text": "implements",
-          "foreground": "#ddca7e"
+          "foreground": "#809bbd"
         },
         {
           "line": 25,
           "text": "required",
-          "foreground": "#ddca7e"
+          "foreground": "#809bbd"
         },
         {
           "line": 28,
@@ -398,7 +398,7 @@
         {
           "line": 70,
           "text": "final",
-          "foreground": "#ddca7e"
+          "foreground": "#809bbd"
         },
         {
           "line": 76,
@@ -408,7 +408,7 @@
         {
           "line": 76,
           "text": "get",
-          "foreground": "#ddca7e"
+          "foreground": "#809bbd"
         },
         {
           "line": 76,
@@ -443,12 +443,12 @@
         {
           "line": 121,
           "text": "sealed",
-          "foreground": "#ddca7e"
+          "foreground": "#809bbd"
         },
         {
           "line": 125,
           "text": "extends",
-          "foreground": "#ddca7e"
+          "foreground": "#809bbd"
         },
         {
           "line": 134,
@@ -463,7 +463,7 @@
         {
           "line": 145,
           "text": "final",
-          "foreground": "#ddca7e"
+          "foreground": "#809bbd"
         },
         {
           "line": 145,
@@ -508,7 +508,7 @@
         {
           "line": 159,
           "text": "final",
-          "foreground": "#ddca7e"
+          "foreground": "#809bbd"
         },
         {
           "line": 159,
@@ -623,7 +623,7 @@
         {
           "line": 9,
           "text": "Name",
-          "foreground": "#9a8297"
+          "foreground": "#ffffff"
         },
         {
           "line": 9,
@@ -658,22 +658,22 @@
         {
           "line": 19,
           "text": "make",
-          "foreground": "#ddca7e"
+          "foreground": "#9a8297"
         },
         {
           "line": 19,
           "text": "len",
-          "foreground": "#ddca7e"
+          "foreground": "#9a8297"
         },
         {
           "line": 22,
           "text": "append",
-          "foreground": "#ddca7e"
+          "foreground": "#9a8297"
         },
         {
           "line": 30,
           "text": "Name",
-          "foreground": "#9a8297"
+          "foreground": "#ffffff"
         },
         {
           "line": 42,
@@ -743,7 +743,7 @@
         {
           "line": 27,
           "text": "textContent",
-          "foreground": "#9a8297"
+          "foreground": "#ffffff"
         },
         {
           "line": 30,
@@ -768,22 +768,22 @@
         {
           "line": 1,
           "text": "import",
-          "foreground": "#ddca7e"
+          "foreground": "#809bbd"
         },
         {
           "line": 3,
           "text": "public",
-          "foreground": "#ddca7e"
+          "foreground": "#809bbd"
         },
         {
           "line": 3,
           "text": "final",
-          "foreground": "#ddca7e"
+          "foreground": "#809bbd"
         },
         {
           "line": 3,
           "text": "class",
-          "foreground": "#ddca7e"
+          "foreground": "#809bbd"
         },
         {
           "line": 3,
@@ -793,12 +793,12 @@
         {
           "line": 4,
           "text": "private",
-          "foreground": "#ddca7e"
+          "foreground": "#809bbd"
         },
         {
           "line": 4,
           "text": "static",
-          "foreground": "#ddca7e"
+          "foreground": "#809bbd"
         },
         {
           "line": 4,
@@ -808,7 +808,7 @@
         {
           "line": 4,
           "text": "THEME_NAME",
-          "foreground": "#9a8297"
+          "foreground": "#ffffff"
         },
         {
           "line": 7,
@@ -818,7 +818,7 @@
         {
           "line": 9,
           "text": "record",
-          "foreground": "#ddca7e"
+          "foreground": "#809bbd"
         },
         {
           "line": 9,
@@ -888,7 +888,7 @@
         {
           "line": 24,
           "text": "out",
-          "foreground": "#9a8297"
+          "foreground": "#ffffff"
         },
         {
           "line": 24,
@@ -933,7 +933,7 @@
         {
           "line": 4,
           "text": "background",
-          "foreground": "#9a8297"
+          "foreground": "#ffffff"
         },
         {
           "line": 10,
@@ -1163,7 +1163,7 @@
         {
           "line": 17,
           "text": "keyword",
-          "foreground": "#9a8297"
+          "foreground": "#ffffff"
         },
         {
           "line": 23,
@@ -1228,7 +1228,7 @@
         {
           "line": 6,
           "text": "name",
-          "foreground": "#9a8297"
+          "foreground": "#ffffff"
         },
         {
           "line": 6,
@@ -1413,7 +1413,7 @@
         {
           "line": 38,
           "text": "when",
-          "foreground": "#809bbd"
+          "foreground": "#ddca7e"
         },
         {
           "line": 39,
@@ -1613,7 +1613,7 @@
         {
           "line": 8,
           "text": "name",
-          "foreground": "#9a8297"
+          "foreground": "#ffffff"
         },
         {
           "line": 13,
@@ -1633,7 +1633,7 @@
         {
           "line": 23,
           "text": "accent",
-          "foreground": "#9a8297"
+          "foreground": "#ffffff"
         },
         {
           "line": 29,
@@ -1668,7 +1668,7 @@
         {
           "line": 43,
           "text": "match",
-          "foreground": "#809bbd"
+          "foreground": "#ddca7e"
         }
       ]
     },
@@ -1678,7 +1678,7 @@
         {
           "line": 6,
           "text": "class",
-          "foreground": "#ddca7e"
+          "foreground": "#809bbd"
         },
         {
           "line": 6,
@@ -1698,7 +1698,7 @@
         {
           "line": 17,
           "text": "def",
-          "foreground": "#ddca7e"
+          "foreground": "#809bbd"
         },
         {
           "line": 17,
@@ -2386,7 +2386,7 @@
         {
           "line": 9,
           "text": "function",
-          "foreground": "#809bbd"
+          "foreground": "#ddca7e"
         },
         {
           "line": 9,
@@ -2401,7 +2401,7 @@
         {
           "line": 10,
           "text": "value",
-          "foreground": "#9a8297"
+          "foreground": "#ffffff"
         },
         {
           "line": 15,
@@ -2591,7 +2591,7 @@
         {
           "line": 1,
           "text": "ns",
-          "foreground": "#809bbd"
+          "foreground": "#ddca7e"
         },
         {
           "line": 1,
@@ -3412,7 +3412,7 @@
         {
           "line": 1,
           "text": "import",
-          "foreground": "#809bbd"
+          "foreground": "#ddca7e"
         },
         {
           "line": 1,
@@ -3457,7 +3457,7 @@
         {
           "line": 1,
           "text": "import",
-          "foreground": "#809bbd"
+          "foreground": "#ddca7e"
         },
         {
           "line": 1,
@@ -3502,7 +3502,7 @@
         {
           "line": 1,
           "text": "use",
-          "foreground": "#809bbd"
+          "foreground": "#ddca7e"
         },
         {
           "line": 1,
@@ -3647,7 +3647,7 @@
         {
           "line": 1,
           "text": "name",
-          "foreground": "#9a8297"
+          "foreground": "#ffffff"
         },
         {
           "line": 1,
@@ -3697,7 +3697,7 @@
         {
           "line": 3,
           "text": "name",
-          "foreground": "#9a8297",
+          "foreground": "#ffffff",
           "providerFallbacks": {
             "1.96.0": {
               "foreground": "#ffffff",

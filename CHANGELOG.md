@@ -1,6 +1,8 @@
 # Changelog
 
 ## Unreleased
+- **CHANGED**: use a GitHub-inspired programming-role hierarchy with CodePen colors: yellow types and executable flow, blue declarations/modifiers/annotations, purple callables, and white bindings/fields/properties/enum values; keep stylesheet-family colors on their classic CodePen contract
+- **FIXED**: keep function-typed parameters white at declaration sites while coloring their actual invocations purple
 - **ADDED**: `CodePen Theme Original Ligatures`, preserving the Original palette while retaining theme-owned italics; `CodePen Theme Original` remains non-italic
 - **ADDED**: legacy Operator Mono Lig/Operator Mono typography with Monaco/Courier fallbacks for the editor, integrated terminal, Debug Console, and `[Log]`-scoped Output editor; editor ligatures are enabled
 - **FIXED**: Dart named-argument values retain their binding color instead of inheriting the argument-label color
@@ -17,7 +19,7 @@
 - **FIXED**: Java modifiers, array types, fields and record components; Dart annotation colors; Just/Make targets and automatic Make variables
 - **FIXED**: member, type, unit and interpolation colors in C/C++, C#, Go, PHP, Python, Rust, Swift, Sass/CSS and TOML
 - **ADDED**: full-source color assertions for the original 33 refinement-oriented samples, Makefile provider coverage, and multi-position Dart plus Java/Just/Make editor checks
-- **CHANGED**: apply measured classic Twilight JS/TS roles across languages: neutral type references, blue bindings, purple members, and gray operators; preserve existing TextMate decorations
+- **CHANGED**: preserve gray operators and independent TextMate decorations while adapting programming roles consistently across provider grammars
 - **CHANGED**: keep bracket-pair rainbow colors from overriding syntax foregrounds and sort palette keys alphabetically
 - **ADDED**: semantic highlighting with JS/TS local/declaration distinctions and Dart member/constructor roles; keep Dart keyword typography separate from color rules
 - **ADDED**: 30 recorded live CodePen variants, exact-span reference audits with explicit known differences, color checks for 30 language fixtures, and real JS/TS and optional Dart semantic verification

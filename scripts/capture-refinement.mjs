@@ -153,6 +153,14 @@ try {
       return rows.length === lines.length && rows.every((row, index) =>
         row.textContent.replaceAll('\u00a0', ' ').replaceAll('\u200b', '') === lines[index]);
     }, ready.source.split(/\r?\n/).map(expandTabs), { timeout: 20000 });
+    // A provider loaded for the first time can expose the source before the
+    // workbench has attached the color-theme CSS to the new editor model.
+    await page.waitForFunction(() => {
+      const leaves = [...document.querySelectorAll('.part.editor .view-line span')]
+        .filter((element) => element.textContent?.trim() && !element.querySelector('span'));
+      return leaves.length > 0 && leaves.every((element) =>
+        getComputedStyle(element).color !== 'rgb(0, 0, 0)');
+    }, undefined, { timeout: 20000 });
     if (index === 0) {
       typography = await page.locator('.part.editor .view-line').first().evaluate((line) => {
         const style = getComputedStyle(line);

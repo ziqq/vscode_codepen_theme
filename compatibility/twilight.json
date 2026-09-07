@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "reference": "CodePen palette with a GitHub-inspired programming hierarchy: blue keywords, yellow types, purple callables, and white bindings. Domain languages retain their measured contracts.",
+  "reference": "CodePen palette with a GitHub-inspired programming hierarchy: blue declarations and annotations, yellow types and flow, purple callables, and white bindings, fields, properties, and enum values. Domain languages retain their measured contracts.",
   "decorationSha256": "6ee9779e2538a32797f4cb02f9e15243b602da92aedcf8b23bf638146a8f0f9e",
   "cases": [
     {
@@ -61,7 +61,7 @@
         {
           "line": 2,
           "text": "return",
-          "foreground": "#809bbd"
+          "foreground": "#ddca7e"
         },
         {
           "line": 1,
@@ -97,7 +97,7 @@
         {
           "line": 2,
           "text": "return",
-          "foreground": "#809bbd"
+          "foreground": "#ddca7e"
         },
         {
           "line": 1,
@@ -179,7 +179,7 @@
         {
           "line": 1,
           "text": "import",
-          "foreground": "#ddca7e",
+          "foreground": "#809bbd",
           "fontStyle": 1
         },
         {
@@ -220,7 +220,7 @@
         {
           "line": 25,
           "text": "const",
-          "foreground": "#ddca7e",
+          "foreground": "#809bbd",
           "fontStyle": 1
         },
         {
@@ -478,7 +478,7 @@
         {
           "line": 2,
           "text": "function",
-          "foreground": "#809bbd",
+          "foreground": "#ddca7e",
           "fontStyle": 1
         },
         {
@@ -489,7 +489,7 @@
         {
           "line": 3,
           "text": "width",
-          "foreground": "#9a8297"
+          "foreground": "#ffffff"
         },
         {
           "line": 3,
@@ -499,7 +499,7 @@
         {
           "line": 4,
           "text": "classList",
-          "foreground": "#9a8297"
+          "foreground": "#ffffff"
         },
         {
           "line": 5,
@@ -684,7 +684,7 @@
         {
           "line": 6,
           "text": "name",
-          "foreground": "#9a8297"
+          "foreground": "#ffffff"
         },
         {
           "line": 6,
@@ -699,7 +699,7 @@
         {
           "line": 7,
           "text": "accent",
-          "foreground": "#9a8297"
+          "foreground": "#ffffff"
         },
         {
           "line": 7,
@@ -750,7 +750,7 @@
         {
           "line": 13,
           "text": "name",
-          "foreground": "#9a8297"
+          "foreground": "#ffffff"
         },
         {
           "line": 23,
@@ -1241,7 +1241,7 @@
         {
           "line": 1,
           "text": "ns",
-          "foreground": "#809bbd"
+          "foreground": "#ddca7e"
         },
         {
           "line": 1,
@@ -1598,7 +1598,7 @@
         {
           "line": 1,
           "text": "import",
-          "foreground": "#809bbd"
+          "foreground": "#ddca7e"
         },
         {
           "line": 1,
@@ -1619,7 +1619,7 @@
         {
           "line": 1,
           "text": "import",
-          "foreground": "#809bbd"
+          "foreground": "#ddca7e"
         },
         {
           "line": 1,
@@ -1640,7 +1640,7 @@
         {
           "line": 1,
           "text": "use",
-          "foreground": "#809bbd"
+          "foreground": "#ddca7e"
         },
         {
           "line": 1,
@@ -1713,7 +1713,7 @@
         {
           "line": 1,
           "text": "name",
-          "foreground": "#9a8297"
+          "foreground": "#ffffff"
         }
       ]
     },

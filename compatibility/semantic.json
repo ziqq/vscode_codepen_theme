@@ -59,7 +59,7 @@
           "modifiers": [
             "declaration"
           ],
-          "foreground": "#9a8297"
+          "foreground": "#ffffff"
         },
         {
           "line": 4,
@@ -94,7 +94,7 @@
           "text": "width",
           "type": "property",
           "modifiers": [],
-          "foreground": "#9a8297"
+          "foreground": "#ffffff"
         },
         {
           "line": 7,
@@ -125,7 +125,7 @@
           "modifiers": [
             "declaration"
           ],
-          "foreground": "#9a8297"
+          "foreground": "#ffffff"
         },
         {
           "line": 3,
@@ -239,7 +239,7 @@
           "modifiers": [
             "declaration"
           ],
-          "foreground": "#9a8297"
+          "foreground": "#ffffff"
         },
         {
           "line": 9,
@@ -295,7 +295,7 @@
           "text": "accent",
           "type": "property",
           "modifiers": [],
-          "foreground": "#9a8297"
+          "foreground": "#ffffff"
         },
         {
           "line": 28,

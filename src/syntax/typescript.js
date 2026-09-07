@@ -1,6 +1,6 @@
 const { Spans } = require('./spans');
 const { addComment } = require('./comments');
-const { codeRoles } = require('./roles');
+const { codeRoles, keywordStyle } = require('./roles');
 
 let compiler;
 function refineTypeScript(source, language) {
@@ -136,7 +136,8 @@ function refineTypeScript(source, language) {
       return codeRoles.method;
     }
     if (declarations.some(isCallableBinding)) return codeRoles.functionDeclaration;
-    if (declarations.some((declaration) => isProperty(declaration) || isParameterProperty(declaration) || isAccessor(declaration))) {
+    if (declarations.some(isAccessor)) return codeRoles.property;
+    if (declarations.some((declaration) => isProperty(declaration) || isParameterProperty(declaration))) {
       return codeRoles.property;
     }
     if (declarations.some((item) => isBindingDeclaration(item) || isLocal(item))) return codeRoles.binding;
@@ -157,7 +158,9 @@ function refineTypeScript(source, language) {
     comments(node.pos);
     comments(node.end, true);
     if (ts.isIdentifier(node) || ts.isPrivateIdentifier(node)) {
-      spans.add(start, node.end, identifierRole(node), 30);
+      const role = identifierRole(node);
+      spans.add(start, node.end, role, 30,
+        role === codeRoles.annotation ? 'italic' : undefined);
       return;
     }
     if (ts.isStringLiteralLike(node) || ts.isRegularExpressionLiteral(node) ||
@@ -179,28 +182,38 @@ function refineTypeScript(source, language) {
     if (children.length) { for (const child of children) visit(child); return; }
     if (node.kind === S.EndOfFileToken || start === node.end) return;
     const parent = node.parent;
+    const text = source.slice(start, node.end);
     let role = 'white';
-    if (node.kind >= S.FirstKeyword && node.kind <= S.LastKeyword) role = codeRoles.keyword;
+    let fontStyle;
+    if (node.kind >= S.FirstKeyword && node.kind <= S.LastKeyword) {
+      ({ role, fontStyle } = keywordStyle(text));
+    }
     if (node.kind >= S.FirstTypeNode && node.kind <= S.LastTypeNode ||
         [S.StringKeyword, S.NumberKeyword, S.BooleanKeyword, S.AnyKeyword, S.UnknownKeyword,
-          S.NeverKeyword, S.ObjectKeyword, S.SymbolKeyword, S.BigIntKeyword, S.VoidKeyword].includes(node.kind)) role = codeRoles.type;
-    if (node.kind === S.VoidKeyword) role = codeRoles.keyword;
-    if ([S.TrueKeyword, S.FalseKeyword].includes(node.kind)) role = 'yellow';
-    if (node.kind === S.NullKeyword) role = 'orange';
-    if (node.kind === S.AsKeyword) role = codeRoles.binding;
-    if (node.kind === S.TypeKeyword && ts.isImportClause(parent) && parent.isTypeOnly) role = codeRoles.keyword;
+          S.NeverKeyword, S.ObjectKeyword, S.SymbolKeyword, S.BigIntKeyword, S.VoidKeyword].includes(node.kind)) {
+      role = codeRoles.type;
+      fontStyle = undefined;
+    }
+    if (node.kind === S.VoidKeyword) ({ role, fontStyle } = keywordStyle(text));
+    if ([S.TrueKeyword, S.FalseKeyword].includes(node.kind)) ({ role, fontStyle } = keywordStyle(text));
+    if (node.kind === S.NullKeyword) ({ role, fontStyle } = keywordStyle(text));
+    if (node.kind === S.AsKeyword) ({ role, fontStyle } = keywordStyle(text));
+    if (node.kind === S.TypeKeyword && ts.isImportClause(parent) && parent.isTypeOnly) {
+      ({ role, fontStyle } = keywordStyle(text));
+    }
     if (node.kind >= S.FirstPunctuation && node.kind <= S.LastPunctuation &&
         ![S.OpenBraceToken, S.CloseBraceToken, S.OpenParenToken, S.CloseParenToken,
           S.OpenBracketToken, S.CloseBracketToken, S.DotToken, S.SemicolonToken, S.CommaToken,
-          S.ColonToken].includes(node.kind)) role = 'operator';
-    if (node.kind === S.DotDotDotToken) role = 'purple';
-    if (node.kind === S.QuestionDotToken) role = 'white';
-    if (node.kind === S.AtToken && ts.isDecorator(parent)) role = codeRoles.annotation;
-    if (inJsxTag(node)) role = 'brown';
+          S.ColonToken].includes(node.kind)) { role = 'operator'; fontStyle = undefined; }
+    if (node.kind === S.DotDotDotToken) { role = 'purple'; fontStyle = undefined; }
+    if (node.kind === S.QuestionDotToken) { role = 'white'; fontStyle = undefined; }
+    if (node.kind === S.AtToken && ts.isDecorator(parent)) { role = codeRoles.annotation; fontStyle = undefined; }
+    if (inJsxTag(node)) { role = 'brown'; fontStyle = undefined; }
     if (node.kind === S.ConstructorKeyword && ts.isConstructorDeclaration(parent)) {
       role = codeRoles.method;
+      fontStyle = undefined;
     }
-    if (node.kind === S.AsteriskToken && ts.isFunctionLike(parent)) role = codeRoles.keyword;
+    if (node.kind === S.AsteriskToken && ts.isFunctionLike(parent)) { role = codeRoles.flowKeyword; fontStyle = undefined; }
     if (node.kind === S.AsteriskToken &&
         (ts.isNamespaceImport(parent) || ts.isExportDeclaration(parent))) role = 'yellow';
     if (ts.isJsxAttribute(parent) && node.kind === S.EqualsToken) role = 'white';
@@ -208,7 +221,7 @@ function refineTypeScript(source, language) {
         ts.isJsxSelfClosingElement(parent) || ts.isJsxOpeningFragment(parent) ||
         ts.isJsxClosingFragment(parent)) &&
         [S.LessThanToken, S.GreaterThanToken, S.SlashToken].includes(node.kind)) role = 'brown';
-    spans.add(start, node.end, role);
+    spans.add(start, node.end, role, 10, fontStyle);
   }
   visit(file);
   return spans.finish();

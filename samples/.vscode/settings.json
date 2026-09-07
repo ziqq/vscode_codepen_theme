@@ -1,6 +1,6 @@
 {
   "editor.minimap.enabled": false,
   "editor.semanticHighlighting.enabled": "configuredByTheme",
-  "workbench.colorTheme": "CodePen Theme Original",
+  "workbench.colorTheme": "CodePen Theme Original Ligatures",
   "workbench.startupEditor": "none"
 }

@@ -43,6 +43,7 @@ const PROGRAMMING_SOURCE_SCOPES = Object.freeze([
   'source.coffee',
   'source.cpp',
   'source.cs',
+  'source.cuda-cpp',
   'source.dart',
   'source.fsharp',
   'source.go',
@@ -715,7 +716,6 @@ const tokenColors = [
     // Source roots
     // Storage declarations
     'storage.modifier.dart',
-    'storage.modifier.implements.java',
     'storage.modifier.java',
     'storage.type.annotation.dart',
     'storage.type.annotation.java',
@@ -1079,9 +1079,8 @@ const tokenColors = [
     'variable.other',
     'variable.parameter',
   ])),
-  colorRule('TWILIGHT CODE PROPERTIES', color.purple, [
+  colorRule('TWILIGHT CODE FIELDS', color.white, [
     ...programmingScopes([
-      'constant.other.enum',
       'entity.name.variable.field',
       'entity.name.variable.property',
       'meta.object-literal.key',
@@ -1090,7 +1089,6 @@ const tokenColors = [
       'support.variable.property',
       'variable.object.property',
       'variable.other.constant.property',
-      'variable.other.enummember',
       'variable.other.object.property',
       'variable.other.property',
       'variable.parameter.function-call',
@@ -1134,12 +1132,15 @@ const tokenColors = [
     'meta.function-call.swift support.function.any-method.swift',
     'meta.function-call.swift meta.function-call.swift support.function.any-method.swift',
     'meta.function.call.rust entity.name.function.rust',
-    'support.type.property-name.table.toml',
-    'support.type.property-name.array.toml',
     'entity.name.function.cs',
     'meta.body.class.cpp entity.name.function.call.cpp',
     'entity.name.function.java',
     'entity.name.function.dart',
+    'entity.name.function.support.builtin.go',
+    'source.shell entity.name.function.shell',
+    'source.shell entity.name.function.call.shell',
+    'source.shell entity.name.command.shell',
+    'source.shell support.function.builtin.shell',
     ...['js', 'js.jsx', 'jsx', 'ts', 'tsx'].flatMap((language) => [
       `meta.definition.method.${language} entity.name.function.${language}`,
       `meta.method.declaration.${language} > storage.type.${language}`,
@@ -1147,26 +1148,19 @@ const tokenColors = [
       `meta.function-call.${language} entity.name.function.${language}`,
     ]),
   ]),
+  colorRule('TWILIGHT ENUM MEMBERS', color.white, programmingScopes([
+    'constant.other.enum',
+    'variable.other.enummember',
+  ])),
   colorRule('TWILIGHT KEYWORDS AND ATOMS', color.yellow, [
     'constant.language',
     'constant.language.color.rgb-value.css.sass',
     'meta.directive.on.svelte entity.name.type.svelte',
     'constant.language.dart',
-    'storage.modifier.dart',
-    'storage.type.annotation.dart',
-    'storage.modifier.java',
     'storage.modifier.implements.java',
     'keyword.operator.sizeof.c',
     'keyword.operator.expression.new.cs',
     'keyword.operator.as.php',
-    'entity.name.function.support.builtin.go',
-    'entity.name.function.decorator.python',
-    'keyword.declaration.dart',
-    'keyword.other.import.dart',
-    'keyword.other.import.java',
-    'keyword.other.package.java',
-    'storage.type.class.python',
-    'storage.type.function.python',
     // Stylesheet calls are free/builtin functions, matching JS/TS globals.
     'support.function.calc.css',
     'support.function.calc.less',
@@ -1194,10 +1188,13 @@ const tokenColors = [
     'source.js entity.other.inherited-class.js',
     'source.js support.class.promise.js',
   ]),
-  colorRule('TWILIGHT CODE KEYWORDS', color.blue, programmingScopes([
+  colorRule('TWILIGHT PROGRAMMING FLOW KEYWORDS', color.yellow, programmingScopes([
     'keyword.control',
-    'keyword.declaration',
     'keyword.function',
+    'variable.language',
+  ])),
+  colorRule('TWILIGHT PROGRAMMING DECLARATION KEYWORDS', color.blue, programmingScopes([
+    'keyword.declaration',
     'keyword.other',
     'keyword.package',
     'keyword.struct',
@@ -1217,6 +1214,25 @@ const tokenColors = [
     'source.ts storage.type.ts',
     'source.tsx storage.type.tsx',
   ])),
+  colorRule('TWILIGHT FUNCTION KEYWORD OVERRIDES', color.yellow, [
+    // These grammars use a storage scope for the literal `function` keyword.
+    // Declaration spellings such as def/fn/sub remain blue.
+    ...['coffee', 'js', 'jsx', 'php', 'powershell', 'ts', 'tsx'].flatMap((language) => [
+      `source.${language} storage.type.function.${language}`,
+      `source.${language} keyword.control.function.${language}`,
+    ]),
+  ]),
+  colorRule('TWILIGHT DECLARATION KEYWORD OVERRIDES', color.blue, [
+    // Some grammars expose declaration words through keyword.control rather
+    // than a declaration/storage scope.
+    'source.ruby keyword.control.def.ruby',
+    'source.ruby keyword.control.class.ruby',
+    'source.coffee keyword.control.class.coffee',
+    'source.perl keyword.control.package.perl',
+    'source.perl keyword.control.sub.perl',
+    'source.raku keyword.control.package.raku',
+    'source.raku keyword.control.sub.raku',
+  ]),
   colorRule('TWILIGHT MODULE AND TYPE KEYWORDS', color.blue, [
     // Built-in JS/TS grammars wrap these tokens in meta scopes whose
     // specificity otherwise beats the shared programming keyword rule.
@@ -1226,6 +1242,34 @@ const tokenColors = [
     ]),
     'meta.type.declaration.ts storage.type.type.ts',
     'meta.type.declaration.tsx storage.type.type.tsx',
+    ...programmingScopes([
+      'keyword.control.directive.include',
+      'keyword.control.export',
+      'keyword.control.from',
+      'keyword.control.import',
+      'punctuation.definition.directive',
+    ]),
+    'source.julia punctuation.definition.macro.julia',
+    'source.julia support.function.macro.julia',
+    'keyword.control.as.ts',
+    'keyword.control.as.tsx',
+    'keyword.operator.as.php',
+    'keyword.go.mod',
+    'keyword.package.go',
+    'source.toml support.type.property-name.array.toml',
+    'source.toml support.type.property-name.table.toml',
+  ]),
+  colorRule('TWILIGHT TOML TABLE PUNCTUATION', color.white, [
+    'source.toml punctuation.definition.array.table.toml',
+    'source.toml punctuation.definition.table.toml',
+  ]),
+  colorRule('TWILIGHT GO PACKAGE NAME', color.white, [
+    'source.go entity.name.type.package.go',
+  ]),
+  colorRule('TWILIGHT VOID TYPE', color.yellow, [
+    'source.dart storage.type.primitive.dart',
+    'source.dart keyword.void.dart',
+    'source.dart keyword.other.void.dart',
   ]),
   colorRule('TWILIGHT NULL LITERALS', color.orange, [
     'constant.language.boolean.null.js',
@@ -1335,6 +1379,14 @@ const tokenColors = [
     'punctuation.decorator.ts',
     'punctuation.decorator.tsx',
   ]),
+  colorRule('TWILIGHT CUDA QUALIFIERS', color.blue, [
+    'source.cuda-cpp storage.modifier.__device__.cuda-cpp',
+    'source.cuda-cpp storage.modifier.__global__.cuda-cpp',
+    'source.cuda-cpp storage.modifier.__host__.cuda-cpp',
+  ]),
+  colorRule('TWILIGHT CUDA POINTERS', color.operator, [
+    'source.cuda-cpp storage.modifier.pointer.cuda-cpp',
+  ]),
   colorRule('TWILIGHT DOCUMENTATION', color.gray, [
     'comment.block.documentation.dart variable.name.source.dart',
     'comment.block.documentation.dart variable.other.source.dart',
@@ -1349,14 +1401,28 @@ const tokenColors = [
   // Documentation markup must remain visible inside the muted comment body.
   // Runtime refinement supplies the same roles when a grammar exposes only a
   // single undifferentiated comment token.
-  colorRule('DOCUMENTATION CODE', color.white, [
+  colorRule('DOCUMENTATION CODE', color.muted, [
     'comment markup.inline.raw',
     'comment punctuation.definition.raw',
     'comment.block.documentation.dart punctuation',
     'comment.block.documentation.dart variable.other.source.dart',
   ]),
-  colorRule('DOCUMENTATION SYMBOL REFERENCE', color.white, [
+  colorRule('DOCUMENTATION TYPE REFERENCE', color.yellow, [
     'comment.block.documentation.dart variable.name.source.dart',
+    'comment.block.documentation entity.name.type.instance.jsdoc',
+    'comment.block.documentation storage.type.class.jsdoc',
+  ]),
+  colorRule('TWILIGHT LOG OUTPUT', color.muted, [
+    'text.log',
+    'text.log comment',
+    'text.log constant',
+    'text.log emphasis',
+    'text.log markup',
+    'text.log string',
+    'text.log strong',
+  ]),
+  colorRule('TWILIGHT LOG ERRORS', color.red, [
+    'text.log log.error',
   ]),
   colorRule('TWILIGHT STRING PARTS', color.green, [
     'string constant.other.placeholder',
@@ -1993,8 +2059,10 @@ const tokenColors = [
     'comment.line.number-sign.yaml variable.other.read.github-actions-expression',
     'comment.line.shebang.js',
     // Entities and declarations
-    'entity.name.type.package.go',
     'entity.other.attribute-name',
+    ...programmingScopes([
+      'keyword.control',
+    ]),
     // Keywords and operators
     'keyword.control.at-rule.css',
     'keyword.control.at-rule.font-face.css',
@@ -2017,6 +2085,7 @@ const tokenColors = [
     'keyword.control.at-rule.use.sass',
     'keyword.control.at-rule.use.scss',
     'keyword.control.await.swift',
+    'keyword.control.branch.swift',
     'keyword.control.c',
     'keyword.control.catch-exception.dart',
     'keyword.control.catch.java',
@@ -2076,6 +2145,7 @@ const tokenColors = [
     'keyword.control.trycatch.tsx',
     'keyword.declaration.dart',
     'keyword.control.directive.include.c',
+    'keyword.control.directive.include.cuda-cpp',
     'keyword.function.go',
     'keyword.go.mod',
     'keyword.operator.instanceof.java',
@@ -2131,6 +2201,7 @@ const tokenColors = [
     'punctuation.definition.keyword',
     'punctuation.definition.keyword.css',
     'punctuation.definition.directive.c',
+    'punctuation.definition.directive.cuda-cpp',
     // Storage declarations
     'storage.modifier.async.swift',
     'storage.modifier.attribute.swift',
@@ -2143,7 +2214,9 @@ const tokenColors = [
     'storage.modifier.swift',
     'storage.modifier.ts',
     'storage.modifier.tsx',
-    'storage.type',
+    'storage.modifier.__device__.cuda-cpp',
+    'storage.modifier.__global__.cuda-cpp',
+    'storage.modifier.__host__.cuda-cpp',
     'storage.type.annotation.dart',
     'storage.type.annotation.java',
     'storage.type.class.python',
@@ -2151,6 +2224,10 @@ const tokenColors = [
     'storage.type.function',
     'storage.type.function.python',
     'storage.type.rust',
+    'support.function.macro.julia',
+    'punctuation.definition.macro.julia',
+    'support.type.property-name.array.toml',
+    'support.type.property-name.table.toml',
     // Tags
     'tag.decorator.js entity.name.tag.js',
     'tag.decorator.js punctuation.definition.tag.js',
@@ -2162,6 +2239,43 @@ const tokenColors = [
     'variable.language.self.rust',
     'variable.language.special.self.python',
     'variable.language.this.java',
+  ]),
+  decorationRule('UPRIGHT SQL', 'regular', [
+    'source.sql',
+    'source.sql comment',
+    'source.sql constant',
+    'source.sql entity',
+    'source.sql keyword',
+    'source.sql meta',
+    'source.sql punctuation',
+    'source.sql storage',
+    'source.sql string',
+    'source.sql support',
+    'source.sql variable',
+  ]),
+  decorationRule('UPRIGHT BUILD RECIPES', 'regular', [
+    'source.just',
+    'source.just comment',
+    'source.just constant',
+    'source.just entity',
+    'source.just keyword',
+    'source.just meta',
+    'source.just punctuation',
+    'source.just storage',
+    'source.just string',
+    'source.just support',
+    'source.just variable',
+    'source.makefile',
+    'source.makefile comment',
+    'source.makefile constant',
+    'source.makefile entity',
+    'source.makefile keyword',
+    'source.makefile meta',
+    'source.makefile punctuation',
+    'source.makefile storage',
+    'source.makefile string',
+    'source.makefile support',
+    'source.makefile variable',
   ]),
   decorationRule('UNDERLINE', 'underline', [
     // Markup
@@ -2178,8 +2292,15 @@ const tokenColors = [
  * separate from the semantic palette, just like the TextMate layers above.
  */
 const semanticDecorations = {
+  keyword: { italic: true },
   'keyword:dart': { italic: true },
+  'keyword:sql': { italic: false },
   'keyword.void:dart': { italic: false },
+  decorator: { italic: true },
+  'macro:julia': { italic: true },
+  'annotation:dart': { italic: true },
+  tomlArrayKey: { italic: true },
+  tomlTableKey: { italic: true },
 };
 
 function resolveTheme({ name, italics = true }) {
@@ -2190,6 +2311,7 @@ function resolveTheme({ name, italics = true }) {
       'materialTheme.accent': color.green,
       focusBorder: color.focus,
       foreground: color.white,
+      errorForeground: color.red,
       // ACTIVITY BAR
       'activityBarBadge.background': color.green,
       'activityBar.background': color.background,
@@ -2239,12 +2361,22 @@ function resolveTheme({ name, italics = true }) {
       'list.activeSelectionForeground': color.green,
       'list.inactiveSelectionForeground': color.green,
       'list.highlightForeground': color.green,
+      'list.errorForeground': color.red,
+      'list.warningForeground': color.muted,
       // PANEL
       'panel.background': color.background,
       'panel.border': color.background,
+      'panel.foreground': color.muted,
       'panel.activeBorder': color.green,
-      'panel.activeForeground': color.white,
-      'panel.inactiveForeground': color.white,
+      'panel.activeForeground': color.muted,
+      'panel.inactiveForeground': color.muted,
+      'debugConsole.errorForeground': color.red,
+      'debugConsole.infoForeground': color.muted,
+      'debugConsole.sourceForeground': color.muted,
+      'debugConsole.warningForeground': color.muted,
+      'problemsErrorIcon.foreground': color.red,
+      'problemsInfoIcon.foreground': color.muted,
+      'problemsWarningIcon.foreground': color.muted,
       // SIDEBAR
       'sideBar.background': color.background,
       'sideBar.foreground': color.muted,
@@ -2331,9 +2463,9 @@ function resolveTheme({ name, italics = true }) {
       parameter: color.white,
       variable: color.white,
       'variable.defaultLibrary': color.white,
-      property: color.purple,
-      enumMember: color.purple,
-      'enumMember.declaration': color.purple,
+      property: color.white,
+      enumMember: color.white,
+      'enumMember.declaration': color.white,
       function: color.purple,
       'function.defaultLibrary': color.purple,
       'function.declaration': color.purple,
@@ -2344,10 +2476,13 @@ function resolveTheme({ name, italics = true }) {
       macro: color.yellow,
       'macro.declaration': color.blue,
       decorator: color.blue,
+      tomlArrayKey: color.blue,
+      tomlTableKey: color.blue,
       label: color.yellow,
-      keyword: color.blue,
-      'keyword:dart': color.blue,
-      'keyword.void:dart': color.blue,
+      keyword: color.yellow,
+      'keyword:dart': color.yellow,
+      'keyword:sql': color.yellow,
+      'keyword.void:dart': color.yellow,
       boolean: color.yellow,
       number: color.orange,
       string: color.green,
@@ -2358,10 +2493,11 @@ function resolveTheme({ name, italics = true }) {
       'class.constructor:dart': color.yellow,
       'class.constructor.declaration:dart': color.yellow,
       'variable.importPrefix:dart': color.white,
-      'variable.instance:dart': color.purple,
+      'variable.instance:dart': color.white,
       'annotation:dart': color.blue,
       'source.interpolation:dart': color.green,
       'property.annotation:dart': color.blue,
+      'macro:julia': color.blue,
       'function:just': color.purple,
       'function.declaration:just': color.purple,
       'function.definition:just': color.purple,
@@ -2385,7 +2521,7 @@ function resolveTheme({ name, italics = true }) {
             [`${type}.local:${language}`, type === 'function' ? color.purple : color.white],
           ]),
           [`parameter:${language}`, color.white],
-          [`property:${language}`, color.purple],
+          [`property:${language}`, color.white],
           [`method:${language}`, color.purple],
         ]),
       ),

@@ -1,5 +1,5 @@
 const { Spans } = require('./spans');
-const { codeRoles } = require('./roles');
+const { codeRoles, keywordStyle } = require('./roles');
 
 // Tree-sitter provides the common syntax tree in tree.js. This module keeps
 // grammar-specific constructs isolated so the shared declaration model stays
@@ -28,8 +28,8 @@ const identifier = (node) => node?.type === 'identifier';
 const calledAfter = (source, node) => node &&
   /^\s*(?:<[^;{}()]*>)?\s*\(/.test(source.slice(node.endIndex, node.endIndex + 160));
 
-function add(spans, node, role, priority = 60) {
-  if (node) spans.add(node.startIndex, node.endIndex, role, priority);
+function add(spans, node, role, priority = 60, fontStyle) {
+  if (node) spans.add(node.startIndex, node.endIndex, role, priority, fontStyle);
 }
 
 function directIdentifiers(node) {
@@ -87,9 +87,16 @@ function cuda(spans, nodes, source) {
       add(spans, name, calledAfter(source, name) ? codeRoles.method : codeRoles.type, 70);
     }
   }
-  for (const match of source.matchAll(/^\s*#/gm)) {
-    const at = match.index + match[0].lastIndexOf('#');
-    spans.add(at, at + 1, 'yellow', 70);
+  for (const match of source.matchAll(/^\s*(#)\s*(include|import)\b/gm)) {
+    const hashAt = match.index + match[0].indexOf(match[1]);
+    const keywordAt = match.index + match[0].lastIndexOf(match[2]);
+    spans.add(hashAt, hashAt + 1, codeRoles.declarationKeyword, 75, 'italic');
+    spans.add(keywordAt, keywordAt + match[2].length,
+      codeRoles.declarationKeyword, 75, 'italic');
+  }
+  for (const match of source.matchAll(/\b(?:__global__|__device__|__host__)\b/g)) {
+    spans.add(match.index, match.index + match[0].length,
+      codeRoles.declarationKeyword, 75, 'italic');
   }
   for (const match of source.matchAll(/\b(?:__global__|__device__|__host__)\s+[A-Za-z_]\w*(?:\s*[*&]\s*)?\s+([A-Za-z_]\w*)\s*\(/g)) {
     const at = match.index + match[0].lastIndexOf(match[1]);
@@ -163,7 +170,9 @@ function julia(spans, nodes, source) {
       const typed = ancestor(node, (item) => item.type === 'typed_expression');
       if (typed?.namedChildren.at(-1)?.id === node.id) { add(spans, node, codeRoles.type); continue; }
     }
-    if (parent.type === 'macro_identifier') { add(spans, node, 'purple'); continue; }
+    if (parent.type === 'macro_identifier') {
+      add(spans, parent, codeRoles.annotation, 70, 'italic'); continue;
+    }
     if (parent.type === 'quote_expression') { add(spans, node, 'green'); continue; }
     if (parent.type === 'call_expression' && parent.namedChildren[0]?.id === node.id) {
       add(spans, node, codeRoles.method); continue;
@@ -223,7 +232,11 @@ function lua(spans, nodes, source) {
         (parent.type === 'field' && field(parent, 'name')?.id === node.id)) {
       add(spans, node, calledAfter(source, node) ? codeRoles.method : codeRoles.property); continue;
     }
-    if (node.text === 'self') { add(spans, node, codeRoles.keyword); continue; }
+    if (node.text === 'self') {
+      const style = keywordStyle(node.text);
+      add(spans, node, style.role, 60, style.fontStyle);
+      continue;
+    }
     if (parent.type === 'function_call' && field(parent, 'name')?.id === node.id) {
       add(spans, node, codeRoles.method); continue;
     }
@@ -261,9 +274,12 @@ function objectiveC(spans, nodes, source) {
     if (node.type === 'type_identifier') add(spans, node, codeRoles.type, 50);
     if (identifier(node) && /^_[A-Za-z]/.test(node.text)) add(spans, node, codeRoles.property);
   }
-  for (const match of source.matchAll(/^\s*#/gm)) {
-    const at = match.index + match[0].lastIndexOf('#');
-    spans.add(at, at + 1, codeRoles.keyword, 70);
+  for (const match of source.matchAll(/^\s*(#)\s*(import|include)\b/gm)) {
+    const hashAt = match.index + match[0].indexOf(match[1]);
+    const keywordAt = match.index + match[0].lastIndexOf(match[2]);
+    spans.add(hashAt, hashAt + 1, codeRoles.declarationKeyword, 75, 'italic');
+    spans.add(keywordAt, keywordAt + match[2].length,
+      codeRoles.declarationKeyword, 75, 'italic');
   }
   if (source.includes('::')) {
     for (const match of source.matchAll(/\b([a-z_]\w*)::([A-Za-z_]\w*)/g)) {

@@ -39,7 +39,7 @@
       {
         "line": 6,
         "text": "name",
-        "foreground": "#9a8297"
+        "foreground": "#ffffff"
       },
       {
         "line": 6,
@@ -79,7 +79,7 @@
       {
         "line": 13,
         "text": "name",
-        "foreground": "#9a8297"
+        "foreground": "#ffffff"
       }
     ],
     "semantic": [
@@ -116,7 +116,7 @@
       {
         "line": 6,
         "text": "name",
-        "foreground": "#9a8297"
+        "foreground": "#ffffff"
       },
       {
         "line": 6,
@@ -156,7 +156,7 @@
       {
         "line": 13,
         "text": "name",
-        "foreground": "#9a8297"
+        "foreground": "#ffffff"
       },
       {
         "line": 28,
@@ -180,7 +180,7 @@
       {
       "line": 3,
       "text": "dark",
-      "foreground": "#9a8297"
+      "foreground": "#ffffff"
       },
       {
       "line": 8,
@@ -218,14 +218,14 @@
       "foreground": "#809bbd"
       },
       {
-      "line": 70,
-      "text": "alias",
-      "foreground": "#9a8297"
+        "line": 70,
+        "text": "alias",
+        "foreground": "#ffffff"
       },
       {
-      "line": 73,
-      "text": "value",
-      "foreground": "#9a8297"
+        "line": 73,
+        "text": "value",
+        "foreground": "#ffffff"
       },
       {
       "line": 76,
@@ -243,9 +243,9 @@
         "foreground": "#9a8297"
       },
       {
-      "line": 86,
-      "text": "fixed",
-      "foreground": "#9a8297"
+        "line": 86,
+        "text": "fixed",
+        "foreground": "#ffffff"
       },
       {
         "line": 96,
@@ -268,9 +268,9 @@
       "foreground": "#ddca7e"
       },
       {
-      "line": 128,
-      "text": "name",
-      "foreground": "#9a8297"
+        "line": 128,
+        "text": "name",
+        "foreground": "#ffffff"
       },
       {
         "line": 140,
@@ -305,12 +305,12 @@
       {
         "line": 1,
         "text": "import",
-        "foreground": "#ddca7e"
+        "foreground": "#809bbd"
       },
       {
         "line": 25,
         "text": "const",
-        "foreground": "#ddca7e"
+        "foreground": "#809bbd"
       },
       {
         "line": 28,
@@ -340,7 +340,7 @@
       {
         "line": 121,
         "text": "sealed",
-        "foreground": "#ddca7e"
+        "foreground": "#809bbd"
       },
       {
         "line": 140,
@@ -364,12 +364,12 @@
       {
         "line": 12,
         "text": "name",
-        "foreground": "#9a8297"
+        "foreground": "#ffffff"
       },
       {
         "line": 13,
         "text": "tokens",
-        "foreground": "#9a8297"
+        "foreground": "#ffffff"
       },
       {
         "line": 16,
@@ -403,17 +403,17 @@
       {
         "line": 3,
         "text": "public",
-        "foreground": "#ddca7e"
+        "foreground": "#809bbd"
       },
       {
         "line": 3,
         "text": "final",
-        "foreground": "#ddca7e"
+        "foreground": "#809bbd"
       },
       {
         "line": 3,
         "text": "class",
-        "foreground": "#ddca7e"
+        "foreground": "#809bbd"
       },
       {
         "line": 3,
@@ -423,12 +423,12 @@
       {
         "line": 4,
         "text": "THEME_NAME",
-        "foreground": "#9a8297"
+        "foreground": "#ffffff"
       },
       {
         "line": 9,
         "text": "record",
-        "foreground": "#ddca7e"
+        "foreground": "#809bbd"
       },
       {
         "line": 9,

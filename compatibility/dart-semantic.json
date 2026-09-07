@@ -1,18 +1,116 @@
 {
   "reference": "Dart SDK 3.11.5 analysis-server classifications; color roles are adapted from measured classic CodePen JS/TS. Enum declaration lacks a declaration modifier and therefore uses the neutral type color.",
   "expect": [
-    { "line": 70, "text": "alias", "type": "variable", "modifiers": ["declaration", "instance"], "foreground": "#9a8297" },
-    { "line": 76, "text": "isFixed", "type": "property", "modifiers": ["declaration", "instance"], "foreground": "#9a8297" },
-    { "line": 85, "text": "map", "type": "method", "modifiers": ["declaration", "instance"], "foreground": "#9a8297" },
-    { "line": 86, "text": "fixed", "type": "parameter", "modifiers": ["declaration"], "foreground": "#ffffff" },
-    { "line": 86, "text": "Function", "type": "keyword", "modifiers": [], "foreground": "#809bbd", "limitation": "Dart emits the same keyword token as const; the contextual refinement layer restores the yellow type role." },
-    { "line": 96, "text": "maybeMap", "type": "method", "modifiers": ["declaration", "instance"], "foreground": "#9a8297" },
-    { "line": 101, "text": "map", "type": "method", "modifiers": ["instance"], "foreground": "#9a8297" },
-    { "line": 108, "text": "maybeMapOrNull", "type": "method", "modifiers": ["declaration", "instance"], "foreground": "#9a8297" },
-    { "line": 114, "text": "override", "type": "property", "modifiers": ["annotation"], "foreground": "#809bbd" },
-    { "line": 115, "text": "compareTo", "type": "method", "modifiers": ["declaration", "instance"], "foreground": "#9a8297" },
-    { "line": 145, "text": "name", "type": "variable", "modifiers": ["declaration"], "foreground": "#ffffff" },
-    { "line": 154, "text": "state", "type": "variable", "modifiers": [], "foreground": "#ffffff" },
+    {
+      "line": 70,
+      "text": "alias",
+      "type": "variable",
+      "modifiers": [
+        "declaration",
+        "instance"
+      ],
+      "foreground": "#ffffff"
+    },
+    {
+      "line": 76,
+      "text": "isFixed",
+      "type": "property",
+      "modifiers": [
+        "declaration",
+        "instance"
+      ],
+      "foreground": "#ffffff"
+    },
+    {
+      "line": 85,
+      "text": "map",
+      "type": "method",
+      "modifiers": [
+        "declaration",
+        "instance"
+      ],
+      "foreground": "#9a8297"
+    },
+    {
+      "line": 86,
+      "text": "fixed",
+      "type": "parameter",
+      "modifiers": [
+        "declaration"
+      ],
+      "foreground": "#ffffff"
+    },
+    {
+      "line": 86,
+      "text": "Function",
+      "type": "keyword",
+      "modifiers": [],
+      "foreground": "#ddca7e"
+    },
+    {
+      "line": 96,
+      "text": "maybeMap",
+      "type": "method",
+      "modifiers": [
+        "declaration",
+        "instance"
+      ],
+      "foreground": "#9a8297"
+    },
+    {
+      "line": 101,
+      "text": "map",
+      "type": "method",
+      "modifiers": [
+        "instance"
+      ],
+      "foreground": "#9a8297"
+    },
+    {
+      "line": 108,
+      "text": "maybeMapOrNull",
+      "type": "method",
+      "modifiers": [
+        "declaration",
+        "instance"
+      ],
+      "foreground": "#9a8297"
+    },
+    {
+      "line": 114,
+      "text": "override",
+      "type": "property",
+      "modifiers": [
+        "annotation"
+      ],
+      "foreground": "#809bbd"
+    },
+    {
+      "line": 115,
+      "text": "compareTo",
+      "type": "method",
+      "modifiers": [
+        "declaration",
+        "instance"
+      ],
+      "foreground": "#9a8297"
+    },
+    {
+      "line": 145,
+      "text": "name",
+      "type": "variable",
+      "modifiers": [
+        "declaration"
+      ],
+      "foreground": "#ffffff"
+    },
+    {
+      "line": 154,
+      "text": "state",
+      "type": "variable",
+      "modifiers": [],
+      "foreground": "#ffffff"
+    },
     {
       "line": 3,
       "text": "ThemeMode",
@@ -25,7 +123,7 @@
       "text": "dark",
       "type": "enumMember",
       "modifiers": [],
-      "foreground": "#9a8297"
+      "foreground": "#ffffff"
     },
     {
       "line": 8,
@@ -98,7 +196,7 @@
         "declaration",
         "instance"
       ],
-      "foreground": "#9a8297"
+      "foreground": "#ffffff"
     },
     {
       "line": 131,
@@ -108,7 +206,7 @@
         "declaration",
         "instance"
       ],
-      "foreground": "#9a8297"
+      "foreground": "#ffffff"
     },
     {
       "line": 140,

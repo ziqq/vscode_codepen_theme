@@ -1,6 +1,6 @@
 const { Spans } = require('./spans');
 const { addComment } = require('./comments');
-const { codeRoles } = require('./roles');
+const { codeRoles, keywordStyle } = require('./roles');
 const { refineTypeScript } = require('./typescript');
 
 // Providers without a dependable Tree-sitter grammar use bounded lexical
@@ -29,7 +29,11 @@ function mask(source, spans, commentPattern, stringPattern = /"(?:\\.|[^"\\])*(?
 
 function wordSpans(spans, text, words, role, priority = 40) {
   const pattern = new RegExp(`\\b(?:${[...words].join('|')})\\b`, 'g');
-  for (const match of text.matchAll(pattern)) spans.add(match.index, match.index + match[0].length, role, priority);
+  for (const match of text.matchAll(pattern)) {
+    const style = typeof role === 'function' ? role(match[0]) : { role };
+    spans.add(match.index, match.index + match[0].length,
+      style.role, priority, style.fontStyle);
+  }
 }
 
 function calledAfter(source, end) {
@@ -124,7 +128,7 @@ function refineFsharp(source) {
     else if (functions.has(match[0])) spans.add(match.index, match.index + match[0].length, codeRoles.method, 35);
     else if (bindings.has(match[0])) spans.add(match.index, match.index + match[0].length, codeRoles.binding, 30);
   }
-  wordSpans(spans, masked, new Set(['namespace', 'open', 'type', 'of', 'module', 'let', 'rec', 'function', 'match', 'with', 'if', 'then', 'else', 'for', 'in', 'do', 'yield', 'return']), codeRoles.keyword, 45);
+  wordSpans(spans, masked, new Set(['namespace', 'open', 'type', 'of', 'module', 'let', 'rec', 'function', 'match', 'with', 'if', 'then', 'else', 'for', 'in', 'do', 'yield', 'return']), keywordStyle, 45);
   wordSpans(spans, masked, new Set(['true', 'false', 'None', 'Some']), 'yellow', 45);
   wordSpans(spans, masked, new Set(['string', 'bool', 'int', 'float', 'unit', 'list', 'option']), codeRoles.type, 50);
   for (const match of masked.matchAll(/\b\d+(?:\.\d+)?\b/g)) spans.add(match.index, match.index + match[0].length, 'orange', 45);
@@ -176,7 +180,8 @@ function refineShader(source, language) {
       spans.add(nameAt, nameAt + functionMatch[2].length, codeRoles.functionDeclaration, 75); functions.add(functionMatch[2]);
       if (functionMatch[4]) {
         const semanticAt = offset + line.lastIndexOf(functionMatch[4]);
-        spans.add(semanticAt, semanticAt + functionMatch[4].length, 'purple', 70);
+        spans.add(semanticAt, semanticAt + functionMatch[4].length,
+          codeRoles.annotation, 70, 'italic');
       }
       const paramsAt = line.indexOf(functionMatch[3], nameAt - offset + functionMatch[2].length);
       for (const param of functionMatch[3].matchAll(/(?:\b[A-Za-z_]\w*(?:<[^>]+>)?\s+)([A-Za-z_]\w*)/g)) {
@@ -198,14 +203,13 @@ function refineShader(source, language) {
         ? codeRoles.property
         : inFunction
           ? codeRoles.binding
-          : language === 'shaderlab' && /^_/.test(declaration[2])
-            ? 'purple'
-            : codeRoles.global;
+          : codeRoles.global;
       spans.add(at, at + declaration[2].length, role, 70);
       (inAggregate ? members : inFunction ? locals : globals).add(declaration[2]);
       if (declaration[3]) {
         const semanticAt = offset + line.lastIndexOf(declaration[3]);
-        spans.add(semanticAt, semanticAt + declaration[3].length, 'purple', 70);
+        spans.add(semanticAt, semanticAt + declaration[3].length,
+          codeRoles.annotation, 70, 'italic');
       }
     }
     for (const property of line.matchAll(/\.([A-Za-z_]\w*)/g)) {
@@ -215,7 +219,8 @@ function refineShader(source, language) {
     }
     for (const semantic of line.matchAll(/:\s*([A-Z][A-Z0-9_]*)/g)) {
       const at = offset + semantic.index + semantic[0].lastIndexOf(semantic[1]);
-      spans.add(at, at + semantic[1].length, 'purple', 70);
+      spans.add(at, at + semantic[1].length,
+        codeRoles.annotation, 70, 'italic');
     }
     braces += (line.match(/\{/g) ?? []).length - (line.match(/\}/g) ?? []).length;
     if (inAggregate && /^\s*};/.test(line)) inAggregate = false;
@@ -224,7 +229,7 @@ function refineShader(source, language) {
   if (language === 'shaderlab') {
     for (const match of masked.matchAll(/\b(_[A-Za-z_]\w*)\s*\(/g)) {
       const at = match.index + match[0].lastIndexOf(match[1]);
-      spans.add(at, at + match[1].length, 'purple', 75);
+      spans.add(at, at + match[1].length, codeRoles.property, 75);
       globals.add(match[1]);
     }
   }
@@ -241,8 +246,8 @@ function refineShader(source, language) {
     }
   }
   wordSpans(spans, masked, new Set(['struct', 'cbuffer', 'return', 'if', 'else', 'for', 'while', 'register',
-    'Shader', 'Properties', 'SubShader', 'Tags', 'LOD', 'Pass', 'CGPROGRAM', 'ENDCG', 'pragma', 'include']), codeRoles.keyword, 45);
-  wordSpans(spans, masked, new Set(['void']), codeRoles.keyword, 60);
+    'Shader', 'Properties', 'SubShader', 'Tags', 'LOD', 'Pass', 'CGPROGRAM', 'ENDCG', 'pragma', 'include']), keywordStyle, 45);
+  wordSpans(spans, masked, new Set(['void']), keywordStyle, 60);
   for (const match of masked.matchAll(/\b\d+(?:\.\d+)?(?:[fFhH])?\b/g)) spans.add(match.index, match.index + match[0].length, 'orange', 50);
   return spans.finish();
 }
@@ -321,7 +326,7 @@ function refinePowerShell(source) {
       spans.add(match.index, match.index + match[0].length, codeRoles.method, 45);
     }
   }
-  wordSpans(spans, masked, new Set(['class', 'function', 'param', 'process', 'return', 'if', 'else', 'foreach', 'in', 'switch']), codeRoles.keyword, 50);
+  wordSpans(spans, masked, new Set(['class', 'function', 'param', 'process', 'return', 'if', 'else', 'foreach', 'in', 'switch']), keywordStyle, 50);
   wordSpans(spans, masked, new Set(['true', 'false']), 'yellow', 50);
   for (const match of masked.matchAll(/\b\d+(?:\.\d+)?\b/g)) spans.add(match.index, match.index + match[0].length, 'orange', 45);
   return spans.finish();
@@ -393,7 +398,7 @@ function refinePerl(source, language) {
     }
     for (const match of masked.matchAll(/[{}()[\],;]/g)) spans.add(match.index, match.index + 1, 'white', 58);
   }
-  wordSpans(spans, masked, new Set(['package', 'class', 'enum', 'has', 'is', 'required', 'method', 'sub', 'my', 'our', 'use', 'return', 'if', 'else', 'given', 'when', 'default', 'new']), codeRoles.keyword, 50);
+  wordSpans(spans, masked, new Set(['package', 'class', 'enum', 'has', 'is', 'required', 'method', 'sub', 'my', 'our', 'use', 'return', 'if', 'else', 'given', 'when', 'default', 'new']), keywordStyle, 50);
   wordSpans(spans, masked, new Set(['False', 'True']), 'yellow', 50);
   wordSpans(spans, masked, new Set(raku ? ['Str', 'Array', 'Bool', 'Seq', 'Int'] : ['scalar']), codeRoles.type, 55);
   for (const match of masked.matchAll(/\b\d+(?:\.\d+)?\b/g)) spans.add(match.index, match.index + match[0].length, 'orange', 45);
@@ -466,7 +471,7 @@ function refineVisualBasic(source) {
     }
   }
   wordSpans(spans, masked, new Set(['String', 'Boolean', 'Integer', 'Long', 'Double', 'Single', 'Object', 'Void']), codeRoles.type, 60);
-  wordSpans(spans, masked, new Set(['Imports', 'Public', 'Private', 'Protected', 'Friend', 'ReadOnly', 'NotInheritable', 'Class', 'Module', 'Property', 'Function', 'Sub', 'New', 'As', 'Of', 'Return', 'Iterator', 'For', 'Each', 'In', 'If', 'Then', 'Else', 'Yield', 'End', 'Dim', 'Optional']), codeRoles.keyword, 50);
+  wordSpans(spans, masked, new Set(['Imports', 'Public', 'Private', 'Protected', 'Friend', 'ReadOnly', 'NotInheritable', 'Class', 'Module', 'Property', 'Function', 'Sub', 'New', 'As', 'Of', 'Return', 'Iterator', 'For', 'Each', 'In', 'If', 'Then', 'Else', 'Yield', 'End', 'Dim', 'Optional']), keywordStyle, 50);
   wordSpans(spans, masked, new Set(['True', 'False']), 'yellow', 50);
   for (const match of masked.matchAll(/\b\d+(?:\.\d+)?\b/g)) spans.add(match.index, match.index + match[0].length, 'orange', 45);
   return spans.finish();
@@ -493,8 +498,17 @@ function refineHandlebars(source) {
       const at = bodyAt + name.index;
       const previous = body.slice(0, name.index).match(/\.\s*$/);
       const hashKey = new RegExp(`\\b${name[0].replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\s*=`).test(body.slice(name.index));
-      let role = previous || hashKey ? 'purple' : aliases.has(name[0]) ? codeRoles.binding : 'yellow';
-      if (['if', 'each', 'else', 'as'].includes(name[0])) role = 'yellow';
+      const keyword = ['if', 'each', 'else', 'as'].includes(name[0]);
+      const first = body.slice(0, name.index).trim().replace(/^[#/>]/, '') === '';
+      const helper = first && /\s/.test(body.slice(name.index + name[0].length));
+      let role = previous || hashKey
+        ? codeRoles.property
+        : aliases.has(name[0])
+          ? codeRoles.binding
+          : helper
+            ? codeRoles.method
+            : codeRoles.binding;
+      if (keyword) role = 'yellow';
       spans.add(at, at + name[0].length, role, 65);
     }
   }
@@ -664,6 +678,10 @@ function refineCoffeeScript(source) {
   for (const match of masked.matchAll(/\bnull\b/g)) {
     spans.add(match.index, match.index + match[0].length, 'orange', 80);
   }
+  wordSpans(spans, masked, new Set([
+    'class', 'extends', 'super', 'this', 'for', 'in', 'by', 'when', 'unless',
+    'if', 'then', 'else', 'switch', 'try', 'catch', 'throw', 'return', 'yield',
+  ]), keywordStyle, 60);
   for (const match of masked.matchAll(/\b\d+(?:\.\d+)?\b/g)) {
     spans.add(match.index, match.index + match[0].length, 'orange', 70);
   }
@@ -744,7 +762,10 @@ function refineClojure(source) {
     const symbol = match[1];
     const at = match.index + match[0].lastIndexOf(symbol);
     if (symbol.startsWith(':')) spans.add(at, at + symbol.length, codeRoles.property, 72);
-    else if (special.has(symbol)) spans.add(at, at + symbol.length, codeRoles.keyword, 70);
+    else if (special.has(symbol)) {
+      const style = keywordStyle(symbol);
+      spans.add(at, at + symbol.length, style.role, 70, style.fontStyle);
+    }
     else if (symbol.includes('/')) {
       const slash = symbol.indexOf('/');
       spans.add(at, at + slash, codeRoles.binding, 65);

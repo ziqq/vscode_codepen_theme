@@ -2,7 +2,7 @@ const path = require('node:path');
 const { Spans } = require('./spans');
 const { addComment } = require('./comments');
 const { refineDialect } = require('./dialects');
-const { codeRoles } = require('./roles');
+const { codeRoles, keywordStyle } = require('./roles');
 
 const grammars = Object.freeze({
   c: 'c', cpp: 'cpp', csharp: 'c_sharp', dart: 'dart', go: 'go', java: 'java',
@@ -31,7 +31,7 @@ const blockKinds = new Set(['block', 'compound_statement', 'for_statement', 'for
 const typeKinds = /^(?:primitive_type|predefined_type|integral_type|floating_point_type|boolean_type|void_type|user_type|type|generic_type|type_annotation|type_arguments|type_parameters|type_parameter|type_parameter_list|nullable_type|reference_type|array_type|function_type|parameter_type_list)$/;
 const stringKinds = /^(?:string|.*string_literal|interpreted_string_literal|raw_string_literal|char_literal|character_literal|encapsed_string|symbol_literal|external_command|heredoc_body)$/;
 const numericKinds = /^(?:(?:hex_|decimal_|octal_|binary_)?(?:integer|floating_point)_literal|number_literal|int_literal|float_literal|integer|float|number)$/;
-const keywords = new Set(('abstract alias as assert async await base bool boolean break case catch class const constexpr continue covariant data default defer deferred def define del do done dynamic elif else end endef enum except export extends extension extern external factory false fi final finally fn for foreach from fun func function get global goto hide if ifdef ifeq ifndef ifneq impl implements import in include inline instanceof interface internal is late let library match mixin mod mutable mut native new nil nonlocal null object on operator or out override package part pass private protected protocol pub public raise record redo ref reified required rescue return rethrow sealed select self set show sizeof static struct super switch sync synchronized template then this throw throws trait transient true try type typedef typealias typeof union unless unsafe unset use using val var virtual volatile when where while with yield').split(' '));
+const keywords = new Set(('abstract alias as assert async await base bool boolean break case catch class const constexpr continue covariant data default defer deferred def define del do done dynamic elif else end endef enum except export extends extension extern external factory false fi final finally fn for foreach from fun func function get given global goto hide if ifdef ifeq ifndef ifneq impl implementation implements import in include inline instanceof interface internal is late let library match method mixin mod mutable mut my native new nil nonlocal null object on operator or our out override package param part pass private process property protected protocol pub public raise record redo ref reified required rescue return rethrow sealed select self set show sizeof static struct sub super switch sync synchronized template then this throw throws trait transient true try type typedef typealias typeof union unless unsafe unset use using val var virtual void volatile when where while with yield').split(' '));
 
 const contains = (region, node) => region.start <= node.startIndex && region.end >= node.endIndex;
 const ancestor = (node, predicate) => {
@@ -189,6 +189,8 @@ function classify(root, source, language) {
         node.type === 'method_declaration' || qualified || kotlinReceiver ||
         node.type === 'constructor_declaration' || (cls && (!outerFn || outerFn.start < cls.start)) ||
         (language === 'rust' && ancestor(node, (item) => item.type === 'impl_item' || item.type === 'trait_item'));
+      // Accessors expose a property contract even when the grammar represents
+      // them as function-like nodes. Keep their names neutral like reads.
       declare(name, accessor ? 'property' : member ? 'method' : 'function',
         accessor ? cls ?? region(root) : member && cls ? cls :
           member && !['ruby', 'just'].includes(language) ? region(node) : outerFn ?? region(root));
@@ -214,9 +216,7 @@ function classify(root, source, language) {
         (language === 'kotlin' && param.type === 'class_parameter' && param.children.some((item) => item.type === 'binding_pattern_kind')) ||
         (['csharp', 'java', 'razor'].includes(language) && param.parent?.parent?.type === 'record_declaration');
       const signature = ancestor(node, (item) => item.type === 'function_declarator');
-      const callable = language === 'dart' && /\bFunction\s*(?:<[^>]*>)?\s*\(/.test(
-        source.slice(param.startIndex, param.endIndex),
-      );
+      const callable = language === 'dart' && /\bFunction\s*(?:<[^>{}]*>)?\s*\(/.test(param.text);
       declare(node, promoted ? 'property' : callable ? 'method' : 'variable', promoted ? classOf(node) :
         functionOf(node) ?? (signature ? region(signature) : region(param)));
     }
@@ -247,10 +247,19 @@ function classify(root, source, language) {
         (parent.type === 'variable_declaration' && firstIdentifier(parent)?.id === node.id) ||
         (language === 'dart' && declaration.type === 'static_final_declaration' &&
           firstIdentifier(declaration)?.id === node.id))) {
-      declare(node, memberContext(declaration) ? 'property' : 'variable', memberContext(declaration) ? classOf(node) : undefined);
+      const member = memberContext(declaration);
+      const owner = member ? classOf(node) : undefined;
+      const pythonEnumMember = language === 'python' && member && owner &&
+        /\bclass\s+\w+\s*\([^\n)]*\b(?:Enum|IntEnum|StrEnum)\b/.test(owner.node.text.slice(0, 240));
+      declare(node, pythonEnumMember ? 'enum' : member ? 'property' : 'variable', owner);
     }
     if (language === 'python' && parent.type === 'assignment' && isField(node, 'left')) {
-      declare(node, memberContext(node) ? 'property' : 'variable', nearestOwner(node) ?? region(root));
+      const member = memberContext(node);
+      const owner = member ? classOf(node) : undefined;
+      const enumMember = member && owner &&
+        /\bclass\s+\w+\s*\([^\n)]*\b(?:Enum|IntEnum|StrEnum)\b/.test(owner.node.text.slice(0, 240));
+      declare(node, enumMember ? 'enum' : member ? 'property' : 'variable',
+        owner ?? nearestOwner(node) ?? region(root));
     }
     if (language === 'ruby' && parent.type === 'assignment' && isField(node, 'left')) declare(node, 'variable');
     if (language === 'go' && ancestor(node, (item) => item.type === 'short_var_declaration') &&
@@ -281,6 +290,9 @@ function classify(root, source, language) {
       if (ancestor(node, (item) => item.type === 'invocation')) return 'yellow';
       return ancestor(node, (item) => item.type === 'field') ? 'purple' : 'blue';
     }
+    if (language === 'go' && ancestor(node, (item) => item.type === 'package_clause')) {
+      return codeRoles.binding;
+    }
     if (language === 'rust' && parent.type === 'macro_invocation' && isField(node, 'macro')) return 'purple';
     if (propertyNode(node)) return calledMember(node) ? codeRoles.method : codeRoles.property;
     if (['keyword_argument', 'label', 'value_argument_label', 'field_initializer',
@@ -295,7 +307,7 @@ function classify(root, source, language) {
         isField(node, 'object') && /^[A-Z]/.test(node.text)) return codeRoles.type;
     if (language === 'ruby' && parent.type === 'call' && isField(node, 'method')) return node.text === 'new' ? 'yellow' : 'purple';
     if (language === 'php' && parent.type === 'variable_name') {
-      return node.text === 'this' ? codeRoles.keyword : codeRoles.binding;
+      return node.text === 'this' ? keywordStyle('this') : codeRoles.binding;
     }
     if (language === 'php' && parent.type === 'function_call_expression' && isField(node, 'function')) return codeRoles.method;
     if (parent.type === 'object_creation_expression') return 'yellow';
@@ -356,14 +368,27 @@ function classify(root, source, language) {
     }
     if (stringKinds.test(node.type) && !ancestor(node, (item) => item.type === 'primitive_type')) spans.add(node.startIndex, node.endIndex, 'green', 2);
     if (/^(?:primitive_type|predefined_type|integral_type|floating_point_type|boolean_type|void_type)$/.test(node.type)) {
-      spans.add(node.startIndex, node.endIndex,
-        text === 'void' ? codeRoles.keyword : codeRoles.type,
-        40, language === 'dart' ? 'normal' : undefined);
+      if (text === 'void') {
+        const style = keywordStyle(text);
+        spans.add(node.startIndex, node.endIndex, style.role, 40, style.fontStyle);
+      } else {
+        spans.add(node.startIndex, node.endIndex, codeRoles.type, 40);
+      }
     }
     if (numericKinds.test(node.type)) spans.add(node.startIndex, node.endIndex, 'orange', 30);
     if (isIdentifier(node)) {
+      if (['self', 'super', 'this'].includes(text)) {
+        const style = keywordStyle(text);
+        spans.add(node.startIndex, node.endIndex, style.role, 50,
+          style.fontStyle);
+        continue;
+      }
       const role = useRole(node);
-      if (role) spans.add(node.startIndex, node.endIndex, role, 30);
+      if (role) {
+        const style = typeof role === 'string' ? { role } : role;
+        spans.add(node.startIndex, node.endIndex, style.role, 30,
+          style.fontStyle ?? (style.role === codeRoles.annotation ? 'italic' : undefined));
+      }
       continue;
     }
     if (language === 'makefile') {
@@ -397,8 +422,8 @@ function classify(root, source, language) {
     }
     if (node.childCount !== 0) continue;
     if (text === 'void') {
-      spans.add(node.startIndex, node.endIndex, codeRoles.keyword, 60,
-        language === 'dart' ? 'normal' : undefined);
+      const style = keywordStyle(text);
+      spans.add(node.startIndex, node.endIndex, style.role, 60, style.fontStyle);
       continue;
     }
     if ((node.isNamed && typeKinds.test(node.type)) || (language === 'dart' && text === 'Function')) {
@@ -408,13 +433,10 @@ function classify(root, source, language) {
     // Do not treat string content, names, shell commands, or error recovery text as keywords.
     if (!node.isNamed || /^keyword_/.test(node.type) || /_builtin$/.test(node.type) ||
         ['true', 'false', 'null_literal', 'null', 'this', 'super', 'self', 'inferred_type', 'binding_pattern_kind'].includes(node.type)) {
-      if (keywords.has(text) || /^keyword_/.test(node.type)) {
-        const atom = ['true', 'false', 'null', 'nil', 'None', 'Some'].includes(text);
-        let role = codeRoles.keyword;
-        if (text.toLowerCase() === 'as') role = codeRoles.binding;
-        else if (text === 'null') role = 'orange';
-        else if (['sql', 'just', 'makefile'].includes(language) || atom) role = 'yellow';
-        spans.add(node.startIndex, node.endIndex, role, 20);
+      if (keywords.has(text.toLowerCase().replace(/^@/, '')) || /^keyword_/.test(node.type)) {
+        const style = keywordStyle(text);
+        spans.add(node.startIndex, node.endIndex, style.role, 20,
+          ['sql', 'just', 'makefile'].includes(language) ? undefined : style.fontStyle);
       }
       else if (/^(?:[{}()[\],;.])$/.test(text)) spans.add(node.startIndex, node.endIndex, 'white', 15);
       else if (/^(?:[:=<>!?+*\/|&%~^@-]+|=>|->)$/.test(text)) spans.add(node.startIndex, node.endIndex, text === ':' ? 'white' : 'operator', 15);

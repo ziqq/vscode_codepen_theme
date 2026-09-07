@@ -66,10 +66,10 @@ for (const rule of theme.tokenColors) {
 for (const value of Object.values(theme.semanticTokenColors)) {
   assert.match(typeof value === 'string' ? value : value.foreground, /^#[0-9a-f]{6}$/i);
 }
-assert.equal(theme.semanticTokenColors['keyword:dart'], '#809bbd');
-assert.equal(theme.semanticTokenColors['keyword.void:dart'].italic, false);
+assert.equal(theme.semanticTokenColors['keyword:dart'], '#ddca7e');
+assert.equal(theme.semanticTokenColors['keyword.void:dart'], '#809bbd');
 assert.equal(ligaturesTheme.semanticTokenColors['keyword:dart'].italic, true);
-assert.equal(ligaturesTheme.semanticTokenColors['keyword.void:dart'].italic, false);
+assert.equal(ligaturesTheme.semanticTokenColors['keyword.void:dart'].italic, true);
 assert.deepEqual(
   twilight.cases.map((item) => item.language).sort(),
   compatibility.cases.map((item) => item.language).sort(),
@@ -119,9 +119,8 @@ const probes = [
   ['source.js keyword.operator.assignment.js', '#cccccc', 0],
   ['source.js storage.type.function.arrow.js', '#cccccc', 0],
   ['source.js meta.var.expr.js storage.type.js', '#809bbd', 1],
-  ['source.js meta.function.js storage.type.function.js', '#809bbd', 1],
-  // The real structural/semantic providers refine control-flow keywords to
-  // blue. This raw TextMate scope retains the classic fallback before then.
+  ['source.js meta.function.js storage.type.function.js', '#ddca7e', 1],
+  // The structural refinement preserves the same yellow control-flow role.
   ['source.js keyword.control.conditional.js', '#ddca7e', 1],
   // The structural and semantic layers turn the declaration identifier purple;
   // this isolated raw TextMate stack retains the provider's blue fallback.
@@ -143,7 +142,7 @@ const probes = [
   ['source.just entity.name.function.target.just', '#9a8297', 0],
   ['source.tsx entity.name.type.alias.tsx', '#ddca7e', 0],
   ['source.tsx meta.type.annotation.tsx support.type.primitive.tsx', '#ddca7e', 0],
-  ['source.ts meta.object.member.ts variable.other.readwrite.ts', '#9a8297', 0],
+  ['source.ts meta.object.member.ts variable.other.readwrite.ts', '#ffffff', 0],
   ['source.ts meta.function-call.ts entity.name.function.ts', '#9a8297', 0],
   ['source.ts meta.decorator.ts punctuation.decorator.ts', '#809bbd', 0],
   ['source.java punctuation.definition.annotation.java', '#809bbd', 1],
@@ -175,10 +174,10 @@ for (const { languageId } of compatibility.cases) {
     ['class', ['declaration'], '#ddca7e'],
     ['parameter', [], '#ffffff'],
     ['method', ['declaration'], '#9a8297'],
-    ['property', ['readonly'], '#9a8297'],
-    ['enumMember', [], '#9a8297'],
+    ['property', ['readonly'], '#ffffff'],
+    ['enumMember', [], '#ffffff'],
     ['variable', ['defaultLibrary'], '#ffffff'],
-    ['keyword', [], '#809bbd'],
+    ['keyword', [], '#ddca7e'],
   ]) {
     assert.equal(semanticColor(theme, type, modifiers, languageId), expected, `${languageId}: ${type}.${modifiers}`);
     semanticAssertions++;
@@ -194,11 +193,11 @@ for (const language of ['typescript', 'typescriptreact']) {
 for (const [type, expected] of [
   ['type', '#ddca7e'], ['typeParameter', '#ddca7e'],
   ['method', '#9a8297'], ['parameter', '#ffffff'],
-  ['variable', '#ffffff'], ['property', '#9a8297'], ['enumMember', '#9a8297'],
+  ['variable', '#ffffff'], ['property', '#ffffff'], ['enumMember', '#ffffff'],
 ]) {
   assert.equal(semanticColor(theme, type, [], 'dart'), expected);
   assert.equal(semanticColor(theme, type, ['declaration', 'instance'], 'dart'),
-    type === 'variable' ? '#9a8297' : expected);
+    expected);
   semanticAssertions += 2;
 }
 for (const language of ['javascript', 'javascriptreact', 'typescript', 'typescriptreact']) {

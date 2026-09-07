@@ -443,7 +443,8 @@
         {
           "line": 1,
           "text": "name",
-          "foreground": "#ffffff",
+          "foreground": "#ddca7e",
+          "refinedForeground": "#ffffff",
           "fontStyle": 1
         },
         {

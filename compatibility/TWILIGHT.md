@@ -64,19 +64,22 @@ TextMate fallbacks and semantic selectors map equivalent roles; narrow
 provider-specific rules correct known scope differences. Contextual refinement
 now adds an optional foreground-only layer where those providers lose context.
 
-- Types stay neutral; typed declarations are blue only when the provider exposes
-  that declaration role. Parameters and local bindings are blue; members purple.
+- Programming types are yellow. Declaration/modifier/annotation syntax is blue;
+  executable and control-flow keywords are yellow. Ordinary bindings, fields,
+  properties, enum values, object keys, and named arguments are white; callable
+  declarations and invocations are purple.
 - JS/TS semantic `local` and `declaration` modifiers refine the lexical fallback.
   Readonly does not automatically mean yellow: a readonly member is still purple.
-- Dart uses actual Dart-Code tokens: `variable.instance` is a field (purple),
-  `property` and `method` are purple, a declared class is blue, constructor
-  references are yellow, and ordinary type references are white.
+- Dart uses actual Dart-Code tokens: instance fields, properties, bindings, and
+  enum values are white; methods/getters are purple; declaration keywords and
+  annotations are blue; types, constructors, and flow keywords are yellow.
 - Java method parameters and C#/C/C++ primitive types have explicit rules. Free
   function declarations in Go/Python/Rust stay blue where distinguishable.
   Just/Make targets are explicitly purple; their variables stay blue.
   C#/Java methods stay purple.
-- Data keys use the member role. Markup and stylesheet rules retain their own
-  applicable roles; they are not treated as executable JS.
+- JSON quoted key names remain green with neutral quote punctuation. Other data,
+  markup, and stylesheet rules retain their format-specific roles; they are not
+  treated as executable JS.
 
 Palette keys are alphabetical. Existing TextMate decoration rules have an
 unchanged SHA-256 guard. Semantic colors are authored separately from the small
@@ -90,11 +93,13 @@ brackets, or green interpolation delimiters.
 
 ## Results and explicit limitations
 
-On VS Code **1.96.0, 1.105.1, and 1.134.0**, the TextMate-only reference audit
-matches **1,818 of 1,885 spans** exactly. The remaining **67 differences** are
-recorded individually in [codepen-reference-differences.json](codepen-reference-differences.json),
-with reasons. They are not counted as matches. New unreviewed differences fail
-the audit; fixing an existing difference does not require keeping it broken.
+On VS Code **1.135.0**, the custom TextMate hierarchy matches **1,457 of 1,885
+spans** from the immutable CodePen capture. Its **428 differences** are accepted
+only by exact or role-bounded policies in
+[codepen-reference-differences.json](codepen-reference-differences.json), with
+reasons. They are not counted as matches. New unreviewed differences fail the
+audit; fixing an existing difference does not require keeping it broken. The
+version matrix verifies the same contract separately.
 
 The main boundaries are:
 
@@ -111,21 +116,20 @@ The main boundaries are:
 4. The TS semantic service emits the same class-reference token for constructors
    and annotations. Semantic class references therefore stay white, even though
    TextMate can color a syntactically recognized `new Counter()` yellow.
-5. Dart does not emit declaration modifiers for the tested enum/enum-member
-   declarations. Their semantic fallback is white/purple, not an invented blue
-   declaration. The built-in Dart grammar leaves many plain names unclassified
-   and does not distinguish top-level functions from methods; Dart-Code refines
-   that. Grammar-only results will not be identical to semantic results.
-   References inside Dart documentation links also carry ordinary member/type
-   tokens without a documentation modifier, so they retain their symbol colors.
+5. Dart does not emit declaration modifiers for every enum/enum-member construct.
+   The contextual layer therefore separates the blue `enum` declaration keyword
+   from white values explicitly. The built-in grammar leaves many plain names
+   unclassified and does not distinguish top-level functions from methods;
+   Dart-Code and the contextual layer refine that. Type-shaped references inside
+   documentation use yellow, while ordinary member references stay white.
 6. Standard semantic selector coverage does not certify every language server.
    The real-service checks cover JS/TS and the optional local Dart-Code run;
    the other language fixtures exercise real grammars, not their language servers.
 
 The [full-sample follow-up](LANGUAGE-AUDIT.md) extends coverage to 68 language
-fixtures with 299 short and 725 full-sample assertions, plus 35 real TypeScript
-service assertions per matrix version. Offline checks exercise 20 TextMate
-selector probes, 287 semantic selector assertions, and the unchanged-decoration
+fixtures with 299 short and 746 full-sample assertions, plus 35 real TypeScript
+service assertions per matrix version. Offline checks exercise 28 TextMate
+selector probes, 637 semantic selector assertions, and the unchanged-decoration
 guard. The local Dart editor run checks 28 real semantic tokens plus visible
 colors and italic keywords throughout the file.
 

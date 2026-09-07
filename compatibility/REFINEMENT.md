@@ -9,18 +9,24 @@ it does not register languages, grammars, semantic-token providers, formatting,
 diagnostics, or language servers. Selecting another theme removes the decorations
 and terminates the parser worker. The normal VS Code profile is not modified.
 
-The measured JS/TS role policy remains:
+The custom programming-language hierarchy keeps the CodePen palette but assigns
+colors by syntax role:
 
-- Blue bindings and local references; yellow global references and keywords.
-- White type references; blue class/interface/enum declarations.
-- Purple property and method names. Just recipes, aliases, and Make targets use
-  that member role; their variables are blue.
+- Ordinary bindings, value references, fields, properties, enum values, object
+  keys, and named arguments are neutral white.
+- Types and constructors are yellow. Executable/control-flow keywords such as
+  `return`, `switch`, `case`, `try`, `catch`, `async`, `await`, `export`,
+  `function`, `this`, `self`, `super`, `for`, and `yield` are yellow too.
+- Declaration, module, modifier, and annotation syntax is blue: for example
+  `class`, `interface`, `static`, `final`, `let`, `var`, `def`, `sub`,
+  `required`, `override`, and decorators.
+- Function, method, and accessor names are purple. Just recipes, aliases, and
+  Make targets use that callable role; their variables remain blue.
 - Green strings and interpolation delimiters; orange numeric literals; gray
   operators and type brackets; ordinary punctuation white.
 - Original suppresses theme-owned italics while preserving bold and underline.
-  Ligatures retains the italic layer. Narrow Dart corrections restore
-  gray italic documentation and regular white `Function`/`void` types after the
-  Dart provider has classified them as ordinary symbols or keywords.
+  Ligatures retains italics for the yellow executable and blue declarative
+  keyword groups, annotations, and the existing italic comment layer.
 
 CodePen does not implement all these languages. Non-JS languages are adaptations
 of these roles, not claims of a direct CodePen language implementation.
@@ -35,9 +41,10 @@ embedded code to those parsers. CSS, SCSS and Sass documentation comments, Sass
 punctuation, dotenv assignments and proven C4 declaration/reference names have
 narrow format-specific refinements.
 
-CSS and SCSS retain their existing grammar symbol roles; the runtime only exposes
-portable documentation markup inside comments. JSONC, TOML, YAML and Go module
-files retain their existing grammar rules without runtime refinement.
+CSS, SCSS, Sass, and Less retain their existing grammar symbol roles; the runtime
+only exposes portable documentation markup inside their comments. Data/config
+formats retain their own contracts; narrow format refiners distinguish literals
+such as orange `null` without applying the programming hierarchy to keys.
 
 Work runs outside the extension host in one worker. Edits are debounced for 80 ms;
 only one parse runs at a time, with at most one latest queued version per document.
@@ -65,10 +72,10 @@ the large development parser package and its editor queries are excluded.
 1. `check:colors` preserves the decoration hash and checks palette/semantic selectors.
 2. `test:providers` checks 68 complete real-grammar samples plus independent edge
    fixtures. The version matrix covers 1.96.0, 1.105.1, 1.134.0 and 1.135.0.
-   It also checks the runtime overlay against every
-   full-sample and edge expectation. The seven intended full-sample corrections
-   are explicit in `refinement-full.json`; contextual checks have no version-specific
-   fallback exemptions. Native provider fallback assertions are not contextual matches.
+   It also checks the runtime overlay against every full-sample and edge
+   expectation. Every actual provider-to-contextual transition is explicit in
+   `refinement-full.json`; contextual checks have no version-specific fallback
+   exemptions. Native provider fallback assertions are not contextual matches.
 3. `test:refinement` checks independently marked source roles, UTF-16/CRLF offsets,
    incomplete edits, binding shadowing, embedded code, lifecycle and the immutable
    30-case CodePen reference. No expected snapshots are regenerated from the parser.
@@ -92,33 +99,36 @@ npm run test:refinement:editor -- 1.135.0
 
 ## Reference boundary
 
-Verified locally on 2026-09-01:
+Verified locally on 2026-09-03:
 
-- 565 marked role assertions in 48 independently authored fixtures, plus 192
+- 959 marked role assertions in 87 independently authored fixtures, plus 348
   incomplete-edit cases and lifecycle tests.
 - All 68 full samples pass on VS Code 1.96.0, 1.105.1, 1.134.0 and 1.135.0
-  with 299 short, 725 full, 94 edge, and 819
+  with 299 short, 746 full, 94 edge, and 840
   contextual-overlay assertions; no failures.
-- 161 actual-editor scenarios on VS Code 1.135.0: 48 contextual fixtures and
+- 239 actual-editor scenarios on VS Code 1.135.0: 87 contextual fixtures and
   30 reference fixtures in both semantic modes, plus five lifecycle scenarios
   including the Ligatures typography path;
   no color differences or typography failures. Real TS and Dart tokens
   were required for their semantic runs. Other servers are not certified.
-- The 5.88 MiB VSIX passed asset/hash/license checks and installation in all three
-  matrix versions. The normal profile's settings and extension-index hashes
-  remained unchanged. Nothing was published or installed into the normal profile.
+- The 7.92 MiB VSIX passed asset/hash/license checks and installation in the
+  isolated VS Code 1.135.0 screenshot profile. Provider and semantic-token
+  checks passed on all four matrix versions. The normal profile's settings and
+  extension-index hashes remained unchanged. Nothing was published or installed
+  into the normal profile.
 
-Contextual parsing matches **1,885 of 1,885** recorded nonblank CodePen spans.
-[refinement-differences.json](refinement-differences.json) is intentionally empty,
-and the audit rejects both new differences and stale exemptions. Exact compatibility
-includes the classic parser's context transitions for type-only imports, mapped,
-labelled and function types, assertion signatures, `satisfies` constraints, and JSX
-expression scopes. These narrow rules apply only to the affected JS/TS/JSX syntax;
-they do not recolor another language globally. Author italics are deliberately
-excluded from CodePen foreground equivalence.
+The contextual layer keeps **1,224 of 1,885** recorded nonblank CodePen spans
+unchanged and records **661 reviewed differences** in
+[refinement-differences.json](refinement-differences.json). Those differences are
+the intentional GitHub-inspired role hierarchy rendered with CodePen colors, not
+claims of exact classic-Twilight parity. The audit rejects both new differences
+and stale exemptions. The classic parity branch is preserved separately as
+`feature/theme-original-1.0.0`. Author italics are deliberately excluded from
+foreground comparison.
 
-The older 1,818/1,885 TextMate and 1,846/1,885 native-semantic measurements describe
-the baseline with refinement disabled. They are not scores for the new layer.
+With refinement disabled, the current TextMate layer matches 1,457/1,885 spans
+on VS Code 1.135.0; its 428 differences are reviewed independently. Semantic and
+contextual reports are separate and are not promoted to one another's scores.
 
 ## Remaining boundaries
 

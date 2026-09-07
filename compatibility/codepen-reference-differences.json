@@ -6,37 +6,21 @@
       "cmScope": "cm-keyword",
       "expected": "#ddca7e",
       "actual": ["#809bbd"],
-      "reason": "Programming-language declaration and control keywords are blue; stylesheet-family syntax retains the classic CodePen mapping."
+      "reason": "Programming-language declaration and module keywords are blue; executable and control-flow keywords remain CodePen yellow."
     },
     {
       "modes": ["typescript"],
       "cmScope": "cm-keyword",
       "expected": "#ddca7e",
       "actual": ["#809bbd"],
-      "reason": "Programming-language declaration and control keywords are blue; stylesheet-family syntax retains the classic CodePen mapping."
+      "reason": "Programming-language declaration and module keywords are blue; executable and control-flow keywords remain CodePen yellow."
     },
     {
       "modes": ["jsx"],
       "cmScope": "cm-keyword",
       "expected": "#ddca7e",
       "actual": ["#809bbd"],
-      "reason": "Programming-language declaration and control keywords are blue; stylesheet-family syntax retains the classic CodePen mapping."
-    },
-    {
-      "modes": ["javascript"],
-      "cmScope": "cm-keyword",
-      "expected": "#ddca7e",
-      "actual": ["#809bbd", "#ddca7e"],
-      "texts": ["function*"],
-      "reason": "The function declaration keyword is blue while the generator marker retains its classic operator color."
-    },
-    {
-      "modes": ["typescript"],
-      "cmScope": "cm-keyword",
-      "expected": "#ddca7e",
-      "actual": ["#809bbd", "#ddca7e"],
-      "texts": ["function*"],
-      "reason": "The function declaration keyword is blue while the generator marker retains its classic operator color."
+      "reason": "Programming-language declaration and module keywords are blue; executable and control-flow keywords remain CodePen yellow."
     },
     {
       "modes": ["typescript"],
@@ -65,6 +49,32 @@
       "expected": "#ddca7e",
       "actual": ["#ffffff"],
       "reason": "Bindings and value references are white."
+    },
+    {
+      "modes": ["javascript", "typescript", "jsx"],
+      "cmScope": "cm-variable-2",
+      "expected": "#809bbd",
+      "actual": ["#ffffff"],
+      "reason": "Bindings and value references use neutral white in the custom hierarchy."
+    },
+    {
+      "modes": ["javascript", "typescript", "jsx"],
+      "cmScope": "cm-property",
+      "expected": "#9a8297",
+      "actual": ["#ffffff"],
+      "reason": "Fields, properties, object keys, and enum values use neutral white; callable members remain purple."
+    },
+    {
+      "modes": ["javascript", "typescript"],
+      "cmScope": "cm-comment",
+      "expected": "#717790",
+      "actual": ["#717790", "#ddca7e"],
+      "texts": [
+        "/** @param {number} value - sample */",
+        " * @param value input",
+        " * @returns output"
+      ],
+      "reason": "Documentation prose stays gray while type-shaped references reuse the yellow programming type role."
     },
     {
       "modes": ["typescript"],
