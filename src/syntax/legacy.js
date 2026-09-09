@@ -129,7 +129,8 @@ function refineFsharp(source) {
     else if (bindings.has(match[0])) spans.add(match.index, match.index + match[0].length, codeRoles.binding, 30);
   }
   wordSpans(spans, masked, new Set(['namespace', 'open', 'type', 'of', 'module', 'let', 'rec', 'function', 'match', 'with', 'if', 'then', 'else', 'for', 'in', 'do', 'yield', 'return']), keywordStyle, 45);
-  wordSpans(spans, masked, new Set(['true', 'false', 'None', 'Some']), 'yellow', 45);
+  wordSpans(spans, masked, new Set(['true', 'false']), 'orange', 45);
+  wordSpans(spans, masked, new Set(['None', 'Some']), 'yellow', 45);
   wordSpans(spans, masked, new Set(['string', 'bool', 'int', 'float', 'unit', 'list', 'option']), codeRoles.type, 50);
   for (const match of masked.matchAll(/\b\d+(?:\.\d+)?\b/g)) spans.add(match.index, match.index + match[0].length, 'orange', 45);
   for (const match of masked.matchAll(/->|<-|\|>|\|\||&&|<>|<=|>=|[=+*\/<>|-]/g)) {
@@ -181,7 +182,7 @@ function refineShader(source, language) {
       if (functionMatch[4]) {
         const semanticAt = offset + line.lastIndexOf(functionMatch[4]);
         spans.add(semanticAt, semanticAt + functionMatch[4].length,
-          codeRoles.annotation, 70, 'italic');
+          codeRoles.annotation, 70, 'normal');
       }
       const paramsAt = line.indexOf(functionMatch[3], nameAt - offset + functionMatch[2].length);
       for (const param of functionMatch[3].matchAll(/(?:\b[A-Za-z_]\w*(?:<[^>]+>)?\s+)([A-Za-z_]\w*)/g)) {
@@ -209,7 +210,7 @@ function refineShader(source, language) {
       if (declaration[3]) {
         const semanticAt = offset + line.lastIndexOf(declaration[3]);
         spans.add(semanticAt, semanticAt + declaration[3].length,
-          codeRoles.annotation, 70, 'italic');
+          codeRoles.annotation, 70, 'normal');
       }
     }
     for (const property of line.matchAll(/\.([A-Za-z_]\w*)/g)) {
@@ -220,7 +221,7 @@ function refineShader(source, language) {
     for (const semantic of line.matchAll(/:\s*([A-Z][A-Z0-9_]*)/g)) {
       const at = offset + semantic.index + semantic[0].lastIndexOf(semantic[1]);
       spans.add(at, at + semantic[1].length,
-        codeRoles.annotation, 70, 'italic');
+        codeRoles.annotation, 70, 'normal');
     }
     braces += (line.match(/\{/g) ?? []).length - (line.match(/\}/g) ?? []).length;
     if (inAggregate && /^\s*};/.test(line)) inAggregate = false;
@@ -327,7 +328,7 @@ function refinePowerShell(source) {
     }
   }
   wordSpans(spans, masked, new Set(['class', 'function', 'param', 'process', 'return', 'if', 'else', 'foreach', 'in', 'switch']), keywordStyle, 50);
-  wordSpans(spans, masked, new Set(['true', 'false']), 'yellow', 50);
+  wordSpans(spans, masked, new Set(['true', 'false']), 'orange', 50);
   for (const match of masked.matchAll(/\b\d+(?:\.\d+)?\b/g)) spans.add(match.index, match.index + match[0].length, 'orange', 45);
   return spans.finish();
 }
@@ -772,9 +773,14 @@ function refineClojure(source) {
       spans.add(at + slash + 1, at + symbol.length, codeRoles.method, 70);
     } else if (!declarations.has(at)) spans.add(at, at + symbol.length, codeRoles.method, 60);
   }
-  for (const match of masked.matchAll(/\((?:defprotocol)\s+[^\s()[\]{}]+[\s\S]*?\(\s*([A-Za-z_][\w-]*)\s+\[/g)) {
-    const at = match.index + match[0].lastIndexOf(match[1]);
-    spans.add(at, at + match[1].length, 'purple', 78);
+  for (const form of forms) {
+    const body = masked.slice(form.start, form.end);
+    if (!/^\(\s*defprotocol\b/.test(body)) continue;
+    for (const match of body.matchAll(/\(\s*([A-Za-z_][\w-]*)\s+\[/g)) {
+      if (match[1] === 'defprotocol') continue;
+      const at = form.start + match.index + match[0].lastIndexOf(match[1]);
+      spans.add(at, at + match[1].length, 'purple', 78);
+    }
   }
   for (const match of masked.matchAll(/\((?:map|filter|remove|keep|reduce)\s+([A-Za-z_][\w?!-]*)/g)) {
     const at = match.index + match[0].lastIndexOf(match[1]);

@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "reference": "CodePen palette with a GitHub-inspired programming hierarchy: blue declarations and annotations, yellow types and flow, purple callables, and white bindings, fields, properties, and enum values. Domain languages retain their measured contracts.",
-  "decorationSha256": "6ee9779e2538a32797f4cb02f9e15243b602da92aedcf8b23bf638146a8f0f9e",
+  "decorationSha256": "67552f7e407c93ad262c3b0fd6dbbeed544e2214be6d5c32f9a22428e3d36f35",
   "cases": [
     {
       "language": "C",

@@ -102,7 +102,7 @@ function refineTypeScript(source, language) {
     if (ts.isTypeAliasDeclaration(parent) && parent.name === node) return codeRoles.type;
     if (parent.name === node && (ts.isClassLike(parent) || ts.isInterfaceDeclaration(parent) ||
         ts.isEnumDeclaration(parent))) return codeRoles.type;
-    if (typeOnlyImport(node)) return codeRoles.type;
+    if (typeOnlyImport(node)) return codeRoles.binding;
     if (satisfiesType(node) || assertionPredicateType(node)) return codeRoles.type;
     const tupleMember = namedTupleMember(node);
     if (tupleMember && tupleMember.name === node) return codeRoles.namedArgument;

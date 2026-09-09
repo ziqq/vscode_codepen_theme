@@ -39,7 +39,13 @@ function directIdentifiers(node) {
 function groovy(spans, nodes, source) {
   for (const node of nodes) {
     if (node.type === 'class_definition') add(spans, field(node, 'name'), codeRoles.type);
-    if (node.type === 'annotation') add(spans, node.namedChildren.find(identifier), codeRoles.annotation);
+    if (node.type === 'annotation') {
+      add(spans, node.namedChildren.find(identifier), codeRoles.annotation);
+      if (node.text.startsWith('@')) {
+        spans.add(node.startIndex, node.startIndex + 1,
+          codeRoles.annotation, 70, 'italic');
+      }
+    }
     if (node.type === 'function_definition') {
       add(spans, field(node, 'function'), codeRoles.method);
       add(spans, field(node, 'type'), codeRoles.type);
@@ -115,7 +121,7 @@ function julia(spans, nodes, source) {
   for (const node of nodes) {
     if (node.type === 'module_definition') {
       const name = field(node, 'name');
-      if (name) { add(spans, name, codeRoles.functionDeclaration); globals.add(name.text); declarationIds.add(name.id); }
+      if (name) { add(spans, name, codeRoles.binding); globals.add(name.text); declarationIds.add(name.id); }
     }
     if (node.type === 'struct_definition') {
       const name = node.namedChildren[0]?.descendantsOfType('identifier')[0];
@@ -303,6 +309,51 @@ function objectiveC(spans, nodes, source) {
   }
 }
 
+function cPreprocessor(spans, source) {
+  for (const match of source.matchAll(/^\s*(#)\s*(include(?:_next)?|import)\b/gm)) {
+    const hashAt = match.index + match[0].indexOf(match[1]);
+    const keywordAt = match.index + match[0].lastIndexOf(match[2]);
+    spans.add(hashAt, hashAt + 1, codeRoles.declarationKeyword, 75, 'italic');
+    spans.add(keywordAt, keywordAt + match[2].length,
+      codeRoles.declarationKeyword, 75, 'italic');
+  }
+}
+
+function styleWords(spans, nodes, words, role = codeRoles.declarationKeyword,
+  fontStyle = 'italic') {
+  for (const node of nodes) {
+    if (node.childCount === 0 && words.has(node.text.toLowerCase())) {
+      add(spans, node, role, 80, fontStyle);
+    }
+  }
+}
+
+function sql(spans, nodes) {
+  for (const node of nodes) {
+    if (node.childCount !== 0) continue;
+    const word = node.text.toLowerCase();
+    if (word === 'null') {
+      add(spans, node, 'orange', 85, 'normal');
+    } else if (word === 'true' || word === 'false') {
+      add(spans, node, 'orange', 85, 'normal');
+    } else if (/^keyword_/.test(node.type)) {
+      add(spans, node, codeRoles.declarationKeyword, 80, 'normal');
+    } else if (identifier(node)) {
+      const reference = ancestor(node, (item) => item.type === 'object_reference');
+      const invocation = reference?.parent?.type === 'invocation'
+        ? reference.parent
+        : undefined;
+      const functionName = invocation?.namedChildren[0]
+        ?.descendantsOfType('identifier').at(-1);
+      add(spans, node,
+        functionName?.id === node.id
+          ? codeRoles.method
+          : codeRoles.binding,
+        80, 'normal');
+    }
+  }
+}
+
 function rLanguage(spans, nodes) {
   const functions = nodes.filter((node) => node.type === 'function_definition');
   const functionOf = (node) => functions.find((candidate) =>
@@ -361,13 +412,35 @@ function razor(spans, source) {
 function refineDialect(root, source, language) {
   const spans = new Spans(source.length);
   const nodes = collect(root);
-  if (language === 'cuda-cpp') cuda(spans, nodes, source);
+  if (language === 'c' || language === 'cpp') {
+    cPreprocessor(spans, source);
+    styleWords(spans, nodes, new Set(['sizeof']), codeRoles.type, 'normal');
+  }
+  else if (language === 'cuda-cpp') cuda(spans, nodes, source);
   else if (language === 'groovy') groovy(spans, nodes, source);
-  else if (language === 'julia') julia(spans, nodes, source);
-  else if (language === 'lua') lua(spans, nodes, source);
+  else if (language === 'julia') {
+    julia(spans, nodes, source);
+    styleWords(spans, nodes, new Set(['module', 'function', 'end']));
+  } else if (language === 'lua') {
+    lua(spans, nodes, source);
+    styleWords(spans, nodes, new Set(['local', 'function', 'then', 'end']));
+  }
+  else if (language === 'makefile') {
+    styleWords(spans, nodes, new Set(['else']), codeRoles.flowKeyword, 'normal');
+  }
   else if (['objective-c', 'objective-cpp'].includes(language)) objectiveC(spans, nodes, source);
+  else if (language === 'php') {
+    styleWords(spans, nodes, new Set(['function', 'array']));
+  }
   else if (language === 'r') rLanguage(spans, nodes);
   else if (language === 'razor') razor(spans, source);
+  else if (language === 'ruby') {
+    styleWords(spans, nodes, new Set(['end', 'in']));
+  }
+  else if (language === 'sql') sql(spans, nodes);
+  else if (language === 'swift') {
+    styleWords(spans, nodes, new Set(['actor']));
+  }
   return spans.finish();
 }
 

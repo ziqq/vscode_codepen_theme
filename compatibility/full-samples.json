@@ -503,26 +503,46 @@
         {
           "line": 158,
           "text": "async",
-          "foreground": "#ddca7e"
-        },
-        {
-          "line": 159,
-          "text": "final",
           "foreground": "#809bbd"
         },
         {
           "line": 159,
+          "text": "try",
+          "foreground": "#809bbd"
+        },
+        {
+          "line": 160,
+          "text": "final",
+          "foreground": "#809bbd"
+        },
+        {
+          "line": 160,
           "text": "limit",
           "foreground": "#ffffff"
         },
         {
-          "line": 159,
+          "line": 160,
           "text": "await",
-          "foreground": "#ddca7e"
+          "foreground": "#809bbd"
         },
         {
-          "line": 160,
+          "line": 161,
           "text": "return",
+          "foreground": "#809bbd"
+        },
+        {
+          "line": 162,
+          "text": "catch",
+          "foreground": "#809bbd"
+        },
+        {
+          "line": 163,
+          "text": "throw",
+          "foreground": "#809bbd"
+        },
+        {
+          "line": 163,
+          "text": "Exception",
           "foreground": "#ddca7e"
         }
       ]

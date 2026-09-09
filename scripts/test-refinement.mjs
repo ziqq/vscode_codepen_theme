@@ -49,25 +49,30 @@ for (const [language, marked] of fixtures) {
 }
 for (const keyword of [
   'return', 'switch', 'case', 'try', 'catch', 'async', 'await', 'export',
-  'function', 'this', 'self', 'super', 'for', 'yield',
+  'for', 'yield', 'match', 'when', 'then', 'while', 'end', 'in',
 ]) {
-  assert.deepEqual(keywordStyle(keyword), { role: 'yellow', fontStyle: 'italic' });
+  assert.deepEqual(keywordStyle(keyword), { role: 'blue', fontStyle: 'italic' });
 }
 for (const keyword of [
   'override', 'required', '@interface', '@implementation', 'static', 'final',
   'let', 'var', 'def', 'class', 'interface', 'abstract', 'method', 'sub', 'my',
   'given', 'import', 'extends', 'implements', 'enum', 'get', 'set', 'fun', 'fn',
-  'func', 'ns', 'of', 'register', 'Shader', 'Properties',
+  'func', 'local', 'ns', 'of', 'register', 'Shader', 'Properties',
 ]) {
   assert.deepEqual(keywordStyle(keyword), { role: 'blue', fontStyle: 'italic' });
 }
 for (const keyword of [
-  'new', 'typeof', 'sizeof', 'match', 'when', 'then', 'while', 'pass',
+  'function', 'this', 'self', 'super', 'new', 'typeof', 'pass',
 ]) {
   assert.deepEqual(keywordStyle(keyword), { role: 'yellow', fontStyle: 'italic' });
 }
-assert.deepEqual(keywordStyle('as'), { role: 'white' });
-assert.deepEqual(keywordStyle('null'), { role: 'orange' });
+assert.deepEqual(keywordStyle('as'), { role: 'blue', fontStyle: 'italic' });
+for (const keyword of ['null', 'true', 'false']) {
+  assert.deepEqual(keywordStyle(keyword), { role: 'orange', fontStyle: 'normal' });
+}
+for (const keyword of ['void', 'sizeof']) {
+  assert.deepEqual(keywordStyle(keyword), { role: 'yellow', fontStyle: 'normal' });
+}
 assert.deepEqual(await refine('x'.repeat(maximumDocumentLength + 1), 'typescript'), []);
 assert.deepEqual(await refine('class Theme {}', 'plaintext'), []);
 await writeFile('build/refinement.json', `${JSON.stringify({ assertions, recoveryCases, failures, results }, null, 2)}\n`);

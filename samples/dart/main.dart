@@ -156,6 +156,10 @@ void main() {
 }
 
 Future<int> resolveLimit(Future<int> value) async {
-  final limit = await value;
-  return limit;
+  try {
+    final limit = await value;
+    return limit;
+  } catch (e) {
+    throw Exception('Failed to resolve limit, $e');
+  }
 }

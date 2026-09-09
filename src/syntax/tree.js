@@ -197,7 +197,15 @@ function classify(root, source, language) {
     }
     if (node.type === 'enum_constant' || node.type === 'enum_variant' ||
         node.type === 'enum_entry' || node.type === 'enumerator') {
-      declare(field(node, 'name') ?? firstIdentifier(node), 'enum', classOf(node));
+      const name = field(node, 'name') ?? firstIdentifier(node);
+      declare(name, 'enum', classOf(node));
+      // Dart enhanced-enum entries with constructor arguments are callable
+      // declarations. Keep their references enum-white via the binding kind,
+      // but render the declaration itself with the method/function purple.
+      if (language === 'dart' && node.type === 'enum_constant' &&
+          node.namedChildren.some((child) => child.type === 'argument_part')) {
+        set(name, codeRoles.functionDeclaration);
+      }
     }
     if (!isIdentifier(node)) continue;
     const parent = node.parent;
@@ -216,8 +224,7 @@ function classify(root, source, language) {
         (language === 'kotlin' && param.type === 'class_parameter' && param.children.some((item) => item.type === 'binding_pattern_kind')) ||
         (['csharp', 'java', 'razor'].includes(language) && param.parent?.parent?.type === 'record_declaration');
       const signature = ancestor(node, (item) => item.type === 'function_declarator');
-      const callable = language === 'dart' && /\bFunction\s*(?:<[^>{}]*>)?\s*\(/.test(param.text);
-      declare(node, promoted ? 'property' : callable ? 'method' : 'variable', promoted ? classOf(node) :
+      declare(node, promoted ? 'property' : 'variable', promoted ? classOf(node) :
         functionOf(node) ?? (signature ? region(signature) : region(param)));
     }
     if (['parameters', 'method_parameters', 'lambda_parameters', 'closure_parameters', 'inferred_parameters'].includes(parent.type)) declare(node, 'variable', functionOf(node));
@@ -284,11 +291,30 @@ function classify(root, source, language) {
       const name = field(annotation, 'name') ?? field(annotation, 'type') ??
         field(target, 'function') ?? firstIdentifier(annotation) ??
         annotation.descendantsOfType('identifier')[0];
-      if (name && contains(region(name), node)) return codeRoles.annotation;
+      if (name && contains(region(name), node)) {
+        return { role: codeRoles.annotation, fontStyle: 'italic' };
+      }
     }
+    const moduleReference = ancestor(node, (item) => [
+      'export_statement', 'groovy_import', 'import_declaration',
+      'import_from_statement', 'import_specification', 'import_statement',
+      'using_directive',
+    ].includes(item.type));
+    if (moduleReference) return codeRoles.binding;
     if (language === 'sql') {
-      if (ancestor(node, (item) => item.type === 'invocation')) return 'yellow';
-      return ancestor(node, (item) => item.type === 'field') ? 'purple' : 'blue';
+      const reference = ancestor(node, (item) => item.type === 'object_reference');
+      const invocation = reference?.parent?.type === 'invocation'
+        ? reference.parent
+        : undefined;
+      const functionName = invocation?.namedChildren[0]
+        ?.descendantsOfType('identifier').at(-1);
+      if (functionName?.id === node.id) return codeRoles.method;
+      return codeRoles.binding;
+    }
+    if (language === 'dart' && parent.type === 'throw_expression' &&
+        /^[A-Z]/.test(node.text) &&
+        /^\s*\(/.test(source.slice(node.endIndex, node.endIndex + 24))) {
+      return codeRoles.type;
     }
     if (language === 'go' && ancestor(node, (item) => item.type === 'package_clause')) {
       return codeRoles.binding;
@@ -387,7 +413,7 @@ function classify(root, source, language) {
       if (role) {
         const style = typeof role === 'string' ? { role } : role;
         spans.add(node.startIndex, node.endIndex, style.role, 30,
-          style.fontStyle ?? (style.role === codeRoles.annotation ? 'italic' : undefined));
+          style.fontStyle);
       }
       continue;
     }
@@ -401,6 +427,10 @@ function classify(root, source, language) {
     }
     if (language === 'dart' && node.type === 'annotation' && text.startsWith('@')) {
       spans.add(node.startIndex, node.startIndex + 1, codeRoles.annotation, 40);
+    }
+    if (language === 'python' && node.type === 'decorator' && text.startsWith('@')) {
+      spans.add(node.startIndex, node.startIndex + 1,
+        codeRoles.annotation, 40, 'italic');
     }
     if (language === 'rust' && node.parent?.type === 'macro_invocation' && (isField(node, 'macro') || text === '!')) {
       spans.add(node.startIndex, node.endIndex, 'purple', 40);
@@ -432,7 +462,9 @@ function classify(root, source, language) {
     }
     // Do not treat string content, names, shell commands, or error recovery text as keywords.
     if (!node.isNamed || /^keyword_/.test(node.type) || /_builtin$/.test(node.type) ||
-        ['true', 'false', 'null_literal', 'null', 'this', 'super', 'self', 'inferred_type', 'binding_pattern_kind'].includes(node.type)) {
+        ['true', 'false', 'boolean', 'boolean_literal', 'null_literal', 'null',
+          'this', 'super', 'self', 'inferred_type',
+          'binding_pattern_kind'].includes(node.type)) {
       if (keywords.has(text.toLowerCase().replace(/^@/, '')) || /^keyword_/.test(node.type)) {
         const style = keywordStyle(text);
         spans.add(node.startIndex, node.endIndex, style.role, 20,

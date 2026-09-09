@@ -21,14 +21,15 @@ const codeRoles = Object.freeze({
 // them through a generic `keyword.control` scope.
 const declarationKeywords = new Set([
   'abstract', 'alias', 'as', 'asserts', 'base', 'cbuffer', 'class', 'const',
-  'covariant', 'data',
-  'def', 'define', 'dim', 'dynamic', 'enum', 'export', 'extension', 'extern', 'external',
+  'constexpr', 'covariant', 'data',
+  'def', 'define', 'defn', 'defprotocol', 'defrecord', 'dim', 'dynamic',
+  'enum', 'export', 'extend-protocol', 'extension', 'extern', 'external',
   'extends', 'factory', 'final', 'fn', 'friend', 'fun', 'func', 'get', 'given',
   'from', 'global', 'has',
   'impl',
   'implementation', 'implements', 'import', 'imports', 'include', 'inline',
   'interface', 'internal', 'iterator', 'late', 'let', 'library', 'method',
-  'mixin', 'mod', 'module', 'mut', 'mutable', 'my', 'namespace', 'native', 'ns',
+  'local', 'mixin', 'mod', 'module', 'mut', 'mutable', 'my', 'namespace', 'native', 'ns',
   'nonlocal', 'notinheritable', 'open', 'operator', 'optional', 'our', 'out',
   'of', 'override', 'package', 'param', 'part', 'private', 'process',
   'properties', 'property',
@@ -40,8 +41,19 @@ const declarationKeywords = new Set([
   'volatile', 'where',
 ]);
 
+// Branching, transfer, and asynchronous control flow use the blue annotation
+// role. Function introducers and language values (`this`, `self`, `super`)
+// intentionally stay in the yellow keyword role.
+const controlKeywords = new Set([
+  'async', 'await', 'break', 'case', 'catch', 'continue', 'default', 'defer',
+  'do', 'elif', 'else', 'end', 'except', 'finally', 'for', 'foreach', 'goto',
+  'if', 'in', 'match', 'raise', 'redo', 'rescue', 'return', 'rethrow', 'select',
+  'switch', 'then', 'throw', 'try', 'unless', 'when', 'when-let', 'while',
+  'yield',
+]);
+
 const literalKeywords = new Set([
-  'false', 'nil', 'none', 'some', 'true',
+  'nil', 'none', 'some',
 ]);
 
 /** Resolve a keyword by meaning rather than by provider-specific scope names. */
@@ -49,10 +61,14 @@ function keywordStyle(value) {
   const annotation = value.startsWith('@');
   const keyword = value.replace(/^@/, '').toLowerCase();
   if (keyword === 'null') return { role: 'orange', fontStyle: 'normal' };
+  if (keyword === 'true' || keyword === 'false') {
+    return { role: 'orange', fontStyle: 'normal' };
+  }
   if (keyword === 'void') return { role: codeRoles.type, fontStyle: 'normal' };
+  if (keyword === 'sizeof') return { role: codeRoles.type, fontStyle: 'normal' };
   if (literalKeywords.has(keyword)) return { role: 'yellow' };
   return {
-    role: annotation || declarationKeywords.has(keyword)
+    role: annotation || declarationKeywords.has(keyword) || controlKeywords.has(keyword)
       ? codeRoles.declarationKeyword
       : codeRoles.flowKeyword,
     fontStyle: 'italic',

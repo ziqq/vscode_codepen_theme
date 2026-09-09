@@ -27,6 +27,17 @@ const expectedRecommendations = compatibility.providers
   .filter((provider) => provider.kind === 'recommended')
   .map((provider) => provider.id);
 const expectedSamples = compatibility.cases.map((item) => item.sample);
+const expectedSemanticTypographySelectors = new Set([
+  'annotation:dart',
+  'decorator',
+  'keyword',
+  'keyword:dart',
+  'keyword:sql',
+  'keyword.void:dart',
+  'macro:julia',
+  'tomlArrayKey',
+  'tomlTableKey',
+]);
 
 const sampleEntries = await readdir('samples', {
   recursive: true,
@@ -194,7 +205,7 @@ for (const [absolutePath, expectedSource] of generatedThemes()) {
       throw new Error(`${selector}: semantic rules must use a palette foreground`);
     }
     if (typeof value !== 'string' &&
-        (!['keyword:dart', 'keyword.void:dart'].includes(selector) ||
+        (!expectedSemanticTypographySelectors.has(selector) ||
          Object.keys(value).sort().join(',') !== 'foreground,italic')) {
       throw new Error(`${selector}: unexpected semantic typography override`);
     }

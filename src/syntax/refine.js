@@ -40,6 +40,16 @@ function refineDotenv(source) {
         else if (!quote && value[index] === '#') { comment = index; break; }
       }
       spans.add(valueStart, valueStart + comment, 'green');
+      const bareValue = /^(\s*)(true|false)(\s*)$/i.exec(value.slice(0, comment));
+      if (bareValue) {
+        const booleanStart = valueStart + bareValue[1].length;
+        spans.add(
+          booleanStart,
+          booleanStart + bareValue[2].length,
+          'orange',
+          30,
+        );
+      }
       addComment(spans, source, valueStart + comment, offset + line.length);
       if (!value.startsWith("'")) {
         for (const match of value.slice(0, comment).matchAll(/(?<!\\)\$\{([A-Za-z_][A-Za-z0-9_]*)(?::[-+?][^}]*)?\}/g)) {

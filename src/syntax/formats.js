@@ -44,7 +44,7 @@ function refineConfig(source, language) {
     }
     if (!continuation && language === 'ini' && trimmed.startsWith('[') && trimmed.endsWith(']')) {
       spans.add(offset + leading, offset + leading + 1, 'white', 40);
-      spans.add(offset + leading + 1, offset + line.length - 1, 'purple', 50);
+      spans.add(offset + leading + 1, offset + line.length - 1, 'blue', 50);
       spans.add(offset + line.length - 1, offset + line.length, 'white', 40);
       return;
     }
@@ -61,17 +61,16 @@ function refineConfig(source, language) {
       const scalar = line.slice(value.start, value.end);
       if (/^null$/i.test(scalar)) {
         spans.add(offset + value.start, offset + value.end, 'orange', 45);
-      } else if (/^(?:true|false|yes|no|on|off)$/i.test(scalar)) {
+      } else if (/^(?:true|false)$/i.test(scalar)) {
+        spans.add(offset + value.start, offset + value.end, 'orange', 45);
+      } else if (/^(?:yes|no|on|off)$/i.test(scalar)) {
         spans.add(offset + value.start, offset + value.end, 'yellow', 45);
       } else if (/^[+-]?(?:\d+(?:\.\d+)?|\.\d+)$/.test(scalar)) {
         spans.add(offset + value.start, offset + value.end, 'orange', 45);
       }
       for (const match of scalar.matchAll(/\$\{([^}]+)\}/g)) {
-        spans.add(offset + value.start + match.index, offset + value.start + match.index + 2, 'green', 55);
-        spans.add(offset + value.start + match.index + 2,
-          offset + value.start + match.index + match[0].length - 1, 'blue', 60);
-        spans.add(offset + value.start + match.index + match[0].length - 1,
-          offset + value.start + match.index + match[0].length, 'green', 55);
+        spans.add(offset + value.start + match.index,
+          offset + value.start + match.index + match[0].length, 'white', 60);
       }
     }
     continuation = language === 'properties' && /(?<!\\)(?:\\\\)*\\\s*$/.test(line);
@@ -80,14 +79,14 @@ function refineConfig(source, language) {
 }
 
 /** JSON providers use one TextMate scope for booleans and null. A tiny
- * string/comment-aware pass keeps booleans yellow while making null orange. */
+ * string/comment-aware pass keeps both literal families orange. */
 function refineJson(source) {
   const spans = new Spans(source.length);
   const masked = source.replace(
     /"(?:\\.|[^"\\])*(?:"|$)|\/\/[^\n]*|\/\*[\s\S]*?(?:\*\/|$)/g,
     (text) => text.replace(/[^\n]/g, ' '),
   );
-  for (const match of masked.matchAll(/\bnull\b/g)) {
+  for (const match of masked.matchAll(/\b(?:true|false|null)\b/g)) {
     spans.add(match.index, match.index + match[0].length, 'orange', 60);
   }
   return spans.finish();
@@ -150,8 +149,8 @@ function refineDockerfile(source) {
 function refineBibtex(source) {
   const spans = new Spans(source.length);
   for (const match of source.matchAll(/@(\w+)\s*\{\s*([^,\s]+)/g)) {
-    spans.add(match.index, match.index + 1, 'white', 45);
-    spans.add(match.index + 1, match.index + 1 + match[1].length, 'yellow', 50);
+    spans.add(match.index, match.index + 1 + match[1].length,
+      'blue', 50, 'italic');
     const keyAt = match.index + match[0].lastIndexOf(match[2]);
     spans.add(keyAt, keyAt + match[2].length, 'blue', 50);
   }

@@ -5,7 +5,7 @@ let «white|value»: «yellow|Theme» = new «yellow|Theme»();
 function «purple|run»() { for (const «white|entry» of []) { console.«purple|log»(«white|entry»); } }
 namespace «yellow|Palette» { export const «white|accent» = 'x'; }
 const «white|result» = «yellow|Palette».«white|accent»;
-const «white|frozen» = { x: 1 } «white|as» «yellow|const»;
+const «white|frozen» = { x: 1 } «blue/italic|as» «yellow|const»;
 const «white|keys» = «yellow|Object».«purple|keys»(«white|frozen»);`],
   ['typescript', `const «white|name» = 'global';
 function «purple|outer»(«white|name»: «yellow|string») {
@@ -21,9 +21,9 @@ const «white|values» = [1];
 const «white|list» = «white|values».«purple|map»((«white|item») => <«brown|b»>{«white|item»}</«brown|b»>);
 const «white|nested» = <«brown|i»>{«white|values».«purple|map»((«white|item», «white|index») => <«brown|b» «yellow|key»={«white|index»}>{«white|item»}</«brown|b»>)}</«brown|i»>;`],
   ['typescript', `type «yellow|Shape»<«yellow|T»> = { «blue|readonly» «white|value»?: «yellow|T» };
-type «yellow|Handler» = («white|value»: «yellow|number») => «blue|void»;
+type «yellow|Handler» = («white|value»: «yellow|number») => «yellow|void»;
 type «yellow|Factory» = new («white|name»: «yellow|string») => «yellow|object»;
-import «blue|type» { «yellow|CSSProperties» } from 'react';
+import «blue|type» { «white|CSSProperties» } from 'react';
 type «yellow|Picked»<«yellow|T»> = { [«yellow|K» in keyof «yellow|T»]?: «yellow|T»[«yellow|K»] };
 const «white|validated» = { «white|count»: 2 } satisfies { «white|count»: «yellow|number» };
 type «yellow|Pair» = [«white|name»: «yellow|string», «white|count»: «yellow|number»];
@@ -45,8 +45,8 @@ const «white|result» = «yellow|Math».«purple|max»(«white|size», «orange
   void «purple|shadow»(String «white|name») { use(«white|name»); use(this.«white|name»); }
   void «purple|run»() { «yellow|Theme» «white|theme» = new «yellow|Theme»(); «white|theme».«purple|label»("x"); }
 }`],
-  ['dart', `«blue|import» 'dart:math' «white|as» «white|math»;
-«gray|/// Links »«white|[»«white|name»«white|]»«gray| and code »«white|\`name\`»«gray| remain comments.»
+  ['dart', `«blue|import» 'dart:math' «blue/italic|as» «white|math»;
+«gray|/// Links »«muted|[»«muted|name»«muted|]»«gray| and code »«muted|\`name\`»«gray| remain comments.»
 enum «yellow|Mode» { «white|dark», «white|light» }
 class «yellow|Theme» {
   final «yellow|String» «white|name»;
@@ -64,23 +64,23 @@ void «purple|main»() {
   final «white|fixed» = 1;
   invoke(«white|fixed»: «white|fixed»);
 }`],
-  ['dart', `«yellow|Future»<«yellow|int»> «purple|resolveLimit»(«yellow|Future»<«yellow|int»> «white|value») «yellow|async» {
-  «blue|final» «white|limit» = «yellow|await» «white|value»;
-  «yellow|return» «white|limit»;
+  ['dart', `«yellow|Future»<«yellow|int»> «purple|resolveLimit»(«yellow|Future»<«yellow|int»> «white|value») «blue/italic|async» {
+  «blue|final» «white|limit» = «blue/italic|await» «white|value»;
+  «blue/italic|return» «white|limit»;
 }`],
   ['dart', `class ThemeReady { final ThemePalette palette; }
 String describeTheme(ThemeReady state) => switch (state) {
   ThemeReady(:final «white|palette») => «green|'value: \${»«white|palette»«white|.»«white|background»«green|}'»
 };`],
-  ['typescript', `«gray|/** Uses »«white|[»«yellow|Theme»«white|]»«gray| and »«white|\`value\`»«gray|. */»
+  ['typescript', `«gray|/** Uses »«muted|[»«yellow|Theme»«muted|]»«gray| and »«muted|\`value\`»«gray|. */»
 const «white|value» = 1;`],
-  ['java', `«gray|/** Uses »«white|[»«yellow|Theme»«white|]»«gray| and »«white|\`value\`»«gray|. */»
+  ['java', `«gray|/** Uses »«muted|[»«yellow|Theme»«muted|]»«gray| and »«muted|\`value\`»«gray|. */»
 class «yellow|Theme» {}`],
-  ['python', `«gray|# Uses »«white|[»«yellow|Theme»«white|]»«gray| and »«white|\`value\`»«gray|.»
+  ['python', `«gray|# Uses »«muted|[»«yellow|Theme»«muted|]»«gray| and »«muted|\`value\`»«gray|.»
 «white|value» = 1`],
-  ['css', `«gray|/* Uses »«white|[»«yellow|Theme»«white|]»«gray| and »«white|\`value\`»«gray|. */»
+  ['css', `«gray|/* Uses »«muted|[»«yellow|Theme»«muted|]»«gray| and »«muted|\`value\`»«gray|. */»
 .theme { color: red; }`],
-  ['html', `«gray|<!-- Uses »«white|[»«yellow|Theme»«white|]»«gray| and »«white|\`value\`»«gray|. -->»
+  ['html', `«gray|<!-- Uses »«muted|[»«yellow|Theme»«muted|]»«gray| and »«muted|\`value\`»«gray|. -->»
 <div></div>`],
   ['go', `package main
 type «yellow|Theme» struct { «white|Name» «yellow|string» }
@@ -141,8 +141,9 @@ alias «purple|b» := «purple|build»
 «purple|build»:
 \t@mkdir -p build
 `],
-  ['sql', `«yellow|SELECT» «purple|name» FROM tokens WHERE «purple|active» = «yellow|TRUE» AND «purple|deleted» = «yellow|FALSE»;`],
+  ['sql', `«blue/normal|SELECT» «white/normal|name» FROM tokens WHERE «white/normal|active» = «orange/normal|TRUE» AND «white/normal|deleted» = «orange/normal|FALSE»;`],
   ['dotenv', `«blue|MODE»=«green|dark»
+«blue|ENABLED»=«orange|true»
 «blue|COUNT»=«green|42»
 «blue|VALUE»=«green|"\${»«blue|MODE»«green|} \${»«blue|COUNT»«green|}"»
 «blue|LITERAL»=«green|'\${MODE}'»
@@ -180,7 +181,7 @@ echo «green|"\${»«blue|name»«green|}"»
   ['rust', `fn «purple|label»(«white|name»: &«yellow|str») -> «yellow|String» { «purple|format!»(«green|"{name}: {}"», «orange|2») }`],
   ['dart', `class «yellow|Theme» { «blue|@»«blue/italic|override» String «purple|toString»() => 'x'; }`],
   ['typescriptreact', `const «white|view» = <«brown|UI.Card» «yellow|title»="x">{value.«white|name»}</«brown|UI.Card»>;`],
-  ['javascript', `class «yellow|Theme» { «blue|get» «purple|name»() { return 'x'; } «blue|set» «purple|name»(«white|value») {} }
+  ['javascript', `class «yellow|Theme» { «blue|get» «white|name»() { return 'x'; } «blue|set» «white|name»(«white|value») {} }
 const «white|object» = { «purple|get»() { return 1; } };`],
   ['rust', `fn «purple|label»() {}
 struct «yellow|Theme» { «white|name»: «yellow|String» }
@@ -204,7 +205,7 @@ __global__ void «purple|render»(«yellow|Theme» *«white|theme») { «white|t
   «yellow|String» «purple|label»(«yellow|String» «white|prefix») { «green|"\${»«white|prefix»«green|}: \${»«white|name»«green|}"» }
 }
 new «yellow|Theme»().«purple|label»('x')`],
-  ['julia', `module «purple|ThemeKit»
+  ['julia', `module «white|ThemeKit»
 struct «yellow|Theme»
   «white|name»::«yellow|String»
 end
@@ -228,14 +229,14 @@ print(«white|theme».«white|name»)`],
   ['r', `«white|theme» <- list(«white|name» = "x")
 «white|label» <- function(«white|value») paste(«white|value»$«white|name»)
 «purple|label»(«white|theme»)`],
-  ['ini', `[«purple|theme»]
+  ['ini', `[«blue|theme»]
 «purple|name»«operator|=»«green|CodePen»
-«purple|enabled»«operator|=»«yellow|true»
+«purple|enabled»«operator|=»«orange|true»
 «purple|count»«operator|=»«orange|2»
-«purple|source»«operator|=»«green|\${»«blue|HOME»«green|}/theme»`],
+«purple|source»«operator|=»«white|\${HOME}»«green|/theme»`],
   ['properties', `«purple|theme.name»«operator|=»«green|CodePen»
 «purple|theme.count»«operator|=»«orange|2»
-«purple|theme.source»«operator|=»«green|\${»«blue|base»«green|}/theme»`],
+«purple|theme.source»«operator|=»«white|\${base}»«green|/theme»`],
   ['dockerfile', `ARG «blue|VERSION»=«orange|22»
 FROM node:\${«blue|VERSION»} AS «blue|build»
 LABEL «purple|theme»="CodePen"
@@ -311,15 +312,15 @@ theme.«purple|label»()`],
 («purple|label» default-theme)`],
   ['razor', `<«brown|PageTitle»>@«white|State».«white|Title»</«brown|PageTitle»>
 @code { private «yellow|ThemeState» «white|State» { get; } = new «yellow|ThemeState»(); }`],
-  ['typescript', `«yellow/italic|export» «blue/italic|abstract» «blue/italic|class» «yellow|Theme» extends «yellow|Base» {
-  «blue/italic|static» «yellow/italic|async» «purple|run»() {
-    «yellow/italic|for» («blue/italic|const» «white|item» of []) {
-      «yellow/italic|try» { «yellow/italic|switch» («white|item») { «yellow/italic|case» 0: «yellow/italic|return» «yellow/italic|await» «yellow/italic|this».«purple|work»(); } }
-      «yellow/italic|catch» («white|error») { «yellow/italic|return» «yellow/italic|super».«purple|work»(); }
+  ['typescript', `«blue/italic|export» «blue/italic|abstract» «blue/italic|class» «yellow|Theme» extends «yellow|Base» {
+  «blue/italic|static» «blue/italic|async» «purple|run»() {
+    «blue/italic|for» («blue/italic|const» «white|item» of []) {
+      «blue/italic|try» { «blue/italic|switch» («white|item») { «blue/italic|case» 0: «blue/italic|return» «blue/italic|await» «yellow/italic|this».«purple|work»(); } }
+      «blue/italic|catch» («white|error») { «blue/italic|return» «yellow/italic|super».«purple|work»(); }
     }
   }
 }
-«yellow/italic|export» «yellow/italic|async» «yellow/italic|function»* «purple|render»() { «yellow/italic|yield» 1; }`],
+«blue/italic|export» «blue/italic|async» «yellow/italic|function»* «purple|render»() { «blue/italic|yield» 1; }`],
   ['objective-c', `«blue/italic|@interface» «yellow|Theme» : NSObject
 «blue/italic|@implementation» «yellow|Theme»
 «blue/italic|@end»`],

@@ -66,10 +66,13 @@ for (const rule of theme.tokenColors) {
 for (const value of Object.values(theme.semanticTokenColors)) {
   assert.match(typeof value === 'string' ? value : value.foreground, /^#[0-9a-f]{6}$/i);
 }
-assert.equal(theme.semanticTokenColors['keyword:dart'], '#ddca7e');
-assert.equal(theme.semanticTokenColors['keyword.void:dart'], '#809bbd');
+assert.equal(theme.semanticTokenColors['keyword:dart'], '#809bbd');
+assert.deepEqual(theme.semanticTokenColors['keyword.void:dart'], {
+  foreground: '#ddca7e',
+  italic: false,
+});
 assert.equal(ligaturesTheme.semanticTokenColors['keyword:dart'].italic, true);
-assert.equal(ligaturesTheme.semanticTokenColors['keyword.void:dart'].italic, true);
+assert.equal(ligaturesTheme.semanticTokenColors['keyword.void:dart'].italic, false);
 assert.deepEqual(
   twilight.cases.map((item) => item.language).sort(),
   compatibility.cases.map((item) => item.language).sort(),
@@ -120,8 +123,7 @@ const probes = [
   ['source.js storage.type.function.arrow.js', '#cccccc', 0],
   ['source.js meta.var.expr.js storage.type.js', '#809bbd', 1],
   ['source.js meta.function.js storage.type.function.js', '#ddca7e', 1],
-  // The structural refinement preserves the same yellow control-flow role.
-  ['source.js keyword.control.conditional.js', '#ddca7e', 1],
+  ['source.js keyword.control.conditional.js', '#809bbd', 1],
   // The structural and semantic layers turn the declaration identifier purple;
   // this isolated raw TextMate stack retains the provider's blue fallback.
   ['source.js meta.function.js meta.definition.function.js entity.name.function.js', '#809bbd', 0],
@@ -135,7 +137,7 @@ const probes = [
   ['source.css.scss constant.numeric.css keyword.other.unit.px.css', '#d0782a', 0],
   ['source.css support.type.property-name.css', '#9a8297', 0],
   ['source.less support.type.property-name.less', '#9a8297', 0],
-  ['source.toml support.type.property-name.table.toml', '#9a8297', 0],
+  ['source.toml support.type.property-name.table.toml', '#809bbd', 1],
   ['source.json support.type.property-name.json', '#96b38a', 0],
   ['source.dart entity.name.function.dart', '#9a8297', 0],
   ['source.go entity.name.type.go', '#ddca7e', 0],
@@ -147,6 +149,10 @@ const probes = [
   ['source.ts meta.decorator.ts punctuation.decorator.ts', '#809bbd', 0],
   ['source.java punctuation.definition.annotation.java', '#809bbd', 1],
   ['source.js string.quoted.single.js', '#96b38a', 0],
+  ['source.js constant.language.boolean.true.js', '#d0782a', 0],
+  ['source.json constant.language.json.comments', '#d0782a', 0],
+  ['source.toml constant.language.boolean.toml', '#d0782a', 0],
+  ['source.yaml constant.language.boolean.yaml', '#d0782a', 0],
 ];
 const wasm = await readFile('node_modules/vscode-oniguruma/release/onig.wasm');
 await vscodeOniguruma.loadWASM(wasm.buffer.slice(wasm.byteOffset, wasm.byteOffset + wasm.byteLength));
@@ -177,7 +183,7 @@ for (const { languageId } of compatibility.cases) {
     ['property', ['readonly'], '#ffffff'],
     ['enumMember', [], '#ffffff'],
     ['variable', ['defaultLibrary'], '#ffffff'],
-    ['keyword', [], '#ddca7e'],
+    ['keyword', [], '#809bbd'],
   ]) {
     assert.equal(semanticColor(theme, type, modifiers, languageId), expected, `${languageId}: ${type}.${modifiers}`);
     semanticAssertions++;

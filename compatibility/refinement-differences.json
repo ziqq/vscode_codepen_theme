@@ -124,6 +124,14 @@
     {
       "case": "javascript-bindings",
       "line": 6,
+      "start": 2,
+      "text": "if",
+      "actual": "#809bbd",
+      "reason": "Import, export, declaration, annotation, and control-flow keywords use CodePen blue."
+    },
+    {
+      "case": "javascript-bindings",
+      "line": 6,
       "start": 6,
       "text": "local",
       "actual": "#ffffff",
@@ -168,6 +176,14 @@
       "text": "nested",
       "actual": "#ffffff",
       "reason": "Bindings, fields, properties, enum values, and named arguments use neutral white."
+    },
+    {
+      "case": "javascript-bindings",
+      "line": 7,
+      "start": 2,
+      "text": "return",
+      "actual": "#809bbd",
+      "reason": "Import, export, declaration, annotation, and control-flow keywords use CodePen blue."
     },
     {
       "case": "javascript-bindings",
@@ -244,6 +260,22 @@
     {
       "case": "javascript-members",
       "line": 3,
+      "start": 6,
+      "text": "value",
+      "actual": "#ffffff",
+      "reason": "Bindings, fields, properties, accessors, enum values, and imported names use neutral white."
+    },
+    {
+      "case": "javascript-members",
+      "line": 3,
+      "start": 16,
+      "text": "return",
+      "actual": "#809bbd",
+      "reason": "Import, export, declaration, annotation, and control-flow keywords use CodePen blue."
+    },
+    {
+      "case": "javascript-members",
+      "line": 3,
       "start": 28,
       "text": "count",
       "actual": "#ffffff",
@@ -256,6 +288,14 @@
       "text": "set",
       "actual": "#809bbd",
       "reason": "Declaration, modifier, annotation, and module keywords use CodePen blue."
+    },
+    {
+      "case": "javascript-members",
+      "line": 4,
+      "start": 6,
+      "text": "value",
+      "actual": "#ffffff",
+      "reason": "Bindings, fields, properties, accessors, enum values, and imported names use neutral white."
     },
     {
       "case": "javascript-members",
@@ -288,6 +328,14 @@
       "text": "step",
       "actual": "#ffffff",
       "reason": "Bindings, fields, properties, enum values, and named arguments use neutral white."
+    },
+    {
+      "case": "javascript-members",
+      "line": 5,
+      "start": 17,
+      "text": "return",
+      "actual": "#809bbd",
+      "reason": "Import, export, declaration, annotation, and control-flow keywords use CodePen blue."
     },
     {
       "case": "javascript-members",
@@ -452,6 +500,22 @@
     {
       "case": "javascript-literals",
       "line": 7,
+      "start": 15,
+      "text": "true",
+      "actual": "#d0782a",
+      "reason": "Boolean, null, and numeric literals use CodePen orange."
+    },
+    {
+      "case": "javascript-literals",
+      "line": 7,
+      "start": 21,
+      "text": "false",
+      "actual": "#d0782a",
+      "reason": "Boolean, null, and numeric literals use CodePen orange."
+    },
+    {
+      "case": "javascript-literals",
+      "line": 7,
       "start": 28,
       "text": "null",
       "actual": "#d0782a",
@@ -596,6 +660,14 @@
     {
       "case": "javascript-destructuring",
       "line": 4,
+      "start": 43,
+      "text": "return",
+      "actual": "#809bbd",
+      "reason": "Import, export, declaration, annotation, and control-flow keywords use CodePen blue."
+    },
+    {
+      "case": "javascript-destructuring",
+      "line": 4,
       "start": 50,
       "text": "label",
       "actual": "#ffffff",
@@ -648,6 +720,14 @@
       "text": "value",
       "actual": "#ffffff",
       "reason": "Bindings, fields, properties, enum values, and named arguments use neutral white."
+    },
+    {
+      "case": "javascript-destructuring",
+      "line": 5,
+      "start": 39,
+      "text": "return",
+      "actual": "#809bbd",
+      "reason": "Import, export, declaration, annotation, and control-flow keywords use CodePen blue."
     },
     {
       "case": "javascript-destructuring",
@@ -788,6 +868,14 @@
     {
       "case": "javascript-async-docs",
       "line": 2,
+      "start": 0,
+      "text": "async",
+      "actual": "#809bbd",
+      "reason": "Import, export, declaration, annotation, and control-flow keywords use CodePen blue."
+    },
+    {
+      "case": "javascript-async-docs",
+      "line": 2,
       "start": 15,
       "text": "read",
       "actual": "#9a8297",
@@ -804,6 +892,22 @@
     {
       "case": "javascript-async-docs",
       "line": 2,
+      "start": 29,
+      "text": "return",
+      "actual": "#809bbd",
+      "reason": "Import, export, declaration, annotation, and control-flow keywords use CodePen blue."
+    },
+    {
+      "case": "javascript-async-docs",
+      "line": 2,
+      "start": 36,
+      "text": "await",
+      "actual": "#809bbd",
+      "reason": "Import, export, declaration, annotation, and control-flow keywords use CodePen blue."
+    },
+    {
+      "case": "javascript-async-docs",
+      "line": 2,
       "start": 58,
       "text": "value",
       "actual": "#ffffff",
@@ -816,6 +920,14 @@
       "text": "items",
       "actual": "#9a8297",
       "reason": "Function and method names use CodePen purple."
+    },
+    {
+      "case": "javascript-async-docs",
+      "line": 3,
+      "start": 20,
+      "text": "yield",
+      "actual": "#809bbd",
+      "reason": "Import, export, declaration, annotation, and control-flow keywords use CodePen blue."
     },
     {
       "case": "javascript-async-docs",
@@ -1012,6 +1124,14 @@
     {
       "case": "type-and-class-contexts",
       "line": 6,
+      "start": 36,
+      "text": "return",
+      "actual": "#809bbd",
+      "reason": "Import, export, declaration, annotation, and control-flow keywords use CodePen blue."
+    },
+    {
+      "case": "type-and-class-contexts",
+      "line": 6,
       "start": 48,
       "text": "value",
       "actual": "#ffffff",
@@ -1180,6 +1300,14 @@
     {
       "case": "bindings-and-blocks",
       "line": 6,
+      "start": 2,
+      "text": "if",
+      "actual": "#809bbd",
+      "reason": "Import, export, declaration, annotation, and control-flow keywords use CodePen blue."
+    },
+    {
+      "case": "bindings-and-blocks",
+      "line": 6,
       "start": 6,
       "text": "local",
       "actual": "#ffffff",
@@ -1228,6 +1356,14 @@
     {
       "case": "bindings-and-blocks",
       "line": 7,
+      "start": 2,
+      "text": "return",
+      "actual": "#809bbd",
+      "reason": "Import, export, declaration, annotation, and control-flow keywords use CodePen blue."
+    },
+    {
+      "case": "bindings-and-blocks",
+      "line": 7,
       "start": 15,
       "text": "local",
       "actual": "#ffffff",
@@ -1272,6 +1408,14 @@
       "text": "number",
       "actual": "#ddca7e",
       "reason": "Types, constructors, and language atoms use CodePen yellow."
+    },
+    {
+      "case": "functions-and-methods",
+      "line": 1,
+      "start": 43,
+      "text": "return",
+      "actual": "#809bbd",
+      "reason": "Import, export, declaration, annotation, and control-flow keywords use CodePen blue."
     },
     {
       "case": "functions-and-methods",
@@ -1364,6 +1508,14 @@
     {
       "case": "functions-and-methods",
       "line": 3,
+      "start": 46,
+      "text": "return",
+      "actual": "#809bbd",
+      "reason": "Import, export, declaration, annotation, and control-flow keywords use CodePen blue."
+    },
+    {
+      "case": "functions-and-methods",
+      "line": 3,
       "start": 53,
       "text": "inner",
       "actual": "#9a8297",
@@ -1408,6 +1560,14 @@
       "text": "number",
       "actual": "#ddca7e",
       "reason": "Types, constructors, and language atoms use CodePen yellow."
+    },
+    {
+      "case": "functions-and-methods",
+      "line": 4,
+      "start": 41,
+      "text": "return",
+      "actual": "#809bbd",
+      "reason": "Import, export, declaration, annotation, and control-flow keywords use CodePen blue."
     },
     {
       "case": "functions-and-methods",
@@ -1460,6 +1620,14 @@
     {
       "case": "functions-and-methods",
       "line": 7,
+      "start": 0,
+      "text": "async",
+      "actual": "#809bbd",
+      "reason": "Import, export, declaration, annotation, and control-flow keywords use CodePen blue."
+    },
+    {
+      "case": "functions-and-methods",
+      "line": 7,
       "start": 15,
       "text": "task",
       "actual": "#9a8297",
@@ -1492,6 +1660,22 @@
     {
       "case": "functions-and-methods",
       "line": 7,
+      "start": 46,
+      "text": "return",
+      "actual": "#809bbd",
+      "reason": "Import, export, declaration, annotation, and control-flow keywords use CodePen blue."
+    },
+    {
+      "case": "functions-and-methods",
+      "line": 7,
+      "start": 53,
+      "text": "await",
+      "actual": "#809bbd",
+      "reason": "Import, export, declaration, annotation, and control-flow keywords use CodePen blue."
+    },
+    {
+      "case": "functions-and-methods",
+      "line": 7,
       "start": 59,
       "text": "value",
       "actual": "#ffffff",
@@ -1504,6 +1688,14 @@
       "text": "sequence",
       "actual": "#9a8297",
       "reason": "Function and method names use CodePen purple."
+    },
+    {
+      "case": "functions-and-methods",
+      "line": 8,
+      "start": 23,
+      "text": "yield",
+      "actual": "#809bbd",
+      "reason": "Import, export, declaration, annotation, and control-flow keywords use CodePen blue."
     },
     {
       "case": "types-and-generics",
@@ -1788,6 +1980,14 @@
     {
       "case": "types-and-generics",
       "line": 6,
+      "start": 36,
+      "text": "return",
+      "actual": "#809bbd",
+      "reason": "Import, export, declaration, annotation, and control-flow keywords use CodePen blue."
+    },
+    {
+      "case": "types-and-generics",
+      "line": 6,
       "start": 43,
       "text": "value",
       "actual": "#ffffff",
@@ -1862,8 +2062,8 @@
       "line": 8,
       "start": 34,
       "text": "void",
-      "actual": "#809bbd",
-      "reason": "Declaration, modifier, annotation, and module keywords use CodePen blue."
+      "actual": "#ddca7e",
+      "reason": "Types and type-like keywords use CodePen yellow."
     },
     {
       "case": "types-and-generics",
@@ -1968,6 +2168,14 @@
       "text": "namespace",
       "actual": "#809bbd",
       "reason": "Declaration, modifier, annotation, and module keywords use CodePen blue."
+    },
+    {
+      "case": "enums-and-namespaces",
+      "line": 3,
+      "start": 18,
+      "text": "export",
+      "actual": "#809bbd",
+      "reason": "Import, export, declaration, annotation, and control-flow keywords use CodePen blue."
     },
     {
       "case": "enums-and-namespaces",
@@ -2150,8 +2358,8 @@
       "line": 1,
       "start": 22,
       "text": "as",
-      "actual": "#ffffff",
-      "reason": "Bindings, fields, properties, enum values, and named arguments use neutral white."
+      "actual": "#809bbd",
+      "reason": "Import, export, declaration, annotation, and control-flow keywords use CodePen blue."
     },
     {
       "case": "imports-and-exports",
@@ -2160,6 +2368,14 @@
       "text": "alias",
       "actual": "#ffffff",
       "reason": "Bindings, fields, properties, enum values, and named arguments use neutral white."
+    },
+    {
+      "case": "imports-and-exports",
+      "line": 1,
+      "start": 33,
+      "text": "from",
+      "actual": "#809bbd",
+      "reason": "Import, export, declaration, annotation, and control-flow keywords use CodePen blue."
     },
     {
       "case": "imports-and-exports",
@@ -2179,6 +2395,14 @@
     },
     {
       "case": "imports-and-exports",
+      "line": 2,
+      "start": 20,
+      "text": "from",
+      "actual": "#809bbd",
+      "reason": "Import, export, declaration, annotation, and control-flow keywords use CodePen blue."
+    },
+    {
+      "case": "imports-and-exports",
       "line": 3,
       "start": 0,
       "text": "import",
@@ -2190,8 +2414,8 @@
       "line": 3,
       "start": 9,
       "text": "as",
-      "actual": "#ffffff",
-      "reason": "Bindings, fields, properties, enum values, and named arguments use neutral white."
+      "actual": "#809bbd",
+      "reason": "Import, export, declaration, annotation, and control-flow keywords use CodePen blue."
     },
     {
       "case": "imports-and-exports",
@@ -2203,11 +2427,43 @@
     },
     {
       "case": "imports-and-exports",
+      "line": 3,
+      "start": 20,
+      "text": "from",
+      "actual": "#809bbd",
+      "reason": "Import, export, declaration, annotation, and control-flow keywords use CodePen blue."
+    },
+    {
+      "case": "imports-and-exports",
       "line": 4,
       "start": 0,
       "text": "import",
       "actual": "#809bbd",
       "reason": "Declaration, modifier, annotation, and module keywords use CodePen blue."
+    },
+    {
+      "case": "imports-and-exports",
+      "line": 4,
+      "start": 14,
+      "text": "CSSProperties",
+      "actual": "#ffffff",
+      "reason": "Bindings, fields, properties, accessors, enum values, and imported names use neutral white."
+    },
+    {
+      "case": "imports-and-exports",
+      "line": 4,
+      "start": 30,
+      "text": "from",
+      "actual": "#809bbd",
+      "reason": "Import, export, declaration, annotation, and control-flow keywords use CodePen blue."
+    },
+    {
+      "case": "imports-and-exports",
+      "line": 5,
+      "start": 0,
+      "text": "export",
+      "actual": "#809bbd",
+      "reason": "Import, export, declaration, annotation, and control-flow keywords use CodePen blue."
     },
     {
       "case": "imports-and-exports",
@@ -2235,11 +2491,43 @@
     },
     {
       "case": "imports-and-exports",
+      "line": 6,
+      "start": 0,
+      "text": "export",
+      "actual": "#809bbd",
+      "reason": "Import, export, declaration, annotation, and control-flow keywords use CodePen blue."
+    },
+    {
+      "case": "imports-and-exports",
+      "line": 7,
+      "start": 0,
+      "text": "export",
+      "actual": "#809bbd",
+      "reason": "Import, export, declaration, annotation, and control-flow keywords use CodePen blue."
+    },
+    {
+      "case": "imports-and-exports",
+      "line": 7,
+      "start": 7,
+      "text": "default",
+      "actual": "#809bbd",
+      "reason": "Import, export, declaration, annotation, and control-flow keywords use CodePen blue."
+    },
+    {
+      "case": "imports-and-exports",
       "line": 7,
       "start": 24,
       "text": "main",
       "actual": "#9a8297",
       "reason": "Function and method names use CodePen purple."
+    },
+    {
+      "case": "imports-and-exports",
+      "line": 7,
+      "start": 33,
+      "text": "return",
+      "actual": "#809bbd",
+      "reason": "Import, export, declaration, annotation, and control-flow keywords use CodePen blue."
     },
     {
       "case": "imports-and-exports",
@@ -2380,10 +2668,26 @@
     {
       "case": "class-members-and-inheritance",
       "line": 5,
+      "start": 6,
+      "text": "label",
+      "actual": "#ffffff",
+      "reason": "Bindings, fields, properties, accessors, enum values, and imported names use neutral white."
+    },
+    {
+      "case": "class-members-and-inheritance",
+      "line": 5,
       "start": 15,
       "text": "string",
       "actual": "#ddca7e",
       "reason": "Types, constructors, and language atoms use CodePen yellow."
+    },
+    {
+      "case": "class-members-and-inheritance",
+      "line": 5,
+      "start": 24,
+      "text": "return",
+      "actual": "#809bbd",
+      "reason": "Import, export, declaration, annotation, and control-flow keywords use CodePen blue."
     },
     {
       "case": "class-members-and-inheritance",
@@ -2400,6 +2704,14 @@
       "text": "set",
       "actual": "#809bbd",
       "reason": "Declaration, modifier, annotation, and module keywords use CodePen blue."
+    },
+    {
+      "case": "class-members-and-inheritance",
+      "line": 6,
+      "start": 6,
+      "text": "label",
+      "actual": "#ffffff",
+      "reason": "Bindings, fields, properties, accessors, enum values, and imported names use neutral white."
     },
     {
       "case": "class-members-and-inheritance",
@@ -2456,6 +2768,14 @@
       "text": "number",
       "actual": "#ddca7e",
       "reason": "Types, constructors, and language atoms use CodePen yellow."
+    },
+    {
+      "case": "class-members-and-inheritance",
+      "line": 7,
+      "start": 22,
+      "text": "return",
+      "actual": "#809bbd",
+      "reason": "Import, export, declaration, annotation, and control-flow keywords use CodePen blue."
     },
     {
       "case": "class-members-and-inheritance",
@@ -2692,6 +3012,14 @@
     {
       "case": "destructuring-and-rest",
       "line": 6,
+      "start": 2,
+      "text": "return",
+      "actual": "#809bbd",
+      "reason": "Import, export, declaration, annotation, and control-flow keywords use CodePen blue."
+    },
+    {
+      "case": "destructuring-and-rest",
+      "line": 6,
       "start": 9,
       "text": "label",
       "actual": "#ffffff",
@@ -2868,6 +3196,22 @@
     {
       "case": "literals-and-interpolation",
       "line": 7,
+      "start": 15,
+      "text": "true",
+      "actual": "#d0782a",
+      "reason": "Boolean, null, and numeric literals use CodePen orange."
+    },
+    {
+      "case": "literals-and-interpolation",
+      "line": 7,
+      "start": 21,
+      "text": "false",
+      "actual": "#d0782a",
+      "reason": "Boolean, null, and numeric literals use CodePen orange."
+    },
+    {
+      "case": "literals-and-interpolation",
+      "line": 7,
       "start": 28,
       "text": "null",
       "actual": "#d0782a",
@@ -2916,6 +3260,14 @@
     {
       "case": "operators-and-control",
       "line": 2,
+      "start": 2,
+      "text": "if",
+      "actual": "#809bbd",
+      "reason": "Import, export, declaration, annotation, and control-flow keywords use CodePen blue."
+    },
+    {
+      "case": "operators-and-control",
+      "line": 2,
       "start": 13,
       "text": "value",
       "actual": "#ffffff",
@@ -2936,6 +3288,14 @@
       "text": "length",
       "actual": "#ffffff",
       "reason": "Bindings, fields, properties, enum values, and named arguments use neutral white."
+    },
+    {
+      "case": "operators-and-control",
+      "line": 2,
+      "start": 53,
+      "text": "return",
+      "actual": "#809bbd",
+      "reason": "Import, export, declaration, annotation, and control-flow keywords use CodePen blue."
     },
     {
       "case": "operators-and-control",
@@ -2980,6 +3340,14 @@
     {
       "case": "operators-and-control",
       "line": 4,
+      "start": 2,
+      "text": "return",
+      "actual": "#809bbd",
+      "reason": "Import, export, declaration, annotation, and control-flow keywords use CodePen blue."
+    },
+    {
+      "case": "operators-and-control",
+      "line": 4,
       "start": 9,
       "text": "result",
       "actual": "#ffffff",
@@ -3000,6 +3368,14 @@
       "text": "fallback",
       "actual": "#ffffff",
       "reason": "Bindings, fields, properties, enum values, and named arguments use neutral white."
+    },
+    {
+      "case": "operators-and-control",
+      "line": 6,
+      "start": 0,
+      "text": "for",
+      "actual": "#809bbd",
+      "reason": "Import, export, declaration, annotation, and control-flow keywords use CodePen blue."
     },
     {
       "case": "operators-and-control",
@@ -3032,6 +3408,30 @@
       "text": "entry",
       "actual": "#ffffff",
       "reason": "Bindings, fields, properties, enum values, and named arguments use neutral white."
+    },
+    {
+      "case": "operators-and-control",
+      "line": 7,
+      "start": 0,
+      "text": "try",
+      "actual": "#809bbd",
+      "reason": "Import, export, declaration, annotation, and control-flow keywords use CodePen blue."
+    },
+    {
+      "case": "operators-and-control",
+      "line": 7,
+      "start": 6,
+      "text": "throw",
+      "actual": "#809bbd",
+      "reason": "Import, export, declaration, annotation, and control-flow keywords use CodePen blue."
+    },
+    {
+      "case": "operators-and-control",
+      "line": 7,
+      "start": 33,
+      "text": "catch",
+      "actual": "#809bbd",
+      "reason": "Import, export, declaration, annotation, and control-flow keywords use CodePen blue."
     },
     {
       "case": "operators-and-control",
@@ -3128,6 +3528,14 @@
       "text": "T",
       "actual": "#ddca7e",
       "reason": "Types, constructors, and language atoms use CodePen yellow."
+    },
+    {
+      "case": "mapped-and-conditional-types",
+      "line": 1,
+      "start": 22,
+      "text": "in",
+      "actual": "#809bbd",
+      "reason": "Import, export, declaration, annotation, and control-flow keywords use CodePen blue."
     },
     {
       "case": "mapped-and-conditional-types",
@@ -3318,8 +3726,8 @@
       "line": 5,
       "start": 33,
       "text": "as",
-      "actual": "#ffffff",
-      "reason": "Bindings, fields, properties, enum values, and named arguments use neutral white."
+      "actual": "#809bbd",
+      "reason": "Import, export, declaration, annotation, and control-flow keywords use CodePen blue."
     },
     {
       "case": "mapped-and-conditional-types",
@@ -3404,6 +3812,14 @@
     {
       "case": "labels-switch-and-async",
       "line": 1,
+      "start": 0,
+      "text": "async",
+      "actual": "#809bbd",
+      "reason": "Import, export, declaration, annotation, and control-flow keywords use CodePen blue."
+    },
+    {
+      "case": "labels-switch-and-async",
+      "line": 1,
       "start": 15,
       "text": "run",
       "actual": "#9a8297",
@@ -3452,10 +3868,26 @@
     {
       "case": "labels-switch-and-async",
       "line": 2,
+      "start": 16,
+      "text": "await",
+      "actual": "#809bbd",
+      "reason": "Import, export, declaration, annotation, and control-flow keywords use CodePen blue."
+    },
+    {
+      "case": "labels-switch-and-async",
+      "line": 2,
       "start": 22,
       "text": "task",
       "actual": "#9a8297",
       "reason": "Function and method names use CodePen purple."
+    },
+    {
+      "case": "labels-switch-and-async",
+      "line": 3,
+      "start": 2,
+      "text": "switch",
+      "actual": "#809bbd",
+      "reason": "Import, export, declaration, annotation, and control-flow keywords use CodePen blue."
     },
     {
       "case": "labels-switch-and-async",
@@ -3467,11 +3899,67 @@
     },
     {
       "case": "labels-switch-and-async",
+      "line": 4,
+      "start": 4,
+      "text": "case",
+      "actual": "#809bbd",
+      "reason": "Import, export, declaration, annotation, and control-flow keywords use CodePen blue."
+    },
+    {
+      "case": "labels-switch-and-async",
+      "line": 4,
+      "start": 12,
+      "text": "return",
+      "actual": "#809bbd",
+      "reason": "Import, export, declaration, annotation, and control-flow keywords use CodePen blue."
+    },
+    {
+      "case": "labels-switch-and-async",
+      "line": 4,
+      "start": 19,
+      "text": "true",
+      "actual": "#d0782a",
+      "reason": "Boolean, null, and numeric literals use CodePen orange."
+    },
+    {
+      "case": "labels-switch-and-async",
+      "line": 5,
+      "start": 4,
+      "text": "default",
+      "actual": "#809bbd",
+      "reason": "Import, export, declaration, annotation, and control-flow keywords use CodePen blue."
+    },
+    {
+      "case": "labels-switch-and-async",
+      "line": 5,
+      "start": 13,
+      "text": "return",
+      "actual": "#809bbd",
+      "reason": "Import, export, declaration, annotation, and control-flow keywords use CodePen blue."
+    },
+    {
+      "case": "labels-switch-and-async",
+      "line": 5,
+      "start": 20,
+      "text": "false",
+      "actual": "#d0782a",
+      "reason": "Boolean, null, and numeric literals use CodePen orange."
+    },
+    {
+      "case": "labels-switch-and-async",
       "line": 8,
       "start": 9,
       "text": "loops",
       "actual": "#9a8297",
       "reason": "Function and method names use CodePen purple."
+    },
+    {
+      "case": "labels-switch-and-async",
+      "line": 8,
+      "start": 26,
+      "text": "for",
+      "actual": "#809bbd",
+      "reason": "Import, export, declaration, annotation, and control-flow keywords use CodePen blue."
     },
     {
       "case": "labels-switch-and-async",
@@ -3506,6 +3994,14 @@
       "reason": "Bindings, fields, properties, enum values, and named arguments use neutral white."
     },
     {
+      "case": "labels-switch-and-async",
+      "line": 8,
+      "start": 56,
+      "text": "break",
+      "actual": "#809bbd",
+      "reason": "Import, export, declaration, annotation, and control-flow keywords use CodePen blue."
+    },
+    {
       "case": "decorators-and-access",
       "line": 1,
       "start": 9,
@@ -3528,6 +4024,14 @@
       "text": "unknown",
       "actual": "#ddca7e",
       "reason": "Types, constructors, and language atoms use CodePen yellow."
+    },
+    {
+      "case": "decorators-and-access",
+      "line": 1,
+      "start": 33,
+      "text": "return",
+      "actual": "#809bbd",
+      "reason": "Import, export, declaration, annotation, and control-flow keywords use CodePen blue."
     },
     {
       "case": "decorators-and-access",
@@ -3584,6 +4088,22 @@
       "text": "static",
       "actual": "#809bbd",
       "reason": "Declaration, modifier, annotation, and module keywords use CodePen blue."
+    },
+    {
+      "case": "decorators-and-access",
+      "line": 5,
+      "start": 20,
+      "text": "return",
+      "actual": "#809bbd",
+      "reason": "Import, export, declaration, annotation, and control-flow keywords use CodePen blue."
+    },
+    {
+      "case": "decorators-and-access",
+      "line": 6,
+      "start": 11,
+      "text": "return",
+      "actual": "#809bbd",
+      "reason": "Import, export, declaration, annotation, and control-flow keywords use CodePen blue."
     },
     {
       "case": "decorators-and-access",
@@ -3712,6 +4232,14 @@
       "text": "string",
       "actual": "#ddca7e",
       "reason": "Types, constructors, and language atoms use CodePen yellow."
+    },
+    {
+      "case": "overloads-and-function-types",
+      "line": 3,
+      "start": 50,
+      "text": "return",
+      "actual": "#809bbd",
+      "reason": "Import, export, declaration, annotation, and control-flow keywords use CodePen blue."
     },
     {
       "case": "overloads-and-function-types",
@@ -4110,8 +4638,8 @@
       "line": 3,
       "start": 19,
       "text": "as",
-      "actual": "#ffffff",
-      "reason": "Bindings, fields, properties, enum values, and named arguments use neutral white."
+      "actual": "#809bbd",
+      "reason": "Import, export, declaration, annotation, and control-flow keywords use CodePen blue."
     },
     {
       "case": "assertions-and-type-queries",
@@ -4216,6 +4744,14 @@
       "text": "Data",
       "actual": "#ddca7e",
       "reason": "Types, constructors, and language atoms use CodePen yellow."
+    },
+    {
+      "case": "assertions-and-type-queries",
+      "line": 6,
+      "start": 49,
+      "text": "return",
+      "actual": "#809bbd",
+      "reason": "Import, export, declaration, annotation, and control-flow keywords use CodePen blue."
     },
     {
       "case": "assertions-and-type-queries",
@@ -4374,8 +4910,8 @@
       "line": 4,
       "start": 18,
       "text": "void",
-      "actual": "#809bbd",
-      "reason": "Declaration, modifier, annotation, and module keywords use CodePen blue."
+      "actual": "#ddca7e",
+      "reason": "Types and type-like keywords use CodePen yellow."
     },
     {
       "case": "abstract-classes-and-implements",
@@ -4422,8 +4958,8 @@
       "line": 8,
       "start": 9,
       "text": "void",
-      "actual": "#809bbd",
-      "reason": "Declaration, modifier, annotation, and module keywords use CodePen blue."
+      "actual": "#ddca7e",
+      "reason": "Types and type-like keywords use CodePen yellow."
     },
     {
       "case": "computed-properties-and-symbols",
@@ -4480,6 +5016,22 @@
       "text": "get",
       "actual": "#809bbd",
       "reason": "Declaration, modifier, annotation, and module keywords use CodePen blue."
+    },
+    {
+      "case": "computed-properties-and-symbols",
+      "line": 2,
+      "start": 49,
+      "text": "size",
+      "actual": "#ffffff",
+      "reason": "Bindings, fields, properties, accessors, enum values, and imported names use neutral white."
+    },
+    {
+      "case": "computed-properties-and-symbols",
+      "line": 2,
+      "start": 58,
+      "text": "return",
+      "actual": "#809bbd",
+      "reason": "Import, export, declaration, annotation, and control-flow keywords use CodePen blue."
     },
     {
       "case": "computed-properties-and-symbols",
@@ -4846,8 +5398,8 @@
       "line": 7,
       "start": 41,
       "text": "void",
-      "actual": "#809bbd",
-      "reason": "Declaration, modifier, annotation, and module keywords use CodePen blue."
+      "actual": "#ddca7e",
+      "reason": "Types and type-like keywords use CodePen yellow."
     },
     {
       "case": "documentation-and-escapes",
@@ -4880,6 +5432,14 @@
       "text": "string",
       "actual": "#ddca7e",
       "reason": "Types, constructors, and language atoms use CodePen yellow."
+    },
+    {
+      "case": "documentation-and-escapes",
+      "line": 5,
+      "start": 45,
+      "text": "return",
+      "actual": "#809bbd",
+      "reason": "Import, export, declaration, annotation, and control-flow keywords use CodePen blue."
     },
     {
       "case": "documentation-and-escapes",
@@ -5114,6 +5674,14 @@
       "reason": "Bindings, fields, properties, enum values, and named arguments use neutral white."
     },
     {
+      "case": "jsx-components-and-fragments",
+      "line": 4,
+      "start": 15,
+      "text": "false",
+      "actual": "#d0782a",
+      "reason": "Boolean, null, and numeric literals use CodePen orange."
+    },
+    {
       "case": "jsx-events-and-spread",
       "line": 1,
       "start": 0,
@@ -5200,6 +5768,14 @@
       "text": "click",
       "actual": "#9a8297",
       "reason": "Function and method names use CodePen purple."
+    },
+    {
+      "case": "jsx-events-and-spread",
+      "line": 3,
+      "start": 58,
+      "text": "false",
+      "actual": "#d0782a",
+      "reason": "Boolean, null, and numeric literals use CodePen orange."
     },
     {
       "case": "jsx-nested-maps",
