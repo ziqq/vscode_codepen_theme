@@ -289,7 +289,8 @@ mixin «purple|token»(«white|name»)
   code= «white|name»
 main.card(data-name=«yellow|theme».«white|name»)
   +«yellow|token»(«yellow|theme».«white|name»)`],
-  ['bat', `:«purple|render»
+  ['bat', `«yellow/normal|@»echo off
+:«purple|render»
 call :«purple|label»
 :«purple|label»`],
   ['coffeescript', `class «yellow|Theme»

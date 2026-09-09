@@ -119,6 +119,7 @@ for (const fixture of edgeCases.cases) {
 // Exercise TextMate's actual selector resolution offline. The provider suite
 // separately verifies the source -> scopes -> color path using real grammars.
 const probes = [
+  ['source.batchfile keyword.operator.at.batchfile', '#ddca7e', 0],
   ['source.js keyword.operator.assignment.js', '#cccccc', 0],
   ['source.js storage.type.function.arrow.js', '#cccccc', 0],
   ['source.js meta.var.expr.js storage.type.js', '#809bbd', 1],

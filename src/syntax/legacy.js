@@ -624,6 +624,10 @@ function refinePug(source) {
 
 function refineBatch(source) {
   const spans = new Spans(source.length);
+  for (const match of source.matchAll(/^\s*(@)(?=\S)/gm)) {
+    const at = match.index + match[0].lastIndexOf('@');
+    spans.add(at, at + 1, 'yellow', 75, 'normal');
+  }
   for (const match of source.matchAll(/^:([A-Za-z_][\w.-]*)\s*$/gm)) {
     spans.add(match.index + 1, match.index + 1 + match[1].length, 'purple', 70);
   }

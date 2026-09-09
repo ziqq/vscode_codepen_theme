@@ -2520,6 +2520,11 @@
       "expect": [
         {
           "line": 1,
+          "text": "@",
+          "foreground": "#ddca7e"
+        },
+        {
+          "line": 1,
           "text": "echo",
           "foreground": "#ddca7e"
         },

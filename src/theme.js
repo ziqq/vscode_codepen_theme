@@ -1585,6 +1585,9 @@ const tokenColors = [
   colorRule('TWILIGHT MAKE ELSE', color.yellow, [
     'source.makefile keyword.control.else.makefile',
   ]),
+  colorRule('TWILIGHT BATCH COMMAND PREFIX', color.yellow, [
+    'source.batchfile keyword.operator.at.batchfile',
+  ]),
 
   // Decorations intentionally own every fontStyle assignment.
   decorationRule('REGULAR', 'regular', [
