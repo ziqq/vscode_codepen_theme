@@ -14,19 +14,23 @@ colors by syntax role:
 
 - Ordinary bindings, value references, fields, properties, enum values, object
   keys, and named arguments are neutral white.
-- Types and constructors are yellow. Executable/control-flow keywords such as
-  `return`, `switch`, `case`, `try`, `catch`, `async`, `await`, `export`,
-  `function`, `this`, `self`, `super`, `for`, and `yield` are yellow too.
-- Declaration, module, modifier, and annotation syntax is blue: for example
-  `class`, `interface`, `static`, `final`, `let`, `var`, `def`, `sub`,
-  `required`, `override`, and decorators.
-- Function, method, and accessor names are purple. Just recipes, aliases, and
-  Make targets use that callable role; their variables remain blue.
-- Green strings and interpolation delimiters; orange numeric literals; gray
-  operators and type brackets; ordinary punctuation white.
+- Types and constructors are yellow. `void` is yellow and upright; selected
+  language atoms such as `this`, `self`, and `super` retain the yellow role.
+- Declaration, module, modifier, annotation, and control-flow syntax is blue:
+  for example `class`, `interface`, `static`, `final`, `let`, `var`, `def`,
+  `sub`, `required`, `override`, imports/exports, decorators, `return`, `try`,
+  `catch`, `async`, `await`, `for`, and `yield`. Provider-specific declaration
+  introducers such as Julia/Lua/PHP `function` use the same blue role.
+- Function and method names are purple. Accessor/property names are white.
+  Just recipes, aliases, and Make targets use the purple callable role; their
+  variables remain blue.
+- Green strings and interpolation delimiters; orange numeric literals plus
+  `true`, `false`, and `null`; gray operators and type brackets; ordinary
+  punctuation white.
 - Original suppresses theme-owned italics while preserving bold and underline.
-  Ligatures retains italics for the yellow executable and blue declarative
-  keyword groups, annotations, and the existing italic comment layer.
+  Ligatures retains italics for blue declaration/control-flow/module groups,
+  annotations, selected language keywords, and the existing italic comment
+  layer. Just/Make-family files and SQL remain upright.
 
 CodePen does not implement all these languages. Non-JS languages are adaptations
 of these roles, not claims of a direct CodePen language implementation.
@@ -41,8 +45,10 @@ embedded code to those parsers. CSS, SCSS and Sass documentation comments, Sass
 punctuation, dotenv assignments and proven C4 declaration/reference names have
 narrow format-specific refinements.
 
-CSS, SCSS, Sass, and Less retain their existing grammar symbol roles; the runtime
-only exposes portable documentation markup inside their comments. Data/config
+CSS, SCSS, Sass, and Less retain their existing grammar symbol roles, with
+structural and flow at-directives normalized to blue italic as complete `@word`
+tokens. The runtime also exposes portable documentation markup inside their
+comments. Data/config
 formats retain their own contracts; narrow format refiners distinguish literals
 such as orange `null` without applying the programming hierarchy to keys.
 
@@ -99,12 +105,12 @@ npm run test:refinement:editor -- 1.135.0
 
 ## Reference boundary
 
-Verified locally on 2026-09-03:
+Verified locally on 2026-09-09:
 
-- 959 marked role assertions in 87 independently authored fixtures, plus 348
+- 993 marked role assertions in 98 independently authored fixtures, plus 392
   incomplete-edit cases and lifecycle tests.
 - All 68 full samples pass on VS Code 1.96.0, 1.105.1, 1.134.0 and 1.135.0
-  with 299 short, 746 full, 94 edge, and 840
+  with 300 short, 751 full, 94 edge, and 845
   contextual-overlay assertions; no failures.
 - 239 actual-editor scenarios on VS Code 1.135.0: 87 contextual fixtures and
   30 reference fixtures in both semantic modes, plus five lifecycle scenarios
@@ -117,8 +123,8 @@ Verified locally on 2026-09-03:
   extension-index hashes remained unchanged. Nothing was published or installed
   into the normal profile.
 
-The contextual layer keeps **1,224 of 1,885** recorded nonblank CodePen spans
-unchanged and records **661 reviewed differences** in
+The contextual layer keeps **1,153 of 1,885** recorded nonblank CodePen spans
+unchanged and records **732 reviewed differences** in
 [refinement-differences.json](refinement-differences.json). Those differences are
 the intentional GitHub-inspired role hierarchy rendered with CodePen colors, not
 claims of exact classic-Twilight parity. The audit rejects both new differences
@@ -126,8 +132,8 @@ and stale exemptions. The classic parity branch is preserved separately as
 `feature/theme-original-1.0.0`. Author italics are deliberately excluded from
 foreground comparison.
 
-With refinement disabled, the current TextMate layer matches 1,457/1,885 spans
-on VS Code 1.135.0; its 428 differences are reviewed independently. Semantic and
+With refinement disabled, the current TextMate layer matches 1,393/1,885 spans
+on VS Code 1.135.0; its 492 differences are reviewed independently. Semantic and
 contextual reports are separate and are not promoted to one another's scores.
 
 ## Remaining boundaries

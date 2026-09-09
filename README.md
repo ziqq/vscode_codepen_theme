@@ -11,8 +11,9 @@ Install [CodePen Theme Original](https://marketplace.visualstudio.com/items?item
 ## Highlights
 
 - Classic CodePen Twilight colors for TextMate and semantic tokens.
-- GitHub-inspired programming roles: yellow types/flow, blue declarations and
-  annotations, purple callables, and white values/members; stylesheet roles stay classic.
+- GitHub-inspired programming roles: yellow types and selected language atoms;
+  blue declarations, annotations, module directives, and control flow; purple
+  callables; and white values/members.
 - Contextual syntax refinement for ambiguous local bindings and syntax roles.
 - Provider-owned language grammars with verified compatibility baselines.
 - Original and Ligatures variants with identical foreground and workbench colors.

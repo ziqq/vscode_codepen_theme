@@ -8,7 +8,7 @@
         {
           "line": 1,
           "text": "include",
-          "foreground": "#ddca7e"
+          "foreground": "#809bbd"
         },
         {
           "line": 4,
@@ -58,7 +58,8 @@
         {
           "line": 30,
           "text": "return",
-          "foreground": "#ddca7e"
+          "foreground": "#ddca7e",
+          "refinedForeground": "#809bbd"
         },
         {
           "line": 30,
@@ -158,7 +159,7 @@
         {
           "line": 25,
           "text": "return",
-          "foreground": "#ddca7e"
+          "foreground": "#809bbd"
         },
         {
           "line": 28,
@@ -253,7 +254,7 @@
         {
           "line": 1,
           "text": "workspace",
-          "foreground": "#ddca7e"
+          "foreground": "#809bbd"
         },
         {
           "line": 1,
@@ -263,7 +264,7 @@
         {
           "line": 2,
           "text": "model",
-          "foreground": "#ddca7e"
+          "foreground": "#809bbd"
         },
         {
           "line": 3,
@@ -283,7 +284,7 @@
         {
           "line": 21,
           "text": "views",
-          "foreground": "#ddca7e"
+          "foreground": "#809bbd"
         },
         {
           "line": 38,
@@ -598,12 +599,12 @@
         {
           "line": 1,
           "text": "module",
-          "foreground": "#ddca7e"
+          "foreground": "#809bbd"
         },
         {
           "line": 3,
           "text": "go",
-          "foreground": "#ddca7e"
+          "foreground": "#809bbd"
         },
         {
           "line": 5,
@@ -613,7 +614,7 @@
         {
           "line": 6,
           "text": "require",
-          "foreground": "#ddca7e"
+          "foreground": "#809bbd"
         },
         {
           "line": 8,
@@ -623,12 +624,12 @@
         {
           "line": 11,
           "text": "replace",
-          "foreground": "#ddca7e"
+          "foreground": "#809bbd"
         },
         {
           "line": 16,
           "text": "exclude",
-          "foreground": "#ddca7e"
+          "foreground": "#809bbd"
         }
       ]
     },
@@ -963,7 +964,8 @@
         {
           "line": 10,
           "text": "export",
-          "foreground": "#ddca7e"
+          "foreground": "#ddca7e",
+          "refinedForeground": "#809bbd"
         },
         {
           "line": 10,
@@ -988,7 +990,7 @@
         {
           "line": 17,
           "text": "return",
-          "foreground": "#ddca7e"
+          "foreground": "#809bbd"
         },
         {
           "line": 20,
@@ -1028,7 +1030,7 @@
         {
           "line": 38,
           "text": "await",
-          "foreground": "#ddca7e"
+          "foreground": "#809bbd"
         }
       ]
     },
@@ -1118,7 +1120,7 @@
         {
           "line": 5,
           "text": "true",
-          "foreground": "#ddca7e"
+          "foreground": "#d0782a"
         },
         {
           "line": 7,
@@ -1133,7 +1135,7 @@
         {
           "line": 12,
           "text": "false",
-          "foreground": "#ddca7e"
+          "foreground": "#d0782a"
         },
         {
           "line": 13,
@@ -1148,7 +1150,7 @@
         {
           "line": 20,
           "text": "null",
-          "foreground": "#ddca7e"
+          "foreground": "#d0782a"
         }
       ]
     },
@@ -1433,7 +1435,7 @@
         {
           "line": 38,
           "text": "when",
-          "foreground": "#ddca7e"
+          "foreground": "#809bbd"
         },
         {
           "line": 39,
@@ -1648,7 +1650,8 @@
         {
           "line": 19,
           "text": "array",
-          "foreground": "#ddca7e"
+          "foreground": "#ddca7e",
+          "refinedForeground": "#809bbd"
         },
         {
           "line": 23,
@@ -1658,7 +1661,7 @@
         {
           "line": 29,
           "text": "as",
-          "foreground": "#ddca7e",
+          "foreground": "#809bbd",
           "providerFallbacks": {
             "1.96.0": {
               "foreground": "#cccccc",
@@ -1688,7 +1691,7 @@
         {
           "line": 43,
           "text": "match",
-          "foreground": "#ddca7e"
+          "foreground": "#809bbd"
         }
       ]
     },
@@ -1763,7 +1766,7 @@
         {
           "line": 48,
           "text": "match",
-          "foreground": "#ddca7e"
+          "foreground": "#809bbd"
         }
       ]
     },
@@ -1965,12 +1968,12 @@
         {
           "line": 32,
           "text": "each",
-          "foreground": "#ddca7e"
+          "foreground": "#809bbd"
         },
         {
           "line": 36,
           "text": "for",
-          "foreground": "#ddca7e"
+          "foreground": "#809bbd"
         }
       ]
     },
@@ -2030,7 +2033,7 @@
         {
           "line": 39,
           "text": "each",
-          "foreground": "#ddca7e"
+          "foreground": "#809bbd"
         },
         {
           "line": 46,
@@ -2045,17 +2048,17 @@
         {
           "line": 1,
           "text": "WITH",
-          "foreground": "#ddca7e"
+          "foreground": "#809bbd"
         },
         {
           "line": 2,
           "text": "SELECT",
-          "foreground": "#ddca7e"
+          "foreground": "#809bbd"
         },
         {
           "line": 7,
           "text": "FROM",
-          "foreground": "#ddca7e"
+          "foreground": "#809bbd"
         },
         {
           "line": 8,
@@ -2066,7 +2069,7 @@
         {
           "line": 16,
           "text": "GROUP BY",
-          "foreground": "#ddca7e"
+          "foreground": "#809bbd"
         },
         {
           "line": 23,
@@ -2086,22 +2089,22 @@
         {
           "line": 29,
           "text": "DESC",
-          "foreground": "#ddca7e"
+          "foreground": "#809bbd"
         },
         {
           "line": 31,
           "text": "INSERT",
-          "foreground": "#ddca7e"
+          "foreground": "#809bbd"
         },
         {
           "line": 33,
           "text": "UPDATE",
-          "foreground": "#ddca7e"
+          "foreground": "#809bbd"
         },
         {
           "line": 41,
           "text": "ROW_NUMBER",
-          "foreground": "#ddca7e"
+          "foreground": "#9a8297"
         }
       ]
     },
@@ -2201,7 +2204,7 @@
         {
           "line": 14,
           "text": "print_token",
-          "foreground": "#809bbd"
+          "foreground": "#9a8297"
         },
         {
           "line": 15,
@@ -2211,7 +2214,8 @@
         {
           "line": 20,
           "text": "for",
-          "foreground": "#ddca7e"
+          "foreground": "#ddca7e",
+          "refinedForeground": "#809bbd"
         },
         {
           "line": 24,
@@ -2221,22 +2225,25 @@
         {
           "line": 24,
           "text": "then",
-          "foreground": "#ddca7e"
+          "foreground": "#ddca7e",
+          "refinedForeground": "#809bbd"
         },
         {
           "line": 28,
           "text": "describe_mode",
-          "foreground": "#809bbd"
+          "foreground": "#9a8297"
         },
         {
           "line": 29,
           "text": "case",
-          "foreground": "#ddca7e"
+          "foreground": "#ddca7e",
+          "refinedForeground": "#809bbd"
         },
         {
           "line": 40,
           "text": "while",
-          "foreground": "#ddca7e"
+          "foreground": "#ddca7e",
+          "refinedForeground": "#809bbd"
         }
       ]
     },
@@ -2341,7 +2348,7 @@
         {
           "line": 2,
           "text": "true",
-          "foreground": "#ddca7e"
+          "foreground": "#d0782a"
         },
         {
           "line": 4,
@@ -2351,22 +2358,22 @@
         {
           "line": 8,
           "text": "palette",
-          "foreground": "#9a8297"
+          "foreground": "#809bbd"
         },
         {
           "line": 14,
           "text": "rendering",
-          "foreground": "#9a8297"
+          "foreground": "#809bbd"
         },
         {
           "line": 15,
           "text": "false",
-          "foreground": "#ddca7e"
+          "foreground": "#d0782a"
         },
         {
           "line": 18,
           "text": "providers",
-          "foreground": "#9a8297"
+          "foreground": "#809bbd"
         },
         {
           "line": 29,
@@ -2376,7 +2383,7 @@
         {
           "line": 33,
           "text": "screenshots",
-          "foreground": "#9a8297"
+          "foreground": "#809bbd"
         },
         {
           "line": 35,
@@ -2571,7 +2578,7 @@
         {
           "line": 1,
           "text": "article",
-          "foreground": "#ddca7e"
+          "foreground": "#809bbd"
         },
         {
           "line": 1,
@@ -2616,7 +2623,7 @@
         {
           "line": 1,
           "text": "ns",
-          "foreground": "#ddca7e"
+          "foreground": "#809bbd"
         },
         {
           "line": 1,
@@ -2706,7 +2713,7 @@
         {
           "line": 1,
           "text": "include",
-          "foreground": "#ddca7e"
+          "foreground": "#809bbd"
         },
         {
           "line": 1,
@@ -2731,7 +2738,7 @@
         {
           "line": 11,
           "text": "value",
-          "foreground": "#809bbd"
+          "foreground": "#ffffff"
         },
         {
           "line": 23,
@@ -2806,7 +2813,7 @@
         {
           "line": 20,
           "text": "true",
-          "foreground": "#ddca7e"
+          "foreground": "#d0782a"
         },
         {
           "line": 1,
@@ -2891,7 +2898,7 @@
         {
           "line": 1,
           "text": "namespace",
-          "foreground": "#ddca7e"
+          "foreground": "#809bbd"
         },
         {
           "line": 1,
@@ -2931,7 +2938,7 @@
         {
           "line": 3,
           "text": "open",
-          "foreground": "#ddca7e"
+          "foreground": "#809bbd"
         },
         {
           "line": 3,
@@ -3093,7 +3100,7 @@
         {
           "line": 2,
           "text": "theme",
-          "foreground": "#ffffff"
+          "foreground": "#809bbd"
         },
         {
           "line": 3,
@@ -3143,7 +3150,8 @@
         {
           "line": 3,
           "text": "true",
-          "foreground": "#ddca7e"
+          "foreground": "#ddca7e",
+          "refinedForeground": "#d0782a"
         },
         {
           "line": 1,
@@ -3188,7 +3196,8 @@
         {
           "line": 1,
           "text": "true",
-          "foreground": "#ddca7e"
+          "foreground": "#ddca7e",
+          "refinedForeground": "#d0782a"
         },
         {
           "line": 1,
@@ -3235,7 +3244,8 @@
         {
           "line": 10,
           "text": "false",
-          "foreground": "#ddca7e"
+          "foreground": "#ddca7e",
+          "refinedForeground": "#d0782a"
         },
         {
           "line": 11,
@@ -3397,7 +3407,7 @@
         {
           "line": 2,
           "text": "local",
-          "foreground": "#ddca7e"
+          "foreground": "#809bbd"
         },
         {
           "line": 2,
@@ -3437,7 +3447,7 @@
         {
           "line": 1,
           "text": "import",
-          "foreground": "#ddca7e"
+          "foreground": "#809bbd"
         },
         {
           "line": 1,
@@ -3482,7 +3492,7 @@
         {
           "line": 1,
           "text": "import",
-          "foreground": "#ddca7e"
+          "foreground": "#809bbd"
         },
         {
           "line": 1,
@@ -3527,7 +3537,7 @@
         {
           "line": 1,
           "text": "use",
-          "foreground": "#ddca7e"
+          "foreground": "#809bbd"
         },
         {
           "line": 1,
@@ -3748,7 +3758,8 @@
         {
           "line": 13,
           "text": "FALSE",
-          "foreground": "#ddca7e"
+          "foreground": "#ddca7e",
+          "refinedForeground": "#d0782a"
         }
       ]
     },
@@ -3833,7 +3844,7 @@
         {
           "line": 50,
           "text": "false",
-          "foreground": "#ddca7e"
+          "foreground": "#d0782a"
         },
         {
           "line": 2,

@@ -23,7 +23,7 @@ const «white|nested» = <«brown|i»>{«white|values».«purple|map»((«white|
   ['typescript', `type «yellow|Shape»<«yellow|T»> = { «blue|readonly» «white|value»?: «yellow|T» };
 type «yellow|Handler» = («white|value»: «yellow|number») => «yellow|void»;
 type «yellow|Factory» = new («white|name»: «yellow|string») => «yellow|object»;
-import «blue|type» { «white|CSSProperties» } from 'react';
+import «blue|type» { «yellow|CSSProperties» } from 'react';
 type «yellow|Picked»<«yellow|T»> = { [«yellow|K» in keyof «yellow|T»]?: «yellow|T»[«yellow|K»] };
 const «white|validated» = { «white|count»: 2 } satisfies { «white|count»: «yellow|number» };
 type «yellow|Pair» = [«white|name»: «yellow|string», «white|count»: «yellow|number»];
@@ -322,7 +322,35 @@ theme.«purple|label»()`],
   }
 }
 «blue/italic|export» «blue/italic|async» «yellow/italic|function»* «purple|render»() { «blue/italic|yield» 1; }`],
-  ['objective-c', `«blue/italic|@interface» «yellow|Theme» : NSObject
+  ['typescript', `«blue/italic|@sealed»
+«blue/italic|type» «yellow|ThemeName» = string;
+«blue/italic|class» «yellow|Theme» {}`],
+  ['typescriptreact', `import «blue/italic|type» { «yellow|CSSProperties» } from 'react';
+const «white|style»: «yellow|CSSProperties» = {};`],
+  ['python', `«blue/italic|@dataclass»
+class «yellow|Theme»:
+    pass`],
+  ['julia', `«blue/italic|@info» "theme"`],
+  ['c', `«blue/italic|#include» <stdio.h>`],
+  ['cpp', `«blue/italic|#include» <vector>`],
+  ['cuda-cpp', `«blue/italic|#include» <cuda_runtime.h>`],
+  ['sass', `«blue/italic|@function» token-color($name)
+  «blue/italic|@return» $name
+«blue/italic|@for» $index from 1 through 3`],
+  ['scss', `«blue/italic|@function» token-color($name) {
+  «blue/italic|@return» $name;
+}
+«blue/italic|@each» $name in $tokens {}`],
+  ['objective-c', `«blue/italic|#import» <Foundation/Foundation.h>
+«blue/italic|@interface» «yellow|Theme» : NSObject
+«blue/italic|@implementation» «yellow|Theme»
+«blue/italic|@end»
+int main(void) { «blue/italic|@autoreleasepool» {} }`],
+  ['objective-cpp', `«blue/italic|#import» <Foundation/Foundation.h>
+«blue/italic|#include» <vector>
+«blue/italic|@interface» «yellow|Theme» : NSObject
 «blue/italic|@implementation» «yellow|Theme»
 «blue/italic|@end»`],
+  ['rust', `«blue/italic|#[derive»(Debug)«blue/italic|]»
+struct «yellow|Theme»;`],
 ];

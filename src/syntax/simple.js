@@ -14,6 +14,12 @@ function refineSimple(source, language) {
     });
   if (language === 'sass') {
     for (const match of masked.matchAll(/[()]/g)) spans.add(match.index, match.index + 1, 'white');
+  }
+  if (['css', 'sass', 'scss'].includes(language)) {
+    for (const match of masked.matchAll(/@(use|forward|import|mixin|include|function|return|each|for|while|if|else|media|supports|keyframes|font-face|container|layer|at-root|extend|debug|warn|error)\b/gi)) {
+      spans.add(match.index, match.index + match[0].length,
+        'blue', 60, 'italic');
+    }
   } else if (language === 'c4') {
     const names = new Set([...masked.matchAll(/\b([A-Za-z_][\w]*)\s*=\s*(?:person|softwareSystem|container|component|deploymentNode|infrastructureNode)\b/g)].map((match) => match[1]));
     for (const match of masked.matchAll(/\b[A-Za-z_][\w]*\b/g)) {

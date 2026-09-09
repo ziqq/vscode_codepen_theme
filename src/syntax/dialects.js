@@ -287,6 +287,10 @@ function objectiveC(spans, nodes, source) {
     spans.add(keywordAt, keywordAt + match[2].length,
       codeRoles.declarationKeyword, 75, 'italic');
   }
+  for (const match of source.matchAll(/@(interface|implementation|protocol|end|property|autoreleasepool|synthesize|dynamic|selector|encode|defs|class|compatibility_alias|available)\b/g)) {
+    spans.add(match.index, match.index + match[0].length,
+      codeRoles.declarationKeyword, 75, 'italic');
+  }
   if (source.includes('::')) {
     for (const match of source.matchAll(/\b([a-z_]\w*)::([A-Za-z_]\w*)/g)) {
       spans.add(match.index, match.index + match[1].length, 'white', 75);

@@ -2444,14 +2444,6 @@
     {
       "case": "imports-and-exports",
       "line": 4,
-      "start": 14,
-      "text": "CSSProperties",
-      "actual": "#ffffff",
-      "reason": "Bindings, fields, properties, accessors, enum values, and imported names use neutral white."
-    },
-    {
-      "case": "imports-and-exports",
-      "line": 4,
       "start": 30,
       "text": "from",
       "actual": "#809bbd",

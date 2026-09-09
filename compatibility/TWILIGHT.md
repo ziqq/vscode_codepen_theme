@@ -64,15 +64,16 @@ TextMate fallbacks and semantic selectors map equivalent roles; narrow
 provider-specific rules correct known scope differences. Contextual refinement
 now adds an optional foreground-only layer where those providers lose context.
 
-- Programming types are yellow. Declaration/modifier/annotation syntax is blue;
-  executable and control-flow keywords are yellow. Ordinary bindings, fields,
+- Programming types are yellow. Declaration/modifier/annotation syntax, module
+  directives, and executable/control-flow keywords are blue. Ordinary bindings, fields,
   properties, enum values, object keys, and named arguments are white; callable
   declarations and invocations are purple.
 - JS/TS semantic `local` and `declaration` modifiers refine the lexical fallback.
   Readonly does not automatically mean yellow: a readonly member is still purple.
 - Dart uses actual Dart-Code tokens: instance fields, properties, bindings, and
-  enum values are white; methods/getters are purple; declaration keywords and
-  annotations are blue; types, constructors, and flow keywords are yellow.
+  enum values plus getter/accessor names are white; methods are purple; declaration keywords and
+  annotations are blue; types and constructors are yellow; flow keywords are
+  blue; `void` is yellow and upright.
 - Java method parameters and C#/C/C++ primitive types have explicit rules. Free
   function declarations in Go/Python/Rust stay blue where distinguishable.
   Just/Make targets are explicitly purple; their variables stay blue.
@@ -93,8 +94,8 @@ brackets, or green interpolation delimiters.
 
 ## Results and explicit limitations
 
-On VS Code **1.135.0**, the custom TextMate hierarchy matches **1,457 of 1,885
-spans** from the immutable CodePen capture. Its **428 differences** are accepted
+On VS Code **1.135.0**, the custom TextMate hierarchy matches **1,393 of 1,885
+spans** from the immutable CodePen capture. Its **492 differences** are accepted
 only by exact or role-bounded policies in
 [codepen-reference-differences.json](codepen-reference-differences.json), with
 reasons. They are not counted as matches. New unreviewed differences fail the
@@ -127,9 +128,9 @@ The main boundaries are:
    the other language fixtures exercise real grammars, not their language servers.
 
 The [full-sample follow-up](LANGUAGE-AUDIT.md) extends coverage to 68 language
-fixtures with 299 short and 746 full-sample assertions, plus 35 real TypeScript
+fixtures with 300 short and 751 full-sample assertions, plus 35 real TypeScript
 service assertions per matrix version. Offline checks exercise 28 TextMate
-selector probes, 637 semantic selector assertions, and the unchanged-decoration
+selector probes, 637 semantic selector assertions, and the pinned-decoration
 guard. The local Dart editor run checks 28 real semantic tokens plus visible
 colors and italic keywords throughout the file.
 

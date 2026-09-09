@@ -42,8 +42,8 @@ const declarationKeywords = new Set([
 ]);
 
 // Branching, transfer, and asynchronous control flow use the blue annotation
-// role. Function introducers and language values (`this`, `self`, `super`)
-// intentionally stay in the yellow keyword role.
+// role. Selected language values (`this`, `self`, `super`) and otherwise
+// unclassified language keywords stay in the yellow keyword role.
 const controlKeywords = new Set([
   'async', 'await', 'break', 'case', 'catch', 'continue', 'default', 'defer',
   'do', 'elif', 'else', 'end', 'except', 'finally', 'for', 'foreach', 'goto',

@@ -47,15 +47,15 @@
       "language": "Dart",
       "line": 1,
       "text": "as",
-      "foreground": "#ffffff",
+      "foreground": "#809bbd",
       "reason": "An alias connector is neutral like the binding it introduces."
     },
     {
       "language": "Dart",
       "line": 76,
       "text": "isFixed",
-      "foreground": "#9a8297",
-      "reason": "A getter declaration uses CodePen purple."
+      "foreground": "#ffffff",
+      "reason": "Getter and accessor names use the neutral white property role."
     },
     {
       "language": "Dart",
@@ -68,7 +68,7 @@
       "language": "Dart",
       "line": 150,
       "text": "void",
-      "foreground": "#809bbd",
+      "foreground": "#ddca7e",
       "reason": "A programming keyword, modifier, annotation, or decorator uses CodePen blue."
     },
     {
@@ -117,7 +117,7 @@
       "language": "Java",
       "line": 22,
       "text": "void",
-      "foreground": "#809bbd",
+      "foreground": "#ddca7e",
       "reason": "A programming keyword, modifier, annotation, or decorator uses CodePen blue."
     },
     {
@@ -159,8 +159,8 @@
       "language": "JavaScript",
       "line": 35,
       "text": "async",
-      "foreground": "#ddca7e",
-      "reason": "A control-flow or executable keyword, type, constructor, or language atom uses CodePen yellow."
+      "foreground": "#809bbd",
+      "reason": "A control-flow or executable keyword uses CodePen blue."
     },
     {
       "language": "JavaScript React",
@@ -285,7 +285,7 @@
       "language": "PHP",
       "line": 29,
       "text": "as",
-      "foreground": "#ffffff",
+      "foreground": "#809bbd",
       "reason": "An alias connector is neutral like the binding it introduces."
     },
     {
@@ -362,7 +362,7 @@
       "language": "SQL",
       "line": 8,
       "text": "TRUE",
-      "foreground": "#ddca7e",
+      "foreground": "#d0782a",
       "reason": "A programming type or type declaration uses CodePen yellow."
     },
     {
@@ -411,7 +411,7 @@
       "language": "Vue",
       "line": 9,
       "text": "void",
-      "foreground": "#809bbd",
+      "foreground": "#ddca7e",
       "reason": "A programming keyword, modifier, annotation, or decorator uses CodePen blue."
     },
     {
@@ -595,7 +595,7 @@
       "language": "INI",
       "line": 2,
       "text": "theme",
-      "foreground": "#9a8297",
+      "foreground": "#809bbd",
       "reason": "A callable symbol, callable invocation, or shader/member semantic uses CodePen purple."
     },
     {
@@ -630,7 +630,7 @@
       "language": "Julia",
       "line": 1,
       "text": "CodePenTheme",
-      "foreground": "#9a8297",
+      "foreground": "#ffffff",
       "reason": "A callable symbol, callable invocation, or shader/member semantic uses CodePen purple."
     },
     {

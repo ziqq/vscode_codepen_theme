@@ -435,6 +435,12 @@ function classify(root, source, language) {
     if (language === 'rust' && node.parent?.type === 'macro_invocation' && (isField(node, 'macro') || text === '!')) {
       spans.add(node.startIndex, node.endIndex, 'purple', 40);
     }
+    if (language === 'rust' && ancestor(node, (item) =>
+      ['attribute_item', 'inner_attribute_item'].includes(item.type)) &&
+      (!node.isNamed || ['attribute_item', 'inner_attribute_item'].includes(node.type))) {
+      spans.add(node.startIndex, node.endIndex,
+        codeRoles.annotation, 40, 'italic');
+    }
     if (node.type === 'instance_variable' || node.type === 'class_variable') spans.add(node.startIndex, node.endIndex, codeRoles.property, 30);
     if (node.type === 'variable_name' && language === 'shellscript') spans.add(node.startIndex, node.endIndex, 'blue', 30);
     if (node.type === 'template_substitution' || node.type === 'interpolated_expression' || node.type === 'interpolation') {

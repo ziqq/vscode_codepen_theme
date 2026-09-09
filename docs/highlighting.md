@@ -3,11 +3,12 @@
 ## Twilight colors
 
 The palette remains classic CodePen Twilight, while programming languages use a
-GitHub-inspired role hierarchy: green strings, orange numbers and `null`, yellow
-types plus executable/control-flow keywords, blue declarations/modifiers/
-annotations, white bindings/fields/properties/enum values, purple callables,
-brown HTML/JSX tags, muted comments, and `#CCCCCC` operators. CSS, Sass, SCSS,
-Less, and related stylesheet syntax keep their original CodePen mapping.
+GitHub-inspired role hierarchy: green strings; orange numbers, `true`, `false`,
+and `null`; yellow types and selected language atoms; blue declarations,
+modifiers, annotations, module directives, and executable/control-flow keywords;
+white bindings/fields/properties/enum values; purple callables; brown HTML/JSX
+tags; muted comments; and `#CCCCCC` operators. CSS, Sass, SCSS, and Less keep
+their domain roles while complete at-directives use the unified blue italic style.
 
 ## Semantic highlighting
 
@@ -49,8 +50,8 @@ are role-based adaptations, not claims that CodePen supports those languages.
 Bracket-pair rainbow foregrounds are transparent so they do not override syntax
 colors. Unmeasured selection, search, error, workbench, and terminal states retain
 their existing theme values rather than claiming an exact CodePen match. With
-contextual refinement active, 1,224 of 1,885 recorded nonblank JS/TS/JSX spans
-remain exact and 661 differences encode the reviewed custom hierarchy. The
+contextual refinement active, 1,153 of 1,885 recorded nonblank JS/TS/JSX spans
+remain exact and 732 differences encode the reviewed custom hierarchy. The
 original-parity branch remains separate; author italics are not part of the
 foreground score.
 

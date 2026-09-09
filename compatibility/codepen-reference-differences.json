@@ -6,21 +6,21 @@
       "cmScope": "cm-keyword",
       "expected": "#ddca7e",
       "actual": ["#809bbd"],
-      "reason": "Programming-language declaration and module keywords are blue; executable and control-flow keywords remain CodePen yellow."
+      "reason": "Programming-language declaration, module, executable, and control-flow keywords use CodePen blue."
     },
     {
       "modes": ["typescript"],
       "cmScope": "cm-keyword",
       "expected": "#ddca7e",
       "actual": ["#809bbd"],
-      "reason": "Programming-language declaration and module keywords are blue; executable and control-flow keywords remain CodePen yellow."
+      "reason": "Programming-language declaration, module, executable, and control-flow keywords use CodePen blue."
     },
     {
       "modes": ["jsx"],
       "cmScope": "cm-keyword",
       "expected": "#ddca7e",
       "actual": ["#809bbd"],
-      "reason": "Programming-language declaration and module keywords are blue; executable and control-flow keywords remain CodePen yellow."
+      "reason": "Programming-language declaration, module, executable, and control-flow keywords use CodePen blue."
     },
     {
       "modes": ["typescript"],
@@ -91,6 +91,22 @@
       "actual": ["#809bbd"],
       "texts": ["from"],
       "reason": "Import syntax is blue throughout the adapted programming-language hierarchy, including from where classic CodeMirror reports a variable role."
+    },
+    {
+      "modes": ["javascript", "typescript", "jsx"],
+      "cmScope": "cm-atom",
+      "expected": "#ddca7e",
+      "actual": ["#d0782a"],
+      "texts": ["true", "false"],
+      "reason": "Boolean literals use the same CodePen orange literal role as numbers and null."
+    },
+    {
+      "modes": ["typescript"],
+      "cmScope": "cm-def",
+      "expected": "#809bbd",
+      "actual": ["#ffffff"],
+      "texts": ["value", "alias", "DefaultValue", "library"],
+      "reason": "Imported runtime bindings use the neutral white value role; import and export syntax remains blue."
     },
     {
       "modes": ["typescript"],
@@ -848,7 +864,7 @@
       "actual": [
         "#d0782a"
       ],
-      "reason": "The adapted literal hierarchy separates null from booleans and assigns it CodePen orange."
+      "reason": "The adapted literal hierarchy assigns booleans and null the CodePen orange literal role."
     },
     {
       "case": "literals-and-interpolation",
@@ -859,7 +875,7 @@
       "actual": [
         "#d0782a"
       ],
-      "reason": "The adapted literal hierarchy separates null from booleans and assigns it CodePen orange."
+      "reason": "The adapted literal hierarchy assigns booleans and null the CodePen orange literal role."
     }
   ]
 }

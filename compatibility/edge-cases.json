@@ -397,7 +397,8 @@
         {
           "line": 3,
           "text": "true",
-          "foreground": "#96b38a"
+          "foreground": "#96b38a",
+          "refinedForeground": "#d0782a"
         },
         {
           "line": 4,
@@ -444,13 +445,13 @@
           "line": 1,
           "text": "name",
           "foreground": "#ddca7e",
-          "refinedForeground": "#ffffff",
+          "refinedForeground": "#999999",
           "fontStyle": 1
         },
         {
           "line": 1,
           "text": "`value`",
-          "foreground": "#ffffff",
+          "foreground": "#999999",
           "fontStyle": 1
         }
       ]
@@ -483,12 +484,12 @@
         {
           "line": 4,
           "text": "true",
-          "foreground": "#ddca7e"
+          "foreground": "#d0782a"
         },
         {
           "line": 5,
           "text": "false",
-          "foreground": "#ddca7e"
+          "foreground": "#d0782a"
         },
         {
           "line": 6,
@@ -515,7 +516,7 @@
         {
           "line": 1,
           "text": "theme",
-          "foreground": "#9a8297"
+          "foreground": "#809bbd"
         },
         {
           "line": 2,
@@ -540,7 +541,7 @@
         {
           "line": 5,
           "text": "true",
-          "foreground": "#ddca7e"
+          "foreground": "#d0782a"
         },
         {
           "line": 6,
@@ -572,12 +573,12 @@
         {
           "line": 4,
           "text": "true",
-          "foreground": "#ddca7e"
+          "foreground": "#d0782a"
         },
         {
           "line": 5,
           "text": "null",
-          "foreground": "#ddca7e",
+          "foreground": "#d0782a",
           "refinedForeground": "#d0782a"
         }
       ]

@@ -102,7 +102,7 @@ function refineTypeScript(source, language) {
     if (ts.isTypeAliasDeclaration(parent) && parent.name === node) return codeRoles.type;
     if (parent.name === node && (ts.isClassLike(parent) || ts.isInterfaceDeclaration(parent) ||
         ts.isEnumDeclaration(parent))) return codeRoles.type;
-    if (typeOnlyImport(node)) return codeRoles.binding;
+    if (typeOnlyImport(node)) return codeRoles.type;
     if (satisfiesType(node) || assertionPredicateType(node)) return codeRoles.type;
     const tupleMember = namedTupleMember(node);
     if (tupleMember && tupleMember.name === node) return codeRoles.namedArgument;
@@ -207,7 +207,10 @@ function refineTypeScript(source, language) {
           S.ColonToken].includes(node.kind)) { role = 'operator'; fontStyle = undefined; }
     if (node.kind === S.DotDotDotToken) { role = 'purple'; fontStyle = undefined; }
     if (node.kind === S.QuestionDotToken) { role = 'white'; fontStyle = undefined; }
-    if (node.kind === S.AtToken && ts.isDecorator(parent)) { role = codeRoles.annotation; fontStyle = undefined; }
+    if (node.kind === S.AtToken && ts.isDecorator(parent)) {
+      role = codeRoles.annotation;
+      fontStyle = 'italic';
+    }
     if (inJsxTag(node)) { role = 'brown'; fontStyle = undefined; }
     if (node.kind === S.ConstructorKeyword && ts.isConstructorDeclaration(parent)) {
       role = codeRoles.method;

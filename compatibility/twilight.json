@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "reference": "CodePen palette with a GitHub-inspired programming hierarchy: blue declarations and annotations, yellow types and flow, purple callables, and white bindings, fields, properties, and enum values. Domain languages retain their measured contracts.",
-  "decorationSha256": "67552f7e407c93ad262c3b0fd6dbbeed544e2214be6d5c32f9a22428e3d36f35",
+  "reference": "CodePen palette with a GitHub-inspired programming hierarchy: blue declarations, annotations, module directives, and control flow; yellow types and selected language atoms; purple callables; white bindings, fields, properties, and enum values; orange true, false, null, and numbers. Domain languages retain their measured contracts.",
+  "decorationSha256": "91281151c435971f343d2971107c02230930492632cd175da1f8484e04df4e7c",
   "cases": [
     {
       "language": "C",
@@ -61,7 +61,7 @@
         {
           "line": 2,
           "text": "return",
-          "foreground": "#ddca7e"
+          "foreground": "#809bbd"
         },
         {
           "line": 1,
@@ -97,7 +97,7 @@
         {
           "line": 2,
           "text": "return",
-          "foreground": "#ddca7e"
+          "foreground": "#809bbd"
         },
         {
           "line": 1,
@@ -133,7 +133,7 @@
         {
           "line": 2,
           "text": "workspace",
-          "foreground": "#ddca7e"
+          "foreground": "#809bbd"
         },
         {
           "line": 2,
@@ -276,7 +276,7 @@
         {
           "line": 144,
           "text": "return",
-          "foreground": "#ddca7e",
+          "foreground": "#809bbd",
           "fontStyle": 1
         },
         {
@@ -321,12 +321,12 @@
         {
           "line": 2,
           "text": "module",
-          "foreground": "#ddca7e"
+          "foreground": "#809bbd"
         },
         {
           "line": 3,
           "text": "go",
-          "foreground": "#ddca7e"
+          "foreground": "#809bbd"
         }
       ]
     },
@@ -347,7 +347,7 @@
         {
           "line": 3,
           "text": "return",
-          "foreground": "#ddca7e"
+          "foreground": "#809bbd"
         },
         {
           "line": 2,
@@ -415,7 +415,7 @@
         {
           "line": 2,
           "text": "return",
-          "foreground": "#ddca7e"
+          "foreground": "#809bbd"
         },
         {
           "line": 1,
@@ -509,7 +509,7 @@
         {
           "line": 6,
           "text": "if",
-          "foreground": "#ddca7e",
+          "foreground": "#809bbd",
           "fontStyle": 1
         },
         {
@@ -628,7 +628,7 @@
         {
           "line": 1,
           "text": "CSSProperties",
-          "foreground": "#809bbd"
+          "foreground": "#ffffff"
         },
         {
           "line": 1,
@@ -1047,7 +1047,7 @@
         {
           "line": 2,
           "text": "SELECT",
-          "foreground": "#ddca7e"
+          "foreground": "#809bbd"
         },
         {
           "line": 2,
@@ -1089,7 +1089,7 @@
         {
           "line": 2,
           "text": "run",
-          "foreground": "#809bbd"
+          "foreground": "#9a8297"
         },
         {
           "line": 2,
@@ -1225,7 +1225,7 @@
         {
           "line": 1,
           "text": "article",
-          "foreground": "#ddca7e"
+          "foreground": "#809bbd"
         },
         {
           "line": 1,
@@ -1246,7 +1246,7 @@
         {
           "line": 1,
           "text": "ns",
-          "foreground": "#ddca7e"
+          "foreground": "#809bbd"
         },
         {
           "line": 1,
@@ -1288,7 +1288,7 @@
         {
           "line": 1,
           "text": "include",
-          "foreground": "#ddca7e"
+          "foreground": "#809bbd"
         },
         {
           "line": 1,
@@ -1340,7 +1340,7 @@
         {
           "line": 20,
           "text": "true",
-          "foreground": "#ddca7e"
+          "foreground": "#d0782a"
         }
       ]
     },
@@ -1372,7 +1372,7 @@
         {
           "line": 1,
           "text": "namespace",
-          "foreground": "#ddca7e"
+          "foreground": "#809bbd"
         },
         {
           "line": 1,
@@ -1461,7 +1461,7 @@
         {
           "line": 2,
           "text": "theme",
-          "foreground": "#ffffff"
+          "foreground": "#809bbd"
         },
         {
           "line": 3,
@@ -1587,7 +1587,7 @@
         {
           "line": 2,
           "text": "local",
-          "foreground": "#ddca7e"
+          "foreground": "#809bbd"
         },
         {
           "line": 2,
@@ -1603,7 +1603,7 @@
         {
           "line": 1,
           "text": "import",
-          "foreground": "#ddca7e"
+          "foreground": "#809bbd"
         },
         {
           "line": 1,
@@ -1624,7 +1624,7 @@
         {
           "line": 1,
           "text": "import",
-          "foreground": "#ddca7e"
+          "foreground": "#809bbd"
         },
         {
           "line": 1,
@@ -1645,7 +1645,7 @@
         {
           "line": 1,
           "text": "use",
-          "foreground": "#ddca7e"
+          "foreground": "#809bbd"
         },
         {
           "line": 1,
