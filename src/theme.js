@@ -1119,6 +1119,7 @@ const tokenColors = [
     'variable.name.alias.just',
     'meta.function.method.with-arguments.ruby entity.name.function.ruby',
     'meta.function.method.without-arguments.ruby entity.name.function.ruby',
+    'source.ruby keyword.other.special-method.ruby',
     'entity.name.function.target.makefile',
     'support.function.target.PHONY.makefile',
     'meta.scope.prerequisites.makefile',
@@ -1509,6 +1510,8 @@ const tokenColors = [
     'punctuation.definition.keyword.svelte',
     'keyword.operator.recipe.end.just',
     'storage.modifier.array.bracket.square.c',
+    'source.rust meta.attribute.rust punctuation.brackets.attribute.rust',
+    'source.rust meta.attribute.rust punctuation.brackets.round.rust',
     'keyword.control.ternary.java',
   ]),
   colorRule('TWILIGHT UNIFIED MODULE KEYWORDS', color.blue, [
@@ -1598,7 +1601,7 @@ const tokenColors = [
     'keyword.control.trycatch.ts',
     'keyword.control.trycatch.tsx',
   ]),
-  colorRule('TWILIGHT SQL STRUCTURE', color.blue, [
+  colorRule('TWILIGHT SQL STRUCTURE', color.yellow, [
     'source.sql keyword',
     'source.sql keyword.other.DDL.create.II.sql',
     'source.sql keyword.other.DML.sql',
@@ -1609,6 +1612,10 @@ const tokenColors = [
     'source.sql keyword.other.sql',
     'source.sql storage.modifier',
   ]),
+  colorRule('TWILIGHT SQL CONSTANT REFERENCES', color.blue, [
+    'source.sql constant.other.database-name.sql',
+    'source.sql constant.other.table-name.sql',
+  ]),
   colorRule('TWILIGHT SQL FUNCTIONS', color.purple, [
     'source.sql entity.name.function',
     'source.sql support.function',
@@ -1618,6 +1625,9 @@ const tokenColors = [
   ]),
   colorRule('TWILIGHT BATCH COMMAND PREFIX', color.yellow, [
     'source.batchfile keyword.operator.at.batchfile',
+  ]),
+  colorRule('TWILIGHT RAZOR EXPRESSION TRANSITIONS', color.white, [
+    'text.html.cshtml meta.expression.implicit.cshtml keyword.control.cshtml.transition',
   ]),
 
   // Decorations intentionally own every fontStyle assignment.
@@ -2228,6 +2238,7 @@ const tokenColors = [
     'source.rust meta.attribute.rust',
     'source.rust meta.attribute.rust punctuation.brackets.attribute.rust',
     'source.rust meta.attribute.rust punctuation.definition.attribute.rust',
+    'source.shell keyword.control',
     'source.sass keyword.control.at-rule.css.sass',
     'source.css.scss meta.at-rule.each.scss keyword.control.each.scss',
     'source.css.scss meta.at-rule.each.scss keyword.control.operator',
@@ -2459,6 +2470,13 @@ const tokenColors = [
     'source.hlsl support.variable.semantic.hlsl',
     'source.hlsl support.variable.semantic.sm4.hlsl',
     'source.hlsl support.variable.semantic.sm5.hlsl',
+  ]),
+  decorationRule('UPRIGHT RUBY CONSTRUCTOR CALLS', 'regular', [
+    'source.ruby keyword.other.special-method.ruby',
+  ]),
+  decorationRule('UPRIGHT RUST ATTRIBUTE PUNCTUATION', 'regular', [
+    'source.rust meta.attribute.rust punctuation.brackets.attribute.rust',
+    'source.rust meta.attribute.rust punctuation.brackets.round.rust',
   ]),
   decorationRule('UPRIGHT BUILD RECIPES', 'regular', [
     'source.dockerfile',
@@ -2699,7 +2717,7 @@ function resolveTheme({ name, italics = true }) {
       label: color.yellow,
       keyword: color.blue,
       'keyword:dart': color.blue,
-      'keyword:sql': color.blue,
+      'keyword:sql': color.yellow,
       'keyword.void:dart': color.yellow,
       boolean: color.orange,
       number: color.orange,

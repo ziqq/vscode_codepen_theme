@@ -2,9 +2,9 @@
  * Add the base comment color and the two portable documentation constructs
  * understood by every supported parser: inline code and symbol references.
  * Type-shaped references reuse the live-code type role instead of becoming a
- * third documentation-only color. Neutral references use CodePen's muted
- * foreground so inline documentation remains distinct from live code. The
- * active theme still owns italics.
+ * third live-code color. Neutral references use a dedicated softly muted
+ * white so documentation metadata remains readable without competing with
+ * executable code. The active theme still owns italics.
  */
 function addComment(spans, source, start, end, fontStyle) {
   spans.add(start, end, 'gray', 100, fontStyle);
@@ -18,16 +18,16 @@ function addComment(spans, source, start, end, fontStyle) {
     const head = value.replace(/^[#@]/, '').split(/[.#]/, 1)[0];
     return /^[A-Z]/.test(head) || builtInTypes.has(head.toLowerCase())
       ? 'yellow'
-      : 'muted';
+      : 'documentation';
   };
 
   // Markdown-style inline code is common in Dartdoc, JSDoc, Rustdoc, and
   // ordinary explanatory comments. Do not cross a line or an escaped tick.
   for (const match of text.matchAll(/(?<!\\)`[^`\r\n]+(?<!\\)`/g)) {
     const at = start + match.index;
-    spans.add(at, at + 1, 'muted', 130, fontStyle);
+    spans.add(at, at + 1, 'documentation', 130, fontStyle);
     spans.add(at + match[0].length - 1, at + match[0].length,
-      'muted', 130, fontStyle);
+      'documentation', 130, fontStyle);
     spans.add(at + 1, at + match[0].length - 1,
       referenceRole(match[0].slice(1, -1)), 130, fontStyle);
   }
@@ -37,9 +37,9 @@ function addComment(spans, source, start, end, fontStyle) {
   // use the same yellow role as their declarations and live references.
   for (const match of text.matchAll(/\[([A-Za-z_$][\w$]*(?:[.#][A-Za-z_$][\w$]*)*)\]/g)) {
     const at = start + match.index;
-    spans.add(at, at + 1, 'muted', 120, fontStyle);
+    spans.add(at, at + 1, 'documentation', 120, fontStyle);
     spans.add(at + match[0].length - 1, at + match[0].length,
-      'muted', 120, fontStyle);
+      'documentation', 120, fontStyle);
     spans.add(at + 1, at + match[0].length - 1,
       referenceRole(match[1]), 120, fontStyle);
   }

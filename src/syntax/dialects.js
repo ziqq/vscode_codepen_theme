@@ -341,7 +341,7 @@ function sql(spans, nodes) {
     } else if (word === 'true' || word === 'false') {
       add(spans, node, 'orange', 85, 'normal');
     } else if (/^keyword_/.test(node.type)) {
-      add(spans, node, codeRoles.declarationKeyword, 80, 'normal');
+      add(spans, node, codeRoles.flowKeyword, 80, 'normal');
     } else if (identifier(node)) {
       const reference = ancestor(node, (item) => item.type === 'object_reference');
       const invocation = reference?.parent?.type === 'invocation'
@@ -352,7 +352,9 @@ function sql(spans, nodes) {
       add(spans, node,
         functionName?.id === node.id
           ? codeRoles.method
-          : codeRoles.binding,
+          : reference
+            ? codeRoles.declarationKeyword
+            : codeRoles.binding,
         80, 'normal');
     }
   }
@@ -410,6 +412,28 @@ function razor(spans, source) {
   }
   for (const match of source.matchAll(/\/?\s*>/g)) {
     spans.add(match.index, match.index + match[0].length, 'brown', 75);
+  }
+  const directives = new Set([
+    'addTagHelper', 'attribute', 'code', 'functions', 'implements', 'inject',
+    'layout', 'model', 'namespace', 'page', 'preservewhitespace', 'removeTagHelper',
+    'rendermode', 'section', 'typeparam', 'using',
+    'if', 'else', 'for', 'foreach', 'while', 'do', 'switch', 'case', 'try',
+    'catch', 'finally', 'lock',
+  ].map((word) => word.toLowerCase()));
+  for (const match of source.matchAll(/@([A-Za-z_][\w]*)/g)) {
+    const name = match[1];
+    const lineStart = source.lastIndexOf('\n', match.index) + 1;
+    const tagStart = source.lastIndexOf('<', match.index);
+    const tagEnd = source.lastIndexOf('>', match.index);
+    const attribute = tagStart >= lineStart && tagStart > tagEnd &&
+      /^@[\w.-]+\s*=/.test(source.slice(match.index));
+    const role = directives.has(name.toLowerCase())
+      ? codeRoles.declarationKeyword
+      : attribute
+        ? codeRoles.type
+        : codeRoles.binding;
+    const fontStyle = directives.has(name.toLowerCase()) ? 'italic' : undefined;
+    spans.add(match.index, match.index + match[0].length, role, 85, fontStyle);
   }
 }
 

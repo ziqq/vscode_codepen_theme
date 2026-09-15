@@ -25,13 +25,19 @@ const classKinds = new Set(['class_declaration', 'class_definition', 'class_spec
 const functionKinds = new Set(['function_declaration', 'function_definition', 'function_item',
   'method_declaration', 'constructor_declaration', 'method', 'singleton_method', 'lambda_expression',
   'lambda_literal', 'lambda', 'closure_expression', 'anonymous_function', 'function_literal', 'recipe',
-  'function_signature', 'constructor_signature', 'getter_signature', 'setter_signature']);
+  'function_signature', 'constructor_signature', 'factory_constructor_signature',
+  'getter_signature', 'setter_signature']);
 const blockKinds = new Set(['block', 'compound_statement', 'for_statement', 'for_in_statement',
   'for_expression', 'enhanced_for_statement', 'for_range_loop', 'catch_clause']);
 const typeKinds = /^(?:primitive_type|predefined_type|integral_type|floating_point_type|boolean_type|void_type|user_type|type|generic_type|type_annotation|type_arguments|type_parameters|type_parameter|type_parameter_list|nullable_type|reference_type|array_type|function_type|parameter_type_list)$/;
 const stringKinds = /^(?:string|.*string_literal|interpreted_string_literal|raw_string_literal|char_literal|character_literal|encapsed_string|symbol_literal|external_command|heredoc_body)$/;
 const numericKinds = /^(?:(?:hex_|decimal_|octal_|binary_)?(?:integer|floating_point)_literal|number_literal|int_literal|float_literal|integer|float|number)$/;
 const keywords = new Set(('abstract alias as assert async await base bool boolean break case catch class const constexpr continue covariant data default defer deferred def define del do done dynamic elif else end endef enum except export extends extension extern external factory false fi final finally fn for foreach from fun func function get given global goto hide if ifdef ifeq ifndef ifneq impl implementation implements import in include inline instanceof interface internal is late let library match method mixin mod mutable mut my native new nil nonlocal null object on operator or our out override package param part pass private process property protected protocol pub public raise record redo ref reified required rescue return rethrow sealed select self set show sizeof static struct sub super switch sync synchronized template then this throw throws trait transient true try type typedef typealias typeof union unless unsafe unset use using val var virtual void volatile when where while with yield').split(' '));
+const implicitTypeCallLanguages = new Set([
+  // Go is intentionally absent: exported functions are also PascalCase, so
+  // syntax alone cannot distinguish NewClient() from a type conversion.
+  'dart', 'julia', 'kotlin', 'python', 'swift',
+]);
 
 const contains = (region, node) => region.start <= node.startIndex && region.end >= node.endIndex;
 const ancestor = (node, predicate) => {
@@ -185,10 +191,21 @@ function classify(root, source, language) {
       const kotlinReceiver = language === 'kotlin' && node.type === 'function_declaration' && name &&
         /\.\s*$/.test(source.slice(node.startIndex, name.startIndex));
       const accessor = node.type === 'getter_signature' || node.type === 'setter_signature';
+      const constructor = node.type === 'constructor_declaration' ||
+        node.type === 'constructor_signature' ||
+        node.type === 'factory_constructor_signature';
       const member = language === 'ruby' || language === 'just' || language === 'razor' ||
         node.type === 'method_declaration' || qualified || kotlinReceiver ||
         node.type === 'constructor_declaration' || (cls && (!outerFn || outerFn.start < cls.start)) ||
         (language === 'rust' && ancestor(node, (item) => item.type === 'impl_item' || item.type === 'trait_item'));
+      if (constructor) {
+        // Constructor declarations name a type, not a callable member. This is
+        // especially important in Dart, whose TextMate grammar uses the same
+        // function scope for constructors and ordinary methods.
+        set(name, codeRoles.type);
+        if (name) declarations.add(name.id);
+        continue;
+      }
       // Accessors expose a property contract even when the grammar represents
       // them as function-like nodes. Keep their names neutral like reads.
       declare(name, accessor ? 'property' : member ? 'method' : 'function',
@@ -275,7 +292,7 @@ function classify(root, source, language) {
       if (parent.type === 'alias') set(node, 'purple');
       if (parent.type === 'assignment' && isField(node, 'left')) declare(node, 'variable');
       if (['dependency', 'dependency_expression', 'recipe_header'].includes(parent.type) && isField(node, 'name')) set(node, 'purple');
-      if (parent.type === 'function_call' && isField(node, 'name')) set(node, 'yellow');
+      if (parent.type === 'function_call' && isField(node, 'name')) set(node, codeRoles.method);
     }
   }
 
@@ -294,6 +311,7 @@ function classify(root, source, language) {
       if (name && contains(region(name), node)) {
         return { role: codeRoles.annotation, fontStyle: 'italic' };
       }
+      if (language === 'rust' && /^[A-Z]/.test(node.text)) return codeRoles.type;
     }
     const moduleReference = ancestor(node, (item) => [
       'export_statement', 'groovy_import', 'import_declaration',
@@ -309,6 +327,7 @@ function classify(root, source, language) {
       const functionName = invocation?.namedChildren[0]
         ?.descendantsOfType('identifier').at(-1);
       if (functionName?.id === node.id) return codeRoles.method;
+      if (reference) return codeRoles.declarationKeyword;
       return codeRoles.binding;
     }
     if (language === 'dart' && parent.type === 'throw_expression' &&
@@ -331,7 +350,8 @@ function classify(root, source, language) {
     if (language === 'java' && parent.type === 'method_invocation' && isField(node, 'name')) return 'purple';
     if (language === 'java' && parent.type === 'method_invocation' &&
         isField(node, 'object') && /^[A-Z]/.test(node.text)) return codeRoles.type;
-    if (language === 'ruby' && parent.type === 'call' && isField(node, 'method')) return node.text === 'new' ? 'yellow' : 'purple';
+    if (language === 'ruby' && node.type === 'constant') return codeRoles.type;
+    if (language === 'ruby' && parent.type === 'call' && isField(node, 'method')) return codeRoles.method;
     if (language === 'php' && parent.type === 'variable_name') {
       return node.text === 'this' ? keywordStyle('this') : codeRoles.binding;
     }
@@ -377,10 +397,14 @@ function classify(root, source, language) {
     }
     if (node.type === 'constant') return 'yellow';
     if (node.type === 'identifier_dollar_escaped' || node.type === 'interpolated_identifier') return codeRoles.binding;
-    if (['call_expression', 'call', 'function_call', 'invocation_expression', 'function_call_expression'].includes(parent.type) &&
-        (isField(node, 'function') || isField(node, 'name') || firstIdentifier(parent)?.id === node.id)) return codeRoles.method;
-    if (language === 'dart' && node.nextNamedSibling?.type === 'selector' &&
-        node.nextNamedSibling.firstNamedChild?.type === 'argument_part') return codeRoles.method;
+    const directCall = ['call_expression', 'call', 'function_call', 'invocation_expression',
+      'function_call_expression'].includes(parent.type) &&
+      (isField(node, 'function') || isField(node, 'name') || firstIdentifier(parent)?.id === node.id);
+    const dartCall = language === 'dart' && node.nextNamedSibling?.type === 'selector' &&
+      node.nextNamedSibling.firstNamedChild?.type === 'argument_part';
+    if ((directCall || dartCall) && implicitTypeCallLanguages.has(language) &&
+        /^_?[A-Z]/.test(node.text)) return codeRoles.type;
+    if (directCall || dartCall) return codeRoles.method;
     // Unknown names retain the grammar/server fallback, rather than guessing from case.
     return undefined;
   }
@@ -436,10 +460,13 @@ function classify(root, source, language) {
       spans.add(node.startIndex, node.endIndex, 'purple', 40);
     }
     if (language === 'rust' && ancestor(node, (item) =>
-      ['attribute_item', 'inner_attribute_item'].includes(item.type)) &&
-      (!node.isNamed || ['attribute_item', 'inner_attribute_item'].includes(node.type))) {
-      spans.add(node.startIndex, node.endIndex,
-        codeRoles.annotation, 40, 'italic');
+      ['attribute_item', 'inner_attribute_item'].includes(item.type)) && !node.isNamed) {
+      for (const match of text.matchAll(/#|[\[\](),]/g)) {
+        const start = node.startIndex + match.index;
+        spans.add(start, start + 1,
+          match[0] === '#' ? codeRoles.annotation : 'white',
+          50, match[0] === '#' ? 'italic' : 'normal');
+      }
     }
     if (node.type === 'instance_variable' || node.type === 'class_variable') spans.add(node.startIndex, node.endIndex, codeRoles.property, 30);
     if (node.type === 'variable_name' && language === 'shellscript') spans.add(node.startIndex, node.endIndex, 'blue', 30);
@@ -473,6 +500,9 @@ function classify(root, source, language) {
           'binding_pattern_kind'].includes(node.type)) {
       if (keywords.has(text.toLowerCase().replace(/^@/, '')) || /^keyword_/.test(node.type)) {
         const style = keywordStyle(text);
+        if (language === 'shellscript' && style.fontStyle === 'italic') {
+          style.role = codeRoles.flowKeyword;
+        }
         spans.add(node.startIndex, node.endIndex, style.role, 20,
           ['sql', 'just', 'makefile'].includes(language) ? undefined : style.fontStyle);
       }

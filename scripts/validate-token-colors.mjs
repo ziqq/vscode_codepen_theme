@@ -132,10 +132,15 @@ const probes = [
   ['source.python meta.function.decorator.python entity.name.function.decorator.python', '#809bbd', 1],
   ['source.julia support.function.macro.julia', '#809bbd', 1],
   ['source.rust meta.attribute.rust punctuation.definition.attribute.rust', '#809bbd', 1],
-  ['source.rust meta.attribute.rust punctuation.brackets.attribute.rust', '#809bbd', 1],
+  ['source.rust meta.attribute.rust punctuation.brackets.attribute.rust', '#ffffff', 0],
+  ['source.rust meta.attribute.rust punctuation.brackets.round.rust', '#ffffff', 0],
   ['source.sass keyword.control.at-rule.css.sass', '#809bbd', 1],
   ['source.css.scss meta.at-rule.return.scss keyword.control.return.scss punctuation.definition.keyword.scss', '#809bbd', 1],
-  ['source.sql keyword.other.DML.sql', '#809bbd', 0],
+  ['source.sql keyword.other.DML.sql', '#ddca7e', 0],
+  ['source.sql constant.other.database-name.sql', '#809bbd', 0],
+  ['source.ruby keyword.other.special-method.ruby', '#9a8297', 0],
+  ['source.shell keyword.control.for.shell', '#ddca7e', 1],
+  ['text.html.cshtml meta.expression.implicit.cshtml keyword.control.cshtml.transition', '#ffffff', 0],
   ['source.js keyword.operator.assignment.js', '#cccccc', 0],
   ['source.js storage.type.function.arrow.js', '#cccccc', 0],
   ['source.js meta.var.expr.js storage.type.js', '#809bbd', 1],
@@ -201,7 +206,7 @@ for (const { languageId } of compatibility.cases) {
     ['property', ['readonly'], '#ffffff'],
     ['enumMember', [], '#ffffff'],
     ['variable', ['defaultLibrary'], '#ffffff'],
-    ['keyword', [], '#809bbd'],
+    ['keyword', [], languageId === 'sql' ? '#ddca7e' : '#809bbd'],
   ]) {
     assert.equal(semanticColor(theme, type, modifiers, languageId), expected, `${languageId}: ${type}.${modifiers}`);
     semanticAssertions++;

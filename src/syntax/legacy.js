@@ -246,8 +246,12 @@ function refineShader(source, language) {
       spans.add(match.index, match.index + match[1].length, codeRoles.method, 50);
     }
   }
+  const shaderKeywordStyle = (word) => {
+    const style = keywordStyle(word);
+    return language === 'shaderlab' ? { ...style, fontStyle: 'normal' } : style;
+  };
   wordSpans(spans, masked, new Set(['struct', 'cbuffer', 'return', 'if', 'else', 'for', 'while', 'register',
-    'Shader', 'Properties', 'SubShader', 'Tags', 'LOD', 'Pass', 'CGPROGRAM', 'ENDCG', 'pragma', 'include']), keywordStyle, 45);
+    'Shader', 'Properties', 'SubShader', 'Tags', 'LOD', 'Pass', 'CGPROGRAM', 'ENDCG', 'pragma', 'include']), shaderKeywordStyle, 45);
   wordSpans(spans, masked, new Set(['void']), keywordStyle, 60);
   for (const match of masked.matchAll(/\b\d+(?:\.\d+)?(?:[fFhH])?\b/g)) spans.add(match.index, match.index + match[0].length, 'orange', 50);
   return spans.finish();

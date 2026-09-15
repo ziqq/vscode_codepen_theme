@@ -2048,28 +2048,33 @@
         {
           "line": 1,
           "text": "WITH",
-          "foreground": "#809bbd"
+          "foreground": "#ddca7e"
         },
         {
           "line": 2,
           "text": "SELECT",
-          "foreground": "#809bbd"
+          "foreground": "#ddca7e"
         },
         {
           "line": 7,
           "text": "FROM",
-          "foreground": "#809bbd"
+          "foreground": "#ddca7e"
         },
         {
           "line": 8,
           "text": "TRUE",
           "foreground": "#ffffff",
-          "limitation": "The built-in SQL grammar emits only source.sql, not a boolean token. Desired atom color is yellow; a theme cannot infer it from unclassified text."
+          "limitation": "The built-in SQL grammar emits only source.sql, not a boolean token. Desired atom color is orange; a theme cannot infer it from unclassified text."
+        },
+        {
+          "line": 19,
+          "text": "summary",
+          "foreground": "#809bbd"
         },
         {
           "line": 16,
           "text": "GROUP BY",
-          "foreground": "#809bbd"
+          "foreground": "#ddca7e"
         },
         {
           "line": 23,
@@ -2089,17 +2094,17 @@
         {
           "line": 29,
           "text": "DESC",
-          "foreground": "#809bbd"
+          "foreground": "#ddca7e"
         },
         {
           "line": 31,
           "text": "INSERT",
-          "foreground": "#809bbd"
+          "foreground": "#ddca7e"
         },
         {
           "line": 33,
           "text": "UPDATE",
-          "foreground": "#809bbd"
+          "foreground": "#ddca7e"
         },
         {
           "line": 41,
