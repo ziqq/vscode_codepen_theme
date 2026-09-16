@@ -56,6 +56,20 @@ void «blue|main»() {
   final «blue|fixed» = 1;
   invoke(«purple|fixed»: «blue|fixed»);
 }`],
+  ['dart', `import 'dart:convert' as «blue|convert»;
+void «blue|read»(«white|String» «blue|contents», «white|String» «blue|_outputPath») {
+  «yellow|convert».«purple|jsonDecode»(«blue|contents»);
+  «yellow|jsonDecode»(«blue|contents»);
+  final «blue|encoder» = «yellow|JsonEncoder».«purple|withIndent»(«green|'  '»);
+  final «blue|output» = «yellow|File»(«blue|_outputPath»);
+  final «blue|theme» = «yellow|Theme».«purple|new»();
+  try {} on «white|FormatException» catch («blue|error», «blue|stackTrace») {
+    throw «yellow|FormatException»(«green|'Invalid JSON at \${»«blue|error»«white|.»«purple|message»«green|}: $»«blue|stackTrace»«green|'»);
+  }
+  if (output == «yellow|null») encoder.«purple|convert»(theme);
+}
+«operator|@»«yellow|pragma»«white|(»«green|"vm:entry-point"»«white|)»
+abstract interface class «blue|Directory» implements «white|FileSystemEntity» {}`],
   ['dart', `class ThemeReady { final ThemePalette palette; }
 String describeTheme(ThemeReady state) => switch (state) {
   ThemeReady(:final «blue|palette») => «green|'value: \${»«blue|palette»«white|.»«purple|background»«green|}'»
@@ -157,7 +171,7 @@ echo «green|"\${»«blue|name»«green|}"»
   ['go', `«yellow|package» main
 «yellow|type» «blue|Theme» struct { «purple|Name» «white|string» }`],
   ['rust', `fn «blue|label»(«blue|name»: &«white|str») -> «white|String» { «purple|format!»(«green|"{name}: {}"», «orange|2») }`],
-  ['dart', `class «blue|Theme» { «yellow|@override» String «purple|toString»() => 'x'; }`],
+  ['dart', `class «blue|Theme» { «operator|@»«yellow|override» String «purple|toString»() => 'x'; }`],
   ['typescriptreact', `const «blue|view» = <«brown|UI.Card» «yellow|title»="x">{value.«purple|name»}</«brown|UI.Card»>;`],
   ['javascript', `class «blue|Theme» { «yellow|get» «purple|name»() { return 'x'; } «yellow|set» «purple|name»(«blue|value») {} }
 const «blue|object» = { «purple|get»() { return 1; } };`],
