@@ -500,8 +500,8 @@
         },
         {
           "line": 2,
-          "text": "label",
-          "foreground": "#9a8297"
+          "text": "\"label\"",
+          "foreground": "#96b38a"
         },
         {
           "line": 2,
@@ -1390,8 +1390,8 @@
       "expect": [
         {
           "line": 2,
-          "text": "name",
-          "foreground": "#9a8297"
+          "text": "\"name\"",
+          "foreground": "#96b38a"
         },
         {
           "line": 2,
@@ -1411,8 +1411,8 @@
       "expect": [
         {
           "line": 1,
-          "text": "event",
-          "foreground": "#9a8297"
+          "text": "\"event\"",
+          "foreground": "#96b38a"
         },
         {
           "line": 1,

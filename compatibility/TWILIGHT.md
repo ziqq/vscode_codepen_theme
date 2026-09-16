@@ -75,7 +75,10 @@ now adds an optional foreground-only layer where those providers lose context.
   function declarations in Go/Python/Rust stay blue where distinguishable.
   Just/Make targets are explicitly purple; their variables stay blue.
   C#/Java methods stay purple.
-- Data keys use the member role. Markup and stylesheet rules retain their own
+- Quoted JSON, JSONC, and JSON Lines keys are string literals, so the complete
+  key including its quotes is green. Unquoted properties and members in
+  programming languages remain purple. Other data formats retain the role
+  exposed by their grammar. Markup and stylesheet rules retain their own
   applicable roles; they are not treated as executable JS.
 
 Palette keys are alphabetical. Existing TextMate decoration rules have an

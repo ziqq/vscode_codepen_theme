@@ -774,6 +774,8 @@ const tokenColors = [
     'string.regexp',
     'string.regexp.js',
     'string.regexp.ts',
+    // JSON object keys are quoted string literals, including their quotes.
+    'support.type.property-name.json',
     // Compound and wildcard selectors
     '*link*',
     '*uri*',
@@ -861,7 +863,6 @@ const tokenColors = [
     'support.function.misc.css',
     'support.function.misc.sass',
     'support.type.property-name.css',
-    'support.type.property-name.json',
     'support.type.property-name.toml',
     'support.type.property-name.css.sass.prop.name',
     'support.type.property-name.media.css',

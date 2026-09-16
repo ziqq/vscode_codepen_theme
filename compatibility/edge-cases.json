@@ -202,7 +202,7 @@
       "language": "JSONC",
       "source": "{\n  \"name\": \"demo\",\n  \"count\": 42,\n  \"enabled\": true,\n  \"empty\": null\n}",
       "expect": [
-        { "line": 2, "text": "name", "foreground": "#9a8297" },
+        { "line": 2, "text": "\"name\"", "foreground": "#96b38a" },
         { "line": 2, "text": "demo", "foreground": "#96b38a" },
         { "line": 3, "text": "42", "foreground": "#d0782a" },
         { "line": 4, "text": "true", "foreground": "#ddca7e" },

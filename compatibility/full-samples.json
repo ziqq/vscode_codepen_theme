@@ -985,8 +985,8 @@
         },
         {
           "line": 3,
-          "text": "name",
-          "foreground": "#9a8297"
+          "text": "\"name\"",
+          "foreground": "#96b38a"
         },
         {
           "line": 3,
@@ -1000,8 +1000,8 @@
         },
         {
           "line": 7,
-          "text": "background",
-          "foreground": "#9a8297"
+          "text": "\"background\"",
+          "foreground": "#96b38a"
         },
         {
           "line": 9,
@@ -1020,8 +1020,8 @@
       },
       {
         "line": 16,
-        "text": "diagnostics",
-        "foreground": "#9a8297"
+        "text": "\"diagnostics\"",
+        "foreground": "#96b38a"
       },
       {
         "line": 20,
@@ -2981,8 +2981,8 @@
       "expect": [
         {
           "line": 2,
-          "text": "name",
-          "foreground": "#9a8297"
+          "text": "\"name\"",
+          "foreground": "#96b38a"
         },
         {
           "line": 2,
@@ -3011,8 +3011,8 @@
         },
         {
           "line": 3,
-          "text": "dark",
-          "foreground": "#9a8297"
+          "text": "\"dark\"",
+          "foreground": "#96b38a"
         },
         {
           "line": 3,
@@ -3026,8 +3026,8 @@
       "expect": [
         {
           "line": 1,
-          "text": "event",
-          "foreground": "#9a8297"
+          "text": "\"event\"",
+          "foreground": "#96b38a"
         },
         {
           "line": 1,
@@ -3056,9 +3056,8 @@
         },
         {
           "line": 1,
-          "text": "theme",
-          "occurrence": 2,
-          "foreground": "#9a8297"
+          "text": "\"theme\"",
+          "foreground": "#96b38a"
         },
         {
           "line": 1,
@@ -3078,8 +3077,8 @@
         },
         {
           "line": 9,
-          "text": "colors",
-          "foreground": "#9a8297"
+          "text": "\"colors\"",
+          "foreground": "#96b38a"
         },
         {
           "line": 10,
