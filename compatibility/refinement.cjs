@@ -144,8 +144,10 @@ alias «purple|b» := «purple|build»
 \t@mkdir -p build
 `],
   ['sql', `«yellow|SELECT» «purple|name» FROM tokens WHERE «purple|active» = «yellow|TRUE» AND «purple|deleted» = «yellow|FALSE»;`],
-  ['dotenv', `«blue|MODE»=«green|dark»
-«blue|COUNT»=«green|42»
+  ['dotenv', `«blue|MODE»=«white|dark»
+«blue|COUNT»=«orange|42»
+«blue|ENABLED»=«orange|true»
+«blue|EMPTY»=
 «blue|VALUE»=«green|"\${»«blue|MODE»«green|} \${»«blue|COUNT»«green|}"»
 «blue|LITERAL»=«green|'\${MODE}'»
 «blue|HASH»=«green|"# not comment"» «gray|# comment»`],

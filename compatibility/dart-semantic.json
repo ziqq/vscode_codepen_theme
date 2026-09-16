@@ -11,8 +11,8 @@
     { "line": 108, "text": "maybeMapOrNull", "type": "method", "modifiers": ["declaration", "instance"], "foreground": "#9a8297" },
     { "line": 114, "text": "override", "type": "property", "modifiers": ["annotation"], "foreground": "#ddca7e" },
     { "line": 115, "text": "compareTo", "type": "method", "modifiers": ["declaration", "instance"], "foreground": "#9a8297" },
-    { "line": 145, "text": "name", "type": "variable", "modifiers": ["declaration"], "foreground": "#809bbd" },
-    { "line": 154, "text": "state", "type": "variable", "modifiers": [], "foreground": "#809bbd" },
+    { "line": 166, "text": "name", "type": "variable", "modifiers": ["declaration"], "foreground": "#809bbd" },
+    { "line": 175, "text": "state", "type": "variable", "modifiers": [], "foreground": "#809bbd" },
     {
       "line": 3,
       "text": "ThemeMode",
@@ -72,7 +72,7 @@
       "foreground": "#9a8297"
     },
     {
-      "line": 121,
+      "line": 142,
       "text": "ThemeState",
       "type": "class",
       "modifiers": [
@@ -81,7 +81,7 @@
       "foreground": "#809bbd"
     },
     {
-      "line": 122,
+      "line": 143,
       "text": "ThemeState",
       "type": "class",
       "modifiers": [
@@ -91,7 +91,7 @@
       "foreground": "#809bbd"
     },
     {
-      "line": 128,
+      "line": 149,
       "text": "name",
       "type": "variable",
       "modifiers": [
@@ -101,7 +101,7 @@
       "foreground": "#9a8297"
     },
     {
-      "line": 131,
+      "line": 152,
       "text": "label",
       "type": "property",
       "modifiers": [
@@ -111,7 +111,7 @@
       "foreground": "#9a8297"
     },
     {
-      "line": 140,
+      "line": 161,
       "text": "contrastScore",
       "type": "method",
       "modifiers": [
@@ -121,14 +121,14 @@
       "foreground": "#9a8297"
     },
     {
-      "line": 140,
+      "line": 161,
       "text": "max",
       "type": "function",
       "modifiers": [],
       "foreground": "#ddca7e"
     },
     {
-      "line": 143,
+      "line": 164,
       "text": "describeTheme",
       "type": "function",
       "modifiers": [
@@ -138,7 +138,7 @@
       "foreground": "#809bbd"
     },
     {
-      "line": 151,
+      "line": 172,
       "text": "ThemePalette",
       "type": "class",
       "modifiers": [
@@ -147,7 +147,7 @@
       "foreground": "#ddca7e"
     },
     {
-      "line": 154,
+      "line": 175,
       "text": "message",
       "type": "variable",
       "modifiers": [

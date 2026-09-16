@@ -399,47 +399,47 @@
           "foreground": "#9a8297"
         },
         {
-          "line": 121,
+          "line": 142,
           "text": "sealed",
           "foreground": "#ddca7e"
         },
         {
-          "line": 125,
+          "line": 146,
           "text": "extends",
           "foreground": "#ddca7e"
         },
         {
-          "line": 134,
+          "line": 155,
           "text": "ThemePalette",
           "foreground": "#ffffff"
         },
         {
-          "line": 140,
+          "line": 161,
           "text": "contrastScore",
           "foreground": "#9a8297"
         },
         {
-          "line": 145,
+          "line": 166,
           "text": "final",
           "foreground": "#ddca7e"
         },
         {
-          "line": 145,
+          "line": 166,
           "text": "palette",
           "foreground": "#ffffff"
         },
         {
-          "line": 146,
+          "line": 167,
           "text": "palette",
           "foreground": "#809bbd"
         },
         {
-          "line": 150,
+          "line": 171,
           "text": "void",
           "foreground": "#ffffff"
         },
         {
-          "line": 154,
+          "line": 175,
           "text": "message",
           "foreground": "#ffffff"
         }

@@ -39,10 +39,16 @@ function refineDotenv(source) {
         else if (!quote && ['"', "'", '`'].includes(value[index])) quote = value[index];
         else if (!quote && value[index] === '#') { comment = index; break; }
       }
-      spans.add(valueStart, valueStart + comment, 'green');
+      const scalar = value.slice(0, comment);
+      const trimmed = scalar.trim();
+      const quoted = /^(['"]).*\1$/s.test(trimmed);
+      const numeric = /^[+-]?(?:0[xX][\dA-Fa-f]+|(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][+-]?\d+)?)$/.test(trimmed);
+      const atom = /^(?:true|false|null)$/i.test(trimmed);
+      if (scalar) spans.add(valueStart, valueStart + scalar.length,
+        quoted ? 'green' : numeric || atom ? 'orange' : 'white');
       addComment(spans, source, valueStart + comment, offset + line.length);
-      if (!value.startsWith("'")) {
-        for (const match of value.slice(0, comment).matchAll(/(?<!\\)\$\{([A-Za-z_][A-Za-z0-9_]*)(?::[-+?][^}]*)?\}/g)) {
+      if (!trimmed.startsWith("'")) {
+        for (const match of scalar.matchAll(/(?<!\\)\$\{([A-Za-z_][A-Za-z0-9_]*)(?::[-+?][^}]*)?\}/g)) {
           spans.add(valueStart + match.index + 2, valueStart + match.index + 2 + match[1].length, 'blue', 30);
         }
       }

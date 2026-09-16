@@ -118,6 +118,27 @@ enum PriceType implements Comparable<PriceType> {
   String toString() => alias;
 }
 
+// Identity belongs to one show command, including identical consecutive values.
+// Delayed completion and timers must never acquire ownership of its successor.
+// ignore: unused_element
+class _Presentation {
+  _Presentation({
+    required this.message,
+    required this.progress,
+    required this.duration,
+    required this.blockInteraction,
+    required this.dismissOnTap,
+    required this.bottomOffset,
+  });
+
+  final String? message;
+  final double? progress;
+  final Duration? duration;
+  final bool blockInteraction;
+  final bool dismissOnTap;
+  final double bottomOffset;
+}
+
 sealed class ThemeState {
   const ThemeState();
 }

@@ -218,27 +218,27 @@
         "foreground": "#ddca7e"
       },
       {
-        "line": 121,
+        "line": 142,
         "text": "ThemeState",
         "foreground": "#809bbd"
       },
       {
-        "line": 128,
+        "line": 149,
         "text": "name",
         "foreground": "#9a8297"
       },
       {
-        "line": 140,
+        "line": 161,
         "text": "contrastScore",
         "foreground": "#9a8297"
       },
       {
-        "line": 145,
+        "line": 166,
         "text": "name",
         "foreground": "#809bbd"
       },
       {
-        "line": 154,
+        "line": 175,
         "text": "state",
         "foreground": "#809bbd"
       }
@@ -248,8 +248,8 @@
       40,
       70,
       96,
-      124,
-      150
+      145,
+      171
     ],
     "textmate": [
       {
@@ -288,12 +288,12 @@
         "foreground": "#ddca7e"
       },
       {
-        "line": 121,
+        "line": 142,
         "text": "sealed",
         "foreground": "#ddca7e"
       },
       {
-        "line": 140,
+        "line": 161,
         "text": "contrastScore",
         "foreground": "#9a8297"
       }

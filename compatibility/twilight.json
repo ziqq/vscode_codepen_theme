@@ -218,33 +218,33 @@
           "foreground": "#9a8297"
         },
         {
-          "line": 128,
+          "line": 149,
           "text": "name",
           "foreground": "#ffffff"
         },
         {
-          "line": 140,
+          "line": 161,
           "text": "contrastScore",
           "foreground": "#9a8297"
         },
         {
-          "line": 143,
+          "line": 164,
           "text": "describeTheme",
           "foreground": "#9a8297"
         },
         {
-          "line": 143,
+          "line": 164,
           "text": "state",
           "foreground": "#ffffff"
         },
         {
-          "line": 144,
+          "line": 165,
           "text": "return",
           "foreground": "#ddca7e",
           "fontStyle": 1
         },
         {
-          "line": 151,
+          "line": 172,
           "text": "palette",
           "foreground": "#ffffff"
         }
