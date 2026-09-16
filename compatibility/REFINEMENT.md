@@ -17,8 +17,10 @@ The measured JS/TS role policy remains:
   that member role; their variables are blue.
 - Green strings and interpolation delimiters; orange numeric literals; gray
   operators and type brackets; ordinary punctuation white.
-- Original suppresses theme-owned italics while preserving bold and underline.
-  Ligatures retains the italic layer. Narrow Dart corrections restore
+- Original suppresses the general theme-owned italic layer while preserving
+  bold and underline. Explicit annotations and decorators are the shared yellow
+  italic exception across languages. Ligatures retains the full italic layer.
+  Narrow Dart corrections restore
   gray italic documentation and regular white `Function`/`void` types after the
   Dart provider has classified them as ordinary symbols or keywords.
 

@@ -290,7 +290,8 @@
       {
         "line": 114,
         "text": "@override",
-        "foreground": "#cccccc"
+        "foreground": "#ddca7e",
+        "fontStyle": "italic"
       },
       {
         "line": 142,

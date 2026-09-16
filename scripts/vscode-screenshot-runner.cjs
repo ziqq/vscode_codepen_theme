@@ -61,7 +61,7 @@ exports.run = async () => {
       if (document.languageId === 'dart') {
         const assert = require('node:assert/strict');
         const { readFile } = require('node:fs/promises');
-        const { semanticColor } = await import('./lib/token-colors.mjs');
+        const { semanticStyle } = await import('./lib/token-colors.mjs');
         const expectations = JSON.parse(await readFile(`${__dirname}/../compatibility/dart-semantic.json`, 'utf8'));
         const colors = JSON.parse(await readFile(`${theme.extensionPath}/themes/codepen-theme.json`, 'utf8'));
         for (const expected of expectations.expect) {
@@ -69,7 +69,11 @@ exports.run = async () => {
           assert.ok(token, `Missing Dart semantic token ${expected.line}:${expected.text}`);
           assert.equal(token.type, expected.type, `${expected.text}: semantic type`);
           assert.deepEqual([...token.modifiers].sort(), [...expected.modifiers].sort(), `${expected.text}: modifiers`);
-          assert.equal(semanticColor(colors, token.type, token.modifiers, 'dart'), expected.foreground, `${expected.text}: foreground`);
+          const style = semanticStyle(colors, token.type, token.modifiers, 'dart');
+          assert.equal(style?.foreground, expected.foreground, `${expected.text}: foreground`);
+          if (expected.italic !== undefined) {
+            assert.equal(style?.italic, expected.italic, `${expected.text}: italic`);
+          }
         }
       }
       results.push({ file, language: document.languageId, tokens: tokens.data.length / 5,

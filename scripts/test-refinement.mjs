@@ -41,6 +41,23 @@ for (const [language, marked] of fixtures) {
     recoveryCases++;
   }
 }
+for (const [language, source, annotation] of [
+  ['dart', '@override\nString label() => "x";', '@override'],
+  ['groovy', '@Immutable\nclass Theme {}', '@Immutable'],
+  ['java', '@Deprecated\nclass Theme {}', '@Deprecated'],
+  ['kotlin', '@Deprecated("old")\nclass Theme', '@Deprecated'],
+  ['python', '@dataclass(frozen=True)\nclass Theme: pass', '@dataclass'],
+  ['swift', '@available(iOS 17, *)\nstruct Theme {}', '@available'],
+  ['typescript', '@sealed\nclass Theme {}', '@sealed'],
+]) {
+  const spans = await refine(source, language);
+  for (let offset = 0; offset < annotation.length; offset++) {
+    const actual = spans.find((span) => span.start <= offset && span.end > offset);
+    assert.equal(actual?.role, 'yellow', `${language}: annotation foreground role`);
+    assert.equal(actual?.fontStyle, 'annotation', `${language}: annotation italic role`);
+    assertions += 2;
+  }
+}
 assert.deepEqual(await refine('x'.repeat(maximumDocumentLength + 1), 'typescript'), []);
 assert.deepEqual(await refine('class Theme {}', 'plaintext'), []);
 await writeFile('build/refinement.json', `${JSON.stringify({ assertions, recoveryCases, failures, results }, null, 2)}\n`);

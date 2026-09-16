@@ -28,9 +28,11 @@ function activate(context) {
     supportedLanguages.includes(document.languageId) && document.getText().length <= maximumDocumentLength;
 
   function decoration(span) {
-    // Contextual colors are shared by both variants. Original suppresses
-    // theme-owned italics, while Ligatures retains them.
-    const fontStyle = activeVariant()?.italics ? span.fontStyle : undefined;
+    // Contextual colors are shared by both variants. Original suppresses the
+    // general italic layer; provider-marked annotations are the exception.
+    const fontStyle = span.fontStyle === 'annotation'
+      ? 'italic'
+      : activeVariant()?.italics ? span.fontStyle : undefined;
     const key = `${span.role}:${fontStyle ?? ''}`;
     if (!decorations.has(key)) decorations.set(key, vscode.window.createTextEditorDecorationType({
       color: palette[span.role], ...(fontStyle ? { fontStyle } : {}),

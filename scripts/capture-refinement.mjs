@@ -221,8 +221,18 @@ try {
         const start = ready.source.indexOf(check.text);
         if (fontStyles.slice(start, start + check.text.length).some((style) => style !== check.style)) result.errors.push({ typography: check });
       }
-      if (!ready.ligatures && fontStyles.some((style) => style === 'italic')) {
-        result.errors.push({ typography: 'Original rendered theme-owned italics' });
+      const annotationItalic = new Set();
+      for (const match of ready.source.matchAll(
+        /@[A-Za-z_][\w.]*(?:\([^\r\n]*\))?/g,
+      )) {
+        for (let index = match.index; index < match.index + match[0].length; index++) {
+          annotationItalic.add(index);
+        }
+      }
+      if (!ready.ligatures && fontStyles.some(
+        (style, index) => style === 'italic' && !annotationItalic.has(index),
+      )) {
+        result.errors.push({ typography: 'Original rendered non-annotation theme-owned italics' });
       }
       if (ready.ligatures && !fontStyles.some((style) => style === 'italic')) {
         result.errors.push({ typography: 'Ligatures did not render theme-owned italics' });

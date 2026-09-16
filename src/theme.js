@@ -64,6 +64,40 @@ function decorationRule(name, fontStyle, scopes) {
   };
 }
 
+// Keep annotation/decorator typography consistent across provider grammars.
+// These selectors intentionally describe syntax roles rather than every use of
+// the @ character, so strings, stylesheet directives, and language variables
+// retain their own highlighting.
+const ANNOTATION_SCOPES = [
+  'entity.name.function.decorator',
+  'entity.name.function.decorator.python',
+  'entity.name.function.annotation',
+  'entity.name.function.annotation.kotlin',
+  'meta.function.decorator.python',
+  'punctuation.decorator',
+  'punctuation.decorator.js',
+  'punctuation.decorator.jsx',
+  'punctuation.decorator.ts',
+  'punctuation.decorator.tsx',
+  'punctuation.definition.annotation',
+  'punctuation.definition.annotation.java',
+  'punctuation.definition.annotation.kotlin',
+  'punctuation.definition.attribute.swift',
+  'punctuation.definition.decorator',
+  'punctuation.definition.decorator.python',
+  'storage.modifier.attribute.swift',
+  'storage.type.annotation',
+  'storage.type.annotation.dart',
+  'storage.type.annotation.groovy',
+  'storage.type.annotation.java',
+  'tag.decorator.js entity.name.tag.js',
+  'tag.decorator.js punctuation.definition.tag.js',
+  ...['js', 'js.jsx', 'jsx', 'ts', 'tsx'].map(
+    (language) =>
+      `meta.decorator.${language} variable.other.readwrite.${language}`,
+  ),
+];
+
 const tokenColors = [
   // Provider-neutral fallbacks must remain first.
   colorRule('FALLBACK WHITE', color.white, [
@@ -1153,6 +1187,9 @@ const tokenColors = [
     'punctuation.decorator.ts',
     'punctuation.decorator.tsx',
   ]),
+  // Deliberate product adaptation: CodePen renders decorator punctuation gray,
+  // while both VS Code variants render the complete annotation yellow.
+  colorRule('ANNOTATIONS', color.yellow, ANNOTATION_SCOPES),
   colorRule('TWILIGHT DOCUMENTATION', color.gray, [
     'comment.block.documentation.dart variable.name.source.dart',
     'comment.block.documentation.dart variable.other.source.dart',
@@ -1975,6 +2012,9 @@ const tokenColors = [
     'variable.language.special.self.python',
     'variable.language.this.java',
   ]),
+  // Annotation italics are part of both public variants. The broader ITALIC
+  // layer below remains exclusive to the Ligatures variant.
+  decorationRule('ANNOTATION ITALIC', 'italic', ANNOTATION_SCOPES),
   decorationRule('UNDERLINE', 'underline', [
     // Markup
     'markup.underline',
@@ -1986,10 +2026,14 @@ const tokenColors = [
 ];
 
 /**
- * Dart's semantic keyword fallback clears TextMate italics. Keep typography
- * separate from the semantic palette, just like the TextMate layers above.
+ * Keep semantic typography separate from the semantic palette, just like the
+ * TextMate layers above. `always` marks the narrow annotation exception that
+ * is shared by both public variants.
  */
 const semanticDecorations = {
+  decorator: { italic: true, always: true },
+  'annotation:dart': { italic: true, always: true },
+  'property.annotation:dart': { italic: true, always: true },
   'keyword:dart': { italic: true },
   'keyword.void:dart': { italic: false },
 };
@@ -2121,8 +2165,9 @@ function resolveTheme({ name, italics = true }) {
       // DART COLORS
       'dart.closingLabels': color.gray,
     },
-    // Original omits the dedicated italic layer; Ligatures retains it. Regular,
-    // bold, underline, and every foreground rule remain byte-for-byte equal.
+    // Original omits the general italic layer; Ligatures retains it. The narrow
+    // annotation italic rule, bold, underline, and every foreground rule remain
+    // shared by both variants.
     tokenColors: italics
       ? tokenColors
       : tokenColors.filter((rule) => rule.name !== 'ITALIC'),
@@ -2204,10 +2249,11 @@ function resolveTheme({ name, italics = true }) {
   };
 
   for (const [selector, decoration] of Object.entries(semanticDecorations)) {
-    if (!italics && decoration.italic === true) continue;
+    const { always = false, ...settings } = decoration;
+    if (!italics && settings.italic === true && !always) continue;
     theme.semanticTokenColors[selector] = {
       foreground: theme.semanticTokenColors[selector],
-      ...decoration,
+      ...settings,
     };
   }
   return theme;

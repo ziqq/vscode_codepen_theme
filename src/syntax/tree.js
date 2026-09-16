@@ -31,6 +31,12 @@ const blockKinds = new Set(['block', 'compound_statement', 'for_statement', 'for
 const typeKinds = /^(?:primitive_type|predefined_type|integral_type|floating_point_type|boolean_type|void_type|user_type|type|generic_type|type_annotation|type_arguments|type_parameters|type_parameter|type_parameter_list|nullable_type|reference_type|array_type|function_type|parameter_type_list)$/;
 const stringKinds = /^(?:string|.*string_literal|interpreted_string_literal|raw_string_literal|char_literal|character_literal|encapsed_string|symbol_literal|external_command|heredoc_body)$/;
 const numericKinds = /^(?:(?:hex_|decimal_|octal_|binary_)?(?:integer|floating_point)_literal|number_literal|int_literal|float_literal|integer|float|number)$/;
+const annotationKinds = new Set([
+  'annotation',
+  'attribute',
+  'decorator',
+  'marker_annotation',
+]);
 const keywords = new Set(('abstract alias as assert async await base bool boolean break case catch class const constexpr continue covariant data default defer deferred def define del do done dynamic elif else end endef enum except export extends extension extern external factory false fi final finally fn for foreach from fun func function get global goto hide if ifdef ifeq ifndef ifneq impl implements import in include inline instanceof interface internal is late let library match mixin mod mutable mut native new nil nonlocal null object on operator or out override package part pass private protected protocol pub public raise record redo ref reified required rescue return rethrow sealed select self set show sizeof static struct super switch sync synchronized template then this throw throws trait transient true try type typedef typealias typeof union unless unsafe unset use using val var virtual volatile when where while with yield').split(' '));
 
 const contains = (region, node) => region.start <= node.startIndex && region.end >= node.endIndex;
@@ -40,6 +46,14 @@ const ancestor = (node, predicate) => {
 const field = (node, name) => node?.childForFieldName(name);
 const isField = (node, name) => field(node.parent, name)?.id === node.id;
 const firstIdentifier = (node) => node?.namedChildren.find((child) => identifiers.has(child.type));
+const firstDescendantIdentifier = (node) => {
+  const stack = [...(node?.namedChildren ?? [])].reverse();
+  while (stack.length) {
+    const child = stack.pop();
+    if (identifiers.has(child.type)) return child;
+    stack.push(...child.namedChildren.toReversed());
+  }
+};
 const isIdentifier = (node) => identifiers.has(node.type) && !node.namedChildren.some(isIdentifier);
 
 async function refineTree(source, language) {
@@ -50,6 +64,7 @@ async function refineTree(source, language) {
     for (const span of refineDialect(root, source, language)) {
       spans.add(span.start, span.end, span.role, 40, span.fontStyle);
     }
+    addAnnotations(root, source, spans);
     if (language !== 'makefile') return spans.finish();
     const stack = [root];
     while (stack.length) {
@@ -62,6 +77,23 @@ async function refineTree(source, language) {
     }
     return spans.finish();
   });
+}
+
+function addAnnotations(root, source, spans) {
+  const stack = [root];
+  while (stack.length) {
+    const node = stack.pop();
+    stack.push(...node.namedChildren);
+    if (!annotationKinds.has(node.type)) continue;
+    const marker = source.indexOf('@', node.startIndex);
+    if (marker < node.startIndex || marker >= node.endIndex) continue;
+    spans.add(marker, marker + 1, 'yellow', 60, 'annotation');
+    const name = field(node, 'name') ?? field(node, 'attribute') ??
+      firstDescendantIdentifier(node);
+    if (name) {
+      spans.add(name.startIndex, name.endIndex, 'yellow', 60, 'annotation');
+    }
+  }
 }
 
 async function withTree(source, language, callback) {

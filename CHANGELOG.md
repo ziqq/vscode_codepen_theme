@@ -1,7 +1,8 @@
 # Changelog
 
 ## Unreleased
-- **ADDED**: `CodePen Theme Original Ligatures`, preserving the Original palette while retaining theme-owned italics; `CodePen Theme Original` remains non-italic
+- **ADDED**: `CodePen Theme Original Ligatures`, preserving the Original palette while retaining the full theme-owned italic layer; `CodePen Theme Original` keeps only the shared annotation/decorator italic exception
+- **CHANGED**: provider-marked annotations, decorators, and Swift attributes use one yellow italic style across supported languages, including their `@` marker; unrelated at-sign syntax remains language-owned
 - **ADDED**: legacy Operator Mono Lig/Operator Mono typography with Monaco/Courier fallbacks for the editor, integrated terminal, Debug Console, and `[Log]`-scoped Output editor; editor ligatures are enabled
 - **FIXED**: Dart named-argument values retain their binding color instead of inheriting the argument-label color
 - **FIXED**: Dart switch-pattern bindings remain blue when referenced inside string interpolation

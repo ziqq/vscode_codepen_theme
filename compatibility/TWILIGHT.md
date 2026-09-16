@@ -80,10 +80,15 @@ now adds an optional foreground-only layer where those providers lose context.
   programming languages remain purple. Other data formats retain the role
   exposed by their grammar. Markup and stylesheet rules retain their own
   applicable roles; they are not treated as executable JS.
+- CodePen itself classifies decorator `@` as gray and the name as yellow. The
+  VS Code themes deliberately unify provider-marked annotations, decorators,
+  and Swift attributes as yellow italic constructs in both variants. Unrelated
+  uses of `@` retain their language-specific role.
 
-Palette keys are alphabetical. Existing TextMate decoration rules have an
-unchanged SHA-256 guard. Semantic colors are authored separately from the small
-Dart typography layer: keywords italic, `void` regular. Dart does not expose
+Palette keys are alphabetical. TextMate decoration rules have a reviewed
+SHA-256 guard. Semantic colors are authored separately from annotation/decorator
+typography and the small Dart typography layer: keywords italic, `void` regular.
+Dart does not expose
 fine-grained keyword subtypes for every existing TextMate distinction, so this
 layer cannot recreate every keyword-by-keyword font distinction.
 

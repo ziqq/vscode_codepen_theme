@@ -1,4 +1,13 @@
 {
-  "description": "No exceptions. Every recorded nonblank classic CodePen span must match the contextual refinement exactly.",
-  "differences": []
+  "description": "Reviewed exceptions to the measured classic CodePen foregrounds. Annotation typography is intentionally unified across the marker and name.",
+  "differences": [
+    {
+      "case": "decorators-and-access",
+      "line": 2,
+      "start": 0,
+      "text": "@",
+      "actual": "#ddca7e",
+      "reason": "User-approved cross-language adaptation: the annotation marker matches its yellow italic annotation name."
+    }
+  ]
 }

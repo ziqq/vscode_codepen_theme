@@ -68,7 +68,7 @@ void «blue|read»(«white|String» «blue|contents», «white|String» «blue|_
   }
   if (output == «yellow|null») encoder.«purple|convert»(theme);
 }
-«operator|@»«yellow|pragma»«white|(»«green|"vm:entry-point"»«white|)»
+«yellow|@pragma»«white|(»«green|"vm:entry-point"»«white|)»
 abstract interface class «blue|Directory» implements «white|FileSystemEntity» {}`],
   ['dart', `class ThemeReady { final ThemePalette palette; }
 String describeTheme(ThemeReady state) => switch (state) {
@@ -173,7 +173,12 @@ echo «green|"\${»«blue|name»«green|}"»
   ['go', `«yellow|package» main
 «yellow|type» «blue|Theme» struct { «purple|Name» «white|string» }`],
   ['rust', `fn «blue|label»(«blue|name»: &«white|str») -> «white|String» { «purple|format!»(«green|"{name}: {}"», «orange|2») }`],
-  ['dart', `class «blue|Theme» { «operator|@»«yellow|override» String «purple|toString»() => 'x'; }`],
+  ['dart', `class «blue|Theme» { «yellow|@override» String «purple|toString»() => 'x'; }`],
+  ['java', `«yellow|@Deprecated» class «blue|Theme» {}`],
+  ['kotlin', `«yellow|@Deprecated»("old") class «blue|Theme»`],
+  ['python', `«yellow|@dataclass»(frozen=True)\nclass «blue|Theme»: pass`],
+  ['swift', `«yellow|@available»(iOS 17, *)\nstruct «blue|Theme» {}`],
+  ['typescript', `«yellow|@sealed»\nclass «blue|Theme» {}`],
   ['dart', `class «blue|Settings» {
   static const int «blue|passwordMaxLength» = «yellow|int».«purple|fromEnvironment»('PASSWORD_MAX_LENGTH');
   factory Settings.from(String? «blue|environment») => switch («blue|environment»?.«purple|trim»()) { _ => Settings() };

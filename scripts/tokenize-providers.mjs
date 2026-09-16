@@ -184,9 +184,18 @@ for (const item of compatibility.cases) {
   }
   for (const edge of edgeCases.cases.filter((entry) => entry.language === item.language)) {
     for (const expected of edge.expect) {
+      const fallback = expected.providerFallbacks?.[vscodeVersion];
       try {
         edgeColorAssertions += assertTokenColors(registry, grammar, {
-          ...edge, language: `${item.language}/${edge.id}`, expect: [expected],
+          ...edge,
+          language: `${item.language}/${edge.id}`,
+          expect: [fallback ? {
+            ...expected,
+            foreground: fallback.foreground,
+            ...(fallback.fontStyle === undefined
+              ? {}
+              : { fontStyle: fallback.fontStyle }),
+          } : expected],
         });
       } catch (error) {
         edgeColorErrors.push(error.message);

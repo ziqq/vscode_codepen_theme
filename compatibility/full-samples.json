@@ -391,7 +391,8 @@
         {
           "line": 114,
           "text": "@override",
-          "foreground": "#cccccc"
+          "foreground": "#ddca7e",
+          "fontStyle": 1
         },
         {
           "line": 115,
@@ -1568,7 +1569,14 @@
         {
           "line": 11,
           "text": "dataclass",
-          "foreground": "#ddca7e"
+          "foreground": "#ddca7e",
+          "fontStyle": 1
+        },
+        {
+          "line": 11,
+          "text": "@",
+          "foreground": "#ddca7e",
+          "fontStyle": 1
         },
         {
           "line": 13,
@@ -2796,6 +2804,12 @@
           "line": 1,
           "text": "import",
           "foreground": "#ddca7e"
+        },
+        {
+          "line": 4,
+          "text": "@Immutable",
+          "foreground": "#ddca7e",
+          "fontStyle": 1
         },
         {
           "line": 3,

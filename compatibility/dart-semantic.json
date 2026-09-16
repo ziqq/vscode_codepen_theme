@@ -9,7 +9,7 @@
     { "line": 96, "text": "maybeMap", "type": "method", "modifiers": ["declaration", "instance"], "foreground": "#9a8297" },
     { "line": 101, "text": "map", "type": "method", "modifiers": ["instance"], "foreground": "#9a8297" },
     { "line": 108, "text": "maybeMapOrNull", "type": "method", "modifiers": ["declaration", "instance"], "foreground": "#9a8297" },
-    { "line": 114, "text": "override", "type": "property", "modifiers": ["annotation"], "foreground": "#ddca7e" },
+    { "line": 114, "text": "override", "type": "property", "modifiers": ["annotation"], "foreground": "#ddca7e", "italic": true },
     { "line": 115, "text": "compareTo", "type": "method", "modifiers": ["declaration", "instance"], "foreground": "#9a8297" },
     { "line": 166, "text": "name", "type": "variable", "modifiers": ["declaration"], "foreground": "#809bbd" },
     { "line": 175, "text": "state", "type": "variable", "modifiers": [], "foreground": "#809bbd" },

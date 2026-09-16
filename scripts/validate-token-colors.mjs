@@ -43,10 +43,21 @@ assert.deepEqual(
   )),
   'Ligatures must preserve all semantic foregrounds',
 );
-assert.ok(!theme.tokenColors.some((rule) =>
-  rule.settings.fontStyle?.split(/\s+/).includes('italic')));
-assert.ok(!Object.values(theme.semanticTokenColors).some((value) =>
-  typeof value === 'object' && value.italic === true));
+assert.deepEqual(
+  theme.tokenColors
+    .filter((rule) => rule.settings.fontStyle?.split(/\s+/).includes('italic'))
+    .map((rule) => rule.name),
+  ['ANNOTATION ITALIC'],
+  'Original must limit theme-owned italics to annotations and decorators',
+);
+assert.deepEqual(
+  Object.entries(theme.semanticTokenColors)
+    .filter(([, value]) => typeof value === 'object' && value.italic === true)
+    .map(([selector]) => selector)
+    .sort(),
+  ['annotation:dart', 'decorator', 'property.annotation:dart'],
+  'Original must limit semantic italics to annotations and decorators',
+);
 assert.ok(ligaturesTheme.tokenColors.some((rule) =>
   rule.settings.fontStyle?.split(/\s+/).includes('italic')));
 assert.ok(Object.values(ligaturesTheme.semanticTokenColors).some((value) =>
@@ -66,6 +77,18 @@ for (const value of Object.values(theme.semanticTokenColors)) {
   assert.match(typeof value === 'string' ? value : value.foreground, /^#[0-9a-f]{6}$/i);
 }
 assert.equal(theme.semanticTokenColors['keyword:dart'], '#ddca7e');
+assert.deepEqual(theme.semanticTokenColors.decorator, {
+  foreground: '#ddca7e',
+  italic: true,
+});
+assert.deepEqual(theme.semanticTokenColors['annotation:dart'], {
+  foreground: '#ddca7e',
+  italic: true,
+});
+assert.deepEqual(theme.semanticTokenColors['property.annotation:dart'], {
+  foreground: '#ddca7e',
+  italic: true,
+});
 assert.equal(theme.semanticTokenColors['keyword.void:dart'].italic, false);
 assert.equal(ligaturesTheme.semanticTokenColors['keyword:dart'].italic, true);
 assert.equal(ligaturesTheme.semanticTokenColors['keyword.void:dart'].italic, false);
@@ -118,6 +141,15 @@ const probes = [
   ['source.css.scss keyword.control.at-rule.mixin.scss', '#809bbd', 1],
   ['source.css.scss constant.numeric.css keyword.other.unit.px.css', '#d0782a', 0],
   ['source.dart entity.name.function.dart', '#9a8297', 0],
+  ['source.dart storage.type.annotation.dart', '#ddca7e', 1],
+  ['source.groovy storage.type.annotation.groovy', '#ddca7e', 1],
+  ['source.java punctuation.definition.annotation.java', '#ddca7e', 1],
+  ['source.java storage.type.annotation.java', '#ddca7e', 1],
+  ['source.kotlin meta.annotation.kotlin entity.name.function.annotation.kotlin', '#ddca7e', 1],
+  ['source.python meta.function.decorator.python entity.name.function.decorator.python punctuation.definition.decorator.python', '#ddca7e', 1],
+  ['source.swift storage.modifier.attribute.swift', '#ddca7e', 1],
+  ['source.ts meta.decorator.ts punctuation.decorator.ts', '#ddca7e', 1],
+  ['source.ts meta.decorator.ts variable.other.readwrite.ts', '#ddca7e', 1],
   ['source.go entity.name.type.go', '#ffffff', 0],
   ['source.just entity.name.function.target.just', '#9a8297', 0],
   ['source.tsx entity.name.type.alias.tsx', '#ffffff', 0],

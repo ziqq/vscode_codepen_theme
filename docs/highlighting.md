@@ -36,8 +36,13 @@ the runtime/global reference is yellow in `new Counter()`. Likewise, Dart's
 `kReleaseMode` is a yellow external runtime reference, while a local binding or
 parameter is blue. A property or method remains purple.
 
-The decorator marker is independently classified: `@` is `#CCCCCC`, while an
-annotation name such as `override` uses the yellow keyword/global role.
+In the measured CodePen reference, the decorator marker is independently
+classified: `@` is `#CCCCCC`, while a decorator name uses the yellow
+keyword/global role. The VS Code themes intentionally adapt this one role: when
+a provider explicitly marks an annotation, decorator, or Swift attribute, the
+complete construct (`@` and its name) is yellow and italic in both variants.
+This does not recolor unrelated at-sign syntax such as strings, email text,
+stylesheet directives, Just quiet markers, or language variables.
 
 ## Adaptations outside CodePen
 
@@ -56,8 +61,9 @@ and JSONC comments are muted gray.
 
 Semantic highlighting is enabled when `editor.semanticHighlighting.enabled` is
 `configuredByTheme`, the VS Code default. Semantic colors are separate from
-typography in the source; a small Dart keyword style layer preserves italics when
-the provider replaces TextMate styling.
+typography in the source; a small semantic style layer preserves annotation and
+decorator italics across languages, plus Dart keyword italics in Ligatures, when
+a provider replaces TextMate styling.
 
 JS/TS uses the built-in provider's `local`, `declaration`, and `defaultLibrary`
 modifiers to distinguish local symbols, declarations, and library functions.
@@ -99,7 +105,8 @@ The [full-language audit](https://github.com/ziqq/vscode_codepen_theme/blob/mast
 covers all 68 complete samples and records fixes and remaining provider limitations
 per language. Just/Make recipe targets are purple; their variables and parameters
 are blue. Java modifiers are yellow, type references white, and members purple.
-Dart annotations use the same yellow role with and without semantic highlighting.
+Annotations and decorators use the same yellow italic role with and without
+semantic highlighting wherever the provider exposes that role.
 The exact list of verified languages and grammars that still use generic fallback
 coverage is maintained in the
 [syntax coverage boundary](https://github.com/ziqq/vscode_codepen_theme/blob/master/compatibility/COVERAGE.md).

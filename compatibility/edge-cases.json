@@ -3,6 +3,53 @@
   "description": "Role-based regressions from the deep audit. Expectations are authored independently of the rendered theme, including punctuation and repeated contexts.",
   "cases": [
     {
+      "id": "java-annotation",
+      "language": "Java",
+      "source": "@Deprecated\nclass Demo {}",
+      "expect": [
+        { "line": 1, "text": "@", "foreground": "#ddca7e", "fontStyle": 1 },
+        { "line": 1, "text": "Deprecated", "foreground": "#ddca7e", "fontStyle": 1 }
+      ]
+    },
+    {
+      "id": "kotlin-annotation",
+      "language": "Kotlin",
+      "source": "@Deprecated(\"old\")\nclass Demo",
+      "expect": [
+        { "line": 1, "text": "@", "foreground": "#ddca7e", "fontStyle": 1 },
+        {
+          "line": 1,
+          "text": "Deprecated",
+          "foreground": "#ddca7e",
+          "fontStyle": 1,
+          "providerFallbacks": {
+            "1.96.0": { "foreground": "#ffffff", "fontStyle": 0, "reason": "The provider leaves the annotation name unscoped; contextual refinement restores the role." },
+            "1.105.1": { "foreground": "#ffffff", "fontStyle": 0, "reason": "The provider leaves the annotation name unscoped; contextual refinement restores the role." },
+            "1.134.0": { "foreground": "#ffffff", "fontStyle": 0, "reason": "The provider leaves the annotation name unscoped; contextual refinement restores the role." },
+            "1.135.0": { "foreground": "#ffffff", "fontStyle": 0, "reason": "The provider leaves the annotation name unscoped; contextual refinement restores the role." }
+          }
+        },
+        { "line": 1, "text": "\"old\"", "foreground": "#96b38a" }
+      ]
+    },
+    {
+      "id": "typescript-decorator",
+      "language": "TypeScript",
+      "source": "@sealed\nclass Demo {}",
+      "expect": [
+        { "line": 1, "text": "@", "foreground": "#ddca7e", "fontStyle": 1 },
+        { "line": 1, "text": "sealed", "foreground": "#ddca7e", "fontStyle": 1 }
+      ]
+    },
+    {
+      "id": "swift-attribute",
+      "language": "Swift",
+      "source": "@available(iOS 17, *)\nfunc run() {}",
+      "expect": [
+        { "line": 1, "text": "@available", "foreground": "#ddca7e", "fontStyle": 1 }
+      ]
+    },
+    {
       "id": "swift-function-body",
       "language": "Swift",
       "source": "func palette() -> [String: String] {\n  [\n    \"name\": \"demo\",\n    \"accent\": \"green\",\n  ]\n}",
@@ -56,6 +103,7 @@
         { "line": 1, "text": "name", "foreground": "#809bbd" },
         { "line": 2, "text": "build", "foreground": "#9a8297" },
         { "line": 2, "text": "target", "foreground": "#809bbd" },
+        { "line": 3, "text": "@", "foreground": "#cccccc", "fontStyle": 0 },
         { "line": 3, "text": "name", "foreground": "#809bbd" },
         { "line": 4, "text": "b", "foreground": "#9a8297" },
         { "line": 5, "text": "build", "foreground": "#9a8297" }

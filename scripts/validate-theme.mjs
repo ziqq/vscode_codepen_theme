@@ -194,7 +194,13 @@ for (const [absolutePath, expectedSource] of generatedThemes()) {
       throw new Error(`${selector}: semantic rules must use a palette foreground`);
     }
     if (typeof value !== 'string' &&
-        (!['keyword:dart', 'keyword.void:dart'].includes(selector) ||
+        (![
+          'annotation:dart',
+          'decorator',
+          'keyword:dart',
+          'keyword.void:dart',
+          'property.annotation:dart',
+        ].includes(selector) ||
          Object.keys(value).sort().join(',') !== 'foreground,italic')) {
       throw new Error(`${selector}: unexpected semantic typography override`);
     }
@@ -217,11 +223,17 @@ if (JSON.stringify(original.colors) !== JSON.stringify(ligatures.colors) ||
     JSON.stringify(semanticForegrounds(original)) !== JSON.stringify(semanticForegrounds(ligatures))) {
   throw new Error('Ligatures variant must preserve every Original foreground color');
 }
-if (original.tokenColors.some((rule) =>
-  rule.settings.fontStyle?.split(/\s+/).includes('italic')) ||
-  Object.values(original.semanticTokenColors).some((value) =>
-    typeof value === 'object' && value.italic === true)) {
-  throw new Error('Original must not contribute italic typography');
+const originalItalicRules = original.tokenColors
+  .filter((rule) => rule.settings.fontStyle?.split(/\s+/).includes('italic'))
+  .map((rule) => rule.name);
+const originalSemanticItalics = Object.entries(original.semanticTokenColors)
+  .filter(([, value]) => typeof value === 'object' && value.italic === true)
+  .map(([selector]) => selector)
+  .sort();
+if (JSON.stringify(originalItalicRules) !== JSON.stringify(['ANNOTATION ITALIC']) ||
+    JSON.stringify(originalSemanticItalics) !==
+      JSON.stringify(['annotation:dart', 'decorator', 'property.annotation:dart'])) {
+  throw new Error('Original must limit italic typography to annotations and decorators');
 }
 if (!ligatures.tokenColors.some((rule) =>
   rule.settings.fontStyle?.split(/\s+/).includes('italic')) ||

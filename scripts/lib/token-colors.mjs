@@ -23,10 +23,10 @@ export function tokenStyle(metadata, colorMap) {
 // subtypes remain VS Code's responsibility, including their inheritance.
 // Scoring follows VS Code's tokenClassificationRegistry: type 100, language 10,
 // and 100 per modifier. This helper is for assertions, not extension runtime.
-export function semanticColor(theme, type, modifiers = [], language = '') {
+export function semanticStyle(theme, type, modifiers = [], language = '') {
   let result;
   let best = -1;
-  for (const [selector, foreground] of Object.entries(theme.semanticTokenColors)) {
+  for (const [selector, value] of Object.entries(theme.semanticTokenColors)) {
     const [classifier, selectedLanguage] = selector.split(':');
     const [selectedType, ...required] = classifier.split('.');
     if (selectedType !== type ||
@@ -35,10 +35,14 @@ export function semanticColor(theme, type, modifiers = [], language = '') {
     const score = 100 + (selectedLanguage === undefined ? 0 : 10) + required.length * 100;
     if (score >= best) {
       best = score;
-      result = typeof foreground === 'string' ? foreground : foreground.foreground;
+      result = typeof value === 'string' ? { foreground: value } : value;
     }
   }
   return result;
+}
+
+export function semanticColor(theme, type, modifiers = [], language = '') {
+  return semanticStyle(theme, type, modifiers, language)?.foreground;
 }
 
 export function assertTokenColors(registry, grammar, fixture) {
