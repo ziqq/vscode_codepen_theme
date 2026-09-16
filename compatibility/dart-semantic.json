@@ -1,7 +1,7 @@
 {
   "reference": "Dart SDK 3.11.5 analysis-server classifications; color roles are adapted from measured classic CodePen JS/TS. Enum declaration lacks a declaration modifier and therefore uses the neutral type color.",
   "expect": [
-    { "line": 70, "text": "alias", "type": "variable", "modifiers": ["declaration", "instance"], "foreground": "#9a8297" },
+    { "line": 70, "text": "alias", "type": "variable", "modifiers": ["declaration", "instance"], "foreground": "#809bbd" },
     { "line": 76, "text": "isFixed", "type": "property", "modifiers": ["declaration", "instance"], "foreground": "#9a8297" },
     { "line": 85, "text": "map", "type": "method", "modifiers": ["declaration", "instance"], "foreground": "#9a8297" },
     { "line": 86, "text": "fixed", "type": "parameter", "modifiers": ["declaration"], "foreground": "#809bbd" },
@@ -98,7 +98,7 @@
         "declaration",
         "instance"
       ],
-      "foreground": "#9a8297"
+      "foreground": "#809bbd"
     },
     {
       "line": 152,

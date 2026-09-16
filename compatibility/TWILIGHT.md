@@ -68,7 +68,7 @@ now adds an optional foreground-only layer where those providers lose context.
   that declaration role. Parameters and local bindings are blue; members purple.
 - JS/TS semantic `local` and `declaration` modifiers refine the lexical fallback.
   Readonly does not automatically mean yellow: a readonly member is still purple.
-- Dart uses actual Dart-Code tokens: `variable.instance` is a field (purple),
+- Dart uses actual Dart-Code tokens: `variable.instance` is a variable (blue),
   `property` and `method` are purple, a declared class is blue, constructor
   references are yellow, and ordinary type references are white.
 - Java method parameters and C#/C/C++ primitive types have explicit rules. Free

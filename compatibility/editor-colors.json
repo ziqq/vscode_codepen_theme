@@ -185,7 +185,7 @@
       {
         "line": 70,
         "text": "alias",
-        "foreground": "#9a8297"
+        "foreground": "#809bbd"
       },
       {
         "line": 76,
@@ -214,7 +214,12 @@
       },
       {
         "line": 114,
-        "text": "@override",
+        "text": "@",
+        "foreground": "#cccccc"
+      },
+      {
+        "line": 114,
+        "text": "override",
         "foreground": "#ddca7e"
       },
       {
@@ -225,7 +230,7 @@
       {
         "line": 149,
         "text": "name",
-        "foreground": "#9a8297"
+        "foreground": "#809bbd"
       },
       {
         "line": 161,
@@ -285,7 +290,7 @@
       {
         "line": 114,
         "text": "@override",
-        "foreground": "#ddca7e"
+        "foreground": "#cccccc"
       },
       {
         "line": 142,

@@ -24,7 +24,8 @@ const classKinds = new Set(['class_declaration', 'class_definition', 'class_spec
 const functionKinds = new Set(['function_declaration', 'function_definition', 'function_item',
   'method_declaration', 'constructor_declaration', 'method', 'singleton_method', 'lambda_expression',
   'lambda_literal', 'lambda', 'closure_expression', 'anonymous_function', 'function_literal', 'recipe',
-  'function_signature', 'constructor_signature', 'getter_signature', 'setter_signature']);
+  'function_signature', 'constructor_signature', 'factory_constructor_signature',
+  'getter_signature', 'setter_signature']);
 const blockKinds = new Set(['block', 'compound_statement', 'for_statement', 'for_in_statement',
   'for_expression', 'enhanced_for_statement', 'for_range_loop', 'catch_clause']);
 const typeKinds = /^(?:primitive_type|predefined_type|integral_type|floating_point_type|boolean_type|void_type|user_type|type|generic_type|type_annotation|type_arguments|type_parameters|type_parameter|type_parameter_list|nullable_type|reference_type|array_type|function_type|parameter_type_list)$/;
@@ -144,7 +145,7 @@ function classify(root, source, language) {
       'scoped_property_access_expression', 'scoped_call_expression'].includes(node.parent.type) && isField(node, 'name')) ||
     (node.parent.type === 'attribute' && isField(node, 'attribute')) ||
     ['navigation_suffix', 'unconditional_assignable_selector', 'conditional_assignable_selector',
-      'cascade_selector'].includes(node.parent.type);
+      'cascade_selector', 'dot_shorthand'].includes(node.parent.type);
   const dartQualifiedConstructor = (node) => language === 'dart' &&
     node.parent.type === 'unconditional_assignable_selector' && /^[A-Z_]/.test(node.text) &&
     node.parent.parent?.nextNamedSibling?.firstNamedChild?.type === 'argument_part';
@@ -152,6 +153,9 @@ function classify(root, source, language) {
     node.parent.namedChildren.slice(node.parent.namedChildren.indexOf(node) + 1)
       .some((sibling) => sibling.type === 'selector' &&
         sibling.firstNamedChild?.type === 'argument_part');
+  const dartRelationalTypeArgument = (node) => language === 'dart' &&
+    node.parent.type === 'relational_expression' &&
+    node.previousNamedSibling?.text === '<' && node.parent.nextNamedSibling?.text === '>';
   function outOfLineClass(node) {
     if (language !== 'cpp') return undefined;
     const fn = functionOf(node)?.node;
@@ -190,7 +194,8 @@ function classify(root, source, language) {
         node.type === 'constructor_declaration' || (cls && (!outerFn || outerFn.start < cls.start)) ||
         (language === 'rust' && ancestor(node, (item) => item.type === 'impl_item' || item.type === 'trait_item'));
       const kind = language === 'dart' &&
-        ['constructor_declaration', 'constructor_signature'].includes(node.type)
+        ['constructor_declaration', 'constructor_signature',
+          'factory_constructor_signature'].includes(node.type)
         ? 'constructor' : member ? 'member' : 'function';
       declare(name, kind, member && cls ? cls :
         member && !['ruby', 'just'].includes(language) ? region(node) : outerFn ?? region(root));
@@ -237,12 +242,15 @@ function classify(root, source, language) {
     }
     const declaration = ancestor(node, (item) => ['variable_declarator', 'initialized_identifier',
       'initialized_variable_definition', 'variable_declaration', 'property_declaration', 'let_declaration',
-      'var_spec', 'const_spec', 'init_declarator', 'declaration', 'field_declaration'].includes(item.type));
+      'var_spec', 'const_spec', 'init_declarator', 'declaration', 'field_declaration',
+      'static_final_declaration'].includes(item.type));
     if (declaration && (fieldContains(declaration, 'name', node) || fieldContains(declaration, 'pattern', node) ||
         fieldContains(declaration, 'declarator', node) ||
         parent.type === 'initialized_identifier' || (parent.type === 'pattern' && isField(node, 'bound_identifier')) ||
+        (parent.type === 'static_final_declaration' && firstIdentifier(parent)?.id === node.id) ||
         (parent.type === 'variable_declaration' && firstIdentifier(parent)?.id === node.id))) {
-      declare(node, memberContext(declaration) ? 'member' : 'variable', memberContext(declaration) ? classOf(node) : undefined);
+      const member = memberContext(declaration);
+      declare(node, member && language !== 'dart' ? 'member' : 'variable', member ? classOf(node) : undefined);
     }
     if (language === 'python' && parent.type === 'assignment' && isField(node, 'left')) {
       declare(node, memberContext(node) ? 'member' : 'variable', nearestOwner(node) ?? region(root));
@@ -271,6 +279,8 @@ function classify(root, source, language) {
       entry.start === associatedClass.start && entry.end === associatedClass.end;
     const candidates = (bindings.get(node.text) ?? []).filter((entry) => contains(entry, node) || associatedMember(entry))
       .sort((a, b) => Number(a.global) - Number(b.global) ||
+        Number(language === 'dart' && a.kind !== 'variable') -
+          Number(language === 'dart' && b.kind !== 'variable') ||
         Number(contains(b, node)) - Number(contains(a, node)) ||
         (a.end - a.start) - (b.end - b.start) || b.node.startIndex - a.node.startIndex);
     const binding = candidates[0];
@@ -278,10 +288,13 @@ function classify(root, source, language) {
     if (dartQualifiedConstructor(node)) return 'yellow';
     if (!binding && dartInvokedRoot(node)) return 'yellow';
     if (language === 'dart' && parent.type === 'annotation') return 'yellow';
-    if (propertyNode(node)) return 'purple';
+    if (dartRelationalTypeArgument(node)) return 'white';
     if (['keyword_argument', 'label', 'value_argument_label', 'field_initializer',
       'field_pattern'].includes(parent.type) &&
         (isField(node, 'name') || isField(node, 'field') || firstIdentifier(parent)?.id === node.id)) return 'purple';
+    if (binding?.kind === 'variable') return binding.global &&
+      !['just', 'makefile', 'shellscript', 'ruby'].includes(language) ? 'yellow' : 'blue';
+    if (propertyNode(node)) return 'purple';
     if (language === 'go' && parent.type === 'literal_element' && isField(parent, 'key')) return 'purple';
     if (language === 'java' && parent.type === 'record_pattern' && firstIdentifier(parent)?.id === node.id) return 'white';
     if (language === 'kotlin' && parent.type === 'value_argument' &&
@@ -305,11 +318,14 @@ function classify(root, source, language) {
       return binding.global && !['just', 'makefile', 'shellscript', 'ruby'].includes(language) ? 'yellow' : 'blue';
     }
     if (node.type === 'constant') return 'yellow';
-    if (node.type === 'identifier_dollar_escaped' || node.type === 'interpolated_identifier') return 'blue';
+    if (node.type === 'identifier_dollar_escaped' || node.type === 'interpolated_identifier') {
+      return language === 'dart' ? 'yellow' : 'blue';
+    }
     if (['call_expression', 'call', 'function_call', 'invocation_expression', 'function_call_expression'].includes(parent.type) &&
         (isField(node, 'function') || isField(node, 'name') || firstIdentifier(parent)?.id === node.id)) return 'yellow';
     if (language === 'dart' && node.nextNamedSibling?.type === 'selector' &&
         node.nextNamedSibling.firstNamedChild?.type === 'argument_part') return 'yellow';
+    if (language === 'dart') return 'yellow';
     // Unknown names retain the grammar/server fallback, rather than guessing from case.
     return undefined;
   }

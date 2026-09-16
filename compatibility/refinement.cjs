@@ -44,9 +44,9 @@ const «blue|text» = «green|"class False { field }"»;`],
   ['dart', `«gray|/// Links »«white|[»«purple|name»«white|]»«gray| and code »«white|\`name\`»«gray| remain comments.»
 enum «blue|Mode» { «purple|dark», «purple|light» }
 class «blue|Theme» {
-  final «white|String» «purple|name»;
+  final «white|String» «blue|name»;
   Theme(this.«purple|name»);
-  «white|String» «purple|label»(«white|String» «blue|prefix») => «green|"$»«blue|prefix»«green| \${»«purple|name»«white|.»«purple|toLowerCase»«white|()»«green|}"»;
+  «white|String» «purple|label»(«white|String» «blue|prefix») => «green|"$»«blue|prefix»«green| \${»«blue|name»«white|.»«purple|toLowerCase»«white|()»«green|}"»;
   «white|T» «purple|map»«operator|<»«white|T»«operator|>»(«white|T» «white|Function»() «blue|callback») => «blue|callback»();
 }
 void «blue|main»() { final «blue|theme» = «yellow|Theme»("x"); print(«blue|theme».«purple|label»("y")); }`],
@@ -164,7 +164,7 @@ echo «green|"\${»«blue|name»«green|}"»
   ['c4', 'workspace "Theme" { model { «blue|author» = person "Author"\n«blue|system» = softwareSystem "App"\n«blue|author» -> «blue|system» "Uses" } }'],
   ['typescript', `const «blue|emoji» = «green|"😀"»;\r\nfunction «blue|café»(«blue|значение»: «white|string») { return «blue|значение»; }\r\nconst «blue|𐐀» = «yellow|café»(«yellow|emoji»);`],
   ['java', `class «blue|Café» { String «purple|имя» = «green|"😀"»; String «purple|label»(String «blue|значение») { return «blue|значение» + «purple|имя»; } }`],
-  ['dart', `class «blue|Theme» { String «purple|name» = 'x'; void «purple|run»(String «blue|name») { print(«blue|name»); print(this.«purple|name»); } }`],
+  ['dart', `class «blue|Theme» { String «blue|name» = 'x'; void «purple|run»(String «blue|name») { print(«blue|name»); print(this.«purple|name»); } }`],
   ['makefile', `«blue|NAME» := hi
 «purple|build»:
 \t@echo «green|"name: »$(«blue|NAME»)«green|"» «blue|$@» «blue|$<»
@@ -174,6 +174,14 @@ echo «green|"\${»«blue|name»«green|}"»
 «yellow|type» «blue|Theme» struct { «purple|Name» «white|string» }`],
   ['rust', `fn «blue|label»(«blue|name»: &«white|str») -> «white|String» { «purple|format!»(«green|"{name}: {}"», «orange|2») }`],
   ['dart', `class «blue|Theme» { «operator|@»«yellow|override» String «purple|toString»() => 'x'; }`],
+  ['dart', `class «blue|Settings» {
+  static const int «blue|passwordMaxLength» = «yellow|int».«purple|fromEnvironment»('PASSWORD_MAX_LENGTH');
+  factory Settings.from(String? «blue|environment») => switch («blue|environment»?.«purple|trim»()) { _ => Settings() };
+  static const String «blue|_appStoreID» = '1529842812';
+  String «purple|resolve»() => «blue|_appStoreID»;
+}
+abstract interface class «blue|List»<«white|E»> implements «white|Iterable»<«white|E»> {}
+final «blue|countries» = «yellow|List»<«white|String»>.«purple|unmodifiable»([]);`],
   ['typescriptreact', `const «blue|view» = <«brown|UI.Card» «yellow|title»="x">{value.«purple|name»}</«brown|UI.Card»>;`],
   ['javascript', `class «blue|Theme» { «yellow|get» «purple|name»() { return 'x'; } «yellow|set» «purple|name»(«blue|value») {} }
 const «blue|object» = { «purple|get»() { return 1; } };`],

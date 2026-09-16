@@ -271,7 +271,10 @@ const tokenColors = [
     'variable.language.fenced.markdown',
     'variable.parameter.url.scss',
   ]),
-  colorRule('OPERATOR', color.operator, ['storage.type.function.arrow']),
+  colorRule('OPERATOR', color.operator, [
+    'storage.type.annotation.dart',
+    'storage.type.function.arrow',
+  ]),
   colorRule('BROWN', color.brown, [
     // Entities and declarations
     'entity.name.tag',
@@ -674,7 +677,6 @@ const tokenColors = [
     'storage.modifier.dart',
     'storage.modifier.implements.java',
     'storage.modifier.java',
-    'storage.type.annotation.dart',
     'storage.type.annotation.java',
     'storage.type.class.python',
     'storage.type.function.python',
@@ -1038,7 +1040,6 @@ const tokenColors = [
     'meta.directive.on.svelte entity.name.type.svelte',
     'constant.language.dart',
     'storage.modifier.dart',
-    'storage.type.annotation.dart',
     'storage.modifier.java',
     'storage.modifier.implements.java',
     'keyword.operator.sizeof.c',
@@ -2167,7 +2168,7 @@ function resolveTheme({ name, italics = true }) {
       'class.constructor:dart': color.yellow,
       'class.constructor.declaration:dart': color.blue,
       'variable.importPrefix:dart': color.yellow,
-      'variable.instance:dart': color.purple,
+      'variable.instance:dart': color.blue,
       'annotation:dart': color.yellow,
       'source.interpolation:dart': color.green,
       'property.annotation:dart': color.yellow,
