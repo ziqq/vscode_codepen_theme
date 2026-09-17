@@ -1,6 +1,10 @@
 # Changelog
 
 ## Unreleased
+
+- **FIXED**: Dart constant constructor declarations, super-formal parameters,
+  and qualified enum members retain their declaration/member roles with and
+  without semantic highlighting.
 - **ADDED**: `CodePen Theme Original Ligatures`, preserving the Original palette while retaining the full theme-owned italic layer; `CodePen Theme Original` keeps only the shared annotation/decorator italic exception
 - **CHANGED**: provider-marked annotations, decorators, and Swift attributes use one yellow italic style across supported languages, including their `@` marker; unrelated at-sign syntax remains language-owned
 - **ADDED**: legacy Operator Mono Lig/Operator Mono typography with Monaco/Courier fallbacks for the editor, integrated terminal, Debug Console, and `[Log]`-scoped Output editor; editor ligatures are enabled

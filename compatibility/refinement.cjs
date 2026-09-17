@@ -56,6 +56,20 @@ void «blue|main»() {
   final «blue|fixed» = 1;
   invoke(«purple|fixed»: «blue|fixed»);
 }`],
+  ['dart', `sealed class «blue|CheckApplicationState» extends «white|_$CheckApplicationStateBase» {
+  const «blue|CheckApplicationState»({
+    required super.«purple|isUpdateRequired»,
+    required super.«purple|message»,
+    super.«purple|error»,
+    super.«purple|stackTrace»,
+  });
+}
+final «blue|sampleRate» = switch («yellow|Config».«purple|environment») {
+  «white|EnvironmentFlavor».«purple|development» => 1.0,
+  «white|EnvironmentFlavor».«purple|staging» => 1.0,
+  «white|EnvironmentFlavor».«purple|fake» => 1.0,
+  «white|EnvironmentFlavor».«purple|production» => 0.1,
+};`],
   ['dart', `import 'dart:convert' as «blue|convert»;
 void «blue|read»(«white|String» «blue|contents», «white|String» «blue|_outputPath») {
   «yellow|convert».«purple|jsonDecode»(«blue|contents»);

@@ -25,7 +25,7 @@ const functionKinds = new Set(['function_declaration', 'function_definition', 'f
   'method_declaration', 'constructor_declaration', 'method', 'singleton_method', 'lambda_expression',
   'lambda_literal', 'lambda', 'closure_expression', 'anonymous_function', 'function_literal', 'recipe',
   'function_signature', 'constructor_signature', 'factory_constructor_signature',
-  'getter_signature', 'setter_signature']);
+  'constant_constructor_signature', 'getter_signature', 'setter_signature']);
 const blockKinds = new Set(['block', 'compound_statement', 'for_statement', 'for_in_statement',
   'for_expression', 'enhanced_for_statement', 'for_range_loop', 'catch_clause']);
 const typeKinds = /^(?:primitive_type|predefined_type|integral_type|floating_point_type|boolean_type|void_type|user_type|type|generic_type|type_annotation|type_arguments|type_parameters|type_parameter|type_parameter_list|nullable_type|reference_type|array_type|function_type|parameter_type_list)$/;
@@ -227,6 +227,7 @@ function classify(root, source, language) {
         (language === 'rust' && ancestor(node, (item) => item.type === 'impl_item' || item.type === 'trait_item'));
       const kind = language === 'dart' &&
         ['constructor_declaration', 'constructor_signature',
+          'constant_constructor_signature',
           'factory_constructor_signature'].includes(node.type)
         ? 'constructor' : member ? 'member' : 'function';
       declare(name, kind, member && cls ? cls :
@@ -238,6 +239,10 @@ function classify(root, source, language) {
     }
     if (!isIdentifier(node)) continue;
     const parent = node.parent;
+    if (language === 'dart' && parent.type === 'super_formal_parameter') {
+      set(node, 'purple');
+      continue;
+    }
     if (propertyNode(node)) set(node, dartQualifiedConstructor(node) ? 'yellow' : 'purple');
     if (declarations.has(node.id) || node.type === 'type_identifier' || node.type === 'namespace_identifier') continue;
     const param = ancestor(node, (item) => /^(?:formal_parameter|simple_parameter|parameter|parameter_declaration|typed_parameter|default_parameter|class_parameter|property_promotion_parameter|constructor_param)$/.test(item.type));
@@ -320,6 +325,9 @@ function classify(root, source, language) {
     if (dartQualifiedConstructor(node)) return 'yellow';
     if (!binding && dartInvokedRoot(node)) return 'yellow';
     if (language === 'dart' && parent.type === 'annotation') return 'yellow';
+    if (language === 'dart' && parent.type === 'qualified' &&
+        parent.namedChildren[0]?.type === 'type_identifier' &&
+        parent.namedChildren.at(-1)?.id === node.id) return 'purple';
     if (dartRelationalTypeArgument(node)) return 'white';
     if (['keyword_argument', 'label', 'value_argument_label', 'field_initializer',
       'field_pattern'].includes(parent.type) &&
