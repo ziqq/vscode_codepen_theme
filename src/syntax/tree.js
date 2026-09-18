@@ -325,6 +325,8 @@ function classify(root, source, language) {
     if (dartQualifiedConstructor(node)) return 'yellow';
     if (!binding && dartInvokedRoot(node)) return 'yellow';
     if (language === 'dart' && parent.type === 'annotation') return 'yellow';
+    if (!binding && language === 'dart' && node.text === 'values' &&
+        classOf(node)?.node.type === 'enum_declaration') return 'purple';
     if (language === 'dart' && parent.type === 'qualified' &&
         parent.namedChildren[0]?.type === 'type_identifier' &&
         parent.namedChildren.at(-1)?.id === node.id) return 'purple';

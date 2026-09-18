@@ -70,6 +70,16 @@ final «blue|sampleRate» = switch («yellow|Config».«purple|environment») {
   «white|EnvironmentFlavor».«purple|fake» => 1.0,
   «white|EnvironmentFlavor».«purple|production» => 0.1,
 };`],
+  ['dart', `enum ApplicationStore {
+  appStore;
+
+  static List<ApplicationStore> resolve() {
+    if (kIsWeb) return «purple|values»;
+    return switch (defaultTargetPlatform) {
+      _ => «purple|values»,
+    };
+  }
+}`],
   ['dart', `import 'dart:convert' as «blue|convert»;
 void «blue|read»(«white|String» «blue|contents», «white|String» «blue|_outputPath») {
   «yellow|convert».«purple|jsonDecode»(«blue|contents»);
