@@ -2013,7 +2013,7 @@ const tokenColors = [
     'variable.language.this.java',
   ]),
   // Annotation italics are part of both public variants. The broader ITALIC
-  // layer below remains exclusive to the Ligatures variant.
+  // layer below remains exclusive to the Italics variant.
   decorationRule('ANNOTATION ITALIC', 'italic', ANNOTATION_SCOPES),
   decorationRule('UNDERLINE', 'underline', [
     // Markup
@@ -2165,7 +2165,7 @@ function resolveTheme({ name, italics = true }) {
       // DART COLORS
       'dart.closingLabels': color.gray,
     },
-    // Original omits the general italic layer; Ligatures retains it. The narrow
+    // Original omits the general italic layer; Italics retains it. The narrow
     // annotation italic rule, bold, underline, and every foreground rule remain
     // shared by both variants.
     tokenColors: italics

@@ -10,9 +10,9 @@ const themeVariants = Object.freeze([
     italics: false,
   }),
   Object.freeze({
-    id: 'ligatures',
-    label: 'CodePen Theme Original Ligatures',
-    file: 'codepen-theme-ligatures.json',
+    id: 'italics',
+    label: 'CodePen Theme Original Italics',
+    file: 'codepen-theme-italics.json',
     italics: true,
   }),
 ]);

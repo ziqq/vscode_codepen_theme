@@ -285,7 +285,7 @@ COPY --from=«blue|build» /src /app`],
     call «yellow|$helper»)
   (export "render" (func «yellow|$render»)))`],
   ['fsharp', `type «blue|Theme» = { «purple|Name»: «white|string» }
-type «blue|Mode» = | «purple|Original» | «purple|Ligatures»
+type «blue|Mode» = | «purple|Original» | «purple|Italics»
 let «blue|label» «blue|prefix» «blue|theme» = «green|$"{»«blue|prefix»«green|}: {»«blue|theme»«white|.»«purple|Name»«green|}"»`],
   ['hlsl', `cbuffer «blue|ThemeSettings» : register(b0) { float4 «purple|Accent»; };
 struct «blue|Input» { float3 «purple|position» : «purple|POSITION»; };
@@ -303,7 +303,7 @@ function «blue|Show-Theme»([Theme] «blue|$theme») { «blue|$theme».«purple
 sub «purple|label» { my «blue|$self» = shift; return «green|"»«blue|$self»«green|->{»«purple|name»«green|}"»; }
 package «blue|main»;
 my «blue|$theme» = «yellow|Theme»->«purple|new»(«purple|name» => 'x');`],
-  ['raku', `enum «blue|Mode» <«purple|original» «purple|ligatures»>;
+  ['raku', `enum «blue|Mode» <«purple|original» «purple|italics»>;
 class «blue|Theme» { has Str «purple|$.name»; method «purple|label»(Str «blue|$prefix») { «green|"»«blue|$prefix»«green|: »«purple|$!name»«green|"» } }
 my «blue|$theme» = Theme.«purple|new»(«purple|name» => 'x');`],
   ['vb', `Public Class «blue|Theme»

@@ -6,7 +6,7 @@
 theme-owned italic layer. Annotations and decorators remain yellow and italic
 in both variants; Original also retains bold and underline TextMate styles.
 
-**CodePen Theme Original Ligatures** uses the same foreground and workbench colors
+**CodePen Theme Original Italics** uses the same foreground and workbench colors
 while retaining the theme's full italic syntax layer. It also keeps narrow corrections
 for Dart documentation and `Function` types.
 
