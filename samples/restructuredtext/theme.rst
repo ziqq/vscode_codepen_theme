@@ -23,7 +23,7 @@ Palette
      - ``#717790``
 
 .. note::
-   The **Original** variant is upright.  The *Ligatures* variant keeps italics.
+   The **Original** variant is upright.  The *Italics* variant keeps italics.
 
 .. code-block:: typescript
 

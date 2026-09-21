@@ -6,14 +6,14 @@ A dark Visual Studio Code color theme inspired by the CodePen editor. Made with 
 
 ## Install
 
-Install [CodePen Theme Original](https://marketplace.visualstudio.com/items?itemName=ziqq.codepen-theme-original) from the Visual Studio Code Marketplace, then select **CodePen Theme Original** from **Preferences: Color Theme**. It omits general theme-owned italics; annotations and decorators are the deliberate exception. Select **CodePen Theme Original Ligatures** for the same palette with the full italic syntax layer. Version `1.0.0` requires Visual Studio Code `1.96.0` or newer.
+Install [CodePen Theme Original](https://marketplace.visualstudio.com/items?itemName=ziqq.codepen-theme-original) from the Visual Studio Code Marketplace, then select **CodePen Theme Original** from **Preferences: Color Theme**. It omits general theme-owned italics; annotations and decorators are the deliberate exception. Select **CodePen Theme Original Italics** for the same palette with the full italic syntax layer. Version `1.0.0` requires Visual Studio Code `1.96.0` or newer.
 
 ## Highlights
 
 - Classic CodePen Twilight colors for TextMate and semantic tokens.
 - Contextual syntax refinement for ambiguous local bindings and syntax roles.
 - Provider-owned language grammars with verified compatibility baselines.
-- Original and Ligatures variants with identical foreground and workbench colors.
+- Original and Italics variants with identical foreground and workbench colors.
 
 ## Documentation
 

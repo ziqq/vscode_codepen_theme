@@ -62,7 +62,7 @@ and JSONC comments are muted gray.
 Semantic highlighting is enabled when `editor.semanticHighlighting.enabled` is
 `configuredByTheme`, the VS Code default. Semantic colors are separate from
 typography in the source; a small semantic style layer preserves annotation and
-decorator italics across languages, plus Dart keyword italics in Ligatures, when
+decorator italics across languages, plus Dart keyword italics in Italics, when
 a provider replaces TextMate styling.
 
 JS/TS uses the built-in provider's `local`, `declaration`, and `defaultLibrary`

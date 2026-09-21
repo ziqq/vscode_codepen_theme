@@ -59,7 +59,7 @@ for (const item of cases) {
 }
 const plan = cases.flatMap((item) => [ { ...item, semantic: false }, { ...item, semantic: true } ]);
 plan.push(...[
-  { disabled: true }, { otherTheme: true }, { ligatures: true }, { edit: true }, {},
+  { disabled: true }, { otherTheme: true }, { italics: true }, { edit: true }, {},
 ].map((mode, index) => ({ ...cases[0], id: `lifecycle-${index}`, semantic: true, ...mode })));
 await fs.writeFile(path.join(output, 'plan.json'), JSON.stringify({
   root,
@@ -215,8 +215,8 @@ try {
     if (!ready.disabled && !ready.otherTheme) {
       const styleChecks = [];
       if (ready.language === 'dart' && ready.source.includes('Function')) styleChecks.push({ text: 'Function', style: 'normal' });
-      if (ready.language === 'dart' && ready.source.startsWith('///')) styleChecks.push({ text: ready.source.split('\n')[0], style: ready.ligatures ? 'italic' : 'normal' });
-      if (ready.id === 'typescript-0') styleChecks.push({ text: 'const', style: ready.ligatures ? 'italic' : 'normal' });
+      if (ready.language === 'dart' && ready.source.startsWith('///')) styleChecks.push({ text: ready.source.split('\n')[0], style: ready.italics ? 'italic' : 'normal' });
+      if (ready.id === 'typescript-0') styleChecks.push({ text: 'const', style: ready.italics ? 'italic' : 'normal' });
       for (const check of styleChecks) {
         const start = ready.source.indexOf(check.text);
         if (fontStyles.slice(start, start + check.text.length).some((style) => style !== check.style)) result.errors.push({ typography: check });
@@ -229,13 +229,13 @@ try {
           annotationItalic.add(index);
         }
       }
-      if (!ready.ligatures && fontStyles.some(
+      if (!ready.italics && fontStyles.some(
         (style, index) => style === 'italic' && !annotationItalic.has(index),
       )) {
         result.errors.push({ typography: 'Original rendered non-annotation theme-owned italics' });
       }
-      if (ready.ligatures && !fontStyles.some((style) => style === 'italic')) {
-        result.errors.push({ typography: 'Ligatures did not render theme-owned italics' });
+      if (ready.italics && !fontStyles.some((style) => style === 'italic')) {
+        result.errors.push({ typography: 'Italics did not render theme-owned italics' });
       }
     }
     if (!ready.disabled && !ready.otherTheme) for (const expected of ready.expectations ?? []) {

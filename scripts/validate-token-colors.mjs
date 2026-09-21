@@ -7,8 +7,8 @@ import vscodeOniguruma from 'vscode-oniguruma';
 import { semanticColor, textmateTheme, tokenStyle } from './lib/token-colors.mjs';
 
 const theme = JSON.parse(await readFile('themes/codepen-theme.json', 'utf8'));
-const ligaturesTheme = JSON.parse(
-  await readFile('themes/codepen-theme-ligatures.json', 'utf8'),
+const italicsTheme = JSON.parse(
+  await readFile('themes/codepen-theme-italics.json', 'utf8'),
 );
 const twilight = JSON.parse(await readFile('compatibility/twilight.json', 'utf8'));
 const compatibility = JSON.parse(await readFile('compatibility/scopes.json', 'utf8'));
@@ -22,14 +22,14 @@ assert.equal(twilight.schemaVersion, 1);
 assert.equal(theme.colors['editor.background'], '#1d1e22');
 assert.equal(theme.colors['editorLineNumber.foreground'], '#34363e');
 assert.equal(theme.semanticHighlighting, true);
-assert.deepEqual(ligaturesTheme.colors, theme.colors);
+assert.deepEqual(italicsTheme.colors, theme.colors);
 assert.deepEqual(
-  ligaturesTheme.tokenColors.filter((rule) => rule.settings.foreground),
+  italicsTheme.tokenColors.filter((rule) => rule.settings.foreground),
   theme.tokenColors.filter((rule) => rule.settings.foreground),
-  'Ligatures must preserve all TextMate foreground rules',
+  'Italics must preserve all TextMate foreground rules',
 );
 assert.deepEqual(
-  Object.fromEntries(Object.entries(ligaturesTheme.semanticTokenColors).map(
+  Object.fromEntries(Object.entries(italicsTheme.semanticTokenColors).map(
     ([selector, value]) => [
       selector,
       typeof value === 'string' ? value : value.foreground,
@@ -41,7 +41,7 @@ assert.deepEqual(
       typeof value === 'string' ? value : value.foreground,
     ],
   )),
-  'Ligatures must preserve all semantic foregrounds',
+  'Italics must preserve all semantic foregrounds',
 );
 assert.deepEqual(
   theme.tokenColors
@@ -58,17 +58,17 @@ assert.deepEqual(
   ['annotation:dart', 'decorator', 'property.annotation:dart'],
   'Original must limit semantic italics to annotations and decorators',
 );
-assert.ok(ligaturesTheme.tokenColors.some((rule) =>
+assert.ok(italicsTheme.tokenColors.some((rule) =>
   rule.settings.fontStyle?.split(/\s+/).includes('italic')));
-assert.ok(Object.values(ligaturesTheme.semanticTokenColors).some((value) =>
+assert.ok(Object.values(italicsTheme.semanticTokenColors).some((value) =>
   typeof value === 'object' && value.italic === true));
 
-const decorations = ligaturesTheme.tokenColors.filter((rule) =>
+const decorations = italicsTheme.tokenColors.filter((rule) =>
   rule.settings.fontStyle !== undefined);
 assert.equal(
   createHash('sha256').update(JSON.stringify(decorations)).digest('hex'),
   twilight.decorationSha256,
-  'Ligatures TextMate decorations must match the reviewed typography baseline',
+  'Italics TextMate decorations must match the reviewed typography baseline',
 );
 for (const rule of theme.tokenColors) {
   assert.equal(Object.keys(rule.settings).length, 1, `${rule.name}: mixed color/style rule`);
@@ -90,8 +90,8 @@ assert.deepEqual(theme.semanticTokenColors['property.annotation:dart'], {
   italic: true,
 });
 assert.equal(theme.semanticTokenColors['keyword.void:dart'].italic, false);
-assert.equal(ligaturesTheme.semanticTokenColors['keyword:dart'].italic, true);
-assert.equal(ligaturesTheme.semanticTokenColors['keyword.void:dart'].italic, false);
+assert.equal(italicsTheme.semanticTokenColors['keyword:dart'].italic, true);
+assert.equal(italicsTheme.semanticTokenColors['keyword.void:dart'].italic, false);
 assert.deepEqual(
   twilight.cases.map((item) => item.language).sort(),
   compatibility.cases.map((item) => item.language).sort(),
@@ -159,7 +159,7 @@ const probes = [
 const wasm = await readFile('node_modules/vscode-oniguruma/release/onig.wasm');
 await vscodeOniguruma.loadWASM(wasm.buffer.slice(wasm.byteOffset, wasm.byteOffset + wasm.byteLength));
 const registry = new vscodeTextmate.Registry({
-  theme: textmateTheme(ligaturesTheme),
+  theme: textmateTheme(italicsTheme),
   onigLib: Promise.resolve(vscodeOniguruma),
   loadGrammar: async () => ({
     scopeName: 'source.twilight-test',

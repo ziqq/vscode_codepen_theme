@@ -1,7 +1,7 @@
 use v6.d;
 
 # Classes, attributes, signatures, named arguments, junctions, and matching.
-enum ThemeMode <original ligatures>;
+enum ThemeMode <original italics>;
 
 class Theme {
     has Str $.name is required;
@@ -27,7 +27,7 @@ my $theme = Theme.new(
 );
 
 given ThemeMode::original {
-    when original | ligatures {
+    when original | italics {
         say $theme.label, ': ', $theme.visible-tokens.join(', ');
     }
     default { die 'unsupported theme mode' }

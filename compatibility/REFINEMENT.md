@@ -19,7 +19,7 @@ The measured JS/TS role policy remains:
   operators and type brackets; ordinary punctuation white.
 - Original suppresses the general theme-owned italic layer while preserving
   bold and underline. Explicit annotations and decorators are the shared yellow
-  italic exception across languages. Ligatures retains the full italic layer.
+  italic exception across languages. Italics retains the full italic layer.
   Narrow Dart corrections restore
   gray italic documentation and regular white `Function`/`void` types after the
   Dart provider has classified them as ordinary symbols or keywords.
@@ -103,7 +103,7 @@ Verified locally on 2026-09-01:
   contextual-overlay assertions; no failures.
 - 161 actual-editor scenarios on VS Code 1.135.0: 48 contextual fixtures and
   30 reference fixtures in both semantic modes, plus five lifecycle scenarios
-  including the Ligatures typography path;
+  including the Italics typography path;
   no color differences or typography failures. Real TS and Dart tokens
   were required for their semantic runs. Other servers are not certified.
 - The 5.88 MiB VSIX passed asset/hash/license checks and installation in all three

@@ -3,7 +3,7 @@
 // Interfaces, properties, class and instance methods, literals, and blocks.
 typedef NS_ENUM(NSUInteger, ThemeMode) {
     ThemeModeOriginal,
-    ThemeModeLigatures,
+    ThemeModeItalics,
 };
 
 @interface Theme : NSObject
