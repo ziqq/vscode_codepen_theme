@@ -265,6 +265,9 @@ function classify(root, source, language) {
         (isField(node, 'name') || isField(node, 'left') || isField(node, 'pattern'))) {
       declare(node, 'variable', region(parent));
     }
+    if (parent.type === 'for_loop_parts' && isField(node, 'name')) {
+      declare(node, 'variable', region(parent.parent));
+    }
     if (['type_pattern', 'record_pattern_component'].includes(parent.type) &&
         parent.namedChildren.at(-1)?.id === node.id) {
       const patternScope = ancestor(node, (item) => item.type === 'switch_rule' || item.type.includes('case'));
