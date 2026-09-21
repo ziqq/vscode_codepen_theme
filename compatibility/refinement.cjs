@@ -80,6 +80,11 @@ final «blue|sampleRate» = switch («yellow|Config».«purple|environment») {
     };
   }
 }`],
+  ['dart', `void «blue|build»() {
+  for (final «blue|value» in «yellow|CardListLayout».«purple|values») {
+    «yellow|print»(«blue|value»);
+  }
+}`],
   ['dart', `import 'dart:convert' as «blue|convert»;
 void «blue|read»(«white|String» «blue|contents», «white|String» «blue|_outputPath») {
   «yellow|convert».«purple|jsonDecode»(«blue|contents»);
