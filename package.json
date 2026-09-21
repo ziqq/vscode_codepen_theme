@@ -69,9 +69,9 @@
         "path": "./themes/codepen-theme.json"
       },
       {
-        "label": "CodePen Theme Original Ligatures",
+        "label": "CodePen Theme Original Italics",
         "uiTheme": "vs-dark",
-        "path": "./themes/codepen-theme-ligatures.json"
+        "path": "./themes/codepen-theme-italics.json"
       }
     ]
   },

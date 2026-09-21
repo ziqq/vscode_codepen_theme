@@ -33,7 +33,7 @@
 
     private void ToggleMode() => State = State with
     {
-        Ligatures = !State.Ligatures,
+        Italics = !State.Italics,
     };
 
     private sealed record Token(string Role, string Color);
@@ -41,7 +41,7 @@
     private sealed record ThemeState(
         string Name,
         string Accent,
-        bool Ligatures,
+        bool Italics,
         ImmutableArray<Token> Tokens)
     {
         public static ThemeState Original { get; } = new(

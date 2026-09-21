@@ -22,9 +22,9 @@ const compatibility = JSON.parse(
   await readFile('compatibility/scopes.json', 'utf8'),
 );
 // Compatibility fixtures include the classic italic decoration contract, so
-// provider typography is exercised through the Ligatures variant.
+// provider typography is exercised through the Italics variant.
 const theme = JSON.parse(
-  await readFile('themes/codepen-theme-ligatures.json', 'utf8'),
+  await readFile('themes/codepen-theme-italics.json', 'utf8'),
 );
 const twilight = JSON.parse(await readFile('compatibility/twilight.json', 'utf8'));
 const fullSamples = JSON.parse(await readFile('compatibility/full-samples.json', 'utf8'));

@@ -62,12 +62,12 @@ test('theme gating, opt-out, coalescing, stale results, closure and disposal', a
     assert.equal(types.at(-1).options.fontStyle, undefined,
       'Original must suppress runtime-provided italics');
     assert.equal(api.getState().documents[0].version, 1);
-    configuration.theme = 'CodePen Theme Original Ligatures'; changed(); await wait(15);
+    configuration.theme = 'CodePen Theme Original Italics'; changed(); await wait(15);
     assert.ok(workers[0].terminated);
-    assert.equal(workers.length, 2, 'Ligatures must keep refinement active');
+    assert.equal(workers.length, 2, 'Italics must keep refinement active');
     workers[1].reply(workers[1].messages[0], 'blue', 'italic');
     assert.equal(types.at(-1).options.fontStyle, 'italic',
-      'Ligatures must retain runtime-provided italics');
+      'Italics must retain runtime-provided italics');
     document.version++; text = 'const b = 2'; listeners.edit({ document }); await wait(100);
     assert.equal(isClear(), true, 'Old ranges must be removed before new offsets are parsed');
     const inFlight = workers[1].messages[1];

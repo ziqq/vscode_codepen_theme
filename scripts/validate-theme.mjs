@@ -208,7 +208,7 @@ for (const [absolutePath, expectedSource] of generatedThemes()) {
 }
 
 const original = parsedThemes.get('CodePen Theme Original');
-const ligatures = parsedThemes.get('CodePen Theme Original Ligatures');
+const italics = parsedThemes.get('CodePen Theme Original Italics');
 const foregroundRules = (theme) => theme.tokenColors.filter(
   (rule) => rule.settings.foreground !== undefined,
 );
@@ -218,10 +218,10 @@ const semanticForegrounds = (theme) => Object.fromEntries(
     typeof value === 'string' ? value : value.foreground,
   ]),
 );
-if (JSON.stringify(original.colors) !== JSON.stringify(ligatures.colors) ||
-    JSON.stringify(foregroundRules(original)) !== JSON.stringify(foregroundRules(ligatures)) ||
-    JSON.stringify(semanticForegrounds(original)) !== JSON.stringify(semanticForegrounds(ligatures))) {
-  throw new Error('Ligatures variant must preserve every Original foreground color');
+if (JSON.stringify(original.colors) !== JSON.stringify(italics.colors) ||
+    JSON.stringify(foregroundRules(original)) !== JSON.stringify(foregroundRules(italics)) ||
+    JSON.stringify(semanticForegrounds(original)) !== JSON.stringify(semanticForegrounds(italics))) {
+  throw new Error('Italics variant must preserve every Original foreground color');
 }
 const originalItalicRules = original.tokenColors
   .filter((rule) => rule.settings.fontStyle?.split(/\s+/).includes('italic'))
@@ -235,11 +235,11 @@ if (JSON.stringify(originalItalicRules) !== JSON.stringify(['ANNOTATION ITALIC']
       JSON.stringify(['annotation:dart', 'decorator', 'property.annotation:dart'])) {
   throw new Error('Original must limit italic typography to annotations and decorators');
 }
-if (!ligatures.tokenColors.some((rule) =>
+if (!italics.tokenColors.some((rule) =>
   rule.settings.fontStyle?.split(/\s+/).includes('italic')) ||
-  !Object.values(ligatures.semanticTokenColors).some((value) =>
+  !Object.values(italics.semanticTokenColors).some((value) =>
     typeof value === 'object' && value.italic === true)) {
-  throw new Error('Ligatures must retain TextMate and semantic italics');
+  throw new Error('Italics must retain TextMate and semantic italics');
 }
 
 const generatedThemeFiles = await readdir('themes');
