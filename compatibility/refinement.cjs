@@ -61,6 +61,10 @@ void «blue|main»() {
     «yellow|print»(«blue|value»);
   }
 }`],
+  ['dart', `class «blue|Widgets» {
+  final «white|OverlayEntry» «blue|scopes» = «yellow|OverlayEntry»(«purple|id»: 1);
+  «white|OverlayEntry» «purple|clone»() => «yellow|OverlayEntry»();
+}`],
   ['dart', `import 'dart:convert' as «blue|convert»;
 void «blue|read»(«white|String» «blue|contents», «white|String» «blue|_outputPath») {
   «yellow|convert».«purple|jsonDecode»(«blue|contents»);
