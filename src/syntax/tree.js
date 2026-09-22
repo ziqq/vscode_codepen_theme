@@ -286,7 +286,8 @@ function classify(root, source, language) {
       'static_final_declaration'].includes(item.type));
     if (declaration && (fieldContains(declaration, 'name', node) || fieldContains(declaration, 'pattern', node) ||
         fieldContains(declaration, 'declarator', node) ||
-        parent.type === 'initialized_identifier' || (parent.type === 'pattern' && isField(node, 'bound_identifier')) ||
+        (parent.type === 'initialized_identifier' && firstIdentifier(parent)?.id === node.id) ||
+        (parent.type === 'pattern' && isField(node, 'bound_identifier')) ||
         (parent.type === 'static_final_declaration' && firstIdentifier(parent)?.id === node.id) ||
         (parent.type === 'variable_declaration' && firstIdentifier(parent)?.id === node.id))) {
       const member = memberContext(declaration);
