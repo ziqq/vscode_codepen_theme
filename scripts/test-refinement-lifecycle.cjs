@@ -69,15 +69,16 @@ test('theme gating, opt-out, coalescing, stale results, closure and disposal', a
     assert.equal(types.at(-1).options.fontStyle, 'italic',
       'Italics must retain runtime-provided italics');
     document.version++; text = 'const b = 2'; listeners.edit({ document }); await wait(100);
-    assert.equal(isClear(), true, 'Old ranges must be removed before new offsets are parsed');
+    assert.equal(isClear(), false, 'Stale decorations persist to avoid color flash during re-parse');
     const inFlight = workers[1].messages[1];
     for (let count = 0; count < 4; count++) {
       document.version++; text = `const c = ${count}`; listeners.edit({ document }); await wait(90);
     }
     assert.equal(workers[1].messages.length, 2, 'Only one worker request may be in flight');
     assert.equal(api.getState().pending, 2, 'Keep one latest queued version per document');
+    const typesBefore = types.length;
     workers[1].reply(inFlight, 'purple');
-    assert.equal(isClear(), true, 'Superseded parse must not be applied');
+    assert.equal(types.length, typesBefore, 'Superseded parse must not be applied');
     assert.equal(workers[1].messages[2].source, text);
     workers[1].reply(workers[1].messages[2]);
     assert.equal(api.getState().documents[0].version, document.version);
