@@ -68,19 +68,24 @@ test('theme gating, opt-out, coalescing, stale results, closure and disposal', a
     workers[1].reply(workers[1].messages[0], 'blue', 'italic');
     assert.equal(types.at(-1).options.fontStyle, 'italic',
       'Italics must retain runtime-provided italics');
-    document.version++; text = 'const b = 2'; listeners.edit({ document }); await wait(100);
-    assert.equal(isClear(), true, 'Old ranges must be removed before new offsets are parsed');
+    const minorChange = [{ text: 'b', range: { start: { line: 0 }, end: { line: 0 } } }];
+    document.version++; text = 'const b = 2'; listeners.edit({ document, contentChanges: minorChange }); await wait(100);
+    assert.equal(isClear(), false, 'Minor edits keep decorations to avoid a flash to the semantic layer');
     const inFlight = workers[1].messages[1];
     for (let count = 0; count < 4; count++) {
-      document.version++; text = `const c = ${count}`; listeners.edit({ document }); await wait(90);
+      document.version++; text = `const c = ${count}`; listeners.edit({ document, contentChanges: minorChange }); await wait(90);
     }
     assert.equal(workers[1].messages.length, 2, 'Only one worker request may be in flight');
     assert.equal(api.getState().pending, 2, 'Keep one latest queued version per document');
+    const typesBefore = types.length;
     workers[1].reply(inFlight, 'purple');
-    assert.equal(isClear(), true, 'Superseded parse must not be applied');
+    assert.equal(types.length, typesBefore, 'Superseded parse must not be applied');
     assert.equal(workers[1].messages[2].source, text);
     workers[1].reply(workers[1].messages[2]);
     assert.equal(api.getState().documents[0].version, document.version);
+    document.version++; text = 'const b = 2\nconst e = 4';
+    listeners.edit({ document, contentChanges: [{ text: '\nconst e = 4', range: { start: { line: 0 }, end: { line: 1 } } }] });
+    assert.equal(isClear(), true, 'Structural edits clear stale ranges before re-parse');
     configuration.enabled = false; changed(); await wait(15);
     assert.ok(workers[1].terminated);
     assert.equal(isClear(), true); assert.equal(api.getState().documents.length, 0);
@@ -93,7 +98,7 @@ test('theme gating, opt-out, coalescing, stale results, closure and disposal', a
     document.isClosed = true; listeners.close(document);
     workers[3].reply(workers[3].messages[0]); assert.equal(api.getState().documents.length, 0);
     document.isClosed = false; document.version++; text = 'x'.repeat(250001);
-    listeners.edit({ document }); await wait(100);
+    listeners.edit({ document, contentChanges: minorChange }); await wait(100);
     assert.equal(api.getState().pending, 0, 'Oversize files retain provider highlighting');
   } finally { for (const subscription of context.subscriptions) subscription.dispose(); }
   assert.ok(types.every((type) => type.disposed));
