@@ -107,7 +107,6 @@ function activate(context) {
     if (!enabled(document)) { clear(editor); cache.delete(uri); return; }
     const saved = cache.get(uri);
     if (saved?.version === document.version) { apply(editor, saved.spans); return; }
-    clear(editor);
     timers.set(uri, setTimeout(() => {
       timers.delete(uri);
       if (!enabled(document) || document.isClosed) return;
