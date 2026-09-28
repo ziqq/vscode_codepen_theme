@@ -85,6 +85,13 @@ final «blue|sampleRate» = switch («yellow|Config».«purple|environment») {
     «yellow|print»(«blue|value»);
   }
 }`],
+  ['dart', `class «blue|State» extends Base {
+  const State({required super.«purple|message», super.«purple|error»});
+  const factory State.idle({required «white|Step» «purple|step», String? «purple|email»}) = Idle;
+  factory State.plain(int «purple|code») = Plain;
+  State.named(int «blue|count», {String «blue|name» = ''}) : «purple|label» = «blue|name», handler = («blue|item») => «blue|item»;
+  void «purple|run»(String «blue|text», {bool «blue|loud» = false}) {}
+}`],
   ['dart', `class «blue|Widgets» {
   final «white|OverlayEntry» «blue|scopes» = «yellow|OverlayEntry»(«purple|id»: 1);
   «white|OverlayEntry» «purple|clone»() => «yellow|OverlayEntry»();
