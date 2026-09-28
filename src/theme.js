@@ -2215,6 +2215,8 @@ function resolveTheme({ name, italics = true }) {
       'class.constructor.declaration:dart': color.blue,
       'variable.importPrefix:dart': color.yellow,
       'variable.instance:dart': color.blue,
+      // Named-argument labels match the refinement member role, so edits do not flash blue.
+      'parameter.label:dart': color.purple,
       'annotation:dart': color.yellow,
       'source.interpolation:dart': color.green,
       'property.annotation:dart': color.yellow,
