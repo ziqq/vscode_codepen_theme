@@ -85,7 +85,7 @@ test('theme gating, opt-out, coalescing, stale results, closure and disposal', a
     assert.equal(api.getState().documents[0].version, document.version);
     document.version++; text = 'const b = 2\nconst e = 4';
     listeners.edit({ document, contentChanges: [{ text: '\nconst e = 4', range: { start: { line: 0 }, end: { line: 1 } } }] });
-    assert.equal(isClear(), true, 'Structural edits clear stale ranges before re-parse');
+    assert.equal(isClear(), false, 'Line moves and pastes keep decorations until the re-parse lands');
     configuration.enabled = false; changed(); await wait(15);
     assert.ok(workers[1].terminated);
     assert.equal(isClear(), true); assert.equal(api.getState().documents.length, 0);

@@ -108,8 +108,25 @@ async function withTree(source, language, callback) {
     parsers.set(grammar, parser);
   }
   const tree = parser.parse(source);
+  // tree-sitter resolves `parent` by descending from the root on every access;
+  // classification asks for it constantly, so index parents once per tree.
+  const parents = new Map([[tree.rootNode.id, null]]);
+  const stack = [tree.rootNode];
+  while (stack.length) {
+    const node = stack.pop();
+    for (const child of node.children) { parents.set(child.id, node); stack.push(child); }
+  }
+  const prototype = Object.getPrototypeOf(tree.rootNode);
+  const descriptor = Object.getOwnPropertyDescriptor(prototype, 'parent');
+  Object.defineProperty(prototype, 'parent', { configurable: true, get() {
+    const parent = parents.get(this.id);
+    return parent === undefined ? descriptor.get.call(this) : parent;
+  } });
   try { return await callback(tree.rootNode); }
-  finally { tree.delete(); }
+  finally {
+    Object.defineProperty(prototype, 'parent', descriptor);
+    tree.delete();
+  }
 }
 
 function classify(root, source, language) {
