@@ -107,8 +107,8 @@ function activate(context) {
     if (!enabled(document)) { clear(editor); cache.delete(uri); return; }
     const saved = cache.get(uri);
     if (saved?.version === document.version) { apply(editor, saved.spans); return; }
-    // Minor single-line edits keep their decorations (VS Code shifts the ranges)
-    // so contextual colors do not flash to the semantic layer between keystrokes.
+    // Edits keep their decorations (VS Code shifts or drops the ranges) so
+    // contextual colors do not flash to the semantic layer before the re-parse.
     if (!keep) clear(editor);
     timers.set(uri, setTimeout(() => {
       timers.delete(uri);
@@ -133,10 +133,8 @@ function activate(context) {
       for (const uri of queued.keys()) if (!visible.has(uri)) queued.delete(uri);
       for (const editor of editors) schedule(editor);
     }),
-    vscode.workspace.onDidChangeTextDocument(({ document, contentChanges }) => {
-      const minor = contentChanges.length > 0 && contentChanges.every((change) =>
-        !change.text.includes('\n') && change.range.start.line === change.range.end.line);
-      for (const editor of vscode.window.visibleTextEditors) if (editor.document === document) schedule(editor, 80, minor);
+    vscode.workspace.onDidChangeTextDocument(({ document }) => {
+      for (const editor of vscode.window.visibleTextEditors) if (editor.document === document) schedule(editor, 80, true);
     }),
     vscode.workspace.onDidCloseTextDocument((document) => {
       const uri = document.uri.toString();
