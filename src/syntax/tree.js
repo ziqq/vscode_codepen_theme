@@ -132,17 +132,17 @@ function classify(root, source, language) {
     const value = field(owner, name);
     return value && (value.id === node.id || contains(region(value), node));
   };
+  // A Dart signature owns its initializer list and the sibling function body.
+  const signatureRegion = (node) => {
+    const owner = ['method_signature', 'declaration'].includes(node.parent.type) ? node.parent : node;
+    const next = owner.nextNamedSibling;
+    return { start: owner.startIndex, end: next?.type === 'function_body' ? next.endIndex : owner.endIndex, node };
+  };
   for (const node of nodes) {
     if ((classKinds.has(node.type) || node.type === 'impl_item') && node.id !== root.id) classes.push(region(node));
     if (blockKinds.has(node.type)) blocks.push(region(node));
     if (functionKinds.has(node.type)) {
-      let owner = node;
-      if (language === 'dart' && /signature$/.test(node.type)) {
-        if (node.parent.type === 'method_signature' || node.parent.type === 'declaration') owner = node.parent;
-        const next = owner.nextNamedSibling;
-        functions.push({ start: owner.startIndex,
-          end: next?.type === 'function_body' ? next.endIndex : owner.endIndex, node });
-      } else functions.push(region(node));
+      functions.push(language === 'dart' && /signature$/.test(node.type) ? signatureRegion(node) : region(node));
     }
   }
   const smallest = (regions, node) => regions.filter((item) => contains(item, node))
@@ -240,16 +240,21 @@ function classify(root, source, language) {
     const parent = node.parent;
     if (propertyNode(node)) set(node, dartQualifiedConstructor(node) ? 'yellow' : 'purple');
     if (declarations.has(node.id) || node.type === 'type_identifier' || node.type === 'namespace_identifier') continue;
-    const param = ancestor(node, (item) => /^(?:formal_parameter|simple_parameter|parameter|parameter_declaration|typed_parameter|default_parameter|class_parameter|property_promotion_parameter|constructor_param)$/.test(item.type));
+    const param = ancestor(node, (item) => /^(?:formal_parameter|simple_parameter|parameter|parameter_declaration|typed_parameter|default_parameter|class_parameter|property_promotion_parameter|constructor_param|super_formal_parameter)$/.test(item.type));
     if (param && !ancestor(node, (item) => item.id !== param.id && typeKinds.test(item.type)) &&
         (isField(node, 'name') || isField(node, 'pattern') || isField(node, 'declarator') ||
           firstIdentifier(param)?.id === node.id || parent.type === 'variable_name')) {
       const promoted = param.type === 'property_promotion_parameter' || param.type === 'constructor_param' ||
+        param.type === 'super_formal_parameter' ||
         (language === 'kotlin' && param.type === 'class_parameter' && param.children.some((item) => item.type === 'binding_pattern_kind')) ||
         (['csharp', 'java', 'razor'].includes(language) && param.parent?.parent?.type === 'record_declaration');
+      // Redirecting factory parameters become the target's fields (freezed-style).
+      const list = language === 'dart' ? ancestor(param, (item) => item.type === 'formal_parameter_list') : undefined;
+      const redirect = list?.parent.type === 'redirecting_factory_constructor_signature' ? list.parent : undefined;
       const signature = ancestor(node, (item) => item.type === 'function_declarator');
-      declare(node, promoted ? 'member' : 'variable', promoted ? classOf(node) :
-        functionOf(node) ?? (signature ? region(signature) : region(param)));
+      declare(node, promoted || redirect ? 'member' : 'variable', promoted ? classOf(node) :
+        redirect ? signatureRegion(redirect) :
+          functionOf(node) ?? (signature ? region(signature) : region(param)));
     }
     if (['parameters', 'method_parameters', 'lambda_parameters', 'closure_parameters', 'inferred_parameters'].includes(parent.type)) declare(node, 'variable', functionOf(node));
     if (language === 'dart' && parent.type === 'catch_parameters') {
