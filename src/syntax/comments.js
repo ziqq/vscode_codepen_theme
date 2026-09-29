@@ -2,8 +2,11 @@
  * Add the base comment color and the two portable documentation constructs
  * understood by every supported parser: inline code and symbol references.
  * Decorations change foreground only, so the active theme still owns italics.
+ *
+ * `resolve(name)` may return the role of a reference that names a declaration
+ * the parser can see (for example a parameter of the documented function).
  */
-function addComment(spans, source, start, end, fontStyle) {
+function addComment(spans, source, start, end, fontStyle, resolve) {
   spans.add(start, end, 'gray', 100, fontStyle);
   const text = source.slice(start, end);
 
@@ -15,15 +18,19 @@ function addComment(spans, source, start, end, fontStyle) {
   }
 
   // Square-bracket symbol references are canonical Dartdoc and also occur in
-  // Javadoc/Rustdoc prose. Uppercase references are types; lowercase names are
-  // members. Delimiters stay neutral white in both cases.
-  for (const match of text.matchAll(/\[([A-Za-z_$][\w$]*(?:[.#][A-Za-z_$][\w$]*)*)\]/g)) {
+  // Javadoc/Rustdoc prose. Names take their code role; delimiters and generic
+  // punctuation stay muted so the reference does not outshine the prose.
+  // A following `(` marks a Markdown link rather than a symbol reference.
+  for (const match of text.matchAll(/\[([A-Za-z_$](?:[\w$.#<>?()]|, ?)*)\](?!\()/g)) {
     const at = start + match.index;
-    spans.add(at, at + 1, 'white', 120, fontStyle);
-    spans.add(at + match[0].length - 1, at + match[0].length,
-      'white', 120, fontStyle);
-    spans.add(at + 1, at + match[0].length - 1,
-      /^[A-Z]/.test(match[1]) ? 'white' : 'purple', 120, fontStyle);
+    spans.add(at, at + match[0].length, 'operator', 120, fontStyle);
+    for (const name of match[1].matchAll(/[A-Za-z_$][\w$]*/g)) {
+      const offset = at + 1 + name.index;
+      const qualified = name.index > 0 && /[.#]/.test(match[1][name.index - 1]);
+      const role = (!qualified && resolve?.(name[0])) ||
+        (/^[A-Z]/.test(name[0]) ? 'white' : 'purple');
+      spans.add(offset, offset + name[0].length, role, 121, fontStyle);
+    }
   }
 }
 

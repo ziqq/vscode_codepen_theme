@@ -57,6 +57,15 @@ properties and members in programming languages are purple (`#9A8297`). JSON
 numbers are orange, `true`, `false`, and `null` are yellow, punctuation is white,
 and JSONC comments are muted gray.
 
+Dart constructor parameters (including `this.x`, `super.x`, and redirecting
+factory parameters) describe fields, so they are purple like named arguments at
+call sites. Method, function, and closure parameters stay blue.
+
+Documentation references such as `[handler]` take the role of the parameter they
+name on the documented declaration; other references are white for types and
+purple for members. Reference brackets and generic punctuation are muted
+(`#CCCCCC`) so they do not outshine the surrounding comment.
+
 ## Semantic highlighting
 
 Semantic highlighting is enabled when `editor.semanticHighlighting.enabled` is
