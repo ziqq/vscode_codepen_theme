@@ -26,6 +26,8 @@ const functionKinds = new Set(['function_declaration', 'function_definition', 'f
   'lambda_literal', 'lambda', 'closure_expression', 'anonymous_function', 'function_literal', 'recipe',
   'function_signature', 'constructor_signature', 'factory_constructor_signature',
   'constant_constructor_signature', 'getter_signature', 'setter_signature']);
+const dartConstructorKinds = new Set(['constructor_signature', 'constant_constructor_signature',
+  'factory_constructor_signature', 'redirecting_factory_constructor_signature']);
 const blockKinds = new Set(['block', 'compound_statement', 'for_statement', 'for_in_statement',
   'for_expression', 'enhanced_for_statement', 'for_range_loop', 'catch_clause']);
 const typeKinds = /^(?:primitive_type|predefined_type|integral_type|floating_point_type|boolean_type|void_type|user_type|type|generic_type|type_annotation|type_arguments|type_parameters|type_parameter|type_parameter_list|nullable_type|reference_type|array_type|function_type|parameter_type_list)$/;
@@ -269,12 +271,12 @@ function classify(root, source, language) {
       const promoted = param.type === 'property_promotion_parameter' || param.type === 'constructor_param' ||
         (language === 'kotlin' && param.type === 'class_parameter' && param.children.some((item) => item.type === 'binding_pattern_kind')) ||
         (['csharp', 'java', 'razor'].includes(language) && param.parent?.parent?.type === 'record_declaration');
-      // Redirecting factory parameters become the target's fields (freezed-style).
+      // Dart constructor parameters describe fields, matching named arguments at call sites.
       const list = language === 'dart' ? ancestor(param, (item) => item.type === 'formal_parameter_list') : undefined;
-      const redirect = list?.parent.type === 'redirecting_factory_constructor_signature' ? list.parent : undefined;
+      const constructor = dartConstructorKinds.has(list?.parent.type) ? list.parent : undefined;
       const signature = ancestor(node, (item) => item.type === 'function_declarator');
-      declare(node, promoted || redirect ? 'member' : 'variable', promoted ? classOf(node) :
-        redirect ? signatureRegion(redirect) :
+      declare(node, promoted || constructor ? 'member' : 'variable', promoted ? classOf(node) :
+        constructor ? signatureRegion(constructor) :
           functionOf(node) ?? (signature ? region(signature) : region(param)));
     }
     if (['parameters', 'method_parameters', 'lambda_parameters', 'closure_parameters', 'inferred_parameters'].includes(parent.type)) declare(node, 'variable', functionOf(node));
@@ -397,11 +399,29 @@ function classify(root, source, language) {
     return undefined;
   }
 
+  // Dartdoc `[name]` references to parameters of the documented declaration
+  // take that parameter's role; other references fall back to their case.
+  function documentedParameters(comment) {
+    let target = comment.nextNamedSibling;
+    while (target && (/comment/.test(target.type) || annotationKinds.has(target.type))) target = target.nextNamedSibling;
+    const found = new Map();
+    const stack = target ? [target] : [];
+    while (stack.length) {
+      const node = stack.pop();
+      if (node.type === 'block' || /body$/.test(node.type)) continue;
+      if (declarations.has(node.id) && !found.has(node.text) &&
+          ancestor(node, (item) => item.type === 'formal_parameter_list')) found.set(node.text, roles.get(node.id));
+      stack.push(...node.namedChildren);
+    }
+    return (name) => found.get(name);
+  }
+
   for (const node of nodes) {
     const text = node.text;
     if (/comment/.test(node.type)) {
       addComment(spans, source, node.startIndex, node.endIndex,
-        language === 'dart' && node.type === 'documentation_comment' ? 'italic' : undefined);
+        language === 'dart' && node.type === 'documentation_comment' ? 'italic' : undefined,
+        language === 'dart' ? documentedParameters(node) : undefined);
       continue;
     }
     if (stringKinds.test(node.type) && !ancestor(node, (item) => item.type === 'primitive_type')) spans.add(node.startIndex, node.endIndex, 'green', 2);
