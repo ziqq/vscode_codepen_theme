@@ -63,8 +63,8 @@ void «blue|main»() {
 }`],
   ['dart', `class «blue|State» extends Base {
   const State({required super.«purple|message», super.«purple|error»});
-  const factory State.idle({required «white|Step» «purple|step», String? «purple|email»}) = Idle;
-  factory State.plain(int «purple|code») = Plain;
+  const factory «blue|State».«purple|idle»({required «white|Step» «purple|step», String? «purple|email»}) = «yellow|_State$Idle»;
+  factory «blue|State».«purple|plain»(int «purple|code») = «yellow|Plain»<«white|int»>.«purple|named»;
   State.named(int «purple|count», {required «white|User» «purple|user», String «purple|name» = ''}) : «purple|label» = «purple|name», «purple|id» = «purple|user».«purple|userID», handler = («blue|item») => «blue|item» {
     «yellow|print»(«purple|count»);
   }
