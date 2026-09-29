@@ -25,7 +25,8 @@ const functionKinds = new Set(['function_declaration', 'function_definition', 'f
   'method_declaration', 'constructor_declaration', 'method', 'singleton_method', 'lambda_expression',
   'lambda_literal', 'lambda', 'closure_expression', 'anonymous_function', 'function_literal', 'recipe',
   'function_signature', 'constructor_signature', 'factory_constructor_signature',
-  'constant_constructor_signature', 'getter_signature', 'setter_signature']);
+  'constant_constructor_signature', 'redirecting_factory_constructor_signature',
+  'getter_signature', 'setter_signature']);
 const dartConstructorKinds = new Set(['constructor_signature', 'constant_constructor_signature',
   'factory_constructor_signature', 'redirecting_factory_constructor_signature']);
 const blockKinds = new Set(['block', 'compound_statement', 'for_statement', 'for_in_statement',
@@ -245,12 +246,21 @@ function classify(root, source, language) {
         node.type === 'constructor_declaration' || (cls && (!outerFn || outerFn.start < cls.start)) ||
         (language === 'rust' && ancestor(node, (item) => item.type === 'impl_item' || item.type === 'trait_item'));
       const kind = language === 'dart' &&
-        ['constructor_declaration', 'constructor_signature',
-          'constant_constructor_signature',
-          'factory_constructor_signature'].includes(node.type)
+        (node.type === 'constructor_declaration' || dartConstructorKinds.has(node.type))
         ? 'constructor' : member ? 'member' : 'function';
       declare(name, kind, member && cls ? cls :
         member && !['ruby', 'just'].includes(language) ? region(node) : outerFn ?? region(root));
+      if (kind === 'constructor') {
+        // `Class.named` declares a member-like name, as it reads at call sites;
+        // a redirect target `= Other.named` is a constructor reference.
+        const list = node.namedChildren.findIndex((child) => child.type === 'formal_parameter_list');
+        const head = node.namedChildren.slice(0, list).filter((child) => child.type === 'identifier');
+        if (head[1]) set(head[1], 'purple');
+        for (const target of list < 0 ? [] : node.namedChildren.slice(list + 1)) {
+          if (target.type === 'type_identifier') set(target, 'yellow');
+          if (target.type === 'identifier') set(target, 'purple');
+        }
+      }
     }
     if (node.type === 'enum_constant' || node.type === 'enum_variant' ||
         node.type === 'enum_entry' || node.type === 'enumerator') {
