@@ -41,7 +41,7 @@ const «blue|text» = «green|"class False { field }"»;`],
   void «purple|shadow»(String «blue|name») { use(«blue|name»); use(this.«purple|name»); }
   void «purple|run»() { «white|Theme» «blue|theme» = new «yellow|Theme»(); «blue|theme».«purple|label»("x"); }
 }`],
-  ['dart', `«gray|/// Links »«white|[»«purple|name»«white|]»«gray| and code »«white|\`name\`»«gray| remain comments.»
+  ['dart', `«gray|/// Links »«operator|[»«purple|name»«operator|]»«gray| and code »«white|\`name\`»«gray| remain comments.»
 enum «blue|Mode» { «purple|dark», «purple|light» }
 class «blue|Theme» {
   final «white|String» «blue|name»;
@@ -55,6 +55,31 @@ class «blue|ThemeReady» extends «white|ThemeState» {}
 void «blue|main»() {
   final «blue|fixed» = 1;
   invoke(«purple|fixed»: «blue|fixed»);
+}`],
+  ['dart', `void «blue|build»() {
+  for (final «blue|value» in «yellow|CardListLayout».«purple|values») {
+    «yellow|print»(«blue|value»);
+  }
+}`],
+  ['dart', `class «blue|State» extends Base {
+  const State({required super.«purple|message», super.«purple|error»});
+  const factory State.idle({required «white|Step» «purple|step», String? «purple|email»}) = Idle;
+  factory State.plain(int «purple|code») = Plain;
+  State.named(int «purple|count», {required «white|User» «purple|user», String «purple|name» = ''}) : «purple|label» = «purple|name», «purple|id» = «purple|user».«purple|userID», handler = («blue|item») => «blue|item» {
+    «yellow|print»(«purple|count»);
+  }
+  void «purple|run»(String «blue|text», {bool «blue|loud» = false}) {}
+}`],
+  ['dart', `class «blue|Controller» {
+  «gray|/// Creates a form for »«operator|[»«purple|user»«operator|]»«gray|.»
+  Controller({required User «purple|user»});
+
+  «gray|/// Returns »«operator|[»«white|Future»«operator|<»«white|T»«operator|?>]»«gray| from »«operator|[»«blue|handler»«operator|]»«gray|, see »«operator|[»«white|Sequential»«operator|.»«purple|run»«operator|]»«gray| or »«gray|[docs](https://dart.dev)»«gray|.»
+  Future<T?> «purple|handle»<T>(Future<T> Function() «blue|handler», {String? «blue|name»}) => handler();
+}`],
+  ['dart', `class «blue|Widgets» {
+  final «white|OverlayEntry» «blue|scopes» = «yellow|OverlayEntry»(«purple|id»: 1);
+  «white|OverlayEntry» «purple|clone»() => «yellow|OverlayEntry»();
 }`],
   ['dart', `sealed class «blue|CheckApplicationState» extends «white|_$CheckApplicationStateBase» {
   const «blue|CheckApplicationState»({
@@ -80,22 +105,6 @@ final «blue|sampleRate» = switch («yellow|Config».«purple|environment») {
     };
   }
 }`],
-  ['dart', `void «blue|build»() {
-  for (final «blue|value» in «yellow|CardListLayout».«purple|values») {
-    «yellow|print»(«blue|value»);
-  }
-}`],
-  ['dart', `class «blue|State» extends Base {
-  const State({required super.«purple|message», super.«purple|error»});
-  const factory State.idle({required «white|Step» «purple|step», String? «purple|email»}) = Idle;
-  factory State.plain(int «purple|code») = Plain;
-  State.named(int «blue|count», {String «blue|name» = ''}) : «purple|label» = «blue|name», handler = («blue|item») => «blue|item»;
-  void «purple|run»(String «blue|text», {bool «blue|loud» = false}) {}
-}`],
-  ['dart', `class «blue|Widgets» {
-  final «white|OverlayEntry» «blue|scopes» = «yellow|OverlayEntry»(«purple|id»: 1);
-  «white|OverlayEntry» «purple|clone»() => «yellow|OverlayEntry»();
-}`],
   ['dart', `import 'dart:convert' as «blue|convert»;
 void «blue|read»(«white|String» «blue|contents», «white|String» «blue|_outputPath») {
   «yellow|convert».«purple|jsonDecode»(«blue|contents»);
@@ -114,15 +123,15 @@ abstract interface class «blue|Directory» implements «white|FileSystemEntity�
 String describeTheme(ThemeReady state) => switch (state) {
   ThemeReady(:final «blue|palette») => «green|'value: \${»«blue|palette»«white|.»«purple|background»«green|}'»
 };`],
-  ['typescript', `«gray|/** Uses »«white|[Theme]»«gray| and »«white|\`value\`»«gray|. */»
+  ['typescript', `«gray|/** Uses »«operator|[»«white|Theme»«operator|]»«gray| and »«white|\`value\`»«gray|. */»
 const «blue|value» = 1;`],
-  ['java', `«gray|/** Uses »«white|[Theme]»«gray| and »«white|\`value\`»«gray|. */»
+  ['java', `«gray|/** Uses »«operator|[»«white|Theme»«operator|]»«gray| and »«white|\`value\`»«gray|. */»
 class «blue|Theme» {}`],
-  ['python', `«gray|# Uses »«white|[Theme]»«gray| and »«white|\`value\`»«gray|.»
+  ['python', `«gray|# Uses »«operator|[»«white|Theme»«operator|]»«gray| and »«white|\`value\`»«gray|.»
 «blue|value» = 1`],
-  ['css', `«gray|/* Uses »«white|[Theme]»«gray| and »«white|\`value\`»«gray|. */»
+  ['css', `«gray|/* Uses »«operator|[»«white|Theme»«operator|]»«gray| and »«white|\`value\`»«gray|. */»
 .theme { color: red; }`],
-  ['html', `«gray|<!-- Uses »«white|[Theme]»«gray| and »«white|\`value\`»«gray|. -->»
+  ['html', `«gray|<!-- Uses »«operator|[»«white|Theme»«operator|]»«gray| and »«white|\`value\`»«gray|. -->»
 <div></div>`],
   ['go', `package main
 type «blue|Theme» struct { «purple|Name» «white|string» }
@@ -221,7 +230,7 @@ echo «green|"\${»«blue|name»«green|}"»
   ['typescript', `«yellow|@sealed»\nclass «blue|Theme» {}`],
   ['dart', `class «blue|Settings» {
   static const int «blue|passwordMaxLength» = «yellow|int».«purple|fromEnvironment»('PASSWORD_MAX_LENGTH');
-  factory Settings.from(String? «blue|environment») => switch («blue|environment»?.«purple|trim»()) { _ => Settings() };
+  factory Settings.from(String? «purple|environment») => switch («purple|environment»?.«purple|trim»()) { _ => Settings() };
   static const String «blue|_appStoreID» = '1529842812';
   String «purple|resolve»() => «blue|_appStoreID»;
 }
