@@ -32,8 +32,20 @@ only branch-to-issue linking receives `contents: write`.
 
 ## Notifications
 
-`.github/workflows/notifications.yml` sends a required Discord and Telegram
-notification when an issue is opened.
+`.github/workflows/notifications.yml` calls
+`ziqq/actions/.github/workflows/notify-events.yml@7737ce8c4d87c656b7ccf5f78138d8d7e53a1b62`
+to send required Discord and Telegram notifications for newly opened issues
+and pull requests (including drafts and forks).
+
+Both events are explicitly enabled here with `notify-issues: true` and
+`notify-pull-requests: true`. Set either input to `false` to disable that event;
+the reusable workflow defaults both inputs to `false`. Edits, reopened items,
+and draft-to-ready changes do not send another notification.
+
+Templates belong to this repository: `.github/notify/templates/issue.md` and
+`.github/notify/templates/pull-request.md`. Pull request notifications use
+`pull_request_target` and check out only the trusted base SHA, never PR-head
+code with repository secrets.
 
 `.github/workflows/checkout.yml` sends a best-effort notification after every CI result.
 Fork and Dependabot pull requests are skipped because repository secrets are
