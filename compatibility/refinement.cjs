@@ -230,7 +230,7 @@ echo «green|"\${»«blue|name»«green|}"»
   ['typescript', `«yellow|@sealed»\nclass «blue|Theme» {}`],
   ['dart', `class «blue|Settings» {
   static const int «blue|passwordMaxLength» = «yellow|int».«purple|fromEnvironment»('PASSWORD_MAX_LENGTH');
-  factory Settings.from(String? «purple|environment») => switch («purple|environment»?.«purple|trim»()) { _ => Settings() };
+  factory Settings.«purple|from»(«white|String»? «blue|environment») => switch («blue|environment»?.«purple|trim»()) { _ => Settings() };
   static const String «blue|_appStoreID» = '1529842812';
   String «purple|resolve»() => «blue|_appStoreID»;
 }
