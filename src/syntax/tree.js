@@ -275,12 +275,11 @@ function classify(root, source, language) {
     }
     if (propertyNode(node)) set(node, dartQualifiedConstructor(node) ? 'yellow' : 'purple');
     if (declarations.has(node.id) || node.type === 'type_identifier' || node.type === 'namespace_identifier') continue;
-    const param = ancestor(node, (item) => /^(?:formal_parameter|simple_parameter|parameter|parameter_declaration|typed_parameter|default_parameter|class_parameter|property_promotion_parameter|constructor_param|super_formal_parameter)$/.test(item.type));
+    const param = ancestor(node, (item) => /^(?:formal_parameter|simple_parameter|parameter|parameter_declaration|typed_parameter|default_parameter|class_parameter|property_promotion_parameter|constructor_param)$/.test(item.type));
     if (param && !ancestor(node, (item) => item.id !== param.id && typeKinds.test(item.type)) &&
         (isField(node, 'name') || isField(node, 'pattern') || isField(node, 'declarator') ||
           firstIdentifier(param)?.id === node.id || parent.type === 'variable_name')) {
       const promoted = param.type === 'property_promotion_parameter' || param.type === 'constructor_param' ||
-        param.type === 'super_formal_parameter' ||
         (language === 'kotlin' && param.type === 'class_parameter' && param.children.some((item) => item.type === 'binding_pattern_kind')) ||
         (['csharp', 'java', 'razor'].includes(language) && param.parent?.parent?.type === 'record_declaration');
       // Generative and redirecting Dart constructor parameters describe fields;
