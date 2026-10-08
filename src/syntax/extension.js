@@ -36,7 +36,7 @@ function activate(context) {
     const key = `${span.role}:${fontStyle ?? ''}`;
     if (!decorations.has(key)) decorations.set(key, vscode.window.createTextEditorDecorationType({
       color: palette[span.role], ...(fontStyle ? { fontStyle } : {}),
-      rangeBehavior: vscode.DecorationRangeBehavior.ClosedClosed,
+      rangeBehavior: vscode.DecorationRangeBehavior.ClosedOpen,
     }));
     return decorations.get(key);
   }
@@ -129,11 +129,16 @@ function activate(context) {
   context.subscriptions.push(output,
     vscode.window.onDidChangeVisibleTextEditors((editors) => {
       const visible = new Set(editors.map((editor) => editor.document.uri.toString()));
-      for (const uri of cache.keys()) if (!visible.has(uri)) cache.delete(uri);
+      for (const [uri, timer] of timers) if (!visible.has(uri)) {
+        clearTimeout(timer);
+        timers.delete(uri);
+      }
       for (const uri of queued.keys()) if (!visible.has(uri)) queued.delete(uri);
-      for (const editor of editors) schedule(editor);
+      for (const editor of editors) schedule(editor, 0, true);
     }),
-    vscode.workspace.onDidChangeTextDocument(({ document }) => {
+    vscode.workspace.onDidChangeTextDocument(({ document, contentChanges }) => {
+      if (!contentChanges.length) return;
+      cache.delete(document.uri.toString());
       for (const editor of vscode.window.visibleTextEditors) if (editor.document === document) schedule(editor, 80, true);
     }),
     vscode.workspace.onDidCloseTextDocument((document) => {

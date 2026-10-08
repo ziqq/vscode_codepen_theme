@@ -192,6 +192,7 @@ function classify(root, source, language) {
       language === 'razor' && ['property_declaration', 'field_declaration'].includes(node.type);
   };
   const propertyNode = (node) => node.type === 'field_identifier' ||
+    (language === 'dart' && node.type === 'identifier' && node.parent.type === 'const_object_expression') ||
     (node.parent.type === 'field_access' && isField(node, 'field')) ||
     (['member_access_expression', 'member_call_expression', 'member_binding_expression',
       'scoped_property_access_expression', 'scoped_call_expression'].includes(node.parent.type) && isField(node, 'name')) ||
@@ -282,11 +283,13 @@ function classify(root, source, language) {
         param.type === 'super_formal_parameter' ||
         (language === 'kotlin' && param.type === 'class_parameter' && param.children.some((item) => item.type === 'binding_pattern_kind')) ||
         (['csharp', 'java', 'razor'].includes(language) && param.parent?.parent?.type === 'record_declaration');
-      // Dart constructor parameters describe fields, matching named arguments at call sites.
+      // Generative and redirecting Dart constructor parameters describe fields;
+      // factory bodies use their parameters as local bindings.
       const list = language === 'dart' ? ancestor(param, (item) => item.type === 'formal_parameter_list') : undefined;
       const constructor = dartConstructorKinds.has(list?.parent.type) ? list.parent : undefined;
       const signature = ancestor(node, (item) => item.type === 'function_declarator');
-      declare(node, promoted || constructor ? 'member' : 'variable', promoted ? classOf(node) :
+      const member = promoted || (constructor && constructor.type !== 'factory_constructor_signature');
+      declare(node, member ? 'member' : 'variable', promoted ? classOf(node) :
         constructor ? signatureRegion(constructor) :
           functionOf(node) ?? (signature ? region(signature) : region(param)));
     }
