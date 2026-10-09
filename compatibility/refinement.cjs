@@ -293,7 +293,10 @@ print(«yellow|theme».«purple|name»)`],
   ['toml', `«purple|min_version» = "2026.6.10"
 «gray|# Tools are pinned per platform.»
 [«purple|tools»]
-«purple|flutter» = { «purple|version» = "3.47.6", «purple|platforms» = { «purple|linux-x64» = { «purple|url» = "flutter_{{ version }}.tar.xz" } } }
+«purple|flutter» = { «purple|version» = "3.47.6", «purple|platforms» = { «purple|linux-x64» = { «purple|url» = "flutter_{{ «blue|version» }}.tar.xz" } } }
+«purple|lockfile» = «yellow|true»
+«purple|jobs» = [«orange|4», «orange|-1.5e3», «orange|0x1F»]
+«purple|home» = '{{ «blue|env».«purple|HOME» | «yellow|lower» }}/bin'
 «purple|site».«purple|"display name"» = 'x = [y]'
 «purple|notes» = """
 not = [a, key]

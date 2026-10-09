@@ -41,10 +41,12 @@ CSS and SCSS retain their existing grammar symbol roles; the runtime only expose
 portable documentation markup inside comments. JSONC, YAML and Go module files
 retain their existing grammar rules without runtime refinement.
 
-TOML keys and table names are refined as members and dates as literals because
-the mise extension replaces the Even Better TOML grammar with one that leaves
-keys unscoped. Strings, numbers and booleans stay with the active grammar, so
-template injections inside strings keep their own colors.
+TOML keys and table names are refined as members, and booleans, numbers and
+dates as literals, because the mise extension replaces the Even Better TOML
+grammar with one that leaves keys unscoped and the TOML language server can
+recolor values. Strings stay with the active grammar; Tera-style `{{ name }}`
+templates inside them use the binding role, `.field` the member role and
+`| filter` the function role.
 
 Work runs outside the extension host in one worker. Edits are debounced for 80 ms;
 only one parse runs at a time, with at most one latest queued version per document.
