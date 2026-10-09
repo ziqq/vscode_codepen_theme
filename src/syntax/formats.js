@@ -267,7 +267,23 @@ function refineToml(source) {
     }
     return cursor;
   }
+  // Tera-style `{{ value.field | filter }}` templates (mise, Cargo generators)
+  // are bindings inside the string; the braces keep the string color.
+  function templates(start, end) {
+    const text = source.slice(start, end);
+    for (const match of text.matchAll(/\{\{(.*?)\}\}/g)) {
+      const body = start + match.index + 2;
+      let previous = '';
+      for (const name of match[1].matchAll(/[A-Za-z_][\w]*|[.|]/g)) {
+        if (name[0] === '.' || name[0] === '|') { previous = name[0]; continue; }
+        const role = previous === '.' ? 'purple' : previous === '|' ? 'yellow' : 'blue';
+        spans.add(body + name.index, body + name.index + name[0].length, role, 60);
+        previous = '';
+      }
+    }
+  }
   const date = /^\d{4}-\d{2}-\d{2}(?:[Tt ]\d{2}:\d{2}(?::\d{2}(?:\.\d+)?)?)?(?:[Zz]|[+-]\d{2}:\d{2})?|^\d{2}:\d{2}:\d{2}(?:\.\d+)?/;
+  const number = /^[+-]?(?:0x[\da-fA-F_]+|0o[0-7_]+|0b[01_]+|\d[\d_]*(?:\.\d[\d_]*)?(?:[eE][+-]?\d[\d_]*)?|inf|nan)$/;
   while (index < source.length) {
     const char = source[index];
     if (char === '\n') { if (!stack.length) expectKey = true; index++; continue; }
@@ -284,14 +300,18 @@ function refineToml(source) {
       if (source[index] === '=') { expectKey = false; index++; } else index = Math.max(index, lineEnd(index));
       continue;
     }
-    if (char === '"' || char === "'") { index = stringEnd(index); continue; }
+    if (char === '"' || char === "'") { const end = stringEnd(index); templates(index, end); index = end; continue; }
     if (char === '[') { stack.push('array'); index++; continue; }
     if (char === '{') { stack.push('table'); expectKey = true; index++; continue; }
     if (char === ']' || char === '}') { stack.pop(); expectKey = false; index++; continue; }
     if (char === ',') { expectKey = stack.at(-1) === 'table'; index++; continue; }
     const match = date.exec(source.slice(index, lineEnd(index)));
     if (match) { spans.add(index, index + match[0].length, 'green', 30); index += match[0].length; continue; }
+    const start = index;
     while (index < source.length && !/[\s,\]}#]/.test(source[index])) index++;
+    const word = source.slice(start, index);
+    if (word === 'true' || word === 'false') spans.add(start, index, 'yellow', 30);
+    else if (number.test(word)) spans.add(start, index, 'orange', 30);
   }
   return spans.finish();
 }
