@@ -294,6 +294,7 @@ print(«yellow|theme».«purple|name»)`],
 «gray|# Tools are pinned per platform.»
 [«purple|tools»]
 «purple|flutter» = { «purple|version» = "3.47.6", «purple|platforms» = { «purple|linux-x64» = { «purple|url» = "flutter_{{ «blue|version» }}.tar.xz" } } }
+«purple|version_expr» = '«yellow|fromJSON»(«blue|body»).«purple|releases» «operator||» «yellow|filter»({ «blue|#».«purple|channel» «operator|==» «green|"stable"» }) «operator||» «yellow|sortVersions»()'
 «purple|lockfile» = «yellow|true»
 «purple|jobs» = [«orange|4», «orange|-1.5e3», «orange|0x1F»]
 «purple|home» = '{{ «blue|env».«purple|HOME» | «yellow|lower» }}/bin'

@@ -46,7 +46,9 @@ dates as literals, because the mise extension replaces the Even Better TOML
 grammar with one that leaves keys unscoped and the TOML language server can
 recolor values. Strings stay with the active grammar; Tera-style `{{ name }}`
 templates inside them use the binding role, `.field` the member role and
-`| filter` the function role.
+`| filter` the function role. Values of `*_expr` keys (mise `version_expr`) are
+expr-lang code: calls are yellow, members purple, bindings and `#` blue, nested
+strings green and operators muted.
 
 Work runs outside the extension host in one worker. Edits are debounced for 80 ms;
 only one parse runs at a time, with at most one latest queued version per document.
