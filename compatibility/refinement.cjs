@@ -290,6 +290,19 @@ print(«yellow|theme».«purple|name»)`],
 «purple|enabled»«operator|=»«yellow|true»
 «purple|count»«operator|=»«orange|2»
 «purple|source»«operator|=»«green|\${»«blue|HOME»«green|}/theme`],
+  ['toml', `«purple|min_version» = "2026.6.10"
+«gray|# Tools are pinned per platform.»
+[«purple|tools»]
+«purple|flutter» = { «purple|version» = "3.47.6", «purple|platforms» = { «purple|linux-x64» = { «purple|url» = "flutter_{{ version }}.tar.xz" } } }
+«purple|site».«purple|"display name"» = 'x = [y]'
+«purple|notes» = """
+not = [a, key]
+"""
+«purple|owners» = [
+  { «purple|name» = "a", «purple|role» = "b" },
+]
+[[«purple|tasks».«purple|setup»]]
+«purple|updated» = «green|2026-09-01T12:30:00+04:00»`],
   ['properties', `«purple|theme.name»«operator|=»«green|CodePen»
 «purple|theme.count»«operator|=»«orange|2»
 «purple|theme.source»«operator|=»«green|\${»«blue|base»«green|}/theme`],

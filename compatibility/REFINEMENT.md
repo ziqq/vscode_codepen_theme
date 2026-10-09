@@ -38,8 +38,13 @@ punctuation, dotenv assignments and proven C4 declaration/reference names have
 narrow format-specific refinements.
 
 CSS and SCSS retain their existing grammar symbol roles; the runtime only exposes
-portable documentation markup inside comments. JSONC, TOML, YAML and Go module
-files retain their existing grammar rules without runtime refinement.
+portable documentation markup inside comments. JSONC, YAML and Go module files
+retain their existing grammar rules without runtime refinement.
+
+TOML keys and table names are refined as members and dates as literals because
+the mise extension replaces the Even Better TOML grammar with one that leaves
+keys unscoped. Strings, numbers and booleans stay with the active grammar, so
+template injections inside strings keep their own colors.
 
 Work runs outside the extension host in one worker. Edits are debounced for 80 ms;
 only one parse runs at a time, with at most one latest queued version per document.
