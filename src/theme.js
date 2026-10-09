@@ -772,6 +772,11 @@ const tokenColors = [
     'constant.other.time.datetime.local.toml',
     'constant.other.time.datetime.offset.toml',
     'constant.other.time.time.local.toml',
+    // The mise extension ships its own TOML grammar with different date scopes.
+    'constant.other.date.local.toml',
+    'constant.other.datetime.local.toml',
+    'constant.other.datetime.offset.toml',
+    'constant.other.time.local.toml',
     'constant.other.key',
     'constant.other.symbol',
     // Entities and declarations
@@ -1294,6 +1299,10 @@ const tokenColors = [
     'constant.other.time.datetime.local.toml',
     'constant.other.time.datetime.offset.toml',
     'constant.other.time.time.local.toml',
+    'constant.other.date.local.toml',
+    'constant.other.datetime.local.toml',
+    'constant.other.datetime.offset.toml',
+    'constant.other.time.local.toml',
     'constant.other.key',
     'constant.other.php',
     'constant.other.reference.link.markdown',

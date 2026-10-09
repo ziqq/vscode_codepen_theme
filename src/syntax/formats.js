@@ -224,7 +224,80 @@ function refineWat(source) {
   return spans.finish();
 }
 
+/** TOML keys and table names are members. Both popular TOML grammars color
+ * strings, numbers, and booleans, but the mise extension's grammar leaves keys
+ * and table names unscoped, so model them from the document structure. Strings
+ * stay with the grammar so template injections such as `{{ version }}` survive. */
+function refineToml(source) {
+  const spans = new Spans(source.length);
+  const stack = [];
+  let expectKey = true;
+  let index = 0;
+  const lineEnd = (at) => { const end = source.indexOf('\n', at); return end < 0 ? source.length : end; };
+  function stringEnd(at) {
+    const quote = source[at];
+    const triple = source.startsWith(quote.repeat(3), at);
+    let cursor = at + (triple ? 3 : 1);
+    while (cursor < source.length) {
+      if (quote === '"' && source[cursor] === '\\') { cursor += 2; continue; }
+      if (!triple && source[cursor] === '\n') return cursor;
+      if (triple ? source.startsWith(quote.repeat(3), cursor) : source[cursor] === quote) {
+        // A closing delimiter may absorb up to two adjacent quote characters.
+        let end = cursor + (triple ? 3 : 1);
+        while (triple && source[end] === quote && end < cursor + 5) end++;
+        return end;
+      }
+      cursor++;
+    }
+    return source.length;
+  }
+  // Keys are bare, quoted, or dotted segments of either; each name is a member.
+  function readKey(at, close) {
+    let cursor = at;
+    while (cursor < source.length) {
+      while (source[cursor] === ' ' || source[cursor] === '\t') cursor++;
+      const start = cursor;
+      if (source[cursor] === '"' || source[cursor] === "'") cursor = stringEnd(cursor);
+      else while (cursor < source.length && /[A-Za-z0-9_-]/.test(source[cursor])) cursor++;
+      if (cursor === start) return cursor;
+      spans.add(start, cursor, 'purple', 50);
+      while (source[cursor] === ' ' || source[cursor] === '\t') cursor++;
+      if (source[cursor] !== '.') return close && source.startsWith(close, cursor) ? cursor + close.length : cursor;
+      cursor++;
+    }
+    return cursor;
+  }
+  const date = /^\d{4}-\d{2}-\d{2}(?:[Tt ]\d{2}:\d{2}(?::\d{2}(?:\.\d+)?)?)?(?:[Zz]|[+-]\d{2}:\d{2})?|^\d{2}:\d{2}:\d{2}(?:\.\d+)?/;
+  while (index < source.length) {
+    const char = source[index];
+    if (char === '\n') { if (!stack.length) expectKey = true; index++; continue; }
+    if (/\s/.test(char)) { index++; continue; }
+    if (char === '#') { const end = lineEnd(index); addComment(spans, source, index, end); index = end; continue; }
+    if (expectKey && !stack.length && char === '[') {
+      const array = source[index + 1] === '[';
+      index = readKey(index + (array ? 2 : 1), array ? ']]' : ']');
+      expectKey = false;
+      continue;
+    }
+    if (expectKey && char !== '}') {
+      index = readKey(index);
+      if (source[index] === '=') { expectKey = false; index++; } else index = Math.max(index, lineEnd(index));
+      continue;
+    }
+    if (char === '"' || char === "'") { index = stringEnd(index); continue; }
+    if (char === '[') { stack.push('array'); index++; continue; }
+    if (char === '{') { stack.push('table'); expectKey = true; index++; continue; }
+    if (char === ']' || char === '}') { stack.pop(); expectKey = false; index++; continue; }
+    if (char === ',') { expectKey = stack.at(-1) === 'table'; index++; continue; }
+    const match = date.exec(source.slice(index, lineEnd(index)));
+    if (match) { spans.add(index, index + match[0].length, 'green', 30); index += match[0].length; continue; }
+    while (index < source.length && !/[\s,\]}#]/.test(source[index])) index++;
+  }
+  return spans.finish();
+}
+
 function refineFormat(source, language) {
+  if (language === 'toml') return refineToml(source);
   if (language === 'ini' || language === 'properties') return refineConfig(source, language);
   if (language === 'dockerfile') return refineDockerfile(source);
   if (language === 'bibtex') return refineBibtex(source);
@@ -233,6 +306,6 @@ function refineFormat(source, language) {
   return [];
 }
 
-const formatLanguages = ['ini', 'properties', 'dockerfile', 'bibtex', 'latex', 'tex', 'wat'];
+const formatLanguages = ['ini', 'properties', 'toml', 'dockerfile', 'bibtex', 'latex', 'tex', 'wat'];
 
 module.exports = { refineFormat, formatLanguages };
