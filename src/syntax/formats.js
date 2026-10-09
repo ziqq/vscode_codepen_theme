@@ -251,6 +251,7 @@ function refineToml(source) {
     }
     return source.length;
   }
+  let lastKey = '';
   // Keys are bare, quoted, or dotted segments of either; each name is a member.
   function readKey(at, close) {
     let cursor = at;
@@ -261,6 +262,7 @@ function refineToml(source) {
       else while (cursor < source.length && /[A-Za-z0-9_-]/.test(source[cursor])) cursor++;
       if (cursor === start) return cursor;
       spans.add(start, cursor, 'purple', 50);
+      lastKey = source.slice(start, cursor).replace(/^["']|["']$/g, '');
       while (source[cursor] === ' ' || source[cursor] === '\t') cursor++;
       if (source[cursor] !== '.') return close && source.startsWith(close, cursor) ? cursor + close.length : cursor;
       cursor++;
@@ -282,6 +284,40 @@ function refineToml(source) {
       }
     }
   }
+  // mise `*_expr` values are expr-lang code: functions, members, the `#`
+  // element, nested strings, and operators take their code roles.
+  const exprKeywords = new Set(['true', 'false', 'nil', 'and', 'or', 'not', 'in', 'matches',
+    'contains', 'startsWith', 'endsWith', 'let', 'if', 'else']);
+  function expression(start, end) {
+    spans.add(start, end, 'white', 55);
+    let cursor = start;
+    while (cursor < end) {
+      if (/\s/.test(source[cursor])) { cursor++; continue; }
+      const rest = source.slice(cursor, end);
+      const escaped = rest.startsWith('\\"');
+      if (escaped || /^["`]/.test(rest)) {
+        const close = escaped ? '\\"' : rest[0];
+        let stop = cursor + close.length;
+        while (stop < end && !source.startsWith(close, stop)) stop += source[stop] === '\\' && !escaped ? 2 : 1;
+        stop = Math.min(end, stop + close.length);
+        spans.add(cursor, stop, 'green', 60);
+        cursor = stop;
+        continue;
+      }
+      const token = /^(?:#[A-Za-z_]\w*|#|[A-Za-z_]\w*|\d+(?:\.\d+)?|\?\?|[=!<>]=|&&|\|\||[|!<>+\-*/%?:]|\S)/.exec(rest)[0];
+      const before = source.slice(start, cursor).trimEnd();
+      let role;
+      if (token.startsWith('#')) role = 'blue';
+      else if (/^[A-Za-z_]/.test(token)) {
+        role = before.endsWith('.') ? 'purple'
+          : exprKeywords.has(token) || /^\s*\(/.test(source.slice(cursor + token.length, end)) ? 'yellow' : 'blue';
+      } else if (/^\d/.test(token)) role = 'orange';
+      else if (/^[(){}[\],.]$/.test(token)) role = undefined;
+      else role = 'operator';
+      if (role) spans.add(cursor, cursor + token.length, role, 60);
+      cursor += token.length;
+    }
+  }
   const date = /^\d{4}-\d{2}-\d{2}(?:[Tt ]\d{2}:\d{2}(?::\d{2}(?:\.\d+)?)?)?(?:[Zz]|[+-]\d{2}:\d{2})?|^\d{2}:\d{2}:\d{2}(?:\.\d+)?/;
   const number = /^[+-]?(?:0x[\da-fA-F_]+|0o[0-7_]+|0b[01_]+|\d[\d_]*(?:\.\d[\d_]*)?(?:[eE][+-]?\d[\d_]*)?|inf|nan)$/;
   while (index < source.length) {
@@ -300,7 +336,15 @@ function refineToml(source) {
       if (source[index] === '=') { expectKey = false; index++; } else index = Math.max(index, lineEnd(index));
       continue;
     }
-    if (char === '"' || char === "'") { const end = stringEnd(index); templates(index, end); index = end; continue; }
+    if (char === '"' || char === "'") {
+      const end = stringEnd(index);
+      const delimiter = source.startsWith(char.repeat(3), index) ? 3 : 1;
+      if (/(?:^|_)expr$/.test(lastKey) && end - index > delimiter * 2) {
+        expression(index + delimiter, end - delimiter);
+      } else templates(index, end);
+      index = end;
+      continue;
+    }
     if (char === '[') { stack.push('array'); index++; continue; }
     if (char === '{') { stack.push('table'); expectKey = true; index++; continue; }
     if (char === ']' || char === '}') { stack.pop(); expectKey = false; index++; continue; }
