@@ -26,7 +26,7 @@ const functionKinds = new Set(['function_declaration', 'function_definition', 'f
   'lambda_literal', 'lambda', 'closure_expression', 'anonymous_function', 'function_literal', 'recipe',
   'function_signature', 'constructor_signature', 'factory_constructor_signature',
   'constant_constructor_signature', 'redirecting_factory_constructor_signature',
-  'getter_signature', 'setter_signature']);
+  'getter_signature', 'setter_signature', 'operator_signature']);
 const dartConstructorKinds = new Set(['constructor_signature', 'constant_constructor_signature',
   'factory_constructor_signature', 'redirecting_factory_constructor_signature']);
 const blockKinds = new Set(['block', 'compound_statement', 'for_statement', 'for_in_statement',
@@ -329,6 +329,10 @@ function classify(root, source, language) {
       const member = memberContext(declaration);
       declare(node, member && language !== 'dart' ? 'member' : 'variable', member ? classOf(node) : undefined);
     }
+    // `abstract`/`external` Dart fields have no storage and behave like getters.
+    if (language === 'dart' && parent.type === 'identifier_list' && parent.parent?.type === 'declaration') {
+      declare(node, 'member', classOf(node));
+    }
     if (language === 'python' && parent.type === 'assignment' && isField(node, 'left')) {
       declare(node, memberContext(node) ? 'member' : 'variable', nearestOwner(node) ?? region(root));
     }
@@ -340,6 +344,15 @@ function classify(root, source, language) {
       if (parent.type === 'assignment' && isField(node, 'left')) declare(node, 'variable');
       if (['dependency', 'dependency_expression', 'recipe_header'].includes(parent.type) && isField(node, 'name')) set(node, 'purple');
       if (parent.type === 'function_call' && isField(node, 'name')) set(node, 'yellow');
+    }
+  }
+
+  // Match initializing formals to their fields after all declarations are known.
+  if (language === 'dart') for (const entries of bindings.values()) {
+    for (const entry of entries) {
+      if (entry.kind === 'variable' && entries.some((parameter) =>
+        parameter.kind === 'member' && parameter.node.parent.type === 'constructor_param' &&
+        parameter.start === entry.start && parameter.end === entry.end)) set(entry.node, 'purple');
     }
   }
 
