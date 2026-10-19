@@ -44,7 +44,7 @@ const «blue|text» = «green|"class False { field }"»;`],
   ['dart', `«gray|/// Links »«operator|[»«purple|name»«operator|]»«gray| and code »«white|\`name\`»«gray| remain comments.»
 enum «blue|Mode» { «purple|dark», «purple|light» }
 class «blue|Theme» {
-  final «white|String» «blue|name»;
+  final «white|String» «purple|name»;
   Theme(this.«purple|name»);
   «white|String» «purple|label»(«white|String» «blue|prefix») => «green|"$»«blue|prefix»«green| \${»«blue|name»«white|.»«purple|toLowerCase»«white|()»«green|}"»;
   «white|T» «purple|map»«operator|<»«white|T»«operator|>»(«white|T» «white|Function»() «blue|callback») => «blue|callback»();
@@ -76,6 +76,14 @@ void «blue|main»() {
 
   «gray|/// Returns »«operator|[»«white|Future»«operator|<»«white|T»«operator|?>]»«gray| from »«operator|[»«blue|handler»«operator|]»«gray|, see »«operator|[»«white|Sequential»«operator|.»«purple|run»«operator|]»«gray| or »«gray|[docs](https://dart.dev)»«gray|.»
   Future<T?> «purple|handle»<T>(Future<T> Function() «blue|handler», {String? «blue|name»}) => handler();
+}`],
+  ['dart', `abstract base class «blue|StateBase» {
+  const StateBase({required this.«purple|message»});
+  abstract final «white|String» «purple|type»;
+  final «white|String» «purple|message»;
+  final «white|FocusNode» «blue|_focusNode» = «yellow|FocusNode»();
+  bool «yellow|operator» ==(«white|Object» «blue|other») =>
+      «yellow|identical»(this, «blue|other») || «blue|other» is StateBase && «purple|type» == «blue|other».«purple|type»;
 }`],
   ['dart', `class «blue|Widgets» {
   final «white|OverlayEntry» «blue|scopes» = «yellow|OverlayEntry»(«purple|id»: 1);
