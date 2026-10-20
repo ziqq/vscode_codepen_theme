@@ -202,7 +202,9 @@ for (const [type, expected] of [
   ['variable', '#809bbd'], ['property', '#9a8297'],
 ]) {
   assert.equal(semanticColor(theme, type, [], 'dart'), expected);
-  assert.equal(semanticColor(theme, type, ['declaration', 'instance'], 'dart'), expected);
+  // Dart instance fields are class members, so they share the purple property role.
+  assert.equal(semanticColor(theme, type, ['declaration', 'instance'], 'dart'),
+    type === 'variable' ? '#9a8297' : expected);
   semanticAssertions += 2;
 }
 for (const language of ['javascript', 'javascriptreact', 'typescript', 'typescriptreact']) {
