@@ -60,7 +60,10 @@ and JSONC comments are muted gray.
 Dart constructor parameters (including `this.x`, `super.x`, and redirecting
 factory parameters) describe fields, so they are purple like named arguments at
 call sites. Parameters of factory constructors with a body stay blue, as do
-method, function, and closure parameters.
+method, function, and closure parameters. Dart class fields are members: their
+declarations and every reference inside the class are purple like methods,
+while locals and parameters that shadow them stay blue. `const Widget()` and
+`new Widget()` name a constructor and are yellow like other constructor calls.
 
 Documentation references such as `[handler]` take the role of the parameter they
 name on the documented declaration; other references are white for types and

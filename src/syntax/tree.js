@@ -327,7 +327,7 @@ function classify(root, source, language) {
         (parent.type === 'static_final_declaration' && firstIdentifier(parent)?.id === node.id) ||
         (parent.type === 'variable_declaration' && firstIdentifier(parent)?.id === node.id))) {
       const member = memberContext(declaration);
-      declare(node, member && language !== 'dart' ? 'member' : 'variable', member ? classOf(node) : undefined);
+      declare(node, member ? 'member' : 'variable', member ? classOf(node) : undefined);
     }
     // `abstract`/`external` Dart fields have no storage and behave like getters.
     if (language === 'dart' && parent.type === 'identifier_list' && parent.parent?.type === 'declaration') {
@@ -344,15 +344,6 @@ function classify(root, source, language) {
       if (parent.type === 'assignment' && isField(node, 'left')) declare(node, 'variable');
       if (['dependency', 'dependency_expression', 'recipe_header'].includes(parent.type) && isField(node, 'name')) set(node, 'purple');
       if (parent.type === 'function_call' && isField(node, 'name')) set(node, 'yellow');
-    }
-  }
-
-  // Match initializing formals to their fields after all declarations are known.
-  if (language === 'dart') for (const entries of bindings.values()) {
-    for (const entry of entries) {
-      if (entry.kind === 'variable' && entries.some((parameter) =>
-        parameter.kind === 'member' && parameter.node.parent.type === 'constructor_param' &&
-        parameter.start === entry.start && parameter.end === entry.end)) set(entry.node, 'purple');
     }
   }
 
@@ -401,6 +392,9 @@ function classify(root, source, language) {
     if (language === 'php' && parent.type === 'variable_name') return node.text === 'this' ? 'yellow' : 'blue';
     if (language === 'php' && parent.type === 'function_call_expression' && isField(node, 'function')) return 'yellow';
     if (parent.type === 'object_creation_expression') return 'yellow';
+    // `const Widget()` / `new Widget()` name a constructor, not a type annotation.
+    if (language === 'dart' && node.type === 'type_identifier' &&
+        ['const_object_expression', 'new_expression'].includes(parent.type)) return 'yellow';
     if (node.type === 'type_identifier' &&
         ancestor(node, (item) => ['object_creation_expression', 'struct_expression', 'composite_literal'].includes(item.type)) &&
         !ancestor(node, (item) => typeKinds.test(item.type))) return 'yellow';

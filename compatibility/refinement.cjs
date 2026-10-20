@@ -46,7 +46,7 @@ enum «blue|Mode» { «purple|dark», «purple|light» }
 class «blue|Theme» {
   final «white|String» «purple|name»;
   Theme(this.«purple|name»);
-  «white|String» «purple|label»(«white|String» «blue|prefix») => «green|"$»«blue|prefix»«green| \${»«blue|name»«white|.»«purple|toLowerCase»«white|()»«green|}"»;
+  «white|String» «purple|label»(«white|String» «blue|prefix») => «green|"$»«blue|prefix»«green| \${»«purple|name»«white|.»«purple|toLowerCase»«white|()»«green|}"»;
   «white|T» «purple|map»«operator|<»«white|T»«operator|>»(«white|T» «white|Function»() «blue|callback») => «blue|callback»();
 }
 void «blue|main»() { final «blue|theme» = «yellow|Theme»("x"); print(«blue|theme».«purple|label»("y")); }`],
@@ -81,12 +81,21 @@ void «blue|main»() {
   const StateBase({required this.«purple|message»});
   abstract final «white|String» «purple|type»;
   final «white|String» «purple|message»;
-  final «white|FocusNode» «blue|_focusNode» = «yellow|FocusNode»();
+  final «white|FocusNode» «purple|_focusNode» = «yellow|FocusNode»();
   bool «yellow|operator» ==(«white|Object» «blue|other») =>
       «yellow|identical»(this, «blue|other») || «blue|other» is StateBase && «purple|type» == «blue|other».«purple|type»;
 }`],
+  ['dart', `class «blue|FlowState» {
+  late final «white|Controller» «purple|_controller»;
+  final «white|ValueNotifier»<«white|bool»> «purple|_signingIn» = «yellow|ValueNotifier»<«white|bool»>(false);
+  void «purple|_signIn»() { final «blue|session» = «purple|_controller»; }
+  Widget «purple|build»() => Column(children: [
+    Screen(key: const «yellow|ValueKey»<«white|String»>('k'), «purple|controller»: «purple|_controller», «purple|onSucceeded»: «purple|_signIn», «purple|submitting»: «purple|_signingIn»),
+    if (a) const «yellow|SizedBox».«purple|shrink»() else const «yellow|UIBottomSpacer»(),
+  ]);
+}`],
   ['dart', `class «blue|Widgets» {
-  final «white|OverlayEntry» «blue|scopes» = «yellow|OverlayEntry»(«purple|id»: 1);
+  final «white|OverlayEntry» «purple|scopes» = «yellow|OverlayEntry»(«purple|id»: 1);
   «white|OverlayEntry» «purple|clone»() => «yellow|OverlayEntry»();
 }`],
   ['dart', `sealed class «blue|CheckApplicationState» extends «white|_$CheckApplicationStateBase» {
@@ -221,7 +230,7 @@ echo «green|"\${»«blue|name»«green|}"»
   ['c4', 'workspace "Theme" { model { «blue|author» = person "Author"\n«blue|system» = softwareSystem "App"\n«blue|author» -> «blue|system» "Uses" } }'],
   ['typescript', `const «blue|emoji» = «green|"😀"»;\r\nfunction «blue|café»(«blue|значение»: «white|string») { return «blue|значение»; }\r\nconst «blue|𐐀» = «yellow|café»(«yellow|emoji»);`],
   ['java', `class «blue|Café» { String «purple|имя» = «green|"😀"»; String «purple|label»(String «blue|значение») { return «blue|значение» + «purple|имя»; } }`],
-  ['dart', `class «blue|Theme» { String «blue|name» = 'x'; void «purple|run»(String «blue|name») { print(«blue|name»); print(this.«purple|name»); } }`],
+  ['dart', `class «blue|Theme» { String «purple|name» = 'x'; void «purple|run»(String «blue|name») { print(«blue|name»); print(this.«purple|name»); } }`],
   ['makefile', `«blue|NAME» := hi
 «purple|build»:
 \t@echo «green|"name: »$(«blue|NAME»)«green|"» «blue|$@» «blue|$<»
@@ -237,10 +246,10 @@ echo «green|"\${»«blue|name»«green|}"»
   ['swift', `«yellow|@available»(iOS 17, *)\nstruct «blue|Theme» {}`],
   ['typescript', `«yellow|@sealed»\nclass «blue|Theme» {}`],
   ['dart', `class «blue|Settings» {
-  static const int «blue|passwordMaxLength» = «yellow|int».«purple|fromEnvironment»('PASSWORD_MAX_LENGTH');
+  static const int «purple|passwordMaxLength» = «yellow|int».«purple|fromEnvironment»('PASSWORD_MAX_LENGTH');
   factory Settings.«purple|from»(«white|String»? «blue|environment») => switch («blue|environment»?.«purple|trim»()) { _ => Settings() };
-  static const String «blue|_appStoreID» = '1529842812';
-  String «purple|resolve»() => «blue|_appStoreID»;
+  static const String «purple|_appStoreID» = '1529842812';
+  String «purple|resolve»() => «purple|_appStoreID»;
 }
 abstract interface class «blue|List»<«white|E»> implements «white|Iterable»<«white|E»> {}
 final «blue|countries» = «yellow|List»<«white|String»>.«purple|unmodifiable»([]);`],
