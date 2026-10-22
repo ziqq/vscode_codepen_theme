@@ -3,6 +3,20 @@
 This repository uses reusable actions pinned to
 `ziqq/actions@ccd1a799683cd461a45d9303ac6fcb2792f8f5d2`.
 
+## Extension validation and publication
+
+Pull request CI packages the extension as a VSIX using Node.js 22 and
+`@vscode/vsce@4.0.0`. The package currently has no test or lint npm scripts.
+
+Publication runs only when an existing version tag is pushed. The tag must be
+`v<package.json version>`, and the first version in `CHANGELOG.md` must match.
+The workflow does not create tags or change the package version.
+
+The deploy job uses the `release` environment and the existing `VSCE_PAT` secret.
+Before the next release, configure the environment with a required reviewer and
+a tag-only `v*` deployment policy, then protect the release tags. Keep the
+repository secrets until a separate credential migration is approved.
+
 ## Semantic labels
 
 `.github/labels.json` is the repository-owned source of truth. Automation uses
