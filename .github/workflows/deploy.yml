@@ -8,10 +8,14 @@ on:
   #  types:
   #    - created
 
+permissions:
+  contents: read
+
 jobs:
   deploy:
     name: "Deploy VS Code Extension"
     runs-on: ubuntu-latest
+    environment: release
     defaults:
       run:
         working-directory: ./
@@ -19,19 +23,37 @@ jobs:
     steps:
       - name: Checkout
         id: checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
 
       - name: Install Node.js
         id: node-setup
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
-          node-version: 20.x
+          node-version: 22.x
+
+      - name: Validate release tag
+        run: |
+          node <<'NODE'
+          const fs = require('node:fs');
+          const { version } = JSON.parse(fs.readFileSync('package.json', 'utf8'));
+          const changelog = fs.readFileSync('CHANGELOG.md', 'utf8');
+          const changelogVersion = changelog.match(/^##\s+(\S+)/m)?.[1];
+          if (process.env.GITHUB_REF_TYPE !== 'tag' ||
+              process.env.GITHUB_REF_NAME !== `v${version}` ||
+              changelogVersion !== version) {
+            console.error('The release tag, package.json and first changelog version must match.');
+            process.exit(1);
+          }
+          console.log(`Validated existing release tag v${version}.`);
+          NODE
 
       - name: Install Dependencies
         id: install
         run: |
-          npm install
-          npm install -g @vscode/vsce
+          npm ci
+          npm install -g @vscode/vsce@4.0.0
 
       - name: Publish
         id: publish
