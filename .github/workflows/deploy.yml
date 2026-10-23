@@ -16,6 +16,9 @@ jobs:
     name: "Deploy VS Code Extension"
     runs-on: ubuntu-latest
     environment: release
+    permissions:
+      contents: read
+      id-token: write
     defaults:
       run:
         working-directory: ./
@@ -55,12 +58,19 @@ jobs:
           npm ci
           npm install -g @vscode/vsce@4.0.0
 
+      - name: Sign in to Microsoft Entra
+        uses: azure/login@a641126d1b8aa4d1fa005f4f92df94a3a4c4c906 # v3.1.0
+        with:
+          client-id: ${{ vars.AZURE_CLIENT_ID }}
+          tenant-id: ${{ vars.AZURE_TENANT_ID }}
+          allow-no-subscriptions: true
+
       - name: Publish
         id: publish
         if: success() && startsWith(github.ref, 'refs/tags/')
-        run: npm run deploy
+        run: npm run deploy -- --azure-credential
         env:
-          VSCE_PAT: ${{ secrets.VSCE_PAT }}
+          AZURE_TENANT_ID: ${{ vars.AZURE_TENANT_ID }}
 
   complete-issues:
     name: Complete issues after successful publication
