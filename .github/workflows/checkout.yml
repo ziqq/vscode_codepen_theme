@@ -12,14 +12,6 @@ on:
       - "bugfix/**"
       - "hotfix/**"
       - "support/**"
-    paths:
-      - .github/workflows/*.yml
-      - "README.md"
-      - "CHANGELOG.md"
-      - "**.json"
-      - "**.ts"
-      - "**.js"
-      - "**.mjs"
 
 permissions:
   contents: read
