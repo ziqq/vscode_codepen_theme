@@ -2,6 +2,7 @@ const path = require('node:path');
 const { Spans } = require('./spans');
 const { addComment } = require('./comments');
 const { refineDialect } = require('./dialects');
+const { codeRoles, keywordStyle } = require('./roles');
 
 const grammars = Object.freeze({
   c: 'c', cpp: 'cpp', csharp: 'c_sharp', dart: 'dart', go: 'go', java: 'java',
@@ -25,22 +26,18 @@ const functionKinds = new Set(['function_declaration', 'function_definition', 'f
   'method_declaration', 'constructor_declaration', 'method', 'singleton_method', 'lambda_expression',
   'lambda_literal', 'lambda', 'closure_expression', 'anonymous_function', 'function_literal', 'recipe',
   'function_signature', 'constructor_signature', 'factory_constructor_signature',
-  'constant_constructor_signature', 'redirecting_factory_constructor_signature',
-  'getter_signature', 'setter_signature', 'operator_signature']);
-const dartConstructorKinds = new Set(['constructor_signature', 'constant_constructor_signature',
-  'factory_constructor_signature', 'redirecting_factory_constructor_signature']);
+  'getter_signature', 'setter_signature']);
 const blockKinds = new Set(['block', 'compound_statement', 'for_statement', 'for_in_statement',
   'for_expression', 'enhanced_for_statement', 'for_range_loop', 'catch_clause']);
 const typeKinds = /^(?:primitive_type|predefined_type|integral_type|floating_point_type|boolean_type|void_type|user_type|type|generic_type|type_annotation|type_arguments|type_parameters|type_parameter|type_parameter_list|nullable_type|reference_type|array_type|function_type|parameter_type_list)$/;
 const stringKinds = /^(?:string|.*string_literal|interpreted_string_literal|raw_string_literal|char_literal|character_literal|encapsed_string|symbol_literal|external_command|heredoc_body)$/;
 const numericKinds = /^(?:(?:hex_|decimal_|octal_|binary_)?(?:integer|floating_point)_literal|number_literal|int_literal|float_literal|integer|float|number)$/;
-const annotationKinds = new Set([
-  'annotation',
-  'attribute',
-  'decorator',
-  'marker_annotation',
+const keywords = new Set(('abstract alias as assert async await base bool boolean break case catch class const constexpr continue covariant data default defer deferred def define del do done dynamic elif else end endef enum except export extends extension extern external factory false fi final finally fn for foreach from fun func function get given global goto hide if ifdef ifeq ifndef ifneq impl implementation implements import in include inline instanceof interface internal is late let library match method mixin mod mutable mut my native new nil nonlocal null object on operator or our out override package param part pass private process property protected protocol pub public raise record redo ref reified required rescue return rethrow sealed select self set show sizeof static struct sub super switch sync synchronized template then this throw throws trait transient true try type typedef typealias typeof union unless unsafe unset use using val var virtual void volatile when where while with yield').split(' '));
+const implicitTypeCallLanguages = new Set([
+  // Go is intentionally absent: exported functions are also PascalCase, so
+  // syntax alone cannot distinguish NewClient() from a type conversion.
+  'dart', 'julia', 'kotlin', 'python', 'swift',
 ]);
-const keywords = new Set(('abstract alias as assert async await base bool boolean break case catch class const constexpr continue covariant data default defer deferred def define del do done dynamic elif else end endef enum except export extends extension extern external factory false fi final finally fn for foreach from fun func function get global goto hide if ifdef ifeq ifndef ifneq impl implements import in include inline instanceof interface internal is late let library match mixin mod mutable mut native new nil nonlocal null object on operator or out override package part pass private protected protocol pub public raise record redo ref reified required rescue return rethrow sealed select self set show sizeof static struct super switch sync synchronized template then this throw throws trait transient true try type typedef typealias typeof union unless unsafe unset use using val var virtual volatile when where while with yield').split(' '));
 
 const contains = (region, node) => region.start <= node.startIndex && region.end >= node.endIndex;
 const ancestor = (node, predicate) => {
@@ -49,14 +46,6 @@ const ancestor = (node, predicate) => {
 const field = (node, name) => node?.childForFieldName(name);
 const isField = (node, name) => field(node.parent, name)?.id === node.id;
 const firstIdentifier = (node) => node?.namedChildren.find((child) => identifiers.has(child.type));
-const firstDescendantIdentifier = (node) => {
-  const stack = [...(node?.namedChildren ?? [])].reverse();
-  while (stack.length) {
-    const child = stack.pop();
-    if (identifiers.has(child.type)) return child;
-    stack.push(...child.namedChildren.toReversed());
-  }
-};
 const isIdentifier = (node) => identifiers.has(node.type) && !node.namedChildren.some(isIdentifier);
 
 async function refineTree(source, language) {
@@ -67,7 +56,6 @@ async function refineTree(source, language) {
     for (const span of refineDialect(root, source, language)) {
       spans.add(span.start, span.end, span.role, 40, span.fontStyle);
     }
-    addAnnotations(root, source, spans);
     if (language !== 'makefile') return spans.finish();
     const stack = [root];
     while (stack.length) {
@@ -82,54 +70,20 @@ async function refineTree(source, language) {
   });
 }
 
-function addAnnotations(root, source, spans) {
-  const stack = [root];
-  while (stack.length) {
-    const node = stack.pop();
-    stack.push(...node.namedChildren);
-    if (!annotationKinds.has(node.type)) continue;
-    const marker = source.indexOf('@', node.startIndex);
-    if (marker < node.startIndex || marker >= node.endIndex) continue;
-    spans.add(marker, marker + 1, 'yellow', 60, 'annotation');
-    const name = field(node, 'name') ?? field(node, 'attribute') ??
-      firstDescendantIdentifier(node);
-    if (name) {
-      spans.add(name.startIndex, name.endIndex, 'yellow', 60, 'annotation');
-    }
-  }
-}
-
 async function withTree(source, language, callback) {
   const grammar = grammars[language];
   if (!grammar) return [];
-  const { Parser, Language } = require('./vendor/web-tree-sitter.cjs');
-  await (initialization ??= Parser.init({ locateFile: () => path.join(__dirname, 'vendor/web-tree-sitter.wasm') }));
+  const { Parser, Language } = require('../vendor/web-tree-sitter.cjs');
+  await (initialization ??= Parser.init({ locateFile: () => path.join(__dirname, '../vendor/web-tree-sitter.wasm') }));
   let parser = parsers.get(grammar);
   if (!parser) {
     parser = new Parser();
-    parser.setLanguage(await Language.load(path.join(__dirname, `grammars/${grammar}.wasm`)));
+    parser.setLanguage(await Language.load(path.join(__dirname, `../grammars/${grammar}.wasm`)));
     parsers.set(grammar, parser);
   }
   const tree = parser.parse(source);
-  // tree-sitter resolves `parent` by descending from the root on every access;
-  // classification asks for it constantly, so index parents once per tree.
-  const parents = new Map([[tree.rootNode.id, null]]);
-  const stack = [tree.rootNode];
-  while (stack.length) {
-    const node = stack.pop();
-    for (const child of node.children) { parents.set(child.id, node); stack.push(child); }
-  }
-  const prototype = Object.getPrototypeOf(tree.rootNode);
-  const descriptor = Object.getOwnPropertyDescriptor(prototype, 'parent');
-  Object.defineProperty(prototype, 'parent', { configurable: true, get() {
-    const parent = parents.get(this.id);
-    return parent === undefined ? descriptor.get.call(this) : parent;
-  } });
   try { return await callback(tree.rootNode); }
-  finally {
-    Object.defineProperty(prototype, 'parent', descriptor);
-    tree.delete();
-  }
+  finally { tree.delete(); }
 }
 
 function classify(root, source, language) {
@@ -152,17 +106,17 @@ function classify(root, source, language) {
     const value = field(owner, name);
     return value && (value.id === node.id || contains(region(value), node));
   };
-  // A Dart signature owns its initializer list and the sibling function body.
-  const signatureRegion = (node) => {
-    const owner = ['method_signature', 'declaration'].includes(node.parent.type) ? node.parent : node;
-    const next = owner.nextNamedSibling;
-    return { start: owner.startIndex, end: next?.type === 'function_body' ? next.endIndex : owner.endIndex, node };
-  };
   for (const node of nodes) {
     if ((classKinds.has(node.type) || node.type === 'impl_item') && node.id !== root.id) classes.push(region(node));
     if (blockKinds.has(node.type)) blocks.push(region(node));
     if (functionKinds.has(node.type)) {
-      functions.push(language === 'dart' && /signature$/.test(node.type) ? signatureRegion(node) : region(node));
+      let owner = node;
+      if (language === 'dart' && /signature$/.test(node.type)) {
+        if (node.parent.type === 'method_signature' || node.parent.type === 'declaration') owner = node.parent;
+        const next = owner.nextNamedSibling;
+        functions.push({ start: owner.startIndex,
+          end: next?.type === 'function_body' ? next.endIndex : owner.endIndex, node });
+      } else functions.push(region(node));
     }
   }
   const smallest = (regions, node) => regions.filter((item) => contains(item, node))
@@ -172,7 +126,14 @@ function classify(root, source, language) {
   const set = (node, role) => { if (node) roles.set(node.id, role); };
   function declare(node, kind, scope) {
     if (!node) return;
-    const role = kind === 'member' || kind === 'enum' ? 'purple' : kind === 'alias' ? 'white' : 'blue';
+    const domainBinding = ['just', 'makefile', 'shellscript'].includes(language)
+      ? 'blue'
+      : codeRoles.binding;
+    const role = kind === 'method' ? codeRoles.method :
+      kind === 'property' ? codeRoles.property :
+      kind === 'enum' ? codeRoles.enumMember :
+      kind === 'function' ? codeRoles.functionDeclaration :
+      kind === 'type' || kind === 'alias' ? codeRoles.type : domainBinding;
     set(node, role);
     declarations.add(node.id);
     const owner = scope ?? smallest(blocks, node) ?? functionOf(node) ?? region(root);
@@ -192,23 +153,14 @@ function classify(root, source, language) {
       language === 'razor' && ['property_declaration', 'field_declaration'].includes(node.type);
   };
   const propertyNode = (node) => node.type === 'field_identifier' ||
-    (language === 'dart' && node.type === 'identifier' && node.parent.type === 'const_object_expression') ||
     (node.parent.type === 'field_access' && isField(node, 'field')) ||
     (['member_access_expression', 'member_call_expression', 'member_binding_expression',
       'scoped_property_access_expression', 'scoped_call_expression'].includes(node.parent.type) && isField(node, 'name')) ||
     (node.parent.type === 'attribute' && isField(node, 'attribute')) ||
     ['navigation_suffix', 'unconditional_assignable_selector', 'conditional_assignable_selector',
-      'cascade_selector', 'dot_shorthand'].includes(node.parent.type);
-  const dartQualifiedConstructor = (node) => language === 'dart' &&
-    node.parent.type === 'unconditional_assignable_selector' && /^[A-Z_]/.test(node.text) &&
-    node.parent.parent?.nextNamedSibling?.firstNamedChild?.type === 'argument_part';
-  const dartInvokedRoot = (node) => language === 'dart' &&
-    node.parent.namedChildren.slice(node.parent.namedChildren.indexOf(node) + 1)
-      .some((sibling) => sibling.type === 'selector' &&
-        sibling.firstNamedChild?.type === 'argument_part');
-  const dartRelationalTypeArgument = (node) => language === 'dart' &&
-    node.parent.type === 'relational_expression' &&
-    node.previousNamedSibling?.text === '<' && node.parent.nextNamedSibling?.text === '>';
+      'cascade_selector'].includes(node.parent.type);
+  const calledMember = (node) => propertyNode(node) &&
+    /^\s*(?:<[^;{}()]*>)?\s*\(/.test(source.slice(node.endIndex, node.endIndex + 160));
   function outOfLineClass(node) {
     if (language !== 'cpp') return undefined;
     const fn = functionOf(node)?.node;
@@ -219,10 +171,6 @@ function classify(root, source, language) {
 
   // Declarations establish local binding identity before uses are classified.
   for (const node of nodes) {
-    if (language === 'dart' && node.type === 'import_specification') {
-      const name = node.namedChildren.filter((child) => isIdentifier(child)).at(-1);
-      declare(name, 'namespace', region(root));
-    }
     if (classKinds.has(node.type)) {
       const name = field(node, 'name') ?? firstIdentifier(node);
       declare(name, 'type', smallest(blocks, node) ?? region(root));
@@ -242,38 +190,48 @@ function classify(root, source, language) {
       const qualified = name && ancestor(name, (item) => item.type === 'qualified_identifier');
       const kotlinReceiver = language === 'kotlin' && node.type === 'function_declaration' && name &&
         /\.\s*$/.test(source.slice(node.startIndex, name.startIndex));
+      const accessor = node.type === 'getter_signature' || node.type === 'setter_signature';
+      const constructor = node.type === 'constructor_declaration' ||
+        node.type === 'constructor_signature' ||
+        node.type === 'factory_constructor_signature';
       const member = language === 'ruby' || language === 'just' || language === 'razor' ||
         node.type === 'method_declaration' || qualified || kotlinReceiver ||
         node.type === 'constructor_declaration' || (cls && (!outerFn || outerFn.start < cls.start)) ||
         (language === 'rust' && ancestor(node, (item) => item.type === 'impl_item' || item.type === 'trait_item'));
-      const kind = language === 'dart' &&
-        (node.type === 'constructor_declaration' || dartConstructorKinds.has(node.type))
-        ? 'constructor' : member ? 'member' : 'function';
-      declare(name, kind, member && cls ? cls :
-        member && !['ruby', 'just'].includes(language) ? region(node) : outerFn ?? region(root));
-      if (kind === 'constructor') {
-        // `Class.named` declares a member-like name, as it reads at call sites;
-        // a redirect target `= Other.named` is a constructor reference.
-        const list = node.namedChildren.findIndex((child) => child.type === 'formal_parameter_list');
-        const head = node.namedChildren.slice(0, list).filter((child) => child.type === 'identifier');
-        if (head[1]) set(head[1], 'purple');
-        for (const target of list < 0 ? [] : node.namedChildren.slice(list + 1)) {
-          if (target.type === 'type_identifier') set(target, 'yellow');
-          if (target.type === 'identifier') set(target, 'purple');
-        }
+      if (constructor) {
+        // Constructor declarations name a type, not a callable member. This is
+        // especially important in Dart, whose TextMate grammar uses the same
+        // function scope for constructors and ordinary methods.
+        set(name, codeRoles.type);
+        if (name) declarations.add(name.id);
+        continue;
       }
+      // Accessors expose a property contract even when the grammar represents
+      // them as function-like nodes. Keep their names neutral like reads.
+      declare(name, accessor ? 'property' : member ? 'method' : 'function',
+        accessor ? cls ?? region(root) : member && cls ? cls :
+          member && !['ruby', 'just'].includes(language) ? region(node) : outerFn ?? region(root));
     }
     if (node.type === 'enum_constant' || node.type === 'enum_variant' ||
         node.type === 'enum_entry' || node.type === 'enumerator') {
-      declare(field(node, 'name') ?? firstIdentifier(node), 'enum', classOf(node));
+      const name = field(node, 'name') ?? firstIdentifier(node);
+      declare(name, 'enum', classOf(node));
+      // Dart enhanced-enum entries with constructor arguments are callable
+      // declarations. Keep their references enum-white via the binding kind,
+      // but render the declaration itself with the method/function purple.
+      if (language === 'dart' && node.type === 'enum_constant' &&
+          node.namedChildren.some((child) => child.type === 'argument_part')) {
+        set(name, codeRoles.functionDeclaration);
+      }
     }
     if (!isIdentifier(node)) continue;
     const parent = node.parent;
-    if (language === 'dart' && parent.type === 'super_formal_parameter') {
-      set(node, 'purple');
-      continue;
+    if (language === 'dart' && parent.type === 'import_specification') {
+      // A Dart import specification exposes only its `as` prefix as an
+      // identifier. The prefix is a value-like namespace binding, not a type.
+      declare(node, 'variable', region(root));
     }
-    if (propertyNode(node)) set(node, dartQualifiedConstructor(node) ? 'yellow' : 'purple');
+    if (propertyNode(node)) set(node, calledMember(node) ? codeRoles.method : codeRoles.property);
     if (declarations.has(node.id) || node.type === 'type_identifier' || node.type === 'namespace_identifier') continue;
     const param = ancestor(node, (item) => /^(?:formal_parameter|simple_parameter|parameter|parameter_declaration|typed_parameter|default_parameter|class_parameter|property_promotion_parameter|constructor_param)$/.test(item.type));
     if (param && !ancestor(node, (item) => item.id !== param.id && typeKinds.test(item.type)) &&
@@ -282,27 +240,14 @@ function classify(root, source, language) {
       const promoted = param.type === 'property_promotion_parameter' || param.type === 'constructor_param' ||
         (language === 'kotlin' && param.type === 'class_parameter' && param.children.some((item) => item.type === 'binding_pattern_kind')) ||
         (['csharp', 'java', 'razor'].includes(language) && param.parent?.parent?.type === 'record_declaration');
-      // Generative and redirecting Dart constructor parameters describe fields;
-      // factory bodies use their parameters as local bindings.
-      const list = language === 'dart' ? ancestor(param, (item) => item.type === 'formal_parameter_list') : undefined;
-      const constructor = dartConstructorKinds.has(list?.parent.type) ? list.parent : undefined;
       const signature = ancestor(node, (item) => item.type === 'function_declarator');
-      const member = promoted || (constructor && constructor.type !== 'factory_constructor_signature');
-      declare(node, member ? 'member' : 'variable', promoted ? classOf(node) :
-        constructor ? signatureRegion(constructor) :
-          functionOf(node) ?? (signature ? region(signature) : region(param)));
+      declare(node, promoted ? 'property' : 'variable', promoted ? classOf(node) :
+        functionOf(node) ?? (signature ? region(signature) : region(param)));
     }
     if (['parameters', 'method_parameters', 'lambda_parameters', 'closure_parameters', 'inferred_parameters'].includes(parent.type)) declare(node, 'variable', functionOf(node));
-    if (language === 'dart' && parent.type === 'catch_parameters') {
-      const catchBody = parent.parent.nextNamedSibling;
-      declare(node, 'variable', catchBody?.type === 'block' ? region(catchBody) : functionOf(node));
-    }
     if (['enhanced_for_statement', 'for_in_statement', 'for_range_loop'].includes(parent.type) &&
         (isField(node, 'name') || isField(node, 'left') || isField(node, 'pattern'))) {
       declare(node, 'variable', region(parent));
-    }
-    if (parent.type === 'for_loop_parts' && isField(node, 'name')) {
-      declare(node, 'variable', region(parent.parent));
     }
     if (['type_pattern', 'record_pattern_component'].includes(parent.type) &&
         parent.namedChildren.at(-1)?.id === node.id) {
@@ -322,19 +267,23 @@ function classify(root, source, language) {
       'static_final_declaration'].includes(item.type));
     if (declaration && (fieldContains(declaration, 'name', node) || fieldContains(declaration, 'pattern', node) ||
         fieldContains(declaration, 'declarator', node) ||
-        (parent.type === 'initialized_identifier' && firstIdentifier(parent)?.id === node.id) ||
-        (parent.type === 'pattern' && isField(node, 'bound_identifier')) ||
-        (parent.type === 'static_final_declaration' && firstIdentifier(parent)?.id === node.id) ||
-        (parent.type === 'variable_declaration' && firstIdentifier(parent)?.id === node.id))) {
+        parent.type === 'initialized_identifier' || (parent.type === 'pattern' && isField(node, 'bound_identifier')) ||
+        (parent.type === 'variable_declaration' && firstIdentifier(parent)?.id === node.id) ||
+        (language === 'dart' && declaration.type === 'static_final_declaration' &&
+          firstIdentifier(declaration)?.id === node.id))) {
       const member = memberContext(declaration);
-      declare(node, member ? 'member' : 'variable', member ? classOf(node) : undefined);
-    }
-    // `abstract`/`external` Dart fields have no storage and behave like getters.
-    if (language === 'dart' && parent.type === 'identifier_list' && parent.parent?.type === 'declaration') {
-      declare(node, 'member', classOf(node));
+      const owner = member ? classOf(node) : undefined;
+      const pythonEnumMember = language === 'python' && member && owner &&
+        /\bclass\s+\w+\s*\([^\n)]*\b(?:Enum|IntEnum|StrEnum)\b/.test(owner.node.text.slice(0, 240));
+      declare(node, pythonEnumMember ? 'enum' : member ? 'property' : 'variable', owner);
     }
     if (language === 'python' && parent.type === 'assignment' && isField(node, 'left')) {
-      declare(node, memberContext(node) ? 'member' : 'variable', nearestOwner(node) ?? region(root));
+      const member = memberContext(node);
+      const owner = member ? classOf(node) : undefined;
+      const enumMember = member && owner &&
+        /\bclass\s+\w+\s*\([^\n)]*\b(?:Enum|IntEnum|StrEnum)\b/.test(owner.node.text.slice(0, 240));
+      declare(node, enumMember ? 'enum' : member ? 'property' : 'variable',
+        owner ?? nearestOwner(node) ?? region(root));
     }
     if (language === 'ruby' && parent.type === 'assignment' && isField(node, 'left')) declare(node, 'variable');
     if (language === 'go' && ancestor(node, (item) => item.type === 'short_var_declaration') &&
@@ -343,115 +292,153 @@ function classify(root, source, language) {
       if (parent.type === 'alias') set(node, 'purple');
       if (parent.type === 'assignment' && isField(node, 'left')) declare(node, 'variable');
       if (['dependency', 'dependency_expression', 'recipe_header'].includes(parent.type) && isField(node, 'name')) set(node, 'purple');
-      if (parent.type === 'function_call' && isField(node, 'name')) set(node, 'yellow');
+      if (parent.type === 'function_call' && isField(node, 'name')) set(node, codeRoles.method);
     }
   }
 
   function useRole(node) {
     if (roles.has(node.id)) return roles.get(node.id);
     const parent = node.parent;
+    const annotation = ancestor(node, (item) =>
+      ['annotation', 'annotation_entry', 'marker_annotation', 'decorator',
+        'attribute_item', 'inner_attribute_item'].includes(item.type) ||
+      item.type === 'attribute' && ['csharp', 'swift'].includes(language));
+    if (annotation) {
+      const target = annotation.namedChildren[0];
+      const name = field(annotation, 'name') ?? field(annotation, 'type') ??
+        field(target, 'function') ?? firstIdentifier(annotation) ??
+        annotation.descendantsOfType('identifier')[0];
+      if (name && contains(region(name), node)) {
+        return { role: codeRoles.annotation, fontStyle: 'italic' };
+      }
+      if (language === 'rust' && /^[A-Z]/.test(node.text)) return codeRoles.type;
+    }
+    const moduleReference = ancestor(node, (item) => [
+      'export_statement', 'groovy_import', 'import_declaration',
+      'import_from_statement', 'import_specification', 'import_statement',
+      'using_directive',
+    ].includes(item.type));
+    if (moduleReference) return codeRoles.binding;
     if (language === 'sql') {
-      if (ancestor(node, (item) => item.type === 'invocation')) return 'yellow';
-      return ancestor(node, (item) => item.type === 'field') ? 'purple' : 'blue';
+      const reference = ancestor(node, (item) => item.type === 'object_reference');
+      const invocation = reference?.parent?.type === 'invocation'
+        ? reference.parent
+        : undefined;
+      const functionName = invocation?.namedChildren[0]
+        ?.descendantsOfType('identifier').at(-1);
+      if (functionName?.id === node.id) return codeRoles.method;
+      if (reference) return codeRoles.declarationKeyword;
+      return codeRoles.binding;
+    }
+    if (language === 'dart' && parent.type === 'throw_expression' &&
+        /^[A-Z]/.test(node.text) &&
+        /^\s*\(/.test(source.slice(node.endIndex, node.endIndex + 24))) {
+      return codeRoles.type;
+    }
+    if (language === 'go' && ancestor(node, (item) => item.type === 'package_clause')) {
+      return codeRoles.binding;
     }
     if (language === 'rust' && parent.type === 'macro_invocation' && isField(node, 'macro')) return 'purple';
-    const associatedClass = outOfLineClass(node);
-    const associatedMember = (entry) => entry.kind === 'member' && associatedClass &&
-      entry.start === associatedClass.start && entry.end === associatedClass.end;
-    const candidates = (bindings.get(node.text) ?? []).filter((entry) => contains(entry, node) || associatedMember(entry))
-      .sort((a, b) => Number(a.global) - Number(b.global) ||
-        Number(language === 'dart' && a.kind !== 'variable') -
-          Number(language === 'dart' && b.kind !== 'variable') ||
-        Number(contains(b, node)) - Number(contains(a, node)) ||
-        (a.end - a.start) - (b.end - b.start) || b.node.startIndex - a.node.startIndex);
-    const binding = candidates[0];
-    if (binding?.kind === 'namespace') return 'yellow';
-    if (dartQualifiedConstructor(node)) return 'yellow';
-    if (!binding && dartInvokedRoot(node)) return 'yellow';
-    if (language === 'dart' && parent.type === 'annotation') return 'yellow';
-    if (!binding && language === 'dart' && node.text === 'values' &&
-        classOf(node)?.node.type === 'enum_declaration') return 'purple';
-    if (language === 'dart' && parent.type === 'qualified' &&
-        parent.namedChildren[0]?.type === 'type_identifier' &&
-        parent.namedChildren.at(-1)?.id === node.id) return 'purple';
-    if (dartRelationalTypeArgument(node)) return 'white';
+    if (propertyNode(node)) return calledMember(node) ? codeRoles.method : codeRoles.property;
     if (['keyword_argument', 'label', 'value_argument_label', 'field_initializer',
       'field_pattern'].includes(parent.type) &&
-        (isField(node, 'name') || isField(node, 'field') || firstIdentifier(parent)?.id === node.id)) return 'purple';
-    if (binding?.kind === 'variable') return binding.global &&
-      !['just', 'makefile', 'shellscript', 'ruby'].includes(language) ? 'yellow' : 'blue';
-    if (propertyNode(node)) return 'purple';
-    if (language === 'go' && parent.type === 'literal_element' && isField(parent, 'key')) return 'purple';
-    if (language === 'java' && parent.type === 'record_pattern' && firstIdentifier(parent)?.id === node.id) return 'white';
+        (isField(node, 'name') || isField(node, 'field') || firstIdentifier(parent)?.id === node.id)) return codeRoles.namedArgument;
+    if (language === 'go' && parent.type === 'literal_element' && isField(parent, 'key')) return codeRoles.property;
+    if (language === 'java' && parent.type === 'record_pattern' && firstIdentifier(parent)?.id === node.id) return codeRoles.type;
     if (language === 'kotlin' && parent.type === 'value_argument' &&
-        parent.namedChildren[0]?.id === node.id && parent.children.some((item) => item.text === '=')) return 'purple';
+        parent.namedChildren[0]?.id === node.id && parent.children.some((item) => item.text === '=')) return codeRoles.namedArgument;
     if (language === 'java' && parent.type === 'method_invocation' && isField(node, 'name')) return 'purple';
     if (language === 'java' && parent.type === 'method_invocation' &&
-        isField(node, 'object') && /^[A-Z]/.test(node.text)) return 'white';
-    if (language === 'ruby' && parent.type === 'call' && isField(node, 'method')) return node.text === 'new' ? 'yellow' : 'purple';
-    if (language === 'php' && parent.type === 'variable_name') return node.text === 'this' ? 'yellow' : 'blue';
-    if (language === 'php' && parent.type === 'function_call_expression' && isField(node, 'function')) return 'yellow';
+        isField(node, 'object') && /^[A-Z]/.test(node.text)) return codeRoles.type;
+    if (language === 'ruby' && node.type === 'constant') return codeRoles.type;
+    if (language === 'ruby' && parent.type === 'call' && isField(node, 'method')) return codeRoles.method;
+    if (language === 'php' && parent.type === 'variable_name') {
+      return node.text === 'this' ? keywordStyle('this') : codeRoles.binding;
+    }
+    if (language === 'php' && parent.type === 'function_call_expression' && isField(node, 'function')) return codeRoles.method;
     if (parent.type === 'object_creation_expression') return 'yellow';
-    // `const Widget()` / `new Widget()` name a constructor, not a type annotation.
-    if (language === 'dart' && node.type === 'type_identifier' &&
-        ['const_object_expression', 'new_expression'].includes(parent.type)) return 'yellow';
     if (node.type === 'type_identifier' &&
         ancestor(node, (item) => ['object_creation_expression', 'struct_expression', 'composite_literal'].includes(item.type)) &&
         !ancestor(node, (item) => typeKinds.test(item.type))) return 'yellow';
-    if (node.type === 'type_identifier' || node.type === 'namespace_identifier' ||
-        ancestor(node, (item) => typeKinds.test(item.type))) return 'white';
-    if (['csharp', 'razor'].includes(language) && ['type', 'returns'].some((name) => isField(node, name))) return 'white';
+    if (node.type === 'namespace_identifier') return 'white';
+    if (node.type === 'type_identifier' || ancestor(node, (item) => typeKinds.test(item.type))) {
+      return codeRoles.type;
+    }
+    if (['csharp', 'razor'].includes(language) && ['type', 'returns'].some((name) => isField(node, name))) return codeRoles.type;
+    const associatedClass = outOfLineClass(node);
+    const associatedMember = (entry) => ['method', 'property', 'enum'].includes(entry.kind) && associatedClass &&
+      entry.start === associatedClass.start && entry.end === associatedClass.end;
+    const candidates = (bindings.get(node.text) ?? []).filter((entry) => contains(entry, node) || associatedMember(entry))
+      .sort((a, b) => Number(a.global) - Number(b.global) ||
+        Number(contains(b, node)) - Number(contains(a, node)) ||
+        (a.end - a.start) - (b.end - b.start) || b.node.startIndex - a.node.startIndex);
+    const binding = candidates[0];
     if (binding) {
-      if (binding.kind === 'member' || binding.kind === 'enum') return 'purple';
-      if (binding.kind === 'type' || binding.kind === 'constructor') return 'yellow';
-      return binding.global && !['just', 'makefile', 'shellscript', 'ruby'].includes(language) ? 'yellow' : 'blue';
+      if (binding.kind === 'method') return codeRoles.method;
+      if (binding.kind === 'function') return codeRoles.functionDeclaration;
+      if (binding.kind === 'enum') return codeRoles.enumMember;
+      if (binding.kind === 'property') return codeRoles.property;
+      if (binding.kind === 'type' || binding.kind === 'alias') {
+        const directCall = ['call_expression', 'call'].includes(parent.type) &&
+          (isField(node, 'function') || parent.firstNamedChild?.id === node.id);
+        const dartCall = language === 'dart' && node.nextNamedSibling?.type === 'selector' &&
+          node.nextNamedSibling.firstNamedChild?.type === 'argument_part';
+        return directCall || dartCall ? 'yellow' : codeRoles.type;
+      }
+      const directCall = ['call_expression', 'call', 'function_call', 'invocation_expression',
+        'function_call_expression'].includes(parent.type) &&
+        (isField(node, 'function') || isField(node, 'name') || firstIdentifier(parent)?.id === node.id);
+      const dartCall = language === 'dart' && node.nextNamedSibling?.type === 'selector' &&
+        node.nextNamedSibling.firstNamedChild?.type === 'argument_part';
+      if (directCall || dartCall) return codeRoles.method;
+      return ['just', 'makefile', 'shellscript'].includes(language)
+        ? 'blue'
+        : codeRoles.binding;
     }
     if (node.type === 'constant') return 'yellow';
-    if (node.type === 'identifier_dollar_escaped' || node.type === 'interpolated_identifier') {
-      return language === 'dart' ? 'yellow' : 'blue';
-    }
-    if (['call_expression', 'call', 'function_call', 'invocation_expression', 'function_call_expression'].includes(parent.type) &&
-        (isField(node, 'function') || isField(node, 'name') || firstIdentifier(parent)?.id === node.id)) return 'yellow';
-    if (language === 'dart' && node.nextNamedSibling?.type === 'selector' &&
-        node.nextNamedSibling.firstNamedChild?.type === 'argument_part') return 'yellow';
-    if (language === 'dart') return 'yellow';
+    if (node.type === 'identifier_dollar_escaped' || node.type === 'interpolated_identifier') return codeRoles.binding;
+    const directCall = ['call_expression', 'call', 'function_call', 'invocation_expression',
+      'function_call_expression'].includes(parent.type) &&
+      (isField(node, 'function') || isField(node, 'name') || firstIdentifier(parent)?.id === node.id);
+    const dartCall = language === 'dart' && node.nextNamedSibling?.type === 'selector' &&
+      node.nextNamedSibling.firstNamedChild?.type === 'argument_part';
+    if ((directCall || dartCall) && implicitTypeCallLanguages.has(language) &&
+        /^_?[A-Z]/.test(node.text)) return codeRoles.type;
+    if (directCall || dartCall) return codeRoles.method;
     // Unknown names retain the grammar/server fallback, rather than guessing from case.
     return undefined;
-  }
-
-  // Dartdoc `[name]` references to parameters of the documented declaration
-  // take that parameter's role; other references fall back to their case.
-  function documentedParameters(comment) {
-    let target = comment.nextNamedSibling;
-    while (target && (/comment/.test(target.type) || annotationKinds.has(target.type))) target = target.nextNamedSibling;
-    const found = new Map();
-    const stack = target ? [target] : [];
-    while (stack.length) {
-      const node = stack.pop();
-      if (node.type === 'block' || /body$/.test(node.type)) continue;
-      if (declarations.has(node.id) && !found.has(node.text) &&
-          ancestor(node, (item) => item.type === 'formal_parameter_list')) found.set(node.text, roles.get(node.id));
-      stack.push(...node.namedChildren);
-    }
-    return (name) => found.get(name);
   }
 
   for (const node of nodes) {
     const text = node.text;
     if (/comment/.test(node.type)) {
       addComment(spans, source, node.startIndex, node.endIndex,
-        language === 'dart' && node.type === 'documentation_comment' ? 'italic' : undefined,
-        language === 'dart' ? documentedParameters(node) : undefined);
+        language === 'dart' && node.type === 'documentation_comment' ? 'italic' : undefined);
       continue;
     }
     if (stringKinds.test(node.type) && !ancestor(node, (item) => item.type === 'primitive_type')) spans.add(node.startIndex, node.endIndex, 'green', 2);
     if (/^(?:primitive_type|predefined_type|integral_type|floating_point_type|boolean_type|void_type)$/.test(node.type)) {
-      spans.add(node.startIndex, node.endIndex, 'white', 40, language === 'dart' ? 'normal' : undefined);
+      if (text === 'void') {
+        const style = keywordStyle(text);
+        spans.add(node.startIndex, node.endIndex, style.role, 40, style.fontStyle);
+      } else {
+        spans.add(node.startIndex, node.endIndex, codeRoles.type, 40);
+      }
     }
     if (numericKinds.test(node.type)) spans.add(node.startIndex, node.endIndex, 'orange', 30);
     if (isIdentifier(node)) {
+      if (['self', 'super', 'this'].includes(text)) {
+        const style = keywordStyle(text);
+        spans.add(node.startIndex, node.endIndex, style.role, 50,
+          style.fontStyle);
+        continue;
+      }
       const role = useRole(node);
-      if (role) spans.add(node.startIndex, node.endIndex, role, 30);
+      if (role) {
+        const style = typeof role === 'string' ? { role } : role;
+        spans.add(node.startIndex, node.endIndex, style.role, 30,
+          style.fontStyle);
+      }
       continue;
     }
     if (language === 'makefile') {
@@ -462,10 +449,26 @@ function classify(root, source, language) {
         spans.add(node.startIndex, node.endIndex, 'yellow', 40);
       }
     }
+    if (language === 'dart' && node.type === 'annotation' && text.startsWith('@')) {
+      spans.add(node.startIndex, node.startIndex + 1, codeRoles.annotation, 40);
+    }
+    if (language === 'python' && node.type === 'decorator' && text.startsWith('@')) {
+      spans.add(node.startIndex, node.startIndex + 1,
+        codeRoles.annotation, 40, 'italic');
+    }
     if (language === 'rust' && node.parent?.type === 'macro_invocation' && (isField(node, 'macro') || text === '!')) {
       spans.add(node.startIndex, node.endIndex, 'purple', 40);
     }
-    if (node.type === 'instance_variable' || node.type === 'class_variable') spans.add(node.startIndex, node.endIndex, 'purple', 30);
+    if (language === 'rust' && ancestor(node, (item) =>
+      ['attribute_item', 'inner_attribute_item'].includes(item.type)) && !node.isNamed) {
+      for (const match of text.matchAll(/#|[\[\](),]/g)) {
+        const start = node.startIndex + match.index;
+        spans.add(start, start + 1,
+          match[0] === '#' ? codeRoles.annotation : 'white',
+          50, match[0] === '#' ? 'italic' : 'normal');
+      }
+    }
+    if (node.type === 'instance_variable' || node.type === 'class_variable') spans.add(node.startIndex, node.endIndex, codeRoles.property, 30);
     if (node.type === 'variable_name' && language === 'shellscript') spans.add(node.startIndex, node.endIndex, 'blue', 30);
     if (node.type === 'template_substitution' || node.type === 'interpolated_expression' || node.type === 'interpolation') {
       for (const child of node.children) if (!child.isNamed && /^(?:\$|\{|\}|#\{|\$\{|\{\{|\}\})$/.test(child.text)) {
@@ -481,16 +484,27 @@ function classify(root, source, language) {
       spans.add(node.startIndex, node.endIndex, 'green', 50);
     }
     if (node.childCount !== 0) continue;
+    if (text === 'void') {
+      const style = keywordStyle(text);
+      spans.add(node.startIndex, node.endIndex, style.role, 60, style.fontStyle);
+      continue;
+    }
     if ((node.isNamed && typeKinds.test(node.type)) || (language === 'dart' && text === 'Function')) {
-      spans.add(node.startIndex, node.endIndex, 'white', 40, language === 'dart' ? 'normal' : undefined);
+      spans.add(node.startIndex, node.endIndex, codeRoles.type, 40, language === 'dart' ? 'normal' : undefined);
       continue;
     }
     // Do not treat string content, names, shell commands, or error recovery text as keywords.
     if (!node.isNamed || /^keyword_/.test(node.type) || /_builtin$/.test(node.type) ||
-        ['true', 'false', 'null_literal', 'null', 'this', 'super', 'self', 'inferred_type', 'binding_pattern_kind'].includes(node.type)) {
-      if (keywords.has(text) || /^keyword_/.test(node.type)) {
-        spans.add(node.startIndex, node.endIndex, 'yellow', 20,
-          language === 'dart' && text === 'null' ? 'normal' : undefined);
+        ['true', 'false', 'boolean', 'boolean_literal', 'null_literal', 'null',
+          'this', 'super', 'self', 'inferred_type',
+          'binding_pattern_kind'].includes(node.type)) {
+      if (keywords.has(text.toLowerCase().replace(/^@/, '')) || /^keyword_/.test(node.type)) {
+        const style = keywordStyle(text);
+        if (language === 'shellscript' && style.fontStyle === 'italic') {
+          style.role = codeRoles.flowKeyword;
+        }
+        spans.add(node.startIndex, node.endIndex, style.role, 20,
+          ['sql', 'just', 'makefile'].includes(language) ? undefined : style.fontStyle);
       }
       else if (/^(?:[{}()[\],;.])$/.test(text)) spans.add(node.startIndex, node.endIndex, 'white', 15);
       else if (/^(?:[:=<>!?+*\/|&%~^@-]+|=>|->)$/.test(text)) spans.add(node.startIndex, node.endIndex, text === ':' ? 'white' : 'operator', 15);

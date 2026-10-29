@@ -6,7 +6,7 @@ import path from 'node:path';
 const require = createRequire(import.meta.url);
 const { generatedThemes } = require('../src/index.js');
 const { runtimeFiles } = require('../src/build-runtime.js');
-const { themeVariants } = require('../src/theme-variants.js');
+const { themeFamilies, themeVariants } = require('../src/theme-variants.js');
 
 const manifest = JSON.parse(await readFile('package.json', 'utf8'));
 const recommendations = JSON.parse(
@@ -27,6 +27,29 @@ const expectedRecommendations = compatibility.providers
   .filter((provider) => provider.kind === 'recommended')
   .map((provider) => provider.id);
 const expectedSamples = compatibility.cases.map((item) => item.sample);
+// Selectors that may carry an italic flag next to their foreground, across
+// both families.
+const semanticTypographySelectors = new Set([
+  'annotation:dart',
+  'decorator',
+  'keyword',
+  'keyword:dart',
+  'keyword:sql',
+  'keyword.void:dart',
+  'macro:julia',
+  'property.annotation:dart',
+  'tomlArrayKey',
+  'tomlTableKey',
+]);
+// Base variants own their italic contract: Original keeps provider-marked
+// annotations italic; Custom contributes no italic typography at all.
+const baseItalics = {
+  original: {
+    tokenRules: ['ANNOTATION ITALIC'],
+    semantic: ['annotation:dart', 'decorator', 'property.annotation:dart'],
+  },
+  custom: { tokenRules: [], semantic: [] },
+};
 
 const sampleEntries = await readdir('samples', {
   recursive: true,
@@ -194,21 +217,13 @@ for (const [absolutePath, expectedSource] of generatedThemes()) {
       throw new Error(`${selector}: semantic rules must use a palette foreground`);
     }
     if (typeof value !== 'string' &&
-        (![
-          'annotation:dart',
-          'decorator',
-          'keyword:dart',
-          'keyword.void:dart',
-          'property.annotation:dart',
-        ].includes(selector) ||
+        (!semanticTypographySelectors.has(selector) ||
          Object.keys(value).sort().join(',') !== 'foreground,italic')) {
       throw new Error(`${selector}: unexpected semantic typography override`);
     }
   }
 }
 
-const original = parsedThemes.get('CodePen Theme Original');
-const italics = parsedThemes.get('CodePen Theme Original Italics');
 const foregroundRules = (theme) => theme.tokenColors.filter(
   (rule) => rule.settings.foreground !== undefined,
 );
@@ -218,28 +233,32 @@ const semanticForegrounds = (theme) => Object.fromEntries(
     typeof value === 'string' ? value : value.foreground,
   ]),
 );
-if (JSON.stringify(original.colors) !== JSON.stringify(italics.colors) ||
-    JSON.stringify(foregroundRules(original)) !== JSON.stringify(foregroundRules(italics)) ||
-    JSON.stringify(semanticForegrounds(original)) !== JSON.stringify(semanticForegrounds(italics))) {
-  throw new Error('Italics variant must preserve every Original foreground color');
-}
-const originalItalicRules = original.tokenColors
-  .filter((rule) => rule.settings.fontStyle?.split(/\s+/).includes('italic'))
-  .map((rule) => rule.name);
-const originalSemanticItalics = Object.entries(original.semanticTokenColors)
-  .filter(([, value]) => typeof value === 'object' && value.italic === true)
-  .map(([selector]) => selector)
-  .sort();
-if (JSON.stringify(originalItalicRules) !== JSON.stringify(['ANNOTATION ITALIC']) ||
-    JSON.stringify(originalSemanticItalics) !==
-      JSON.stringify(['annotation:dart', 'decorator', 'property.annotation:dart'])) {
-  throw new Error('Original must limit italic typography to annotations and decorators');
-}
-if (!italics.tokenColors.some((rule) =>
-  rule.settings.fontStyle?.split(/\s+/).includes('italic')) ||
-  !Object.values(italics.semanticTokenColors).some((value) =>
-    typeof value === 'object' && value.italic === true)) {
-  throw new Error('Italics must retain TextMate and semantic italics');
+for (const family of themeFamilies) {
+  const variants = themeVariants.filter((variant) => variant.family === family);
+  const base = parsedThemes.get(variants.find((variant) => !variant.italics).label);
+  const italics = parsedThemes.get(variants.find((variant) => variant.italics).label);
+  if (JSON.stringify(base.colors) !== JSON.stringify(italics.colors) ||
+      JSON.stringify(foregroundRules(base)) !== JSON.stringify(foregroundRules(italics)) ||
+      JSON.stringify(semanticForegrounds(base)) !== JSON.stringify(semanticForegrounds(italics))) {
+    throw new Error(`${italics.name} must preserve every ${base.name} foreground color`);
+  }
+  const italicRules = base.tokenColors
+    .filter((rule) => rule.settings.fontStyle?.split(/\s+/).includes('italic'))
+    .map((rule) => rule.name);
+  const semanticItalics = Object.entries(base.semanticTokenColors)
+    .filter(([, value]) => typeof value === 'object' && value.italic === true)
+    .map(([selector]) => selector)
+    .sort();
+  if (JSON.stringify(italicRules) !== JSON.stringify(baseItalics[family].tokenRules) ||
+      JSON.stringify(semanticItalics) !== JSON.stringify(baseItalics[family].semantic)) {
+    throw new Error(`${base.name} italic typography differs from its reviewed contract`);
+  }
+  if (!italics.tokenColors.some((rule) =>
+    rule.settings.fontStyle?.split(/\s+/).includes('italic')) ||
+    !Object.values(italics.semanticTokenColors).some((value) =>
+      typeof value === 'object' && value.italic === true)) {
+    throw new Error(`${italics.name} must retain TextMate and semantic italics`);
+  }
 }
 
 const generatedThemeFiles = await readdir('themes');

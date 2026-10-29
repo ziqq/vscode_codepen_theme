@@ -4,6 +4,7 @@ import {
   compareVersions,
   providerVersionFor,
 } from './lib/compatibility.mjs';
+import { baseThemePath } from './lib/family.mjs';
 
 const manifest = JSON.parse(await readFile('package.json', 'utf8'));
 const recommendations = JSON.parse(
@@ -12,7 +13,7 @@ const recommendations = JSON.parse(
 const compatibility = JSON.parse(
   await readFile('compatibility/scopes.json', 'utf8'),
 );
-const theme = JSON.parse(await readFile('themes/codepen-theme.json', 'utf8'));
+const theme = JSON.parse(await readFile(baseThemePath, 'utf8'));
 
 if (compatibility.schemaVersion !== 1) {
   throw new Error('Unsupported compatibility contract schema');

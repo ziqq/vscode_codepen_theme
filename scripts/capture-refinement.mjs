@@ -6,6 +6,7 @@ import { spawn } from 'node:child_process';
 import { createRequire } from 'node:module';
 import assert from 'node:assert/strict';
 import { vscodeExecutable } from './lib/vscode-runtime.mjs';
+import { baseVariant, family, fixturePath, italicsVariant, themeVariants } from './lib/family.mjs';
 const require = createRequire(import.meta.url);
 const { chromium } = require('playwright-core');
 const root = process.cwd();
@@ -21,9 +22,9 @@ const requestedVersion = process.argv[2] ?? '1.135.0';
 const executable = await vscodeExecutable(requestedVersion);
 const output = await fs.mkdtemp(path.join(os.tmpdir(), 'codepen-refinement-'));
 const preview = JSON.parse(await fs.readFile('.cache/codepen-theme/preview/manifest.json', 'utf8'));
-const fixtures = JSON.parse(await fs.readFile('build/refinement.json', 'utf8')).results;
+const fixtures = JSON.parse(await fs.readFile(`build/refinement-${family}.json`, 'utf8')).results;
 const references = JSON.parse(await fs.readFile('compatibility/codepen-reference.json', 'utf8')).cases;
-const reviewed = JSON.parse(await fs.readFile('compatibility/refinement-differences.json', 'utf8')).differences;
+const reviewed = JSON.parse(await fs.readFile(fixturePath('refinement-differences.json'), 'utf8')).differences;
 const palette = require('../src/colors');
 const expandTabs = (line) => {
   let result = '';
@@ -65,9 +66,12 @@ await fs.writeFile(path.join(output, 'plan.json'), JSON.stringify({
   root,
   cases: plan,
   typographyDefaults,
+  labels: themeVariants.map((variant) => variant.label),
+  baseTheme: baseVariant.label,
+  italicsTheme: italicsVariant.label,
 }));
 const settings = {
-  'workbench.colorTheme': 'CodePen Theme Original', 'workbench.colorCustomizations': {},
+  'workbench.colorTheme': baseVariant.label, 'workbench.colorCustomizations': {},
   'editor.tokenColorCustomizations': { textMateRules: [] }, 'editor.semanticTokenColorCustomizations': {},
   'editor.semanticHighlighting.enabled': false, 'editor.lineHeight': 21,
   'editor.minimap.enabled': false, 'editor.stickyScroll.enabled': false,
@@ -153,6 +157,14 @@ try {
       return rows.length === lines.length && rows.every((row, index) =>
         row.textContent.replaceAll('\u00a0', ' ').replaceAll('\u200b', '') === lines[index]);
     }, ready.source.split(/\r?\n/).map(expandTabs), { timeout: 20000 });
+    // A provider loaded for the first time can expose the source before the
+    // workbench has attached the color-theme CSS to the new editor model.
+    await page.waitForFunction(() => {
+      const leaves = [...document.querySelectorAll('.part.editor .view-line span')]
+        .filter((element) => element.textContent?.trim() && !element.querySelector('span'));
+      return leaves.length > 0 && leaves.every((element) =>
+        getComputedStyle(element).color !== 'rgb(0, 0, 0)');
+    }, undefined, { timeout: 20000 });
     if (index === 0) {
       typography = await page.locator('.part.editor .view-line').first().evaluate((line) => {
         const style = getComputedStyle(line);
@@ -221,21 +233,22 @@ try {
         const start = ready.source.indexOf(check.text);
         if (fontStyles.slice(start, start + check.text.length).some((style) => style !== check.style)) result.errors.push({ typography: check });
       }
+      // Original keeps provider-marked annotations italic in its base variant.
       const annotationItalic = new Set();
-      for (const match of ready.source.matchAll(
-        /@[A-Za-z_][\w.]*(?:\([^\r\n]*\))?/g,
-      )) {
-        for (let index = match.index; index < match.index + match[0].length; index++) {
-          annotationItalic.add(index);
+      if (family === 'original') {
+        for (const match of ready.source.matchAll(/@[A-Za-z_][\w.]*(?:\([^\r\n]*\))?/g)) {
+          for (let index = match.index; index < match.index + match[0].length; index++) {
+            annotationItalic.add(index);
+          }
         }
       }
       if (!ready.italics && fontStyles.some(
         (style, index) => style === 'italic' && !annotationItalic.has(index),
       )) {
-        result.errors.push({ typography: 'Original rendered non-annotation theme-owned italics' });
+        result.errors.push({ typography: `${baseVariant.label} rendered theme-owned italics` });
       }
       if (ready.italics && !fontStyles.some((style) => style === 'italic')) {
-        result.errors.push({ typography: 'Italics did not render theme-owned italics' });
+        result.errors.push({ typography: `${italicsVariant.label} did not render theme-owned italics` });
       }
     }
     if (!ready.disabled && !ready.otherTheme) for (const expected of ready.expectations ?? []) {
@@ -288,7 +301,7 @@ try {
 } finally {
   if (exitCode !== 0) await page?.screenshot({ path: path.join(output, 'last-editor.png') }).catch(() => {});
   await fs.writeFile(path.join(output, 'vscode.log'), logs);
-  await fs.writeFile('build/refinement-editor.json', JSON.stringify({
+  await fs.writeFile(`build/refinement-editor-${family}.json`, JSON.stringify({
     output, typography, outputTypography, results,
   }, null, 2));
   await browser?.close().catch(() => {});

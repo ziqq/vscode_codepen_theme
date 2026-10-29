@@ -3,7 +3,7 @@ const { addComment } = require('./comments');
 
 let compiler;
 function refineTypeScript(source, language) {
-  const ts = compiler ??= require('./vendor/typescript.js');
+  const ts = compiler ??= require('../vendor/typescript.js');
   const jsx = language.endsWith('react');
   const js = language.startsWith('javascript');
   const fileName = `preview.${jsx ? (js ? 'jsx' : 'tsx') : (js ? 'js' : 'ts')}`;

@@ -43,7 +43,7 @@
         "codepen.syntaxRefinement.enabled": {
           "type": "boolean",
           "default": true,
-          "description": "Refine ambiguous syntax colors while a CodePen Theme Original variant is active. Does not replace language grammars or language servers.",
+          "description": "Refine ambiguous syntax colors while a CodePen Theme variant is active. Does not replace language grammars or language servers.",
           "scope": "resource"
         }
       }
@@ -72,6 +72,16 @@
         "label": "CodePen Theme Original Italics",
         "uiTheme": "vs-dark",
         "path": "./themes/codepen-theme-italics.json"
+      },
+      {
+        "label": "CodePen Theme Custom",
+        "uiTheme": "vs-dark",
+        "path": "./themes/codepen-theme-custom.json"
+      },
+      {
+        "label": "CodePen Theme Custom Italics",
+        "uiTheme": "vs-dark",
+        "path": "./themes/codepen-theme-custom-italics.json"
       }
     ]
   },
@@ -90,27 +100,27 @@
     "start": "node --watch --watch-preserve-output src/index.js",
     "build": "node src/index.js",
     "check:theme": "node scripts/validate-theme.mjs",
-    "check:colors": "node scripts/validate-token-colors.mjs",
-    "check:compatibility": "node scripts/validate-compatibility.mjs",
+    "check:colors": "node scripts/run-families.mjs scripts/validate-token-colors.mjs",
+    "check:compatibility": "node scripts/run-families.mjs scripts/validate-compatibility.mjs",
     "check:docs": "node scripts/generate-language-support.mjs --check",
-    "check:visual": "node scripts/render-visual-baseline.mjs --check",
+    "check:visual": "node scripts/run-families.mjs scripts/render-visual-baseline.mjs --check",
     "check:release": "node scripts/validate-release.mjs",
     "check": "npm run check:theme && npm run lint:refinement && npm run check:colors && npm run test:refinement && npm run check:compatibility && npm run check:docs && npm run check:visual && npm run check:release",
     "lint:refinement": "node scripts/lint-refinement.mjs",
     "test": "npm run check",
-    "lint": "node --check scripts/audit-codepen-reference.mjs && node --check scripts/lib/token-colors.mjs && node --check scripts/validate-token-colors.mjs && node --check scripts/test-semantic-provider.mjs && node --check src/colors.js && node --check src/theme-variants.js && node --check src/theme.js && node --check src/index.js && node --check scripts/prepare-preview.mjs && node --check scripts/lib/compatibility.mjs && node --check scripts/lib/providers.mjs && node --check scripts/lib/vscode-runtime.mjs && node --check scripts/capture-vscode-screenshots.mjs && node --check scripts/vscode-screenshot-runner.cjs && node --check scripts/check-provider-drift.mjs && node --check scripts/validate-theme.mjs && node --check scripts/validate-compatibility.mjs && node --check scripts/generate-language-support.mjs && node --check scripts/render-visual-baseline.mjs && node --check scripts/tokenize-providers.mjs && node --check scripts/validate-provider-matrix.mjs && node --check scripts/validate-vscode-versions.mjs && node --check scripts/validate-release.mjs && node --check scripts/validate-vsix.mjs",
+    "lint": "node --check scripts/audit-codepen-reference.mjs && node --check scripts/lib/token-colors.mjs && node --check scripts/validate-token-colors.mjs && node --check scripts/token-colors/original.mjs && node --check scripts/token-colors/custom.mjs && node --check scripts/run-families.mjs && node --check scripts/lib/family.mjs && node --check scripts/lib/family.cjs && node --check scripts/test-semantic-provider.mjs && node --check src/colors.js && node --check src/theme-variants.js && node --check src/themes/original.js && node --check src/themes/custom.js && node --check src/index.js && node --check scripts/prepare-preview.mjs && node --check scripts/lib/compatibility.mjs && node --check scripts/lib/providers.mjs && node --check scripts/lib/vscode-runtime.mjs && node --check scripts/capture-vscode-screenshots.mjs && node --check scripts/vscode-screenshot-runner.cjs && node --check scripts/check-provider-drift.mjs && node --check scripts/validate-theme.mjs && node --check scripts/validate-compatibility.mjs && node --check scripts/generate-language-support.mjs && node --check scripts/render-visual-baseline.mjs && node --check scripts/tokenize-providers.mjs && node --check scripts/validate-provider-matrix.mjs && node --check scripts/validate-vscode-versions.mjs && node --check scripts/validate-release.mjs && node --check scripts/validate-vsix.mjs",
     "docs:update": "node scripts/generate-language-support.mjs --write",
     "check:provider-drift": "node scripts/check-provider-drift.mjs",
     "test:vscode-versions": "node scripts/validate-vscode-versions.mjs",
-    "test:providers": "node scripts/tokenize-providers.mjs",
-    "test:semantic": "node scripts/test-semantic-provider.mjs",
-    "test:refinement": "node scripts/test-refinement.mjs && node --test scripts/test-refinement-lifecycle.cjs && node scripts/audit-refinement-reference.mjs",
-    "test:refinement:editor": "node scripts/capture-refinement.mjs",
-    "test:reference": "node scripts/audit-codepen-reference.mjs",
+    "test:providers": "node scripts/run-families.mjs scripts/tokenize-providers.mjs",
+    "test:semantic": "node scripts/run-families.mjs scripts/test-semantic-provider.mjs",
+    "test:refinement": "node scripts/run-families.mjs scripts/test-refinement.mjs && node --test scripts/test-refinement-lifecycle.cjs && node scripts/run-families.mjs scripts/audit-refinement-reference.mjs",
+    "test:refinement:editor": "node scripts/run-families.mjs scripts/capture-refinement.mjs",
+    "test:reference": "node scripts/run-families.mjs scripts/audit-codepen-reference.mjs",
     "test:provider-matrix": "node scripts/validate-provider-matrix.mjs",
-    "test:screenshots": "node scripts/capture-vscode-screenshots.mjs",
-    "test:screenshots:semantic": "node scripts/capture-vscode-screenshots.mjs --semantic",
-    "visual:update": "node scripts/render-visual-baseline.mjs --write",
+    "test:screenshots": "node scripts/run-families.mjs scripts/capture-vscode-screenshots.mjs",
+    "test:screenshots:semantic": "node scripts/run-families.mjs scripts/capture-vscode-screenshots.mjs --semantic",
+    "visual:update": "node scripts/run-families.mjs scripts/render-visual-baseline.mjs --write",
     "check:package": "node scripts/validate-vsix.mjs ./build/codepen-theme-original.vsix",
     "package": "vsce package --githubBranch master --out ./build/codepen-theme-original.vsix && npm run check:package",
     "vscode:prepublish": "npm run build && npm run check",

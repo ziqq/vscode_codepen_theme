@@ -5,12 +5,13 @@ const compatibility = JSON.parse(
   await readFile('compatibility/scopes.json', 'utf8'),
 );
 
+// Every family is checked against every VS Code version in the matrix.
 for (const version of compatibility.testVscodeVersions) {
   console.log(`Tokenizing provider matrix for VS Code ${version}.`);
   const exitCode = await new Promise((resolve, reject) => {
     const child = spawn(
       process.execPath,
-      ['scripts/tokenize-providers.mjs', version],
+      ['scripts/run-families.mjs', 'scripts/tokenize-providers.mjs', version],
       { stdio: 'inherit', env: process.env },
     );
     child.once('error', reject);
@@ -24,7 +25,7 @@ for (const version of compatibility.testVscodeVersions) {
   const semanticExitCode = await new Promise((resolve, reject) => {
     const child = spawn(
       process.execPath,
-      ['scripts/test-semantic-provider.mjs', version],
+      ['scripts/run-families.mjs', 'scripts/test-semantic-provider.mjs', version],
       { stdio: 'inherit', env: process.env },
     );
     child.once('error', reject);
@@ -36,7 +37,7 @@ for (const version of compatibility.testVscodeVersions) {
   const referenceExitCode = await new Promise((resolve, reject) => {
     const child = spawn(
       process.execPath,
-      ['scripts/audit-codepen-reference.mjs', version],
+      ['scripts/run-families.mjs', 'scripts/audit-codepen-reference.mjs', version],
       { stdio: 'inherit', env: process.env },
     );
     child.once('error', reject);

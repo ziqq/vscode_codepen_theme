@@ -1,0 +1,553 @@
+{
+  "typescriptreact": {
+    "textmate": [
+      {
+        "line": 1,
+        "text": "import",
+        "foreground": "#809bbd"
+      },
+      {
+        "line": 1,
+        "text": "type",
+        "foreground": "#809bbd"
+      },
+      {
+        "line": 1,
+        "text": "CSSProperties",
+        "foreground": "#809bbd"
+      },
+      {
+        "line": 1,
+        "text": "{",
+        "foreground": "#ffffff"
+      },
+      {
+        "line": 3,
+        "text": "TokenName",
+        "foreground": "#ddca7e"
+      },
+      {
+        "line": 5,
+        "text": "Readonly",
+        "foreground": "#ddca7e"
+      },
+      {
+        "line": 5,
+        "text": "<",
+        "foreground": "#cccccc"
+      },
+      {
+        "line": 6,
+        "text": "name",
+        "foreground": "#ffffff"
+      },
+      {
+        "line": 6,
+        "text": "string",
+        "foreground": "#ddca7e"
+      },
+      {
+        "line": 7,
+        "text": "${",
+        "foreground": "#96b38a"
+      },
+      {
+        "line": 7,
+        "text": "string",
+        "foreground": "#ddca7e"
+      },
+      {
+        "line": 9,
+        "text": "Record",
+        "foreground": "#ddca7e"
+      },
+      {
+        "line": 12,
+        "text": "const",
+        "foreground": "#809bbd"
+      },
+      {
+        "line": 12,
+        "text": "theme",
+        "foreground": "#809bbd"
+      },
+      {
+        "line": 12,
+        "text": "Theme",
+        "foreground": "#ddca7e"
+      },
+      {
+        "line": 13,
+        "text": "name",
+        "foreground": "#ffffff"
+      }
+    ],
+    "semantic": [
+      {
+        "line": 1,
+        "text": "import",
+        "foreground": "#809bbd"
+      },
+      {
+        "line": 1,
+        "text": "type",
+        "foreground": "#809bbd"
+      },
+      {
+        "line": 1,
+        "text": "{",
+        "foreground": "#ffffff"
+      },
+      {
+        "line": 3,
+        "text": "TokenName",
+        "foreground": "#ddca7e"
+      },
+      {
+        "line": 5,
+        "text": "Readonly",
+        "foreground": "#ddca7e"
+      },
+      {
+        "line": 5,
+        "text": "<",
+        "foreground": "#cccccc"
+      },
+      {
+        "line": 6,
+        "text": "name",
+        "foreground": "#ffffff"
+      },
+      {
+        "line": 6,
+        "text": "string",
+        "foreground": "#ddca7e"
+      },
+      {
+        "line": 7,
+        "text": "${",
+        "foreground": "#96b38a"
+      },
+      {
+        "line": 7,
+        "text": "string",
+        "foreground": "#ddca7e"
+      },
+      {
+        "line": 9,
+        "text": "Record",
+        "foreground": "#ddca7e"
+      },
+      {
+        "line": 12,
+        "text": "const",
+        "foreground": "#809bbd"
+      },
+      {
+        "line": 12,
+        "text": "theme",
+        "foreground": "#ffffff"
+      },
+      {
+        "line": 12,
+        "text": "Theme",
+        "foreground": "#ddca7e"
+      },
+      {
+        "line": 13,
+        "text": "name",
+        "foreground": "#ffffff"
+      },
+      {
+        "line": 28,
+        "text": "tokenLabel",
+        "foreground": "#9a8297"
+      },
+      {
+        "line": 30,
+        "text": "Preview",
+        "foreground": "#9a8297"
+      }
+    ]
+  },
+  "dart": {
+    "semantic": [
+      {
+        "line": 3,
+        "text": "ThemeMode",
+        "foreground": "#ddca7e"
+      },
+      {
+        "line": 3,
+        "text": "dark",
+        "foreground": "#ffffff"
+      },
+      {
+        "line": 8,
+        "text": "Comparable",
+        "foreground": "#ddca7e"
+      },
+      {
+        "line": 12,
+        "text": "alias",
+        "foreground": "#ffffff"
+      },
+      {
+        "line": 12,
+        "text": "0",
+        "foreground": "#d0782a"
+      },
+      {
+        "line": 1,
+        "text": "import",
+        "foreground": "#809bbd"
+      },
+      {
+        "line": 1,
+        "text": "as",
+        "foreground": "#ffffff"
+      },
+      {
+        "line": 3,
+        "text": "enum",
+        "foreground": "#809bbd"
+      },
+      {
+        "line": 25,
+        "text": "const",
+        "foreground": "#809bbd"
+      },
+      {
+        "line": 70,
+        "text": "alias",
+        "foreground": "#ffffff"
+      },
+      {
+        "line": 73,
+        "text": "value",
+        "foreground": "#ffffff"
+      },
+      {
+        "line": 76,
+        "text": "isFixed",
+        "foreground": "#9a8297"
+      },
+      {
+        "line": 66,
+        "text": "null",
+        "foreground": "#d0782a"
+      },
+      {
+        "line": 85,
+        "text": "map",
+        "foreground": "#9a8297"
+      },
+      {
+        "line": 86,
+        "text": "fixed",
+        "foreground": "#ffffff"
+      },
+      {
+        "line": 96,
+        "text": "maybeMap",
+        "foreground": "#9a8297"
+      },
+      {
+        "line": 101,
+        "text": "map",
+        "foreground": "#9a8297"
+      },
+      {
+        "line": 114,
+        "text": "@override",
+        "foreground": "#809bbd"
+      },
+      {
+        "line": 142,
+        "text": "ThemeState",
+        "foreground": "#ddca7e"
+      },
+      {
+        "line": 149,
+        "text": "name",
+        "foreground": "#ffffff"
+      },
+      {
+        "line": 161,
+        "text": "contrastScore",
+        "foreground": "#9a8297"
+      },
+      {
+        "line": 166,
+        "text": "name",
+        "foreground": "#ffffff"
+      },
+      {
+        "line": 175,
+        "text": "state",
+        "foreground": "#ffffff"
+      },
+      {
+        "line": 176,
+        "text": "print",
+        "foreground": "#9a8297"
+      }
+    ],
+    "scrollLines": [
+      1,
+      40,
+      70,
+      96,
+      145,
+      171
+    ],
+    "textmate": [
+      {
+        "line": 1,
+        "text": "import",
+        "foreground": "#809bbd"
+      },
+      {
+        "line": 25,
+        "text": "const",
+        "foreground": "#809bbd"
+      },
+      {
+        "line": 28,
+        "text": "fromAlias",
+        "foreground": "#9a8297"
+      },
+      {
+        "line": 70,
+        "text": "String",
+        "foreground": "#ddca7e"
+      },
+      {
+        "line": 85,
+        "text": "map",
+        "foreground": "#9a8297"
+      },
+      {
+        "line": 96,
+        "text": "maybeMap",
+        "foreground": "#9a8297"
+      },
+      {
+        "line": 114,
+        "text": "@override",
+        "foreground": "#809bbd"
+      },
+      {
+        "line": 142,
+        "text": "sealed",
+        "foreground": "#809bbd"
+      },
+      {
+        "line": 161,
+        "text": "contrastScore",
+        "foreground": "#9a8297"
+      }
+    ]
+  },
+  "javascript": {
+    "scrollLines": [
+      1,
+      25,
+      35
+    ],
+    "semantic": [
+      {
+        "line": 10,
+        "text": "ThemePreview",
+        "foreground": "#ddca7e"
+      },
+      {
+        "line": 12,
+        "text": "name",
+        "foreground": "#ffffff"
+      },
+      {
+        "line": 13,
+        "text": "tokens",
+        "foreground": "#ffffff"
+      },
+      {
+        "line": 16,
+        "text": "label",
+        "foreground": "#9a8297"
+      },
+      {
+        "line": 27,
+        "text": "renderPreview",
+        "foreground": "#9a8297"
+      },
+      {
+        "line": 28,
+        "text": "lines",
+        "foreground": "#ffffff"
+      },
+      {
+        "line": 28,
+        "text": "visibleTokens",
+        "foreground": "#9a8297"
+      },
+      {
+        "line": 35,
+        "text": "streamTokenLabels",
+        "foreground": "#9a8297"
+      }
+    ]
+  },
+  "java": {
+    "textmate": [
+      {
+        "line": 3,
+        "text": "public",
+        "foreground": "#809bbd"
+      },
+      {
+        "line": 3,
+        "text": "final",
+        "foreground": "#809bbd"
+      },
+      {
+        "line": 3,
+        "text": "class",
+        "foreground": "#809bbd"
+      },
+      {
+        "line": 3,
+        "text": "Main",
+        "foreground": "#ddca7e"
+      },
+      {
+        "line": 4,
+        "text": "THEME_NAME",
+        "foreground": "#ffffff"
+      },
+      {
+        "line": 9,
+        "text": "record",
+        "foreground": "#809bbd"
+      },
+      {
+        "line": 9,
+        "text": "name",
+        "foreground": "#9a8297"
+      },
+      {
+        "line": 15,
+        "text": "<",
+        "foreground": "#cccccc"
+      },
+      {
+        "line": 15,
+        "text": "defaultTokens",
+        "foreground": "#9a8297"
+      },
+      {
+        "line": 22,
+        "text": "String",
+        "foreground": "#ddca7e"
+      },
+      {
+        "line": 22,
+        "text": "args",
+        "foreground": "#809bbd"
+      },
+      {
+        "line": 27,
+        "text": "message",
+        "foreground": "#ffffff"
+      }
+    ]
+  },
+  "just": {
+    "textmate": [
+      {
+        "line": 11,
+        "text": "theme",
+        "foreground": "#809bbd"
+      },
+      {
+        "line": 11,
+        "text": "{{",
+        "foreground": "#96b38a"
+      },
+      {
+        "line": 3,
+        "text": "theme",
+        "foreground": "#809bbd"
+      },
+      {
+        "line": 8,
+        "text": "default",
+        "foreground": "#9a8297"
+      },
+      {
+        "line": 8,
+        "text": "check",
+        "foreground": "#9a8297"
+      },
+      {
+        "line": 14,
+        "text": "build",
+        "foreground": "#9a8297"
+      },
+      {
+        "line": 14,
+        "text": "target",
+        "foreground": "#809bbd"
+      },
+      {
+        "line": 20,
+        "text": "ci",
+        "foreground": "#9a8297"
+      }
+    ]
+  },
+  "makefile": {
+    "textmate": [
+      {
+        "line": 2,
+        "text": "THEME",
+        "foreground": "#809bbd"
+      },
+      {
+        "line": 7,
+        "text": ".PHONY",
+        "foreground": "#9a8297"
+      },
+      {
+        "line": 8,
+        "text": "all",
+        "foreground": "#9a8297"
+      },
+      {
+        "line": 8,
+        "text": "check",
+        "foreground": "#9a8297"
+      },
+      {
+        "line": 13,
+        "text": "OUTPUT",
+        "foreground": "#809bbd"
+      },
+      {
+        "line": 17,
+        "text": "$@",
+        "foreground": "#809bbd"
+      },
+      {
+        "line": 17,
+        "text": "$<",
+        "foreground": "#809bbd"
+      },
+      {
+        "line": 19,
+        "text": "%.json",
+        "foreground": "#9a8297"
+      }
+    ]
+  }
+}

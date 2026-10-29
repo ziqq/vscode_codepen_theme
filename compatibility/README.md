@@ -4,6 +4,12 @@
 TextMate scope, representative token scopes, and sample file for every
 supported syntax.
 
+`scopes.json`, `codepen-reference.json`, `visual-baselines.json`, and the
+samples are shared by both theme families. Every fixture that encodes colors or
+typography lives once per family, in `original/` and `custom/`; the files named
+below refer to those directories. Family-scoped scripts read the family from
+`CODEPEN_THEME_FAMILY`, and `npm run check` runs them for both.
+
 The contract has three layers:
 
 1. Built-in and recommended extensions own language detection and grammars.

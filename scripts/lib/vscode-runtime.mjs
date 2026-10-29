@@ -9,9 +9,30 @@ import {
 
 const execFileAsync = promisify(execFile);
 
+async function existingVscodeExecutable(executable) {
+  try {
+    await access(executable);
+    return executable;
+  } catch (error) {
+    if (error?.code !== 'ENOENT' || process.platform !== 'darwin' ||
+        path.basename(executable) !== 'Electron') {
+      throw error;
+    }
+  }
+
+  // VS Code 1.135 renamed the macOS app binary from Electron to Code before
+  // @vscode/test-electron learned the new path. Accept the sibling executable
+  // while keeping every caller on the exact downloaded application bundle.
+  const renamedExecutable = path.join(path.dirname(executable), 'Code');
+  await access(renamedExecutable);
+  return renamedExecutable;
+}
+
 export async function vscodeExecutable(version) {
   if (process.env.CODEPEN_VSCODE_EXECUTABLE) {
-    const executable = path.resolve(process.env.CODEPEN_VSCODE_EXECUTABLE);
+    const executable = await existingVscodeExecutable(
+      path.resolve(process.env.CODEPEN_VSCODE_EXECUTABLE),
+    );
     const cli = resolveCliPathFromVSCodeExecutablePath(executable);
     const { stdout } = await execFileAsync(cli, ['--version']);
     const actualVersion = stdout.trim().split(/\s+/)[0];
@@ -32,7 +53,7 @@ export async function vscodeExecutable(version) {
         'CODEPEN_ALLOW_VSCODE_DOWNLOAD=1.',
     );
   }
-  return downloadAndUnzipVSCode(version);
+  return existingVscodeExecutable(await downloadAndUnzipVSCode(version));
 }
 
 export async function vscodeBuiltinExtensions(executable) {
