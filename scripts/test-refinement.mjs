@@ -1,9 +1,10 @@
 import assert from 'node:assert/strict';
 import { createRequire } from 'node:module';
 import { readFile, writeFile } from 'node:fs/promises';
+import { family, fixturePath, runtimeRefinePath } from './lib/family.mjs';
 const require = createRequire(import.meta.url);
-const { refine, maximumDocumentLength } = require('../runtime/refine');
-const fixtures = require('../compatibility/refinement.cjs');
+const { refine, maximumDocumentLength } = require(runtimeRefinePath);
+const fixtures = require(`../${fixturePath('refinement.cjs')}`);
 const palette = require('../src/colors');
 const failures = [];
 const results = [];
@@ -12,19 +13,25 @@ let recoveryCases = 0;
 for (const [language, marked] of fixtures) {
   const expectations = [];
   let removed = 0;
-  const source = marked.replace(/«(\w+)\|([^»]+)»/g, (marker, role, text, at) => {
-    expectations.push({ start: at - removed, end: at - removed + text.length, text, role });
-    removed += marker.length - text.length;
-    return text;
-  });
+  // «role|text» asserts a role; «role/fontStyle|text» also asserts typography.
+  const source = marked.replace(/«(\w+)(?:\/(\w+))?\|([^»]+)»/g,
+    (marker, role, fontStyle, text, at) => {
+      expectations.push({ start: at - removed, end: at - removed + text.length,
+        text, role, fontStyle });
+      removed += marker.length - text.length;
+      return text;
+    });
   const start = performance.now();
   const spans = await refine(source, language);
   for (const expected of expectations) {
     assertions++;
     for (let offset = expected.start; offset < expected.end; offset++) {
       const actual = spans.find((span) => span.start <= offset && span.end > offset);
-      if (actual?.role !== expected.role) {
-        failures.push(`${language}: ${JSON.stringify(expected.text)} at ${expected.start}: expected ${expected.role}, got ${actual?.role ?? 'fallback'} at ${offset}`);
+      if (actual?.role !== expected.role || expected.fontStyle &&
+          actual?.fontStyle !== expected.fontStyle) {
+        const wanted = `${expected.role}${expected.fontStyle ? `/${expected.fontStyle}` : ''}`;
+        const received = `${actual?.role ?? 'fallback'}${actual?.fontStyle ? `/${actual.fontStyle}` : ''}`;
+        failures.push(`${language}: ${JSON.stringify(expected.text)} at ${expected.start}: expected ${wanted}, got ${received} at ${offset}`);
         break;
       }
     }
@@ -41,26 +48,58 @@ for (const [language, marked] of fixtures) {
     recoveryCases++;
   }
 }
-for (const [language, source, annotation] of [
-  ['dart', '@override\nString label() => "x";', '@override'],
-  ['groovy', '@Immutable\nclass Theme {}', '@Immutable'],
-  ['java', '@Deprecated\nclass Theme {}', '@Deprecated'],
-  ['kotlin', '@Deprecated("old")\nclass Theme', '@Deprecated'],
-  ['python', '@dataclass(frozen=True)\nclass Theme: pass', '@dataclass'],
-  ['swift', '@available(iOS 17, *)\nstruct Theme {}', '@available'],
-  ['typescript', '@sealed\nclass Theme {}', '@sealed'],
-]) {
-  const spans = await refine(source, language);
-  for (let offset = 0; offset < annotation.length; offset++) {
-    const actual = spans.find((span) => span.start <= offset && span.end > offset);
-    assert.equal(actual?.role, 'yellow', `${language}: annotation foreground role`);
-    assert.equal(actual?.fontStyle, 'annotation', `${language}: annotation italic role`);
-    assertions += 2;
+if (family === 'original') {
+  // Original keeps provider-marked annotations italic in both variants.
+  for (const [language, source, annotation] of [
+    ['dart', '@override\nString label() => "x";', '@override'],
+    ['groovy', '@Immutable\nclass Theme {}', '@Immutable'],
+    ['java', '@Deprecated\nclass Theme {}', '@Deprecated'],
+    ['kotlin', '@Deprecated("old")\nclass Theme', '@Deprecated'],
+    ['python', '@dataclass(frozen=True)\nclass Theme: pass', '@dataclass'],
+    ['swift', '@available(iOS 17, *)\nstruct Theme {}', '@available'],
+    ['typescript', '@sealed\nclass Theme {}', '@sealed'],
+  ]) {
+    const spans = await refine(source, language);
+    for (let offset = 0; offset < annotation.length; offset++) {
+      const actual = spans.find((span) => span.start <= offset && span.end > offset);
+      assert.equal(actual?.role, 'yellow', `${language}: annotation foreground role`);
+      assert.equal(actual?.fontStyle, 'annotation', `${language}: annotation italic role`);
+      assertions += 2;
+    }
+  }
+} else {
+  // Custom keyword typography is owned by its role table.
+  const { keywordStyle } = require('../src/syntax/custom/roles');
+  for (const keyword of [
+    'return', 'switch', 'case', 'try', 'catch', 'async', 'await', 'export',
+    'for', 'yield', 'match', 'when', 'then', 'while', 'end', 'in',
+  ]) {
+    assert.deepEqual(keywordStyle(keyword), { role: 'blue', fontStyle: 'italic' });
+  }
+  for (const keyword of [
+    'override', 'required', '@interface', '@implementation', 'static', 'final',
+    'let', 'var', 'def', 'class', 'interface', 'abstract', 'method', 'sub', 'my',
+    'given', 'import', 'extends', 'implements', 'enum', 'get', 'set', 'fun', 'fn',
+    'func', 'local', 'ns', 'of', 'register', 'Shader', 'Properties',
+  ]) {
+    assert.deepEqual(keywordStyle(keyword), { role: 'blue', fontStyle: 'italic' });
+  }
+  for (const keyword of [
+    'function', 'this', 'self', 'super', 'new', 'typeof', 'pass',
+  ]) {
+    assert.deepEqual(keywordStyle(keyword), { role: 'yellow', fontStyle: 'italic' });
+  }
+  assert.deepEqual(keywordStyle('as'), { role: 'blue', fontStyle: 'italic' });
+  for (const keyword of ['null', 'true', 'false']) {
+    assert.deepEqual(keywordStyle(keyword), { role: 'orange', fontStyle: 'normal' });
+  }
+  for (const keyword of ['void', 'sizeof']) {
+    assert.deepEqual(keywordStyle(keyword), { role: 'yellow', fontStyle: 'normal' });
   }
 }
 assert.deepEqual(await refine('x'.repeat(maximumDocumentLength + 1), 'typescript'), []);
 assert.deepEqual(await refine('class Theme {}', 'plaintext'), []);
-await writeFile('build/refinement.json', `${JSON.stringify({ assertions, recoveryCases, failures, results }, null, 2)}\n`);
+await writeFile(`build/refinement-${family}.json`, `${JSON.stringify({ assertions, recoveryCases, failures, results }, null, 2)}\n`);
 if (failures.length) {
   console.error(failures.join('\n'));
   throw new Error(`${failures.length}/${assertions} contextual syntax assertions failed`);

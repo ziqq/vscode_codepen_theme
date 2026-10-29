@@ -3,7 +3,12 @@ const { Worker } = require('node:worker_threads');
 const vscode = require('vscode');
 let palette = require('./palette.json');
 const themeVariants = require('./theme-variants.json');
-const { supportedLanguages, maximumDocumentLength } = require('./refine');
+// Classifier entry points are loaded per family; the host itself is shared.
+const families = new Map(themeVariants.map((variant) => [variant.family, undefined]));
+function family(name) {
+  if (!families.get(name)) families.set(name, require(`./${name}/refine`));
+  return families.get(name);
+}
 
 const variantByLabel = new Map(
   themeVariants.map((variant) => [variant.label, variant]),
@@ -23,13 +28,18 @@ function activate(context) {
   const activeVariant = () => variantByLabel.get(
     vscode.workspace.getConfiguration('workbench').get('colorTheme'),
   );
-  const enabled = (document) => !disposed && failures < 3 && activeVariant() &&
-    vscode.workspace.getConfiguration('codepen.syntaxRefinement', document).get('enabled', true) &&
-    supportedLanguages.includes(document.languageId) && document.getText().length <= maximumDocumentLength;
+  const enabled = (document) => {
+    const variant = !disposed && failures < 3 && activeVariant();
+    if (!variant) return false;
+    const { supportedLanguages, maximumDocumentLength } = family(variant.family);
+    return vscode.workspace.getConfiguration('codepen.syntaxRefinement', document).get('enabled', true) &&
+      supportedLanguages.includes(document.languageId) && document.getText().length <= maximumDocumentLength;
+  };
 
   function decoration(span) {
-    // Contextual colors are shared by both variants. Original suppresses the
-    // general italic layer; provider-marked annotations are the exception.
+    // Contextual colors are shared by both variants of a family. The base
+    // variant suppresses the general italic layer; provider-marked
+    // annotations are the exception.
     const fontStyle = span.fontStyle === 'annotation'
       ? 'italic'
       : activeVariant()?.italics ? span.fontStyle : undefined;
@@ -69,7 +79,9 @@ function activate(context) {
   }
   function getWorker() {
     if (worker) return worker;
-    const current = worker = new Worker(path.join(__dirname, 'worker.js'));
+    // refresh() stops the worker on theme changes, so a worker never outlives
+    // the family whose classifiers it loaded.
+    const current = worker = new Worker(path.join(__dirname, activeVariant().family, 'worker.js'));
     current.on('error', (error) => { if (worker === current) fail(error); });
     current.on('exit', (code) => { if (worker === current && code !== 0) fail(new Error(`Worker exited (${code})`)); });
     current.on('message', (message) => {

@@ -10,7 +10,7 @@ test('theme gating, opt-out, coalescing, stale results, closure and disposal', a
   const configuration = { theme: 'Default Dark Modern', enabled: true };
   const workers = [];
   class Worker extends EventEmitter {
-    constructor() { super(); this.messages = []; workers.push(this); }
+    constructor(file) { super(); this.file = file; this.messages = []; workers.push(this); }
     postMessage(message) { this.messages.push(message); }
     terminate() { this.terminated = true; return Promise.resolve(); }
     reply(message, role = 'blue', fontStyle) {
@@ -57,6 +57,7 @@ test('theme gating, opt-out, coalescing, stale results, closure and disposal', a
     assert.equal(workers.length, 0, 'Inactive theme must not start a parser');
     configuration.theme = 'CodePen Theme Original'; changed(); await wait(15);
     assert.equal(workers.length, 1);
+    assert.match(workers[0].file, /[\\/]original[\\/]worker\.js$/, 'Original must load its own classifiers');
     workers[0].reply(workers[0].messages[0], 'blue', 'italic');
     assert.equal(isClear(), false);
     assert.equal(types.at(-1).options.fontStyle, undefined,
@@ -65,6 +66,7 @@ test('theme gating, opt-out, coalescing, stale results, closure and disposal', a
     configuration.theme = 'CodePen Theme Original Italics'; changed(); await wait(15);
     assert.ok(workers[0].terminated);
     assert.equal(workers.length, 2, 'Italics must keep refinement active');
+    assert.match(workers[1].file, /[\\/]original[\\/]worker\.js$/);
     workers[1].reply(workers[1].messages[0], 'blue', 'italic');
     assert.equal(types.at(-1).options.fontStyle, 'italic',
       'Italics must retain runtime-provided italics');
@@ -97,7 +99,19 @@ test('theme gating, opt-out, coalescing, stale results, closure and disposal', a
     configuration.theme = 'CodePen Theme Original'; changed(); await wait(15);
     document.isClosed = true; listeners.close(document);
     workers[3].reply(workers[3].messages[0]); assert.equal(api.getState().documents.length, 0);
-    document.isClosed = false; document.version++; text = 'x'.repeat(250001);
+    // Switching family restarts the worker with that family's classifiers;
+    // the Custom base variant suppresses italics like Original does.
+    document.isClosed = false; document.version++; text = 'const f = 5';
+    configuration.theme = 'CodePen Theme Custom'; changed(); await wait(15);
+    assert.ok(workers[3].terminated);
+    assert.match(workers[4].file, /[\\/]custom[\\/]worker\.js$/, 'Custom must load its own classifiers');
+    workers[4].reply(workers[4].messages[0], 'yellow', 'italic');
+    assert.equal(types.at(-1).options.fontStyle, undefined, 'Custom must suppress runtime-provided italics');
+    configuration.theme = 'CodePen Theme Custom Italics'; changed(); await wait(15);
+    assert.match(workers[5].file, /[\\/]custom[\\/]worker\.js$/);
+    workers[5].reply(workers[5].messages[0], 'yellow', 'italic');
+    assert.equal(types.at(-1).options.fontStyle, 'italic', 'Custom Italics must retain runtime-provided italics');
+    document.version++; text = 'x'.repeat(250001);
     listeners.edit({ document, contentChanges: minorChange }); await wait(100);
     assert.equal(api.getState().pending, 0, 'Oversize files retain provider highlighting');
   } finally { for (const subscription of context.subscriptions) subscription.dispose(); }

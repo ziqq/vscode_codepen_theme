@@ -283,7 +283,7 @@
       "id": "JetBrains.kotlin-server",
       "displayName": "Kotlin by JetBrains",
       "kind": "recommended",
-      "version": "0.0.8",
+      "version": "0.0.11",
       "engine": "^1.105.1",
       "compatibility": [
         {
@@ -292,7 +292,7 @@
         },
         {
           "vscode": ">=1.105.1",
-          "version": "0.0.8"
+          "version": "0.0.11"
         }
       ]
     },

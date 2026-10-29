@@ -1,0 +1,257 @@
+{
+  "reference": "Dart SDK 3.11.5 analysis-server classifications; color roles are adapted from measured classic CodePen JS/TS. Enum declaration lacks a declaration modifier and therefore uses the neutral type color.",
+  "expect": [
+    {
+      "line": 70,
+      "text": "alias",
+      "type": "variable",
+      "modifiers": [
+        "declaration",
+        "instance"
+      ],
+      "foreground": "#ffffff"
+    },
+    {
+      "line": 76,
+      "text": "isFixed",
+      "type": "property",
+      "modifiers": [
+        "declaration",
+        "instance"
+      ],
+      "foreground": "#ffffff"
+    },
+    {
+      "line": 85,
+      "text": "map",
+      "type": "method",
+      "modifiers": [
+        "declaration",
+        "instance"
+      ],
+      "foreground": "#9a8297"
+    },
+    {
+      "line": 86,
+      "text": "fixed",
+      "type": "parameter",
+      "modifiers": [
+        "declaration"
+      ],
+      "foreground": "#ffffff"
+    },
+    {
+      "line": 86,
+      "text": "Function",
+      "type": "keyword",
+      "modifiers": [],
+      "foreground": "#ddca7e"
+    },
+    {
+      "line": 96,
+      "text": "maybeMap",
+      "type": "method",
+      "modifiers": [
+        "declaration",
+        "instance"
+      ],
+      "foreground": "#9a8297"
+    },
+    {
+      "line": 101,
+      "text": "map",
+      "type": "method",
+      "modifiers": [
+        "instance"
+      ],
+      "foreground": "#9a8297"
+    },
+    {
+      "line": 108,
+      "text": "maybeMapOrNull",
+      "type": "method",
+      "modifiers": [
+        "declaration",
+        "instance"
+      ],
+      "foreground": "#9a8297"
+    },
+    {
+      "line": 114,
+      "text": "override",
+      "type": "property",
+      "modifiers": [
+        "annotation"
+      ],
+      "foreground": "#809bbd"
+    },
+    {
+      "line": 115,
+      "text": "compareTo",
+      "type": "method",
+      "modifiers": [
+        "declaration",
+        "instance"
+      ],
+      "foreground": "#9a8297"
+    },
+    {
+      "line": 166,
+      "text": "name",
+      "type": "variable",
+      "modifiers": [
+        "declaration"
+      ],
+      "foreground": "#ffffff"
+    },
+    {
+      "line": 175,
+      "text": "state",
+      "type": "variable",
+      "modifiers": [],
+      "foreground": "#ffffff"
+    },
+    {
+      "line": 3,
+      "text": "ThemeMode",
+      "type": "enum",
+      "modifiers": [],
+      "foreground": "#ddca7e"
+    },
+    {
+      "line": 3,
+      "text": "dark",
+      "type": "enumMember",
+      "modifiers": [],
+      "foreground": "#ffffff"
+    },
+    {
+      "line": 8,
+      "text": "Comparable",
+      "type": "class",
+      "modifiers": [],
+      "foreground": "#ddca7e"
+    },
+    {
+      "line": 12,
+      "text": "alias",
+      "type": "parameter",
+      "modifiers": [
+        "label"
+      ],
+      "foreground": "#ffffff"
+    },
+    {
+      "line": 28,
+      "text": "fromAlias",
+      "type": "method",
+      "modifiers": [
+        "declaration",
+        "static"
+      ],
+      "foreground": "#9a8297"
+    },
+    {
+      "line": 29,
+      "text": "alias",
+      "type": "parameter",
+      "modifiers": [
+        "declaration"
+      ],
+      "foreground": "#ffffff"
+    },
+    {
+      "line": 31,
+      "text": "trim",
+      "type": "method",
+      "modifiers": [
+        "instance"
+      ],
+      "foreground": "#9a8297"
+    },
+    {
+      "line": 142,
+      "text": "ThemeState",
+      "type": "class",
+      "modifiers": [
+        "declaration"
+      ],
+      "foreground": "#ddca7e"
+    },
+    {
+      "line": 143,
+      "text": "ThemeState",
+      "type": "class",
+      "modifiers": [
+        "constructor",
+        "declaration"
+      ],
+      "foreground": "#ddca7e"
+    },
+    {
+      "line": 149,
+      "text": "name",
+      "type": "variable",
+      "modifiers": [
+        "declaration",
+        "instance"
+      ],
+      "foreground": "#ffffff"
+    },
+    {
+      "line": 152,
+      "text": "label",
+      "type": "property",
+      "modifiers": [
+        "declaration",
+        "instance"
+      ],
+      "foreground": "#ffffff"
+    },
+    {
+      "line": 161,
+      "text": "contrastScore",
+      "type": "method",
+      "modifiers": [
+        "declaration",
+        "instance"
+      ],
+      "foreground": "#9a8297"
+    },
+    {
+      "line": 161,
+      "text": "max",
+      "type": "function",
+      "modifiers": [],
+      "foreground": "#9a8297"
+    },
+    {
+      "line": 164,
+      "text": "describeTheme",
+      "type": "function",
+      "modifiers": [
+        "declaration",
+        "static"
+      ],
+      "foreground": "#9a8297"
+    },
+    {
+      "line": 172,
+      "text": "ThemePalette",
+      "type": "class",
+      "modifiers": [
+        "constructor"
+      ],
+      "foreground": "#ddca7e"
+    },
+    {
+      "line": 175,
+      "text": "message",
+      "type": "variable",
+      "modifiers": [
+        "declaration"
+      ],
+      "foreground": "#ffffff"
+    }
+  ]
+}

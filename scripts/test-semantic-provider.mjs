@@ -4,11 +4,12 @@ import { createRequire } from 'node:module';
 import path from 'node:path';
 import { semanticColor } from './lib/token-colors.mjs';
 import { vscodeBuiltinExtensions, vscodeExecutable } from './lib/vscode-runtime.mjs';
+import { family, baseThemePath, fixturePath } from './lib/family.mjs';
 
 const require = createRequire(import.meta.url);
 const compatibility = JSON.parse(await readFile('compatibility/scopes.json', 'utf8'));
-const fixtures = JSON.parse(await readFile('compatibility/semantic.json', 'utf8'));
-const theme = JSON.parse(await readFile('themes/codepen-theme.json', 'utf8'));
+const fixtures = JSON.parse(await readFile(fixturePath('semantic.json'), 'utf8'));
+const theme = JSON.parse(await readFile(baseThemePath, 'utf8'));
 const requestedVersion = process.argv[2] ?? compatibility.verifiedVscodeVersion;
 const executable = await vscodeExecutable(requestedVersion);
 const extensions = await vscodeBuiltinExtensions(executable);
@@ -86,7 +87,7 @@ for (const fixture of fixtures.cases) {
     service.dispose();
   }
 }
-await writeFile(`build/semantic-provider-${requestedVersion}.json`, `${JSON.stringify({
+await writeFile(`build/semantic-provider-${family}-${requestedVersion}.json`, `${JSON.stringify({
   vscodeVersion: vscodeManifest.version, typescriptVersion: ts.version,
   verification: 'Bundled TypeScript language-service classifications and theme selector resolution; not a screenshot or other language-server test.',
   results,

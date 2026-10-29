@@ -1,6 +1,5 @@
 const fs = require('node:fs');
 const path = require('node:path');
-const resolveTheme = require('./theme');
 const { buildRuntime } = require('./build-runtime');
 const { themeVariants } = require('./theme-variants');
 
@@ -8,6 +7,8 @@ const themesDirectory = path.resolve(__dirname, '../themes');
 const buildDirectory = path.resolve(__dirname, '../build');
 
 function generateTheme(variant = themeVariants[0]) {
+  // Each family keeps its own role mapping; Italics only adds typography.
+  const resolveTheme = require(`./themes/${variant.family}`);
   const theme = resolveTheme({
     name: variant.label,
     italics: variant.italics,

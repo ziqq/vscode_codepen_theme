@@ -10,25 +10,26 @@ import {
   vscodeBuiltinExtensions,
   vscodeExecutable,
 } from './lib/vscode-runtime.mjs';
+import { family, italicsThemePath, fixturePath, runtimeRefinePath } from './lib/family.mjs';
 
 const { Registry, parseRawGrammar } = vscodeTextmate;
 const require = createRequire(import.meta.url);
-const { refine } = require('../runtime/refine');
+const { refine } = require(runtimeRefinePath);
 const palette = require('../src/colors');
-const corrections = require('../compatibility/refinement-full.json').corrections;
+const corrections = require(`../${fixturePath('refinement-full.json')}`).corrections;
 const { createOnigScanner, createOnigString, loadWASM } = vscodeOniguruma;
 
 const compatibility = JSON.parse(
   await readFile('compatibility/scopes.json', 'utf8'),
 );
 // Compatibility fixtures include the classic italic decoration contract, so
-// provider typography is exercised through the Italics variant.
+// provider typography is exercised through the family's Italics variant.
 const theme = JSON.parse(
-  await readFile('themes/codepen-theme-italics.json', 'utf8'),
+  await readFile(italicsThemePath, 'utf8'),
 );
-const twilight = JSON.parse(await readFile('compatibility/twilight.json', 'utf8'));
-const fullSamples = JSON.parse(await readFile('compatibility/full-samples.json', 'utf8'));
-const edgeCases = JSON.parse(await readFile('compatibility/edge-cases.json', 'utf8'));
+const twilight = JSON.parse(await readFile(fixturePath('twilight.json'), 'utf8'));
+const fullSamples = JSON.parse(await readFile(fixturePath('full-samples.json'), 'utf8'));
+const edgeCases = JSON.parse(await readFile(fixturePath('edge-cases.json'), 'utf8'));
 const vscodeVersion = process.argv[2] ?? compatibility.verifiedVscodeVersion;
 const executable = await vscodeExecutable(vscodeVersion);
 const builtinRoot = process.env.CODEPEN_VSCODE_EXTENSIONS_DIR
@@ -109,6 +110,33 @@ const registry = new Registry({
   getInjections: (scopeName) => injections.get(scopeName) ?? [],
 });
 
+// Keep the provider report useful for fixture maintenance: every source shape
+// (full sample, compact contract, and edge case) is rendered with the exact
+// grammar and theme used by the assertions below.
+function renderSource(grammar, source) {
+  const observed = new Set();
+  const renderedSource = [];
+  let ruleStack = null;
+  for (const line of source.split(/\r?\n/)) {
+    const tokenized = grammar.tokenizeLine(line, ruleStack);
+    const styled = grammar.tokenizeLine2(line, ruleStack).tokens;
+    const spans = [];
+    for (const token of tokenized.tokens) {
+      for (let index = 0; index < styled.length; index += 2) {
+        const start = Math.max(token.startIndex, styled[index]);
+        const end = Math.min(token.endIndex, styled[index + 2] ?? line.length, line.length);
+        if (start >= end) continue;
+        spans.push({ text: line.slice(start, end), start, scopes: token.scopes,
+          ...tokenStyle(styled[index + 1], registry.getColorMap()) });
+      }
+      for (const scope of token.scopes) observed.add(scope);
+    }
+    renderedSource.push(spans);
+    ruleStack = tokenized.ruleStack;
+  }
+  return { observed, renderedSource };
+}
+
 const results = [];
 let failed = false;
 for (const item of compatibility.cases) {
@@ -126,33 +154,15 @@ for (const item of compatibility.cases) {
     throw new Error(`${item.language}: cannot load ${item.rootScope}`);
   }
   const source = await readFile(item.sample, 'utf8');
-  const observed = new Set();
-  const renderedSource = [];
-  let ruleStack = null;
-  for (const line of source.split(/\r?\n/)) {
-    const tokenized = grammar.tokenizeLine(line, ruleStack);
-    const styled = grammar.tokenizeLine2(line, ruleStack).tokens;
-    const spans = [];
-    for (const token of tokenized.tokens) {
-      for (let index = 0; index < styled.length; index += 2) {
-        const start = Math.max(token.startIndex, styled[index]);
-        const end = Math.min(token.endIndex, styled[index + 2] ?? line.length, line.length);
-        if (start >= end) continue;
-        spans.push({ text: line.slice(start, end), start, scopes: token.scopes,
-          ...tokenStyle(styled[index + 1], registry.getColorMap()) });
-      }
-    }
-    renderedSource.push(spans);
-    ruleStack = tokenized.ruleStack;
-    for (const token of tokenized.tokens) {
-      for (const scope of token.scopes) {
-        observed.add(scope);
-      }
-    }
-  }
+  const { observed, renderedSource } = renderSource(grammar, source);
   const missing = item.requiredScopes.filter((scope) => !observed.has(scope));
   const fixture = twilight.cases.find((entry) => entry.language === item.language);
   if (fixture?.sourceFile) fixture.source = await readFile(fixture.sourceFile, 'utf8');
+  const renderedShortSource = fixture ? renderSource(grammar, fixture.source).renderedSource : [];
+  const renderedEdgeSources = edgeCases.cases
+    .filter((entry) => entry.language === item.language)
+    .map((entry) => ({ id: entry.id, source: entry.source,
+      renderedSource: renderSource(grammar, entry.source).renderedSource }));
   let colorAssertions = 0;
   let colorError;
   const fullColorErrors = [];
@@ -187,8 +197,7 @@ for (const item of compatibility.cases) {
       const fallback = expected.providerFallbacks?.[vscodeVersion];
       try {
         edgeColorAssertions += assertTokenColors(registry, grammar, {
-          ...edge,
-          language: `${item.language}/${edge.id}`,
+          ...edge, language: `${item.language}/${edge.id}`,
           expect: [fallback ? {
             ...expected,
             foreground: fallback.foreground,
@@ -225,7 +234,8 @@ for (const item of compatibility.cases) {
     for (const expected of candidate.expect) {
       refinedAssertions++;
       const correction = candidate.full && corrections.find((entry) => entry.language === item.language && entry.line === expected.line && entry.text === expected.text);
-      const foreground = correction ? correction.foreground : expected.foreground;
+      const foreground = expected.refinedForeground ??
+        (correction ? correction.foreground : expected.foreground);
       const base = lines.slice(0, expected.line - 1).reduce((sum, line) => sum + line.length + 1, 0);
       let start = -1;
       for (let index = 0; index < (expected.occurrence ?? 1); index++) start = lines[expected.line - 1].indexOf(expected.text, start + 1);
@@ -256,13 +266,15 @@ for (const item of compatibility.cases) {
       .map((entry) => ({ line: entry.line, text: entry.text, expectedRoleColor: entry.foreground,
         ...(entry.providerFallbacks?.[vscodeVersion] ?? { reason: entry.limitation }) })),
     renderedSource,
+    renderedShortSource,
+    renderedEdgeSources,
   });
   console.log(
     `${item.language}: ${observed.size} scopes, ${missing.length} missing; ${colorAssertions} short + ${fullFixture.expect.length} full + ${edgeColorAssertions} edge + ${refinedAssertions} refined assertions; ${fullColorErrors.length + edgeColorErrors.length + refinedErrors.length} errors.`,
   );
 }
 
-const reportPath = `build/provider-tokenization-${vscodeVersion}.json`;
+const reportPath = `build/provider-tokenization-${family}-${vscodeVersion}.json`;
 await writeFile(
   reportPath,
   `${JSON.stringify({ vscodeVersion, results }, null, 2)}\n`,

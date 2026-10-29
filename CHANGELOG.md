@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- **ADDED**: `CodePen Theme Custom` and `CodePen Theme Custom Italics` in the same extension: the CodePen palette with a GitHub-inspired programming-role hierarchy (yellow types and executable flow, blue declarations/modifiers/annotations, purple callables, white bindings/fields/properties/enum values); stylesheet-family colors keep their classic CodePen contract
+- **CHANGED**: contextual refinement loads the classifiers of the active theme family; Original and Custom keep separate fixtures under `compatibility/original/` and `compatibility/custom/`
+- **CHANGED**: language samples cover constants, generics, async code, error handling, pattern matching, and literal formats for 25 languages
 - **FIXED**: Dart constant constructor declarations, super-formal parameters,
   and qualified enum members retain their declaration/member roles with and
   without semantic highlighting.

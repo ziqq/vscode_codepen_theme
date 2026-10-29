@@ -5,10 +5,11 @@ import vscodeTextmate from 'vscode-textmate';
 import vscodeOniguruma from 'vscode-oniguruma';
 import { textmateTheme, tokenStyle } from './lib/token-colors.mjs';
 import { vscodeBuiltinExtensions, vscodeExecutable } from './lib/vscode-runtime.mjs';
+import { family, baseThemePath, fixturePath } from './lib/family.mjs';
 
 const reference = JSON.parse(await readFile('compatibility/codepen-reference.json', 'utf8'));
-const theme = JSON.parse(await readFile('themes/codepen-theme.json', 'utf8'));
-const reviewed = JSON.parse(await readFile('compatibility/codepen-reference-differences.json', 'utf8'));
+const theme = JSON.parse(await readFile(baseThemePath, 'utf8'));
+const reviewed = JSON.parse(await readFile(fixturePath('codepen-reference-differences.json'), 'utf8'));
 const compatibility = JSON.parse(await readFile('compatibility/scopes.json', 'utf8'));
 const version = process.argv[2] ?? compatibility.verifiedVscodeVersion;
 const extensions = await vscodeBuiltinExtensions(await vscodeExecutable(version));
@@ -21,6 +22,7 @@ const grammars = {
 };
 const results = [];
 const unexpected = [];
+const usedRoleDifferences = new Set();
 for (const fixture of reference.cases) {
   const [extension, grammarFile, scope] = grammars[fixture.mode];
   const grammarPath = path.join(extensions, extension, 'syntaxes', grammarFile);
@@ -62,18 +64,33 @@ for (const fixture of reference.cases) {
   }
   registry.dispose();
   for (const mismatch of mismatches) {
-    const accepted = reviewed.differences.find((item) => item.case === fixture.id &&
+    const exactDifference = reviewed.differences.find((item) => item.case === fixture.id &&
       item.line === mismatch.line && item.start === mismatch.start && item.text === mismatch.text &&
       item.expected === mismatch.expected && JSON.stringify(item.actual) === JSON.stringify(mismatch.actual));
+    const roleDifference = reviewed.roleDifferences?.find((item, index) => {
+      const accepted = item.modes.includes(fixture.mode) &&
+        item.cmScope === mismatch.cmScope &&
+        item.expected === mismatch.expected &&
+        JSON.stringify(item.actual) === JSON.stringify(mismatch.actual) &&
+        (!item.texts || item.texts.includes(mismatch.text));
+      if (accepted) usedRoleDifferences.add(index);
+      return accepted;
+    });
+    const accepted = exactDifference ?? roleDifference;
     if (!accepted) unexpected.push({ case: fixture.id, ...mismatch });
     else mismatch.reason = accepted.reason;
   }
   results.push({ id: fixture.id, mode: fixture.mode, assertions, mismatches });
   console.log(`${fixture.id}: ${assertions - mismatches.length}/${assertions} exact TextMate spans; ${mismatches.length} differences.`);
 }
-await writeFile(`build/codepen-reference-${version}.json`, `${JSON.stringify({
+await writeFile(`build/codepen-reference-${family}-${version}.json`, `${JSON.stringify({
   version,
   verification: 'Measured CodePen DOM versus real TextMate rendering, before semantic tokens. Differences are reported, not silently accepted or counted as matches.',
   results,
 }, null, 2)}\n`);
 assert.equal(unexpected.length, 0, `Unreviewed CodePen differences:\n${JSON.stringify(unexpected, null, 2)}`);
+assert.equal(
+  usedRoleDifferences.size,
+  reviewed.roleDifferences?.length ?? 0,
+  'Stale CodePen role-difference policies must be removed',
+);

@@ -12,10 +12,7 @@ exports.run = async () => {
   const api = await extension.activate();
   const themes = vscode.extensions.all.filter((item) => item.packageJSON.contributes?.themes && !item.id.startsWith('vscode.'));
   assert.deepEqual(themes.map((item) => item.id), ['ziqq.codepen-theme-original']);
-  assert.deepEqual(extension.packageJSON.contributes.themes.map((item) => item.label), [
-    'CodePen Theme Original',
-    'CodePen Theme Original Italics',
-  ]);
+  assert.deepEqual(extension.packageJSON.contributes.themes.map((item) => item.label), plan.labels);
   const configuration = vscode.workspace.getConfiguration();
   for (const [setting, expected] of Object.entries(plan.typographyDefaults)) {
     assert.deepEqual(configuration.inspect(setting)?.defaultValue, expected,
@@ -53,7 +50,7 @@ exports.run = async () => {
     await configuration.update('editor.semanticHighlighting.enabled', item.semantic, target);
     await configuration.update('workbench.colorTheme', item.otherTheme
       ? 'Default Dark Modern'
-      : item.italics ? 'CodePen Theme Original Italics' : 'CodePen Theme Original', target);
+      : item.italics ? plan.italicsTheme : plan.baseTheme, target);
     await configuration.update('codepen.syntaxRefinement.enabled', !item.disabled, target);
     let document = await vscode.workspace.openTextDocument(item.file);
     if (document.languageId !== item.language) document = await vscode.languages.setTextDocumentLanguage(document, item.language);

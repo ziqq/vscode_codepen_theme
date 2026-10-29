@@ -10,6 +10,18 @@ in both variants; Original also retains bold and underline TextMate styles.
 while retaining the theme's full italic syntax layer. It also keeps narrow corrections
 for Dart documentation and `Function` types.
 
+**CodePen Theme Custom** uses the same palette and workbench colors with a
+GitHub-inspired role hierarchy: yellow types and selected atoms; blue
+declarations, modifiers, annotations, module directives, and control flow;
+purple callables; and white bindings, fields, properties, and enum values. It
+adds no theme-owned italics. See [Highlighting: Custom](highlighting-custom.md).
+
+**CodePen Theme Custom Italics** keeps every Custom foreground color and adds the
+Custom italic syntax layer.
+
+Contextual refinement follows the selected family: each family ships its own
+classifiers, and switching themes restarts refinement with the matching set.
+
 ## Typography defaults
 
 The extension contributes the legacy font stack—`Operator Mono Lig`,

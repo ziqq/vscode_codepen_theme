@@ -176,6 +176,15 @@ void main() {
   print('$message; contrast score: ${palette.contrastScore()}');
 }
 
+Future<int> resolveLimit(Future<int> value) async {
+  try {
+    final limit = await value;
+    return limit;
+  } catch (e) {
+    throw Exception('Failed to resolve limit, $e');
+  }
+}
+
 // ---------------------------------------------------------------------------
 // Extended showcase: constants, generics, mixins, extensions, async, records.
 // ---------------------------------------------------------------------------

@@ -17,13 +17,14 @@ import { chromium } from 'playwright-core';
 import pngjs from 'pngjs';
 import { ensureRecommendedProviders } from './lib/providers.mjs';
 import { vscodeExecutable } from './lib/vscode-runtime.mjs';
+import { baseThemePath, baseVariant, fixturePath } from './lib/family.mjs';
 
 const { PNG } = pngjs;
 const execFileAsync = promisify(execFile);
 const compatibility = JSON.parse(
   await readFile('compatibility/scopes.json', 'utf8'),
 );
-const theme = JSON.parse(await readFile('themes/codepen-theme.json', 'utf8'));
+const theme = JSON.parse(await readFile(baseThemePath, 'utf8'));
 const semantic = process.argv.includes('--semantic');
 if (process.env.CODEPEN_DART_SDK && !process.env.CODEPEN_DART_EXTENSION) {
   throw new Error('Dart semantic screenshots require CODEPEN_DART_EXTENSION as well as CODEPEN_DART_SDK; the built-in Dart extension is grammar-only.');
@@ -230,7 +231,10 @@ await writeFile(
     'workbench.startupEditor': 'none',
     'workbench.reduceMotion': 'on',
     'editor.semanticHighlighting.enabled': semantic,
-    'codepen.syntaxRefinement.enabled': false,
+    // TextMate captures isolate the provider/theme contract. Semantic captures
+    // verify the user-visible composition: TextMate + semantic tokens + the
+    // contextual refinement layer that resolves otherwise identical scopes.
+    'codepen.syntaxRefinement.enabled': semantic,
     'dotenv.enableAutocloaking': false,
     'editor.fontFamily': 'monospace',
     'editor.fontSize': 16,
@@ -298,17 +302,32 @@ try {
   const connected = await waitForWorkbench(`http://127.0.0.1:${port}`);
   browser = connected.browser;
   await waitForFile(readyFile, 60_000);
+  if (semantic && process.env.CODEPEN_DART_SDK) {
+    const semanticReport = JSON.parse(
+      await readFile(path.join(output, 'semantic-tokens.json'), 'utf8'),
+    );
+    if (semanticReport.dartErrors.length > 0) {
+      throw new Error(
+        `Dart semantic mismatches:\n${semanticReport.dartErrors.join('\n')}`,
+      );
+    }
+  }
   const page = await waitForExtensionWorkbench(connected.context);
+  // Provider diagnostics are unrelated to theme rendering and may otherwise
+  // cover the editor in captured baselines (for example, an expired LSP build).
+  await page.addStyleTag({
+    content: '.notifications-toasts { display: none !important; }',
+  });
   const modifier = process.platform === 'darwin' ? 'Meta' : 'Control';
   await page.keyboard.press(`${modifier}+K`);
   await page.waitForTimeout(100);
   await page.keyboard.press(`${modifier}+T`);
   const themeInput = page.locator('.quick-input-widget input');
   await themeInput.waitFor({ state: 'visible', timeout: 10_000 });
-  await themeInput.fill('CodePen Theme Original');
+  await themeInput.fill(baseVariant.label);
   const themeRows = page.locator('.quick-input-list .monaco-list-row');
   const themeResult = themeRows
-    .filter({ hasText: 'CodePen Theme Original' })
+    .filter({ hasText: new RegExp(`^${baseVariant.label}$`) })
     .first();
   try {
     await themeResult.waitFor({ state: 'visible', timeout: 20_000 });
@@ -394,7 +413,7 @@ try {
         return { text: spans.map((span) => span.text).join(''), spans };
       }),
     );
-    const editorFixture = JSON.parse(await readFile('compatibility/editor-colors.json', 'utf8'))[item.languageId] ?? {};
+    const editorFixture = JSON.parse(await readFile(fixturePath('editor-colors.json'), 'utf8'))[item.languageId] ?? {};
     const expectations = editorFixture[mode] ?? [];
     const renderedLines = await readRenderedLines();
     const revealLine = async (line) => {

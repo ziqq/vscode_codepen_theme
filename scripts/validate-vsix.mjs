@@ -4,7 +4,7 @@ import { createRequire } from 'node:module';
 import { createHash } from 'node:crypto';
 const require = createRequire(import.meta.url);
 const { runtimeFiles } = require('../src/build-runtime.js');
-const { themeVariants } = require('../src/theme-variants.js');
+const { themeFamilies, themeVariants } = require('../src/theme-variants.js');
 
 const vsixPath = process.argv[2];
 if (!vsixPath) {
@@ -20,6 +20,7 @@ const documentationPaths = [
   'docs/configuration.md',
   'docs/development.md',
   'docs/highlighting.md',
+  'docs/highlighting-custom.md',
   'docs/language-support.md',
   'docs/screenshots.md',
 ];
@@ -32,7 +33,7 @@ const requiredFiles = [
     `extension/${documentationPath}`),
   ...themeVariants.map((variant) => `extension/themes/${variant.file}`),
   'extension/runtime/extension.js',
-  'extension/runtime/worker.js',
+  ...themeFamilies.map((family) => `extension/runtime/${family}/worker.js`),
   'extension/runtime/manifest.json',
 ];
 

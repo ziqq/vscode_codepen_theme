@@ -14,6 +14,7 @@ module.exports = Object.freeze({
   border: '#40404e',
   brown: '#a7925a',
   control: '#464756',
+  documentation: '#cccccc',
   error: '#ff0303',
   focus: '#313131',
   gray: '#717790',

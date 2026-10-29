@@ -1,17 +1,21 @@
 const fs = require('node:fs');
 const path = require('node:path');
 const { createHash } = require('node:crypto');
-const { grammars } = require('./syntax/tree');
 const palette = require('./colors');
-const { themeVariants } = require('./theme-variants');
+const { themeFamilies, themeVariants } = require('./theme-variants');
 const root = path.resolve(__dirname, '..');
 const runtimeDirectory = path.join(root, 'runtime');
 
 function runtimeFiles() {
   const files = new Map();
   const add = (target, source) => files.set(target, fs.readFileSync(path.join(root, source)));
-  for (const name of fs.readdirSync(path.join(__dirname, 'syntax')).sort()) {
-    if (name.endsWith('.js') || name.endsWith('.md')) add(name, `src/syntax/${name}`);
+  // The extension host is shared; every family ships its own classifiers.
+  const syntaxFiles = (directory) => fs.readdirSync(path.join(__dirname, 'syntax', directory))
+    .filter((name) => name.endsWith('.js') || name.endsWith('.md')).sort()
+    .map((name) => directory ? `${directory}/${name}` : name);
+  for (const name of syntaxFiles('')) add(name, `src/syntax/${name}`);
+  for (const family of themeFamilies) {
+    for (const name of syntaxFiles(family)) add(name, `src/syntax/${name}`);
   }
   files.set('palette.json', Buffer.from(`${JSON.stringify(palette)}\n`));
   // Runtime gating consumes generated metadata instead of duplicating public
@@ -25,7 +29,9 @@ function runtimeFiles() {
   add('licenses/web-tree-sitter-LICENSE', 'node_modules/web-tree-sitter/LICENSE');
   add('licenses/tree-sitter-wasm-LICENSE', 'node_modules/tree-sitter-wasm/LICENSE');
   add('licenses/APACHE-2.0.txt', 'LICENSE');
-  for (const grammar of Object.values(grammars).sort()) {
+  const grammars = new Set(themeFamilies.flatMap((family) =>
+    Object.values(require(`./syntax/${family}/tree`).grammars)));
+  for (const grammar of [...grammars].sort()) {
     add(`grammars/${grammar}.wasm`, `node_modules/tree-sitter-wasm/out/${grammar}/tree-sitter-${grammar}.wasm`);
   }
   const manifest = Object.fromEntries([...files].map(([name, bytes]) =>

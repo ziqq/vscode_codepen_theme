@@ -1,4 +1,8 @@
-# Highlighting
+# Highlighting: Original themes
+
+This page describes **CodePen Theme Original** and **CodePen Theme Original Italics**.
+The Custom themes use the same palette with a different role hierarchy; see
+[Highlighting: Custom themes](highlighting-custom.md).
 
 ## Twilight colors
 
@@ -97,14 +101,14 @@ Refinement is active with both **CodePen Theme Original** variants. Files larger
 than 250,000 UTF-16 code units, unsupported contexts, and parser failures retain
 ordinary provider highlighting. Desktop and remote Node extension hosts are
 supported; browser-only VS Code uses the color theme without the Node refinement
-runtime. See [the refinement contract](https://github.com/ziqq/vscode_codepen_theme/blob/master/compatibility/REFINEMENT.md).
+runtime. See [the refinement contract](https://github.com/ziqq/vscode_codepen_theme/blob/master/compatibility/original/REFINEMENT.md).
 
 ## Verification boundary
 
-The [Twilight audit](https://github.com/ziqq/vscode_codepen_theme/blob/master/compatibility/TWILIGHT.md)
+The [Twilight audit](https://github.com/ziqq/vscode_codepen_theme/blob/master/compatibility/original/TWILIGHT.md)
 records 30 live CodePen JS/TS/JSX experiments, measured token colors,
 cross-language mappings, and known parser and provider differences.
-[`compatibility/twilight.json`](https://github.com/ziqq/vscode_codepen_theme/blob/master/compatibility/twilight.json)
+[`compatibility/twilight.json`](https://github.com/ziqq/vscode_codepen_theme/blob/master/compatibility/original/twilight.json)
 records color expectations for all supported language fixtures; other languages
 are role-based adaptations, not claims that CodePen supports those languages.
 
@@ -114,7 +118,7 @@ their existing theme values rather than claiming an exact CodePen match. With
 contextual refinement active, all 1,885 recorded nonblank JS/TS/JSX spans match
 the live classic Twilight capture exactly; author italics remain unchanged.
 
-The [full-language audit](https://github.com/ziqq/vscode_codepen_theme/blob/master/compatibility/LANGUAGE-AUDIT.md)
+The [full-language audit](https://github.com/ziqq/vscode_codepen_theme/blob/master/compatibility/original/LANGUAGE-AUDIT.md)
 covers all 68 complete samples and records fixes and remaining provider limitations
 per language. Just/Make recipe targets are purple; their variables and parameters
 are blue. Java modifiers are yellow, type references white, and members purple.

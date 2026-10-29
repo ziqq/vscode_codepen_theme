@@ -3,7 +3,7 @@
 The theme follows the same source-to-generated architecture as GitHub Theme:
 
 ```text
-src/colors.js ------> src/theme.js ----------> themes/*.json
+src/colors.js ------> src/themes/<family>.js -> themes/*.json
 src/theme-variants.js -> src/index.js --------> runtime/theme-variants.json
 package.json -------------------------------> VS Code typography defaults
                       \\----------------------> validation/editor harness
@@ -11,10 +11,12 @@ package.json -------------------------------> VS Code typography defaults
 
 ## Daily workflow
 
-- Edit the palette in `src/colors.js`, TextMate and workbench mappings in `src/theme.js`, and public variant metadata in `src/theme-variants.js`.
+- Edit the palette in `src/colors.js`, TextMate and workbench mappings in `src/themes/original.js` or `src/themes/custom.js`, and public variant metadata in `src/theme-variants.js`.
+- Contextual refinement has one shared extension host (`src/syntax/extension.js`) and one classifier set per family (`src/syntax/original/`, `src/syntax/custom/`). The host starts the worker of the active theme's family.
+- Fixtures that encode colors live per family in `compatibility/original/` and `compatibility/custom/`; `compatibility/scopes.json` and the samples are shared.
 - Edit classic typography only in `package.json`; validation and the editor harness read `contributes.configurationDefaults` directly from the manifest.
 - Run `npm run build` to regenerate `themes/` and the ignored `runtime/` bundle.
-- Run `npm run check` before submitting a change. Use `npm run check:compatibility`, `npm run check:colors`, and `npm run test:refinement` for focused diagnosis.
+- Run `npm run check` before submitting a change. Family-scoped checks run for both families; set `CODEPEN_THEME_FAMILY=original` or `custom` and call a script directly (for example `node scripts/validate-token-colors.mjs`) to check one. Use `npm run check:compatibility`, `npm run check:colors`, and `npm run test:refinement` for focused diagnosis.
 - Run `npm run test:providers -- <version>` for real-grammar colors, `npm run test:semantic -- <version>` for bundled JS/TS classifications, and `npm run test:reference -- <version>` to compare the recorded CodePen corpus with real JS/TS/JSX grammars.
 - Run `npm run docs:update` after changing provider metadata or VS Code version bands, and `npm run visual:update` only after accepting an intentional visual change.
 - Run `npm run package` to build and validate the distributable VSIX.
