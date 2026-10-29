@@ -52,3 +52,80 @@
   from { opacity: 0.65; }
   to { opacity: 1; }
 }
+
+/* -------------------------------------------------------------------------
+ * Extended showcase: custom properties, layers, nesting, container queries.
+ * ------------------------------------------------------------------------- */
+
+@import url("tokens.css") layer(tokens);
+@charset "utf-8";
+
+@layer reset, base, components;
+
+@font-face {
+  font-family: "Operator Mono";
+  src: url("./fonts/OperatorMono.woff2") format("woff2");
+  font-display: swap;
+  unicode-range: U+0000-00FF;
+}
+
+@property --accent-angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 45deg;
+}
+
+:root {
+  --surface: #1d1e22;
+  --accent: hsl(102deg 23% 62%);
+  --keyword: rgb(221 202 126 / 100%);
+  --gutter: clamp(1rem, 2vw + 0.5rem, 3rem);
+  --shadow: 0 0.25em 1.5em color-mix(in oklab, var(--accent) 35%, transparent);
+  color-scheme: dark;
+}
+
+@layer components {
+  .editor > .line:not(:empty)::before,
+  .editor ~ [data-role="gutter"] {
+    content: counter(line) "\00a0";
+    counter-increment: line;
+    inline-size: calc(100% - var(--gutter) * 2);
+    background: linear-gradient(var(--accent-angle), var(--surface) 0%, #2b2d33 100%);
+    transition: opacity 150ms cubic-bezier(0.4, 0, 0.2, 1), transform 0.2s ease-in-out;
+    box-shadow: var(--shadow) !important;
+  }
+
+  .token {
+    &--keyword { color: var(--keyword); font-weight: 700; }
+    &--string { color: var(--accent); }
+    &:is(:hover, :focus-visible) { outline: 1px dashed currentColor; }
+
+    .editor:has(> &) & { margin-block: 0.125em; }
+  }
+}
+
+.preview {
+  container: preview / inline-size;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(240px, 100%), 1fr));
+  grid-template-areas: "header header" "sidebar main";
+  aspect-ratio: 16 / 9;
+}
+
+@container preview (min-width: 40em) {
+  .token { font-size: max(1rem, 1.2cqi); }
+}
+
+@media (prefers-reduced-motion: no-preference) and (min-width: 768px) {
+  .token--keyword { animation: token-pulse 1.2s infinite alternate both; }
+}
+
+@supports not (backdrop-filter: blur(4px)) {
+  .overlay { background-color: #1d1e22e6; }
+}
+
+input[type="checkbox" i]:checked + label::after,
+a[href^="https://"]:not([href*="codepen.io"]) {
+  transform: translate3d(0, -2px, 0) rotate(-0.5turn) scale(1.05);
+  filter: drop-shadow(0 0 2px #96b38a) brightness(110%);
+}

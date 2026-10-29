@@ -175,3 +175,135 @@ void main() {
   final message = describeTheme(state, ThemeMode.dark);
   print('$message; contrast score: ${palette.contrastScore()}');
 }
+
+// ---------------------------------------------------------------------------
+// Extended showcase: constants, generics, mixins, extensions, async, records.
+// ---------------------------------------------------------------------------
+
+const int kMaxTokens = 0x40;
+const double kOpacity = 0.85;
+final RegExp kHexColor = RegExp(r'^#([0-9a-fA-F]{6})$');
+late final Map<String, int> _cache = <String, int>{};
+var globalCounter = 0;
+
+typedef TokenCallback = void Function(String name, {int? index});
+typedef Json = Map<String, Object?>;
+
+/// Something that can be serialized to [Json].
+abstract interface class Serializable {
+  Json toJson();
+}
+
+mixin Loggable on Object {
+  String get tag => runtimeType.toString();
+
+  void log(String message) => print('[$tag] $message');
+}
+
+base class Repository<T extends Serializable> with Loggable {
+  Repository({this.capacity = kMaxTokens});
+
+  final int capacity;
+  final List<T> _items = [];
+
+  int get length => _items.length;
+  bool get isFull => _items.length >= capacity;
+
+  set first(T value) => _items.insert(0, value);
+
+  T operator [](int index) => _items[index];
+
+  void add(T item) {
+    if (isFull) throw StateError('Repository is full: $capacity');
+    _items.add(item);
+    log('added #${_items.length}');
+  }
+
+  Iterable<R> mapWhere<R>(bool Function(T) test, R Function(T) convert) sync* {
+    for (final item in _items) {
+      if (test(item)) yield convert(item);
+    }
+  }
+}
+
+extension StringColor on String {
+  bool get isHexColor => kHexColor.hasMatch(this);
+
+  int toColorValue() => int.parse(substring(1), radix: 16) | 0xFF000000;
+}
+
+extension type const TokenId(int value) implements int {
+  TokenId.next() : value = ++globalCounter;
+}
+
+class Token implements Serializable {
+  const Token(this.name, this.color, [this.weight = 1]);
+
+  factory Token.fromJson(Json json) => Token(
+    json['name']! as String,
+    json['color'] as String? ?? '#ffffff',
+  );
+
+  Token.keyword() : this('keyword', '#ddca7e');
+
+  final String name;
+  final String color;
+  final int weight;
+
+  @override
+  Json toJson() => {'name': name, 'color': color, 'weight': weight};
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) || other is Token && other.name == name;
+
+  @override
+  int get hashCode => Object.hash(name, color);
+}
+
+(String, {int count}) summarize(List<Token> tokens) =>
+    (tokens.map((t) => t.name).join(', '), count: tokens.length);
+
+Future<List<Token>> loadTokens(Stream<Json> source) async {
+  final tokens = <Token>[];
+  try {
+    await for (final json in source.timeout(const Duration(seconds: 3))) {
+      tokens.add(Token.fromJson(json));
+    }
+  } on FormatException catch (error, stackTrace) {
+    print('Invalid token: ${error.message}\n$stackTrace');
+    rethrow;
+  } catch (_) {
+    return const [];
+  } finally {
+    _cache['loaded'] = tokens.length;
+  }
+  return tokens;
+}
+
+Stream<int> countdown(int from) async* {
+  for (var i = from; i >= 0; i--) {
+    await Future<void>.delayed(Duration(milliseconds: 100 * i));
+    yield i;
+  }
+}
+
+String classify(Object? value) => switch (value) {
+  null => 'null',
+  int n when n < 0 => 'negative int',
+  int() || double() => 'number',
+  String(:final length) when length > 10 => 'long string',
+  [final first, ...final rest] => 'list starting with $first (+${rest.length})',
+  {'name': final String name} => 'map named $name',
+  (final a, final b) => 'record ($a, $b)',
+  _ => 'unknown ${value.runtimeType}',
+};
+
+@pragma('vm:prefer-inline')
+int score(Token token) {
+  var result = token.weight * 2 + (token.color.isHexColor ? 1 : 0);
+  result <<= 1;
+  result ??= 0;
+  assert(result >= 0, 'score must be positive');
+  return result.clamp(0, kMaxTokens);
+}

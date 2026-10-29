@@ -39,3 +39,56 @@ tags = ["semantic", "textmate"]
 language = "dart"
 dimensions = [1280, 720]
 tags = ["refinement", "comments"]
+
+# ---------------------------------------------------------------------------
+# Extended showcase: inline tables, arrays of tables, dates, number formats.
+# ---------------------------------------------------------------------------
+
+[package]
+name = "codepen-theme"
+version = "1.0.0"
+authors = ["Anton Ustinoff <a.a.ustinoff@gmail.com>"]
+edition = '2024'
+description = """
+A CodePen-inspired dark color theme.
+Multi-line strings keep "quotes" and \t escapes."""
+license-file = 'C:\Users\theme\LICENSE'
+
+[package.metadata.palette]
+keyword = "#ddca7e"
+string = "#96b38a"
+comment = { color = "#717790", italic = true }
+"quoted.key" = "value"
+
+[numbers]
+integer = +99
+negative = -17
+underscored = 1_000_000
+hex = 0xDEADBEEF
+octal = 0o755
+binary = 0b1101_0110
+float = 3.1415
+exponent = 6.626e-34
+infinity = inf
+not_a_number = nan
+
+[dates]
+offset = 1979-05-27T07:32:00-08:00
+local_datetime = 1979-05-27T07:32:00.999999
+local_date = 1979-05-27
+local_time = 07:32:00
+
+[dependencies]
+serde = { version = "1.0", features = ["derive"], default-features = false }
+tokio.version = "1"
+tokio.features = ["full"]
+
+[[bin]]
+name = "theme-cli"
+path = "src/bin/cli.rs"
+required-features = []
+
+[[bin]]
+name = "theme-server"
+path = "src/bin/server.rs"
+nested = [[1, 2], ["a", "b"], [true, false]]

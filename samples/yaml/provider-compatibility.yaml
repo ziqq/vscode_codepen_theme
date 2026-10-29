@@ -38,3 +38,62 @@ preview:
   palette:
     background: '#1d1e22'
     accent: '#96b38a'
+
+# ---------------------------------------------------------------------------
+# Extended showcase: anchors, block scalars, tags, flow collections.
+# ---------------------------------------------------------------------------
+---
+version: 2.1
+defaults: &defaults
+  timeout-minutes: 30
+  retries: 3
+  enabled: true
+  ratio: 0.85
+  hex: 0x1d1e22
+  nothing: null
+  tilde: ~
+  released: 2026-10-29
+
+jobs:
+  build:
+    <<: *defaults
+    runs-on: [ubuntu-latest, macos-latest]
+    env: { NODE_ENV: production, CI: "true" }
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Build theme
+        run: |
+          npm ci
+          npm run build -- --mode "${{ matrix.mode }}"
+      - name: Describe
+        shell: bash
+        run: >
+          echo "Folded text keeps
+          a single line"
+  test:
+    <<: *defaults
+    needs: [build]
+    if: ${{ github.event_name != 'schedule' }}
+    strategy:
+      fail-fast: false
+      matrix:
+        mode: [textmate, semantic]
+        include:
+          - mode: semantic
+            dart: !!str 3.9
+    services:
+      postgres:
+        image: 'postgres:17'
+        ports: ["5432:5432"]
+
+binary: !!binary |
+  R0lGODlhDAAMAIQAAP//9/X17unp5WZmZgAAAOfn515eXvPz7Y6OjuDg4J+fn5
+set: !!set
+  ? keyword
+  ? string
+? [complex, key]
+: complex value
+...

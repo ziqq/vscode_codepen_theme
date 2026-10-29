@@ -46,3 +46,75 @@ comment=${tokens[comment]}
 EOF
 
 describe_mode "${CODEPEN_MODE:-dark}"
+
+# ---------------------------------------------------------------------------
+# Extended showcase: functions, traps, arrays, arithmetic, parameter expansion.
+# ---------------------------------------------------------------------------
+readonly MAX_TOKENS=64
+declare -i hits=0
+declare -a roles=(keyword string comment)
+export THEME_HOME="${XDG_CONFIG_HOME:-$HOME/.config}/codepen"
+
+cleanup() {
+  local exit_code=$?
+  rm -rf -- "${tmp_dir:?}"
+  printf 'cleanup finished with %d\n' "$exit_code" >&2
+  return "$exit_code"
+}
+trap cleanup EXIT INT TERM
+
+log() {
+  local level=${1^^}; shift
+  printf '[%(%H:%M:%S)T] %-5s %s\n' -1 "$level" "$*" >&2
+}
+
+is_hex() {
+  [[ $1 =~ ^#[0-9a-fA-F]{6}$ ]]
+}
+
+render_palette() {
+  local -n palette_ref=$1
+  local name color
+  for name in "${!palette_ref[@]}"; do
+    color=${palette_ref[$name]}
+    if is_hex "$color"; then
+      (( hits++ ))
+      printf '%-10s %s\n' "$name" "${color,,}"
+    elif [[ -z $color ]]; then
+      log warn "empty color for ${name}"
+    else
+      log error "invalid color '${color}' for ${name}"
+      continue
+    fi
+  done
+}
+
+tmp_dir=$(mktemp -d "${TMPDIR:-/tmp}/codepen.XXXXXX")
+config_file="$THEME_HOME/theme.conf"
+
+if [[ -f $config_file && -r $config_file ]]; then
+  # shellcheck source=/dev/null
+  source "$config_file"
+elif command -v jq >/dev/null 2>&1; then
+  jq -r '.tokens | to_entries[] | "\(.key)=\(.value)"' theme.json >"$tmp_dir/tokens"
+else
+  log info "no config at ${config_file/#$HOME/\~}"
+fi
+
+case "${1:-render}" in
+  render | show) render_palette tokens ;;
+  count) echo "${#roles[@]} roles, max $MAX_TOKENS" ;;
+  -h | --help)
+    echo "usage: ${0##*/} [render|count]"
+    exit 0
+    ;;
+  *) log error "unknown command: $1"; exit 2 ;;
+esac
+
+while IFS='=' read -r key value; do
+  [[ $key == \#* ]] && continue
+  echo "$key -> ${value:-<unset>}" | tee -a "$tmp_dir/log" 1>/dev/null
+done < <(printf '%s\n' "accent=#96b38a" "# comment" "empty=")
+
+result=$(( (hits * 2 + 0x10) % 7 ))
+echo "result=${result} files=$(find "$tmp_dir" -type f | wc -l) pid=$$ args=$#"

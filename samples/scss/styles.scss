@@ -46,3 +46,87 @@ $tokens: (
 @supports selector(:has(*)) {
   .preview:has(.token--keyword) { outline-color: $accent; }
 }
+
+// ---------------------------------------------------------------------------
+// Extended showcase: modules, maps, mixins, functions, control flow.
+// ---------------------------------------------------------------------------
+
+@use 'sass:map';
+@use 'sass:math';
+@use 'sass:color' as c;
+
+$breakpoints: (
+  'sm': 576px,
+  'md': 768px,
+  'lg': 1024px,
+) !default;
+
+$roles: (
+  keyword: #ddca7e,
+  string: #96b38a,
+  comment: #717790,
+  function: #809bbd,
+);
+
+$base-size: 16px !default;
+%visually-hidden {
+  position: absolute;
+  clip: rect(0 0 0 0);
+}
+
+@function rem($pixels, $context: $base-size) {
+  @if math.unit($pixels) != 'px' {
+    @error 'Expected px, got #{$pixels}';
+  }
+  @return math.div($pixels, $context) * 1rem;
+}
+
+@mixin respond($name) {
+  $width: map.get($breakpoints, $name);
+  @if not $width {
+    @warn "Unknown breakpoint `#{$name}`.";
+  } @else {
+    @media (min-width: $width) {
+      @content;
+    }
+  }
+}
+
+@mixin token($role, $italic: false) {
+  color: map.get($roles, $role);
+  @if $italic { font-style: italic; }
+}
+
+.palette {
+  padding: rem(24px) rem(16px);
+
+  @each $role, $color in $roles {
+    &__#{$role} {
+      @include token($role, $italic: $role == comment);
+      border-left: 2px solid c.adjust($color, $lightness: -15%);
+
+      &:hover { background: rgba($color, 0.12); }
+    }
+  }
+
+  @for $i from 1 through 3 {
+    &--level-#{$i} { margin-left: $i * 0.5rem; }
+  }
+
+  $step: 0;
+  @while $step < 2 {
+    .depth-#{$step} { z-index: 10 + $step; }
+    $step: $step + 1;
+  }
+
+  &__label {
+    @extend %visually-hidden;
+  }
+
+  @include respond('md') {
+    display: flex;
+    gap: math.max(8px, 1vw);
+  }
+
+  @debug "palette has #{length($roles)} roles";
+}
