@@ -6,46 +6,30 @@ This repository uses reusable actions pinned to
 ## Extension validation and publication
 
 Pull request CI packages the extension as a VSIX using Node.js 22 and
-`@vscode/vsce@4.0.0`. The package currently has no test or lint npm scripts.
+`@vscode/vsce@4.1.0`. The package currently has no test or lint npm scripts.
 
 Publication runs only when an existing version tag is pushed. The tag must be
 `v<package.json version>`, and the first version in `CHANGELOG.md` must match.
+The tagged commit must match the checkout and belong to `master` history.
 The workflow does not create tags or change the package version.
 
-The deploy job uses the `release` environment and Microsoft Entra workload
-identity federation. Only this job can request a GitHub OIDC token. The pinned
-`azure/login` action signs in without an Azure subscription, and
-`vsce publish --azure-credential` uses that Azure CLI session to obtain a
-short-lived Azure DevOps token. The workflow no longer reads `VSCE_PAT`; keep
-the stored secret until its removal is separately approved.
+The deploy job uses the `release` environment and Marketplace Trusted Publishing.
+Only this job can request a GitHub OIDC token. `vsce publish --oidc` exchanges
+that token directly with Marketplace; no Microsoft Entra tenant, Azure login,
+client ID or tenant ID is required. The stored `VSCE_PAT` is preserved and is
+not used by this workflow.
 
-Before merging this migration, complete these provider prerequisites:
+The Trusted Publishing policy for Marketplace publisher `ziqq` must specify:
 
-1. Create a dedicated application/service principal in your Microsoft Entra
-   tenant and add a federated identity credential with issuer
-   `https://token.actions.githubusercontent.com`, audience
-   `api://AzureADTokenExchange`, and subject
-   `repo:ziqq/vscode_codepen_theme:environment:release`.
-2. Set the application client ID as `AZURE_CLIENT_ID` and directory tenant ID
-   as `AZURE_TENANT_ID` in the GitHub `release` environment variables. These
-   identifiers are not client secrets. Preserve the environment's required
-   reviewer and tag-only `v*` deployment policy, and release-tag protection.
-3. Grant the identity the **Contributor** role on Marketplace publisher
-   `ziqq`. Use its Visual Studio profile resource ID returned by
-   `az rest -u https://app.vssps.visualstudio.com/_apis/profile/profiles/me --resource 499b84ac-1321-427f-aa17-267ca6975798`
-   while authenticated as that identity. This profile ID differs from the
-   Entra application client ID and service principal object ID.
+- Repository owner: `ziqq`
+- Repository: `vscode_codepen_theme`
+- Workflow: `deploy.yml`
+- Environment: `release`
 
-Keep the PR in draft until federation and publisher membership are configured.
-A passing VSIX packaging check does not verify OIDC token exchange or publication.
-See the official [Azure login OIDC prerequisites](https://github.com/Azure/login#login-with-openid-connect-oidc-recommended)
-and [Marketplace identity authorization](https://code.visualstudio.com/api/working-with-extensions/publishing-extension#secure-automated-publishing-to-visual-studio-marketplace).
-
-As of 2026-10-23, `vsce` also exposes `--oidc`, but Marketplace backend support
-is still pending rollout. This workflow uses the supported Entra path without
-a PAT fallback. Track [Marketplace trusted publishing](https://github.com/microsoft/vsmarketplace/issues/1422)
-and the [2026-10-21 maintainer update](https://github.com/microsoft/vscode-docs/pull/10519#issuecomment-6325167592)
-before considering the direct path.
+Preserve the environment's required reviewer, tag-only `v*` deployment policy,
+and release-tag protection. A passing VSIX packaging check does not verify
+OIDC token exchange or publication; verify those during the next version release.
+See the official [Marketplace Trusted Publishing documentation](https://code.visualstudio.com/api/working-with-extensions/publishing-extension#publish-with-github-actions-and-trusted-publishing).
 
 ## Semantic labels
 

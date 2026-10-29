@@ -55,7 +55,7 @@ jobs:
       - name: Install Dependencies
         run: |
           npm ci
-          npm install -g @vscode/vsce@4.0.0
+          npm install -g @vscode/vsce@4.1.0
 
       - name: Package extension
         run: vsce package --out "$RUNNER_TEMP/codepen-theme.vsix"
