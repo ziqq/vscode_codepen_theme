@@ -39,5 +39,39 @@
     <template id="token-template">
       <li><mark data-role="token">token</mark></li>
     </template>
+    <!-- Extended showcase: forms, media, inline script and style. -->
+    <form action="/themes" method="post" class="theme-form" novalidate>
+      <fieldset>
+        <legend>Pick a token color</legend>
+        <label for="role">Role</label>
+        <select id="role" name="role" required>
+          <option value="keyword" selected>Keyword</option>
+          <option value="string">String</option>
+        </select>
+        <input type="color" id="color" name="color" value="#96b38a" aria-describedby="color-hint">
+        <small id="color-hint">Hex color &mdash; e.g. <code>#ddca7e</code></small>
+        <input type="checkbox" id="italic" name="italic" checked disabled>
+        <button type="submit" data-action="save" onclick="return confirm('Save?')">Save</button>
+      </fieldset>
+    </form>
+    <table>
+      <thead><tr><th scope="col">Role</th><th scope="col">Color</th></tr></thead>
+      <tbody><tr><td>comment</td><td style="color: #717790">#717790</td></tr></tbody>
+    </table>
+    <picture>
+      <source srcset="preview.avif" type="image/avif">
+      <img src="preview.png" alt="Theme preview" width="640" height="360" loading="lazy">
+    </picture>
+    <style>
+      .theme-form :is(input, select):focus-visible { outline: 2px solid var(--accent, #96b38a); }
+    </style>
+    <script type="module">
+      const form = document.querySelector('.theme-form');
+      form?.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        const data = Object.fromEntries(new FormData(form));
+        await fetch(form.action, { method: 'POST', body: JSON.stringify(data) });
+      });
+    </script>
   </body>
 </html>
