@@ -189,9 +189,9 @@
       "source": "MODE=dark\nPORT=3000\nENABLED=true\nQUOTED=\"dark\"\n# A comment",
       "expect": [
         { "line": 1, "text": "MODE", "foreground": "#809bbd" },
-        { "line": 1, "text": "dark", "foreground": "#96b38a" },
-        { "line": 2, "text": "3000", "foreground": "#96b38a" },
-        { "line": 3, "text": "true", "foreground": "#96b38a" },
+        { "line": 1, "text": "dark", "foreground": "#96b38a", "refinedForeground": "#ffffff" },
+        { "line": 2, "text": "3000", "foreground": "#96b38a", "refinedForeground": "#d0782a" },
+        { "line": 3, "text": "true", "foreground": "#96b38a", "refinedForeground": "#d0782a" },
         { "line": 4, "text": "dark", "foreground": "#96b38a" },
         { "line": 5, "text": "A comment", "foreground": "#717790" }
       ]

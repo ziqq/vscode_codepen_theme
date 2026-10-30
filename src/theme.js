@@ -815,6 +815,8 @@ const tokenColors = [
     'string.regexp.ts',
     // JSON object keys are quoted string literals, including their quotes.
     'support.type.property-name.json',
+    'punctuation.support.type.property-name.begin.json',
+    'punctuation.support.type.property-name.end.json',
     // Compound and wildcard selectors
     '*link*',
     '*uri*',

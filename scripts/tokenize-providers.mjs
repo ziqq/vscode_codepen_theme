@@ -225,7 +225,9 @@ for (const item of compatibility.cases) {
     for (const expected of candidate.expect) {
       refinedAssertions++;
       const correction = candidate.full && corrections.find((entry) => entry.language === item.language && entry.line === expected.line && entry.text === expected.text);
-      const foreground = correction ? correction.foreground : expected.foreground;
+      // Edge fixtures state refined colors inline; full samples use reviewed corrections.
+      const foreground = expected.refinedForeground ??
+        (correction ? correction.foreground : expected.foreground);
       const base = lines.slice(0, expected.line - 1).reduce((sum, line) => sum + line.length + 1, 0);
       let start = -1;
       for (let index = 0; index < (expected.occurrence ?? 1); index++) start = lines[expected.line - 1].indexOf(expected.text, start + 1);
