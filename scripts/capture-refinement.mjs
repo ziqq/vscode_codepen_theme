@@ -143,7 +143,8 @@ try {
     const deadline = Date.now() + 60000;
     while (Date.now() < deadline) {
       try { ready = JSON.parse(await fs.readFile(path.join(output, `ready-${index}.json`), 'utf8')); break; }
-      catch (error) { if (error.code !== 'ENOENT') throw error; }
+      // The runner may still be writing the file; a partial JSON read is not ready yet.
+      catch (error) { if (error.code !== 'ENOENT' && !(error instanceof SyntaxError)) throw error; }
       if (exitCode !== undefined) throw new Error(`Editor exited ${exitCode}: ${logs}`);
       await wait(100);
     }
