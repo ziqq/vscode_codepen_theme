@@ -1,0 +1,426 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Original vs Custom</title>
+<style>
+  :root { color-scheme: dark; }
+  body { margin: 0; background: #131417; color: #ddd; font: 14px/1.4 -apple-system, system-ui, sans-serif; }
+  header { position: sticky; top: 0; z-index: 1; background: #1d1e22; padding: 8px 16px; border-bottom: 1px solid #333; }
+  header label { margin-right: 16px; }
+  nav { display: flex; flex-wrap: wrap; gap: 2px 12px; margin-top: 6px; max-height: 84px; overflow: auto; }
+  nav a { color: #96b38a; text-decoration: none; white-space: nowrap; }
+  nav a small { color: #777; }
+  section { padding: 16px; border-bottom: 1px solid #2a2a2e; }
+  h2 { margin: 0 0 8px; font-size: 16px; color: #ddca7e; }
+  h2 span { color: #888; font-weight: normal; font-size: 13px; margin-left: 8px; }
+  img { max-width: 100%; height: auto; display: block; }
+  body:not(.show-diff) .diff, body.show-diff .sbs { display: none; }
+  .diff img { max-width: 50%; }
+</style></head><body>
+<header>
+  <label><input type="radio" name="mode" checked onchange="document.body.classList.remove('show-diff')"> Original | Custom</label>
+  <label><input type="radio" name="mode" onchange="document.body.classList.add('show-diff')"> Карта отличий (красным)</label>
+  <nav><a href="#clojure__core.clj">clojure/core.clj <small>2.63%</small></a><a href="#hlsl__theme.hlsl">hlsl/theme.hlsl <small>2.63%</small></a><a href="#r__theme.R">r/theme.R <small>2.42%</small></a><a href="#cuda__main.cu">cuda/main.cu <small>2.25%</small></a><a href="#julia__theme.jl">julia/theme.jl <small>2.23%</small></a><a href="#lua__theme.lua">lua/theme.lua <small>2.19%</small></a><a href="#powershell__theme.ps1">powershell/theme.ps1 <small>2.08%</small></a><a href="#kotlin__Main.kt">kotlin/Main.kt <small>2.05%</small></a><a href="#swift__main.swift">swift/main.swift <small>2.03%</small></a><a href="#dart__main.dart">dart/main.dart <small>2.02%</small></a><a href="#java__Main.java">java/Main.java <small>2.00%</small></a><a href="#c__main.c">c/main.c <small>1.99%</small></a><a href="#cpp__main.cpp">cpp/main.cpp <small>1.93%</small></a><a href="#perl__theme.pl">perl/theme.pl <small>1.92%</small></a><a href="#objective-c__main.m">objective-c/main.m <small>1.92%</small></a><a href="#raku__theme.raku">raku/theme.raku <small>1.91%</small></a><a href="#fsharp__Program.fs">fsharp/Program.fs <small>1.82%</small></a><a href="#csharp__Program.cs">csharp/Program.cs <small>1.79%</small></a><a href="#python__main.py">python/main.py <small>1.74%</small></a><a href="#visual-basic__Theme.vb">visual-basic/Theme.vb <small>1.73%</small></a><a href="#razor__Theme.razor">razor/Theme.razor <small>1.70%</small></a><a href="#coffeescript__theme.coffee">coffeescript/theme.coffee <small>1.70%</small></a><a href="#go__main.go">go/main.go <small>1.69%</small></a><a href="#shaderlab__Theme.shader">shaderlab/Theme.shader <small>1.66%</small></a><a href="#sql__query.sql">sql/query.sql <small>1.64%</small></a><a href="#javascript__main.js">javascript/main.js <small>1.61%</small></a><a href="#objective-cpp__main.mm">objective-cpp/main.mm <small>1.43%</small></a><a href="#groovy__theme.groovy">groovy/theme.groovy <small>1.37%</small></a><a href="#typescript__main.ts">typescript/main.ts <small>1.28%</small></a><a href="#javascript__Component.jsx">javascript/Component.jsx <small>1.27%</small></a><a href="#handlebars__card.hbs">handlebars/card.hbs <small>1.19%</small></a><a href="#rust__main.rs">rust/main.rs <small>1.17%</small></a><a href="#php__index.php">php/index.php <small>1.17%</small></a><a href="#javascript__index.tsx">javascript/index.tsx <small>1.16%</small></a><a href="#ruby__main.rb">ruby/main.rb <small>0.85%</small></a><a href="#pug__index.pug">pug/index.pug <small>0.79%</small></a><a href="#dotenv__.env.example">dotenv/.env.example <small>0.74%</small></a><a href="#svelte__Counter.svelte">svelte/Counter.svelte <small>0.67%</small></a><a href="#toml__config.toml">toml/config.toml <small>0.45%</small></a><a href="#ini__theme.ini">ini/theme.ini <small>0.41%</small></a><a href="#vue__Counter.vue">vue/Counter.vue <small>0.35%</small></a><a href="#markdown__compatibility.md">markdown/compatibility.md <small>0.33%</small></a><a href="#shell__theme-preview.sh">shell/theme-preview.sh <small>0.31%</small></a><a href="#json__theme.json">json/theme.json <small>0.25%</small></a><a href="#html__index.html">html/index.html <small>0.24%</small></a><a href="#json__events.jsonl">json/events.jsonl <small>0.23%</small></a><a href="#json__theme.jsonc">json/theme.jsonc <small>0.20%</small></a><a href="#properties__theme.properties">properties/theme.properties <small>0.16%</small></a><a href="#latex__references.bib">latex/references.bib <small>0.16%</small></a><a href="#sass__styles.sass">sass/styles.sass <small>0.13%</small></a><a href="#scss__styles.scss">scss/styles.scss <small>0.12%</small></a><a href="#just__justfile">just/justfile <small>0.11%</small></a><a href="#c4__workspace.dsl">c4/workspace.dsl <small>0.05%</small></a><a href="#docker__compose.yaml">docker/compose.yaml <small>0.04%</small></a><a href="#make__Makefile">make/Makefile <small>0.03%</small></a><a href="#yaml__provider-compatibility.yaml">yaml/provider-compatibility.yaml <small>0.03%</small></a><a href="#batch__theme-preview.bat">batch/theme-preview.bat <small>0.01%</small></a><a href="#css__styles.css">css/styles.css <small>0.01%</small></a><a href="#latex__package.sty">latex/package.sty <small>0.00%</small></a><a href="#diff__theme.patch">diff/theme.patch <small>0.00%</small></a><a href="#docker__Dockerfile">docker/Dockerfile <small>0.00%</small></a><a href="#latex__document.tex">latex/document.tex <small>0.00%</small></a><a href="#less__styles.less">less/styles.less <small>0.00%</small></a><a href="#restructuredtext__theme.rst">restructuredtext/theme.rst <small>0.00%</small></a><a href="#wat__theme.wat">wat/theme.wat <small>0.00%</small></a><a href="#xml__theme.xml">xml/theme.xml <small>0.00%</small></a><a href="#xml__transform.xsl">xml/transform.xsl <small>0.00%</small></a></nav>
+</header>
+
+<section id="clojure__core.clj">
+  <h2>clojure/core.clj <span>2.63% пикселей отличается</span></h2>
+  <a class="sbs" href="side-by-side/clojure__core.clj.jpg"><img loading="lazy" src="side-by-side/clojure__core.clj.jpg" alt="clojure/core.clj: Original | Custom"></a>
+  <a class="diff" href="diff/clojure__core.clj.jpg"><img loading="lazy" src="diff/clojure__core.clj.jpg" alt="clojure/core.clj: diff"></a>
+</section>
+
+<section id="hlsl__theme.hlsl">
+  <h2>hlsl/theme.hlsl <span>2.63% пикселей отличается</span></h2>
+  <a class="sbs" href="side-by-side/hlsl__theme.hlsl.jpg"><img loading="lazy" src="side-by-side/hlsl__theme.hlsl.jpg" alt="hlsl/theme.hlsl: Original | Custom"></a>
+  <a class="diff" href="diff/hlsl__theme.hlsl.jpg"><img loading="lazy" src="diff/hlsl__theme.hlsl.jpg" alt="hlsl/theme.hlsl: diff"></a>
+</section>
+
+<section id="r__theme.R">
+  <h2>r/theme.R <span>2.42% пикселей отличается</span></h2>
+  <a class="sbs" href="side-by-side/r__theme.R.jpg"><img loading="lazy" src="side-by-side/r__theme.R.jpg" alt="r/theme.R: Original | Custom"></a>
+  <a class="diff" href="diff/r__theme.R.jpg"><img loading="lazy" src="diff/r__theme.R.jpg" alt="r/theme.R: diff"></a>
+</section>
+
+<section id="cuda__main.cu">
+  <h2>cuda/main.cu <span>2.25% пикселей отличается</span></h2>
+  <a class="sbs" href="side-by-side/cuda__main.cu.jpg"><img loading="lazy" src="side-by-side/cuda__main.cu.jpg" alt="cuda/main.cu: Original | Custom"></a>
+  <a class="diff" href="diff/cuda__main.cu.jpg"><img loading="lazy" src="diff/cuda__main.cu.jpg" alt="cuda/main.cu: diff"></a>
+</section>
+
+<section id="julia__theme.jl">
+  <h2>julia/theme.jl <span>2.23% пикселей отличается</span></h2>
+  <a class="sbs" href="side-by-side/julia__theme.jl.jpg"><img loading="lazy" src="side-by-side/julia__theme.jl.jpg" alt="julia/theme.jl: Original | Custom"></a>
+  <a class="diff" href="diff/julia__theme.jl.jpg"><img loading="lazy" src="diff/julia__theme.jl.jpg" alt="julia/theme.jl: diff"></a>
+</section>
+
+<section id="lua__theme.lua">
+  <h2>lua/theme.lua <span>2.19% пикселей отличается</span></h2>
+  <a class="sbs" href="side-by-side/lua__theme.lua.jpg"><img loading="lazy" src="side-by-side/lua__theme.lua.jpg" alt="lua/theme.lua: Original | Custom"></a>
+  <a class="diff" href="diff/lua__theme.lua.jpg"><img loading="lazy" src="diff/lua__theme.lua.jpg" alt="lua/theme.lua: diff"></a>
+</section>
+
+<section id="powershell__theme.ps1">
+  <h2>powershell/theme.ps1 <span>2.08% пикселей отличается</span></h2>
+  <a class="sbs" href="side-by-side/powershell__theme.ps1.jpg"><img loading="lazy" src="side-by-side/powershell__theme.ps1.jpg" alt="powershell/theme.ps1: Original | Custom"></a>
+  <a class="diff" href="diff/powershell__theme.ps1.jpg"><img loading="lazy" src="diff/powershell__theme.ps1.jpg" alt="powershell/theme.ps1: diff"></a>
+</section>
+
+<section id="kotlin__Main.kt">
+  <h2>kotlin/Main.kt <span>2.05% пикселей отличается</span></h2>
+  <a class="sbs" href="side-by-side/kotlin__Main.kt.jpg"><img loading="lazy" src="side-by-side/kotlin__Main.kt.jpg" alt="kotlin/Main.kt: Original | Custom"></a>
+  <a class="diff" href="diff/kotlin__Main.kt.jpg"><img loading="lazy" src="diff/kotlin__Main.kt.jpg" alt="kotlin/Main.kt: diff"></a>
+</section>
+
+<section id="swift__main.swift">
+  <h2>swift/main.swift <span>2.03% пикселей отличается</span></h2>
+  <a class="sbs" href="side-by-side/swift__main.swift.jpg"><img loading="lazy" src="side-by-side/swift__main.swift.jpg" alt="swift/main.swift: Original | Custom"></a>
+  <a class="diff" href="diff/swift__main.swift.jpg"><img loading="lazy" src="diff/swift__main.swift.jpg" alt="swift/main.swift: diff"></a>
+</section>
+
+<section id="dart__main.dart">
+  <h2>dart/main.dart <span>2.02% пикселей отличается</span></h2>
+  <a class="sbs" href="side-by-side/dart__main.dart.jpg"><img loading="lazy" src="side-by-side/dart__main.dart.jpg" alt="dart/main.dart: Original | Custom"></a>
+  <a class="diff" href="diff/dart__main.dart.jpg"><img loading="lazy" src="diff/dart__main.dart.jpg" alt="dart/main.dart: diff"></a>
+</section>
+
+<section id="java__Main.java">
+  <h2>java/Main.java <span>2.00% пикселей отличается</span></h2>
+  <a class="sbs" href="side-by-side/java__Main.java.jpg"><img loading="lazy" src="side-by-side/java__Main.java.jpg" alt="java/Main.java: Original | Custom"></a>
+  <a class="diff" href="diff/java__Main.java.jpg"><img loading="lazy" src="diff/java__Main.java.jpg" alt="java/Main.java: diff"></a>
+</section>
+
+<section id="c__main.c">
+  <h2>c/main.c <span>1.99% пикселей отличается</span></h2>
+  <a class="sbs" href="side-by-side/c__main.c.jpg"><img loading="lazy" src="side-by-side/c__main.c.jpg" alt="c/main.c: Original | Custom"></a>
+  <a class="diff" href="diff/c__main.c.jpg"><img loading="lazy" src="diff/c__main.c.jpg" alt="c/main.c: diff"></a>
+</section>
+
+<section id="cpp__main.cpp">
+  <h2>cpp/main.cpp <span>1.93% пикселей отличается</span></h2>
+  <a class="sbs" href="side-by-side/cpp__main.cpp.jpg"><img loading="lazy" src="side-by-side/cpp__main.cpp.jpg" alt="cpp/main.cpp: Original | Custom"></a>
+  <a class="diff" href="diff/cpp__main.cpp.jpg"><img loading="lazy" src="diff/cpp__main.cpp.jpg" alt="cpp/main.cpp: diff"></a>
+</section>
+
+<section id="perl__theme.pl">
+  <h2>perl/theme.pl <span>1.92% пикселей отличается</span></h2>
+  <a class="sbs" href="side-by-side/perl__theme.pl.jpg"><img loading="lazy" src="side-by-side/perl__theme.pl.jpg" alt="perl/theme.pl: Original | Custom"></a>
+  <a class="diff" href="diff/perl__theme.pl.jpg"><img loading="lazy" src="diff/perl__theme.pl.jpg" alt="perl/theme.pl: diff"></a>
+</section>
+
+<section id="objective-c__main.m">
+  <h2>objective-c/main.m <span>1.92% пикселей отличается</span></h2>
+  <a class="sbs" href="side-by-side/objective-c__main.m.jpg"><img loading="lazy" src="side-by-side/objective-c__main.m.jpg" alt="objective-c/main.m: Original | Custom"></a>
+  <a class="diff" href="diff/objective-c__main.m.jpg"><img loading="lazy" src="diff/objective-c__main.m.jpg" alt="objective-c/main.m: diff"></a>
+</section>
+
+<section id="raku__theme.raku">
+  <h2>raku/theme.raku <span>1.91% пикселей отличается</span></h2>
+  <a class="sbs" href="side-by-side/raku__theme.raku.jpg"><img loading="lazy" src="side-by-side/raku__theme.raku.jpg" alt="raku/theme.raku: Original | Custom"></a>
+  <a class="diff" href="diff/raku__theme.raku.jpg"><img loading="lazy" src="diff/raku__theme.raku.jpg" alt="raku/theme.raku: diff"></a>
+</section>
+
+<section id="fsharp__Program.fs">
+  <h2>fsharp/Program.fs <span>1.82% пикселей отличается</span></h2>
+  <a class="sbs" href="side-by-side/fsharp__Program.fs.jpg"><img loading="lazy" src="side-by-side/fsharp__Program.fs.jpg" alt="fsharp/Program.fs: Original | Custom"></a>
+  <a class="diff" href="diff/fsharp__Program.fs.jpg"><img loading="lazy" src="diff/fsharp__Program.fs.jpg" alt="fsharp/Program.fs: diff"></a>
+</section>
+
+<section id="csharp__Program.cs">
+  <h2>csharp/Program.cs <span>1.79% пикселей отличается</span></h2>
+  <a class="sbs" href="side-by-side/csharp__Program.cs.jpg"><img loading="lazy" src="side-by-side/csharp__Program.cs.jpg" alt="csharp/Program.cs: Original | Custom"></a>
+  <a class="diff" href="diff/csharp__Program.cs.jpg"><img loading="lazy" src="diff/csharp__Program.cs.jpg" alt="csharp/Program.cs: diff"></a>
+</section>
+
+<section id="python__main.py">
+  <h2>python/main.py <span>1.74% пикселей отличается</span></h2>
+  <a class="sbs" href="side-by-side/python__main.py.jpg"><img loading="lazy" src="side-by-side/python__main.py.jpg" alt="python/main.py: Original | Custom"></a>
+  <a class="diff" href="diff/python__main.py.jpg"><img loading="lazy" src="diff/python__main.py.jpg" alt="python/main.py: diff"></a>
+</section>
+
+<section id="visual-basic__Theme.vb">
+  <h2>visual-basic/Theme.vb <span>1.73% пикселей отличается</span></h2>
+  <a class="sbs" href="side-by-side/visual-basic__Theme.vb.jpg"><img loading="lazy" src="side-by-side/visual-basic__Theme.vb.jpg" alt="visual-basic/Theme.vb: Original | Custom"></a>
+  <a class="diff" href="diff/visual-basic__Theme.vb.jpg"><img loading="lazy" src="diff/visual-basic__Theme.vb.jpg" alt="visual-basic/Theme.vb: diff"></a>
+</section>
+
+<section id="razor__Theme.razor">
+  <h2>razor/Theme.razor <span>1.70% пикселей отличается</span></h2>
+  <a class="sbs" href="side-by-side/razor__Theme.razor.jpg"><img loading="lazy" src="side-by-side/razor__Theme.razor.jpg" alt="razor/Theme.razor: Original | Custom"></a>
+  <a class="diff" href="diff/razor__Theme.razor.jpg"><img loading="lazy" src="diff/razor__Theme.razor.jpg" alt="razor/Theme.razor: diff"></a>
+</section>
+
+<section id="coffeescript__theme.coffee">
+  <h2>coffeescript/theme.coffee <span>1.70% пикселей отличается</span></h2>
+  <a class="sbs" href="side-by-side/coffeescript__theme.coffee.jpg"><img loading="lazy" src="side-by-side/coffeescript__theme.coffee.jpg" alt="coffeescript/theme.coffee: Original | Custom"></a>
+  <a class="diff" href="diff/coffeescript__theme.coffee.jpg"><img loading="lazy" src="diff/coffeescript__theme.coffee.jpg" alt="coffeescript/theme.coffee: diff"></a>
+</section>
+
+<section id="go__main.go">
+  <h2>go/main.go <span>1.69% пикселей отличается</span></h2>
+  <a class="sbs" href="side-by-side/go__main.go.jpg"><img loading="lazy" src="side-by-side/go__main.go.jpg" alt="go/main.go: Original | Custom"></a>
+  <a class="diff" href="diff/go__main.go.jpg"><img loading="lazy" src="diff/go__main.go.jpg" alt="go/main.go: diff"></a>
+</section>
+
+<section id="shaderlab__Theme.shader">
+  <h2>shaderlab/Theme.shader <span>1.66% пикселей отличается</span></h2>
+  <a class="sbs" href="side-by-side/shaderlab__Theme.shader.jpg"><img loading="lazy" src="side-by-side/shaderlab__Theme.shader.jpg" alt="shaderlab/Theme.shader: Original | Custom"></a>
+  <a class="diff" href="diff/shaderlab__Theme.shader.jpg"><img loading="lazy" src="diff/shaderlab__Theme.shader.jpg" alt="shaderlab/Theme.shader: diff"></a>
+</section>
+
+<section id="sql__query.sql">
+  <h2>sql/query.sql <span>1.64% пикселей отличается</span></h2>
+  <a class="sbs" href="side-by-side/sql__query.sql.jpg"><img loading="lazy" src="side-by-side/sql__query.sql.jpg" alt="sql/query.sql: Original | Custom"></a>
+  <a class="diff" href="diff/sql__query.sql.jpg"><img loading="lazy" src="diff/sql__query.sql.jpg" alt="sql/query.sql: diff"></a>
+</section>
+
+<section id="javascript__main.js">
+  <h2>javascript/main.js <span>1.61% пикселей отличается</span></h2>
+  <a class="sbs" href="side-by-side/javascript__main.js.jpg"><img loading="lazy" src="side-by-side/javascript__main.js.jpg" alt="javascript/main.js: Original | Custom"></a>
+  <a class="diff" href="diff/javascript__main.js.jpg"><img loading="lazy" src="diff/javascript__main.js.jpg" alt="javascript/main.js: diff"></a>
+</section>
+
+<section id="objective-cpp__main.mm">
+  <h2>objective-cpp/main.mm <span>1.43% пикселей отличается</span></h2>
+  <a class="sbs" href="side-by-side/objective-cpp__main.mm.jpg"><img loading="lazy" src="side-by-side/objective-cpp__main.mm.jpg" alt="objective-cpp/main.mm: Original | Custom"></a>
+  <a class="diff" href="diff/objective-cpp__main.mm.jpg"><img loading="lazy" src="diff/objective-cpp__main.mm.jpg" alt="objective-cpp/main.mm: diff"></a>
+</section>
+
+<section id="groovy__theme.groovy">
+  <h2>groovy/theme.groovy <span>1.37% пикселей отличается</span></h2>
+  <a class="sbs" href="side-by-side/groovy__theme.groovy.jpg"><img loading="lazy" src="side-by-side/groovy__theme.groovy.jpg" alt="groovy/theme.groovy: Original | Custom"></a>
+  <a class="diff" href="diff/groovy__theme.groovy.jpg"><img loading="lazy" src="diff/groovy__theme.groovy.jpg" alt="groovy/theme.groovy: diff"></a>
+</section>
+
+<section id="typescript__main.ts">
+  <h2>typescript/main.ts <span>1.28% пикселей отличается</span></h2>
+  <a class="sbs" href="side-by-side/typescript__main.ts.jpg"><img loading="lazy" src="side-by-side/typescript__main.ts.jpg" alt="typescript/main.ts: Original | Custom"></a>
+  <a class="diff" href="diff/typescript__main.ts.jpg"><img loading="lazy" src="diff/typescript__main.ts.jpg" alt="typescript/main.ts: diff"></a>
+</section>
+
+<section id="javascript__Component.jsx">
+  <h2>javascript/Component.jsx <span>1.27% пикселей отличается</span></h2>
+  <a class="sbs" href="side-by-side/javascript__Component.jsx.jpg"><img loading="lazy" src="side-by-side/javascript__Component.jsx.jpg" alt="javascript/Component.jsx: Original | Custom"></a>
+  <a class="diff" href="diff/javascript__Component.jsx.jpg"><img loading="lazy" src="diff/javascript__Component.jsx.jpg" alt="javascript/Component.jsx: diff"></a>
+</section>
+
+<section id="handlebars__card.hbs">
+  <h2>handlebars/card.hbs <span>1.19% пикселей отличается</span></h2>
+  <a class="sbs" href="side-by-side/handlebars__card.hbs.jpg"><img loading="lazy" src="side-by-side/handlebars__card.hbs.jpg" alt="handlebars/card.hbs: Original | Custom"></a>
+  <a class="diff" href="diff/handlebars__card.hbs.jpg"><img loading="lazy" src="diff/handlebars__card.hbs.jpg" alt="handlebars/card.hbs: diff"></a>
+</section>
+
+<section id="rust__main.rs">
+  <h2>rust/main.rs <span>1.17% пикселей отличается</span></h2>
+  <a class="sbs" href="side-by-side/rust__main.rs.jpg"><img loading="lazy" src="side-by-side/rust__main.rs.jpg" alt="rust/main.rs: Original | Custom"></a>
+  <a class="diff" href="diff/rust__main.rs.jpg"><img loading="lazy" src="diff/rust__main.rs.jpg" alt="rust/main.rs: diff"></a>
+</section>
+
+<section id="php__index.php">
+  <h2>php/index.php <span>1.17% пикселей отличается</span></h2>
+  <a class="sbs" href="side-by-side/php__index.php.jpg"><img loading="lazy" src="side-by-side/php__index.php.jpg" alt="php/index.php: Original | Custom"></a>
+  <a class="diff" href="diff/php__index.php.jpg"><img loading="lazy" src="diff/php__index.php.jpg" alt="php/index.php: diff"></a>
+</section>
+
+<section id="javascript__index.tsx">
+  <h2>javascript/index.tsx <span>1.16% пикселей отличается</span></h2>
+  <a class="sbs" href="side-by-side/javascript__index.tsx.jpg"><img loading="lazy" src="side-by-side/javascript__index.tsx.jpg" alt="javascript/index.tsx: Original | Custom"></a>
+  <a class="diff" href="diff/javascript__index.tsx.jpg"><img loading="lazy" src="diff/javascript__index.tsx.jpg" alt="javascript/index.tsx: diff"></a>
+</section>
+
+<section id="ruby__main.rb">
+  <h2>ruby/main.rb <span>0.85% пикселей отличается</span></h2>
+  <a class="sbs" href="side-by-side/ruby__main.rb.jpg"><img loading="lazy" src="side-by-side/ruby__main.rb.jpg" alt="ruby/main.rb: Original | Custom"></a>
+  <a class="diff" href="diff/ruby__main.rb.jpg"><img loading="lazy" src="diff/ruby__main.rb.jpg" alt="ruby/main.rb: diff"></a>
+</section>
+
+<section id="pug__index.pug">
+  <h2>pug/index.pug <span>0.79% пикселей отличается</span></h2>
+  <a class="sbs" href="side-by-side/pug__index.pug.jpg"><img loading="lazy" src="side-by-side/pug__index.pug.jpg" alt="pug/index.pug: Original | Custom"></a>
+  <a class="diff" href="diff/pug__index.pug.jpg"><img loading="lazy" src="diff/pug__index.pug.jpg" alt="pug/index.pug: diff"></a>
+</section>
+
+<section id="dotenv__.env.example">
+  <h2>dotenv/.env.example <span>0.74% пикселей отличается</span></h2>
+  <a class="sbs" href="side-by-side/dotenv__.env.example.jpg"><img loading="lazy" src="side-by-side/dotenv__.env.example.jpg" alt="dotenv/.env.example: Original | Custom"></a>
+  <a class="diff" href="diff/dotenv__.env.example.jpg"><img loading="lazy" src="diff/dotenv__.env.example.jpg" alt="dotenv/.env.example: diff"></a>
+</section>
+
+<section id="svelte__Counter.svelte">
+  <h2>svelte/Counter.svelte <span>0.67% пикселей отличается</span></h2>
+  <a class="sbs" href="side-by-side/svelte__Counter.svelte.jpg"><img loading="lazy" src="side-by-side/svelte__Counter.svelte.jpg" alt="svelte/Counter.svelte: Original | Custom"></a>
+  <a class="diff" href="diff/svelte__Counter.svelte.jpg"><img loading="lazy" src="diff/svelte__Counter.svelte.jpg" alt="svelte/Counter.svelte: diff"></a>
+</section>
+
+<section id="toml__config.toml">
+  <h2>toml/config.toml <span>0.45% пикселей отличается</span></h2>
+  <a class="sbs" href="side-by-side/toml__config.toml.jpg"><img loading="lazy" src="side-by-side/toml__config.toml.jpg" alt="toml/config.toml: Original | Custom"></a>
+  <a class="diff" href="diff/toml__config.toml.jpg"><img loading="lazy" src="diff/toml__config.toml.jpg" alt="toml/config.toml: diff"></a>
+</section>
+
+<section id="ini__theme.ini">
+  <h2>ini/theme.ini <span>0.41% пикселей отличается</span></h2>
+  <a class="sbs" href="side-by-side/ini__theme.ini.jpg"><img loading="lazy" src="side-by-side/ini__theme.ini.jpg" alt="ini/theme.ini: Original | Custom"></a>
+  <a class="diff" href="diff/ini__theme.ini.jpg"><img loading="lazy" src="diff/ini__theme.ini.jpg" alt="ini/theme.ini: diff"></a>
+</section>
+
+<section id="vue__Counter.vue">
+  <h2>vue/Counter.vue <span>0.35% пикселей отличается</span></h2>
+  <a class="sbs" href="side-by-side/vue__Counter.vue.jpg"><img loading="lazy" src="side-by-side/vue__Counter.vue.jpg" alt="vue/Counter.vue: Original | Custom"></a>
+  <a class="diff" href="diff/vue__Counter.vue.jpg"><img loading="lazy" src="diff/vue__Counter.vue.jpg" alt="vue/Counter.vue: diff"></a>
+</section>
+
+<section id="markdown__compatibility.md">
+  <h2>markdown/compatibility.md <span>0.33% пикселей отличается</span></h2>
+  <a class="sbs" href="side-by-side/markdown__compatibility.md.jpg"><img loading="lazy" src="side-by-side/markdown__compatibility.md.jpg" alt="markdown/compatibility.md: Original | Custom"></a>
+  <a class="diff" href="diff/markdown__compatibility.md.jpg"><img loading="lazy" src="diff/markdown__compatibility.md.jpg" alt="markdown/compatibility.md: diff"></a>
+</section>
+
+<section id="shell__theme-preview.sh">
+  <h2>shell/theme-preview.sh <span>0.31% пикселей отличается</span></h2>
+  <a class="sbs" href="side-by-side/shell__theme-preview.sh.jpg"><img loading="lazy" src="side-by-side/shell__theme-preview.sh.jpg" alt="shell/theme-preview.sh: Original | Custom"></a>
+  <a class="diff" href="diff/shell__theme-preview.sh.jpg"><img loading="lazy" src="diff/shell__theme-preview.sh.jpg" alt="shell/theme-preview.sh: diff"></a>
+</section>
+
+<section id="json__theme.json">
+  <h2>json/theme.json <span>0.25% пикселей отличается</span></h2>
+  <a class="sbs" href="side-by-side/json__theme.json.jpg"><img loading="lazy" src="side-by-side/json__theme.json.jpg" alt="json/theme.json: Original | Custom"></a>
+  <a class="diff" href="diff/json__theme.json.jpg"><img loading="lazy" src="diff/json__theme.json.jpg" alt="json/theme.json: diff"></a>
+</section>
+
+<section id="html__index.html">
+  <h2>html/index.html <span>0.24% пикселей отличается</span></h2>
+  <a class="sbs" href="side-by-side/html__index.html.jpg"><img loading="lazy" src="side-by-side/html__index.html.jpg" alt="html/index.html: Original | Custom"></a>
+  <a class="diff" href="diff/html__index.html.jpg"><img loading="lazy" src="diff/html__index.html.jpg" alt="html/index.html: diff"></a>
+</section>
+
+<section id="json__events.jsonl">
+  <h2>json/events.jsonl <span>0.23% пикселей отличается</span></h2>
+  <a class="sbs" href="side-by-side/json__events.jsonl.jpg"><img loading="lazy" src="side-by-side/json__events.jsonl.jpg" alt="json/events.jsonl: Original | Custom"></a>
+  <a class="diff" href="diff/json__events.jsonl.jpg"><img loading="lazy" src="diff/json__events.jsonl.jpg" alt="json/events.jsonl: diff"></a>
+</section>
+
+<section id="json__theme.jsonc">
+  <h2>json/theme.jsonc <span>0.20% пикселей отличается</span></h2>
+  <a class="sbs" href="side-by-side/json__theme.jsonc.jpg"><img loading="lazy" src="side-by-side/json__theme.jsonc.jpg" alt="json/theme.jsonc: Original | Custom"></a>
+  <a class="diff" href="diff/json__theme.jsonc.jpg"><img loading="lazy" src="diff/json__theme.jsonc.jpg" alt="json/theme.jsonc: diff"></a>
+</section>
+
+<section id="properties__theme.properties">
+  <h2>properties/theme.properties <span>0.16% пикселей отличается</span></h2>
+  <a class="sbs" href="side-by-side/properties__theme.properties.jpg"><img loading="lazy" src="side-by-side/properties__theme.properties.jpg" alt="properties/theme.properties: Original | Custom"></a>
+  <a class="diff" href="diff/properties__theme.properties.jpg"><img loading="lazy" src="diff/properties__theme.properties.jpg" alt="properties/theme.properties: diff"></a>
+</section>
+
+<section id="latex__references.bib">
+  <h2>latex/references.bib <span>0.16% пикселей отличается</span></h2>
+  <a class="sbs" href="side-by-side/latex__references.bib.jpg"><img loading="lazy" src="side-by-side/latex__references.bib.jpg" alt="latex/references.bib: Original | Custom"></a>
+  <a class="diff" href="diff/latex__references.bib.jpg"><img loading="lazy" src="diff/latex__references.bib.jpg" alt="latex/references.bib: diff"></a>
+</section>
+
+<section id="sass__styles.sass">
+  <h2>sass/styles.sass <span>0.13% пикселей отличается</span></h2>
+  <a class="sbs" href="side-by-side/sass__styles.sass.jpg"><img loading="lazy" src="side-by-side/sass__styles.sass.jpg" alt="sass/styles.sass: Original | Custom"></a>
+  <a class="diff" href="diff/sass__styles.sass.jpg"><img loading="lazy" src="diff/sass__styles.sass.jpg" alt="sass/styles.sass: diff"></a>
+</section>
+
+<section id="scss__styles.scss">
+  <h2>scss/styles.scss <span>0.12% пикселей отличается</span></h2>
+  <a class="sbs" href="side-by-side/scss__styles.scss.jpg"><img loading="lazy" src="side-by-side/scss__styles.scss.jpg" alt="scss/styles.scss: Original | Custom"></a>
+  <a class="diff" href="diff/scss__styles.scss.jpg"><img loading="lazy" src="diff/scss__styles.scss.jpg" alt="scss/styles.scss: diff"></a>
+</section>
+
+<section id="just__justfile">
+  <h2>just/justfile <span>0.11% пикселей отличается</span></h2>
+  <a class="sbs" href="side-by-side/just__justfile.jpg"><img loading="lazy" src="side-by-side/just__justfile.jpg" alt="just/justfile: Original | Custom"></a>
+  <a class="diff" href="diff/just__justfile.jpg"><img loading="lazy" src="diff/just__justfile.jpg" alt="just/justfile: diff"></a>
+</section>
+
+<section id="c4__workspace.dsl">
+  <h2>c4/workspace.dsl <span>0.05% пикселей отличается</span></h2>
+  <a class="sbs" href="side-by-side/c4__workspace.dsl.jpg"><img loading="lazy" src="side-by-side/c4__workspace.dsl.jpg" alt="c4/workspace.dsl: Original | Custom"></a>
+  <a class="diff" href="diff/c4__workspace.dsl.jpg"><img loading="lazy" src="diff/c4__workspace.dsl.jpg" alt="c4/workspace.dsl: diff"></a>
+</section>
+
+<section id="docker__compose.yaml">
+  <h2>docker/compose.yaml <span>0.04% пикселей отличается</span></h2>
+  <a class="sbs" href="side-by-side/docker__compose.yaml.jpg"><img loading="lazy" src="side-by-side/docker__compose.yaml.jpg" alt="docker/compose.yaml: Original | Custom"></a>
+  <a class="diff" href="diff/docker__compose.yaml.jpg"><img loading="lazy" src="diff/docker__compose.yaml.jpg" alt="docker/compose.yaml: diff"></a>
+</section>
+
+<section id="make__Makefile">
+  <h2>make/Makefile <span>0.03% пикселей отличается</span></h2>
+  <a class="sbs" href="side-by-side/make__Makefile.jpg"><img loading="lazy" src="side-by-side/make__Makefile.jpg" alt="make/Makefile: Original | Custom"></a>
+  <a class="diff" href="diff/make__Makefile.jpg"><img loading="lazy" src="diff/make__Makefile.jpg" alt="make/Makefile: diff"></a>
+</section>
+
+<section id="yaml__provider-compatibility.yaml">
+  <h2>yaml/provider-compatibility.yaml <span>0.03% пикселей отличается</span></h2>
+  <a class="sbs" href="side-by-side/yaml__provider-compatibility.yaml.jpg"><img loading="lazy" src="side-by-side/yaml__provider-compatibility.yaml.jpg" alt="yaml/provider-compatibility.yaml: Original | Custom"></a>
+  <a class="diff" href="diff/yaml__provider-compatibility.yaml.jpg"><img loading="lazy" src="diff/yaml__provider-compatibility.yaml.jpg" alt="yaml/provider-compatibility.yaml: diff"></a>
+</section>
+
+<section id="batch__theme-preview.bat">
+  <h2>batch/theme-preview.bat <span>0.01% пикселей отличается</span></h2>
+  <a class="sbs" href="side-by-side/batch__theme-preview.bat.jpg"><img loading="lazy" src="side-by-side/batch__theme-preview.bat.jpg" alt="batch/theme-preview.bat: Original | Custom"></a>
+  <a class="diff" href="diff/batch__theme-preview.bat.jpg"><img loading="lazy" src="diff/batch__theme-preview.bat.jpg" alt="batch/theme-preview.bat: diff"></a>
+</section>
+
+<section id="css__styles.css">
+  <h2>css/styles.css <span>0.01% пикселей отличается</span></h2>
+  <a class="sbs" href="side-by-side/css__styles.css.jpg"><img loading="lazy" src="side-by-side/css__styles.css.jpg" alt="css/styles.css: Original | Custom"></a>
+  <a class="diff" href="diff/css__styles.css.jpg"><img loading="lazy" src="diff/css__styles.css.jpg" alt="css/styles.css: diff"></a>
+</section>
+
+<section id="latex__package.sty">
+  <h2>latex/package.sty <span>0.00% пикселей отличается</span></h2>
+  <a class="sbs" href="side-by-side/latex__package.sty.jpg"><img loading="lazy" src="side-by-side/latex__package.sty.jpg" alt="latex/package.sty: Original | Custom"></a>
+  <a class="diff" href="diff/latex__package.sty.jpg"><img loading="lazy" src="diff/latex__package.sty.jpg" alt="latex/package.sty: diff"></a>
+</section>
+
+<section id="diff__theme.patch">
+  <h2>diff/theme.patch <span>0.00% пикселей отличается</span></h2>
+  <a class="sbs" href="side-by-side/diff__theme.patch.jpg"><img loading="lazy" src="side-by-side/diff__theme.patch.jpg" alt="diff/theme.patch: Original | Custom"></a>
+  <a class="diff" href="diff/diff__theme.patch.jpg"><img loading="lazy" src="diff/diff__theme.patch.jpg" alt="diff/theme.patch: diff"></a>
+</section>
+
+<section id="docker__Dockerfile">
+  <h2>docker/Dockerfile <span>0.00% пикселей отличается</span></h2>
+  <a class="sbs" href="side-by-side/docker__Dockerfile.jpg"><img loading="lazy" src="side-by-side/docker__Dockerfile.jpg" alt="docker/Dockerfile: Original | Custom"></a>
+  <a class="diff" href="diff/docker__Dockerfile.jpg"><img loading="lazy" src="diff/docker__Dockerfile.jpg" alt="docker/Dockerfile: diff"></a>
+</section>
+
+<section id="latex__document.tex">
+  <h2>latex/document.tex <span>0.00% пикселей отличается</span></h2>
+  <a class="sbs" href="side-by-side/latex__document.tex.jpg"><img loading="lazy" src="side-by-side/latex__document.tex.jpg" alt="latex/document.tex: Original | Custom"></a>
+  <a class="diff" href="diff/latex__document.tex.jpg"><img loading="lazy" src="diff/latex__document.tex.jpg" alt="latex/document.tex: diff"></a>
+</section>
+
+<section id="less__styles.less">
+  <h2>less/styles.less <span>0.00% пикселей отличается</span></h2>
+  <a class="sbs" href="side-by-side/less__styles.less.jpg"><img loading="lazy" src="side-by-side/less__styles.less.jpg" alt="less/styles.less: Original | Custom"></a>
+  <a class="diff" href="diff/less__styles.less.jpg"><img loading="lazy" src="diff/less__styles.less.jpg" alt="less/styles.less: diff"></a>
+</section>
+
+<section id="restructuredtext__theme.rst">
+  <h2>restructuredtext/theme.rst <span>0.00% пикселей отличается</span></h2>
+  <a class="sbs" href="side-by-side/restructuredtext__theme.rst.jpg"><img loading="lazy" src="side-by-side/restructuredtext__theme.rst.jpg" alt="restructuredtext/theme.rst: Original | Custom"></a>
+  <a class="diff" href="diff/restructuredtext__theme.rst.jpg"><img loading="lazy" src="diff/restructuredtext__theme.rst.jpg" alt="restructuredtext/theme.rst: diff"></a>
+</section>
+
+<section id="wat__theme.wat">
+  <h2>wat/theme.wat <span>0.00% пикселей отличается</span></h2>
+  <a class="sbs" href="side-by-side/wat__theme.wat.jpg"><img loading="lazy" src="side-by-side/wat__theme.wat.jpg" alt="wat/theme.wat: Original | Custom"></a>
+  <a class="diff" href="diff/wat__theme.wat.jpg"><img loading="lazy" src="diff/wat__theme.wat.jpg" alt="wat/theme.wat: diff"></a>
+</section>
+
+<section id="xml__theme.xml">
+  <h2>xml/theme.xml <span>0.00% пикселей отличается</span></h2>
+  <a class="sbs" href="side-by-side/xml__theme.xml.jpg"><img loading="lazy" src="side-by-side/xml__theme.xml.jpg" alt="xml/theme.xml: Original | Custom"></a>
+  <a class="diff" href="diff/xml__theme.xml.jpg"><img loading="lazy" src="diff/xml__theme.xml.jpg" alt="xml/theme.xml: diff"></a>
+</section>
+
+<section id="xml__transform.xsl">
+  <h2>xml/transform.xsl <span>0.00% пикселей отличается</span></h2>
+  <a class="sbs" href="side-by-side/xml__transform.xsl.jpg"><img loading="lazy" src="side-by-side/xml__transform.xsl.jpg" alt="xml/transform.xsl: Original | Custom"></a>
+  <a class="diff" href="diff/xml__transform.xsl.jpg"><img loading="lazy" src="diff/xml__transform.xsl.jpg" alt="xml/transform.xsl: diff"></a>
+</section>
+</body></html>
