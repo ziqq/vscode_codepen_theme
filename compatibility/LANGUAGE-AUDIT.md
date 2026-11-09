@@ -83,9 +83,9 @@ sample has 156 source lines; checking only its top viewport is insufficient.
 - `fromAlias`, `map`, `maybeMap`, `compareTo`, getters and fields use the purple
   member role. Callback arguments such as `fixed` and pattern bindings such as
   `name` use blue when Dart-Code exposes them as parameters/variables.
-- `@override` previously split into mismatched colors depending on TextMate or
-  semantic highlighting. The complete annotation is now yellow and italic in
-  both modes, using the same cross-language annotation/decorator contract.
+- `@override` uses a gray `@` and yellow italic name with refinement enabled
+  in both TextMate and semantic modes, matching the cross-language contract.
+  Without refinement, the Dart grammar emits the whole annotation as one token.
 - `Function` in `T Function()` is emitted by Dart-Code as `keyword` with no
   distinguishing modifier, the same as `const`. It therefore remains yellow
   under semantic highlighting, while TextMate recognizes it as a white type.

@@ -38,6 +38,15 @@ for (const reference of references) {
   cases.push({ id: reference.id, language: { javascript: 'javascript', typescript: 'typescript', jsx: 'javascriptreact' }[reference.mode],
     source: reference.source, reference: true, lines: reference.lines });
 }
+const importedDart = JSON.parse(await fs.readFile('compatibility/dart-imports.json', 'utf8'));
+cases.push({ id: 'dart-imported-constants', ...importedDart,
+  expectations: importedDart.expect.map((item) => {
+    let start = -1;
+    for (let index = 0; index < (item.occurrence ?? 1); index++) start = importedDart.source.indexOf(item.text, start + 1);
+    assert.ok(start >= 0, `Missing imported Dart fixture token: ${item.text}`);
+    return { start, end: start + item.text.length, role: item.role, text: item.text };
+  }),
+});
 const evidenceCaseIds = new Set([
   cases.find((item) => item.language === 'typescript')?.id,
   cases.find((item) => item.language === 'dart' && item.source.includes('switch (state)'))?.id,
@@ -56,6 +65,9 @@ for (const item of cases) {
   await fs.mkdir(directory);
   item.file = path.join(directory, `sample.${extensions[item.language]}`);
   await fs.writeFile(item.file, item.source);
+  for (const [name, source] of Object.entries(item.dependencies ?? {})) {
+    await fs.writeFile(path.join(directory, name), source);
+  }
 }
 const plan = cases.flatMap((item) => [ { ...item, semantic: false }, { ...item, semantic: true } ]);
 plan.push(...[

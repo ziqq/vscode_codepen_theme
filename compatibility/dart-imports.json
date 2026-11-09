@@ -1,0 +1,17 @@
+{
+  "language": "dart",
+  "source": "import 'service.dart';\nclass FeedbackState {\n  final String _comment = '';\n  bool _sending = false;\n  String? _error;\n  bool get canSend => _comment.length <= AppReviewService.maxFeedbackLength;\n  int readCached() => AppReviewService.cached;\n  int readMethod() => AppReviewService.method();\n}\n",
+  "dependencies": {
+    "service.dart": "class AppReviewService {\n  static const int maxFeedbackLength = 4096;\n  static final int cached = 1;\n  static int method() => 1;\n}\n"
+  },
+  "expect": [
+    { "text": "_comment", "role": "purple", "occurrence": 1 },
+    { "text": "_comment", "role": "purple", "occurrence": 2 },
+    { "text": "_sending", "role": "purple" },
+    { "text": "_error", "role": "purple" },
+    { "text": "canSend", "role": "purple" },
+    { "text": "maxFeedbackLength", "role": "blue" },
+    { "text": "cached", "role": "purple" },
+    { "text": "method", "role": "purple" }
+  ]
+}

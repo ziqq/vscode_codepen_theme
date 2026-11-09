@@ -104,3 +104,53 @@ test('theme gating, opt-out, coalescing, stale results, closure and disposal', a
   assert.ok(types.every((type) => type.disposed));
   assert.ok(workers.every((worker) => worker.terminated));
 });
+
+test('imported Dart constants use their declarations; static-final fields retain purple', async () => {
+  const { dartConstantsAt } = require('../runtime/tree');
+  const source = 'Service.limit + Service.cached';
+  const targetSource = 'class Service { static\n const int limit = 1; static final int cached = 2; }';
+  const targetUri = { toString: () => 'file:///service.dart' };
+  const document = { uri: { toString: () => 'file:///main.dart' }, getText: () => source,
+    positionAt: (offset) => ({ line: 0, character: offset }), offsetAt: (position) => position.character };
+  const target = { version: 1, getText: () => targetSource, offsetAt: (position) => position.character };
+  let available = true;
+  const vscode = {
+    Position: class { constructor(line, character) { Object.assign(this, { line, character }); } },
+    Range: class { constructor(start, end) { Object.assign(this, { start, end }); } },
+    extensions: { getExtension: () => ({ activate: async () => {} }) },
+    workspace: { openTextDocument: async () => target },
+    commands: { executeCommand: async (command, _uri, position) => {
+      if (command.endsWith('Legend')) return { tokenTypes: ['property'], tokenModifiers: ['static'] };
+      if (command.endsWith('SemanticTokens')) return { data: [0, 8, 5, 0, 1, 0, 16, 6, 0, 1] };
+      assert.equal(command, 'vscode.executeDefinitionProvider');
+      const name = source.slice(position.character).split(/\W/)[0];
+      return [{ uri: targetUri, range: { start: { character: targetSource.indexOf(name) } } }];
+    } },
+  };
+  const load = Module._load;
+  let resolveDartConstants;
+  try {
+    delete require.cache[require.resolve('../runtime/dart-constants')];
+    Module._load = function (id, ...args) {
+      return id === 'vscode' ? vscode : load.call(this, id, ...args);
+    };
+    ({ resolveDartConstants } = require('../runtime/dart-constants'));
+  } finally { Module._load = load; }
+  const spans = [
+    { start: 8, end: 13, role: 'purple' },
+    { start: 24, end: 30, role: 'purple' },
+  ];
+  assert.deepEqual(await resolveDartConstants(document, spans, dartConstantsAt, () => available), [
+    { start: 8, end: 13, role: 'blue' },
+    { start: 24, end: 30, role: 'purple' },
+  ]);
+  let parsed = false;
+  const result = await resolveDartConstants(document, spans, async (...args) => {
+    parsed = true;
+    available = false;
+    return dartConstantsAt(...args);
+  }, () => available);
+  assert.ok(parsed);
+  assert.equal(available, false, 'The caller must discard resolution after its document changes');
+  assert.deepEqual(result, spans, 'A superseded resolution must not return recolored spans');
+});

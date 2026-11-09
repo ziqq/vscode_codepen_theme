@@ -134,7 +134,7 @@ void «blue|read»(«white|String» «blue|contents», «white|String» «blue|_
   }
   if (output == «yellow|null») encoder.«purple|convert»(theme);
 }
-«yellow|@pragma»«white|(»«green|"vm:entry-point"»«white|)»
+«operator|@»«yellow|pragma»«white|(»«green|"vm:entry-point"»«white|)»
 abstract interface class «blue|Directory» implements «white|FileSystemEntity» {}`],
   ['dart', `class ThemeReady { final ThemePalette palette; }
 String describeTheme(ThemeReady state) => switch (state) {
@@ -239,17 +239,46 @@ echo «green|"\${»«blue|name»«green|}"»
   ['go', `«yellow|package» main
 «yellow|type» «blue|Theme» struct { «purple|Name» «white|string» }`],
   ['rust', `fn «blue|label»(«blue|name»: &«white|str») -> «white|String» { «purple|format!»(«green|"{name}: {}"», «orange|2») }`],
-  ['dart', `class «blue|Theme» { «yellow|@override» String «purple|toString»() => 'x'; }`],
-  ['java', `«yellow|@Deprecated» class «blue|Theme» {}`],
-  ['kotlin', `«yellow|@Deprecated»("old") class «blue|Theme»`],
-  ['python', `«yellow|@dataclass»(frozen=True)\nclass «blue|Theme»: pass`],
-  ['swift', `«yellow|@available»(iOS 17, *)\nstruct «blue|Theme» {}`],
-  ['typescript', `«yellow|@sealed»\nclass «blue|Theme» {}`],
+  ['dart', `class «blue|Theme» { «operator|@»«yellow|override» String «purple|toString»() => 'x'; }`],
+  ['java', `«operator|@»«yellow|Deprecated» class «blue|Theme» {}`],
+  ['kotlin', `«operator|@»«yellow|Deprecated»("old") class «blue|Theme»`],
+  ['python', `«operator|@»«yellow|dataclass»(frozen=True)\nclass «blue|Theme»: pass`],
+  ['swift', `«operator|@»«yellow|available»(iOS 17, *)\nstruct «blue|Theme» {}`],
+  ['typescript', `«operator|@»«yellow|sealed»\nclass «blue|Theme» {}`],
+  ['dart', `final class AppReviewService {
+  static const String «blue|appStoreID» = '6829682154';
+  static const int «blue|maxFeedbackLength» = 4096;
+  static const Duration «blue|_interval» = Duration(days: 15);
+  static const String «blue|_prefix» = 'app_review';
+  static const String «blue|_firstUseKey» = '$«blue|_prefix».first_use';
+  static const String «blue|_openingsKey» = 'app_review.openings';
+  final dynamic «purple|_sharedPreferences»;
+  bool «purple|_requesting» = false;
+  static final int «purple|cached» = 1;
+  AppReviewService(this.«purple|_sharedPreferences»);
+  Future<void> «purple|recordLaunch»() async {
+    if (await «purple|_sharedPreferences».«purple|getInt»(«blue|_firstUseKey») != null) return;
+    await «purple|_sharedPreferences».«purple|setInt»(«blue|_firstUseKey», DateTime.now().millisecondsSinceEpoch);
+  }
+  Future<void> «purple|recordCardOpened»() async {
+    final «blue|openings» = await «purple|_sharedPreferences».«purple|getInt»(«blue|_openingsKey») ?? 0;
+    await «purple|_sharedPreferences».«purple|setInt»(«blue|_openingsKey», «blue|openings» + 1);
+  }
+  String «purple|read»() => AppReviewService.«blue|appStoreID»;
+}
+String «blue|readID»() => AppReviewService.«blue|appStoreID»;`],
+  ['dart', `const int «blue|top» = 1;
+class Constants {
+  static const int «blue|first» = 1, «blue|second» = 2;
+  int «purple|read»() { const int «blue|local» = 3; return «blue|top» + «blue|first» + «blue|second» + «blue|local»; }
+  int «purple|shadow»(int «blue|first») => «blue|first»;
+  int «purple|property»(dynamic «blue|other») => «blue|other».«purple|first»;
+}`],
   ['dart', `class «blue|Settings» {
-  static const int «purple|passwordMaxLength» = «yellow|int».«purple|fromEnvironment»('PASSWORD_MAX_LENGTH');
+  static const int «blue|passwordMaxLength» = «yellow|int».«purple|fromEnvironment»('PASSWORD_MAX_LENGTH');
   factory Settings.«purple|from»(«white|String»? «blue|environment») => switch («blue|environment»?.«purple|trim»()) { _ => Settings() };
-  static const String «purple|_appStoreID» = '1529842812';
-  String «purple|resolve»() => «purple|_appStoreID»;
+  static const String «blue|_appStoreID» = '1529842812';
+  String «purple|resolve»() => «blue|_appStoreID»;
 }
 abstract interface class «blue|List»<«white|E»> implements «white|Iterable»<«white|E»> {}
 final «blue|countries» = «yellow|List»<«white|String»>.«purple|unmodifiable»([]);`],

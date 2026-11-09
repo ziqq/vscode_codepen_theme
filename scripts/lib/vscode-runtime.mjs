@@ -32,7 +32,18 @@ export async function vscodeExecutable(version) {
         'CODEPEN_ALLOW_VSCODE_DOWNLOAD=1.',
     );
   }
-  return downloadAndUnzipVSCode(version);
+  const executable = await downloadAndUnzipVSCode(version);
+  if (process.platform === 'darwin' && path.basename(executable) === 'Electron') {
+    try {
+      await access(executable);
+    } catch (error) {
+      if (error?.code !== 'ENOENT') throw error;
+      const code = path.join(path.dirname(executable), 'Code');
+      await access(code);
+      return code;
+    }
+  }
+  return executable;
 }
 
 export async function vscodeBuiltinExtensions(executable) {

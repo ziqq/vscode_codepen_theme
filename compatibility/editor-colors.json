@@ -290,7 +290,13 @@
       },
       {
         "line": 114,
-        "text": "@override",
+        "text": "@",
+        "foreground": "#cccccc",
+        "fontStyle": "italic"
+      },
+      {
+        "line": 114,
+        "text": "override",
         "foreground": "#ddca7e",
         "fontStyle": "italic"
       },

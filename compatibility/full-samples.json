@@ -390,7 +390,14 @@
         },
         {
           "line": 114,
-          "text": "@override",
+          "text": "@",
+          "foreground": "#ddca7e",
+          "refinedForeground": "#cccccc",
+          "fontStyle": 1
+        },
+        {
+          "line": 114,
+          "text": "override",
           "foreground": "#ddca7e",
           "fontStyle": 1
         },
@@ -1575,7 +1582,7 @@
         {
           "line": 11,
           "text": "@",
-          "foreground": "#ddca7e",
+          "foreground": "#cccccc",
           "fontStyle": 1
         },
         {
@@ -2807,7 +2814,14 @@
         },
         {
           "line": 4,
-          "text": "@Immutable",
+          "text": "@",
+          "foreground": "#ddca7e",
+          "refinedForeground": "#cccccc",
+          "fontStyle": 1
+        },
+        {
+          "line": 4,
+          "text": "Immutable",
           "foreground": "#ddca7e",
           "fontStyle": 1
         },

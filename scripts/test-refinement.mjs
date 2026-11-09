@@ -53,7 +53,7 @@ for (const [language, source, annotation] of [
   const spans = await refine(source, language);
   for (let offset = 0; offset < annotation.length; offset++) {
     const actual = spans.find((span) => span.start <= offset && span.end > offset);
-    assert.equal(actual?.role, 'yellow', `${language}: annotation foreground role`);
+    assert.equal(actual?.role, offset === 0 ? 'operator' : 'yellow', `${language}: annotation foreground role`);
     assert.equal(actual?.fontStyle, 'annotation', `${language}: annotation italic role`);
     assertions += 2;
   }

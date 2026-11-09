@@ -90,7 +90,7 @@ function addAnnotations(root, source, spans) {
     if (!annotationKinds.has(node.type)) continue;
     const marker = source.indexOf('@', node.startIndex);
     if (marker < node.startIndex || marker >= node.endIndex) continue;
-    spans.add(marker, marker + 1, 'yellow', 60, 'annotation');
+    spans.add(marker, marker + 1, 'operator', 60, 'annotation');
     const name = field(node, 'name') ?? field(node, 'attribute') ??
       firstDescendantIdentifier(node);
     if (name) {
@@ -130,6 +130,26 @@ async function withTree(source, language, callback) {
     Object.defineProperty(prototype, 'parent', descriptor);
     tree.delete();
   }
+}
+
+function dartConstantDeclaration(declaration) {
+  const owner = ancestor(declaration, (item) =>
+    item.type === 'declaration' || item.type === 'initialized_variable_definition');
+  const list = declaration.parent;
+  return owner
+    ? owner.namedChildren.some((child) => child.type === 'const_builtin')
+    : list.type === 'static_final_declaration_list' &&
+      [list.previousNamedSibling, list.previousNamedSibling?.previousNamedSibling]
+        .some((child) => child?.type === 'const_builtin');
+}
+
+async function dartConstantsAt(source, offsets) {
+  return withTree(source, 'dart', (root) => offsets.map((offset) => {
+    const node = root.descendantForIndex(offset);
+    const declaration = ancestor(node, (item) =>
+      item.type === 'static_final_declaration' || item.type === 'initialized_variable_definition');
+    return Boolean(declaration && dartConstantDeclaration(declaration));
+  }));
 }
 
 function classify(root, source, language) {
@@ -327,7 +347,8 @@ function classify(root, source, language) {
         (parent.type === 'static_final_declaration' && firstIdentifier(parent)?.id === node.id) ||
         (parent.type === 'variable_declaration' && firstIdentifier(parent)?.id === node.id))) {
       const member = memberContext(declaration);
-      declare(node, member ? 'member' : 'variable', member ? classOf(node) : undefined);
+      const constant = language === 'dart' && dartConstantDeclaration(declaration);
+      declare(node, constant ? 'constant' : member ? 'member' : 'variable', member ? classOf(node) : undefined);
     }
     // `abstract`/`external` Dart fields have no storage and behave like getters.
     if (language === 'dart' && parent.type === 'identifier_list' && parent.parent?.type === 'declaration') {
@@ -348,6 +369,14 @@ function classify(root, source, language) {
   }
 
   function useRole(node) {
+    if (language === 'dart' && propertyNode(node)) {
+      const selector = ancestor(node, (item) => item.type === 'selector');
+      const receiver = selector?.previousNamedSibling;
+      const owner = receiver?.type === 'identifier' && classes.find((item) =>
+        field(item.node, 'name')?.text === receiver.text);
+      if (owner && (bindings.get(node.text) ?? []).some((entry) =>
+        entry.kind === 'constant' && entry.start === owner.start && entry.end === owner.end)) return 'blue';
+    }
     if (roles.has(node.id)) return roles.get(node.id);
     const parent = node.parent;
     if (language === 'sql') {
@@ -378,6 +407,7 @@ function classify(root, source, language) {
     if (['keyword_argument', 'label', 'value_argument_label', 'field_initializer',
       'field_pattern'].includes(parent.type) &&
         (isField(node, 'name') || isField(node, 'field') || firstIdentifier(parent)?.id === node.id)) return 'purple';
+    if (binding?.kind === 'constant') return 'blue';
     if (binding?.kind === 'variable') return binding.global &&
       !['just', 'makefile', 'shellscript', 'ruby'].includes(language) ? 'yellow' : 'blue';
     if (propertyNode(node)) return 'purple';
@@ -499,4 +529,4 @@ function classify(root, source, language) {
   return spans.finish();
 }
 
-module.exports = { refineTree, withTree, grammars };
+module.exports = { refineTree, withTree, grammars, dartConstantsAt };

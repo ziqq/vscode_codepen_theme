@@ -38,9 +38,10 @@ parameter is blue. A property or method remains purple.
 
 In the measured CodePen reference, the decorator marker is independently
 classified: `@` is `#CCCCCC`, while a decorator name uses the yellow
-keyword/global role. The VS Code themes intentionally adapt this one role: when
-a provider explicitly marks an annotation, decorator, or Swift attribute, the
-complete construct (`@` and its name) is yellow and italic in both variants.
+keyword/global role. Both VS Code variants apply this split across supported
+languages: the `@` marker is gray and the name is yellow, with shared italic
+typography. Contextual refinement separates the marker when a provider emits
+the entire annotation or Swift attribute as a single token.
 This does not recolor unrelated at-sign syntax such as strings, email text,
 stylesheet directives, Just quiet markers, or language variables.
 
@@ -62,7 +63,10 @@ factory parameters) describe fields, so they are purple like named arguments at
 call sites. Parameters of factory constructors with a body stay blue, as do
 method, function, and closure parameters. Dart class fields are members: their
 declarations and every reference inside the class are purple like methods,
-while locals and parameters that shadow them stay blue. `const Widget()` and
+while `const` declarations and their resolved references are blue, as are locals
+and parameters that shadow members. For imported Dart constants, refinement uses
+the Dart provider to locate the declaration and verifies its `const` modifier
+in the parser worker. Ordinary static-final fields retain the member color. `const Widget()` and
 `new Widget()` name a constructor and are yellow like other constructor calls.
 
 Documentation references such as `[handler]` take the role of the parameter they
@@ -89,9 +93,10 @@ refinement setting.
 
 ## Contextual refinement
 
-The refinement layer uses bundled parsers for local syntax and binding context,
-not a project language server. No imports or project code are executed. It cannot
-resolve every cross-file or language-server-specific symbol.
+The refinement layer uses bundled parsers for local syntax and binding context.
+For imported Dart constants it also asks the active Dart provider for definition
+locations, then parses those declarations. No imports or project code are
+executed. Other unresolved cross-file symbols retain their existing roles.
 
 Refinement is active with both **CodePen Theme Original** variants. Files larger
 than 250,000 UTF-16 code units, unsupported contexts, and parser failures retain
@@ -118,8 +123,8 @@ The [full-language audit](https://github.com/ziqq/vscode_codepen_theme/blob/mast
 covers all 68 complete samples and records fixes and remaining provider limitations
 per language. Just/Make recipe targets are purple; their variables and parameters
 are blue. Java modifiers are yellow, type references white, and members purple.
-Annotations and decorators use the same yellow italic role with and without
-semantic highlighting wherever the provider exposes that role.
+Annotation and decorator names are yellow italic, while their `@` markers are
+gray. Without refinement, separating the marker requires distinct provider tokens.
 The exact list of verified languages and grammars that still use generic fallback
 coverage is maintained in the
 [syntax coverage boundary](https://github.com/ziqq/vscode_codepen_theme/blob/master/compatibility/COVERAGE.md).

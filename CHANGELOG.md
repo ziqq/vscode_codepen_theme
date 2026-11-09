@@ -2,13 +2,17 @@
 
 ## Unreleased
 
+- **FIXED**: Dart constants remain blue in declarations and resolved references, including imported constants located through Dart-Code, while ordinary class fields and methods remain purple
+
+- **FIXED**: macOS verification scripts locate the `Code` executable in newer VS Code versions while retaining support for `Electron`
+
 - **FIXED**: Dart constant constructor declarations, super-formal parameters,
   and qualified enum members retain their declaration/member roles with and
   without semantic highlighting.
 - **FIXED**: Dart's implicit enum `values` getter is highlighted as a member
   when referenced inside its enum declaration.
 - **ADDED**: `CodePen Theme Original Italics`, preserving the Original palette while retaining the full theme-owned italic layer; `CodePen Theme Original` keeps only the shared annotation/decorator italic exception
-- **CHANGED**: provider-marked annotations, decorators, and Swift attributes use one yellow italic style across supported languages, including their `@` marker; unrelated at-sign syntax remains language-owned
+- **CHANGED**: provider-marked annotations, decorators, and Swift attributes use one yellow italic style across supported languages, with a gray `@` marker matching CodePen; unrelated at-sign syntax remains language-owned
 - **ADDED**: legacy Operator Mono Lig/Operator Mono typography with Monaco/Courier fallbacks for the editor, integrated terminal, Debug Console, and `[Log]`-scoped Output editor; editor ligatures are enabled
 - **FIXED**: Dart named-argument values retain their binding color instead of inheriting the argument-label color
 - **FIXED**: Dart switch-pattern bindings remain blue when referenced inside string interpolation

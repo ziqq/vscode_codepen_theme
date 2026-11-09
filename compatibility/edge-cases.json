@@ -7,7 +7,7 @@
       "language": "Java",
       "source": "@Deprecated\nclass Demo {}",
       "expect": [
-        { "line": 1, "text": "@", "foreground": "#ddca7e", "fontStyle": 1 },
+        { "line": 1, "text": "@", "foreground": "#cccccc", "fontStyle": 1 },
         { "line": 1, "text": "Deprecated", "foreground": "#ddca7e", "fontStyle": 1 }
       ]
     },
@@ -16,7 +16,7 @@
       "language": "Kotlin",
       "source": "@Deprecated(\"old\")\nclass Demo",
       "expect": [
-        { "line": 1, "text": "@", "foreground": "#ddca7e", "fontStyle": 1 },
+        { "line": 1, "text": "@", "foreground": "#cccccc", "fontStyle": 1 },
         {
           "line": 1,
           "text": "Deprecated",
@@ -37,7 +37,7 @@
       "language": "TypeScript",
       "source": "@sealed\nclass Demo {}",
       "expect": [
-        { "line": 1, "text": "@", "foreground": "#ddca7e", "fontStyle": 1 },
+        { "line": 1, "text": "@", "foreground": "#cccccc", "fontStyle": 1 },
         { "line": 1, "text": "sealed", "foreground": "#ddca7e", "fontStyle": 1 }
       ]
     },
@@ -46,7 +46,8 @@
       "language": "Swift",
       "source": "@available(iOS 17, *)\nfunc run() {}",
       "expect": [
-        { "line": 1, "text": "@available", "foreground": "#ddca7e", "fontStyle": 1 }
+        { "line": 1, "text": "@", "foreground": "#cccccc", "fontStyle": 1 },
+        { "line": 1, "text": "available", "foreground": "#ddca7e", "fontStyle": 1 }
       ]
     },
     {

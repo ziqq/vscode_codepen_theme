@@ -1194,9 +1194,12 @@ const tokenColors = [
     'punctuation.decorator.ts',
     'punctuation.decorator.tsx',
   ]),
-  // Deliberate product adaptation: CodePen renders decorator punctuation gray,
-  // while both VS Code variants render the complete annotation yellow.
   colorRule('ANNOTATIONS', color.yellow, ANNOTATION_SCOPES),
+  colorRule('ANNOTATION MARKERS', color.operator, [
+    ...ANNOTATION_SCOPES.filter((scope) => scope.includes('punctuation')),
+    'entity.name.function.decorator.python punctuation.definition.decorator.python',
+    'meta.function.decorator.python entity.name.function.decorator.python punctuation.definition.decorator.python',
+  ]),
   colorRule('TWILIGHT DOCUMENTATION', color.gray, [
     'comment.block.documentation.dart variable.name.source.dart',
     'comment.block.documentation.dart variable.other.source.dart',

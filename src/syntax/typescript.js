@@ -116,7 +116,7 @@ function refineTypeScript(source, language) {
     comments(node.pos);
     comments(node.end, true);
     if (ts.isDecorator(node)) {
-      spans.add(start, start + 1, 'yellow', 80, 'annotation');
+      spans.add(start, start + 1, 'operator', 80, 'annotation');
       let expression = node.expression;
       while (ts.isCallExpression(expression)) expression = expression.expression;
       if (ts.isIdentifier(expression)) {

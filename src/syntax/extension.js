@@ -4,6 +4,7 @@ const vscode = require('vscode');
 let palette = require('./palette.json');
 const themeVariants = require('./theme-variants.json');
 const { supportedLanguages, maximumDocumentLength } = require('./refine');
+const { resolveDartConstants } = require('./dart-constants');
 
 const variantByLabel = new Map(
   themeVariants.map((variant) => [variant.label, variant]),
@@ -15,6 +16,7 @@ function activate(context) {
   const timers = new Map();
   const requests = new Map();
   const queued = new Map();
+  const resolving = new Map();
   let worker;
   let sequence = 0;
   let disposed = false;
@@ -56,7 +58,11 @@ function activate(context) {
     const current = worker;
     worker = undefined;
     if (current) void current.terminate();
-    for (const request of requests.values()) clearTimeout(request.timeout);
+    for (const request of requests.values()) {
+      clearTimeout(request.timeout);
+      request.complete?.({ error: 'Parser stopped' });
+    }
+    resolving.clear();
     requests.clear();
     queued.clear();
   }
@@ -77,6 +83,7 @@ function activate(context) {
       if (!request || worker !== current) return;
       clearTimeout(request.timeout);
       requests.delete(message.id);
+      if (request.complete) { request.complete(message); pump(); return; }
       const { document, version, uri } = request;
       if (message.error) output.appendLine(`${document.languageId}: ${message.error}`);
       else if (!document.isClosed && document.version === version && enabled(document)) {
@@ -84,10 +91,35 @@ function activate(context) {
         for (const editor of vscode.window.visibleTextEditors) {
           if (editor.document === document) apply(editor, message.spans);
         }
+        if (document.languageId === 'dart') resolveConstants(document, version, message.spans, current);
       }
       pump();
     });
     return current;
+  }
+  function resolveConstants(document, version, spans, parser) {
+    const uri = document.uri.toString();
+    const task = {};
+    resolving.set(uri, task);
+    const current = () => worker === parser && resolving.get(uri) === task &&
+      !document.isClosed && document.version === version && enabled(document);
+    const analyze = (source, constantOffsets) => new Promise((resolve, reject) => {
+      if (!current()) { reject(new Error('Document changed')); return; }
+      const id = ++sequence;
+      const timeout = setTimeout(() => fail(new Error('Parser exceeded the 5 second deadline')), 5000);
+      requests.set(id, { timeout, complete: (message) => message.error
+        ? reject(new Error(message.error)) : resolve(message.constants) });
+      parser.postMessage({ id, source, constantOffsets });
+    });
+    void resolveDartConstants(document, spans, analyze, current).then((resolved) => {
+      if (!current()) return;
+      cache.set(uri, { version, spans: resolved });
+      for (const editor of vscode.window.visibleTextEditors) {
+        if (editor.document === document) apply(editor, resolved);
+      }
+    }).catch((error) => {
+      if (current()) output.appendLine(`Dart constant resolution: ${error.message ?? error}`);
+    }).finally(() => { if (resolving.get(uri) === task) resolving.delete(uri); });
   }
   function pump() {
     if (requests.size || !queued.size) return;
@@ -138,12 +170,21 @@ function activate(context) {
     }),
     vscode.workspace.onDidChangeTextDocument(({ document, contentChanges }) => {
       if (!contentChanges.length) return;
+      if (document.languageId === 'dart') {
+        for (const editor of vscode.window.visibleTextEditors) {
+          if (editor.document !== document && editor.document.languageId === 'dart') {
+            cache.delete(editor.document.uri.toString());
+            schedule(editor, 80, true);
+          }
+        }
+      }
       cache.delete(document.uri.toString());
+      resolving.delete(document.uri.toString());
       for (const editor of vscode.window.visibleTextEditors) if (editor.document === document) schedule(editor, 80, true);
     }),
     vscode.workspace.onDidCloseTextDocument((document) => {
       const uri = document.uri.toString();
-      clearTimeout(timers.get(uri)); timers.delete(uri); cache.delete(uri);
+      clearTimeout(timers.get(uri)); timers.delete(uri); cache.delete(uri); resolving.delete(uri);
       queued.delete(uri);
     }),
     vscode.workspace.onDidChangeConfiguration((event) => {
@@ -171,7 +212,7 @@ function activate(context) {
   }
   refresh();
   // Read-only integration-test evidence; no workspace content is logged or saved.
-  return { getState: () => ({ pending: requests.size + timers.size + queued.size, failures,
+  return { getState: () => ({ pending: requests.size + timers.size + queued.size + resolving.size, failures,
     documents: [...cache.entries()].map(([uri, entry]) => ({ uri, ...entry })) }) };
 }
 
