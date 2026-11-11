@@ -1,3 +1,8 @@
+/**
+ * @file Compare recorded CodePen source spans with real VS Code JS/TS/JSX grammars.
+ * Reviewed TextMate differences are explicit and cannot silently widen.
+ */
+
 import assert from 'node:assert/strict';
 import { readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';

@@ -1,3 +1,8 @@
+/**
+ * @file Assemble a reproducible private runtime, parser payloads, and third-party notices.
+ * Generated files are checked against these exact bytes by package validation.
+ */
+
 const fs = require('node:fs');
 const path = require('node:path');
 const { createHash } = require('node:crypto');
@@ -7,8 +12,18 @@ const { themeVariants } = require('./theme-variants');
 const root = path.resolve(__dirname, '..');
 const runtimeDirectory = path.join(root, 'runtime');
 
+/**
+ * Collect owned runtime code, vendored parsers, grammar binaries, and licenses.
+ * The manifest hashes every payload file so packaging can detect stale assets.
+ *
+ * @returns {Map<string, Buffer>} Runtime-relative paths and their exact distributable bytes.
+ */
 function runtimeFiles() {
   const files = new Map();
+  /**
+   * Read one owned source asset into the runtime payload map.
+   * @type {(target: string, source: string) => Map<string, Buffer>}
+   */
   const add = (target, source) => files.set(target, fs.readFileSync(path.join(root, source)));
   for (const name of fs.readdirSync(path.join(__dirname, 'syntax')).sort()) {
     if (name.endsWith('.js') || name.endsWith('.md')) add(name, `src/syntax/${name}`);
@@ -34,6 +49,11 @@ function runtimeFiles() {
   return files;
 }
 
+/**
+ * Write only changed runtime assets, preserving mtimes for unchanged files.
+ *
+ * @returns {void} The runtime directory is created when needed.
+ */
 function buildRuntime() {
   for (const [name, bytes] of runtimeFiles()) {
     const target = path.join(runtimeDirectory, name);

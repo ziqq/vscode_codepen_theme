@@ -47,7 +47,7 @@ jobs:
       - name: Install Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20.x
+          node-version: 22.x
           cache: npm
 
       - name: Install dependencies
@@ -63,7 +63,7 @@ jobs:
         run: npm run package
 
       - name: Audit dependencies
-        run: npm audit --audit-level=high
+        run: npm audit --audit-level=low
 
       - name: Upload VSIX
         uses: actions/upload-artifact@v4

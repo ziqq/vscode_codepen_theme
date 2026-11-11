@@ -9,6 +9,36 @@ package.json -------------------------------> VS Code typography defaults
                       \\----------------------> validation/editor harness
 ```
 
+## Build tools
+
+Use **Node.js 22** and `npm ci` to reproduce the release toolchain. The Node
+requirement applies to development/CI tools, not the extension's VS Code engine.
+`@vscode/vsce` is pinned; its `glob` and `minimatch` overrides select patched
+versions until the upstream dependency ranges include them. Keep the overrides
+scoped to the packager, validate the resulting VSIX, and require a clean
+`npm audit` before release.
+
+## Source documentation
+
+Owned JavaScript in `src/` and `scripts/` documents public contracts and internal
+helpers with JSDoc. Shared span, binding, variant, provider, theme, and worker
+message types live beside their implementations. Source offsets are UTF-16
+code units and ranges are half-open. Comments explain role precedence, parser
+fallbacks, provider limitations, asynchronous ownership, and test evidence
+boundaries. Update these contracts whenever behavior changes; edit `src/`, not
+the generated `runtime/` bundle.
+
+## Release workflow
+
+Push a reviewed `v<package.json version>` tag only when publication is approved.
+The tag workflow installs dependencies on Node.js 22, rejects any actionable npm
+audit finding, validates source and tag identity, and builds one verified VSIX.
+That same file is published to Marketplace and attached to its GitHub Release.
+GitHub release notes come from the matching CHANGELOG section in its existing
+order. Marketplace publication uses `VSCE_PAT`; GitHub release publication uses
+the workflow's `contents: write` token. Retrying an existing version skips the
+Marketplace duplicate and replaces the matching GitHub asset.
+
 ## Daily workflow
 
 - Edit the palette in `src/colors.js`, TextMate and workbench mappings in `src/theme.js`, and public variant metadata in `src/theme-variants.js`.

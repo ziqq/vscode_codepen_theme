@@ -1,3 +1,8 @@
+/**
+ * @file Capture computed DOM colors from an isolated VS Code development host.
+ * The companion runner controls documents; handshakes prevent probing the wrong source.
+ */
+
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import os from 'node:os';
@@ -25,6 +30,10 @@ const fixtures = JSON.parse(await fs.readFile('build/refinement.json', 'utf8')).
 const references = JSON.parse(await fs.readFile('compatibility/codepen-reference.json', 'utf8')).cases;
 const reviewed = JSON.parse(await fs.readFile('compatibility/refinement-differences.json', 'utf8')).differences;
 const palette = require('../src/colors');
+/**
+ * Expand tabs with the editor's four-column stops before comparing DOM text.
+ * @type {(line: string) => string}
+ */
 const expandTabs = (line) => {
   let result = '';
   for (const char of line) result += char === '\t' ? ' '.repeat(4 - result.length % 4) : char;
@@ -112,6 +121,10 @@ let logs = '', exitCode, browser, page, typography, outputTypography;
 app.stdout.on('data', (chunk) => { logs += chunk; });
 app.stderr.on('data', (chunk) => { logs += chunk; });
 app.once('exit', (code) => { exitCode = code; });
+/**
+ * Yield asynchronously while waiting for an editor handshake or deterministic lifecycle boundary.
+ * @type {(milliseconds: number) => Promise<void>}
+ */
 const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 const results = [];
 try {
@@ -181,6 +194,10 @@ try {
       const probe = document.createElement('span');
       probe.style.position = 'fixed'; probe.style.visibility = 'hidden';
       document.body.append(probe);
+      /**
+       * Normalize a CSS color through the browser so equivalent forms compare equally.
+       * @type {(value: string) => string}
+       */
       const normalizeColor = (value) => {
         probe.style.color = value;
         return getComputedStyle(probe).color;

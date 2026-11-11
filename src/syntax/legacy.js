@@ -1,3 +1,8 @@
+/**
+ * @file Bounded lexical refiners for languages without a dependable bundled structural pass.
+ * Strings/comments are masked before matching bindings, members, and callable syntax.
+ */
+
 const { Spans } = require('./spans');
 const { addComment } = require('./comments');
 const { refineTypeScript } = require('./typescript');
@@ -6,6 +11,13 @@ const { refineTypeScript } = require('./typescript');
 // refiners here. Each refiner applies the same declaration/reference/member
 // role model and masks strings/comments before matching executable syntax.
 
+/**
+ * Visit lines with their original UTF-16 start offsets, preserving newline accounting.
+ *
+ * @param {string} source Complete document text.
+ * @param {(line: string, offset: number) => void} callback Receives each line without its newline and its source offset.
+ * @returns {void} No source normalization is performed.
+ */
 function lines(source, callback) {
   let offset = 0;
   for (const line of source.split('\n')) {
@@ -14,6 +26,16 @@ function lines(source, callback) {
   }
 }
 
+/**
+ * Mask strings and comments before lexical identifier matching.
+ * Replacing non-newline characters with spaces preserves every source offset.
+ *
+ * @param {string} source Document text.
+ * @param {import('./spans').Spans} spans Collector receiving masked string/comment roles.
+ * @param {RegExp | undefined} commentPattern Language-specific comments.
+ * @param {RegExp | undefined} [stringPattern] Language-specific strings, or the default quoted-string matcher.
+ * @returns {string} Offset-preserving executable-syntax view.
+ */
 function mask(source, spans, commentPattern, stringPattern = /"(?:\\.|[^"\\])*(?:"|$)|'(?:\\.|[^'\\])*(?:'|$)/g) {
   // Match strings first so comment markers embedded in a scalar never start a
   // synthetic comment (notably #rrggbb in Perl/Raku and PowerShell strings).
@@ -26,6 +48,16 @@ function mask(source, spans, commentPattern, stringPattern = /"(?:\\.|[^"\\])*(?
   });
 }
 
+/**
+ * Apply a foreground role to a known set of keyword-like words.
+ *
+ * @param {import('./spans').Spans} spans Destination collector.
+ * @param {string} text Masked text with original offsets.
+ * @param {Iterable<string>} words Regular-expression-safe words to recognize.
+ * @param {import('./spans').Role} role Role shared by matching words.
+ * @param {number} [priority=40] Override precedence.
+ * @returns {void} Only whole-word matches are colored.
+ */
 function wordSpans(spans, text, words, role, priority = 40) {
   const pattern = new RegExp(`\\b(?:${[...words].join('|')})\\b`, 'g');
   for (const match of text.matchAll(pattern)) spans.add(match.index, match.index + match[0].length, role, priority);
@@ -54,6 +86,12 @@ function addBraceInterpolations(spans, source, pattern, members = new Set()) {
   }
 }
 
+/**
+ * Classify F# declarations, typed bindings, members, and interpolation.
+ *
+ * @param {string} source Document text; offsets are UTF-16 code units.
+ * @returns {import('./spans').Span[]} Sorted, non-overlapping foreground refinements.
+ */
 function refineFsharp(source) {
   const spans = new Spans(source.length);
   const masked = mask(source, spans, /\/\/[^\n]*/, /\$?@?"(?:""|\\.|[^"\\])*(?:"|$)/);
@@ -115,6 +153,13 @@ function refineFsharp(source) {
   return spans.finish();
 }
 
+/**
+ * Classify HLSL/ShaderLab declarations and semantic metadata.
+ *
+ * @param {string} source Document text; offsets are UTF-16 code units.
+ * @param {string} language VS Code language identifier used to select syntax rules.
+ * @returns {import('./spans').Span[]} Sorted, non-overlapping foreground refinements.
+ */
 function refineShader(source, language) {
   const spans = new Spans(source.length);
   const masked = mask(source, spans, /\/\/[^\n]*|\/\*[\s\S]*?(?:\*\/|$)/);
@@ -217,6 +262,12 @@ function refineShader(source, language) {
   return spans.finish();
 }
 
+/**
+ * Classify PowerShell variables, commands, types, and expandable strings.
+ *
+ * @param {string} source Document text; offsets are UTF-16 code units.
+ * @returns {import('./spans').Span[]} Sorted, non-overlapping foreground refinements.
+ */
 function refinePowerShell(source) {
   const spans = new Spans(source.length);
   const masked = mask(source, spans, /#[^\n]*/, /"(?:`.|[^"`])*(?:"|$)|'(?:''|[^'])*(?:'|$)/);
@@ -295,6 +346,13 @@ function refinePowerShell(source) {
   return spans.finish();
 }
 
+/**
+ * Classify Perl/Raku bindings, calls, regex boundaries, and interpolation.
+ *
+ * @param {string} source Document text; offsets are UTF-16 code units.
+ * @param {string} language VS Code language identifier used to select syntax rules.
+ * @returns {import('./spans').Span[]} Sorted, non-overlapping foreground refinements.
+ */
 function refinePerl(source, language) {
   const spans = new Spans(source.length);
   const masked = mask(source, spans, /(?<!\$)#[^\n]*/, /qq?\{[^}]*\}|"(?:\\.|[^"\\])*(?:"|$)|'(?:\\.|[^'\\])*(?:'|$)/);
@@ -358,6 +416,12 @@ function refinePerl(source, language) {
   return spans.finish();
 }
 
+/**
+ * Classify Visual Basic declarations, types, members, and interpolated strings.
+ *
+ * @param {string} source Document text; offsets are UTF-16 code units.
+ * @returns {import('./spans').Span[]} Sorted, non-overlapping foreground refinements.
+ */
 function refineVisualBasic(source) {
   const spans = new Spans(source.length);
   const masked = mask(source, spans, /'[^\n]*/i, /"(?:""|[^"])*(?:"|$)/);
@@ -415,6 +479,12 @@ function refineVisualBasic(source) {
   return spans.finish();
 }
 
+/**
+ * Classify Handlebars context paths, helper calls, and block bindings.
+ *
+ * @param {string} source Document text; offsets are UTF-16 code units.
+ * @returns {import('./spans').Span[]} Sorted, non-overlapping foreground refinements.
+ */
 function refineHandlebars(source) {
   const spans = new Spans(source.length);
   const aliases = new Set();
@@ -444,12 +514,27 @@ function refineHandlebars(source) {
   return spans.finish();
 }
 
+/**
+ * Classify embedded JavaScript and translate its offsets into the host document.
+ *
+ * @param {import('./spans').Spans} spans Host collector.
+ * @param {string} source Embedded script fragment.
+ * @param {number} start Fragment offset in the original host source.
+ * @param {string} [language=javascript] JS/TS mode passed to the in-memory compiler.
+ * @returns {void} Shifted foreground spans are appended to the host collector.
+ */
 function addShifted(spans, source, start, language = 'javascript') {
   for (const span of refineTypeScript(source, language)) {
     spans.add(start + span.start, start + span.end, span.role, 75, span.fontStyle);
   }
 }
 
+/**
+ * Classify Pug markup while delegating embedded JavaScript fragments.
+ *
+ * @param {string} source Document text; offsets are UTF-16 code units.
+ * @returns {import('./spans').Span[]} Sorted, non-overlapping foreground refinements.
+ */
 function refinePug(source) {
   const spans = new Spans(source.length);
   const aliases = new Set();
@@ -550,6 +635,12 @@ function refinePug(source) {
   return spans.finish();
 }
 
+/**
+ * Classify Batch labels, commands, variables, and parameter substitutions.
+ *
+ * @param {string} source Document text; offsets are UTF-16 code units.
+ * @returns {import('./spans').Span[]} Sorted, non-overlapping foreground refinements.
+ */
 function refineBatch(source) {
   const spans = new Spans(source.length);
   for (const match of source.matchAll(/^:([A-Za-z_][\w.-]*)\s*$/gm)) {
@@ -562,6 +653,12 @@ function refineBatch(source) {
   return spans.finish();
 }
 
+/**
+ * Classify CoffeeScript bindings, instance members, and interpolation.
+ *
+ * @param {string} source Document text; offsets are UTF-16 code units.
+ * @returns {import('./spans').Span[]} Sorted, non-overlapping foreground refinements.
+ */
 function refineCoffeeScript(source) {
   const spans = new Spans(source.length);
   const masked = mask(source, spans, /#[^\n]*/);
@@ -591,6 +688,12 @@ function refineCoffeeScript(source) {
   return spans.finish();
 }
 
+/**
+ * Classify Clojure namespaces, bindings, collection literals, and protocol members.
+ *
+ * @param {string} source Document text; offsets are UTF-16 code units.
+ * @returns {import('./spans').Span[]} Sorted, non-overlapping foreground refinements.
+ */
 function refineClojure(source) {
   const spans = new Spans(source.length);
   const masked = mask(source, spans, /;[^\n]*/);
@@ -613,7 +716,15 @@ function refineClojure(source) {
       if (depth === 0 && formStart >= 0) forms.push({ start: formStart, end: index + 1 });
     }
   }
+  /**
+   * Choose the smallest indexed Clojure form or the whole-document fallback.
+   * @type {(at: number) => {start: number, end: number}}
+   */
   const formAt = (at) => forms.find((form) => form.start <= at && form.end >= at) ?? { start: 0, end: source.length };
+  /**
+   * Associate a Clojure binding name with the enclosing form lifetime.
+   * @type {(name: string, at: number) => number}
+   */
   const addLocal = (name, at) => localBindings.push({ name, ...formAt(at) });
 
   for (const match of masked.matchAll(/\((ns|defrecord|defprotocol|def|defn)\s+([^\s()[\]{}]+)/g)) {
@@ -686,6 +797,13 @@ function refineClojure(source) {
   return spans.finish();
 }
 
+/**
+ * Route languages without dependable structural grammars to conservative lexical passes.
+ *
+ * @param {string} source Document text; offsets are UTF-16 code units.
+ * @param {string} language VS Code language identifier used to select syntax rules.
+ * @returns {import('./spans').Span[]} Sorted, non-overlapping foreground refinements.
+ */
 function refineLegacy(source, language) {
   if (language === 'fsharp') return refineFsharp(source);
   if (language === 'hlsl' || language === 'shaderlab') return refineShader(source, language);

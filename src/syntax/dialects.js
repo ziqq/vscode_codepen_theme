@@ -1,9 +1,20 @@
+/**
+ * @file Grammar-specific overrides layered above common structural classification.
+ * Corrections target constructs whose tree shapes differ across provider grammars.
+ */
+
 const { Spans } = require('./spans');
 
 // Tree-sitter provides the common syntax tree in tree.js. This module keeps
 // grammar-specific constructs isolated so the shared declaration model stays
 // predictable while languages retain their own member and binding forms.
 
+/**
+ * Flatten all parser nodes for reusable dialect-specific passes.
+ *
+ * @param {import('web-tree-sitter').Node} root Root of the live syntax tree.
+ * @returns {import('web-tree-sitter').Node[]} Named and anonymous nodes collected from the document.
+ */
 function collect(root) {
   const result = [];
   const stack = [root];
@@ -17,22 +28,57 @@ function collect(root) {
   return result;
 }
 
+/**
+ * Read an optional named grammar field without guessing child positions.
+ * @type {(node: import('web-tree-sitter').Node | null | undefined, name: string) => import('web-tree-sitter').Node | null | undefined}
+ */
 const field = (node, name) => node?.childForFieldName(name);
+/**
+ * Find the first enclosing node matching a syntax predicate; never cross into another tree.
+ * @type {(node: import('web-tree-sitter').Node, predicate: (node: import('web-tree-sitter').Node) => boolean) => import('web-tree-sitter').Node | undefined}
+ */
 const ancestor = (node, predicate) => {
   for (let current = node.parent; current; current = current.parent) {
     if (predicate(current)) return current;
   }
 };
+/**
+ * Recognize an optional plain identifier node in a dialect grammar.
+ * @type {(node: import('web-tree-sitter').Node | undefined) => boolean}
+ */
 const identifier = (node) => node?.type === 'identifier';
 
+/**
+ * Add a dialect correction only when its optional syntax node exists.
+ *
+ * @param {import('./spans').Spans} spans Destination collector.
+ * @param {import('web-tree-sitter').Node | undefined} node Node to color; missing optional grammar fields are ignored.
+ * @param {import('./spans').Role} role Foreground correction.
+ * @param {number} [priority=60] Precedence over the generic structural layer.
+ * @returns {void} Existing ranges remain available for priority resolution.
+ */
 function add(spans, node, role, priority = 60) {
   if (node) spans.add(node.startIndex, node.endIndex, role, priority);
 }
 
+/**
+ * Select immediate identifier children without descending into nested scopes.
+ *
+ * @param {import('web-tree-sitter').Node} node Grammar node whose direct names are needed.
+ * @returns {import('web-tree-sitter').Node[]} Immediate identifier-like children.
+ */
 function directIdentifiers(node) {
   return node?.namedChildren.filter(identifier) ?? [];
 }
 
+/**
+ * Correct Groovy annotations, declarations, members, and interpolation.
+ *
+ * @param {import('./spans').Spans} spans Collector receiving dialect overrides.
+ * @param {import('web-tree-sitter').Node[]} nodes Flattened named and anonymous nodes from the generic grammar.
+ * @param {string} source Original source for token-boundary checks.
+ * @returns {void} Dialect-specific overrides are added without executing source.
+ */
 function groovy(spans, nodes, source) {
   for (const node of nodes) {
     if (node.type === 'class_definition') add(spans, field(node, 'name'), 'blue');
@@ -74,6 +120,14 @@ function groovy(spans, nodes, source) {
   }
 }
 
+/**
+ * Refine CUDA qualifiers, kernel launches, and C++ member roles.
+ *
+ * @param {import('./spans').Spans} spans Collector receiving dialect overrides.
+ * @param {import('web-tree-sitter').Node[]} nodes Flattened named and anonymous nodes from the generic grammar.
+ * @param {string} source Original source for token-boundary checks.
+ * @returns {void} Dialect-specific overrides are added without executing source.
+ */
 function cuda(spans, nodes, source) {
   for (const node of nodes) {
     if (identifier(node) && ancestor(node, (item) => item.type === 'sizeof_expression')) add(spans, node, 'white', 70);
@@ -92,8 +146,19 @@ function cuda(spans, nodes, source) {
   }
 }
 
+/**
+ * Resolve Julia bindings, callable declarations, types, and interpolation.
+ *
+ * @param {import('./spans').Spans} spans Collector receiving dialect overrides.
+ * @param {import('web-tree-sitter').Node[]} nodes Flattened named and anonymous nodes from the generic grammar.
+ * @returns {void} Dialect-specific overrides are added without executing source.
+ */
 function julia(spans, nodes) {
   const functions = nodes.filter((node) => node.type === 'function_definition');
+  /**
+   * Find the enclosing callable whose lexical range contains this dialect node.
+   * @type {(node: import('web-tree-sitter').Node) => import('web-tree-sitter').Node | undefined}
+   */
   const functionOf = (node) => functions.find((candidate) =>
     candidate.startIndex <= node.startIndex && candidate.endIndex >= node.endIndex);
   const localNames = new Map(functions.map((node) => [node.id, new Set()]));
@@ -176,8 +241,19 @@ function julia(spans, nodes) {
   }
 }
 
+/**
+ * Distinguish Lua locals, table keys, methods, and receiver parameters.
+ *
+ * @param {import('./spans').Spans} spans Collector receiving dialect overrides.
+ * @param {import('web-tree-sitter').Node[]} nodes Flattened named and anonymous nodes from the generic grammar.
+ * @returns {void} Dialect-specific overrides are added without executing source.
+ */
 function lua(spans, nodes) {
   const functions = nodes.filter((node) => node.type === 'function_declaration');
+  /**
+   * Find the enclosing callable whose lexical range contains this dialect node.
+   * @type {(node: import('web-tree-sitter').Node) => import('web-tree-sitter').Node | undefined}
+   */
   const functionOf = (node) => functions.filter((candidate) =>
     candidate.startIndex <= node.startIndex && candidate.endIndex >= node.endIndex)
     .sort((left, right) => (left.endIndex - left.startIndex) - (right.endIndex - right.startIndex))[0];
@@ -228,6 +304,14 @@ function lua(spans, nodes) {
   }
 }
 
+/**
+ * Correct Objective-C declarations, selectors, and message-send roles.
+ *
+ * @param {import('./spans').Spans} spans Collector receiving dialect overrides.
+ * @param {import('web-tree-sitter').Node[]} nodes Flattened named and anonymous nodes from the generic grammar.
+ * @param {string} source Original source for token-boundary checks.
+ * @returns {void} Dialect-specific overrides are added without executing source.
+ */
 function objectiveC(spans, nodes, source) {
   for (const node of nodes) {
     if (['class_interface', 'class_implementation'].includes(node.type)) {
@@ -274,8 +358,19 @@ function objectiveC(spans, nodes, source) {
   }
 }
 
+/**
+ * Distinguish R assignment bindings, calls, parameters, and member access.
+ *
+ * @param {import('./spans').Spans} spans Collector receiving dialect overrides.
+ * @param {import('web-tree-sitter').Node[]} nodes Flattened named and anonymous nodes from the generic grammar.
+ * @returns {void} Dialect-specific overrides are added without executing source.
+ */
 function rLanguage(spans, nodes) {
   const functions = nodes.filter((node) => node.type === 'function_definition');
+  /**
+   * Find the enclosing callable whose lexical range contains this dialect node.
+   * @type {(node: import('web-tree-sitter').Node) => import('web-tree-sitter').Node | undefined}
+   */
   const functionOf = (node) => functions.find((candidate) =>
     candidate.startIndex <= node.startIndex && candidate.endIndex >= node.endIndex);
   const globals = new Set();
@@ -315,6 +410,13 @@ function rLanguage(spans, nodes) {
   }
 }
 
+/**
+ * Refine Razor directives and tag fragments missing from the generic tree.
+ *
+ * @param {import('./spans').Spans} spans Collector receiving markup and directive roles.
+ * @param {string} source Original Razor document.
+ * @returns {void} Only recognized Razor fragments receive overrides.
+ */
 function razor(spans, source) {
   // Razor's grammar exposes HTML punctuation through the same tree as C#.
   // Keep markup brown even when `<` would otherwise look like an operator.
@@ -329,6 +431,14 @@ function razor(spans, source) {
   }
 }
 
+/**
+ * Dispatch grammar-specific corrections without changing the generic binding index.
+ *
+ * @param {import('web-tree-sitter').Node} root Parsed document root.
+ * @param {string} source Original source.
+ * @param {string} language VS Code language identifier.
+ * @returns {import('./spans').Span[]} Dialect-only corrections, or an empty list.
+ */
 function refineDialect(root, source, language) {
   const spans = new Spans(source.length);
   const nodes = collect(root);

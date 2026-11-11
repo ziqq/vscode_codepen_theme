@@ -1,8 +1,21 @@
+/**
+ * @file Prepare documents and signal readiness inside the screenshot extension host.
+ * The outside browser harness captures the isolated workbench only after acknowledgment.
+ */
+
 const { access, writeFile } = require('node:fs/promises');
 const vscode = require('vscode');
 
+/**
+ * Yield asynchronously while waiting for an editor handshake or deterministic lifecycle boundary.
+ * @type {(milliseconds: number) => Promise<void>}
+ */
 const wait = (timeout) => new Promise((resolve) => setTimeout(resolve, timeout));
 
+/**
+ * Execute inside the isolated Extension Development Host and publish readiness evidence.
+ * @returns {Promise<void>} Resolves after all planned documents and lifecycle cases complete.
+ */
 exports.run = async () => {
   const readyFile = process.env.CODEPEN_SCREENSHOT_READY;
   const doneFile = process.env.CODEPEN_SCREENSHOT_DONE;

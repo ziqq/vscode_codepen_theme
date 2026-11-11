@@ -1,3 +1,8 @@
+/**
+ * @file Compare contextual refinements with independently recorded CodePen foregrounds.
+ * Unused reviewed exceptions fail rather than hiding a fixed or shifted difference.
+ */
+
 import assert from 'node:assert/strict';
 import { readFile, writeFile } from 'node:fs/promises';
 import { createRequire } from 'node:module';

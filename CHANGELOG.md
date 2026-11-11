@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 1.0.0
 
 - **FIXED**: Dart constants remain blue in declarations and resolved references, including imported constants located through Dart-Code, while ordinary class fields and methods remain purple
 
@@ -33,7 +33,6 @@
 - **ADDED**: semantic highlighting with JS/TS local/declaration distinctions and Dart member/constructor roles; keep Dart keyword typography separate from color rules
 - **ADDED**: 30 recorded live CodePen variants, exact-span reference audits with explicit known differences, color checks for 30 language fixtures, and real JS/TS and optional Dart semantic verification
 
-## 1.0.0
 - **BREAKING_CHANGES**: removed every bundled language definition, TextMate grammar, language configuration, and snippet
 - **CHANGED**: the extension now contributes only the CodePen color theme
 - **CHANGED**: the checked-in theme is generated from `src/colors.js` and `src/theme.js`

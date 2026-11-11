@@ -1,3 +1,8 @@
+/**
+ * @file Run real-grammar, semantic-service, and CodePen-reference checks per supported editor.
+ * A failing version stops the matrix; later versions are not reported as passed.
+ */
+
 import { spawn } from 'node:child_process';
 import { readFile } from 'node:fs/promises';
 

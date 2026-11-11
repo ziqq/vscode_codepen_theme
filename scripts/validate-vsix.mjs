@@ -1,3 +1,8 @@
+/**
+ * @file Inspect the packaged archive for theme parity, runtime integrity, licenses, and size.
+ * A successful source check alone is not evidence that the distributable contains it.
+ */
+
 import { execFileSync } from 'node:child_process';
 import { readFile, stat } from 'node:fs/promises';
 import { createRequire } from 'node:module';

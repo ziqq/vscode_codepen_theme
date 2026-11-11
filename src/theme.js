@@ -1,3 +1,24 @@
+/**
+ * @file Build VS Code TextMate, semantic, and workbench settings from the shared palette.
+ * Foreground and typography rules remain independent to prevent style leakage.
+ */
+
+/**
+ * @typedef {object} TokenRule
+ * @property {string} name Human-readable rule identifier.
+ * @property {string[]} scope Deterministically ordered TextMate selectors.
+ * @property {{foreground?: string, fontStyle?: string}} settings Foreground or typography settings.
+ */
+
+/**
+ * @typedef {object} ThemeDefinition
+ * @property {string} name Public theme label.
+ * @property {Record<string, string>} colors VS Code workbench/editor colors.
+ * @property {TokenRule[]} tokenColors Ordered TextMate foreground and typography layers.
+ * @property {boolean} semanticHighlighting Theme semantic-highlighting default.
+ * @property {Record<string, string | {foreground?: string, italic?: boolean, bold?: boolean, underline?: boolean}>} semanticTokenColors Semantic selector settings.
+ */
+
 const color = require('./colors');
 
 /**
@@ -34,11 +55,23 @@ const SCOPE_GROUP_INDEX = new Map(
   SCOPE_GROUP_ORDER.map((group, index) => [group, index]),
 );
 
+/**
+ * Choose the stable sort group for a TextMate scope selector.
+ *
+ * @param {string} scope TextMate selector, including contextual selectors.
+ * @returns {string} Known root group, or the fallback group for unknown selectors.
+ */
 function scopeGroup(scope) {
   const root = scope.match(/^[a-z]+/i)?.[0]?.toLowerCase() ?? '*';
   return SCOPE_GROUP_INDEX.has(root) ? root : '*';
 }
 
+/**
+ * Deduplicate selectors and order them by the theme-owned group precedence.
+ *
+ * @param {string[]} scopes Selectors to normalize without mutating the input.
+ * @returns {string[]} Deterministically sorted selectors.
+ */
 function sortScopes(scopes) {
   return [...new Set(scopes)].sort((left, right) => {
     const groupDelta =
@@ -48,6 +81,14 @@ function sortScopes(scopes) {
   });
 }
 
+/**
+ * Create a foreground-only rule; typography remains a separate layer.
+ *
+ * @param {string} name Human-readable rule identifier.
+ * @param {string} foreground Hex foreground color.
+ * @param {string[]} scopes Selectors sharing this foreground.
+ * @returns {TokenRule} Normalized TextMate foreground rule.
+ */
 function colorRule(name, foreground, scopes) {
   return {
     name,
@@ -56,6 +97,14 @@ function colorRule(name, foreground, scopes) {
   };
 }
 
+/**
+ * Create a typography-only rule without implicitly changing foregrounds.
+ *
+ * @param {string} name Human-readable rule identifier.
+ * @param {string} fontStyle Space-separated TextMate font styles.
+ * @param {string[]} scopes Selectors sharing these decorations.
+ * @returns {TokenRule} Normalized TextMate decoration rule.
+ */
 function decorationRule(name, fontStyle, scopes) {
   return {
     name,
@@ -2052,6 +2101,13 @@ const semanticDecorations = {
   'keyword.void:dart': { italic: false },
 };
 
+/**
+ * Build one public variant with shared foregrounds and variant-specific italics.
+ * Original drops the general italic layer but retains the annotation exception.
+ *
+ * @param {{name: string, italics?: boolean}} options Public label and italic-layer selection.
+ * @returns {ThemeDefinition} Complete VS Code color-theme definition.
+ */
 function resolveTheme({ name, italics = true }) {
   const theme = {
     name: name,

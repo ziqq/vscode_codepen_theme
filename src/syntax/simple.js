@@ -1,8 +1,20 @@
+/**
+ * @file Minimal lexical corrections for Sass punctuation and C4 declaration references.
+ * Unrecognized syntax keeps the grammar or semantic-provider foreground.
+ */
+
 const { Spans } = require('./spans');
 const { addComment } = require('./comments');
 
 // A conservative lexer for the two formats without a bundled structural parser.
 // It only refines proven identifiers or punctuation, never strings/comments.
+/**
+ * Apply conservative Sass/C4 refinements after masking comments and strings.
+ *
+ * @param {string} source Document text; offsets are UTF-16 code units.
+ * @param {string} language VS Code language identifier used to select syntax rules.
+ * @returns {import('./spans').Span[]} Sorted, non-overlapping foreground refinements.
+ */
 function refineSimple(source, language) {
   const spans = new Spans(source.length);
   const masked = source.replace(/\/\*[\s\S]*?(?:\*\/|$)|\/\/[^\n]*|"(?:\\.|[^"\\])*(?:"|$)|'(?:\\.|[^'\\])*(?:'|$)/g,

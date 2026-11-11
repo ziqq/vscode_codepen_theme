@@ -1,3 +1,8 @@
+/**
+ * @file Classic CodePen Twilight palette and theme-owned workbench colors.
+ * Keep keys sorted; foreground roles are shared by both public variants.
+ */
+
 // COLORS PALETTE:
 // BROWN       : #a7925a
 // ORANGE      : #d0782a || #A5925C

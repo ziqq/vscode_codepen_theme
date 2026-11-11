@@ -1,3 +1,8 @@
+/**
+ * @file Validate provider IDs, version bands, sample coverage, and scope contract integrity.
+ * Contract errors fail before downloading providers or launching an editor.
+ */
+
 import { access, readFile } from 'node:fs/promises';
 import { constants } from 'node:fs';
 import {
@@ -108,6 +113,10 @@ const colorSelectors = theme.tokenColors.flatMap((rule) => {
   );
 });
 
+/**
+ * Check simple scope-prefix coverage while leaving complex selectors to real grammar tests.
+ * @type {(scope: string) => boolean}
+ */
 const isCovered = (scope) =>
   colorSelectors.some(
     (selector) => scope === selector || scope.startsWith(`${selector}.`),

@@ -1,3 +1,8 @@
+/**
+ * @file Validate generated themes, public variants, manifest contributions, and source parity.
+ * Checks read generator output so handwritten theme drift cannot pass unnoticed.
+ */
+
 import { access, readFile, readdir } from 'node:fs/promises';
 import { constants } from 'node:fs';
 import { createRequire } from 'node:module';
@@ -209,9 +214,17 @@ for (const [absolutePath, expectedSource] of generatedThemes()) {
 
 const original = parsedThemes.get('CodePen Theme Original');
 const italics = parsedThemes.get('CodePen Theme Original Italics');
+/**
+ * Select foreground rules independently of variant-only typography layers.
+ * @type {(theme: import('../src/theme').ThemeDefinition) => import('../src/theme').TokenRule[]}
+ */
 const foregroundRules = (theme) => theme.tokenColors.filter(
   (rule) => rule.settings.foreground !== undefined,
 );
+/**
+ * Normalize semantic style objects to foregrounds for Original/Italics parity.
+ * @type {(theme: import('../src/theme').ThemeDefinition) => Record<string, string | undefined>}
+ */
 const semanticForegrounds = (theme) => Object.fromEntries(
   Object.entries(theme.semanticTokenColors).map(([selector, value]) => [
     selector,

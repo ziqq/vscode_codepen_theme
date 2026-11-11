@@ -1,3 +1,8 @@
+/**
+ * @file Validate package/changelog release identity and an optional publication tag.
+ * This metadata check neither creates a tag nor publishes the extension.
+ */
+
 import { readFile } from 'node:fs/promises';
 
 const manifest = JSON.parse(await readFile('package.json', 'utf8'));

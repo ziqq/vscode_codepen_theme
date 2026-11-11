@@ -77,7 +77,7 @@
   },
   "devDependencies": {
     "@vscode/test-electron": "^2.5.2",
-    "@vscode/vsce": "3.7.1",
+    "@vscode/vsce": "4.1.0",
     "playwright-core": "^1.62.1",
     "pngjs": "^7.0.0",
     "tree-sitter-wasm": "1.1.6",
@@ -85,6 +85,12 @@
     "vscode-oniguruma": "^2.0.1",
     "vscode-textmate": "^9.3.2",
     "web-tree-sitter": "0.27.0"
+  },
+  "overrides": {
+    "@vscode/vsce": {
+      "glob": "14.0.2",
+      "minimatch": "11.0.1"
+    }
   },
   "scripts": {
     "start": "node --watch --watch-preserve-output src/index.js",

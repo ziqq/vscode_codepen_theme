@@ -1,3 +1,8 @@
+/**
+ * @file Install the built VSIX into disposable directories for each supported editor.
+ * Every temporary installation is cleaned after its manifest identity is verified.
+ */
+
 import { execFile } from 'node:child_process';
 import {
   mkdtemp,

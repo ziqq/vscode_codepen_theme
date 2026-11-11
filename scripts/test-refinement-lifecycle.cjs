@@ -1,11 +1,24 @@
+/**
+ * @file Exercise ownership, coalescing, stale replies, disposal, and Dart constant resolution.
+ * Provider and worker doubles test lifecycle boundaries without mutating an editor profile.
+ */
+
 const assert = require('node:assert/strict');
 const Module = require('node:module');
 const { EventEmitter } = require('node:events');
 const { test } = require('node:test');
+/**
+ * Yield asynchronously while waiting for an editor handshake or deterministic lifecycle boundary.
+ * @type {(milliseconds: number) => Promise<void>}
+ */
 const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 test('theme gating, opt-out, coalescing, stale results, closure and disposal', async () => {
   const listeners = {};
+  /**
+   * Register deterministic lifecycle callbacks in the editor double.
+   * @type {(name: string) => (callback: Function) => {dispose: () => void}}
+   */
   const event = (name) => (callback) => { listeners[name] = callback; return { dispose() {} }; };
   const configuration = { theme: 'Default Dark Modern', enabled: true };
   const workers = [];
@@ -50,7 +63,15 @@ test('theme gating, opt-out, coalescing, stale results, closure and disposal', a
   } finally { Module._load = load; }
   const context = { subscriptions: [] };
   const api = activate(context);
+  /**
+   * Deliver a configuration change to the extension double.
+   * @type {() => void}
+   */
   const changed = () => listeners.configuration({ affectsConfiguration: () => true });
+  /**
+   * Check that every registered decoration type has no remaining ranges.
+   * @type {() => boolean}
+   */
   const isClear = () => [...applied.values()].every((ranges) => ranges.length === 0);
   try {
     await wait(15);

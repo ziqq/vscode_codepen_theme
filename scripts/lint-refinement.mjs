@@ -1,3 +1,8 @@
+/**
+ * @file Run syntax checks over owned refinement sources and their regression harnesses.
+ * Generated vendor/parser payloads are intentionally outside this source lint pass.
+ */
+
 import { readdir } from 'node:fs/promises';
 import { execFileSync } from 'node:child_process';
 const files = ['src/build-runtime.js', 'compatibility/refinement.cjs',

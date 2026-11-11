@@ -1,3 +1,8 @@
+/**
+ * @file Load pinned real grammars and validate short, full-source, edge, and refined spans.
+ * Version-specific provider fallbacks remain distinct from contextual corrections.
+ */
+
 import { readFile, readdir, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import assert from 'node:assert/strict';
@@ -42,6 +47,14 @@ const externalProviders = await ensureRecommendedProviders(
 const grammarByScope = new Map();
 const injections = new Map();
 
+/**
+ * Register contributed grammars and injections from a verified extension directory.
+ *
+ * @param {string} extensionRoot Directory containing the provider manifest.
+ * @param {string} providerId Contract identifier recorded in evidence.
+ * @param {boolean} overwrite Whether this provider may replace an existing scope registration.
+ * @returns {Promise<void>} Grammar paths and injection indexes are updated.
+ */
 async function registerExtension(extensionRoot, providerId, overwrite) {
   const manifestPath = path.join(extensionRoot, 'package.json');
   let manifest;

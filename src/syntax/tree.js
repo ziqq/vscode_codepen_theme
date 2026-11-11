@@ -1,3 +1,20 @@
+/**
+ * @file Structural classification using bundled Tree-sitter grammars and lexical binding scopes.
+ * Parser trees live only during callbacks; no project source is executed.
+ */
+
+/**
+ * @typedef {object} Region
+ * @property {number} start Inclusive lexical owner offset.
+ * @property {number} end Exclusive lexical owner offset.
+ * @property {import('web-tree-sitter').Node} node Owner node, valid only while its tree is alive.
+ */
+
+/**
+ * @typedef {Region & {kind: string, global: boolean}} Binding
+ * Declaration identity and lexical lifetime used when resolving same-name occurrences.
+ */
+
 const path = require('node:path');
 const { Spans } = require('./spans');
 const { addComment } = require('./comments');
@@ -42,13 +59,37 @@ const annotationKinds = new Set([
 ]);
 const keywords = new Set(('abstract alias as assert async await base bool boolean break case catch class const constexpr continue covariant data default defer deferred def define del do done dynamic elif else end endef enum except export extends extension extern external factory false fi final finally fn for foreach from fun func function get global goto hide if ifdef ifeq ifndef ifneq impl implements import in include inline instanceof interface internal is late let library match mixin mod mutable mut native new nil nonlocal null object on operator or out override package part pass private protected protocol pub public raise record redo ref reified required rescue return rethrow sealed select self set show sizeof static struct super switch sync synchronized template then this throw throws trait transient true try type typedef typealias typeof union unless unsafe unset use using val var virtual volatile when where while with yield').split(' '));
 
+/**
+ * Check containment in a half-open lexical region, including whole-node boundaries.
+ * @type {(region: Region, node: import('web-tree-sitter').Node) => boolean}
+ */
 const contains = (region, node) => region.start <= node.startIndex && region.end >= node.endIndex;
+/**
+ * Find the first enclosing node matching a syntax predicate; never cross into another tree.
+ * @type {(node: import('web-tree-sitter').Node, predicate: (node: import('web-tree-sitter').Node) => boolean) => import('web-tree-sitter').Node | undefined}
+ */
 const ancestor = (node, predicate) => {
   for (let current = node.parent; current; current = current.parent) if (predicate(current)) return current;
 };
+/**
+ * Read an optional named grammar field without guessing child positions.
+ * @type {(node: import('web-tree-sitter').Node | null | undefined, name: string) => import('web-tree-sitter').Node | null | undefined}
+ */
 const field = (node, name) => node?.childForFieldName(name);
+/**
+ * Determine whether this node is exactly a named field of its parent.
+ * @type {(node: import('web-tree-sitter').Node, name: string) => boolean}
+ */
 const isField = (node, name) => field(node.parent, name)?.id === node.id;
+/**
+ * Find a direct identifier-like child when a grammar lacks a named field.
+ * @type {(node: import('web-tree-sitter').Node | undefined) => import('web-tree-sitter').Node | undefined}
+ */
 const firstIdentifier = (node) => node?.namedChildren.find((child) => identifiers.has(child.type));
+/**
+ * Find the first identifier descendant in source order, skipping irrelevant wrappers.
+ * @type {(node: import('web-tree-sitter').Node | undefined) => import('web-tree-sitter').Node | undefined}
+ */
 const firstDescendantIdentifier = (node) => {
   const stack = [...(node?.namedChildren ?? [])].reverse();
   while (stack.length) {
@@ -57,8 +98,19 @@ const firstDescendantIdentifier = (node) => {
     stack.push(...child.namedChildren.toReversed());
   }
 };
+/**
+ * Select the leaf identifier rather than emitting duplicate ranges for wrapper nodes.
+ * @type {(node: import('web-tree-sitter').Node) => boolean}
+ */
 const isIdentifier = (node) => identifiers.has(node.type) && !node.namedChildren.some(isIdentifier);
 
+/**
+ * Layer generic bindings, dialect corrections, and annotations over a parsed tree.
+ *
+ * @param {string} source Document text; offsets are UTF-16 code units.
+ * @param {string} language VS Code language identifier used to select syntax rules.
+ * @returns {Promise<import('./spans').Span[]>} Sorted, non-overlapping foreground refinements.
+ */
 async function refineTree(source, language) {
   return withTree(source, language, async (root) => {
     const base = classify(root, source, language);
@@ -82,6 +134,14 @@ async function refineTree(source, language) {
   });
 }
 
+/**
+ * Split annotation markers from names without recoloring unrelated at-sign syntax.
+ *
+ * @param {import('web-tree-sitter').Node} root Parsed document root.
+ * @param {string} source Original document text.
+ * @param {import('./spans').Spans} spans Collector receiving the gray marker and yellow italic name.
+ * @returns {void} Annotation spans override generic identifier colors.
+ */
 function addAnnotations(root, source, spans) {
   const stack = [root];
   while (stack.length) {
@@ -99,6 +159,16 @@ function addAnnotations(root, source, spans) {
   }
 }
 
+/**
+ * Parse with a lazily initialized, cached grammar and dispose the tree afterward.
+ * A temporary parent index avoids repeated root-to-node searches during classification.
+ *
+ * @template T
+ * @param {string} source Document text to parse.
+ * @param {string} language VS Code language ID mapped to a bundled grammar.
+ * @param {(root: import('web-tree-sitter').Node) => T | Promise<T>} callback Work performed while the tree is alive.
+ * @returns {Promise<T | []>} Callback result, or an empty list for unsupported grammars.
+ */
 async function withTree(source, language, callback) {
   const grammar = grammars[language];
   if (!grammar) return [];
@@ -127,11 +197,20 @@ async function withTree(source, language, callback) {
   } });
   try { return await callback(tree.rootNode); }
   finally {
+    // Restore the shared prototype even if a dialect pass throws; later parses
+    // must not retain nodes from this tree through the temporary parent map.
     Object.defineProperty(prototype, 'parent', descriptor);
     tree.delete();
   }
 }
 
+/**
+ * Recognize Dart const storage at local, class, and top-level declarations.
+ * A const expression used as an initializer does not make a final field constant.
+ *
+ * @param {import('web-tree-sitter').Node} declaration Declaration node containing the bound identifier.
+ * @returns {boolean} Whether the declaration itself has a const modifier.
+ */
 function dartConstantDeclaration(declaration) {
   const owner = ancestor(declaration, (item) =>
     item.type === 'declaration' || item.type === 'initialized_variable_definition');
@@ -143,6 +222,13 @@ function dartConstantDeclaration(declaration) {
         .some((child) => child?.type === 'const_builtin');
 }
 
+/**
+ * Verify definition-provider target offsets against actual Dart declarations.
+ *
+ * @param {string} source Defining document text.
+ * @param {number[]} offsets UTF-16 offsets of the resolved symbol names.
+ * @returns {Promise<boolean[]>} One const/non-const result per input offset.
+ */
 async function dartConstantsAt(source, offsets) {
   return withTree(source, 'dart', (root) => offsets.map((offset) => {
     const node = root.descendantForIndex(offset);
@@ -152,6 +238,15 @@ async function dartConstantsAt(source, offsets) {
   }));
 }
 
+/**
+ * Index lexical owners and declarations before assigning roles to references.
+ * Local bindings shadow members; unresolved names keep conservative language fallbacks.
+ *
+ * @param {import('web-tree-sitter').Node} root Live parser root.
+ * @param {string} source Original document text.
+ * @param {string} language Language-specific classification switches.
+ * @returns {import('./spans').Span[]} Merged structural foreground spans.
+ */
 function classify(root, source, language) {
   const spans = new Spans(source.length);
   const nodes = [];
@@ -167,12 +262,24 @@ function classify(root, source, language) {
   const roles = new Map();
   const bindings = new Map();
   const declarations = new Set();
+  /**
+   * Capture a live syntax node as a lexical source interval.
+   * @type {(node: import('web-tree-sitter').Node) => Region}
+   */
   const region = (node) => ({ start: node.startIndex, end: node.endIndex, node });
+  /**
+   * Check whether a named declaration field owns this identifier or a descendant.
+   * @type {(owner: import('web-tree-sitter').Node, name: string, node: import('web-tree-sitter').Node) => boolean | null | undefined}
+   */
   const fieldContains = (owner, name, node) => {
     const value = field(owner, name);
     return value && (value.id === node.id || contains(region(value), node));
   };
   // A Dart signature owns its initializer list and the sibling function body.
+  /**
+   * Include a Dart declaration body when its grammar stores signature and body as siblings.
+   * @type {(node: import('web-tree-sitter').Node) => Region}
+   */
   const signatureRegion = (node) => {
     const owner = ['method_signature', 'declaration'].includes(node.parent.type) ? node.parent : node;
     const next = owner.nextNamedSibling;
@@ -185,11 +292,35 @@ function classify(root, source, language) {
       functions.push(language === 'dart' && /signature$/.test(node.type) ? signatureRegion(node) : region(node));
     }
   }
+  /**
+   * Choose the tightest lexical owner when nested scopes all contain the same node.
+   * @type {(regions: Region[], node: import('web-tree-sitter').Node) => Region | undefined}
+   */
   const smallest = (regions, node) => regions.filter((item) => contains(item, node))
     .sort((a, b) => (a.end - a.start) - (b.end - b.start))[0];
+  /**
+   * Find the tightest class-like lexical region containing a node.
+   * @type {(node: import('web-tree-sitter').Node) => Region | undefined}
+   */
   const classOf = (node) => smallest(classes, node);
+  /**
+   * Find the tightest callable lexical region containing a node.
+   * @type {(node: import('web-tree-sitter').Node) => Region | undefined}
+   */
   const functionOf = (node) => smallest(functions, node);
+  /**
+   * Record a declaration role only when an optional grammar field is present.
+   * @type {(node: import('web-tree-sitter').Node | undefined, role: import('./spans').Role) => void}
+   */
   const set = (node, role) => { if (node) roles.set(node.id, role); };
+  /**
+   * Record a binding with its lexical lifetime and declaration foreground.
+   *
+   * @param {import('web-tree-sitter').Node | undefined} node Identifier to bind; absent names are ignored.
+   * @param {string} kind Binding category: variable, constant, member, type, or constructor.
+   * @param {Region} [scope] Explicit owner; otherwise choose the nearest lexical region.
+   * @returns {void} The binding index and declaration roles are updated together.
+   */
   function declare(node, kind, scope) {
     if (!node) return;
     const role = kind === 'member' || kind === 'enum' ? 'purple' : kind === 'alias' ? 'white' : 'blue';
@@ -201,16 +332,28 @@ function classify(root, source, language) {
     entries.push(entry);
     bindings.set(node.text, entries);
   }
+  /**
+   * Choose between enclosing class and function ownership by lexical nesting.
+   * @type {(node: import('web-tree-sitter').Node) => Region | undefined}
+   */
   const nearestOwner = (node) => {
     const fn = functionOf(node);
     const cls = classOf(node);
     return fn && (!cls || fn.start > cls.start) ? fn : cls;
   };
+  /**
+   * Distinguish class storage from callable-local bindings, including Razor field nodes.
+   * @type {(node: import('web-tree-sitter').Node) => boolean | undefined}
+   */
   const memberContext = (node) => {
     const owner = nearestOwner(node);
     return owner && classKinds.has(owner.node.type) ||
       language === 'razor' && ['property_declaration', 'field_declaration'].includes(node.type);
   };
+  /**
+   * Recognize syntactic member positions before applying binding-specific exceptions.
+   * @type {(node: import('web-tree-sitter').Node) => boolean}
+   */
   const propertyNode = (node) => node.type === 'field_identifier' ||
     (language === 'dart' && node.type === 'identifier' && node.parent.type === 'const_object_expression') ||
     (node.parent.type === 'field_access' && isField(node, 'field')) ||
@@ -219,16 +362,34 @@ function classify(root, source, language) {
     (node.parent.type === 'attribute' && isField(node, 'attribute')) ||
     ['navigation_suffix', 'unconditional_assignable_selector', 'conditional_assignable_selector',
       'cascade_selector', 'dot_shorthand'].includes(node.parent.type);
+  /**
+   * Identify a Dart named-constructor type in a qualified selector context.
+   * @type {(node: import('web-tree-sitter').Node) => boolean}
+   */
   const dartQualifiedConstructor = (node) => language === 'dart' &&
     node.parent.type === 'unconditional_assignable_selector' && /^[A-Z_]/.test(node.text) &&
     node.parent.parent?.nextNamedSibling?.firstNamedChild?.type === 'argument_part';
+  /**
+   * Detect a Dart root name followed by an invocation selector.
+   * @type {(node: import('web-tree-sitter').Node) => boolean}
+   */
   const dartInvokedRoot = (node) => language === 'dart' &&
     node.parent.namedChildren.slice(node.parent.namedChildren.indexOf(node) + 1)
       .some((sibling) => sibling.type === 'selector' &&
         sibling.firstNamedChild?.type === 'argument_part');
+  /**
+   * Recover type arguments that the Dart grammar exposes through a relational-expression shape.
+   * @type {(node: import('web-tree-sitter').Node) => boolean}
+   */
   const dartRelationalTypeArgument = (node) => language === 'dart' &&
     node.parent.type === 'relational_expression' &&
     node.previousNamedSibling?.text === '<' && node.parent.nextNamedSibling?.text === '>';
+  /**
+   * Find the class owning a C++ method defined outside its class body.
+   *
+   * @param {import('web-tree-sitter').Node} node Identifier inside an out-of-line method definition.
+   * @returns {Region | undefined} Matching class region, if the local document defines it.
+   */
   function outOfLineClass(node) {
     if (language !== 'cpp') return undefined;
     const fn = functionOf(node)?.node;
@@ -368,6 +529,13 @@ function classify(root, source, language) {
     }
   }
 
+  /**
+   * Resolve an occurrence after all declarations have been indexed.
+   * Imported Dart constants require the separate provider-backed resolution pass.
+   *
+   * @param {import('web-tree-sitter').Node} node Identifier occurrence to classify.
+   * @returns {import('./spans').Role | undefined} Resolved role, or no refinement when the provider should decide.
+   */
   function useRole(node) {
     if (language === 'dart' && propertyNode(node)) {
       const selector = ancestor(node, (item) => item.type === 'selector');
@@ -385,6 +553,10 @@ function classify(root, source, language) {
     }
     if (language === 'rust' && parent.type === 'macro_invocation' && isField(node, 'macro')) return 'purple';
     const associatedClass = outOfLineClass(node);
+    /**
+     * Make class members visible inside an out-of-line C++ method definition.
+     * @type {(entry: Binding) => boolean | Region | undefined}
+     */
     const associatedMember = (entry) => entry.kind === 'member' && associatedClass &&
       entry.start === associatedClass.start && entry.end === associatedClass.end;
     const candidates = (bindings.get(node.text) ?? []).filter((entry) => contains(entry, node) || associatedMember(entry))
@@ -451,6 +623,12 @@ function classify(root, source, language) {
 
   // Dartdoc `[name]` references to parameters of the documented declaration
   // take that parameter's role; other references fall back to their case.
+  /**
+   * Resolve Dartdoc references against the declaration immediately following a comment.
+   *
+   * @param {import('web-tree-sitter').Node} comment Documentation comment preceding the declaration.
+   * @returns {(name: string) => import('./spans').Role | undefined} Lookup restricted to parameters of that declaration.
+   */
   function documentedParameters(comment) {
     let target = comment.nextNamedSibling;
     while (target && (/comment/.test(target.type) || annotationKinds.has(target.type))) target = target.nextNamedSibling;

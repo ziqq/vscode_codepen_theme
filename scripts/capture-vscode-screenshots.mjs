@@ -1,3 +1,8 @@
+/**
+ * @file Capture isolated real-editor screenshots and inspect rendered syntax/palette evidence.
+ * TextMate-only and semantic runs share the same source and typography contract.
+ */
+
 import { execFile, spawn } from 'node:child_process';
 import {
   access,
@@ -38,6 +43,10 @@ if (visualCases.length === 0) {
   throw new Error('No visual compatibility cases are configured');
 }
 
+/**
+ * Decode a six-digit hex palette color for screenshot pixel checks.
+ * @type {(hex: string) => number[]}
+ */
 const rgb = (hex) => [
   Number.parseInt(hex.slice(1, 3), 16),
   Number.parseInt(hex.slice(3, 5), 16),
@@ -52,6 +61,10 @@ const tokenPalette = [
   ),
 ].map((color) => ({ color, rgb: rgb(color) }));
 
+/**
+ * Reserve and release a loopback port for one isolated editor debugger.
+ * @type {() => Promise<number>}
+ */
 const freePort = async () => {
   const server = net.createServer();
   await new Promise((resolve, reject) => {
@@ -66,6 +79,10 @@ const freePort = async () => {
   return address.port;
 };
 
+/**
+ * Wait for an extension-host acknowledgment with a bounded deadline.
+ * @type {(file: string, timeout?: number) => Promise<void>}
+ */
 const waitForFile = async (file, timeout = 30_000) => {
   const deadline = Date.now() + timeout;
   while (Date.now() < deadline) {
@@ -80,6 +97,10 @@ const waitForFile = async (file, timeout = 30_000) => {
   throw new Error(`Timed out waiting for ${file}`);
 };
 
+/**
+ * Connect Playwright only after the debugger exposes a workbench page.
+ * @type {(endpoint: string) => Promise<{browser: import('playwright-core').Browser, context: import('playwright-core').BrowserContext}>}
+ */
 const waitForWorkbench = async (endpoint) => {
   const deadline = Date.now() + 60_000;
   let lastError;
@@ -108,6 +129,10 @@ const waitForWorkbench = async (endpoint) => {
   return { browser, context };
 };
 
+/**
+ * Select the visible Extension Development Host rather than another debugger page.
+ * @type {(context: import('playwright-core').BrowserContext) => Promise<import('playwright-core').Page>}
+ */
 const waitForExtensionWorkbench = async (context) => {
   const workbenchDeadline = Date.now() + 30_000;
   let page;
@@ -139,6 +164,10 @@ const waitForExtensionWorkbench = async (context) => {
   return page;
 };
 
+/**
+ * Count opaque background and near-palette pixels as screenshot smoke evidence.
+ * @type {(file: string) => Promise<{width: number, height: number, backgroundPixels: number, paletteMatches: {color: string, pixels: number}[]}>}
+ */
 const inspectScreenshot = async (file) => {
   const png = PNG.sync.read(await readFile(file));
   const counts = new Map();
@@ -147,7 +176,15 @@ const inspectScreenshot = async (file) => {
     const key = `${png.data[offset]},${png.data[offset + 1]},${png.data[offset + 2]}`;
     counts.set(key, (counts.get(key) ?? 0) + 1);
   }
+  /**
+   * Read the exact opaque-pixel frequency of one RGB color.
+   * @type {(value: number[]) => number}
+   */
   const count = (value) => counts.get(value.join(',')) ?? 0;
+  /**
+   * Count colors inside a Euclidean RGB-distance tolerance for antialiased glyphs.
+   * @type {(value: number[], tolerance: number) => number}
+   */
   const countNear = (value, tolerance) => {
     let pixels = 0;
     for (const [key, occurrences] of counts) {
@@ -353,6 +390,10 @@ try {
       .locator('.tabs-container [role="tab"]')
       .filter({ hasText: path.basename(item.sample) })
       .last();
+    /**
+     * Focus the selected sample tab before keyboard-driven editor navigation.
+     * @type {() => Promise<void>}
+     */
     const focusSample = async () => {
       try {
         await sampleTab.click({ force: true, timeout: 2_000 });
@@ -360,6 +401,10 @@ try {
         if (error?.name !== 'TimeoutError') throw error;
       }
     };
+    /**
+     * Wait until the editor DOM displays the expected sample source.
+     * @type {() => Promise<void>}
+     */
     const waitForSample = async () => page.waitForFunction(
       (needle) => {
         const normalizedNeedle = needle.replaceAll(/\s+/g, ' ').trim();
@@ -382,6 +427,10 @@ try {
     await page.waitForTimeout(2_000);
     await focusSample();
     await waitForSample();
+    /**
+     * Read visible editor text and computed foregrounds from the real workbench DOM.
+     * @type {() => Promise<object[]>}
+     */
     const readRenderedLines = async () => page.locator('.part.editor .view-line').evaluateAll((elements) =>
       elements.map((element) => {
         const walker = document.createTreeWalker(element, NodeFilter.SHOW_TEXT);
@@ -397,6 +446,10 @@ try {
     const editorFixture = JSON.parse(await readFile('compatibility/editor-colors.json', 'utf8'))[item.languageId] ?? {};
     const expectations = editorFixture[mode] ?? [];
     const renderedLines = await readRenderedLines();
+    /**
+     * Navigate to a one-based line before probing a potentially offscreen expectation.
+     * @type {(line: number) => Promise<void>}
+     */
     const revealLine = async (line) => {
       await page.keyboard.press('Control+G');
       const input = page.locator('.quick-input-widget input');

@@ -1,3 +1,8 @@
+/**
+ * @file Assert TextMate/semantic foregrounds and the independent typography contract.
+ * The Original and Italics variants must share all foreground settings.
+ */
+
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { readFile } from 'node:fs/promises';

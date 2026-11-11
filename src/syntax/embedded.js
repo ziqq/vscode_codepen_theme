@@ -1,8 +1,22 @@
+/**
+ * @file Map script blocks, framework expressions, and fenced languages into host offsets.
+ * Synthetic parsing context is never emitted as a decoration.
+ */
+
 const { withTree } = require('./tree');
 const { refineTypeScript } = require('./typescript');
 const { Spans } = require('./spans');
 const { addComment } = require('./comments');
 
+/**
+ * Refine script blocks, template expressions, and supported Markdown code fences.
+ * Synthetic parsing wrappers are clipped away when translating offsets back.
+ *
+ * @param {string} source Document text; offsets are UTF-16 code units.
+ * @param {string} language VS Code language identifier used to select syntax rules.
+ * @param {(source: string, language: string) => Promise<import('./spans').Span[]>} refine Dispatcher for nested fenced languages.
+ * @returns {Promise<import('./spans').Span[]>} Sorted, non-overlapping foreground refinements.
+ */
 async function refineEmbedded(source, language, refine) {
   return withTree(source, language, async (root) => {
     const spans = new Spans(source.length);
@@ -14,6 +28,12 @@ async function refineEmbedded(source, language, refine) {
     const script = nodes.filter((node) => node.type === 'raw_text' && node.parent.type === 'script_element');
     // SFC template expressions share script declarations but do not execute code.
     const declarations = script.map((node) => node.text).join('\n');
+    /**
+     * Read script attributes without treating JSON or text/plain blocks as JavaScript.
+     *
+     * @param {import('web-tree-sitter').Node} node Raw script text node.
+     * @returns {'javascript' | 'typescript' | undefined} Executable script mode, or no embedded refinement.
+     */
     function scriptMode(node) {
       const tag = node.parent.namedChildren.find((child) => child.type === 'start_tag')?.text ?? '';
       if (/\btype\s*=\s*["'](?:application\/(?:ld\+)?json|text\/plain)["']/.test(tag)) return undefined;
@@ -26,9 +46,23 @@ async function refineEmbedded(source, language, refine) {
         spans.add(node.startIndex + span.start, node.startIndex + span.end, span.role, 20);
       }
     }
+    /**
+     * Find the first enclosing node matching a syntax predicate; never cross into another tree.
+     * @type {(node: import('web-tree-sitter').Node, predicate: (node: import('web-tree-sitter').Node) => boolean) => import('web-tree-sitter').Node | undefined}
+     */
     const ancestor = (node, predicate) => {
       for (let parent = node.parent; parent; parent = parent.parent) if (predicate(parent)) return parent;
     };
+    /**
+     * Parse a template fragment with a synthetic context and clip results to the real text.
+     *
+     * @param {import('web-tree-sitter').Node} node Host node containing the fragment.
+     * @param {string} text Fragment to classify.
+     * @param {number} at Fragment offset relative to its host node.
+     * @param {string} prefix Synthetic declarations or expression opener.
+     * @param {string} suffix Synthetic expression/statement closer.
+     * @returns {void} Translated spans are added only within the original fragment.
+     */
     function fragment(node, text, at, prefix, suffix) {
       for (const span of refineTypeScript(`${prefix}${text}${suffix}`, 'typescript')) {
         const start = Math.max(span.start - prefix.length, 0);

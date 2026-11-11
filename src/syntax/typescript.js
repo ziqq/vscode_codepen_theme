@@ -1,7 +1,20 @@
+/**
+ * @file Classic CodePen JS/TS roles from a self-contained TypeScript compiler program.
+ * No filesystem host, project import resolution, or source execution is available.
+ */
+
 const { Spans } = require('./spans');
 const { addComment } = require('./comments');
 
 let compiler;
+/**
+ * Classify JS/TS/JSX in an in-memory program without resolving project imports.
+ * Classic CodePen reference roles take precedence over modern type inference.
+ *
+ * @param {string} source Document text; offsets are UTF-16 code units.
+ * @param {string} language VS Code language identifier used to select syntax rules.
+ * @returns {import('./spans').Span[]} Sorted, non-overlapping foreground refinements.
+ */
 function refineTypeScript(source, language) {
   const ts = compiler ??= require('./vendor/typescript.js');
   const jsx = language.endsWith('react');
@@ -25,34 +38,80 @@ function refineTypeScript(source, language) {
   const spans = new Spans(source.length);
   for (const match of source.matchAll(/\s+/g)) spans.add(match.index, match.index + match[0].length, 'white', 0);
   const S = ts.SyntaxKind;
+  /**
+   * Find a matching TypeScript ancestor in the in-memory program.
+   * @type {(node: import('typescript').Node, predicate: (node: import('typescript').Node) => boolean) => import('typescript').Node | undefined}
+   */
   const ancestor = (node, predicate) => {
     for (let current = node.parent; current; current = current.parent) {
       if (predicate(current)) return current;
     }
   };
+  /**
+   * Recognize declaration and object-literal member syntax.
+   * @type {(node: import('typescript').Node) => boolean}
+   */
   const isMember = (node) => ts.isPropertyDeclaration(node) || ts.isPropertySignature(node) ||
     ts.isPropertyAssignment(node) || ts.isMethodDeclaration(node) || ts.isMethodSignature(node) ||
     ts.isGetAccessor(node) || ts.isSetAccessor(node);
+  /**
+   * Identify a reference within a callable, block, loop, or catch scope.
+   * @type {(node: import('typescript').Node) => boolean}
+   */
   const isLocal = (node) => Boolean(ancestor(node, (parent) => ts.isFunctionLike(parent) ||
     ts.isBlock(parent) || ts.isForStatement(parent) || ts.isForOfStatement(parent) ||
     ts.isForInStatement(parent) || ts.isCatchClause(parent)));
+  /**
+   * Restrict component/tag colors to the tag name rather than its attribute expressions.
+   * @type {(node: import('typescript').Node) => boolean}
+   */
   const inJsxTag = (node) => Boolean(ancestor(node, (parent) =>
     (ts.isJsxOpeningElement(parent) || ts.isJsxClosingElement(parent) || ts.isJsxSelfClosingElement(parent)) &&
     parent.tagName.pos <= node.pos && parent.tagName.end >= node.end));
+  /**
+   * Test compiler-node interval containment without resolving symbols.
+   * @type {(node: import('typescript').Node, parent: import('typescript').Node | undefined) => boolean}
+   */
   const inside = (node, parent) => Boolean(parent && parent.pos <= node.pos && parent.end >= node.end);
+  /**
+   * Find the enclosing JSX expression island that follows classic CodePen atom roles.
+   * @type {(node: import('typescript').Node) => import('typescript').JsxExpression | undefined}
+   */
   const jsxExpression = (node) => ancestor(node, (parent) => ts.isJsxExpression(parent));
+  /**
+   * Find the enclosing type-only import clause used by the classic reference mapping.
+   * @type {(node: import('typescript').Node) => import('typescript').ImportClause | undefined}
+   */
   const typeOnlyImport = (node) => ancestor(node, (parent) =>
     ts.isImportClause(parent) && parent.isTypeOnly);
+  /**
+   * Check whether an identifier lies in the type operand of a satisfies expression.
+   * @type {(node: import('typescript').Node) => boolean | undefined}
+   */
   const satisfiesType = (node) => {
     const expression = ancestor(node, (parent) => ts.isSatisfiesExpression(parent));
     return expression && inside(node, expression.type);
   };
+  /**
+   * Check an assertion-predicate type position without recoloring its parameter binding.
+   * @type {(node: import('typescript').Node) => boolean | undefined}
+   */
   const assertionPredicateType = (node) => {
     const predicate = ancestor(node, (parent) => ts.isTypePredicateNode(parent));
     return predicate?.assertsModifier && inside(node, predicate.type);
   };
+  /**
+   * Find a named tuple element for its reference-specific first-element rule.
+   * @type {(node: import('typescript').Node) => import('typescript').NamedTupleMember | undefined}
+   */
   const namedTupleMember = (node) => ancestor(node, (parent) => ts.isNamedTupleMember(parent));
 
+  /**
+   * Choose a role using declaration identity, member context, and classic JSX rules.
+   *
+   * @param {import('typescript').Identifier | import('typescript').PrivateIdentifier} node Identifier from the temporary source file.
+   * @returns {import('./spans').Role} Foreground role for this occurrence.
+   */
   function identifierRole(node) {
     const parent = node.parent;
     if (inJsxTag(node)) return 'brown';
@@ -103,6 +162,13 @@ function refineTypeScript(source, language) {
   }
 
   const commentKeys = new Set();
+  /**
+   * Add leading or trailing comments once, even when neighboring nodes overlap.
+   *
+   * @param {number} at Source offset used by the TypeScript comment scanner.
+   * @param {boolean} [trailing=false] Read trailing rather than leading comment ranges.
+   * @returns {void} Comment spans are appended to the current collector.
+   */
   function comments(at, trailing = false) {
     const ranges = (trailing ? ts.getTrailingCommentRanges : ts.getLeadingCommentRanges)(source, at) ?? [];
     for (const range of ranges) {
@@ -111,6 +177,12 @@ function refineTypeScript(source, language) {
       addComment(spans, source, range.pos, range.end);
     }
   }
+  /**
+   * Walk compiler nodes, preserving decorator, literal, punctuation, and JSX roles.
+   *
+   * @param {import('typescript').Node} node Node in the in-memory syntax tree.
+   * @returns {void} Refinement spans are accumulated in source order.
+   */
   function visit(node) {
     const start = node.getStart(file);
     comments(node.pos);

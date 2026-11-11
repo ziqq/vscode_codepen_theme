@@ -1,3 +1,8 @@
+/**
+ * @file Prepare generated sample workspaces and provider links for an isolated preview.
+ * Installed extensions and normal editor profiles remain the source of inputs.
+ */
+
 import {
   access,
   lstat,
@@ -33,10 +38,24 @@ const compatibility = JSON.parse(
   await readFile(path.join(root, 'compatibility', 'scopes.json'), 'utf8'),
 );
 
+/**
+ * Build the canonical publisher.name identifier from an extension manifest.
+ *
+ * @param {{publisher: string, name: string}} manifest Provider manifest.
+ * @returns {string} Canonical provider identifier.
+ */
 function extensionId(manifest) {
   return `${manifest.publisher}.${manifest.name}`.toLowerCase();
 }
 
+/**
+ * Reject preview providers whose identity or version differs from the requested source.
+ *
+ * @param {string} extensionRoot Provider directory.
+ * @param {string} expectedId Required publisher.name identifier.
+ * @param {string} [expectedVersion] Required exact version, if pinned.
+ * @returns {Promise<string>} Verified provider version from its manifest.
+ */
 async function assertProvider(extensionRoot, expectedId, expectedVersion) {
   const manifest = JSON.parse(
     await readFile(path.join(extensionRoot, 'package.json'), 'utf8'),
@@ -55,6 +74,13 @@ async function assertProvider(extensionRoot, expectedId, expectedVersion) {
   return manifest.version;
 }
 
+/**
+ * Replace one generated preview link while leaving installed extensions untouched.
+ *
+ * @param {string} name Generated provider-link name.
+ * @param {string} target Existing provider directory to reference.
+ * @returns {Promise<string>} Absolute generated link path.
+ */
 async function replaceGeneratedLink(name, target) {
   const link = path.join(providerLinks, name.toLowerCase());
   try {
@@ -73,6 +99,11 @@ async function replaceGeneratedLink(name, target) {
   return link;
 }
 
+/**
+ * Find a local Dart-Code installation or honor the explicit extension override.
+ *
+ * @returns {Promise<string | undefined>} Installed Dart-Code source directory when available.
+ */
 async function installedDartExtension() {
   if (process.env.CODEPEN_DART_EXTENSION) {
     return path.resolve(process.env.CODEPEN_DART_EXTENSION);

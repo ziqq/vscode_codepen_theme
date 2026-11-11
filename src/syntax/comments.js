@@ -1,10 +1,23 @@
 /**
+ * @file Shared documentation foregrounds for prose, inline code, and bracketed references.
+ * Explicit priorities keep documentation constructs visible within muted comments.
+ */
+
+/**
  * Add the base comment color and the two portable documentation constructs
  * understood by every supported parser: inline code and symbol references.
  * Decorations change foreground only, so the active theme still owns italics.
  *
  * `resolve(name)` may return the role of a reference that names a declaration
  * the parser can see (for example a parameter of the documented function).
+ *
+ * @param {import('./spans').Spans} spans Collector receiving comment and embedded-documentation spans.
+ * @param {string} source Original document text.
+ * @param {number} start Inclusive comment offset.
+ * @param {number} end Exclusive comment offset.
+ * @param {string} [fontStyle] Optional inherited comment typography.
+ * @param {(name: string) => import('./spans').Role | undefined} [resolve] Resolve a documented parameter visible in the local parser.
+ * @returns {void} Higher-priority documentation spans refine the base comment.
  */
 function addComment(spans, source, start, end, fontStyle, resolve) {
   spans.add(start, end, 'gray', 100, fontStyle);

@@ -1,9 +1,22 @@
+/**
+ * @file Drive the extension-host half of the rendered refinement integration test.
+ * Documents, semantic-provider readiness, and lifecycle cases are acknowledged explicitly.
+ */
+
 const assert = require('node:assert/strict');
 const fs = require('node:fs/promises');
 const path = require('node:path');
 const vscode = require('vscode');
+/**
+ * Yield asynchronously while waiting for an editor handshake or deterministic lifecycle boundary.
+ * @type {(milliseconds: number) => Promise<void>}
+ */
 const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
+/**
+ * Execute inside the isolated Extension Development Host and publish readiness evidence.
+ * @returns {Promise<void>} Resolves after all planned documents and lifecycle cases complete.
+ */
 exports.run = async () => {
   const output = process.env.CODEPEN_REFINEMENT_OUTPUT;
   const plan = JSON.parse(await fs.readFile(path.join(output, 'plan.json'), 'utf8'));
@@ -34,6 +47,13 @@ exports.run = async () => {
   outputChannel.dispose();
   await vscode.commands.executeCommand('workbench.action.closePanel');
   const target = vscode.ConfigurationTarget.Workspace;
+  /**
+   * Wait for current-version refinement evidence before notifying the browser harness.
+   *
+   * @param {import('vscode').TextDocument} document Document expected in the extension's read-only state.
+   * @param {boolean} active Whether theme-owned refinement should be present.
+   * @returns {Promise<object>} Settled extension state, or an assertion failure on timeout.
+   */
   async function idle(document, active) {
     const deadline = Date.now() + 15000;
     while (Date.now() < deadline) {

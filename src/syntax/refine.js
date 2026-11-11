@@ -1,3 +1,8 @@
+/**
+ * @file Bound and dispatch source text to its language-specific foreground classifier.
+ * This module is shared by worker execution and independent regression checks.
+ */
+
 const { grammars, refineTree } = require('./tree');
 const { refineTypeScript } = require('./typescript');
 const { Spans } = require('./spans');
@@ -21,6 +26,12 @@ const supportedLanguages = [
 ];
 const maximumDocumentLength = 250_000;
 
+/**
+ * Distinguish dotenv keys, quoted strings, unquoted scalars, and substitutions.
+ *
+ * @param {string} source Document text; offsets are UTF-16 code units.
+ * @returns {import('./spans').Span[]} Sorted, non-overlapping foreground refinements.
+ */
 function refineDotenv(source) {
   const spans = new Spans(source.length);
   let offset = 0;
@@ -58,6 +69,14 @@ function refineDotenv(source) {
   return spans.finish();
 }
 
+/**
+ * Dispatch bounded document text to its structural or lexical refiner.
+ * Unsupported language IDs and oversized documents retain provider highlighting.
+ *
+ * @param {string} source Document text; offsets are UTF-16 code units.
+ * @param {string} language VS Code language identifier used to select syntax rules.
+ * @returns {Promise<import('./spans').Span[]>} Sorted, non-overlapping foreground refinements.
+ */
 async function refine(source, language) {
   if (typeof source !== 'string' || source.length > maximumDocumentLength) return [];
   if (scriptLanguages.includes(language)) return refineTypeScript(source, language);

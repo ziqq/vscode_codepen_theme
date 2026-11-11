@@ -1,3 +1,8 @@
+/**
+ * @file Render deterministic synthetic scope/color evidence and hash reviewed WebP previews.
+ * Synthetic SVG probes do not claim to be real-editor screenshot verification.
+ */
+
 import { createHash } from 'node:crypto';
 import { readFile, writeFile } from 'node:fs/promises';
 
@@ -31,6 +36,12 @@ const selectors = theme.tokenColors.flatMap((rule) => {
     .map((scope) => ({ scope, settings: rule.settings ?? {} }));
 });
 
+/**
+ * Resolve simple scope-prefix rules for the synthetic baseline, not full TextMate selectors.
+ *
+ * @param {string} scope Single scope in a compatibility baseline probe.
+ * @returns {{foreground: string, fontStyle?: string}} Merged simple-scope presentation.
+ */
 function resolveStyle(scope) {
   const style = { foreground: theme.colors['editor.foreground'] };
   for (const selector of selectors) {
@@ -44,6 +55,10 @@ function resolveStyle(scope) {
   return style;
 }
 
+/**
+ * Escape untrusted scope/provider text before embedding it in generated SVG.
+ * @type {(value: unknown) => string}
+ */
 const escapeXml = (value) =>
   String(value)
     .replaceAll('&', '&amp;')
@@ -51,6 +66,11 @@ const escapeXml = (value) =>
     .replaceAll('>', '&gt;')
     .replaceAll('"', '&quot;');
 
+/**
+ * Render deterministic palette/scope probes for the checked-in synthetic baseline.
+ *
+ * @returns {string} SVG evidence; this is not a real-editor screenshot.
+ */
 function renderSvg() {
   const width = 1280;
   const headerHeight = 112;
@@ -99,6 +119,12 @@ function renderSvg() {
   ].join('\n');
 }
 
+/**
+ * Read WebP canvas dimensions from supported VP8, VP8L, or VP8X headers.
+ *
+ * @param {Buffer} buffer WebP asset bytes.
+ * @returns {{width: number, height: number}} Pixel dimensions recorded in the asset manifest.
+ */
 function readWebpDimensions(buffer) {
   if (
     buffer.toString('ascii', 0, 4) !== 'RIFF' ||
@@ -130,6 +156,11 @@ function readWebpDimensions(buffer) {
   throw new Error(`Unsupported WebP chunk ${chunk}`);
 }
 
+/**
+ * Hash reviewed preview assets and record their dimensions without rewriting images.
+ *
+ * @returns {Promise<string>} Serialized deterministic asset manifest.
+ */
 async function renderAssetManifest() {
   const languagesByAsset = new Map();
   for (const item of compatibility.cases) {

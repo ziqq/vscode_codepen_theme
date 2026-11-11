@@ -1,3 +1,8 @@
+/**
+ * @file Locate exact VS Code versions and their built-in grammars for reproducible checks.
+ * Local downloads are opt-in and macOS executable naming is normalized here.
+ */
+
 import { execFile } from 'node:child_process';
 import { access } from 'node:fs/promises';
 import path from 'node:path';
@@ -9,6 +14,14 @@ import {
 
 const execFileAsync = promisify(execFile);
 
+/**
+ * Locate the requested VS Code binary and validate explicit overrides.
+ * macOS caches may expose either the historical Electron name or the newer Code name.
+ *
+ * @throws {Error} When downloads are disallowed, an override has the wrong version, or the binary is absent.
+ * @param {string} version Exact editor version required by the test.
+ * @returns {Promise<string>} Absolute editor executable path.
+ */
 export async function vscodeExecutable(version) {
   if (process.env.CODEPEN_VSCODE_EXECUTABLE) {
     const executable = path.resolve(process.env.CODEPEN_VSCODE_EXECUTABLE);
@@ -46,6 +59,12 @@ export async function vscodeExecutable(version) {
   return executable;
 }
 
+/**
+ * Find built-in language extensions relative to a platform-specific editor binary.
+ *
+ * @param {string} executable Absolute VS Code executable path.
+ * @returns {Promise<string>} Absolute built-in extensions directory.
+ */
 export async function vscodeBuiltinExtensions(executable) {
   const directory = path.dirname(executable);
   const candidates = [
@@ -68,6 +87,14 @@ export async function vscodeBuiltinExtensions(executable) {
   );
 }
 
+/**
+ * Run an editor executable with bounded captured output and caller-supplied process options.
+ *
+ * @param {string} executable Editor or CLI executable.
+ * @param {string[]} args Arguments passed without shell interpolation.
+ * @param {import('node:child_process').ExecFileOptions} [options] Child-process overrides.
+ * @returns {Promise<{stdout: string | Buffer, stderr: string | Buffer}>} Captured process output.
+ */
 export async function runVSCode(executable, args, options = {}) {
   return execFileAsync(executable, args, {
     maxBuffer: 10 * 1024 * 1024,

@@ -1,3 +1,8 @@
+/**
+ * @file Conservative classifiers for configuration and markup-oriented formats.
+ * Stateful scanners preserve quoted scalars, multiline boundaries, and substitutions.
+ */
+
 const { Spans } = require('./spans');
 const { addComment } = require('./comments');
 
@@ -5,6 +10,13 @@ const { addComment } = require('./comments');
 // used for programming languages. Their compact refiners model data keys,
 // substitutions, commands, and references directly from source structure.
 
+/**
+ * Visit lines with their original UTF-16 start offsets, preserving newline accounting.
+ *
+ * @param {string} source Complete document text.
+ * @param {(line: string, offset: number) => void} callback Receives each line without its newline and its source offset.
+ * @returns {void} No source normalization is performed.
+ */
 function lines(source, callback) {
   let offset = 0;
   for (const line of source.split('\n')) {
@@ -13,12 +25,26 @@ function lines(source, callback) {
   }
 }
 
+/**
+ * Trim whitespace from a source-relative range without allocating a substring.
+ *
+ * @param {string} text Text containing the range.
+ * @param {number} start Inclusive start offset.
+ * @param {number} [end=text.length] Exclusive end offset.
+ * @returns {{start: number, end: number}} Trimmed half-open range.
+ */
 function trimRange(text, start, end = text.length) {
   while (start < end && /\s/.test(text[start])) start++;
   while (end > start && /\s/.test(text[end - 1])) end--;
   return { start, end };
 }
 
+/**
+ * Find the first unescaped configuration assignment separator.
+ *
+ * @param {string} line INI/properties line to scan.
+ * @returns {number} Separator offset, or -1 when no unescaped separator exists.
+ */
 function separatorAt(line) {
   let escaped = false;
   for (let index = 0; index < line.length; index++) {
@@ -77,6 +103,12 @@ function refineConfig(source, language) {
   return spans.finish();
 }
 
+/**
+ * Distinguish Dockerfile directives, build bindings, stages, and substitutions.
+ *
+ * @param {string} source Document text; offsets are UTF-16 code units.
+ * @returns {import('./spans').Span[]} Sorted, non-overlapping foreground refinements.
+ */
 function refineDockerfile(source) {
   const spans = new Spans(source.length);
   const stages = new Set();
@@ -131,6 +163,12 @@ function refineDockerfile(source) {
   return spans.finish();
 }
 
+/**
+ * Refine bibliography entry bindings, field members, and literal values.
+ *
+ * @param {string} source Document text; offsets are UTF-16 code units.
+ * @returns {import('./spans').Span[]} Sorted, non-overlapping foreground refinements.
+ */
 function refineBibtex(source) {
   const spans = new Spans(source.length);
   for (const match of source.matchAll(/@(\w+)\s*\{\s*([^,\s]+)/g)) {
@@ -146,6 +184,13 @@ function refineBibtex(source) {
   return spans.finish();
 }
 
+/**
+ * Mask LaTeX comments while retaining original source offsets.
+ *
+ * @param {string} source LaTeX document.
+ * @param {import('./spans').Spans} spans Collector receiving the masked regions' foregrounds.
+ * @returns {string} Offset-preserving text for matching executable LaTeX syntax.
+ */
 function maskLatex(source, spans) {
   return source.replace(/%[^\n]*/g, (text, at) => {
     addComment(spans, source, at, at + text.length);
@@ -153,6 +198,12 @@ function maskLatex(source, spans) {
   });
 }
 
+/**
+ * Refine LaTeX commands, environments, references, and math fragments.
+ *
+ * @param {string} source Document text; offsets are UTF-16 code units.
+ * @returns {import('./spans').Span[]} Sorted, non-overlapping foreground refinements.
+ */
 function refineLatex(source) {
   const spans = new Spans(source.length);
   const masked = maskLatex(source, spans);
@@ -179,6 +230,12 @@ function refineLatex(source) {
   return spans.finish();
 }
 
+/**
+ * Refine WebAssembly text declarations, instructions, labels, and references.
+ *
+ * @param {string} source Document text; offsets are UTF-16 code units.
+ * @returns {import('./spans').Span[]} Sorted, non-overlapping foreground refinements.
+ */
 function refineWat(source) {
   const spans = new Spans(source.length);
   const masked = source.replace(/;;[^\n]*|\(;[\s\S]*?(?:;\)|$)|"(?:\\.|[^"\\])*(?:"|$)/g,
@@ -188,6 +245,10 @@ function refineWat(source) {
       return text.replace(/[^\n]/g, ' ');
     });
   const declarations = new Set();
+  /**
+   * Record a WAT binding and its source offset before resolving later references.
+   * @type {(at: number, name: string) => void}
+   */
   const addDeclaration = (at, name) => {
     spans.add(at, at + name.length, 'blue', 60);
     declarations.add(at);
@@ -233,7 +294,17 @@ function refineToml(source) {
   const stack = [];
   let expectKey = true;
   let index = 0;
+  /**
+   * Find the next newline or the document end without slicing the TOML source.
+   * @type {(at: number) => number}
+   */
   const lineEnd = (at) => { const end = source.indexOf('\n', at); return end < 0 ? source.length : end; };
+  /**
+   * Find the end of a quoted TOML value, accepting incomplete editor input.
+   *
+   * @param {number} at Opening quote offset in the enclosing source.
+   * @returns {number} Exclusive closing offset, newline boundary, or document end.
+   */
   function stringEnd(at) {
     const quote = source[at];
     const triple = source.startsWith(quote.repeat(3), at);
@@ -253,6 +324,13 @@ function refineToml(source) {
   }
   let lastKey = '';
   // Keys are bare, quoted, or dotted segments of either; each name is a member.
+  /**
+   * Consume bare, quoted, or dotted TOML keys and remember the final key name.
+   *
+   * @param {number} at First candidate key offset.
+   * @param {string} [close] Optional table-closing delimiter.
+   * @returns {number} First unconsumed offset, including an optional closing delimiter.
+   */
   function readKey(at, close) {
     let cursor = at;
     while (cursor < source.length) {
@@ -271,6 +349,13 @@ function refineToml(source) {
   }
   // Tera-style `{{ value.field | filter }}` templates (mise, Cargo generators)
   // are bindings inside the string; the braces keep the string color.
+  /**
+   * Refine Tera-style substitutions inside a TOML string without recoloring its braces.
+   *
+   * @param {number} start Inclusive value offset.
+   * @param {number} end Exclusive value offset.
+   * @returns {void} Expression spans are added to the enclosing TOML collector.
+   */
   function templates(start, end) {
     const text = source.slice(start, end);
     for (const match of text.matchAll(/\{\{(.*?)\}\}/g)) {
@@ -288,6 +373,13 @@ function refineToml(source) {
   // element, nested strings, and operators take their code roles.
   const exprKeywords = new Set(['true', 'false', 'nil', 'and', 'or', 'not', 'in', 'matches',
     'contains', 'startsWith', 'endsWith', 'let', 'if', 'else']);
+  /**
+   * Classify mise expr-lang code inside a scalar value rather than as ordinary string text.
+   *
+   * @param {number} start Inclusive value offset.
+   * @param {number} end Exclusive value offset.
+   * @returns {void} Expression spans are added to the enclosing TOML collector.
+   */
   function expression(start, end) {
     spans.add(start, end, 'white', 55);
     let cursor = start;
@@ -360,6 +452,13 @@ function refineToml(source) {
   return spans.finish();
 }
 
+/**
+ * Route data and markup formats to their bounded lexical classifiers.
+ *
+ * @param {string} source Document text; offsets are UTF-16 code units.
+ * @param {string} language VS Code language identifier used to select syntax rules.
+ * @returns {import('./spans').Span[]} Sorted, non-overlapping foreground refinements.
+ */
 function refineFormat(source, language) {
   if (language === 'toml') return refineToml(source);
   if (language === 'ini' || language === 'properties') return refineConfig(source, language);

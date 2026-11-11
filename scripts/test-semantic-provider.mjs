@@ -1,3 +1,8 @@
+/**
+ * @file Run the TypeScript language service bundled with the requested VS Code version.
+ * TSX dependency stubs keep programs valid without altering expected semantic colors.
+ */
+
 import assert from 'node:assert/strict';
 import { readFile, writeFile } from 'node:fs/promises';
 import { createRequire } from 'node:module';

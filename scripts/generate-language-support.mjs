@@ -1,3 +1,8 @@
+/**
+ * @file Generate the provider support table from compatibility metadata.
+ * Check mode fails on drift; write mode updates only the generated table.
+ */
+
 import { readFile, writeFile } from 'node:fs/promises';
 
 const mode = process.argv[2] ?? '--check';

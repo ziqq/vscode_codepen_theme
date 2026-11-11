@@ -1,3 +1,8 @@
+/**
+ * @file Query Marketplace metadata and report drift from pinned language-provider versions.
+ * This check reports upstream changes without rewriting the compatibility contract.
+ */
+
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 
 if (
@@ -19,6 +24,10 @@ const providers = compatibility.providers.filter(
 const endpoint =
   'https://marketplace.visualstudio.com/_apis/public/gallery/extensionquery';
 
+/**
+ * Read one Marketplace extension version without changing the pinned contract.
+ * @type {(id: string) => Promise<object>}
+ */
 const queryProvider = async (id) => {
   const response = await fetch(endpoint, {
     method: 'POST',

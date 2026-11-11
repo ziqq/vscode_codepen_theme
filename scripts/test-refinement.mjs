@@ -1,3 +1,8 @@
+/**
+ * @file Check independently marked foreground ranges and incomplete-edit recovery.
+ * Fixtures use source offsets so whole identifiers, not sampled pixels, must match.
+ */
+
 import assert from 'node:assert/strict';
 import { createRequire } from 'node:module';
 import { readFile, writeFile } from 'node:fs/promises';
