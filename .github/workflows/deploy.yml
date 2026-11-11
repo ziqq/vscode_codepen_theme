@@ -78,6 +78,9 @@ jobs:
       - name: Check JavaScript Syntax
         run: npm run lint
 
+      - name: Build generated runtime
+        run: npm run build
+
       - name: Validate Source
         run: npm test
 

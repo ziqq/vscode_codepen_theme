@@ -70,6 +70,6 @@ The scheduled `Provider Compatibility` workflow installs the VSIX across the gen
 
 The matrix checks final source-span colors, not only scope presence, and runs the bundled TypeScript language service against JS/TS semantic fixtures. It does not prove activation of every third-party language server. Optional local Dart semantic verification requires an installed Dart-Code extension and SDK; see the [audit commands](https://github.com/ziqq/vscode_codepen_theme/blob/master/compatibility/TWILIGHT.md#verification).
 
-Screenshot smoke tests cover both TextMate-only and JS/TS semantic modes, retain bracket-pair colorization, and check exact rendered TSX spans.
+Screenshot smoke tests cover both TextMate-only and JS/TS semantic modes, retain bracket-pair colorization, and check exact rendered TSX spans. These runs disable syntax refinement to isolate provider output: the Dart grammar emits `@override` as one yellow token. `npm run test:refinement` and `npm run test:refinement:editor` verify the refined gray marker and yellow name separately.
 
 Ordinary local checks do not download VS Code or providers. They require `CODEPEN_VSCODE_EXECUTABLE` and cached providers. Downloads outside CI require explicit `CODEPEN_ALLOW_VSCODE_DOWNLOAD=1` or `CODEPEN_ALLOW_PROVIDER_DOWNLOAD=1` opt-in.
