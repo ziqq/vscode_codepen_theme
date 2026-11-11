@@ -1275,6 +1275,9 @@ const tokenColors = [
   colorRule('TWILIGHT STRING PARTS', color.green, [
     'string constant.other.placeholder',
     'property.value.dotenv',
+    // Dotenv 1.5.8 separates numeric values from property.value; preserve the
+    // TextMate fallback while runtime refinement still classifies numbers.
+    'constant.numeric.dotenv',
     'keyword.interpolation.begin.dotenv',
     'keyword.interpolation.end.dotenv',
     'string.interpolated.escape.just',

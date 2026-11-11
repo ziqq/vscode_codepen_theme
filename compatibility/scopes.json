@@ -257,12 +257,12 @@
       "id": "dotenv.dotenv-vscode",
       "displayName": "Dotenv Official +Vault",
       "kind": "recommended",
-      "version": "0.28.1",
+      "version": "1.5.8",
       "engine": "^1.65.0",
       "compatibility": [
         {
           "vscode": ">=1.96.0",
-          "version": "0.28.1"
+          "version": "1.5.8"
         }
       ]
     },
@@ -270,12 +270,16 @@
       "id": "golang.go",
       "displayName": "Go",
       "kind": "recommended",
-      "version": "0.57.2",
-      "engine": "^1.90.0",
+      "version": "0.59.0",
+      "engine": "^1.110.0",
       "compatibility": [
         {
-          "vscode": ">=1.96.0",
+          "vscode": ">=1.96.0 <1.110.0",
           "version": "0.57.2"
+        },
+        {
+          "vscode": ">=1.110.0",
+          "version": "0.59.0"
         }
       ]
     },
@@ -283,7 +287,7 @@
       "id": "JetBrains.kotlin-server",
       "displayName": "Kotlin by JetBrains",
       "kind": "recommended",
-      "version": "0.0.8",
+      "version": "0.0.86",
       "engine": "^1.105.1",
       "compatibility": [
         {
@@ -292,7 +296,7 @@
         },
         {
           "vscode": ">=1.105.1",
-          "version": "0.0.8"
+          "version": "0.0.86"
         }
       ]
     },
@@ -326,12 +330,12 @@
       "id": "svelte.svelte-vscode",
       "displayName": "Svelte for VS Code",
       "kind": "recommended",
-      "version": "110.3.1",
+      "version": "110.3.2",
       "engine": "^1.82.0",
       "compatibility": [
         {
           "vscode": ">=1.96.0",
-          "version": "110.3.1"
+          "version": "110.3.2"
         }
       ]
     },
@@ -352,12 +356,12 @@
       "id": "Vue.volar",
       "displayName": "Vue (Official)",
       "kind": "recommended",
-      "version": "3.3.11",
+      "version": "3.3.14",
       "engine": "^1.88.0",
       "compatibility": [
         {
           "vscode": ">=1.96.0",
-          "version": "3.3.11"
+          "version": "3.3.14"
         }
       ]
     }
