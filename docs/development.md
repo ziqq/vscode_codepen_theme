@@ -35,8 +35,9 @@ The tag workflow installs dependencies on Node.js 22, rejects any actionable npm
 audit finding, validates source and tag identity, and builds one verified VSIX.
 That same file is published to Marketplace and attached to its GitHub Release.
 GitHub release notes come from the matching CHANGELOG section in its existing
-order. Marketplace publication uses `VSCE_PAT`; GitHub release publication uses
-the workflow's `contents: write` token. Retrying an existing version skips the
+order. Marketplace publication keeps the configured OIDC trusted publishing and
+`release` environment; tags must reference a commit already on `master`. GitHub
+release publication uses the workflow's `contents: write` token. Retrying an existing version skips the
 Marketplace duplicate and replaces the matching GitHub asset.
 
 ## Daily workflow

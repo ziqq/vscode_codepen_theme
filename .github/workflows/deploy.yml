@@ -3,11 +3,10 @@ name: Deploy VS Code Extension
 on:
   push:
     tags:
-      - "v*.*.*"
-
-concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: false
+      - "v[0-9]+.[0-9]+.[0-9]+*"
+  #release:
+  #  types:
+  #    - created
 
 permissions:
   contents: read
@@ -16,8 +15,10 @@ jobs:
   deploy:
     name: "Deploy VS Code Extension"
     runs-on: ubuntu-latest
+    environment: release
     permissions:
       contents: write
+      id-token: write
     defaults:
       run:
         working-directory: ./
@@ -25,17 +26,50 @@ jobs:
     steps:
       - name: Checkout
         id: checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+
+      - name: Validate release source
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [[ "$GITHUB_REF_TYPE" != tag ]]; then
+            echo "::error::Releases require an existing tag."
+            exit 1
+          fi
+          git fetch --no-tags origin "$GITHUB_REF"
+          tag_commit="$(git rev-parse 'FETCH_HEAD^{commit}')"
+          test "$(git rev-parse HEAD)" = "$tag_commit"
+          git fetch --no-tags origin refs/heads/master
+          git merge-base --is-ancestor "$tag_commit" FETCH_HEAD
 
       - name: Install Node.js
         id: node-setup
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: 22.x
-          cache: npm
+
+      - name: Validate release tag
+        run: |
+          node <<'NODE'
+          const fs = require('node:fs');
+          const { version } = JSON.parse(fs.readFileSync('package.json', 'utf8'));
+          const changelog = fs.readFileSync('CHANGELOG.md', 'utf8');
+          const changelogVersion = changelog.match(/^##\s+(\S+)/m)?.[1];
+          if (process.env.GITHUB_REF_TYPE !== 'tag' ||
+              process.env.GITHUB_REF_NAME !== `v${version}` ||
+              changelogVersion !== version) {
+            console.error('The release tag, package.json and first changelog version must match.');
+            process.exit(1);
+          }
+          console.log(`Validated existing release tag v${version}.`);
+          NODE
 
       - name: Install Dependencies
         id: install
+        # The project lockfile supplies the audited OIDC-capable packager.
         run: npm ci
 
       - name: Audit dependencies
@@ -46,9 +80,6 @@ jobs:
 
       - name: Validate Source
         run: npm test
-
-      - name: Validate Release Tag
-        run: npm run check:release -- "${GITHUB_REF_NAME}"
 
       - name: Prepare release notes
         # Preserve the reviewed CHANGELOG order instead of generating notes from commits.
@@ -73,10 +104,8 @@ jobs:
       - name: Publish
         id: publish
         if: success() && startsWith(github.ref, 'refs/tags/')
-        # A retry can still upload the GitHub asset after Marketplace publication succeeded.
-        run: npm run deploy -- --skip-duplicate
-        env:
-          VSCE_PAT: ${{ secrets.VSCE_PAT }}
+        # Retries may finish GitHub Release publication after Marketplace succeeded.
+        run: npm run deploy -- --oidc --skip-duplicate
 
       - name: Publish GitHub Release and VSIX
         env:
@@ -92,3 +121,54 @@ jobs:
           else
             gh release create "${GITHUB_REF_NAME}" "$asset" --verify-tag --title "$title" --notes-file "$notes" --repo "${GITHUB_REPOSITORY}"
           fi
+
+  complete-issues:
+    name: Complete issues after successful publication
+    needs: [deploy]
+    if: needs.deploy.result == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+      issues: write
+    concurrency:
+      group: labels-${{ github.repository }}
+      cancel-in-progress: false
+    steps:
+      - name: Apply semantic release transition
+        uses: ziqq/actions/labeler@a991545704ba3fc43380d2b6024db3ca6935e4a7
+        with:
+          operation: release-completed
+          github-token: ${{ github.token }}
+          config-source: api
+          allow-empty: 'true'
+          allow-pattern-removal: 'true'
+          max-targets: '100'
+
+  notify:
+    name: Notify deploy result
+    needs: deploy
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout trusted notification template
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+
+      - name: Notify Discord and Telegram
+        uses: ziqq/actions/notify@ccd1a799683cd461a45d9303ac6fcb2792f8f5d2
+        with:
+          providers: discord,telegram
+          template-path: .github/notify/templates/release.md
+          variables: |
+            {
+              "status_label": ${{ toJSON(needs.deploy.result) }}
+            }
+          failure-policy: required
+          timeout-ms: "10000"
+          max-attempts: "5"
+          discord-webhooks: ${{ secrets.DISCORD_WEBHOOKS }}
+          telegram-bot-token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          telegram-targets: ${{ secrets.TELEGRAM_TARGETS }}

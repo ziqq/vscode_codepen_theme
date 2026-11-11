@@ -1,57 +1,62 @@
-name: Verify VS Code Extension
+name: Checkout VS Code Extension
 
 on:
   workflow_dispatch:
   pull_request:
     branches:
-      - main
-      - master
-      - dev
-      - develop
-    paths:
-      - ".github/workflows/**"
-      - ".gitattributes"
-      - ".gitignore"
-      - ".vscode/**"
-      - "assets/**"
-      - "compatibility/**"
-      - "samples/**"
-      - "scripts/**"
-      - "src/**"
-      - "themes/**"
-      - ".vscodeignore"
-      - "CHANGELOG.md"
-      - "docs/**"
-      - "Makefile"
-      - "MIGRATION.md"
-      - "README.md"
-      - "package.json"
-      - "package-lock.json"
-
-concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
+      - "main"
+      - "master"
+      - "dev"
+      - "develop"
+      - "feature/**"
+      - "bugfix/**"
+      - "hotfix/**"
+      - "support/**"
 
 permissions:
   contents: read
 
 jobs:
-  verify:
-    name: Verify and package
-    runs-on: ubuntu-latest
+  checkout:
+    name: "Checkout VS Code Extension"
+    strategy:
+      fail-fast: false
+      matrix:
+        os:
+          - ubuntu-latest
+          #- macos-latest
+          #- windows-latest
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        working-directory: ./
     timeout-minutes: 10
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        id: checkout
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+        #with:
+        #  sparse-checkout: |
+        #    .github
+        #    src/
+        #    *.json
+        #    *.js
+        #    *.mjs
+        #    README.md
+        #    CHANGELOG.md
 
       - name: Install Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: 22.x
-          cache: npm
 
-      - name: Install dependencies
+      - name: Install Dependencies
         run: npm ci
+
+      - name: Audit dependencies
+        run: npm audit --audit-level=low
 
       - name: Check JavaScript syntax
         run: npm run lint
@@ -59,14 +64,11 @@ jobs:
       - name: Validate source and generated theme
         run: npm test
 
-      - name: Build and validate VSIX
+      - name: Package extension
         run: npm run package
 
-      - name: Audit dependencies
-        run: npm audit --audit-level=low
-
       - name: Upload VSIX
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: codepen-theme-original-${{ github.event.pull_request.head.sha || github.sha }}
           path: build/codepen-theme-original.vsix
@@ -77,3 +79,61 @@ jobs:
     name: Full provider compatibility
     if: github.event_name == 'workflow_dispatch'
     uses: ./.github/workflows/compatibility.yml
+
+  notify:
+    name: Notify CI result
+    needs: checkout
+    continue-on-error: true
+    if: >-
+      always() &&
+      github.actor != 'dependabot[bot]' &&
+      (github.event_name != 'pull_request' ||
+      github.event.pull_request.head.repo.full_name == github.repository)
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+    env:
+      NOTIFY_DISCORD_WEBHOOKS: ${{ secrets.DISCORD_WEBHOOKS }}
+      NOTIFY_TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+      NOTIFY_TELEGRAM_TARGETS: ${{ secrets.TELEGRAM_TARGETS }}
+    steps:
+      - name: Report missing notification secrets
+        if: >-
+          env.NOTIFY_DISCORD_WEBHOOKS == '' ||
+          env.NOTIFY_TELEGRAM_BOT_TOKEN == '' ||
+          env.NOTIFY_TELEGRAM_TARGETS == ''
+        shell: bash
+        run: >-
+          echo "::warning::CI notification skipped because one or more notification secrets are not configured."
+
+      - name: Checkout trusted notification template
+        if: >-
+          env.NOTIFY_DISCORD_WEBHOOKS != '' &&
+          env.NOTIFY_TELEGRAM_BOT_TOKEN != '' &&
+          env.NOTIFY_TELEGRAM_TARGETS != ''
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          ref: ${{ github.event_name == 'pull_request' && github.event.pull_request.base.sha || github.sha }}
+
+      - name: Notify Discord and Telegram
+        if: >-
+          env.NOTIFY_DISCORD_WEBHOOKS != '' &&
+          env.NOTIFY_TELEGRAM_BOT_TOKEN != '' &&
+          env.NOTIFY_TELEGRAM_TARGETS != '' &&
+          hashFiles('.github/notify/templates/ci.md') != ''
+        uses: ziqq/actions/notify@ccd1a799683cd461a45d9303ac6fcb2792f8f5d2
+        with:
+          providers: discord,telegram
+          template-path: .github/notify/templates/ci.md
+          variables: |
+            {
+              "pub_dev_url": "",
+              "status_label": ${{ toJSON(needs.checkout.result) }}
+            }
+          failure-policy: best-effort
+          timeout-ms: "10000"
+          max-attempts: "5"
+          discord-webhooks: ${{ env.NOTIFY_DISCORD_WEBHOOKS }}
+          telegram-bot-token: ${{ env.NOTIFY_TELEGRAM_BOT_TOKEN }}
+          telegram-targets: ${{ env.NOTIFY_TELEGRAM_TARGETS }}
