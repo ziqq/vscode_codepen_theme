@@ -148,6 +148,19 @@ function addAnnotations(root, source, spans) {
     const node = stack.pop();
     stack.push(...node.namedChildren);
     if (!annotationKinds.has(node.type)) continue;
+    // Rust attributes carry their marker on the wrapper, not on the name node.
+    // Keep arguments with their own type/string roles instead of painting the list.
+    if (node.type === 'attribute' &&
+        ['attribute_item', 'inner_attribute_item'].includes(node.parent?.type)) {
+      const wrapper = node.parent;
+      const markerEnd = wrapper.startIndex + (source.startsWith('#!', wrapper.startIndex) ? 2 : 1);
+      spans.add(wrapper.startIndex, markerEnd, 'operator', 60, 'annotation');
+      const name = node.namedChildren[0];
+      if (name && ['identifier', 'scoped_identifier'].includes(name.type)) {
+        spans.add(name.startIndex, name.endIndex, 'yellow', 60, 'annotation');
+      }
+      continue;
+    }
     const marker = source.indexOf('@', node.startIndex);
     if (marker < node.startIndex || marker >= node.endIndex) continue;
     spans.add(marker, marker + 1, 'operator', 60, 'annotation');
@@ -220,6 +233,22 @@ function dartConstantDeclaration(declaration) {
     : list.type === 'static_final_declaration_list' &&
       [list.previousNamedSibling, list.previousNamedSibling?.previousNamedSibling]
         .some((child) => child?.type === 'const_builtin');
+}
+
+/**
+ * Java static-final fields and interface constants declare class-owned constants.
+ * Instance final fields remain members; uppercase spelling alone proves nothing.
+ * @param {import('web-tree-sitter').Node} declaration Bound variable declarator.
+ * @returns {boolean} Whether its storage declaration has constant field modifiers.
+ */
+function javaConstantDeclaration(declaration) {
+  const owner = ancestor(declaration, (node) =>
+    node.type === 'field_declaration' || node.type === 'constant_declaration');
+  if (!owner) return false;
+  if (owner.type === 'constant_declaration') return true;
+  const modifiers = owner.namedChildren.find((node) => node.type === 'modifiers');
+  return ['static', 'final'].every((modifier) =>
+    modifiers?.children.some((node) => node.type === modifier));
 }
 
 /**
@@ -500,7 +529,7 @@ function classify(root, source, language) {
     const declaration = ancestor(node, (item) => ['variable_declarator', 'initialized_identifier',
       'initialized_variable_definition', 'variable_declaration', 'property_declaration', 'let_declaration',
       'var_spec', 'const_spec', 'init_declarator', 'declaration', 'field_declaration',
-      'static_final_declaration'].includes(item.type));
+      'static_final_declaration', ...(language === 'java' ? ['constant_declaration'] : [])].includes(item.type));
     if (declaration && (fieldContains(declaration, 'name', node) || fieldContains(declaration, 'pattern', node) ||
         fieldContains(declaration, 'declarator', node) ||
         (parent.type === 'initialized_identifier' && firstIdentifier(parent)?.id === node.id) ||
@@ -508,7 +537,8 @@ function classify(root, source, language) {
         (parent.type === 'static_final_declaration' && firstIdentifier(parent)?.id === node.id) ||
         (parent.type === 'variable_declaration' && firstIdentifier(parent)?.id === node.id))) {
       const member = memberContext(declaration);
-      const constant = language === 'dart' && dartConstantDeclaration(declaration);
+      const constant = language === 'dart' && dartConstantDeclaration(declaration) ||
+        language === 'java' && javaConstantDeclaration(declaration);
       declare(node, constant ? 'constant' : member ? 'member' : 'variable', member ? classOf(node) : undefined);
     }
     // `abstract`/`external` Dart fields have no storage and behave like getters.
@@ -537,6 +567,15 @@ function classify(root, source, language) {
    * @returns {import('./spans').Role | undefined} Resolved role, or no refinement when the provider should decide.
    */
   function useRole(node) {
+    // A qualified class constant must win over the generic member-position role.
+    // Only a class declared in this document proves the receiver's identity.
+    if (language === 'java' && node.parent.type === 'field_access' && isField(node, 'field')) {
+      const receiver = field(node.parent, 'object');
+      const owner = receiver?.type === 'identifier' && classes.find((item) =>
+        field(item.node, 'name')?.text === receiver.text);
+      if (owner && useRole(receiver) === 'yellow' && (bindings.get(node.text) ?? []).some((entry) =>
+        entry.kind === 'constant' && entry.start === owner.start && entry.end === owner.end)) return 'blue';
+    }
     if (language === 'dart' && propertyNode(node)) {
       const selector = ancestor(node, (item) => item.type === 'selector');
       const receiver = selector?.previousNamedSibling;

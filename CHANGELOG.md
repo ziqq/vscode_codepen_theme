@@ -25,8 +25,8 @@
 - **FIXED**: runtime/type references and local bindings in JS/TS; Dart documentation, enums and callback types; Java bare fields/parameters; method/field roles across typed languages; Just aliases and Make separators
 - **FIXED**: Swift/SCSS container color leakage, C format strings, Ruby/PHP/Kotlin interpolation, dotenv values, Sass hex values and Svelte directives
 - **ADDED**: independent contextual, incomplete-edit, lifecycle and actual-editor regression checks; parser license and packaged-asset integrity checks
-- **FIXED**: Java modifiers, array types, fields and record components; Dart annotation colors; Just/Make targets and automatic Make variables
-- **FIXED**: member, type, unit and interpolation colors in C/C++, C#, Go, PHP, Python, Rust, Swift, Sass/CSS and TOML
+- **FIXED**: Java modifiers, array types, fields and record components, with blue static-final/interface constants and purple methods; Dart annotation colors; Just/Make targets and automatic Make variables
+- **FIXED**: member, type, unit and interpolation colors in C/C++, C#, Go, PHP, Python, Rust, Swift, Sass/CSS and TOML; Rust attributes have gray markers and yellow italic names, Sass mixins and directives follow CodePen, and TOML table names are yellow with white brackets
 - **ADDED**: full-source color assertions for the original 33 refinement-oriented samples, Makefile provider coverage, and multi-position Dart plus Java/Just/Make editor checks
 - **CHANGED**: apply measured classic Twilight JS/TS roles across languages: neutral type references, blue bindings, purple members, and gray operators; preserve existing TextMate decorations
 - **CHANGED**: keep bracket-pair rainbow colors from overriding syntax foregrounds and sort palette keys alphabetically

@@ -60,8 +60,8 @@
       ],
       "width": 888,
       "height": 905,
-      "bytes": 33812,
-      "sha256": "bed42075768eaf22d5b18db8d683ed2cae4ad23efc046cb305d3d9eb2243566a"
+      "bytes": 33440,
+      "sha256": "9f4255316182ca0adda887785fff3129fe5ea9ae64d8ff0b3591871493ed6cb5"
     },
     {
       "path": "assets/preview_js.webp",
@@ -70,8 +70,8 @@
       ],
       "width": 888,
       "height": 905,
-      "bytes": 37120,
-      "sha256": "6dc79b883c32638825768df97ee23cd9f891ba7e0db4bb588e55e0da854dbb62"
+      "bytes": 36318,
+      "sha256": "02c70e2fb0a4623b5f20bd14a27542773f1b3b1722a3f60acd59e8bdbc52151e"
     },
     {
       "path": "assets/preview_justfile.webp",
@@ -100,8 +100,8 @@
       ],
       "width": 888,
       "height": 905,
-      "bytes": 28906,
-      "sha256": "2ac3801c811c64979c02c238cee9551f2b55e4dea9d30f1940833e1b2cb94f76"
+      "bytes": 28926,
+      "sha256": "76e52a5edd89e782e89b7544e0b7e80e12eed9b10d04ca04f32873d3919e7b4f"
     },
     {
       "path": "assets/preview_rust_II.webp",
@@ -110,8 +110,8 @@
       ],
       "width": 888,
       "height": 905,
-      "bytes": 33002,
-      "sha256": "4036b266cc98216d1ebb6cae538e72af2ba6975d7fc0bca1a9ab4e46d9a26846"
+      "bytes": 33380,
+      "sha256": "b3efb844f97091ce00df29394a7feecf2fc0a9053556b979120122523a161de9"
     },
     {
       "path": "assets/preview_sass.webp",
@@ -120,8 +120,8 @@
       ],
       "width": 888,
       "height": 905,
-      "bytes": 31556,
-      "sha256": "943d99a21fbb9c68ed8bfdb7982c922de7b1ceb4a77fc598e0674f07773c2792"
+      "bytes": 29700,
+      "sha256": "7ee4c7f1cc1cd0b595b7df65f298d374c2bc6564feba23d8205c57eaec00fec5"
     },
     {
       "path": "assets/preview_scss.webp",
@@ -150,8 +150,8 @@
       ],
       "width": 888,
       "height": 905,
-      "bytes": 27632,
-      "sha256": "20e605a951f77705493c84b65f3e58c74745b0f3e8cc8409189e261bf1b4bbcd"
+      "bytes": 28226,
+      "sha256": "7973f3fb5153ba9c43ca631db2da106530c76788ba99d19102c0f013fa9e4ce3"
     }
   ]
 }

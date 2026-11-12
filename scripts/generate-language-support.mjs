@@ -15,7 +15,7 @@ if (!['--check', '--write'].includes(mode)) {
 const compatibility = JSON.parse(
   await readFile('compatibility/scopes.json', 'utf8'),
 );
-const languageSupportPath = 'docs/language-support.md';
+const languageSupportPath = 'docs/LANGUAGE-SUPPORT.md';
 const languageSupport = await readFile(languageSupportPath, 'utf8');
 const startMarker = '<!-- provider-table:start -->';
 const endMarker = '<!-- provider-table:end -->';

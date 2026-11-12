@@ -65,6 +65,33 @@ for (const [language, source, annotation] of [
 }
 assert.deepEqual(await refine('x'.repeat(maximumDocumentLength + 1), 'typescript'), []);
 assert.deepEqual(await refine('class Theme {}', 'plaintext'), []);
+// Sparse refinements must preserve the grammar's strings and attribute arguments.
+for (const [language, source, untouched] of [
+  ['sass', 'content: "=ignored($color) @return #abcdef"', '"=ignored($color) @return #abcdef"'],
+  ['rust', '#[derive(Debug)]\nstruct Theme {}', 'Debug'],
+]) {
+  const start = source.indexOf(untouched);
+  const spans = await refine(source, language);
+  assert.ok(!spans.some((span) => span.start < start + untouched.length && span.end > start),
+    `${language}: provider-owned token must remain untouched`);
+  assertions++;
+}
+for (const [source, marker, name] of [
+  ['#[derive(Debug)]\nstruct Theme {}', '#', 'derive'],
+  ['#![allow(dead_code)]', '#!', 'allow'],
+  ['#[tokio::test]\nasync fn run() {}', '#', 'tokio::test'],
+]) {
+  const spans = await refine(source, 'rust');
+  for (const [text, role] of [[marker, 'operator'], [name, 'yellow']]) {
+    const start = source.indexOf(text);
+    for (let offset = start; offset < start + text.length; offset++) {
+      const span = spans.find((item) => item.start <= offset && item.end > offset);
+      assert.equal(span?.role, role, 'Rust attribute marker/name foreground');
+      assert.equal(span?.fontStyle, 'annotation', 'Rust attribute typography');
+      assertions += 2;
+    }
+  }
+}
 await writeFile('build/refinement.json', `${JSON.stringify({ assertions, recoveryCases, failures, results }, null, 2)}\n`);
 if (failures.length) {
   console.error(failures.join('\n'));

@@ -2,7 +2,7 @@
 
 Version `1.0.0` intentionally removes the old registered language definitions and
 TextMate grammars. Before upgrading, install the language extensions you need from
-the [recommended language extensions table](docs/language-support.md#recommended-language-extensions).
+the [recommended language extensions table](docs/LANGUAGE-SUPPORT.md#recommended-language-extensions).
 The new private WASM parsers only refine colors; they do not restore the removed
 language registrations.
 

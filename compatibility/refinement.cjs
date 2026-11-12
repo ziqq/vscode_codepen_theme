@@ -226,7 +226,20 @@ echo «green|"\${»«blue|name»«green|}"»
   ['svelte', `<script lang="ts">class «blue|Theme» {} const «blue|theme»: «white|Theme» = new «yellow|Theme»();</script>
 <div title={«yellow|theme».«purple|name»}>{#each «yellow|items» as «blue|item», «blue|index»}<b>{«blue|item»} {«blue|index»}</b>{/each}</div>`],
   ['markdown', '```ts\nclass «blue|Theme» {}\nconst «blue|theme»: «white|Theme» = new «yellow|Theme»();\n```'],
-  ['sass', '.button\n  color: lighten«white|(»$accent, 8%«white|)»\n  content: "(not code)"'],
+  ['sass', '.button\n  color: «yellow|lighten»«operator|(»$accent, 8«operator|%»«operator|)»\n  content: "(not code)"'],
+  ['sass', `«purple|=token»«operator|(»$color«operator|)»
+  color«operator|:» $color
+  transition: color 160«yellow|ms» ease
+.preview
+  «white|+token»«operator|(»$accent«operator|)»
+  color: «orange|#96b38a»
+  padding: 1«yellow|rem» 2«orange|px»
+  &«white|:hover»
+    color: «yellow|lighten»«operator|(»$accent«white|,» 8«operator|%»«operator|)»
+«blue|@function» «yellow|token-color»($name)
+  «blue|@return» «yellow|map-get»($colors, $name)
+«gray|// =ignored($color) @return #abcdef»
+content: "=ignored($color) @return #abcdef"`],
   ['c4', 'workspace "Theme" { model { «blue|author» = person "Author"\n«blue|system» = softwareSystem "App"\n«blue|author» -> «blue|system» "Uses" } }'],
   ['typescript', `const «blue|emoji» = «green|"😀"»;\r\nfunction «blue|café»(«blue|значение»: «white|string») { return «blue|значение»; }\r\nconst «blue|𐐀» = «yellow|café»(«yellow|emoji»);`],
   ['java', `class «blue|Café» { String «purple|имя» = «green|"😀"»; String «purple|label»(String «blue|значение») { return «blue|значение» + «purple|имя»; } }`],
@@ -297,6 +310,21 @@ std::string Theme::«purple|label»(std::string «blue|prefix») { return «blue
     for («white|Theme» «blue|item» : items) use(«blue|item».«purple|name»);
   }
 }`],
+  ['java', `class «blue|Palette» {
+  static final String «blue|NAME» = "x";
+  final String «purple|instanceName» = "y";
+  static String «purple|mutableName» = "z";
+  String «purple|label»() { return «blue|NAME» + Palette.«blue|NAME» + «purple|instanceName» + «purple|mutableName»; }
+  void «purple|shadow»(Other «blue|Palette») { use(«blue|Palette».«purple|NAME»); }
+}
+interface «blue|Limits» { int «blue|SIZE» = 2; }
+class «blue|Other» { String «purple|NAME»; }`],
+  ['rust', `«operator|#»[«yellow|derive»(Debug)]
+struct «blue|Palette» { «purple|name»: String }
+«operator|#!»[«yellow|allow»(dead_code)]
+«operator|#»[«yellow|tokio::test»]
+async fn «blue|test_palette»() {}
+«operator|#»[«yellow|doc» = «green|"# is documentation"»]`],
   ['kotlin', `class «blue|Theme»
 fun «white|Theme».«purple|label»(«blue|prefix»: «white|String») = «blue|prefix»
 fun «blue|main»() { label(«purple|prefix» = value) }`],
@@ -338,7 +366,7 @@ print(«yellow|theme».«purple|name»)`],
 «purple|source»«operator|=»«green|\${»«blue|HOME»«green|}/theme`],
   ['toml', `«purple|min_version» = "2026.6.10"
 «gray|# Tools are pinned per platform.»
-[«purple|tools»]
+«white|[»«yellow|tools»«white|]»
 «purple|flutter» = { «purple|version» = "3.47.6", «purple|platforms» = { «purple|linux-x64» = { «purple|url» = "flutter_{{ «blue|version» }}.tar.xz" } } }
 «purple|version_expr» = '«yellow|fromJSON»(«blue|body»).«purple|releases» «operator||» «yellow|filter»({ «blue|#».«purple|channel» «operator|==» «green|"stable"» }) «operator||» «yellow|sortVersions»()'
 «purple|lockfile» = «yellow|true»
@@ -351,8 +379,15 @@ not = [a, key]
 «purple|owners» = [
   { «purple|name» = "a", «purple|role» = "b" },
 ]
-[[«purple|tasks».«purple|setup»]]
+«white|[[»«yellow|tasks.setup»«white|]]»
 «purple|updated» = «green|2026-09-01T12:30:00+04:00»`],
+  ['toml', `«white|[»«yellow|palette»«white|]» «gray|# header comment»
+«purple|values» = [«orange|1», «orange|2»]
+«white|[[»«yellow|providers»«white|]]»
+«purple|name» = "toml"
+«white|[»«yellow|"quoted.table".child»«white|]»
+«purple|text» = "[not a header]"
+«white|[»«yellow|unfinished»`],
   ['properties', `«purple|theme.name»«operator|=»«green|CodePen»
 «purple|theme.count»«operator|=»«orange|2»
 «purple|theme.source»«operator|=»«green|\${»«blue|base»«green|}/theme`],

@@ -38,4 +38,4 @@ before applying custom semantic and TextMate foreground overrides. Switching awa
 from both CodePen Theme variants also removes refinement decorations and stops the
 worker.
 
-See [Highlighting](highlighting.md) for the color contract and refinement boundary.
+See [Highlighting](HIGHLIGHTING.md) for the color contract and refinement boundary.

@@ -2,7 +2,7 @@
 
 Captured from the packaged **CodePen Theme Original 1.0.0** extension in **VS Code 1.135.0**, with contextual refinement enabled. These are real editor captures of the repository samples. The Italics variant uses the same colors with additional syntax italics.
 
-See [language support](language-support.md) for recommended providers and [configuration](configuration.md) for typography and highlighting controls.
+See [language support](LANGUAGE-SUPPORT.md) for recommended providers and [configuration](CONFIGURATION.md) for typography and highlighting controls.
 
 ## HTML
 

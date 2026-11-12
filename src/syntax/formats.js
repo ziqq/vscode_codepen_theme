@@ -285,7 +285,8 @@ function refineWat(source) {
   return spans.finish();
 }
 
-/** TOML keys and table names are members. Both popular TOML grammars color
+/** TOML keys are members; table headers use the CodeMirror atom role.
+ * Both popular TOML grammars color
  * strings, numbers, and booleans, but the mise extension's grammar leaves keys
  * and table names unscoped, so model them from the document structure. Strings
  * stay with the grammar so template injections such as `{{ version }}` survive. */
@@ -418,8 +419,17 @@ function refineToml(source) {
     if (/\s/.test(char)) { index++; continue; }
     if (char === '#') { const end = lineEnd(index); addComment(spans, source, index, end); index = end; continue; }
     if (expectKey && !stack.length && char === '[') {
+      const start = index;
       const array = source[index + 1] === '[';
-      index = readKey(index + (array ? 2 : 1), array ? ']]' : ']');
+      const width = array ? 2 : 1;
+      const close = array ? ']]' : ']';
+      index = readKey(index + width, close);
+      const end = source.slice(index - width, index) === close ? index - width : index;
+      // Keep table names yellow and their delimiters white, including both
+      // bracket pairs for arrays of tables.
+      spans.add(start, start + width, 'white', 55);
+      spans.add(start + width, end, 'yellow', 55);
+      if (end < index) spans.add(end, index, 'white', 55);
       expectKey = false;
       continue;
     }

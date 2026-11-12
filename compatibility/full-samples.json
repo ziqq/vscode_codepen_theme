@@ -1798,7 +1798,12 @@
         },
         {
           "line": 8,
-          "text": "160ms",
+          "text": "160",
+          "foreground": "#d0782a"
+        },
+        {
+          "line": 8,
+          "text": "ms",
           "foreground": "#d0782a"
         },
         {
@@ -1813,12 +1818,22 @@
         },
         {
           "line": 14,
-          "text": "1rem",
+          "text": "1",
+          "foreground": "#d0782a"
+        },
+        {
+          "line": 14,
+          "text": "rem",
           "foreground": "#d0782a"
         },
         {
           "line": 17,
-          "text": "8%",
+          "text": "8",
+          "foreground": "#d0782a"
+        },
+        {
+          "line": 17,
+          "text": "%",
           "foreground": "#d0782a"
         },
         {

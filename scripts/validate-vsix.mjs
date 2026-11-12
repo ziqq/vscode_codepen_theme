@@ -22,11 +22,11 @@ const files = execFileSync('unzip', ['-Z1', vsixPath], { encoding: 'utf8' })
 
 const documentationPaths = [
   'MIGRATION.md',
-  'docs/configuration.md',
-  'docs/development.md',
-  'docs/highlighting.md',
-  'docs/language-support.md',
-  'docs/screenshots.md',
+  'docs/CONFIGURATION.md',
+  'docs/DEVELOPMENT.md',
+  'docs/HIGHLIGHTING.md',
+  'docs/LANGUAGE-SUPPORT.md',
+  'docs/SCREENSHOTS.md',
 ];
 
 const requiredFiles = [

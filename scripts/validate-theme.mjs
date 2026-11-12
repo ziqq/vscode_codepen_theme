@@ -20,7 +20,7 @@ const recommendations = JSON.parse(
 const compatibility = JSON.parse(
   await readFile('compatibility/scopes.json', 'utf8'),
 );
-const languageSupport = await readFile('docs/language-support.md', 'utf8');
+const languageSupport = await readFile('docs/LANGUAGE-SUPPORT.md', 'utf8');
 
 const expectedContributionPoints = [
   'configuration',

@@ -30,9 +30,9 @@ You can also use **Extensions: Install from VSIX…** in the Command Palette. Se
 - Dart constants are blue; class fields and methods are purple. Annotation markers are gray, with yellow italic names.
 - TextMate and semantic highlighting work with the same palette in both variants.
 
-The theme uses language grammars supplied by VS Code and recommended extensions. Install the providers listed in [language support](docs/language-support.md) for languages such as Dart, Go, Vue, Svelte, and TOML. Language-server features may also require their SDKs; installing the theme does not install them.
+The theme uses language grammars supplied by VS Code and recommended extensions. Install the providers listed in [language support](docs/LANGUAGE-SUPPORT.md) for languages such as Dart, Go, Vue, Svelte, and TOML. Language-server features may also require their SDKs; installing the theme does not install them.
 
-Contextual refinement is enabled by default. See [configuration](docs/configuration.md) to change typography or highlighting settings, and [highlighting](docs/highlighting.md) for the color rules and refinement boundaries.
+Contextual refinement is enabled by default. See [configuration](docs/CONFIGURATION.md) to change typography or highlighting settings, and [highlighting](docs/HIGHLIGHTING.md) for the color rules and refinement boundaries.
 
 ## Screenshots
 
@@ -42,8 +42,8 @@ These previews show **CodePen Theme Original** from the packaged extension in VS
 
 <img src="./assets/preview_dart_II.webp" width="888" alt="Dart annotations, class fields, methods, and constructors in CodePen Theme Original">
 
-See the [full screenshot gallery](docs/screenshots.md) for HTML, SCSS, Sass, TypeScript/React, Dart, Go, Python, Rust, TOML, Java, Just, SQL, and dotenv.
+See the [full screenshot gallery](docs/SCREENSHOTS.md) for HTML, SCSS, Sass, TypeScript/React, Dart, Go, Python, Rust, TOML, Java, Just, SQL, and dotenv.
 
 ## Development
 
-The [development guide](docs/development.md) covers building the VSIX, running checks, and testing the theme in an isolated editor. The [compatibility contract](https://github.com/ziqq/vscode_codepen_theme/blob/master/compatibility/README.md) records provider versions, source fixtures, and verification boundaries.
+The [development guide](docs/DEVELOPMENT.md) covers building the VSIX, running checks, and testing the theme in an isolated editor. The [compatibility contract](https://github.com/ziqq/vscode_codepen_theme/blob/master/compatibility/README.md) records provider versions, source fixtures, and verification boundaries.

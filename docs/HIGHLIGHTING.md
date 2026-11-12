@@ -32,9 +32,13 @@ the Original themes:
 
 Color follows syntax role rather than spelling. For example, a declaration is
 blue in `class Counter`, the type reference is white in `value: Counter`, and
-the runtime/global reference is yellow in `new Counter()`. Likewise, Dart's
-`kReleaseMode` is a yellow external runtime reference, while a local binding or
-parameter is blue. A property or method remains purple.
+the runtime/global reference is yellow in `new Counter()`. Resolved Dart constants,
+local bindings, and parameters are blue; an unresolved external reference may
+retain the yellow global role. A property or method remains purple.
+
+The classic TypeScript mode treats names in `import type { CSSProperties }`
+as yellow references. In an ordinary `import { CSSProperties }`, the imported
+binding is blue. These contexts were checked again in the live CodePen editor.
 
 In the measured CodePen reference, the decorator marker is independently
 classified: `@` is `#CCCCCC`, while a decorator name uses the yellow
@@ -88,7 +92,7 @@ Properties and methods remain purple, including declarations. Other languages us
 the same standard semantic roles when their language extension supplies them.
 
 Setting semantic highlighting to `false` keeps the TextMate fallback available.
-See [Configuration](configuration.md#highlighting-controls) for the related
+See [Configuration](CONFIGURATION.md#highlighting-controls) for the related
 refinement setting.
 
 ## Contextual refinement
@@ -122,9 +126,23 @@ the live classic Twilight capture exactly; author italics remain unchanged.
 The [full-language audit](https://github.com/ziqq/vscode_codepen_theme/blob/master/compatibility/LANGUAGE-AUDIT.md)
 covers all 68 complete samples and records fixes and remaining provider limitations
 per language. Just/Make recipe targets are purple; their variables and parameters
-are blue. Java modifiers are yellow, type references white, and members purple.
+are blue. Java modifiers are yellow, type references white, and methods and
+ordinary fields purple. Static-final fields and interface constants are blue,
+including references qualified by a class declared in the same document.
 Annotation and decorator names are yellow italic, while their `@` markers are
 gray. Without refinement, separating the marker requires distinct provider tokens.
+TOML table headers such as `[palette]` and `[[providers]]` use yellow names
+and white brackets. Ordinary keys remain purple;
+brackets in array values keep their punctuation role.
+
+Rust attributes use gray `#`/`#!` markers and yellow italic attribute names;
+attribute arguments keep their own colors.
+
+Sass uses the measured CodePen Sass-mode roles: hex colors are orange, function
+names yellow, directives blue, shortcut mixin declarations purple (including the `=` in `=token`), and
+shortcut mixin calls white (including the `+` in `+token`). Operators, including parentheses and interpolation delimiters, are
+gray. Stylesheet directives retain their Sass role rather than annotation styling.
+
 The exact list of verified languages and grammars that still use generic fallback
 coverage is maintained in the
 [syntax coverage boundary](https://github.com/ziqq/vscode_codepen_theme/blob/master/compatibility/COVERAGE.md).
