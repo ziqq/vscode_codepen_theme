@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Namespaces, attributes, entities, CDATA, processing instructions, and comments. -->
+<?theme-preview mode="original"?>
+<theme xmlns="https://example.com/codepen/theme"
+       xmlns:ui="https://example.com/codepen/ui"
+       id="codepen-original"
+       dark="true">
+  <metadata version="1.0">
+    <name>CodePen Theme Original</name>
+    <description>Twilight &amp; semantic-token compatibility</description>
+  </metadata>
+
+  <palette background="#1d1e22" accent="#96b38a">
+    <token role="keyword" color="#ddca7e" italic="false" />
+    <token role="binding" color="#809bbd" italic="false" />
+    <token role="member" color="#9a8297" italic="false" />
+  </palette>
+
+  <ui:preview font-size="15">
+    <![CDATA[
+      const theme = { name: 'CodePen Theme Original' };
+      console.log(theme.name);
+    ]]>
+  </ui:preview>
+</theme>

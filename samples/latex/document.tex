@@ -1,0 +1,30 @@
+\documentclass[11pt]{article}
+\usepackage{xcolor}
+\usepackage{hyperref}
+
+% Commands, environments, math, references, and optional arguments.
+\definecolor{codepenaccent}{HTML}{96B38A}
+\newcommand{\themename}{CodePen Theme Original}
+\newcommand{\token}[2][codepenaccent]{\textcolor{#1}{\texttt{#2}}}
+
+\title{\themename}
+\author{Theme Maintainers}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+The \token{keyword} role uses $\#\mathrm{DDCA7E}$ and the
+\token[blue]{binding} role uses $\#\mathrm{809BBD}$.
+
+\begin{itemize}
+  \item Strings are green.
+  \item Members are purple.
+  \item Comments remain muted.
+\end{itemize}
+
+For the palette definition, see Section~\ref{sec:palette}.
+\section{Palette}\label{sec:palette}
+The contrast score is $\frac{L_1 + 0.05}{L_2 + 0.05}$.
+
+\end{document}

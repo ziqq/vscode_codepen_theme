@@ -1,0 +1,22 @@
+{
+  "name": "CodePen Theme Original",
+  "dark": true,
+  "version": 1,
+  "accent": "#96b38a",
+  "editor": {
+    "fontFamily": [
+      "Operator Mono Lig",
+      "Operator Mono",
+      "Monaco",
+      "monospace"
+    ],
+    "fontSize": 15,
+    "ligatures": true
+  },
+  "tokens": [
+    { "role": "keyword", "color": "#ddca7e", "italic": false },
+    { "role": "string", "color": "#96b38a", "italic": false },
+    { "role": "comment", "color": "#717790", "italic": false }
+  ],
+  "metadata": null
+}

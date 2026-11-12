@@ -1,0 +1,22 @@
+name: codepen-theme-preview
+
+services:
+  preview:
+    build:
+      context: ../..
+      dockerfile: samples/docker/Dockerfile
+      args:
+        NODE_VERSION: "22"
+    environment:
+      THEME_NAME: CodePen Theme Original
+      ACCENT: "#96b38a"
+    ports:
+      - "8080:8080"
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:8080/"]
+      interval: 30s
+      timeout: 3s
+      retries: 3
+    read_only: true
+    tmpfs:
+      - /var/cache/nginx

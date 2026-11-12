@@ -6,7 +6,9 @@ This repository uses reusable actions pinned to
 ## Extension validation and publication
 
 Pull request CI packages the extension as a VSIX using Node.js 22 and
-`@vscode/vsce@4.1.0`. The package currently has no test or lint npm scripts.
+`@vscode/vsce@4.1.0` from the project lockfile. It runs lint, tests, a zero-finding
+npm audit, package validation, and uploads the verified VSIX. A manual validation
+run additionally executes the full provider compatibility matrix.
 
 Publication runs only when an existing version tag is pushed. The tag must be
 `v<package.json version>`, and the first version in `CHANGELOG.md` must match.
@@ -17,7 +19,9 @@ The deploy job uses the `release` environment and Marketplace Trusted Publishing
 Only this job can request a GitHub OIDC token. `vsce publish --oidc` exchanges
 that token directly with Marketplace; no Microsoft Entra tenant, Azure login,
 client ID or tenant ID is required. The stored `VSCE_PAT` is preserved and is
-not used by this workflow.
+not used by this workflow. After Marketplace succeeds, the same verified VSIX is
+attached to a GitHub Release whose notes come from the matching CHANGELOG section.
+A retry skips an existing Marketplace version and replaces the GitHub asset.
 
 The Trusted Publishing policy for Marketplace publisher `ziqq` must specify:
 

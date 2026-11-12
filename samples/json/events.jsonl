@@ -1,0 +1,12 @@
+{"event":"theme_loaded","theme":"CodePen Theme Original","success":true,"duration_ms":18}
+{"event":"token_rendered","role":"keyword","color":"#ddca7e","line":12}
+{"event":"token_rendered","role":"string","color":"#96b38a","line":13}
+{"event":"token_rendered","role":"comment","color":"#717790","line":14}
+{"event":"fallback_selected","font":"Monaco","reason":null,"attempt":2}
+{"event":"preview_closed","files":["main.ts","main.dart","Makefile"],"success":true}
+{"event":"semantic_mode_changed","language":"typescriptreact","enabled":true,"tokens":15}
+{"event":"provider_checked","provider":"vscode.json","version":"1.135.0","errors":[]}
+{"event":"palette_applied","colors":{"keyword":"#ddca7e","string":"#96b38a","member":"#9a8297"}}
+{"event":"diagnostic","severity":"warning","message":"Missing provider metadata","recoverable":false}
+{"event":"timing","phases":[{"name":"parse","duration_ms":4},{"name":"decorate","duration_ms":7}],"total_ms":11}
+{"event":"session_ended","active_document":null,"open_documents":3,"reason":"completed"}

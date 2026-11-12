@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     environment: release
     permissions:
-      contents: read
+      contents: write
       id-token: write
     defaults:
       run:
@@ -69,14 +69,61 @@ jobs:
 
       - name: Install Dependencies
         id: install
+        # The project lockfile supplies the audited OIDC-capable packager.
+        run: npm ci
+
+      - name: Audit dependencies
+        run: npm audit --audit-level=low
+
+      - name: Check JavaScript Syntax
+        run: npm run lint
+
+      - name: Build generated runtime
+        run: npm run build
+
+      - name: Validate Source
+        run: npm test
+
+      - name: Prepare release notes
+        # Preserve the reviewed CHANGELOG order instead of generating notes from commits.
         run: |
-          npm ci
-          npm install -g @vscode/vsce@4.1.0
+          node --input-type=module <<'NODE'
+          import { readFileSync, writeFileSync } from 'node:fs';
+          import path from 'node:path';
+          const { version } = JSON.parse(readFileSync('package.json', 'utf8'));
+          const lines = readFileSync('CHANGELOG.md', 'utf8').split(/\r?\n/);
+          const heading = lines.indexOf(`## ${version}`);
+          if (heading < 0) throw new Error(`Missing CHANGELOG section for ${version}`);
+          const section = lines.slice(heading + 1);
+          const next = section.findIndex((line) => line.startsWith('## '));
+          const notes = section.slice(0, next < 0 ? section.length : next).join('\n').trim();
+          if (!notes) throw new Error(`Empty CHANGELOG section for ${version}`);
+          writeFileSync(path.join(process.env.RUNNER_TEMP, 'codepen-release-notes.md'), `${notes}\n`);
+          NODE
+
+      - name: Validate Package
+        run: npm run package
 
       - name: Publish
         id: publish
         if: success() && startsWith(github.ref, 'refs/tags/')
-        run: npm run deploy -- --oidc
+        # Retries may finish GitHub Release publication after Marketplace succeeded.
+        run: npm run deploy -- --oidc --skip-duplicate
+
+      - name: Publish GitHub Release and VSIX
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          # Reuse the exact package validated and published to Marketplace above.
+          asset="build/codepen-theme-original.vsix"
+          notes="${RUNNER_TEMP}/codepen-release-notes.md"
+          title="CodePen Theme Original ${GITHUB_REF_NAME}"
+          if gh release view "${GITHUB_REF_NAME}" --repo "${GITHUB_REPOSITORY}" >/dev/null 2>&1; then
+            gh release upload "${GITHUB_REF_NAME}" "$asset" --clobber --repo "${GITHUB_REPOSITORY}"
+            gh release edit "${GITHUB_REF_NAME}" --title "$title" --notes-file "$notes" --repo "${GITHUB_REPOSITORY}"
+          else
+            gh release create "${GITHUB_REF_NAME}" "$asset" --verify-tag --title "$title" --notes-file "$notes" --repo "${GITHUB_REPOSITORY}"
+          fi
 
   complete-issues:
     name: Complete issues after successful publication

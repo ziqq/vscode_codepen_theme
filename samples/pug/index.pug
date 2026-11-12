@@ -1,0 +1,24 @@
+- const theme = { name: 'CodePen Theme Original', accent: '#96b38a' }
+- const tokens = ['keyword', 'string', 'comment']
+
+//- Mixins, attributes, interpolation, loops, conditions, and embedded code.
+mixin token(name, index)
+  li.token(class=`token--${name}` data-index=index)
+    code= name
+
+doctype html
+html(lang="en")
+  head
+    title= theme.name
+    style.
+      :root { --accent: #{theme.accent}; }
+  body
+    main.theme-card(data-theme=theme.name)
+      h1(style=`color: ${theme.accent}`) #{theme.name}
+      if tokens.length
+        ul
+          each token, index in tokens
+            +token(token, index)
+      else
+        p No visible tokens
+      a(href="https://codepen.io" target="_blank") Open CodePen

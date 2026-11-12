@@ -1,19 +1,53 @@
-// A launch configuration that launches the extension inside a new window
 {
-    "version": "0.1.0",
-    "configurations": [
-        {
-            "name": "Run Extension",
-            "type": "extensionHost",
-            "request": "launch",
-            "runtimeExecutable": "${execPath}",
-            "args": [
-                "--extensionDevelopmentPath=${workspaceRoot}"
-            ],
-            "outFiles": [
-                "${workspaceFolder}/dist/**/*.js"
-            ],
-            "preLaunchTask": "${defaultBuildTask}"
-        }
-    ]
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Run Samples",
+      "type": "extensionHost",
+      "request": "launch",
+      "runtimeExecutable": "${execPath}",
+      "args": [
+        "--extensionDevelopmentPath=${workspaceFolder}",
+        "--extensionDevelopmentPath=${workspaceFolder}/.cache/codepen-theme/preview/providers/systemticks.c4-dsl-extension",
+        "--extensionDevelopmentPath=${workspaceFolder}/.cache/codepen-theme/preview/providers/dotenv.dotenv-vscode",
+        "--extensionDevelopmentPath=${workspaceFolder}/.cache/codepen-theme/preview/providers/golang.go",
+        "--extensionDevelopmentPath=${workspaceFolder}/.cache/codepen-theme/preview/providers/jetbrains.kotlin-server",
+        "--extensionDevelopmentPath=${workspaceFolder}/.cache/codepen-theme/preview/providers/nefrob.vscode-just-syntax",
+        "--extensionDevelopmentPath=${workspaceFolder}/.cache/codepen-theme/preview/providers/syler.sass-indented",
+        "--extensionDevelopmentPath=${workspaceFolder}/.cache/codepen-theme/preview/providers/svelte.svelte-vscode",
+        "--extensionDevelopmentPath=${workspaceFolder}/.cache/codepen-theme/preview/providers/tamasfe.even-better-toml",
+        "--extensionDevelopmentPath=${workspaceFolder}/.cache/codepen-theme/preview/providers/vue.volar",
+        "--extensionDevelopmentPath=${workspaceFolder}/.cache/codepen-theme/preview/providers/dart-code.dart-code",
+        "--profile-temp",
+        "--skip-welcome",
+        "--skip-release-notes",
+        "${workspaceFolder}/.cache/codepen-theme/preview/samples.code-workspace"
+      ],
+      "preLaunchTask": "preview: launch"
+    },
+    {
+      "name": "Run Samples Without Build",
+      "type": "extensionHost",
+      "request": "launch",
+      "runtimeExecutable": "${execPath}",
+      "args": [
+        "--extensionDevelopmentPath=${workspaceFolder}",
+        "--extensionDevelopmentPath=${workspaceFolder}/.cache/codepen-theme/preview/providers/systemticks.c4-dsl-extension",
+        "--extensionDevelopmentPath=${workspaceFolder}/.cache/codepen-theme/preview/providers/dotenv.dotenv-vscode",
+        "--extensionDevelopmentPath=${workspaceFolder}/.cache/codepen-theme/preview/providers/golang.go",
+        "--extensionDevelopmentPath=${workspaceFolder}/.cache/codepen-theme/preview/providers/jetbrains.kotlin-server",
+        "--extensionDevelopmentPath=${workspaceFolder}/.cache/codepen-theme/preview/providers/nefrob.vscode-just-syntax",
+        "--extensionDevelopmentPath=${workspaceFolder}/.cache/codepen-theme/preview/providers/syler.sass-indented",
+        "--extensionDevelopmentPath=${workspaceFolder}/.cache/codepen-theme/preview/providers/svelte.svelte-vscode",
+        "--extensionDevelopmentPath=${workspaceFolder}/.cache/codepen-theme/preview/providers/tamasfe.even-better-toml",
+        "--extensionDevelopmentPath=${workspaceFolder}/.cache/codepen-theme/preview/providers/vue.volar",
+        "--extensionDevelopmentPath=${workspaceFolder}/.cache/codepen-theme/preview/providers/dart-code.dart-code",
+        "--profile-temp",
+        "--skip-welcome",
+        "--skip-release-notes",
+        "${workspaceFolder}/.cache/codepen-theme/preview/samples.code-workspace"
+      ],
+      "preLaunchTask": "preview: prepare"
+    }
+  ]
 }

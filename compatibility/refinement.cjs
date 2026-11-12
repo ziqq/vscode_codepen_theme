@@ -1,0 +1,460 @@
+// Markers are independently authored role expectations, stripped before parsing.
+module.exports = [
+  ['typescript', `class «blue|Theme» { «purple|name» = 'x'; «purple|label»(«blue|prefix»: «white|string») { return «blue|prefix» + this.«purple|name»; } }
+let «blue|value»: «white|Theme» = new «yellow|Theme»();
+function «blue|run»() { for (const «blue|entry» of []) { console.«purple|log»(«blue|entry»); } }
+namespace «yellow|Palette» { export const «blue|accent» = 'x'; }
+const «blue|result» = «yellow|Palette».«purple|accent»;
+const «blue|frozen» = { x: 1 } as «yellow|const»;
+const «blue|keys» = «yellow|Object».«purple|keys»(«yellow|frozen»);`],
+  ['typescript', `const «blue|name» = 'global';
+function «blue|outer»(«blue|name»: «white|string») {
+  { const «blue|name» = 'shadow'; console.log(«blue|name»); }
+  return () => «blue|name»;
+}
+«yellow|outer»(«yellow|name»);
+type «white|Callback» = («yellow|value»: «white|string») => «white|string»;
+function «blue|valid»(«blue|value»: «white|unknown»): «blue|value» is «white|string» { return true; }
+type «white|Data» = typeof «yellow|name»;`],
+  ['javascriptreact', `const «blue|Card» = («blue|props») => <«brown|section» «yellow|title»=«green|"x"»>{«yellow|props».«purple|name»} «yellow|&amp;»</«brown|section»>;
+const «blue|values» = [1];
+const «blue|list» = «yellow|values».«purple|map»((«blue|item») => <«brown|b»>{«yellow|item»}</«brown|b»>);
+const «blue|nested» = <«brown|i»>{«yellow|values».«purple|map»((«yellow|item», «yellow|index») => <«brown|b» «yellow|key»={«yellow|index»}>{«yellow|item»}</«brown|b»>)}</«brown|i»>;`],
+  ['typescript', `type «white|Shape»<«white|T»> = { «purple|readonly» «purple|value»?: «white|T» };
+type «white|Handler» = («yellow|value»: «white|number») => «white|void»;
+type «white|Factory» = new («yellow|name»: «white|string») => «white|object»;
+import «blue|type» { «yellow|CSSProperties» } from 'react';
+type «white|Picked»<«white|T»> = { [«yellow|K» in keyof «white|T»]?: «white|T»[«white|K»] };
+const «blue|validated» = { «purple|count»: 2 } satisfies { «yellow|count»: «yellow|number» };
+type «white|Pair» = [«white|name»: «yellow|string», «yellow|count»: «yellow|number»];
+function «blue|assertData»(«blue|value»: «white|unknown»): «white|asserts» «blue|value» is «yellow|Data» {}`],
+  ['typescriptreact', `const «blue|Widget» = ({ «blue|title» }) => <«brown|span»>{«yellow|title»}</«brown|span»>;
+const «blue|List» = () => <«brown|ul»>{«yellow|items».«purple|map»((«yellow|item», «yellow|index») => <«brown|li» «yellow|key»={«yellow|index»}>{«yellow|item»}</«brown|li»>)}</«brown|ul»>;`],
+  ['javascript', `class «blue|Child» extends «yellow|Parent» { «purple|constructor»() { super(); } }
+function* «blue|items»(«blue|name») { yield «green|\`hello \${»«blue|name»«green|}\`»; }
+const «blue|value» = 'x'; const «blue|object» = { «purple|value» };
+«gray|// new Child(value), not executable code»
+const «blue|text» = «green|"class False { field }"»;`],
+  ['java', `«yellow|public» «yellow|final» «yellow|class» «blue|Theme» {
+  final «white|String» «purple|name» = "x";
+  «white|String» «purple|label»(«white|String» «blue|prefix») { return «blue|prefix» + «purple|name»; }
+  void «purple|shadow»(String «blue|name») { use(«blue|name»); use(this.«purple|name»); }
+  void «purple|run»() { «white|Theme» «blue|theme» = new «yellow|Theme»(); «blue|theme».«purple|label»("x"); }
+}`],
+  ['dart', `«gray|/// Links »«operator|[»«purple|name»«operator|]»«gray| and code »«white|\`name\`»«gray| remain comments.»
+enum «blue|Mode» { «purple|dark», «purple|light» }
+class «blue|Theme» {
+  final «white|String» «purple|name»;
+  Theme(this.«purple|name»);
+  «white|String» «purple|label»(«white|String» «blue|prefix») => «green|"$»«blue|prefix»«green| \${»«purple|name»«white|.»«purple|toLowerCase»«white|()»«green|}"»;
+  «white|T» «purple|map»«operator|<»«white|T»«operator|>»(«white|T» «white|Function»() «blue|callback») => «blue|callback»();
+}
+void «blue|main»() { final «blue|theme» = «yellow|Theme»("x"); print(«blue|theme».«purple|label»("y")); }`],
+  ['dart', `class «blue|ThemeState» {}
+class «blue|ThemeReady» extends «white|ThemeState» {}
+void «blue|main»() {
+  final «blue|fixed» = 1;
+  invoke(«purple|fixed»: «blue|fixed»);
+}`],
+  ['dart', `void «blue|build»() {
+  for (final «blue|value» in «yellow|CardListLayout».«purple|values») {
+    «yellow|print»(«blue|value»);
+  }
+}`],
+  ['dart', `class «blue|State» extends Base {
+  const State({required super.«purple|message», super.«purple|error»});
+  const factory «blue|State».«purple|idle»({required «white|Step» «purple|step», String? «purple|email»}) = «yellow|_State$Idle»;
+  factory «blue|State».«purple|plain»(int «purple|code») = «yellow|Plain»<«white|int»>.«purple|named»;
+  State.named(int «purple|count», {required «white|User» «purple|user», String «purple|name» = ''}) : «purple|label» = «purple|name», «purple|id» = «purple|user».«purple|userID», handler = («blue|item») => «blue|item» {
+    «yellow|print»(«purple|count»);
+  }
+  void «purple|run»(String «blue|text», {bool «blue|loud» = false}) {}
+}`],
+  ['dart', `class «blue|Controller» {
+  «gray|/// Creates a form for »«operator|[»«purple|user»«operator|]»«gray|.»
+  Controller({required User «purple|user»});
+
+  «gray|/// Returns »«operator|[»«white|Future»«operator|<»«white|T»«operator|?>]»«gray| from »«operator|[»«blue|handler»«operator|]»«gray|, see »«operator|[»«white|Sequential»«operator|.»«purple|run»«operator|]»«gray| or »«gray|[docs](https://dart.dev)»«gray|.»
+  Future<T?> «purple|handle»<T>(Future<T> Function() «blue|handler», {String? «blue|name»}) => handler();
+}`],
+  ['dart', `abstract base class «blue|StateBase» {
+  const StateBase({required this.«purple|message»});
+  abstract final «white|String» «purple|type»;
+  final «white|String» «purple|message»;
+  final «white|FocusNode» «purple|_focusNode» = «yellow|FocusNode»();
+  bool «yellow|operator» ==(«white|Object» «blue|other») =>
+      «yellow|identical»(this, «blue|other») || «blue|other» is StateBase && «purple|type» == «blue|other».«purple|type»;
+}`],
+  ['dart', `class «blue|FlowState» {
+  late final «white|Controller» «purple|_controller»;
+  final «white|ValueNotifier»<«white|bool»> «purple|_signingIn» = «yellow|ValueNotifier»<«white|bool»>(false);
+  void «purple|_signIn»() { final «blue|session» = «purple|_controller»; }
+  Widget «purple|build»() => Column(children: [
+    Screen(key: const «yellow|ValueKey»<«white|String»>('k'), «purple|controller»: «purple|_controller», «purple|onSucceeded»: «purple|_signIn», «purple|submitting»: «purple|_signingIn»),
+    if (a) const «yellow|SizedBox».«purple|shrink»() else const «yellow|UIBottomSpacer»(),
+  ]);
+}`],
+  ['dart', `class «blue|Widgets» {
+  final «white|OverlayEntry» «purple|scopes» = «yellow|OverlayEntry»(«purple|id»: 1);
+  «white|OverlayEntry» «purple|clone»() => «yellow|OverlayEntry»();
+}`],
+  ['dart', `sealed class «blue|CheckApplicationState» extends «white|_$CheckApplicationStateBase» {
+  const «blue|CheckApplicationState»({
+    required super.«purple|isUpdateRequired»,
+    required super.«purple|message»,
+    super.«purple|error»,
+    super.«purple|stackTrace»,
+  });
+}
+final «blue|sampleRate» = switch («yellow|Config».«purple|environment») {
+  «white|EnvironmentFlavor».«purple|development» => 1.0,
+  «white|EnvironmentFlavor».«purple|staging» => 1.0,
+  «white|EnvironmentFlavor».«purple|fake» => 1.0,
+  «white|EnvironmentFlavor».«purple|production» => 0.1,
+};`],
+  ['dart', `enum ApplicationStore {
+  appStore;
+
+  static List<ApplicationStore> resolve() {
+    if (kIsWeb) return «purple|values»;
+    return switch (defaultTargetPlatform) {
+      _ => «purple|values»,
+    };
+  }
+}`],
+  ['dart', `import 'dart:convert' as «blue|convert»;
+void «blue|read»(«white|String» «blue|contents», «white|String» «blue|_outputPath») {
+  «yellow|convert».«purple|jsonDecode»(«blue|contents»);
+  «yellow|jsonDecode»(«blue|contents»);
+  final «blue|encoder» = «yellow|JsonEncoder».«purple|withIndent»(«green|'  '»);
+  final «blue|output» = «yellow|File»(«blue|_outputPath»);
+  final «blue|theme» = «yellow|Theme».«purple|new»();
+  try {} on «white|FormatException» catch («blue|error», «blue|stackTrace») {
+    throw «yellow|FormatException»(«green|'Invalid JSON at \${»«blue|error»«white|.»«purple|message»«green|}: $»«blue|stackTrace»«green|'»);
+  }
+  if (output == «yellow|null») encoder.«purple|convert»(theme);
+}
+«operator|@»«yellow|pragma»«white|(»«green|"vm:entry-point"»«white|)»
+abstract interface class «blue|Directory» implements «white|FileSystemEntity» {}`],
+  ['dart', `class ThemeReady { final ThemePalette palette; }
+String describeTheme(ThemeReady state) => switch (state) {
+  ThemeReady(:final «blue|palette») => «green|'value: \${»«blue|palette»«white|.»«purple|background»«green|}'»
+};`],
+  ['typescript', `«gray|/** Uses »«operator|[»«white|Theme»«operator|]»«gray| and »«white|\`value\`»«gray|. */»
+const «blue|value» = 1;`],
+  ['java', `«gray|/** Uses »«operator|[»«white|Theme»«operator|]»«gray| and »«white|\`value\`»«gray|. */»
+class «blue|Theme» {}`],
+  ['python', `«gray|# Uses »«operator|[»«white|Theme»«operator|]»«gray| and »«white|\`value\`»«gray|.»
+«blue|value» = 1`],
+  ['css', `«gray|/* Uses »«operator|[»«white|Theme»«operator|]»«gray| and »«white|\`value\`»«gray|. */»
+.theme { color: red; }`],
+  ['html', `«gray|<!-- Uses »«operator|[»«white|Theme»«operator|]»«gray| and »«white|\`value\`»«gray|. -->»
+<div></div>`],
+  ['go', `package main
+type «blue|Theme» struct { «purple|Name» «white|string» }
+func («blue|t» «white|Theme») «purple|Label»(«blue|prefix» «white|string») «white|string» { return «blue|prefix» + «blue|t».«purple|Name» }
+func «blue|main»() { «blue|theme» := «yellow|Theme»{«purple|Name»: "x"}; fmt.«purple|Println»(«blue|theme».«purple|Label»("y")) }`],
+  ['python', `class «blue|Theme»:
+    «purple|name»: «white|str»
+    def «purple|label»(«blue|self», «blue|prefix»: «white|str») -> «white|str»:
+        return «blue|prefix» + «blue|self».«purple|name»
+def «blue|main»():
+    «blue|theme» = «yellow|Theme»("x")
+    print(«blue|theme».«purple|label»("y"))`],
+  ['rust', `struct «blue|Theme» { «purple|name»: «white|String» }
+impl Theme { fn «purple|label»(&self, «blue|prefix»: &«white|str») -> «white|String» { «blue|prefix».«purple|to_owned»() + &self.«purple|name» } }
+fn «blue|main»() { let «blue|theme» = «yellow|Theme» { «purple|name»: "x".into() }; «blue|theme».«purple|label»("y"); }`],
+  ['cpp', `class «blue|Theme» { std::«white|string» «purple|name»;
+  std::string «purple|label»(std::string «blue|prefix») { return «blue|prefix» + «purple|name»; }
+  void «purple|shadow»(std::string «blue|name») { use(«blue|name»); use(this->«purple|name»); }
+};
+int «blue|main»() { Theme «blue|theme»("x"); «blue|theme».«purple|label»("y"); }`],
+  ['c', `const char* «blue|label»(const char* «blue|prefix») { return «blue|prefix»; }
+int «blue|main»() { const char* «blue|name» = "x"; printf(«green|"%s: %02d"», «blue|name», «orange|2»); return 0; }`],
+  ['csharp', `record «blue|Theme»(«white|string» «purple|Name») {
+  «white|string» «purple|Label»(«white|string» «blue|prefix») { return «blue|prefix» + «purple|Name»; }
+  void «purple|Run»() { var «blue|theme» = new «yellow|Theme»("x"); «blue|theme».«purple|Label»("y"); }
+}`],
+  ['kotlin', `data class «blue|Theme»(val «purple|name»: «white|String») {
+  fun «purple|label»(«blue|prefix»: «white|String»): «white|String» = «green|"$»«blue|prefix»«green| \${»«purple|name»«white|.»«purple|lowercase»«white|()»«green|}"»
+}
+fun «blue|main»() { val «blue|theme» = «yellow|Theme»("x"); println(«blue|theme».«purple|label»("y")) }`],
+  ['swift', `struct «blue|Theme» {
+  let «purple|name»: «white|String»
+  func «purple|label»(«blue|prefix»: «white|String») -> «white|String» { return «blue|prefix» + «purple|name» }
+}
+func «blue|main»() { let «blue|theme» = «yellow|Theme»(name: "x"); print(«blue|theme».«purple|label»(prefix: "y")) }`],
+  ['ruby', `class «blue|Theme»
+  def «purple|label»(«blue|prefix»)
+    «green|"#{»«blue|prefix»«green|}: #{»«purple|@name»«green|}"»
+  end
+end
+def «purple|helper»(«blue|value»)
+  «blue|value»
+end`],
+  ['php', `<?php class «blue|Theme» {
+  function «purple|__construct»(public «white|string» $«purple|name») {}
+  function «purple|label»(«white|string» $«blue|prefix»): «white|string» { return «green|"$»«blue|prefix»«green| {»$«yellow|this»->«purple|name»«green|}"»; }
+}
+function «blue|main»() { $«blue|theme» = new «yellow|Theme»("x"); $«blue|theme»->«purple|label»("y"); «yellow|main»(); }`],
+  ['just', `«blue|name» := "world"
+«purple|build» «blue|who»=«blue|name»:
+    echo «green|{{»«yellow|uppercase»«white|(»«blue|who»«white|)»«green|}}»
+alias «purple|b» := «purple|build»
+«purple|all»: («purple|build» «blue|name»)
+`],
+  ['makefile', `«blue|NAME» := hi
+«purple|all»: $(«blue|OBJECTS») «operator||» «purple|build»
+\t@echo "$(«blue|NAME») $@"
+«purple|build»:
+\t@mkdir -p build
+`],
+  ['sql', `«yellow|SELECT» «purple|name» FROM tokens WHERE «purple|active» = «yellow|TRUE» AND «purple|deleted» = «yellow|FALSE»;`],
+  ['dotenv', `«blue|MODE»=«white|dark»
+«blue|COUNT»=«orange|42»
+«blue|ENABLED»=«orange|true»
+«blue|EMPTY»=
+«blue|VALUE»=«green|"\${»«blue|MODE»«green|} \${»«blue|COUNT»«green|}"»
+«blue|LITERAL»=«green|'\${MODE}'»
+«blue|HASH»=«green|"# not comment"» «gray|# comment»`],
+  ['shellscript', `«blue|name»="world"
+echo «green|"\${»«blue|name»«green|}"»
+`],
+  ['html', `<script>class «blue|Theme» {} const «blue|theme» = new «yellow|Theme»(); function «blue|label»(«blue|value») { return «blue|value»; } «yellow|label»(«yellow|theme»);</script>`],
+  ['vue', `<script setup lang="ts">class «blue|Theme» {} const «blue|theme»: «white|Theme» = new «yellow|Theme»(); function «blue|label»(«blue|value»: «white|string») { return «blue|value»; }</script>
+<template><div :title="«yellow|label»('x')">{{ «yellow|theme».«purple|name» }}<b v-for="(«blue|item», «blue|index») in «yellow|items»">{{ «blue|item» }} {{ «blue|index» }}</b></div></template>`],
+  ['svelte', `<script lang="ts">class «blue|Theme» {} const «blue|theme»: «white|Theme» = new «yellow|Theme»();</script>
+<div title={«yellow|theme».«purple|name»}>{#each «yellow|items» as «blue|item», «blue|index»}<b>{«blue|item»} {«blue|index»}</b>{/each}</div>`],
+  ['markdown', '```ts\nclass «blue|Theme» {}\nconst «blue|theme»: «white|Theme» = new «yellow|Theme»();\n```'],
+  ['sass', '.button\n  color: «yellow|lighten»«operator|(»$accent, 8«operator|%»«operator|)»\n  content: "(not code)"'],
+  ['sass', `«purple|=token»«operator|(»$color«operator|)»
+  color«operator|:» $color
+  transition: color 160«yellow|ms» ease
+.preview
+  «white|+token»«operator|(»$accent«operator|)»
+  color: «orange|#96b38a»
+  padding: 1«yellow|rem» 2«orange|px»
+  &«white|:hover»
+    color: «yellow|lighten»«operator|(»$accent«white|,» 8«operator|%»«operator|)»
+«blue|@function» «yellow|token-color»($name)
+  «blue|@return» «yellow|map-get»($colors, $name)
+«gray|// =ignored($color) @return #abcdef»
+content: "=ignored($color) @return #abcdef"`],
+  ['c4', 'workspace "Theme" { model { «blue|author» = person "Author"\n«blue|system» = softwareSystem "App"\n«blue|author» -> «blue|system» "Uses" } }'],
+  ['typescript', `const «blue|emoji» = «green|"😀"»;\r\nfunction «blue|café»(«blue|значение»: «white|string») { return «blue|значение»; }\r\nconst «blue|𐐀» = «yellow|café»(«yellow|emoji»);`],
+  ['java', `class «blue|Café» { String «purple|имя» = «green|"😀"»; String «purple|label»(String «blue|значение») { return «blue|значение» + «purple|имя»; } }`],
+  ['dart', `class «blue|Theme» { String «purple|name» = 'x'; void «purple|run»(String «blue|name») { print(«blue|name»); print(this.«purple|name»); } }`],
+  ['makefile', `«blue|NAME» := hi
+«purple|build»:
+\t@echo «green|"name: »$(«blue|NAME»)«green|"» «blue|$@» «blue|$<»
+`],
+  ['java', `record «blue|Token»(String «purple|name», String «purple|color») { String «purple|label»() { return «purple|name» + «purple|color»; } }`],
+  ['go', `«yellow|package» main
+«yellow|type» «blue|Theme» struct { «purple|Name» «white|string» }`],
+  ['rust', `fn «blue|label»(«blue|name»: &«white|str») -> «white|String» { «purple|format!»(«green|"{name}: {}"», «orange|2») }`],
+  ['dart', `class «blue|Theme» { «operator|@»«yellow|override» String «purple|toString»() => 'x'; }`],
+  ['java', `«operator|@»«yellow|Deprecated» class «blue|Theme» {}`],
+  ['kotlin', `«operator|@»«yellow|Deprecated»("old") class «blue|Theme»`],
+  ['python', `«operator|@»«yellow|dataclass»(frozen=True)\nclass «blue|Theme»: pass`],
+  ['swift', `«operator|@»«yellow|available»(iOS 17, *)\nstruct «blue|Theme» {}`],
+  ['typescript', `«operator|@»«yellow|sealed»\nclass «blue|Theme» {}`],
+  ['dart', `final class AppReviewService {
+  static const String «blue|appStoreID» = '6829682154';
+  static const int «blue|maxFeedbackLength» = 4096;
+  static const Duration «blue|_interval» = Duration(days: 15);
+  static const String «blue|_prefix» = 'app_review';
+  static const String «blue|_firstUseKey» = '$«blue|_prefix».first_use';
+  static const String «blue|_openingsKey» = 'app_review.openings';
+  final dynamic «purple|_sharedPreferences»;
+  bool «purple|_requesting» = false;
+  static final int «purple|cached» = 1;
+  AppReviewService(this.«purple|_sharedPreferences»);
+  Future<void> «purple|recordLaunch»() async {
+    if (await «purple|_sharedPreferences».«purple|getInt»(«blue|_firstUseKey») != null) return;
+    await «purple|_sharedPreferences».«purple|setInt»(«blue|_firstUseKey», DateTime.now().millisecondsSinceEpoch);
+  }
+  Future<void> «purple|recordCardOpened»() async {
+    final «blue|openings» = await «purple|_sharedPreferences».«purple|getInt»(«blue|_openingsKey») ?? 0;
+    await «purple|_sharedPreferences».«purple|setInt»(«blue|_openingsKey», «blue|openings» + 1);
+  }
+  String «purple|read»() => AppReviewService.«blue|appStoreID»;
+}
+String «blue|readID»() => AppReviewService.«blue|appStoreID»;`],
+  ['dart', `const int «blue|top» = 1;
+class Constants {
+  static const int «blue|first» = 1, «blue|second» = 2;
+  int «purple|read»() { const int «blue|local» = 3; return «blue|top» + «blue|first» + «blue|second» + «blue|local»; }
+  int «purple|shadow»(int «blue|first») => «blue|first»;
+  int «purple|property»(dynamic «blue|other») => «blue|other».«purple|first»;
+}`],
+  ['dart', `class «blue|Settings» {
+  static const int «blue|passwordMaxLength» = «yellow|int».«purple|fromEnvironment»('PASSWORD_MAX_LENGTH');
+  factory Settings.«purple|from»(«white|String»? «blue|environment») => switch («blue|environment»?.«purple|trim»()) { _ => Settings() };
+  static const String «blue|_appStoreID» = '1529842812';
+  String «purple|resolve»() => «blue|_appStoreID»;
+}
+abstract interface class «blue|List»<«white|E»> implements «white|Iterable»<«white|E»> {}
+final «blue|countries» = «yellow|List»<«white|String»>.«purple|unmodifiable»([]);`],
+  ['typescriptreact', `const «blue|view» = <«brown|UI.Card» «yellow|title»="x">{value.«purple|name»}</«brown|UI.Card»>;`],
+  ['javascript', `class «blue|Theme» { «yellow|get» «purple|name»() { return 'x'; } «yellow|set» «purple|name»(«blue|value») {} }
+const «blue|object» = { «purple|get»() { return 1; } };`],
+  ['rust', `fn «blue|label»() {}
+struct «blue|Theme» { «purple|name»: «white|String» }
+impl Theme { fn «purple|label»(&self) {} }
+fn «blue|main»() { «yellow|label»(); }`],
+  ['cpp', `struct «blue|Theme» { std::string «purple|name»; std::string label(std::string prefix); };
+std::string Theme::«purple|label»(std::string «blue|prefix») { return «blue|prefix» + «purple|name»; }`],
+  ['java', `class «blue|Theme» {
+  void «purple|run»() {
+    «white|String» «blue|message» = «white|String».«purple|format»("%s", "x");
+    for («white|Theme» «blue|item» : items) use(«blue|item».«purple|name»);
+  }
+}`],
+  ['java', `class «blue|Palette» {
+  static final String «blue|NAME» = "x";
+  final String «purple|instanceName» = "y";
+  static String «purple|mutableName» = "z";
+  String «purple|label»() { return «blue|NAME» + Palette.«blue|NAME» + «purple|instanceName» + «purple|mutableName»; }
+  void «purple|shadow»(Other «blue|Palette») { use(«blue|Palette».«purple|NAME»); }
+}
+interface «blue|Limits» { int «blue|SIZE» = 2; }
+class «blue|Other» { String «purple|NAME»; }`],
+  ['rust', `«operator|#»[«yellow|derive»(Debug)]
+struct «blue|Palette» { «purple|name»: String }
+«operator|#!»[«yellow|allow»(dead_code)]
+«operator|#»[«yellow|tokio::test»]
+async fn «blue|test_palette»() {}
+«operator|#»[«yellow|doc» = «green|"# is documentation"»]`],
+  ['kotlin', `class «blue|Theme»
+fun «white|Theme».«purple|label»(«blue|prefix»: «white|String») = «blue|prefix»
+fun «blue|main»() { label(«purple|prefix» = value) }`],
+  ['cuda-cpp', `struct «blue|Theme» { «white|float» «purple|accent»; };
+__global__ void «blue|render»(«white|Theme» *«blue|theme») { «blue|theme»->«purple|accent» = «orange|1.0f»; }`],
+  ['groovy', `class «blue|Theme» {
+  «white|String» «purple|name»
+  «white|String» «purple|label»(«white|String» «blue|prefix») { «green|"\${»«blue|prefix»«green|}: \${»«purple|name»«green|}"» }
+}
+new «yellow|Theme»().«purple|label»('x')`],
+  ['julia', `module «blue|ThemeKit»
+struct «blue|Theme»
+  «purple|name»::«white|String»
+end
+function «blue|label»(«blue|theme»::«white|Theme»; «blue|prefix»="x")
+  «green|"$(»«blue|prefix»«green|) $(»«blue|theme»«white|.»«purple|name»«green|)"»
+end
+end`],
+  ['lua', `local «blue|Theme» = {}
+function «yellow|Theme».«purple|new»(«blue|name»)
+  return «yellow|setmetatable»({ «purple|name» = «blue|name» }, «yellow|Theme»)
+end
+local «blue|theme» = «yellow|Theme».«purple|new»("x")
+print(«yellow|theme».«purple|name»)`],
+  ['objective-c', `@interface «blue|Theme» : NSObject
+@property NSString *«purple|name»;
+- (NSString *)«purple|label»:(NSString *)«blue|prefix»;
+@end`],
+  ['objective-cpp', `@implementation «blue|Theme»
+- (NSString *)«purple|label»:(NSString *)«blue|prefix» { return self.«purple|name»; }
+@end`],
+  ['r', `«blue|theme» <- list(«purple|name» = "x")
+«blue|label» <- function(«blue|value») paste(«blue|value»$«purple|name»)
+«yellow|label»(«yellow|theme»)`],
+  ['ini', `[«purple|theme»]
+«purple|name»«operator|=»«green|CodePen»
+«purple|enabled»«operator|=»«yellow|true»
+«purple|count»«operator|=»«orange|2»
+«purple|source»«operator|=»«green|\${»«blue|HOME»«green|}/theme`],
+  ['toml', `«purple|min_version» = "2026.6.10"
+«gray|# Tools are pinned per platform.»
+«white|[»«yellow|tools»«white|]»
+«purple|flutter» = { «purple|version» = "3.47.6", «purple|platforms» = { «purple|linux-x64» = { «purple|url» = "flutter_{{ «blue|version» }}.tar.xz" } } }
+«purple|version_expr» = '«yellow|fromJSON»(«blue|body»).«purple|releases» «operator||» «yellow|filter»({ «blue|#».«purple|channel» «operator|==» «green|"stable"» }) «operator||» «yellow|sortVersions»()'
+«purple|lockfile» = «yellow|true»
+«purple|jobs» = [«orange|4», «orange|-1.5e3», «orange|0x1F»]
+«purple|home» = '{{ «blue|env».«purple|HOME» | «yellow|lower» }}/bin'
+«purple|site».«purple|"display name"» = 'x = [y]'
+«purple|notes» = """
+not = [a, key]
+"""
+«purple|owners» = [
+  { «purple|name» = "a", «purple|role» = "b" },
+]
+«white|[[»«yellow|tasks.setup»«white|]]»
+«purple|updated» = «green|2026-09-01T12:30:00+04:00»`],
+  ['toml', `«white|[»«yellow|palette»«white|]» «gray|# header comment»
+«purple|values» = [«orange|1», «orange|2»]
+«white|[[»«yellow|providers»«white|]]»
+«purple|name» = "toml"
+«white|[»«yellow|"quoted.table".child»«white|]»
+«purple|text» = "[not a header]"
+«white|[»«yellow|unfinished»`],
+  ['properties', `«purple|theme.name»«operator|=»«green|CodePen»
+«purple|theme.count»«operator|=»«orange|2»
+«purple|theme.source»«operator|=»«green|\${»«blue|base»«green|}/theme`],
+  ['dockerfile', `ARG «blue|VERSION»=«orange|22»
+FROM node:\${«blue|VERSION»} AS «blue|build»
+LABEL «purple|theme»="CodePen"
+COPY --from=«blue|build» /src /app`],
+  ['bibtex', `@article{«blue|twilight2026»,
+  «purple|author» = {CodePen},
+  «purple|title» = {Twilight}
+}`],
+  ['latex', `\\newcommand{«blue|\\theme»}[2]{«blue|#1» + «blue|#2»}
+«yellow|\\begin»{green} «yellow|\\theme»{x}{«orange|2»} «yellow|\\end»{green}`],
+  ['tex', `\\def«blue|\\theme»#1{«yellow|\\textbf»{«blue|#1»}}`],
+  ['wat', `(module
+  (type «blue|$signature» (func))
+  (func «blue|$render» (type «white|$signature») (param «blue|$value» i32)
+    call «yellow|$helper»)
+  (export "render" (func «yellow|$render»)))`],
+  ['fsharp', `type «blue|Theme» = { «purple|Name»: «white|string» }
+type «blue|Mode» = | «purple|Original» | «purple|Italics»
+let «blue|label» «blue|prefix» «blue|theme» = «green|$"{»«blue|prefix»«green|}: {»«blue|theme»«white|.»«purple|Name»«green|}"»`],
+  ['hlsl', `cbuffer «blue|ThemeSettings» : register(b0) { float4 «purple|Accent»; };
+struct «blue|Input» { float3 «purple|position» : «purple|POSITION»; };
+float4 «blue|render»(«white|Input» «blue|input») : «purple|SV_Target» { return «blue|input».«purple|position».x + «orange|1.0»; }`],
+  ['shaderlab', `Shader "Theme" { Properties { «purple|_Accent» ("Accent", Color) = (1,1,1,1) }
+SubShader { Pass { CGPROGRAM
+float4 «blue|render»(float4 «blue|position» : «purple|POSITION») : «purple|SV_Target» { return «blue|position»; }
+ENDCG } } }`],
+  ['powershell', `class «blue|Theme» {
+  [string] «purple|$Name»
+  [string] «purple|Label»([string] «blue|$prefix») { return «green|"\${»«blue|prefix»«green|}: $(»«yellow|$this»«white|.»«purple|Name»«green|)"» }
+}
+function «blue|Show-Theme»([Theme] «blue|$theme») { «blue|$theme».«purple|Label»('x') }`],
+  ['perl', `package «blue|Theme»;
+sub «purple|label» { my «blue|$self» = shift; return «green|"»«blue|$self»«green|->{»«purple|name»«green|}"»; }
+package «blue|main»;
+my «blue|$theme» = «yellow|Theme»->«purple|new»(«purple|name» => 'x');`],
+  ['raku', `enum «blue|Mode» <«purple|original» «purple|italics»>;
+class «blue|Theme» { has Str «purple|$.name»; method «purple|label»(Str «blue|$prefix») { «green|"»«blue|$prefix»«green|: »«purple|$!name»«green|"» } }
+my «blue|$theme» = Theme.«purple|new»(«purple|name» => 'x');`],
+  ['vb', `Public Class «blue|Theme»
+  Public Property «purple|Name» As «white|String»
+  Public Function «purple|Label»(«blue|prefix» As «white|String») As «white|String»
+    Return «green|$"{»«blue|prefix»«green|}: {»«purple|Name»«green|}"»
+  End Function
+End Class`],
+  ['handlebars', `<article>{{«yellow|theme».«purple|name»}}</article>
+{{#each theme.tokens as |«blue|token» «blue|index»|}}{{«blue|token».«purple|name»}}{{/each}}
+{{helper «purple|name»=«yellow|theme».«purple|name»}}`],
+  ['jade', `- const «blue|theme» = { «purple|name»: 'x' }
+mixin «blue|token»(«blue|name»)
+  code= «blue|name»
+main.card(data-name=«yellow|theme».«purple|name»)
+  +«yellow|token»(«yellow|theme».«purple|name»)`],
+  ['bat', `:«purple|render»
+call :«purple|label»
+:«purple|label»`],
+  ['coffeescript', `class «blue|Theme»
+  constructor: («purple|@name») ->
+  «purple|label»: («blue|prefix») -> «green|"#{»«blue|prefix»«green|}: #{»«purple|@name»«green|}"»
+«blue|theme» = new Theme 'x'
+theme.«purple|label»()`],
+  ['clojure', `(defrecord «blue|Theme» [«purple|name»])
+(defprotocol «blue|Renderable» («purple|render» [value prefix]))
+(defn «blue|label» [«blue|theme»] (str «blue|theme»))
+(«yellow|label» default-theme)`],
+  ['razor', `<«brown|PageTitle»>@«purple|State».«purple|Title»</«brown|PageTitle»>
+@code { private «white|ThemeState» «purple|State» { get; } = new «yellow|ThemeState»(); }`],
+];

@@ -1,0 +1,38 @@
+$accent: #96b38a
+$surface: #2e2f39
+$background: #1d1e22
+$muted: #717790
+
+=token($color)
+  color: $color
+  transition: color 160ms ease
+
+.preview
+  color: $accent
+  background: $background
+  border: 1px solid $surface
+  padding: 1rem
+
+  &:hover
+    border-color: lighten($accent, 8%)
+
+  &__title
+    +token($accent)
+    font-weight: 700
+
+  &__token
+    color: $muted
+
+    &[data-kind='keyword']
+      color: #ddca7e
+
+@function token-color($name)
+  @return map-get(('keyword': #ddca7e, 'string': $accent, 'comment': $muted), $name)
+
+@each $name in keyword, string, comment
+  .token--#{$name}
+    color: token-color($name)
+
+@for $index from 1 through 3
+  .preview__token:nth-child(#{$index})
+    transition-delay: $index * 40ms

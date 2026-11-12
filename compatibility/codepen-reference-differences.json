@@ -1,0 +1,742 @@
+{
+  "description": "Reviewed differences between measured CodePen and TextMate, not matches. Exact spans prevent silently accepting new regressions. Semantic results are checked separately.",
+  "differences": [
+    {
+      "case": "javascript-bindings",
+      "line": 2,
+      "start": 14,
+      "text": "globalValue",
+      "expected": "#ddca7e",
+      "actual": [
+        "#809bbd"
+      ],
+      "reason": "TextMate does not encode lexical binding identity or distinguish a free function call from a member call here; semantic tokens provide the refinement."
+    },
+    {
+      "case": "javascript-bindings",
+      "line": 3,
+      "start": 13,
+      "text": "mutable",
+      "expected": "#ddca7e",
+      "actual": [
+        "#809bbd"
+      ],
+      "reason": "TextMate does not encode lexical binding identity or distinguish a free function call from a member call here; semantic tokens provide the refinement."
+    },
+    {
+      "case": "javascript-bindings",
+      "line": 4,
+      "start": 27,
+      "text": "globalValue",
+      "expected": "#ddca7e",
+      "actual": [
+        "#809bbd"
+      ],
+      "reason": "TextMate does not encode lexical binding identity or distinguish a free function call from a member call here; semantic tokens provide the refinement."
+    },
+    {
+      "case": "javascript-bindings",
+      "line": 5,
+      "start": 28,
+      "text": "globalValue",
+      "expected": "#ddca7e",
+      "actual": [
+        "#809bbd"
+      ],
+      "reason": "TextMate does not encode lexical binding identity or distinguish a free function call from a member call here; semantic tokens provide the refinement."
+    },
+    {
+      "case": "javascript-bindings",
+      "line": 6,
+      "start": 35,
+      "text": "mutable",
+      "expected": "#ddca7e",
+      "actual": [
+        "#809bbd"
+      ],
+      "reason": "TextMate does not encode lexical binding identity or distinguish a free function call from a member call here; semantic tokens provide the refinement."
+    },
+    {
+      "case": "javascript-bindings",
+      "line": 9,
+      "start": 0,
+      "text": "outer",
+      "expected": "#ddca7e",
+      "actual": [
+        "#9a8297"
+      ],
+      "reason": "TextMate does not encode lexical binding identity or distinguish a free function call from a member call here; semantic tokens provide the refinement."
+    },
+    {
+      "case": "javascript-literals",
+      "line": 4,
+      "start": 26,
+      "text": "name",
+      "expected": "#ddca7e",
+      "actual": [
+        "#809bbd"
+      ],
+      "reason": "TextMate does not encode lexical binding identity or distinguish a free function call from a member call here; semantic tokens provide the refinement."
+    },
+    {
+      "case": "javascript-destructuring",
+      "line": 2,
+      "start": 40,
+      "text": "data",
+      "expected": "#ddca7e",
+      "actual": [
+        "#809bbd"
+      ],
+      "reason": "TextMate does not encode lexical binding identity or distinguish a free function call from a member call here; semantic tokens provide the refinement."
+    },
+    {
+      "case": "javascript-destructuring",
+      "line": 4,
+      "start": 58,
+      "text": "values",
+      "expected": "#809bbd",
+      "actual": [
+        "#ddca7e"
+      ],
+      "reason": "TextMate does not encode lexical binding identity or distinguish a free function call from a member call here; semantic tokens provide the refinement."
+    },
+    {
+      "case": "javascript-destructuring",
+      "line": 6,
+      "start": 14,
+      "text": "total",
+      "expected": "#ddca7e",
+      "actual": [
+        "#809bbd"
+      ],
+      "reason": "TextMate does not encode lexical binding identity or distinguish a free function call from a member call here; semantic tokens provide the refinement."
+    },
+    {
+      "case": "javascript-builtins",
+      "line": 6,
+      "start": 16,
+      "text": "value",
+      "expected": "#ddca7e",
+      "actual": [
+        "#809bbd"
+      ],
+      "reason": "TextMate does not encode lexical binding identity or distinguish a free function call from a member call here; semantic tokens provide the refinement."
+    },
+    {
+      "case": "bindings-and-blocks",
+      "line": 2,
+      "start": 14,
+      "text": "globalValue",
+      "expected": "#ddca7e",
+      "actual": [
+        "#809bbd"
+      ],
+      "reason": "TextMate does not encode lexical binding identity or distinguish a free function call from a member call here; semantic tokens provide the refinement."
+    },
+    {
+      "case": "bindings-and-blocks",
+      "line": 3,
+      "start": 13,
+      "text": "mutable",
+      "expected": "#ddca7e",
+      "actual": [
+        "#809bbd"
+      ],
+      "reason": "TextMate does not encode lexical binding identity or distinguish a free function call from a member call here; semantic tokens provide the refinement."
+    },
+    {
+      "case": "bindings-and-blocks",
+      "line": 4,
+      "start": 27,
+      "text": "globalValue",
+      "expected": "#ddca7e",
+      "actual": [
+        "#809bbd"
+      ],
+      "reason": "TextMate does not encode lexical binding identity or distinguish a free function call from a member call here; semantic tokens provide the refinement."
+    },
+    {
+      "case": "bindings-and-blocks",
+      "line": 5,
+      "start": 28,
+      "text": "globalValue",
+      "expected": "#ddca7e",
+      "actual": [
+        "#809bbd"
+      ],
+      "reason": "TextMate does not encode lexical binding identity or distinguish a free function call from a member call here; semantic tokens provide the refinement."
+    },
+    {
+      "case": "bindings-and-blocks",
+      "line": 6,
+      "start": 35,
+      "text": "mutable",
+      "expected": "#ddca7e",
+      "actual": [
+        "#809bbd"
+      ],
+      "reason": "TextMate does not encode lexical binding identity or distinguish a free function call from a member call here; semantic tokens provide the refinement."
+    },
+    {
+      "case": "bindings-and-blocks",
+      "line": 9,
+      "start": 0,
+      "text": "outer",
+      "expected": "#ddca7e",
+      "actual": [
+        "#9a8297"
+      ],
+      "reason": "TextMate does not encode lexical binding identity or distinguish a free function call from a member call here; semantic tokens provide the refinement."
+    },
+    {
+      "case": "functions-and-methods",
+      "line": 3,
+      "start": 53,
+      "text": "inner",
+      "expected": "#ddca7e",
+      "actual": [
+        "#9a8297"
+      ],
+      "reason": "TextMate does not encode lexical binding identity or distinguish a free function call from a member call here; semantic tokens provide the refinement."
+    },
+    {
+      "case": "functions-and-methods",
+      "line": 4,
+      "start": 80,
+      "text": "x",
+      "expected": "#809bbd",
+      "actual": [
+        "#9a8297"
+      ],
+      "reason": "TextMate does not encode lexical binding identity or distinguish a free function call from a member call here; semantic tokens provide the refinement."
+    },
+    {
+      "case": "functions-and-methods",
+      "line": 6,
+      "start": 0,
+      "text": "arrow",
+      "expected": "#ddca7e",
+      "actual": [
+        "#9a8297"
+      ],
+      "reason": "TextMate does not encode lexical binding identity or distinguish a free function call from a member call here; semantic tokens provide the refinement."
+    },
+    {
+      "case": "types-and-generics",
+      "line": 2,
+      "start": 18,
+      "text": "readonly",
+      "expected": "#9a8297",
+      "actual": [
+        "#ddca7e"
+      ],
+      "reason": "Classic CodePen misclassifies this modern TypeScript/JSX construct; preserve the provider's keyword, type, or parameter role instead of copying the parser error."
+    },
+    {
+      "case": "types-and-generics",
+      "line": 4,
+      "start": 30,
+      "text": "null",
+      "expected": "#ddca7e",
+      "actual": [
+        "#ffffff"
+      ],
+      "reason": "The TypeScript grammar assigns the same builtin-type scope to object, null, and undefined in type expressions. Keep these type positions neutral."
+    },
+    {
+      "case": "types-and-generics",
+      "line": 7,
+      "start": 15,
+      "text": "identity",
+      "expected": "#ddca7e",
+      "actual": [
+        "#9a8297"
+      ],
+      "reason": "TextMate does not encode lexical binding identity or distinguish a free function call from a member call here; semantic tokens provide the refinement."
+    },
+    {
+      "case": "types-and-generics",
+      "line": 8,
+      "start": 16,
+      "text": "value",
+      "expected": "#ddca7e",
+      "actual": [
+        "#809bbd"
+      ],
+      "reason": "Classic CodePen misclassifies this modern TypeScript/JSX construct; preserve the provider's keyword, type, or parameter role instead of copying the parser error."
+    },
+    {
+      "case": "imports-and-exports",
+      "line": 4,
+      "start": 14,
+      "text": "CSSProperties",
+      "expected": "#ddca7e",
+      "actual": [
+        "#809bbd"
+      ],
+      "reason": "Classic CodePen parses import type as a binding named type. VS Code exposes the actual imported name with the same scope as other imports, so it stays blue."
+    },
+    {
+      "case": "class-members-and-inheritance",
+      "line": 6,
+      "start": 42,
+      "text": "Number",
+      "expected": "#ddca7e",
+      "actual": [
+        "#9a8297"
+      ],
+      "reason": "TextMate does not encode lexical binding identity or distinguish a free function call from a member call here; semantic tokens provide the refinement."
+    },
+    {
+      "case": "destructuring-and-rest",
+      "line": 2,
+      "start": 40,
+      "text": "data",
+      "expected": "#ddca7e",
+      "actual": [
+        "#809bbd"
+      ],
+      "reason": "TextMate does not encode lexical binding identity or distinguish a free function call from a member call here; semantic tokens provide the refinement."
+    },
+    {
+      "case": "destructuring-and-rest",
+      "line": 8,
+      "start": 19,
+      "text": "data",
+      "expected": "#ddca7e",
+      "actual": [
+        "#9a8297"
+      ],
+      "reason": "TextMate does not encode lexical binding identity or distinguish a free function call from a member call here; semantic tokens provide the refinement."
+    },
+    {
+      "case": "destructuring-and-rest",
+      "line": 8,
+      "start": 32,
+      "text": "total",
+      "expected": "#ddca7e",
+      "actual": [
+        "#9a8297"
+      ],
+      "reason": "TextMate does not encode lexical binding identity or distinguish a free function call from a member call here; semantic tokens provide the refinement."
+    },
+    {
+      "case": "literals-and-interpolation",
+      "line": 4,
+      "start": 26,
+      "text": "name",
+      "expected": "#ddca7e",
+      "actual": [
+        "#809bbd"
+      ],
+      "reason": "TextMate does not encode lexical binding identity or distinguish a free function call from a member call here; semantic tokens provide the refinement."
+    },
+    {
+      "case": "operators-and-control",
+      "line": 2,
+      "start": 35,
+      "text": "value",
+      "expected": "#809bbd",
+      "actual": [
+        "#ddca7e"
+      ],
+      "reason": "TextMate does not encode lexical binding identity or distinguish a free function call from a member call here; semantic tokens provide the refinement."
+    },
+    {
+      "case": "operators-and-control",
+      "line": 4,
+      "start": 27,
+      "text": "String",
+      "expected": "#ddca7e",
+      "actual": [
+        "#ffffff"
+      ],
+      "reason": "TextMate does not encode lexical binding identity or distinguish a free function call from a member call here; semantic tokens provide the refinement."
+    },
+    {
+      "case": "operators-and-control",
+      "line": 4,
+      "start": 42,
+      "text": " : ",
+      "expected": "#ffffff",
+      "actual": [
+        "#cccccc"
+      ],
+      "reason": "The grammar shares keyword.operator.ternary between question mark and colon; keep the common operator color."
+    },
+    {
+      "case": "mapped-and-conditional-types",
+      "line": 1,
+      "start": 20,
+      "text": "K",
+      "expected": "#ddca7e",
+      "actual": [
+        "#ffffff"
+      ],
+      "reason": "Classic CodePen misclassifies this modern TypeScript/JSX construct; preserve the provider's keyword, type, or parameter role instead of copying the parser error."
+    },
+    {
+      "case": "mapped-and-conditional-types",
+      "line": 2,
+      "start": 47,
+      "text": " : ",
+      "expected": "#ffffff",
+      "actual": [
+        "#cccccc"
+      ],
+      "reason": "The grammar shares keyword.operator.ternary between question mark and colon; keep the common operator color."
+    },
+    {
+      "case": "mapped-and-conditional-types",
+      "line": 6,
+      "start": 43,
+      "text": "count",
+      "expected": "#ddca7e",
+      "actual": [
+        "#9a8297"
+      ],
+      "reason": "Classic CodePen misclassifies this modern TypeScript/JSX construct; preserve the provider's keyword, type, or parameter role instead of copying the parser error."
+    },
+    {
+      "case": "mapped-and-conditional-types",
+      "line": 6,
+      "start": 50,
+      "text": "number",
+      "expected": "#ddca7e",
+      "actual": [
+        "#ffffff"
+      ],
+      "reason": "Classic CodePen misclassifies this modern TypeScript/JSX construct; preserve the provider's keyword, type, or parameter role instead of copying the parser error."
+    },
+    {
+      "case": "labels-switch-and-async",
+      "line": 2,
+      "start": 22,
+      "text": "task",
+      "expected": "#809bbd",
+      "actual": [
+        "#9a8297"
+      ],
+      "reason": "TextMate does not encode lexical binding identity or distinguish a free function call from a member call here; semantic tokens provide the refinement."
+    },
+    {
+      "case": "overloads-and-function-types",
+      "line": 3,
+      "start": 57,
+      "text": "String",
+      "expected": "#ddca7e",
+      "actual": [
+        "#9a8297"
+      ],
+      "reason": "TextMate does not encode lexical binding identity or distinguish a free function call from a member call here; semantic tokens provide the refinement."
+    },
+    {
+      "case": "overloads-and-function-types",
+      "line": 4,
+      "start": 17,
+      "text": "value",
+      "expected": "#ddca7e",
+      "actual": [
+        "#809bbd"
+      ],
+      "reason": "Classic CodePen misclassifies this modern TypeScript/JSX construct; preserve the provider's keyword, type, or parameter role instead of copying the parser error."
+    },
+    {
+      "case": "overloads-and-function-types",
+      "line": 6,
+      "start": 27,
+      "text": "format",
+      "expected": "#ddca7e",
+      "actual": [
+        "#809bbd"
+      ],
+      "reason": "TextMate does not encode lexical binding identity or distinguish a free function call from a member call here; semantic tokens provide the refinement."
+    },
+    {
+      "case": "tuples-arrays-and-index-types",
+      "line": 1,
+      "start": 19,
+      "text": "string",
+      "expected": "#ddca7e",
+      "actual": [
+        "#ffffff"
+      ],
+      "reason": "Classic CodePen misclassifies this modern TypeScript/JSX construct; preserve the provider's keyword, type, or parameter role instead of copying the parser error."
+    },
+    {
+      "case": "tuples-arrays-and-index-types",
+      "line": 1,
+      "start": 27,
+      "text": "count",
+      "expected": "#ddca7e",
+      "actual": [
+        "#ffffff"
+      ],
+      "reason": "Classic CodePen misclassifies this modern TypeScript/JSX construct; preserve the provider's keyword, type, or parameter role instead of copying the parser error."
+    },
+    {
+      "case": "tuples-arrays-and-index-types",
+      "line": 1,
+      "start": 34,
+      "text": "number",
+      "expected": "#ddca7e",
+      "actual": [
+        "#ffffff"
+      ],
+      "reason": "Classic CodePen misclassifies this modern TypeScript/JSX construct; preserve the provider's keyword, type, or parameter role instead of copying the parser error."
+    },
+    {
+      "case": "assertions-and-type-queries",
+      "line": 2,
+      "start": 19,
+      "text": "data",
+      "expected": "#ddca7e",
+      "actual": [
+        "#809bbd"
+      ],
+      "reason": "TextMate does not encode lexical binding identity or distinguish a free function call from a member call here; semantic tokens provide the refinement."
+    },
+    {
+      "case": "assertions-and-type-queries",
+      "line": 4,
+      "start": 18,
+      "text": "undefined",
+      "expected": "#ddca7e",
+      "actual": [
+        "#ffffff"
+      ],
+      "reason": "The TypeScript grammar assigns the same builtin-type scope to object, null, and undefined in type expressions. Keep these type positions neutral."
+    },
+    {
+      "case": "assertions-and-type-queries",
+      "line": 5,
+      "start": 13,
+      "text": "maybe",
+      "expected": "#ddca7e",
+      "actual": [
+        "#809bbd"
+      ],
+      "reason": "TextMate does not encode lexical binding identity or distinguish a free function call from a member call here; semantic tokens provide the refinement."
+    },
+    {
+      "case": "assertions-and-type-queries",
+      "line": 7,
+      "start": 37,
+      "text": "asserts",
+      "expected": "#ffffff",
+      "actual": [
+        "#ddca7e"
+      ],
+      "reason": "Classic CodePen misclassifies this modern TypeScript/JSX construct; preserve the provider's keyword, type, or parameter role instead of copying the parser error."
+    },
+    {
+      "case": "assertions-and-type-queries",
+      "line": 7,
+      "start": 54,
+      "text": "Data",
+      "expected": "#ddca7e",
+      "actual": [
+        "#ffffff"
+      ],
+      "reason": "Classic CodePen misclassifies this modern TypeScript/JSX construct; preserve the provider's keyword, type, or parameter role instead of copying the parser error."
+    },
+    {
+      "case": "computed-properties-and-symbols",
+      "line": 1,
+      "start": 12,
+      "text": "Symbol",
+      "expected": "#ddca7e",
+      "actual": [
+        "#9a8297"
+      ],
+      "reason": "TextMate does not encode lexical binding identity or distinguish a free function call from a member call here; semantic tokens provide the refinement."
+    },
+    {
+      "case": "computed-properties-and-symbols",
+      "line": 2,
+      "start": 18,
+      "text": "key",
+      "expected": "#ddca7e",
+      "actual": [
+        "#9a8297"
+      ],
+      "reason": "TextMate does not encode lexical binding identity or distinguish a free function call from a member call here; semantic tokens provide the refinement."
+    },
+    {
+      "case": "computed-properties-and-symbols",
+      "line": 2,
+      "start": 45,
+      "text": "get",
+      "expected": "#9a8297",
+      "actual": [
+        "#ddca7e"
+      ],
+      "reason": "Classic CodePen misclassifies this modern TypeScript/JSX construct; preserve the provider's keyword, type, or parameter role instead of copying the parser error."
+    },
+    {
+      "case": "computed-properties-and-symbols",
+      "line": 3,
+      "start": 14,
+      "text": "object",
+      "expected": "#ddca7e",
+      "actual": [
+        "#809bbd"
+      ],
+      "reason": "TextMate does not encode lexical binding identity or distinguish a free function call from a member call here; semantic tokens provide the refinement."
+    },
+    {
+      "case": "computed-properties-and-symbols",
+      "line": 3,
+      "start": 21,
+      "text": "key",
+      "expected": "#ddca7e",
+      "actual": [
+        "#809bbd"
+      ],
+      "reason": "TextMate does not encode lexical binding identity or distinguish a free function call from a member call here; semantic tokens provide the refinement."
+    },
+    {
+      "case": "computed-properties-and-symbols",
+      "line": 4,
+      "start": 13,
+      "text": "object",
+      "expected": "#ddca7e",
+      "actual": [
+        "#809bbd"
+      ],
+      "reason": "TextMate does not encode lexical binding identity or distinguish a free function call from a member call here; semantic tokens provide the refinement."
+    },
+    {
+      "case": "computed-properties-and-symbols",
+      "line": 5,
+      "start": 12,
+      "text": "object",
+      "expected": "#ddca7e",
+      "actual": [
+        "#809bbd"
+      ],
+      "reason": "TextMate does not encode lexical binding identity or distinguish a free function call from a member call here; semantic tokens provide the refinement."
+    },
+    {
+      "case": "computed-properties-and-symbols",
+      "line": 5,
+      "start": 33,
+      "text": "key",
+      "expected": "#809bbd",
+      "actual": [
+        "#ddca7e"
+      ],
+      "reason": "TextMate does not encode lexical binding identity or distinguish a free function call from a member call here; semantic tokens provide the refinement."
+    },
+    {
+      "case": "nested-generics-and-utilities",
+      "line": 7,
+      "start": 24,
+      "text": "name",
+      "expected": "#ddca7e",
+      "actual": [
+        "#809bbd"
+      ],
+      "reason": "Classic CodePen misclassifies this modern TypeScript/JSX construct; preserve the provider's keyword, type, or parameter role instead of copying the parser error."
+    },
+    {
+      "case": "jsx-tags-and-expressions",
+      "line": 3,
+      "start": 56,
+      "text": "style",
+      "expected": "#ddca7e",
+      "actual": [
+        "#809bbd"
+      ],
+      "reason": "TextMate does not encode lexical binding identity or distinguish a free function call from a member call here; semantic tokens provide the refinement."
+    },
+    {
+      "case": "jsx-components-and-fragments",
+      "line": 1,
+      "start": 37,
+      "text": "title",
+      "expected": "#ddca7e",
+      "actual": [
+        "#809bbd"
+      ],
+      "reason": "Classic CodePen misclassifies this modern TypeScript/JSX construct; preserve the provider's keyword, type, or parameter role instead of copying the parser error."
+    },
+    {
+      "case": "jsx-events-and-spread",
+      "line": 2,
+      "start": 23,
+      "text": "event",
+      "expected": "#809bbd",
+      "actual": [
+        "#ddca7e"
+      ],
+      "reason": "TextMate does not encode lexical binding identity or distinguish a free function call from a member call here; semantic tokens provide the refinement."
+    },
+    {
+      "case": "jsx-events-and-spread",
+      "line": 3,
+      "start": 25,
+      "text": "props",
+      "expected": "#ddca7e",
+      "actual": [
+        "#809bbd"
+      ],
+      "reason": "TextMate does not encode lexical binding identity or distinguish a free function call from a member call here; semantic tokens provide the refinement."
+    },
+    {
+      "case": "jsx-events-and-spread",
+      "line": 3,
+      "start": 41,
+      "text": "click",
+      "expected": "#ddca7e",
+      "actual": [
+        "#809bbd"
+      ],
+      "reason": "TextMate does not encode lexical binding identity or distinguish a free function call from a member call here; semantic tokens provide the refinement."
+    },
+    {
+      "case": "jsx-nested-maps",
+      "line": 3,
+      "start": 14,
+      "text": "item",
+      "expected": "#ddca7e",
+      "actual": [
+        "#809bbd"
+      ],
+      "reason": "Classic CodePen misclassifies this modern TypeScript/JSX construct; preserve the provider's keyword, type, or parameter role instead of copying the parser error."
+    },
+    {
+      "case": "jsx-nested-maps",
+      "line": 3,
+      "start": 20,
+      "text": "index",
+      "expected": "#ddca7e",
+      "actual": [
+        "#809bbd"
+      ],
+      "reason": "Classic CodePen misclassifies this modern TypeScript/JSX construct; preserve the provider's keyword, type, or parameter role instead of copying the parser error."
+    },
+    {
+      "case": "jsx-nested-maps",
+      "line": 3,
+      "start": 39,
+      "text": "index",
+      "expected": "#ddca7e",
+      "actual": [
+        "#809bbd"
+      ],
+      "reason": "Classic CodePen misclassifies this modern TypeScript/JSX construct; preserve the provider's keyword, type, or parameter role instead of copying the parser error."
+    },
+    {
+      "case": "jsx-nested-maps",
+      "line": 3,
+      "start": 47,
+      "text": "item",
+      "expected": "#ddca7e",
+      "actual": [
+        "#809bbd"
+      ],
+      "reason": "Classic CodePen misclassifies this modern TypeScript/JSX construct; preserve the provider's keyword, type, or parameter role instead of copying the parser error."
+    }
+  ]
+}

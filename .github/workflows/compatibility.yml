@@ -1,0 +1,86 @@
+name: Provider Compatibility
+
+on:
+  workflow_call:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 5 * * 1"
+
+concurrency:
+  group: provider-compatibility
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  compatibility:
+    name: VS Code and provider integration
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+
+      - name: Install Node.js
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: 22.x
+          cache: npm
+
+      - name: Restore VS Code and provider caches
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        with:
+          path: |
+            .vscode-test
+            .cache/codepen-theme/providers
+          key: ${{ runner.os }}-provider-compatibility-${{ hashFiles('compatibility/scopes.json', 'package-lock.json') }}
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build and validate VSIX
+        run: npm run package
+
+      - name: Test theme installation matrix
+        run: npm run test:vscode-versions
+        env:
+          CI: "true"
+
+      - name: Test provider tokenization matrix
+        run: npm run test:provider-matrix
+        env:
+          CI: "true"
+
+      - name: Capture real VS Code screenshots
+        run: xvfb-run -a npm run test:screenshots
+        env:
+          CI: "true"
+
+      - name: Check Marketplace provider drift
+        run: npm run check:provider-drift
+        env:
+          CI: "true"
+
+      - name: Capture semantic JS and TS screenshots
+        run: xvfb-run -a npm run test:screenshots:semantic
+        env:
+          CI: "true"
+
+      - name: Upload compatibility evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: provider-compatibility-${{ github.run_id }}
+          path: |
+            build/provider-drift.json
+            build/provider-tokenization-*.json
+            build/semantic-provider-*.json
+            build/codepen-reference-*.json
+            build/refinement*.json
+            build/vscode-version-compatibility.json
+            build/vscode-screenshots/**
+          if-no-files-found: warn
+          retention-days: 14
