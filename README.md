@@ -2,9 +2,9 @@
 
 CodePen’s classic Twilight palette for Visual Studio Code. Blue bindings and constants, purple members, warm yellow keywords, and soft green strings.
 
-[Install from Marketplace](https://marketplace.visualstudio.com/items?itemName=ziqq.codepen-theme-original) · [Explore all 68 languages](https://vscode-codepen-theme.ustinoff.dev/) · [Download VSIX](https://github.com/ziqq/vscode_codepen_theme/releases)
-
-<a href="https://vscode-codepen-theme.ustinoff.dev/#typescriptreact"><img src="./assets/preview_js.webp" width="888" alt="TypeScript and React in CodePen Theme Original"></a>
+· [Install from Marketplace](https://marketplace.visualstudio.com/items?itemName=ziqq.codepen-theme-original)<br/>
+· [Explore all 68 languages](https://vscode-codepen-theme.ustinoff.dev/)<br/>
+· [Download VSIX](https://github.com/ziqq/vscode_codepen_theme/releases)<br/>
 
 ## Install
 
@@ -60,4 +60,6 @@ Grammars come from VS Code and optional [language extensions](docs/LANGUAGE-SUPP
 
 See the [development guide](docs/DEVELOPMENT.md) for building and verifying the VSIX, and the [compatibility contract](compatibility/README.md) for provider versions and validation coverage. The gallery lives in [samples/index.html](samples/index.html), with its captures in [samples/screenshots](samples/screenshots/).
 
-Made with 🖤 by [ziqq](https://github.com/ziqq). Licensed under [Apache-2.0](LICENSE).
+Made with 🖤 by [ziqq](https://github.com/ziqq). 
+
+Licensed under [Apache-2.0](LICENSE).
