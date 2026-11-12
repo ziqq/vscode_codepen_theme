@@ -1,5 +1,9 @@
 # Syntax samples
 
+[Browse all 68 languages in the gallery](https://vscode-codepen-theme.ustinoff.dev/).
+The static page is `index.html`; its CSS and JavaScript are `gallery.css` and
+`gallery.js`, and its real VS Code captures live in `screenshots/`.
+
 Open these files in the Extension Development Host and use **Developer: Inspect Editor Tokens and Scopes** to verify CodePen colors against the active language provider.
 
 Files under `samples/` are development fixtures and are excluded from the published VSIX.
@@ -27,7 +31,8 @@ lives in `compatibility/scopes.json`.
 
 `npm run check:compatibility` rejects missing fixture files, duplicate sample
 references, and any source file added under `samples/` without a matching
-provider contract. `README.md` and `.vscode/` are the only non-fixture paths.
+provider contract. `README.md`, `.vscode/`, and the explicitly listed gallery
+files and screenshots are non-fixture paths; arbitrary new source files still fail.
 
 The scheduled Provider Compatibility workflow re-tokenizes all 68 fixtures with
 the exact provider versions from that contract. Its representative visual cases

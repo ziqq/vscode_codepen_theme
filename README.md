@@ -1,49 +1,63 @@
 # CodePen Theme Original
 
-A dark Visual Studio Code theme inspired by CodePen's classic Twilight palette. Made with 🖤 by ziqq.
+CodePen’s classic Twilight palette for Visual Studio Code. Blue bindings and constants, purple members, warm yellow keywords, and soft green strings.
 
-<img src="./assets/preview_js.webp" width="888" alt="TypeScript and React in CodePen Theme Original">
+[Install from Marketplace](https://marketplace.visualstudio.com/items?itemName=ziqq.codepen-theme-original) · [Explore all 68 languages](https://vscode-codepen-theme.ustinoff.dev/) · [Download VSIX](https://github.com/ziqq/vscode_codepen_theme/releases)
+
+<a href="https://vscode-codepen-theme.ustinoff.dev/#typescriptreact"><img src="./assets/preview_js.webp" width="888" alt="TypeScript and React in CodePen Theme Original"></a>
 
 ## Install
 
-Install [CodePen Theme Original](https://marketplace.visualstudio.com/items?itemName=ziqq.codepen-theme-original) from the Visual Studio Code Marketplace. Open **Preferences: Color Theme** and select:
+Install [CodePen Theme Original](https://marketplace.visualstudio.com/items?itemName=ziqq.codepen-theme-original), open **Preferences: Color Theme**, and choose a variant:
 
-- **CodePen Theme Original** — the classic palette without general syntax italics. Annotations and decorators retain their italic style.
-- **CodePen Theme Original Italics** — the same colors with the full italic syntax layer.
+| Theme | Style |
+| --- | --- |
+| **CodePen Theme Original** | Upright syntax with italic annotation and decorator names. |
+| **CodePen Theme Original Italics** | The same palette with the full italic syntax layer. |
 
-Version **1.0.0** requires **VS Code 1.96.0 or newer**. Upgrading from 0.12.x? Read the [migration guide](MIGRATION.md) for the language-provider changes.
+Version **1.0.0** requires **VS Code 1.96.0 or newer**. Upgrading from 0.12.x? See the [migration guide](MIGRATION.md).
 
-### Install a VSIX
-
-Download `codepen-theme-original.vsix` from [GitHub Releases](https://github.com/ziqq/vscode_codepen_theme/releases), then run:
+To install a downloaded [VSIX](https://github.com/ziqq/vscode_codepen_theme/releases):
 
 ```sh
 code --install-extension ./codepen-theme-original.vsix --force
 ```
 
-You can also use **Extensions: Install from VSIX…** in the Command Palette. Select the theme after installation.
+You can also use **Extensions: Install from VSIX…**, then select the theme.
+
+## See it in your language
+
+The [interactive gallery](https://vscode-codepen-theme.ustinoff.dev/) includes real editor captures for **all 68 verified languages and formats**, language search, enlarged previews, and links to the sample source files. Diagnostics and error indicators are hidden in the preview profile so you can see the theme clearly.
+
+| Dart | Rust |
+| --- | --- |
+| [![Dart fields, annotations and constants](./assets/preview_dart_II.webp)](https://vscode-codepen-theme.ustinoff.dev/#dart) | [![Rust fields and attributes](./assets/preview_rust_I.webp)](https://vscode-codepen-theme.ustinoff.dev/#rust) |
+| **Java** | **Sass** |
+| [![Java constants and methods](./assets/preview_java.webp)](https://vscode-codepen-theme.ustinoff.dev/#java) | [![Sass variables and mixins](./assets/preview_sass.webp)](https://vscode-codepen-theme.ustinoff.dev/#sass) |
+
+**Web:** JavaScript, TypeScript, JSX, TSX, HTML, CSS, SCSS, Sass, Vue, Svelte, and more.<br>
+**Applications:** Dart, Java, Kotlin, Rust, Go, Python, C, C++, C#, Swift, and more.<br>
+**Data & tooling:** JSON, YAML, TOML, SQL, Dockerfile, Makefile, Justfile, and more.
+
+[Open the full gallery →](https://vscode-codepen-theme.ustinoff.dev/) · [Markdown screenshot gallery](docs/SCREENSHOTS.md) · [Verified language providers](docs/LANGUAGE-SUPPORT.md)
 
 ## Highlighting
 
-- Classic Twilight colors for keywords, strings, numbers, comments, and punctuation.
-- Contextual refinement keeps ambiguous variables, constants, fields, and methods distinct.
-- Dart constants are blue; class fields and methods are purple. Annotation markers are gray, with yellow italic names.
-- TextMate and semantic highlighting work with the same palette in both variants.
+| Color | Role |
+| --- | --- |
+| Blue | Bindings and resolved constants. |
+| Purple | Fields, properties, and methods. |
+| Yellow | Keywords, global references, and annotation names. |
+| Green | Strings. |
+| Orange | Numbers. |
+| Gray / white | Comments, operators, and punctuation according to their syntax role. |
 
-The theme uses language grammars supplied by VS Code and recommended extensions. Install the providers listed in [language support](docs/LANGUAGE-SUPPORT.md) for languages such as Dart, Go, Vue, Svelte, and TOML. Language-server features may also require their SDKs; installing the theme does not install them.
+TextMate and semantic highlighting share the palette. Contextual refinement is enabled by default to distinguish syntax that grammars leave ambiguous. See [highlighting](docs/HIGHLIGHTING.md) for language-specific rules and boundaries, and [configuration](docs/CONFIGURATION.md) to adjust typography or refinement.
 
-Contextual refinement is enabled by default. See [configuration](docs/CONFIGURATION.md) to change typography or highlighting settings, and [highlighting](docs/HIGHLIGHTING.md) for the color rules and refinement boundaries.
-
-## Screenshots
-
-These previews show **CodePen Theme Original** from the packaged extension in VS Code, with contextual refinement enabled.
-
-### Dart
-
-<img src="./assets/preview_dart_II.webp" width="888" alt="Dart annotations, class fields, methods, and constructors in CodePen Theme Original">
-
-See the [full screenshot gallery](docs/SCREENSHOTS.md) for HTML, SCSS, Sass, TypeScript/React, Dart, Go, Python, Rust, TOML, Java, Just, SQL, and dotenv.
+Grammars come from VS Code and optional [language extensions](docs/LANGUAGE-SUPPORT.md). Installing the theme does not install language servers or SDKs.
 
 ## Development
 
-The [development guide](docs/DEVELOPMENT.md) covers building the VSIX, running checks, and testing the theme in an isolated editor. The [compatibility contract](https://github.com/ziqq/vscode_codepen_theme/blob/master/compatibility/README.md) records provider versions, source fixtures, and verification boundaries.
+See the [development guide](docs/DEVELOPMENT.md) for building and verifying the VSIX, and the [compatibility contract](compatibility/README.md) for provider versions and validation coverage. The gallery lives in [samples/index.html](samples/index.html), with its captures in [samples/screenshots](samples/screenshots/).
+
+Made with 🖤 by [ziqq](https://github.com/ziqq). Licensed under [Apache-2.0](LICENSE).
