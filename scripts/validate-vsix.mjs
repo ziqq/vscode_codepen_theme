@@ -73,10 +73,18 @@ for (const documentationPath of documentationPaths) {
     );
   }
 }
-const expectedPreview =
-  'https://github.com/ziqq/vscode_codepen_theme/raw/master/assets/preview_js.webp';
-if (!packagedReadme.includes(expectedPreview)) {
-  throw new Error('Packaged README preview does not resolve through master');
+const sourceReadme = await readFile('README.md', 'utf8');
+// Validate the previews the README actually uses; its layout may change.
+const previewPaths = sourceReadme.matchAll(/(?:\.\/)?(assets\/[\w./-]+\.(?:webp|png|jpe?g|svg))\b/g);
+for (const [, previewPath] of previewPaths) {
+  const expectedPreview =
+    `https://github.com/ziqq/vscode_codepen_theme/raw/master/${previewPath}`;
+  if (!packagedReadme.includes(expectedPreview)) {
+    throw new Error(`Packaged README preview ${previewPath} does not resolve through master`);
+  }
+  if (!files.includes(`extension/${previewPath}`)) {
+    throw new Error(`VSIX is missing README preview ${previewPath}`);
+  }
 }
 
 const forbiddenPrefixes = [
