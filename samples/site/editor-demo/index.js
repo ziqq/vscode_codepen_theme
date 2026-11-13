@@ -33,7 +33,7 @@ function render() {
 /** Load Monaco only after a deliberate edit action; retain the screenshot if loading fails. */
 async function startEditing() {
   editButton.disabled = true;
-  status.textContent = 'Loading the browser editor…';
+  status.textContent = 'Loading editor and theme highlighting…';
   try {
     if (!preview) {
       loading ??= (async () => {
@@ -44,16 +44,18 @@ async function startEditing() {
         panel = document.querySelector('#editor-template').content.firstElementChild.cloneNode(true);
         inlineHost.append(panel);
         preview = module.createPreview(panel.querySelector('#editor-container'));
+        await preview.ready;
         panel.querySelector('#reset').addEventListener('click', () => { preview.reset(); preview.focus(); });
       })();
       await loading;
     }
-    preview.setLanguage(language);
+    await preview.setLanguage(language);
     active = true;
     render();
     preview.focus();
     status.textContent = '';
   } catch (error) {
+    if (!active && preview) { preview.dispose(); preview = undefined; panel?.remove(); panel = undefined; }
     loading = undefined;
     status.textContent = 'Editor could not load. The screenshot is still available; try again.';
     console.error(error);
@@ -68,7 +70,7 @@ for (const button of document.querySelectorAll('[data-language]')) {
     screenshot.querySelector('img').src = screenshot.href;
     screenshot.querySelector('img').alt = `${name} in CodePen Theme Original`;
     for (const item of document.querySelectorAll('[data-language]')) item.setAttribute('aria-pressed', String(item.dataset.language === language));
-    if (preview) preview.setLanguage(language);
+    if (preview) preview.setLanguage(language).catch(console.error);
     render();
   });
 }

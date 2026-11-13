@@ -1,0 +1,6 @@
+# Preview grammar sources
+
+Unmodified built-in grammars from VS Code 1.135.0, commit `08d4889f9ec4a1685d257b9b95de036c8e1ce1e5`.
+Source directories: `extensions/typescript-basics/syntaxes/`,
+`extensions/dart/syntaxes/`, `extensions/rust/syntaxes/`.
+See `LICENSE.txt` for the upstream license.
