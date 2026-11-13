@@ -58,7 +58,7 @@ Grammars come from VS Code and optional [language extensions](docs/LANGUAGE-SUPP
 
 ## Development
 
-See the [development guide](docs/DEVELOPMENT.md) for building and verifying the VSIX, and the [compatibility contract](compatibility/README.md) for provider versions and validation coverage. The gallery lives in [samples/index.html](samples/index.html), with its captures in [samples/screenshots](samples/screenshots/).
+See the [development guide](docs/DEVELOPMENT.md) for building and verifying the VSIX, and the [compatibility contract](compatibility/README.md) for provider versions and validation coverage. The gallery lives in [samples/site/index.html](samples/site/index.html), with its captures in [samples/site/screenshots](samples/site/screenshots/).
 
 Made with 🖤 by [ziqq](https://github.com/ziqq). 
 

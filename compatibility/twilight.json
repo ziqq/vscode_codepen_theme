@@ -255,7 +255,7 @@
           "foreground": "#ffffff"
         }
       ],
-      "sourceFile": "samples/dart/main.dart",
+      "sourceFile": "samples/fixtures/dart/main.dart",
       "reference": "JS/TS role adaptation. Dart's TextMate grammar leaves plain names unclassified and does not distinguish methods from top-level functions; real semantic assertions are in dart-semantic.json."
     },
     {
@@ -726,7 +726,7 @@
           "foreground": "#a7925a"
         }
       ],
-      "sourceFile": "samples/javascript/index.tsx",
+      "sourceFile": "samples/fixtures/javascript/index.tsx",
       "reference": "Classic CodePen TypeScript editor, computed cm-type = #ffffff on 2026-08-31. JSX uses HTML roles; CodePen's TS-only parser misclassifies closing JSX tags as regexes."
     },
     {
@@ -1119,7 +1119,7 @@
     },
     {
       "language": "Batch",
-      "sourceFile": "samples/batch/theme-preview.bat",
+      "sourceFile": "samples/fixtures/batch/theme-preview.bat",
       "expect": [
         {
           "line": 1,
@@ -1140,7 +1140,7 @@
     },
     {
       "language": "BibTeX",
-      "sourceFile": "samples/latex/references.bib",
+      "sourceFile": "samples/fixtures/latex/references.bib",
       "expect": [
         {
           "line": 1,
@@ -1161,7 +1161,7 @@
     },
     {
       "language": "Clojure",
-      "sourceFile": "samples/clojure/core.clj",
+      "sourceFile": "samples/fixtures/clojure/core.clj",
       "expect": [
         {
           "line": 1,
@@ -1182,7 +1182,7 @@
     },
     {
       "language": "CoffeeScript",
-      "sourceFile": "samples/coffeescript/theme.coffee",
+      "sourceFile": "samples/fixtures/coffeescript/theme.coffee",
       "expect": [
         {
           "line": 1,
@@ -1203,7 +1203,7 @@
     },
     {
       "language": "CUDA C++",
-      "sourceFile": "samples/cuda/main.cu",
+      "sourceFile": "samples/fixtures/cuda/main.cu",
       "expect": [
         {
           "line": 1,
@@ -1224,7 +1224,7 @@
     },
     {
       "language": "Diff",
-      "sourceFile": "samples/diff/theme.patch",
+      "sourceFile": "samples/fixtures/diff/theme.patch",
       "expect": [
         {
           "line": 1,
@@ -1245,7 +1245,7 @@
     },
     {
       "language": "Docker Compose",
-      "sourceFile": "samples/docker/compose.yaml",
+      "sourceFile": "samples/fixtures/docker/compose.yaml",
       "expect": [
         {
           "line": 1,
@@ -1266,7 +1266,7 @@
     },
     {
       "language": "Dockerfile",
-      "sourceFile": "samples/docker/Dockerfile",
+      "sourceFile": "samples/fixtures/docker/Dockerfile",
       "expect": [
         {
           "line": 1,
@@ -1287,7 +1287,7 @@
     },
     {
       "language": "F#",
-      "sourceFile": "samples/fsharp/Program.fs",
+      "sourceFile": "samples/fixtures/fsharp/Program.fs",
       "expect": [
         {
           "line": 1,
@@ -1308,7 +1308,7 @@
     },
     {
       "language": "Groovy",
-      "sourceFile": "samples/groovy/theme.groovy",
+      "sourceFile": "samples/fixtures/groovy/theme.groovy",
       "expect": [
         {
           "line": 1,
@@ -1335,7 +1335,7 @@
     },
     {
       "language": "Handlebars",
-      "sourceFile": "samples/handlebars/card.hbs",
+      "sourceFile": "samples/fixtures/handlebars/card.hbs",
       "expect": [
         {
           "line": 1,
@@ -1356,7 +1356,7 @@
     },
     {
       "language": "HLSL",
-      "sourceFile": "samples/hlsl/theme.hlsl",
+      "sourceFile": "samples/fixtures/hlsl/theme.hlsl",
       "expect": [
         {
           "line": 1,
@@ -1377,7 +1377,7 @@
     },
     {
       "language": "INI",
-      "sourceFile": "samples/ini/theme.ini",
+      "sourceFile": "samples/fixtures/ini/theme.ini",
       "expect": [
         {
           "line": 1,
@@ -1398,7 +1398,7 @@
     },
     {
       "language": "JSON",
-      "sourceFile": "samples/json/theme.json",
+      "sourceFile": "samples/fixtures/json/theme.json",
       "expect": [
         {
           "line": 2,
@@ -1419,7 +1419,7 @@
     },
     {
       "language": "JSON Lines",
-      "sourceFile": "samples/json/events.jsonl",
+      "sourceFile": "samples/fixtures/json/events.jsonl",
       "expect": [
         {
           "line": 1,
@@ -1440,7 +1440,7 @@
     },
     {
       "language": "Julia",
-      "sourceFile": "samples/julia/theme.jl",
+      "sourceFile": "samples/fixtures/julia/theme.jl",
       "expect": [
         {
           "line": 1,
@@ -1461,7 +1461,7 @@
     },
     {
       "language": "LaTeX",
-      "sourceFile": "samples/latex/document.tex",
+      "sourceFile": "samples/fixtures/latex/document.tex",
       "expect": [
         {
           "line": 1,
@@ -1482,7 +1482,7 @@
     },
     {
       "language": "Less",
-      "sourceFile": "samples/less/styles.less",
+      "sourceFile": "samples/fixtures/less/styles.less",
       "expect": [
         {
           "line": 1,
@@ -1503,7 +1503,7 @@
     },
     {
       "language": "Lua",
-      "sourceFile": "samples/lua/theme.lua",
+      "sourceFile": "samples/fixtures/lua/theme.lua",
       "expect": [
         {
           "line": 1,
@@ -1524,7 +1524,7 @@
     },
     {
       "language": "Objective-C",
-      "sourceFile": "samples/objective-c/main.m",
+      "sourceFile": "samples/fixtures/objective-c/main.m",
       "expect": [
         {
           "line": 1,
@@ -1545,7 +1545,7 @@
     },
     {
       "language": "Objective-C++",
-      "sourceFile": "samples/objective-cpp/main.mm",
+      "sourceFile": "samples/fixtures/objective-cpp/main.mm",
       "expect": [
         {
           "line": 1,
@@ -1566,7 +1566,7 @@
     },
     {
       "language": "Perl",
-      "sourceFile": "samples/perl/theme.pl",
+      "sourceFile": "samples/fixtures/perl/theme.pl",
       "expect": [
         {
           "line": 1,
@@ -1587,7 +1587,7 @@
     },
     {
       "language": "PowerShell",
-      "sourceFile": "samples/powershell/theme.ps1",
+      "sourceFile": "samples/fixtures/powershell/theme.ps1",
       "expect": [
         {
           "line": 1,
@@ -1608,7 +1608,7 @@
     },
     {
       "language": "Properties",
-      "sourceFile": "samples/properties/theme.properties",
+      "sourceFile": "samples/fixtures/properties/theme.properties",
       "expect": [
         {
           "line": 1,
@@ -1629,7 +1629,7 @@
     },
     {
       "language": "Pug",
-      "sourceFile": "samples/pug/index.pug",
+      "sourceFile": "samples/fixtures/pug/index.pug",
       "expect": [
         {
           "line": 1,
@@ -1650,7 +1650,7 @@
     },
     {
       "language": "R",
-      "sourceFile": "samples/r/theme.R",
+      "sourceFile": "samples/fixtures/r/theme.R",
       "expect": [
         {
           "line": 1,
@@ -1671,7 +1671,7 @@
     },
     {
       "language": "Raku",
-      "sourceFile": "samples/raku/theme.raku",
+      "sourceFile": "samples/fixtures/raku/theme.raku",
       "expect": [
         {
           "line": 1,
@@ -1692,7 +1692,7 @@
     },
     {
       "language": "Razor",
-      "sourceFile": "samples/razor/Theme.razor",
+      "sourceFile": "samples/fixtures/razor/Theme.razor",
       "expect": [
         {
           "line": 1,
@@ -1713,7 +1713,7 @@
     },
     {
       "language": "reStructuredText",
-      "sourceFile": "samples/restructuredtext/theme.rst",
+      "sourceFile": "samples/fixtures/restructuredtext/theme.rst",
       "expect": [
         {
           "line": 1,
@@ -1734,7 +1734,7 @@
     },
     {
       "language": "ShaderLab",
-      "sourceFile": "samples/shaderlab/Theme.shader",
+      "sourceFile": "samples/fixtures/shaderlab/Theme.shader",
       "expect": [
         {
           "line": 1,
@@ -1755,7 +1755,7 @@
     },
     {
       "language": "TeX",
-      "sourceFile": "samples/latex/package.sty",
+      "sourceFile": "samples/fixtures/latex/package.sty",
       "expect": [
         {
           "line": 1,
@@ -1776,7 +1776,7 @@
     },
     {
       "language": "Visual Basic",
-      "sourceFile": "samples/visual-basic/Theme.vb",
+      "sourceFile": "samples/fixtures/visual-basic/Theme.vb",
       "expect": [
         {
           "line": 1,
@@ -1797,7 +1797,7 @@
     },
     {
       "language": "WAT",
-      "sourceFile": "samples/wat/theme.wat",
+      "sourceFile": "samples/fixtures/wat/theme.wat",
       "expect": [
         {
           "line": 1,
@@ -1818,7 +1818,7 @@
     },
     {
       "language": "XML",
-      "sourceFile": "samples/xml/theme.xml",
+      "sourceFile": "samples/fixtures/xml/theme.xml",
       "expect": [
         {
           "line": 1,
@@ -1839,7 +1839,7 @@
     },
     {
       "language": "XSL",
-      "sourceFile": "samples/xml/transform.xsl",
+      "sourceFile": "samples/fixtures/xml/transform.xsl",
       "expect": [
         {
           "line": 1,
