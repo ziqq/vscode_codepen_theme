@@ -193,7 +193,7 @@
     },
     {
       "language": "typescriptreact",
-      "sourceFile": "samples/javascript/index.tsx",
+      "sourceFile": "samples/fixtures/javascript/index.tsx",
       "requireValidProgram": true,
       "reference": "Measured CodePen TS roles before JSX. The provider leaves import bindings to TextMate and classifies resolved type references separately.",
       "dependencies": {
