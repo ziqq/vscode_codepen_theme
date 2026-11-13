@@ -370,7 +370,7 @@
     {
       "language": "C",
       "languageId": "c",
-      "sample": "samples/c/main.c",
+      "sample": "samples/fixtures/c/main.c",
       "provider": "vscode.cpp",
       "rootScope": "source.c",
       "requiredScopes": [
@@ -383,7 +383,7 @@
     {
       "language": "C++",
       "languageId": "cpp",
-      "sample": "samples/cpp/main.cpp",
+      "sample": "samples/fixtures/cpp/main.cpp",
       "provider": "vscode.cpp",
       "rootScope": "source.cpp",
       "requiredScopes": [
@@ -396,7 +396,7 @@
     {
       "language": "C#",
       "languageId": "csharp",
-      "sample": "samples/csharp/Program.cs",
+      "sample": "samples/fixtures/csharp/Program.cs",
       "provider": "vscode.csharp",
       "rootScope": "source.cs",
       "requiredScopes": [
@@ -409,7 +409,7 @@
     {
       "language": "C4 / Structurizr DSL",
       "languageId": "c4",
-      "sample": "samples/c4/workspace.dsl",
+      "sample": "samples/fixtures/c4/workspace.dsl",
       "provider": "systemticks.c4-dsl-extension",
       "rootScope": "source.c4",
       "visual": true,
@@ -423,7 +423,7 @@
     {
       "language": "CSS",
       "languageId": "css",
-      "sample": "samples/css/styles.css",
+      "sample": "samples/fixtures/css/styles.css",
       "provider": "vscode.css",
       "rootScope": "source.css",
       "requiredScopes": [
@@ -437,7 +437,7 @@
       "language": "Dart",
       "visual": true,
       "languageId": "dart",
-      "sample": "samples/dart/main.dart",
+      "sample": "samples/fixtures/dart/main.dart",
       "provider": "vscode.dart",
       "rootScope": "source.dart",
       "requiredScopes": [
@@ -454,7 +454,7 @@
     {
       "language": "dotenv",
       "languageId": "dotenv",
-      "sample": "samples/dotenv/.env.example",
+      "sample": "samples/fixtures/dotenv/.env.example",
       "provider": "dotenv.dotenv-vscode",
       "rootScope": "source.dotenv",
       "requiredScopes": [
@@ -470,7 +470,7 @@
     {
       "language": "Go modules",
       "languageId": "go.mod",
-      "sample": "samples/go/go.mod",
+      "sample": "samples/fixtures/go/go.mod",
       "provider": "golang.go",
       "rootScope": "go.mod",
       "requiredScopes": [
@@ -486,7 +486,7 @@
     {
       "language": "Go",
       "languageId": "go",
-      "sample": "samples/go/main.go",
+      "sample": "samples/fixtures/go/main.go",
       "provider": "vscode.go",
       "rootScope": "source.go",
       "requiredScopes": [
@@ -502,7 +502,7 @@
     {
       "language": "HTML",
       "languageId": "html",
-      "sample": "samples/html/index.html",
+      "sample": "samples/fixtures/html/index.html",
       "provider": "vscode.html",
       "rootScope": "text.html.derivative",
       "requiredScopes": [
@@ -519,7 +519,7 @@
       "language": "Java",
       "visual": true,
       "languageId": "java",
-      "sample": "samples/java/Main.java",
+      "sample": "samples/fixtures/java/Main.java",
       "provider": "vscode.java",
       "rootScope": "source.java",
       "requiredScopes": [
@@ -535,7 +535,7 @@
     {
       "language": "JavaScript",
       "languageId": "javascript",
-      "sample": "samples/javascript/main.js",
+      "sample": "samples/fixtures/javascript/main.js",
       "provider": "vscode.javascript",
       "rootScope": "source.js",
       "requiredScopes": [
@@ -548,7 +548,7 @@
     {
       "language": "JavaScript React",
       "languageId": "javascriptreact",
-      "sample": "samples/javascript/Component.jsx",
+      "sample": "samples/fixtures/javascript/Component.jsx",
       "provider": "vscode.javascript",
       "rootScope": "source.js.jsx",
       "requiredScopes": [
@@ -561,7 +561,7 @@
     {
       "language": "JSONC",
       "languageId": "jsonc",
-      "sample": "samples/json/theme.jsonc",
+      "sample": "samples/fixtures/json/theme.jsonc",
       "provider": "vscode.json",
       "rootScope": "source.json.comments",
       "requiredScopes": [
@@ -574,7 +574,7 @@
     {
       "language": "TypeScript",
       "languageId": "typescript",
-      "sample": "samples/typescript/main.ts",
+      "sample": "samples/fixtures/typescript/main.ts",
       "provider": "vscode.typescript-basics",
       "rootScope": "source.ts",
       "requiredScopes": [
@@ -587,7 +587,7 @@
     {
       "language": "TypeScript React",
       "languageId": "typescriptreact",
-      "sample": "samples/javascript/index.tsx",
+      "sample": "samples/fixtures/javascript/index.tsx",
       "provider": "vscode.typescript-basics",
       "rootScope": "source.tsx",
       "visual": true,
@@ -605,7 +605,7 @@
       "language": "Just",
       "visual": true,
       "languageId": "just",
-      "sample": "samples/just/justfile",
+      "sample": "samples/fixtures/just/justfile",
       "provider": "nefrob.vscode-just-syntax",
       "rootScope": "source.just",
       "requiredScopes": [
@@ -621,7 +621,7 @@
     {
       "language": "Kotlin",
       "languageId": "kotlin",
-      "sample": "samples/kotlin/Main.kt",
+      "sample": "samples/fixtures/kotlin/Main.kt",
       "provider": "JetBrains.kotlin-server",
       "rootScope": "source.kotlin",
       "visual": true,
@@ -636,7 +636,7 @@
       "language": "Makefile",
       "visual": true,
       "languageId": "makefile",
-      "sample": "samples/make/Makefile",
+      "sample": "samples/fixtures/make/Makefile",
       "provider": "vscode.make",
       "rootScope": "source.makefile",
       "requiredScopes": [
@@ -649,7 +649,7 @@
     {
       "language": "Markdown",
       "languageId": "markdown",
-      "sample": "samples/markdown/compatibility.md",
+      "sample": "samples/fixtures/markdown/compatibility.md",
       "provider": "vscode.markdown-basics",
       "rootScope": "text.html.markdown",
       "requiredScopes": [
@@ -662,7 +662,7 @@
     {
       "language": "PHP",
       "languageId": "php",
-      "sample": "samples/php/index.php",
+      "sample": "samples/fixtures/php/index.php",
       "provider": "vscode.php",
       "rootScope": "source.php",
       "requiredScopes": [
@@ -675,7 +675,7 @@
     {
       "language": "Python",
       "languageId": "python",
-      "sample": "samples/python/main.py",
+      "sample": "samples/fixtures/python/main.py",
       "provider": "vscode.python",
       "rootScope": "source.python",
       "requiredScopes": [
@@ -691,7 +691,7 @@
     {
       "language": "Rust",
       "languageId": "rust",
-      "sample": "samples/rust/main.rs",
+      "sample": "samples/fixtures/rust/main.rs",
       "provider": "vscode.rust",
       "rootScope": "source.rust",
       "requiredScopes": [
@@ -708,7 +708,7 @@
     {
       "language": "Ruby",
       "languageId": "ruby",
-      "sample": "samples/ruby/main.rb",
+      "sample": "samples/fixtures/ruby/main.rb",
       "provider": "vscode.ruby",
       "rootScope": "source.ruby",
       "requiredScopes": [
@@ -721,7 +721,7 @@
     {
       "language": "Sass",
       "languageId": "sass",
-      "sample": "samples/sass/styles.sass",
+      "sample": "samples/fixtures/sass/styles.sass",
       "provider": "Syler.sass-indented",
       "rootScope": "source.sass",
       "requiredScopes": [
@@ -737,7 +737,7 @@
     {
       "language": "SCSS",
       "languageId": "scss",
-      "sample": "samples/scss/styles.scss",
+      "sample": "samples/fixtures/scss/styles.scss",
       "provider": "vscode.scss",
       "rootScope": "source.css.scss",
       "requiredScopes": [
@@ -753,7 +753,7 @@
     {
       "language": "SQL",
       "languageId": "sql",
-      "sample": "samples/sql/query.sql",
+      "sample": "samples/fixtures/sql/query.sql",
       "provider": "vscode.sql",
       "rootScope": "source.sql",
       "requiredScopes": [
@@ -769,7 +769,7 @@
     {
       "language": "Svelte",
       "languageId": "svelte",
-      "sample": "samples/svelte/Counter.svelte",
+      "sample": "samples/fixtures/svelte/Counter.svelte",
       "provider": "svelte.svelte-vscode",
       "rootScope": "source.svelte",
       "requiredScopes": [
@@ -782,7 +782,7 @@
     {
       "language": "Shell Script",
       "languageId": "shellscript",
-      "sample": "samples/shell/theme-preview.sh",
+      "sample": "samples/fixtures/shell/theme-preview.sh",
       "provider": "vscode.shellscript",
       "rootScope": "source.shell",
       "requiredScopes": [
@@ -795,7 +795,7 @@
     {
       "language": "Swift",
       "languageId": "swift",
-      "sample": "samples/swift/main.swift",
+      "sample": "samples/fixtures/swift/main.swift",
       "provider": "vscode.swift",
       "rootScope": "source.swift",
       "requiredScopes": [
@@ -808,7 +808,7 @@
     {
       "language": "TOML",
       "languageId": "toml",
-      "sample": "samples/toml/config.toml",
+      "sample": "samples/fixtures/toml/config.toml",
       "provider": "tamasfe.even-better-toml",
       "rootScope": "source.toml",
       "requiredScopes": [
@@ -824,7 +824,7 @@
     {
       "language": "Vue",
       "languageId": "vue",
-      "sample": "samples/vue/Counter.vue",
+      "sample": "samples/fixtures/vue/Counter.vue",
       "provider": "Vue.volar",
       "rootScope": "text.html.vue",
       "visual": true,
@@ -838,7 +838,7 @@
     {
       "language": "YAML",
       "languageId": "yaml",
-      "sample": "samples/yaml/provider-compatibility.yaml",
+      "sample": "samples/fixtures/yaml/provider-compatibility.yaml",
       "provider": "vscode.yaml",
       "rootScope": "source.yaml",
       "requiredScopes": [
@@ -851,7 +851,7 @@
     {
       "language": "Batch",
       "languageId": "bat",
-      "sample": "samples/batch/theme-preview.bat",
+      "sample": "samples/fixtures/batch/theme-preview.bat",
       "provider": "vscode.bat",
       "rootScope": "source.batchfile",
       "requiredScopes": [
@@ -864,7 +864,7 @@
     {
       "language": "BibTeX",
       "languageId": "bibtex",
-      "sample": "samples/latex/references.bib",
+      "sample": "samples/fixtures/latex/references.bib",
       "provider": "vscode.latex",
       "rootScope": "text.bibtex",
       "requiredScopes": [
@@ -877,7 +877,7 @@
     {
       "language": "Clojure",
       "languageId": "clojure",
-      "sample": "samples/clojure/core.clj",
+      "sample": "samples/fixtures/clojure/core.clj",
       "provider": "vscode.clojure",
       "rootScope": "source.clojure",
       "requiredScopes": [
@@ -890,7 +890,7 @@
     {
       "language": "CoffeeScript",
       "languageId": "coffeescript",
-      "sample": "samples/coffeescript/theme.coffee",
+      "sample": "samples/fixtures/coffeescript/theme.coffee",
       "provider": "vscode.coffeescript",
       "rootScope": "source.coffee",
       "requiredScopes": [
@@ -903,7 +903,7 @@
     {
       "language": "CUDA C++",
       "languageId": "cuda-cpp",
-      "sample": "samples/cuda/main.cu",
+      "sample": "samples/fixtures/cuda/main.cu",
       "provider": "vscode.cpp",
       "rootScope": "source.cuda-cpp",
       "requiredScopes": [
@@ -916,7 +916,7 @@
     {
       "language": "Diff",
       "languageId": "diff",
-      "sample": "samples/diff/theme.patch",
+      "sample": "samples/fixtures/diff/theme.patch",
       "provider": "vscode.diff",
       "rootScope": "source.diff",
       "requiredScopes": [
@@ -929,7 +929,7 @@
     {
       "language": "Docker Compose",
       "languageId": "dockercompose",
-      "sample": "samples/docker/compose.yaml",
+      "sample": "samples/fixtures/docker/compose.yaml",
       "provider": "vscode.yaml",
       "rootScope": "source.yaml",
       "requiredScopes": [
@@ -942,7 +942,7 @@
     {
       "language": "Dockerfile",
       "languageId": "dockerfile",
-      "sample": "samples/docker/Dockerfile",
+      "sample": "samples/fixtures/docker/Dockerfile",
       "provider": "vscode.docker",
       "rootScope": "source.dockerfile",
       "requiredScopes": [
@@ -955,7 +955,7 @@
     {
       "language": "F#",
       "languageId": "fsharp",
-      "sample": "samples/fsharp/Program.fs",
+      "sample": "samples/fixtures/fsharp/Program.fs",
       "provider": "vscode.fsharp",
       "rootScope": "source.fsharp",
       "requiredScopes": [
@@ -968,7 +968,7 @@
     {
       "language": "Groovy",
       "languageId": "groovy",
-      "sample": "samples/groovy/theme.groovy",
+      "sample": "samples/fixtures/groovy/theme.groovy",
       "provider": "vscode.groovy",
       "rootScope": "source.groovy",
       "requiredScopes": [
@@ -981,7 +981,7 @@
     {
       "language": "Handlebars",
       "languageId": "handlebars",
-      "sample": "samples/handlebars/card.hbs",
+      "sample": "samples/fixtures/handlebars/card.hbs",
       "provider": "vscode.handlebars",
       "rootScope": "text.html.handlebars",
       "requiredScopes": [
@@ -994,7 +994,7 @@
     {
       "language": "HLSL",
       "languageId": "hlsl",
-      "sample": "samples/hlsl/theme.hlsl",
+      "sample": "samples/fixtures/hlsl/theme.hlsl",
       "provider": "vscode.hlsl",
       "rootScope": "source.hlsl",
       "requiredScopes": [
@@ -1007,7 +1007,7 @@
     {
       "language": "INI",
       "languageId": "ini",
-      "sample": "samples/ini/theme.ini",
+      "sample": "samples/fixtures/ini/theme.ini",
       "provider": "vscode.ini",
       "rootScope": "source.ini",
       "requiredScopes": [
@@ -1020,7 +1020,7 @@
     {
       "language": "JSON",
       "languageId": "json",
-      "sample": "samples/json/theme.json",
+      "sample": "samples/fixtures/json/theme.json",
       "provider": "vscode.json",
       "rootScope": "source.json",
       "requiredScopes": [
@@ -1033,7 +1033,7 @@
     {
       "language": "JSON Lines",
       "languageId": "jsonl",
-      "sample": "samples/json/events.jsonl",
+      "sample": "samples/fixtures/json/events.jsonl",
       "provider": "vscode.json",
       "rootScope": "source.json.lines",
       "requiredScopes": [
@@ -1046,7 +1046,7 @@
     {
       "language": "Julia",
       "languageId": "julia",
-      "sample": "samples/julia/theme.jl",
+      "sample": "samples/fixtures/julia/theme.jl",
       "provider": "vscode.julia",
       "rootScope": "source.julia",
       "requiredScopes": [
@@ -1059,7 +1059,7 @@
     {
       "language": "LaTeX",
       "languageId": "latex",
-      "sample": "samples/latex/document.tex",
+      "sample": "samples/fixtures/latex/document.tex",
       "provider": "vscode.latex",
       "rootScope": "text.tex.latex",
       "requiredScopes": [
@@ -1072,7 +1072,7 @@
     {
       "language": "Less",
       "languageId": "less",
-      "sample": "samples/less/styles.less",
+      "sample": "samples/fixtures/less/styles.less",
       "provider": "vscode.less",
       "rootScope": "source.css.less",
       "requiredScopes": [
@@ -1085,7 +1085,7 @@
     {
       "language": "Lua",
       "languageId": "lua",
-      "sample": "samples/lua/theme.lua",
+      "sample": "samples/fixtures/lua/theme.lua",
       "provider": "vscode.lua",
       "rootScope": "source.lua",
       "requiredScopes": [
@@ -1098,7 +1098,7 @@
     {
       "language": "Objective-C",
       "languageId": "objective-c",
-      "sample": "samples/objective-c/main.m",
+      "sample": "samples/fixtures/objective-c/main.m",
       "provider": "vscode.objective-c",
       "rootScope": "source.objc",
       "requiredScopes": [
@@ -1111,7 +1111,7 @@
     {
       "language": "Objective-C++",
       "languageId": "objective-cpp",
-      "sample": "samples/objective-cpp/main.mm",
+      "sample": "samples/fixtures/objective-cpp/main.mm",
       "provider": "vscode.objective-c",
       "rootScope": "source.objcpp",
       "requiredScopes": [
@@ -1124,7 +1124,7 @@
     {
       "language": "Perl",
       "languageId": "perl",
-      "sample": "samples/perl/theme.pl",
+      "sample": "samples/fixtures/perl/theme.pl",
       "provider": "vscode.perl",
       "rootScope": "source.perl",
       "requiredScopes": [
@@ -1137,7 +1137,7 @@
     {
       "language": "PowerShell",
       "languageId": "powershell",
-      "sample": "samples/powershell/theme.ps1",
+      "sample": "samples/fixtures/powershell/theme.ps1",
       "provider": "vscode.powershell",
       "rootScope": "source.powershell",
       "requiredScopes": [
@@ -1150,7 +1150,7 @@
     {
       "language": "Properties",
       "languageId": "properties",
-      "sample": "samples/properties/theme.properties",
+      "sample": "samples/fixtures/properties/theme.properties",
       "provider": "vscode.ini",
       "rootScope": "source.ini",
       "requiredScopes": [
@@ -1163,7 +1163,7 @@
     {
       "language": "Pug",
       "languageId": "jade",
-      "sample": "samples/pug/index.pug",
+      "sample": "samples/fixtures/pug/index.pug",
       "provider": "vscode.pug",
       "rootScope": "text.pug",
       "requiredScopes": [
@@ -1176,7 +1176,7 @@
     {
       "language": "R",
       "languageId": "r",
-      "sample": "samples/r/theme.R",
+      "sample": "samples/fixtures/r/theme.R",
       "provider": "vscode.r",
       "rootScope": "source.r",
       "requiredScopes": [
@@ -1189,7 +1189,7 @@
     {
       "language": "Raku",
       "languageId": "raku",
-      "sample": "samples/raku/theme.raku",
+      "sample": "samples/fixtures/raku/theme.raku",
       "provider": "vscode.perl",
       "rootScope": "source.perl.6",
       "requiredScopes": [
@@ -1202,7 +1202,7 @@
     {
       "language": "Razor",
       "languageId": "razor",
-      "sample": "samples/razor/Theme.razor",
+      "sample": "samples/fixtures/razor/Theme.razor",
       "provider": "vscode.razor",
       "rootScope": "text.html.cshtml",
       "requiredScopes": [
@@ -1215,7 +1215,7 @@
     {
       "language": "reStructuredText",
       "languageId": "restructuredtext",
-      "sample": "samples/restructuredtext/theme.rst",
+      "sample": "samples/fixtures/restructuredtext/theme.rst",
       "provider": "vscode.restructuredtext",
       "rootScope": "source.rst",
       "requiredScopes": [
@@ -1228,7 +1228,7 @@
     {
       "language": "ShaderLab",
       "languageId": "shaderlab",
-      "sample": "samples/shaderlab/Theme.shader",
+      "sample": "samples/fixtures/shaderlab/Theme.shader",
       "provider": "vscode.shaderlab",
       "rootScope": "source.shaderlab",
       "requiredScopes": [
@@ -1241,7 +1241,7 @@
     {
       "language": "TeX",
       "languageId": "tex",
-      "sample": "samples/latex/package.sty",
+      "sample": "samples/fixtures/latex/package.sty",
       "provider": "vscode.latex",
       "rootScope": "text.tex",
       "requiredScopes": [
@@ -1254,7 +1254,7 @@
     {
       "language": "Visual Basic",
       "languageId": "vb",
-      "sample": "samples/visual-basic/Theme.vb",
+      "sample": "samples/fixtures/visual-basic/Theme.vb",
       "provider": "vscode.vb",
       "rootScope": "source.asp.vb.net",
       "requiredScopes": [
@@ -1267,7 +1267,7 @@
     {
       "language": "WAT",
       "languageId": "wat",
-      "sample": "samples/wat/theme.wat",
+      "sample": "samples/fixtures/wat/theme.wat",
       "provider": "vscode.ms-vscode.js-debug",
       "rootScope": "text.wat",
       "requiredScopes": [
@@ -1280,7 +1280,7 @@
     {
       "language": "XML",
       "languageId": "xml",
-      "sample": "samples/xml/theme.xml",
+      "sample": "samples/fixtures/xml/theme.xml",
       "provider": "vscode.xml",
       "rootScope": "text.xml",
       "requiredScopes": [
@@ -1293,7 +1293,7 @@
     {
       "language": "XSL",
       "languageId": "xsl",
-      "sample": "samples/xml/transform.xsl",
+      "sample": "samples/fixtures/xml/transform.xsl",
       "provider": "vscode.xml",
       "rootScope": "text.xml.xsl",
       "requiredScopes": [

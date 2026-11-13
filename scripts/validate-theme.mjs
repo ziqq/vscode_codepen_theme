@@ -32,19 +32,8 @@ const expectedRecommendations = compatibility.providers
   .filter((provider) => provider.kind === 'recommended')
   .map((provider) => provider.id);
 const expectedSamples = compatibility.cases.map((item) => item.sample);
-// The published gallery lives beside the syntax fixtures; exclude only its
-// explicit files so undeclared language samples still fail the coverage check.
-const galleryFiles = new Set([
-  'samples/index.html', 'samples/gallery.css', 'samples/gallery.js',
-  'samples/CNAME', 'samples/.nojekyll',
-  ...compatibility.cases.flatMap((item) => {
-    const name = item.languageId.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
-    return [`samples/screenshots/${name}.webp`,
-      ...(['dart', 'rust'].includes(item.languageId) ? [`samples/screenshots/${name}-details.webp`] : [])];
-  }),
-]);
-
-const sampleEntries = await readdir('samples', {
+// Only language fixtures belong to the compatibility inventory; the site is separate.
+const sampleEntries = await readdir('samples/fixtures', {
   recursive: true,
   withFileTypes: true,
 });
@@ -54,10 +43,7 @@ const actualSamples = sampleEntries
     process.cwd(),
     path.join(entry.parentPath ?? entry.path, entry.name),
   ).split(path.sep).join('/'))
-  .filter((samplePath) =>
-    samplePath !== 'samples/README.md' &&
-    !galleryFiles.has(samplePath) &&
-    !samplePath.startsWith('samples/.vscode/'))
+  .filter((samplePath) => !samplePath.startsWith('samples/fixtures/.vscode/'))
   .sort();
 
 if (

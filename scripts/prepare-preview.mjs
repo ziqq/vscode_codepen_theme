@@ -167,7 +167,7 @@ if (process.env.CODEPEN_DART_SDK) {
 }
 await writeFile(
   workspace,
-  `${JSON.stringify({ folders: [{ path: path.join(root, 'samples') }], settings }, null, 2)}\n`,
+  `${JSON.stringify({ folders: [{ path: path.join(root, 'samples', 'fixtures') }], settings }, null, 2)}\n`,
 );
 await writeFile(
   path.join(previewRoot, 'manifest.json'),

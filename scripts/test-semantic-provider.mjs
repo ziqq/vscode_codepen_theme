@@ -30,9 +30,9 @@ const results = [];
 for (const fixture of fixtures.cases) {
   fixture.source ??= await readFile(fixture.sourceFile, 'utf8');
   const extension = { javascript: 'js', typescript: 'ts', typescriptreact: 'tsx' }[fixture.language];
-  const file = path.resolve('samples/javascript', `semantic-test.${extension}`);
+  const file = path.resolve('samples/fixtures/javascript', `semantic-test.${extension}`);
   const sources = new Map([[file, fixture.source],
-    ...Object.entries(fixture.dependencies ?? {}).map(([name, text]) => [path.resolve('samples/javascript', name), text]),
+    ...Object.entries(fixture.dependencies ?? {}).map(([name, text]) => [path.resolve('samples/fixtures/javascript', name), text]),
   ]);
   const compilerOptions = {
     allowJs: true, checkJs: true, strict: true, target: ts.ScriptTarget.ES2020,
