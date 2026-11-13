@@ -2,9 +2,9 @@
 
 CodePen’s classic Twilight palette for Visual Studio Code. Blue bindings and constants, purple members, warm yellow keywords, and soft green strings.
 
-· [Install from Marketplace](https://marketplace.visualstudio.com/items?itemName=ziqq.codepen-theme-original)<br/>
-· [Explore all 68 languages](https://vscode-codepen-theme.ustinoff.dev/)<br/>
-· [Download VSIX](https://github.com/ziqq/vscode_codepen_theme/releases)<br/>
+– [Explore all 68 languages](https://vscode-codepen-theme.ustinoff.dev/)<br/>
+– [Install from Marketplace](https://marketplace.visualstudio.com/items?itemName=ziqq.codepen-theme-original)<br/>
+– [Download VSIX](https://github.com/ziqq/vscode_codepen_theme/releases)<br/>
 
 ## Install
 
@@ -28,12 +28,6 @@ You can also use **Extensions: Install from VSIX…**, then select the theme.
 ## See it in your language
 
 The [interactive gallery](https://vscode-codepen-theme.ustinoff.dev/) includes real editor captures for **all 68 verified languages and formats**, language search, enlarged previews, and links to the sample source files. Diagnostics and error indicators are hidden in the preview profile so you can see the theme clearly.
-
-| Dart | Rust |
-| --- | --- |
-| [![Dart fields, annotations and constants](./assets/preview_dart_II.webp)](https://vscode-codepen-theme.ustinoff.dev/#dart) | [![Rust fields and attributes](./assets/preview_rust_I.webp)](https://vscode-codepen-theme.ustinoff.dev/#rust) |
-| **Java** | **Sass** |
-| [![Java constants and methods](./assets/preview_java.webp)](https://vscode-codepen-theme.ustinoff.dev/#java) | [![Sass variables and mixins](./assets/preview_sass.webp)](https://vscode-codepen-theme.ustinoff.dev/#sass) |
 
 **Web:** JavaScript, TypeScript, JSX, TSX, HTML, CSS, SCSS, Sass, Vue, Svelte, and more.<br>
 **Applications:** Dart, Java, Kotlin, Rust, Go, Python, C, C++, C#, Swift, and more.<br>
