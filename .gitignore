@@ -139,3 +139,6 @@ dist
 playground/
 
 .DS_Store
+
+# Isolated interactive landing prototype bundles
+samples/site/editor-demo/build/

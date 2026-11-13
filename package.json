@@ -78,6 +78,9 @@
   "devDependencies": {
     "@vscode/test-electron": "^2.5.2",
     "@vscode/vsce": "4.1.0",
+    "dompurify": "3.4.17",
+    "esbuild": "0.28.2",
+    "monaco-editor": "0.57.0",
     "playwright-core": "^1.62.1",
     "pngjs": "^7.0.0",
     "tree-sitter-wasm": "1.1.6",
@@ -87,6 +90,9 @@
     "web-tree-sitter": "0.27.0"
   },
   "overrides": {
+    "monaco-editor": {
+      "dompurify": "3.4.17"
+    },
     "@vscode/vsce": {
       "glob": "14.0.2",
       "minimatch": "11.0.1"
@@ -120,6 +126,7 @@
     "check:package": "node scripts/validate-vsix.mjs ./build/codepen-theme-original.vsix",
     "package": "vsce package --githubBranch master --out ./build/codepen-theme-original.vsix && npm run check:package",
     "vscode:prepublish": "npm run build && npm run check",
-    "deploy": "npm run check:release && npm run check:package && vsce publish --packagePath ./build/codepen-theme-original.vsix"
+    "deploy": "npm run check:release && npm run check:package && vsce publish --packagePath ./build/codepen-theme-original.vsix",
+    "build:editor-demo": "node scripts/build-editor-demo.mjs"
   }
 }

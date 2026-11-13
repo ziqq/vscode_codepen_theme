@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CodePen — интерактивные прототипы</title>
+<link rel="stylesheet" href="../style.css"><link rel="stylesheet" href="style.css">
+<script type="module" src="index.js"></script>
+</head>
+<body>
+<div class="prototype-controls"><strong>Интерактивные прототипы</strong><div role="group" aria-label="Вариант редактора"><button data-mode="inline" aria-pressed="true">A · В правом блоке</button><button data-mode="dialog" aria-pressed="false">B · В большом окне</button></div><p id="concept-description">Код редактируется прямо в первом экране. Редактор загрузится только после нажатия кнопки.</p></div>
+<div class="wrap">
+<header class="topbar"><a class="brand" href="../">CodePen <span>/ Original</span></a><nav aria-label="Main"><a href="../#examples">All examples</a><a href="https://github.com/ziqq/vscode_codepen_theme">GitHub ↗</a></nav></header>
+<main>
+<section class="hero" aria-labelledby="title"><div><p class="eyebrow">A theme for Visual Studio Code</p><h1 id="title">68 languages.<br><span>One familiar palette.</span></h1><p class="intro">The classic CodePen Twilight colors, brought to your editor. Try a few lines, switch languages, and make it yours.</p><div class="actions"><a class="button primary" href="https://marketplace.visualstudio.com/items?itemName=ziqq.codepen-theme-original">Install from Marketplace ↗</a><a class="button" href="../#examples">Explore all examples</a></div></div>
+<figure class="hero-editor" aria-label="Theme preview">
+<div class="preview-languages" role="group" aria-label="Preview language"><button data-language="typescript" aria-pressed="true">TypeScript</button><button data-language="dart" aria-pressed="false">Dart</button><button data-language="rust" aria-pressed="false">Rust</button><button id="edit" class="edit-button">Edit code ↗</button></div>
+<a id="screenshot" class="preview hero-preview" href="../screenshots/typescriptreact.webp"><img src="../screenshots/typescriptreact.webp" width="888" height="905" alt="TypeScript React in CodePen Theme Original"></a>
+<div id="inline-host" hidden></div>
+<figcaption id="preview-caption">Real VS Code screenshot · Select “Edit code” to try the browser preview.</figcaption>
+</figure></section>
+<p id="load-status" role="status"></p>
+<p class="prototype-note">Прототип браузерной подсветки использует палитру темы. Contextual refinement расширения VS Code сюда пока не перенесён; точность цветов проверим отдельно. Правки живут только в памяти этой вкладки, код не выполняется.</p>
+</main></div>
+<dialog id="editor-dialog" aria-labelledby="dialog-title"><header><strong id="dialog-title">Try CodePen Theme Original</strong><button id="close-dialog">Close</button></header><div class="preview-languages" role="group" aria-label="Editor language"><button data-language="typescript" aria-pressed="true">TypeScript</button><button data-language="dart" aria-pressed="false">Dart</button><button data-language="rust" aria-pressed="false">Rust</button></div><div id="dialog-host"></div></dialog>
+<template id="editor-template"><section class="live-editor"><div class="editor-toolbar"><span id="file-name">index.tsx</span><button id="reset">Reset example</button></div><div id="editor-container"></div><div class="editor-hint">Ctrl/⌘ Z — undo · Ctrl/⌘ M — toggle Tab focus mode</div></section></template>
+</body></html>

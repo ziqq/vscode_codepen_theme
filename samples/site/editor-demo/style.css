@@ -1,0 +1,21 @@
+.prototype-controls { padding: 20px 40px; border-bottom: 1px solid var(--line); background: #191a1f; }
+.prototype-controls strong { display: block; margin-bottom: 12px; font-size: 14px; }
+.prototype-controls [role=group] { display: flex; flex-wrap: wrap; gap: 8px; }
+.prototype-controls button, .editor-toolbar button { border: 1px solid var(--line); border-radius: 5px; padding: 9px 14px; background: transparent; color: var(--muted); cursor: pointer; }
+.prototype-controls button[aria-pressed=true] { background: var(--yellow); border-color: var(--yellow); color: #1d1e22; }
+.prototype-controls p { margin: 12px 0 0; color: var(--muted); line-height: 1.6; font-size: 13px; }
+.preview-languages { flex-wrap: wrap; align-items: center; }
+.preview-languages .edit-button { margin-left: auto; color: var(--yellow); }
+.preview-languages .edit-button:disabled { opacity: .6; cursor: progress; }
+.live-editor { border: 1px solid var(--line); border-radius: 0 0 8px 8px; overflow: hidden; background: var(--surface); }
+.editor-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 9px 14px; border-bottom: 1px solid var(--line); font: 12px ui-monospace, monospace; color: var(--muted); }
+.editor-toolbar button { padding: 6px 10px; font: 12px -apple-system, sans-serif; color: var(--text); }
+#editor-container { height: clamp(360px, 36vw, 510px); min-width: 0; }
+.editor-hint { padding: 8px 14px; border-top: 1px solid var(--line); color: var(--muted); font-size: 10px; }
+#editor-dialog { width: min(1240px, 96vw); }
+#editor-dialog .live-editor { border: 0; }
+#editor-dialog #editor-container { height: min(620px, 66vh); min-height: 280px; }
+#load-status { font-size: 13px; color: var(--yellow); }
+.prototype-note { max-width: 900px; color: var(--muted); font-size: 13px; line-height: 1.7; border-top: 1px solid var(--line); padding: 24px 0; margin: 0 0 24px; }
+[hidden] { display: none !important; }
+@media(max-width:800px) { .prototype-controls { padding: 20px; } .preview-languages button { padding: 10px 12px; } }
