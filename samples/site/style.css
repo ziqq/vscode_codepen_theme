@@ -41,13 +41,7 @@ h1 span { color: var(--yellow); }
 .button:hover { filter: brightness(1.12); }
 .hero > div, .hero-editor { min-width: 0; }
 .hero-editor { margin: 0; }
-.preview-languages { display: flex; gap: 2px; padding: 5px; background: #18191d; border: 1px solid var(--line); border-bottom: 0; border-radius: 8px 8px 0 0; }
-.preview-languages[hidden] { display: none; }
-.preview-languages button { padding: 10px 16px; border: 0; border-radius: 4px; background: transparent; color: var(--muted); font-size: 13px; cursor: pointer; }
-.preview-languages button[aria-pressed="true"] { background: #2e2f39; color: var(--text); }
-.preview-languages button:hover { color: var(--text); }
 .hero-preview { border: 1px solid var(--line); border-radius: 7px; overflow: hidden; background: var(--surface); }
-.preview-languages:not([hidden]) + .hero-preview { border-radius: 0 0 8px 8px; }
 .hero-editor .hero-preview img { height: 430px; object-fit: cover; object-position: top; }
 .hero-editor figcaption { text-align: right; margin-top: 10px; color: var(--muted); font-size: 11px; line-height: 1.6; }
 .toolbar { display: flex; justify-content: space-between; gap: 24px; align-items: center; padding: 0 0 24px; }
