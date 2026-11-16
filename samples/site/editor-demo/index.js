@@ -23,7 +23,7 @@ function render() {
     (inDialog ? dialogHost : inlineHost).append(panel);
     document.querySelector('#file-name').textContent = names[language][2];
     if (inDialog && !dialog.open) dialog.showModal();
-    if (!inDialog && dialog.open) dialog.close();
+    if (!inDialog && dialog?.open) dialog.close();
     preview.layout();
   }
   editButton.textContent = active ? (inDialog ? 'Editor open' : 'Editing') : (mode === 'dialog' ? 'Open editor ↗' : 'Edit code ↗');
@@ -66,7 +66,9 @@ for (const button of document.querySelectorAll('[data-language]')) {
   button.addEventListener('click', () => {
     language = button.dataset.language;
     const [name, image] = names[language];
-    screenshot.href = `../screenshots/${image}.webp`;
+    screenshot.href = new URL(`../screenshots/${image}.webp`, import.meta.url).href;
+    screenshot.dataset.title = name;
+    screenshot.setAttribute('aria-label', `Enlarge ${name} screenshot`);
     screenshot.querySelector('img').src = screenshot.href;
     screenshot.querySelector('img').alt = `${name} in CodePen Theme Original`;
     for (const item of document.querySelectorAll('[data-language]')) item.setAttribute('aria-pressed', String(item.dataset.language === language));
@@ -84,5 +86,7 @@ for (const button of document.querySelectorAll('[data-mode]')) {
     render();
   });
 }
-document.querySelector('#close-dialog').addEventListener('click', () => dialog.close());
-dialog.addEventListener('close', () => { if (mode === 'dialog') { active = false; render(); } });
+document.querySelector('#close-dialog')?.addEventListener('click', () => dialog.close());
+dialog?.addEventListener('close', () => { if (mode === 'dialog') { active = false; render(); } });
+
+document.querySelector('.hero-editor .preview-languages').hidden = false;

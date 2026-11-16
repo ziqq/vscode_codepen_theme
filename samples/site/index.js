@@ -7,26 +7,19 @@ const viewer = document.querySelector('#viewer');
 const preview = viewer.querySelector('img');
 const title = viewer.querySelector('strong');
 
-const heroPreview = document.querySelector('.hero-preview');
-const languageButtons = [...document.querySelectorAll('.preview-languages button')];
-
-/** Reuse the gallery's real captures for the manually selected hero language. */
-for (const button of languageButtons) {
-  button.addEventListener('click', () => {
-    const example = document.getElementById(button.dataset.example);
-    const image = example.querySelector('.preview img');
-    const name = example.querySelector('h3').textContent;
-    heroPreview.href = image.src;
-    heroPreview.dataset.title = name;
-    heroPreview.setAttribute('aria-label', `Enlarge ${name} screenshot`);
-    heroPreview.querySelector('img').src = image.src;
-    heroPreview.querySelector('img').alt = image.alt;
-    for (const languageButton of languageButtons) {
-      languageButton.setAttribute('aria-pressed', String(languageButton === button));
-    }
-  });
-}
-document.querySelector('.preview-languages').hidden = false;
+/** Switch the hero between real captures without loading an editor. */
+const hero = document.querySelector('.hero-preview');
+document.querySelector('#preview-language').addEventListener('change', event => {
+  const example = document.getElementById(event.target.value);
+  const image = example.querySelector('.preview img');
+  const name = example.querySelector('h3').textContent;
+  hero.href = image.src;
+  hero.dataset.title = name;
+  hero.setAttribute('aria-label', `Enlarge ${name} screenshot`);
+  hero.querySelector('img').src = image.src;
+  hero.querySelector('img').alt = image.alt;
+  document.querySelector('.hero-editor figcaption').textContent = `${name} · Captured in Visual Studio Code`;
+});
 
 /** Keep the result count and empty state in sync with visible examples. */
 search.addEventListener('input', () => {
