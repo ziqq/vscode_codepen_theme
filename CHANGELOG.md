@@ -1,7 +1,10 @@
 # Changelog
 
-## 1.0.0
+## 1.0.1
+- **ADDED**: automated deployment of the language screenshot gallery to GitHub Pages
+- **FIXED**: GitHub Release titles contain only the release version
 
+## 1.0.0
 - **BREAKING_CHANGES**: removed every bundled language definition, TextMate grammar, language configuration, and snippet
 - **ADDED**: `CodePen Theme Original Italics`, preserving the Original palette while retaining the full theme-owned italic layer; `CodePen Theme Original` keeps only the shared annotation/decorator italic exception
 - **ADDED**: legacy Operator Mono Lig/Operator Mono typography with Monaco/Courier fallbacks for the editor, integrated terminal, Debug Console, and `[Log]`-scoped Output editor; editor ligatures are enabled
