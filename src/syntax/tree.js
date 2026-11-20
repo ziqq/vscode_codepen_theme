@@ -37,7 +37,7 @@ const identifiers = new Set(['identifier', 'type_identifier', 'field_identifier'
 const classKinds = new Set(['class_declaration', 'class_definition', 'class_specifier',
   'struct_specifier', 'struct_item', 'enum_specifier', 'enum_item', 'enum_declaration',
   'interface_declaration', 'protocol_declaration', 'record_declaration', 'trait_item',
-  'extension_declaration', 'extension_type_declaration', 'type_spec', 'class', 'module']);
+  'extension_declaration', 'extension_type_declaration', 'mixin_declaration', 'type_spec', 'class', 'module']);
 const functionKinds = new Set(['function_declaration', 'function_definition', 'function_item',
   'method_declaration', 'constructor_declaration', 'method', 'singleton_method', 'lambda_expression',
   'lambda_literal', 'lambda', 'closure_expression', 'anonymous_function', 'function_literal', 'recipe',
