@@ -36,8 +36,9 @@ const identifiers = new Set(['identifier', 'type_identifier', 'field_identifier'
   'identifier_dollar_escaped', 'interpolated_identifier']);
 const classKinds = new Set(['class_declaration', 'class_definition', 'class_specifier',
   'struct_specifier', 'struct_item', 'enum_specifier', 'enum_item', 'enum_declaration',
-  'interface_declaration', 'protocol_declaration', 'record_declaration', 'trait_item',
-  'extension_declaration', 'extension_type_declaration', 'mixin_declaration', 'type_spec', 'class', 'module']);
+  'interface_declaration', 'protocol_declaration', 'record_declaration', 'trait_item', 'trait_declaration',
+  'extension_declaration', 'extension_type_declaration', 'mixin_declaration',
+  'object_declaration', 'object_literal', 'companion_object', 'type_spec', 'class', 'module']);
 const functionKinds = new Set(['function_declaration', 'function_definition', 'function_item',
   'method_declaration', 'constructor_declaration', 'method', 'singleton_method', 'lambda_expression',
   'lambda_literal', 'lambda', 'closure_expression', 'anonymous_function', 'function_literal', 'recipe',
@@ -483,6 +484,9 @@ function classify(root, source, language) {
       set(node, 'purple');
       continue;
     }
+    if (language === 'dart' && parent.type === 'representation_declaration' && isField(node, 'name')) {
+      declare(node, 'member', classOf(node));
+    }
     if (propertyNode(node)) set(node, dartQualifiedConstructor(node) ? 'yellow' : 'purple');
     if (declarations.has(node.id) || node.type === 'type_identifier' || node.type === 'namespace_identifier') continue;
     const param = ancestor(node, (item) => /^(?:formal_parameter|simple_parameter|parameter|parameter_declaration|typed_parameter|default_parameter|class_parameter|property_promotion_parameter|constructor_param)$/.test(item.type));
@@ -529,7 +533,8 @@ function classify(root, source, language) {
     const declaration = ancestor(node, (item) => ['variable_declarator', 'initialized_identifier',
       'initialized_variable_definition', 'variable_declaration', 'property_declaration', 'let_declaration',
       'var_spec', 'const_spec', 'init_declarator', 'declaration', 'field_declaration',
-      'static_final_declaration', ...(language === 'java' ? ['constant_declaration'] : [])].includes(item.type));
+      'static_final_declaration', ...(language === 'java' ? ['constant_declaration'] : []),
+      ...(language === 'php' ? ['property_element'] : [])].includes(item.type));
     if (declaration && (fieldContains(declaration, 'name', node) || fieldContains(declaration, 'pattern', node) ||
         fieldContains(declaration, 'declarator', node) ||
         (parent.type === 'initialized_identifier' && firstIdentifier(parent)?.id === node.id) ||

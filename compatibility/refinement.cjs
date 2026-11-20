@@ -35,6 +35,56 @@ function* «blue|items»(«blue|name») { yield «green|\`hello \${»«blue|name
 const «blue|value» = 'x'; const «blue|object» = { «purple|value» };
 «gray|// new Child(value), not executable code»
 const «blue|text» = «green|"class False { field }"»;`],
+  ['dart', `extension type const «blue|WrappedValue»<T>(T «purple|value») {
+  T «purple|read»() => «purple|value»;
+  T «purple|shadow»(T «blue|value») => «blue|value»;
+  T «purple|member»() => this.«purple|value»;
+}
+extension type «blue|OtherValue»(int «purple|value») {
+  int «purple|read»() => «purple|value»;
+}
+void «blue|outside»() { print(«yellow|value»); }`],
+  ['kotlin', `object «blue|Palette» {
+  val «purple|value» = 1
+  fun «purple|read»(): Int { return «purple|value» }
+  fun «purple|shadow»(«blue|value»: Int): Int {
+    val «blue|local» = «blue|value»
+    return «blue|local» + this.«purple|value»
+  }
+}
+fun «blue|outside»(«blue|value»: Int): Int { return «blue|value» }
+`],
+  ['kotlin', `fun «blue|create»() {
+  val «blue|holder» = object {
+    val «purple|value» = 1
+    fun «purple|read»(): Int {
+      val «blue|local» = «purple|value»
+      return «blue|local»
+    }
+  }
+}
+class «blue|Host» {
+  companion object {
+    val «purple|value» = 1
+    fun «purple|read»(): Int { return «purple|value» }
+  }
+}
+`],
+  ['php', `<?php
+trait «blue|Palette» {
+  public $«purple|value» = 1;
+  protected static $«purple|shared» = 2;
+  public function «purple|read»($«blue|value») {
+    $«blue|local» = $«blue|value»;
+    return $«blue|local» + $this->«purple|value»;
+  }
+}
+class «blue|Holder» {
+  use Palette;
+  public $«purple|own» = 3;
+  public function «purple|readOwn»() { return $this->«purple|own»; }
+}
+function «blue|outside»($«blue|value») { return $«blue|value»; }`],
   ['java', `«yellow|public» «yellow|final» «yellow|class» «blue|Theme» {
   final «white|String» «purple|name» = "x";
   «white|String» «purple|label»(«white|String» «blue|prefix») { return «blue|prefix» + «purple|name»; }
