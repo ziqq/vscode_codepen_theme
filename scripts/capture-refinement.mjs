@@ -259,6 +259,18 @@ try {
           annotationItalic.add(index);
         }
       }
+      if (ready.language === 'rust') {
+        // Only attribute markers and names are italic; arguments stay language-owned.
+        for (const match of ready.source.matchAll(/(#!?)\[\s*([A-Za-z_]\w*(?:::[A-Za-z_]\w*)*)/dg)) {
+          for (const [start, end] of match.indices.slice(1)) {
+            for (let index = start; index < end; index++) annotationItalic.add(index);
+            if (fontStyles.slice(start, end).some((style) => style !== 'italic')) {
+              result.errors.push({ typography: 'Rust attribute marker/name must be italic',
+                text: ready.source.slice(start, end) });
+            }
+          }
+        }
+      }
       if (!ready.italics && fontStyles.some(
         (style, index) => style === 'italic' && !annotationItalic.has(index),
       )) {

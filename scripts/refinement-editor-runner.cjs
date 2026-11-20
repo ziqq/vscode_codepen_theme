@@ -112,8 +112,11 @@ exports.run = async () => {
   // finish because the Agent Host owns background resources. This explicit
   // signal lets the capture process distinguish a completed test run from a
   // hung or failed extension host without depending on Electron shutdown.
-  await fs.writeFile(path.join(output, 'complete.json'), JSON.stringify({
+  // Publish the signal only after its JSON is complete; readers never see a partial write.
+  const completionFile = path.join(output, 'complete.tmp');
+  await fs.writeFile(completionFile, JSON.stringify({
     vscodeVersion: vscode.version,
     cases: plan.cases.length,
   }));
+  await fs.rename(completionFile, path.join(output, 'complete.json'));
 };
