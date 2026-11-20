@@ -190,30 +190,40 @@ try {
         `${typographyDefaults['editor.fontSize']}px`,
         'Editor must render the contributed font size');
     }
-    const rendered = await page.locator('.part.editor .view-line').evaluateAll((elements) => {
-      const probe = document.createElement('span');
-      probe.style.position = 'fixed'; probe.style.visibility = 'hidden';
-      document.body.append(probe);
-      /**
-       * Normalize a CSS color through the browser so equivalent forms compare equally.
-       * @type {(value: string) => string}
-       */
-      const normalizeColor = (value) => {
-        probe.style.color = value;
-        return getComputedStyle(probe).color;
-      };
-      const rows = elements.map((element) => {
-      const walker = document.createTreeWalker(element, NodeFilter.SHOW_TEXT);
-      const spans = [];
-      while (walker.nextNode()) {
-        const node = walker.currentNode, style = getComputedStyle(node.parentElement);
-        spans.push({ text: node.textContent.replaceAll('\u00a0', ' ').replaceAll('\u200b', ''), color: normalizeColor(style.color), fontStyle: style.fontStyle });
-      }
-      return { text: spans.map((span) => span.text).join(''), spans };
+    let rendered;
+    const renderDeadline = Date.now() + 20000;
+    while (!rendered && Date.now() < renderDeadline) {
+      rendered = await page.locator('.part.editor .view-line').evaluateAll((elements) => {
+        if (!elements.length || elements.some((element) => !element.isConnected)) return null;
+        const probe = document.createElement('span');
+        probe.style.position = 'fixed'; probe.style.visibility = 'hidden';
+        document.body.append(probe);
+        /**
+         * Normalize a CSS color through the browser so equivalent forms compare equally.
+         * @type {(value: string) => string}
+         */
+        const normalizeColor = (value) => {
+          probe.style.color = value;
+          return getComputedStyle(probe).color;
+        };
+        const rows = elements.map((element) => {
+          const walker = document.createTreeWalker(element, NodeFilter.SHOW_TEXT);
+          const spans = [];
+          while (walker.nextNode()) {
+            const node = walker.currentNode, style = getComputedStyle(node.parentElement);
+            // Monaco may replace lines between locator resolution and evaluation.
+            // Disconnected nodes have empty computed styles, not real black syntax.
+            if (!node.parentElement.isConnected || !style.color || !style.fontStyle) return null;
+            spans.push({ text: node.textContent.replaceAll('\u00a0', ' ').replaceAll('\u200b', ''), color: normalizeColor(style.color), fontStyle: style.fontStyle });
+          }
+          return { text: spans.map((span) => span.text).join(''), spans };
+        });
+        probe.remove();
+        return rows.every(Boolean) ? rows : null;
       });
-      probe.remove();
-      return rows;
-    });
+      if (!rendered) await wait(50);
+    }
+    assert.ok(rendered, `${ready.id}: no connected, styled editor lines before timeout`);
     const result = { ...ready, rendered, errors: [] };
     const sourceLines = ready.source.split(/\r?\n/);
     assert.equal(rendered.length, sourceLines.length, `${ready.id}: visible line count`);
