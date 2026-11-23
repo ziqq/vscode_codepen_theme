@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.0.2
+- **FIXED**: Dart mixin fields and methods retain member colors in declarations and references, while local variables, parameters, and constants preserve their own roles
+- **FIXED**: Dart extension-type representation fields are highlighted as members
+- **FIXED**: Kotlin named and anonymous objects and companion objects preserve member colors and local binding scopes
+- **FIXED**: PHP property declarations in traits and classes use the same member colors as property references
+- **FIXED**: editor verification recognizes Rust attribute italics, publishes completion signals atomically, and avoids reading styles from disconnected editor nodes
+
 ## 1.0.1
 - **ADDED**: automated deployment of the language screenshot gallery to GitHub Pages
 - **FIXED**: GitHub Release titles contain only the release version

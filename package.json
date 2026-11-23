@@ -3,7 +3,7 @@
   "displayName": "CodePen Theme Original",
   "description": "A CodePen-inspired dark color theme for Visual Studio Code. Language grammars are provided by VS Code and recommended language extensions.",
   "icon": "assets/logo.png",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "engines": {
     "vscode": "^1.96.0"
   },

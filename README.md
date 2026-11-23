@@ -15,9 +15,9 @@ Install [CodePen Theme Original](https://marketplace.visualstudio.com/items?item
 | **CodePen Theme Original** | Upright syntax with italic annotation and decorator names. |
 | **CodePen Theme Original Italics** | The same palette with the full italic syntax layer. |
 
-Version **1.0.1** requires **VS Code 1.96.0 or newer**. Upgrading from 0.12.x? See the [migration guide](MIGRATION.md).
+Version **1.0.2** requires **VS Code 1.96.0 or newer**. Upgrading from 0.12.x? See the [migration guide](MIGRATION.md).
 
-See the [1.0.1 release notes](CHANGELOG.md#101) for the changelog and gallery deployment fixes.
+See the [1.0.2 release notes](CHANGELOG.md#102) for member highlighting fixes in Dart, Kotlin, and PHP.
 
 To install a downloaded [VSIX](https://github.com/ziqq/vscode_codepen_theme/releases):
 
