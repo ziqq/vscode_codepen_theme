@@ -35,6 +35,56 @@ function* «blue|items»(«blue|name») { yield «green|\`hello \${»«blue|name
 const «blue|value» = 'x'; const «blue|object» = { «purple|value» };
 «gray|// new Child(value), not executable code»
 const «blue|text» = «green|"class False { field }"»;`],
+  ['dart', `extension type const «blue|WrappedValue»<T>(T «purple|value») {
+  T «purple|read»() => «purple|value»;
+  T «purple|shadow»(T «blue|value») => «blue|value»;
+  T «purple|member»() => this.«purple|value»;
+}
+extension type «blue|OtherValue»(int «purple|value») {
+  int «purple|read»() => «purple|value»;
+}
+void «blue|outside»() { print(«yellow|value»); }`],
+  ['kotlin', `object «blue|Palette» {
+  val «purple|value» = 1
+  fun «purple|read»(): Int { return «purple|value» }
+  fun «purple|shadow»(«blue|value»: Int): Int {
+    val «blue|local» = «blue|value»
+    return «blue|local» + this.«purple|value»
+  }
+}
+fun «blue|outside»(«blue|value»: Int): Int { return «blue|value» }
+`],
+  ['kotlin', `fun «blue|create»() {
+  val «blue|holder» = object {
+    val «purple|value» = 1
+    fun «purple|read»(): Int {
+      val «blue|local» = «purple|value»
+      return «blue|local»
+    }
+  }
+}
+class «blue|Host» {
+  companion object {
+    val «purple|value» = 1
+    fun «purple|read»(): Int { return «purple|value» }
+  }
+}
+`],
+  ['php', `<?php
+trait «blue|Palette» {
+  public $«purple|value» = 1;
+  protected static $«purple|shared» = 2;
+  public function «purple|read»($«blue|value») {
+    $«blue|local» = $«blue|value»;
+    return $«blue|local» + $this->«purple|value»;
+  }
+}
+class «blue|Holder» {
+  use Palette;
+  public $«purple|own» = 3;
+  public function «purple|readOwn»() { return $this->«purple|own»; }
+}
+function «blue|outside»($«blue|value») { return $«blue|value»; }`],
   ['java', `«yellow|public» «yellow|final» «yellow|class» «blue|Theme» {
   final «white|String» «purple|name» = "x";
   «white|String» «purple|label»(«white|String» «blue|prefix») { return «blue|prefix» + «purple|name»; }
@@ -50,6 +100,52 @@ class «blue|Theme» {
   «white|T» «purple|map»«operator|<»«white|T»«operator|>»(«white|T» «white|Function»() «blue|callback») => «blue|callback»();
 }
 void «blue|main»() { final «blue|theme» = «yellow|Theme»("x"); print(«blue|theme».«purple|label»("y")); }`],
+  ['dart', `mixin «blue|InputState»<T extends Widget> on State<T> {
+  final FocusNode «purple|_focusNode» = FocusNode();
+  late final «purple|_formatter» = Formatter(«purple|_onChanged»);
+  late Controller «purple|_controller»;
+  bool «purple|_synchronizing» = false;
+  int «purple|count» = 0;
+  static const int «blue|limit» = 2;
+  bool get «purple|busy» => «purple|_synchronizing»;
+  void «purple|initState»() {
+    «purple|_controller» = Controller();
+    «purple|_controller».«purple|addListener»(«purple|_onChanged»);
+    «purple|_focusNode».«purple|requestFocus»();
+    «purple|_formatter».«purple|clear»();
+    «purple|_synchronizing» = true;
+    final «blue|current» = «purple|_controller»;
+    «blue|current».«purple|clear»();
+    final «blue|callback» = () { «purple|_synchronizing» = false; };
+    «blue|callback»();
+    print(«blue|limit»);
+  }
+  void «purple|_onChanged»() { «purple|initState»(); }
+  void «purple|shadow»(int «blue|count») {
+    print(«blue|count»);
+    print(this.«purple|count»);
+    { final «blue|_controller» = Controller(); «blue|_controller».«purple|clear»(); }
+    «purple|_controller».«purple|clear»();
+  }
+}
+base mixin «blue|OtherState» {
+  int «purple|count» = 0;
+  void «purple|clear»() { «purple|count» = 0; }
+}
+void «blue|outside»() { print(«yellow|_synchronizing»); }`],
+  ['dart', `mixin class «blue|SharedState» {
+  int «purple|count» = 0;
+  void «purple|clear»() { «purple|count» = 0; }
+}
+extension «blue|Label» on String {
+  int get «purple|size» => length;
+  int «purple|read»() => «purple|size»;
+}
+enum «blue|ModeWithMembers» {
+  «purple|first»;
+  int get «purple|size» => index;
+  int «purple|read»() => «purple|size»;
+}`],
   ['dart', `class «blue|ThemeState» {}
 class «blue|ThemeReady» extends «white|ThemeState» {}
 void «blue|main»() {
