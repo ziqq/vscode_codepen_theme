@@ -3,6 +3,8 @@
  * All positions use UTF-16 code units and half-open intervals [start, end).
  */
 
+const { addCommentFences } = require('./comments');
+
 /**
  * @typedef {'white' | 'yellow' | 'blue' | 'purple' | 'green' | 'orange' | 'brown' | 'gray' | 'operator'} Role
  * Foreground roles mapped through the shared palette, never literal provider colors.
@@ -59,6 +61,7 @@ class Spans {
    * @returns {Span[]} Final ranges suitable for editor decorations or color assertions.
    */
   finish() {
+    addCommentFences(this);
     const events = this.items.flatMap((item) => [
       { at: item.start, item, open: true }, { at: item.end, item, open: false },
     ]).sort((a, b) => a.at - b.at);

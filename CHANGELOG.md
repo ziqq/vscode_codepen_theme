@@ -1,7 +1,7 @@
 # Changelog
 
 ## 1.0.3
-- **FIXED**: fenced examples in Dart documentation comments use a single muted foreground regardless of the language tag
+- **FIXED**: fenced examples in documentation comments use a single muted foreground across languages with syntax refinement
 
 ## 1.0.2
 - **FIXED**: Dart mixin fields and methods retain member colors in declarations and references, while local variables, parameters, and constants preserve their own roles

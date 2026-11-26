@@ -17,7 +17,7 @@
 
 const path = require('node:path');
 const { Spans } = require('./spans');
-const { addComment } = require('./comments');
+const { addComment, trackComment } = require('./comments');
 const { refineDialect } = require('./dialects');
 
 const grammars = Object.freeze({
@@ -28,6 +28,9 @@ const grammars = Object.freeze({
   python: 'python', r: 'r', razor: 'razor', ruby: 'ruby', rust: 'rust', sql: 'sql',
   swift: 'swift', shellscript: 'bash',
   html: 'html', svelte: 'svelte', vue: 'vue', markdown: 'markdown',
+});
+const fenceGrammars = Object.freeze({
+  'go.mod': 'go', jsonc: 'json', yaml: 'yaml', dockercompose: 'yaml', xml: 'html', xsl: 'html',
 });
 let initialization;
 const parsers = new Map();
@@ -121,7 +124,6 @@ async function refineTree(source, language) {
       spans.add(span.start, span.end, span.role, 40, span.fontStyle);
     }
     addAnnotations(root, source, spans);
-    if (language === 'dart' && source.includes('```')) addDartDocCode(root, source, spans);
     if (language !== 'makefile') return spans.finish();
     const stack = [root];
     while (stack.length) {
@@ -136,37 +138,20 @@ async function refineTree(source, language) {
   });
 }
 
-/** Give closed Dartdoc fences one muted foreground, independent of the language tag. */
-function addDartDocCode(root, source, spans) {
-  let fenceLength = 0;
-  let lines = [];
-  let previousEnd = 0;
-  for (const node of root.descendantsOfType('documentation_comment')) {
-    const prefix = /^\/\/\/[ \t]?/.exec(node.text);
-    const lineStart = source.lastIndexOf('\n', node.startIndex - 1) + 1;
-    if (!prefix || !/^[ \t]*$/.test(source.slice(lineStart, node.startIndex))) continue;
-    if (fenceLength && !/^\r?\n[ \t]*$/.test(source.slice(previousEnd, node.startIndex))) {
-      fenceLength = 0;
-      lines = [];
+/** Color comment fences while leaving the provider in charge of other tokens. */
+async function refineCommentFences(source, language) {
+  if (!source.includes('```')) return [];
+  // The shared markup parser must not interpret literal XML CDATA as comments.
+  const input = fenceGrammars[language] === 'html'
+    ? source.replace(/<!\[CDATA\[[\s\S]*?(?:\]\]>|$)/g, (text) => text.replace(/[^\r\n]/g, ' '))
+    : source;
+  return withTree(input, language, (root) => {
+    const spans = new Spans(source.length);
+    for (const node of root.descendantsOfType('comment')) {
+      trackComment(spans, source, node.startIndex, node.endIndex);
     }
-    previousEnd = node.endIndex;
-    const start = node.startIndex + prefix[0].length;
-    const end = node.endIndex - Number(source[node.endIndex - 1] === '\r');
-    const text = source.slice(start, end);
-    if (!fenceLength) {
-      const opening = /^[ \t]*(`{3,})[^`]*$/.exec(text);
-      if (opening) fenceLength = opening[1].length;
-    } else {
-      const closing = /^[ \t]*(`{3,})[ \t]*$/.exec(text);
-      if (closing && closing[1].length >= fenceLength) {
-        for (const line of lines) spans.add(line.start, line.end, 'operator', 30, 'italic');
-        fenceLength = 0;
-        lines = [];
-      } else {
-        lines.push({ start, end });
-      }
-    }
-  }
+    return spans.finish();
+  });
 }
 
 /**
@@ -218,7 +203,7 @@ function addAnnotations(root, source, spans) {
  * @returns {Promise<T | []>} Callback result, or an empty list for unsupported grammars.
  */
 async function withTree(source, language, callback) {
-  const grammar = grammars[language];
+  const grammar = grammars[language] ?? fenceGrammars[language];
   if (!grammar) return [];
   const { Parser, Language } = require('./vendor/web-tree-sitter.cjs');
   await (initialization ??= Parser.init({ locateFile: () => path.join(__dirname, 'vendor/web-tree-sitter.wasm') }));
@@ -785,4 +770,4 @@ function classify(root, source, language) {
   return spans.finish();
 }
 
-module.exports = { refineTree, withTree, grammars, dartConstantsAt };
+module.exports = { refineTree, refineCommentFences, withTree, grammars, fenceGrammars, dartConstantsAt };

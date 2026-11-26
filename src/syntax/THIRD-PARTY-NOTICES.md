@@ -12,6 +12,7 @@ Only the listed parsers are included; editor queries and unrelated parsers are n
 | Dart | https://github.com/UserNobody14/tree-sitter-dart/tree/be07cf7118d3dba06236a3f19541685a68209934 | MIT; Copyright (c) 2020-2023 UserNobody14 and others |
 | Go | https://github.com/tree-sitter/tree-sitter-go/tree/v0.25.0 | MIT; Copyright (c) 2014 Max Brunsfeld |
 | Java | https://github.com/tree-sitter/tree-sitter-java/tree/v0.23.5 | MIT; Copyright (c) 2017 Ayman Nadeem |
+| JSON | https://github.com/tree-sitter/tree-sitter-json/tree/v0.24.8 | MIT; Copyright (c) 2014 Max Brunsfeld |
 | Just | https://github.com/casey/tree-sitter-just/tree/5685543a6e64f66335e25518c9ae8ffa1dae3d01 | Apache-2.0; Casey Rodarmor and contributors |
 | Kotlin | https://github.com/fwcd/tree-sitter-kotlin/tree/0.3.8 | MIT; Copyright (c) 2019 fwcd |
 | Make | https://github.com/tree-sitter-grammars/tree-sitter-make/tree/70613f3d812cbabbd7f38d104d60a409c4008b43 | MIT; Copyright (c) 2021 Alexandre A. Muller |
@@ -26,6 +27,7 @@ Only the listed parsers are included; editor queries and unrelated parsers are n
 | Svelte | https://github.com/Himujjal/tree-sitter-svelte/tree/60ea1d673a1a3eeeb597e098d9ada9ed0c79ef4b | MIT; Copyright © Himujjal Upadhyaya <himu@tuta.io> |
 | Vue | https://github.com/tree-sitter-grammars/tree-sitter-vue/tree/ce8011a414fdf8091f4e4071752efc376f4afb08 | MIT; Copyright (c) 2024 Amaan Qureshi <amaanq12@gmail.com> |
 | Markdown | https://github.com/tree-sitter-grammars/tree-sitter-markdown/tree/a0a00f817d02412bd92c54d316f164d827b57b5c | MIT; Copyright (c) 2021 Matthias Deiml |
+| YAML | https://github.com/tree-sitter-grammars/tree-sitter-yaml/tree/a1c4812a73ec5e089de8e441fdea3a921e8d5079 | MIT; Copyright (c) 2024 tree-sitter-grammars contributors; Copyright (c) 2019-2021 Ika |
 
 ## MIT License (the MIT-licensed parsers above)
 

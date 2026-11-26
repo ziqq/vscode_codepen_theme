@@ -3,7 +3,7 @@
  * This module is shared by worker execution and independent regression checks.
  */
 
-const { grammars, refineTree } = require('./tree');
+const { grammars, fenceGrammars, refineTree, refineCommentFences } = require('./tree');
 const { refineTypeScript } = require('./typescript');
 const { Spans } = require('./spans');
 const { refineEmbedded } = require('./embedded');
@@ -16,10 +16,12 @@ const scriptLanguages = ['javascript', 'javascriptreact', 'typescript', 'typescr
 const supportedLanguages = [
   ...scriptLanguages,
   ...Object.keys(grammars),
+  ...Object.keys(fenceGrammars),
   'dotenv',
   'sass',
   'scss',
   'css',
+  'less',
   'c4',
   ...formatLanguages,
   ...legacyLanguages,
@@ -83,7 +85,8 @@ async function refine(source, language) {
   if (language === 'dotenv') return refineDotenv(source);
   if (formatLanguages.includes(language)) return refineFormat(source, language);
   if (legacyLanguages.includes(language)) return refineLegacy(source, language);
-  if (['sass', 'scss', 'css', 'c4'].includes(language)) return refineSimple(source, language);
+  if (['sass', 'scss', 'css', 'less', 'c4'].includes(language)) return refineSimple(source, language);
+  if (Object.hasOwn(fenceGrammars, language)) return refineCommentFences(source, language);
   if (['html', 'vue', 'svelte', 'markdown'].includes(language)) return refineEmbedded(source, language, refine);
   return refineTree(source, language);
 }

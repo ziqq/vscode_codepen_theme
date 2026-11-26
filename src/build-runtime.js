@@ -6,7 +6,7 @@
 const fs = require('node:fs');
 const path = require('node:path');
 const { createHash } = require('node:crypto');
-const { grammars } = require('./syntax/tree');
+const { grammars, fenceGrammars } = require('./syntax/tree');
 const palette = require('./colors');
 const { themeVariants } = require('./theme-variants');
 const root = path.resolve(__dirname, '..');
@@ -40,7 +40,7 @@ function runtimeFiles() {
   add('licenses/web-tree-sitter-LICENSE', 'node_modules/web-tree-sitter/LICENSE');
   add('licenses/tree-sitter-wasm-LICENSE', 'node_modules/tree-sitter-wasm/LICENSE');
   add('licenses/APACHE-2.0.txt', 'LICENSE');
-  for (const grammar of Object.values(grammars).sort()) {
+  for (const grammar of [...new Set([...Object.values(grammars), ...Object.values(fenceGrammars)])].sort()) {
     add(`grammars/${grammar}.wasm`, `node_modules/tree-sitter-wasm/out/${grammar}/tree-sitter-${grammar}.wasm`);
   }
   const manifest = Object.fromEntries([...files].map(([name, bytes]) =>
