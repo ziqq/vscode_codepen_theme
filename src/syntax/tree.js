@@ -121,6 +121,7 @@ async function refineTree(source, language) {
       spans.add(span.start, span.end, span.role, 40, span.fontStyle);
     }
     addAnnotations(root, source, spans);
+    if (language === 'dart' && source.includes('```')) addDartDocCode(root, source, spans);
     if (language !== 'makefile') return spans.finish();
     const stack = [root];
     while (stack.length) {
@@ -133,6 +134,39 @@ async function refineTree(source, language) {
     }
     return spans.finish();
   });
+}
+
+/** Give closed Dartdoc fences one muted foreground, independent of the language tag. */
+function addDartDocCode(root, source, spans) {
+  let fenceLength = 0;
+  let lines = [];
+  let previousEnd = 0;
+  for (const node of root.descendantsOfType('documentation_comment')) {
+    const prefix = /^\/\/\/[ \t]?/.exec(node.text);
+    const lineStart = source.lastIndexOf('\n', node.startIndex - 1) + 1;
+    if (!prefix || !/^[ \t]*$/.test(source.slice(lineStart, node.startIndex))) continue;
+    if (fenceLength && !/^\r?\n[ \t]*$/.test(source.slice(previousEnd, node.startIndex))) {
+      fenceLength = 0;
+      lines = [];
+    }
+    previousEnd = node.endIndex;
+    const start = node.startIndex + prefix[0].length;
+    const end = node.endIndex - Number(source[node.endIndex - 1] === '\r');
+    const text = source.slice(start, end);
+    if (!fenceLength) {
+      const opening = /^[ \t]*(`{3,})[^`]*$/.exec(text);
+      if (opening) fenceLength = opening[1].length;
+    } else {
+      const closing = /^[ \t]*(`{3,})[ \t]*$/.exec(text);
+      if (closing && closing[1].length >= fenceLength) {
+        for (const line of lines) spans.add(line.start, line.end, 'operator', 30, 'italic');
+        fenceLength = 0;
+        lines = [];
+      } else {
+        lines.push({ start, end });
+      }
+    }
+  }
 }
 
 /**
