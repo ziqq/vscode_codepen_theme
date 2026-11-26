@@ -92,6 +92,15 @@ function «blue|outside»($«blue|value») { return $«blue|value»; }`],
   void «purple|run»() { «white|Theme» «blue|theme» = new «yellow|Theme»(); «blue|theme».«purple|label»("x"); }
 }`],
   ['dart', `«gray|/// Links »«operator|[»«purple|name»«operator|]»«gray| and code »«white|\`name\`»«gray| remain comments.»
+«gray|/// \`\`\`dart»
+«gray|/// »«operator|const count = 2;»
+«gray|/// \`\`\`»
+«gray|/// \`\`\`js»
+«gray|/// »«operator|const labels = [name];»
+«gray|/// \`\`\`»
+«gray|/// \`\`\`php»
+«gray|/// »«operator|$label = 'Menu';»
+«gray|/// \`\`\`»
 enum «blue|Mode» { «purple|dark», «purple|light» }
 class «blue|Theme» {
   final «white|String» «purple|name»;
