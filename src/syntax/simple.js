@@ -4,7 +4,7 @@
  */
 
 const { Spans } = require('./spans');
-const { addComment } = require('./comments');
+const { addComment, trackComment } = require('./comments');
 
 // A conservative lexer for the two formats without a bundled structural parser.
 // It only refines proven identifiers or punctuation, never strings/comments.
@@ -16,11 +16,13 @@ const { addComment } = require('./comments');
  * @returns {import('./spans').Span[]} Sorted, non-overlapping foreground refinements.
  */
 function refineSimple(source, language) {
+  if (language === 'less' && !source.includes('```')) return [];
   const spans = new Spans(source.length);
+  const comment = language === 'less' ? trackComment : addComment;
   const masked = source.replace(/\/\*[\s\S]*?(?:\*\/|$)|\/\/[^\n]*|"(?:\\.|[^"\\])*(?:"|$)|'(?:\\.|[^'\\])*(?:'|$)/g,
     (text, at) => {
       if (text.startsWith('//') || text.startsWith('/*')) {
-        addComment(spans, source, at, at + text.length);
+        comment(spans, source, at, at + text.length);
       }
       return text.replace(/[^\n]/g, ' ');
     });

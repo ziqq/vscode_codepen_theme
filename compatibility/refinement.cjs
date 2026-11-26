@@ -95,12 +95,6 @@ function «blue|outside»($«blue|value») { return $«blue|value»; }`],
 «gray|/// \`\`\`dart»
 «gray|/// »«operator|const count = 2;»
 «gray|/// \`\`\`»
-«gray|/// \`\`\`js»
-«gray|/// »«operator|const labels = [name];»
-«gray|/// \`\`\`»
-«gray|/// \`\`\`php»
-«gray|/// »«operator|$label = 'Menu';»
-«gray|/// \`\`\`»
 enum «blue|Mode» { «purple|dark», «purple|light» }
 class «blue|Theme» {
   final «white|String» «purple|name»;
@@ -109,6 +103,30 @@ class «blue|Theme» {
   «white|T» «purple|map»«operator|<»«white|T»«operator|>»(«white|T» «white|Function»() «blue|callback») => «blue|callback»();
 }
 void «blue|main»() { final «blue|theme» = «yellow|Theme»("x"); print(«blue|theme».«purple|label»("y")); }`],
+  ['javascript', `/**
+ «gray|* \`\`\`js»
+ «gray|* »«operator|const labels = [name];»
+ «gray|* \`\`\`»
+ */
+function «blue|menu»() {}`],
+  ['php', `<?php
+/**
+ «gray|* \`\`\`php»
+ «gray|* »«operator|$label = 'Menu';»
+ «gray|* \`\`\`»
+ */
+function «blue|menu»() {}`],
+  ['rust', `«gray|//! \`\`\`rust»
+«gray|//! »«operator|let count = 2;»
+«gray|//! \`\`\`»
+fn «blue|menu»() {}`],
+  ['yaml', `# \`\`\`yaml
+# «operator|count: 2»
+# \`\`\`
+example: |
+  # \`\`\`yaml
+  # count: 3
+  # \`\`\``],
   ['dart', `mixin «blue|InputState»<T extends Widget> on State<T> {
   final FocusNode «purple|_focusNode» = FocusNode();
   late final «purple|_formatter» = Formatter(«purple|_onChanged»);
